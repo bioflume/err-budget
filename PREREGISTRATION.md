@@ -175,4 +175,23 @@ observable listed here will be dropped.
 
 ## Frozen code hash
 
-(filled in at the time of the freeze, see the git tag)
+Git tag `v1.2.0-frozen` (commit 41d3db3), 10 October 2026.
+
+SHA-256 of the lines `<sha256>  <file name>` over `src/knobs/*.py` in sorted order:
+
+    34dd3f440eb50317ea44da997a46b663e35602a5e6330df91081e142b078572c
+
+The per-file sums are:
+
+    8799994c89d6f1339db4ec9a8921268293442b6a54e4dac88bcf86ad8abf5950  __init__.py
+    c51aa0b73e6ddd84778e225b6794d38441455c3ccefe3ee6f98e7ef1ac570609  _asymptotic.py
+    3cb761f3665ac5c4f6371ee4be24f9b2bd8877afac1d54efb828863110e72d6f  _core.py
+    6a98b78cdde137be25daf385aaa0575283615afce7963f51f7902b8fb2b7190c  api.py
+
+At the time of the freeze:
+
+- the tensor of H1 was complete;
+- the tensor of H2 was being built;
+- H3 had not been run.
+
+No replay of the program on any of them had been made.
