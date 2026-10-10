@@ -91,7 +91,9 @@ def _manufactured():
 def _dfg1(cost="deterministic"):
     from exp46_dfg_build import LAD
     from openfoam_cylinder import REF
-    raw = pickle.load(open(os.path.join(D, "dfg_tensor.pkl"), "rb"))
+    # version-1.2 post-processing (exact cell centroids at the wall, second-order
+    # wall pressure); the tensor of revision 2 is dfg_tensor.pkl
+    raw = pickle.load(open(os.path.join(D, os.environ.get("KNOBS_DFG_TENSOR", "dfg_tensor_v12.pkl")), "rb"))
     t = {}
     for i, v in raw.items():
         info = dict(v[2]) if len(v) > 2 else {}

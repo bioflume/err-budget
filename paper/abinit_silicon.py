@@ -87,9 +87,14 @@ class AbinitSilicon:
             return ({"energy": float("nan"), "force": float("nan")},
                     float("inf"), wall, {"unavailable": "could not parse output"})
         fx, fy, fz = (float(f.group(i)) for i in (1, 2, 3))
+        # ABINIT warns when the SCF cycle stops at nstep without meeting toldfe
+        abo = [os.path.join(self.dir, n) for n in os.listdir(self.dir) if ".abo" in n]
+        log = out + (open(max(abo, key=os.path.getmtime), errors="ignore").read() if abo else "")
+        converged = "not enough SCF cycles to converge" not in log
         return ({"energy": float(e.group(1)),
-                 "force": float(np.sqrt(fx * fx + fy * fy + fz * fz))},
-                float(cpu), wall, {})
+                 "force": float(np.sqrt(fx * fx + fy * fy + fz * fz)),
+                 "converged": converged},
+                float(cpu), wall, {"converged": converged})
 
     def reference(self):
         return dict(ecut=48.0, ngkpt=8, toldfe=1e-14, nline=8)

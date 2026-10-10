@@ -176,6 +176,10 @@ class LocalBudget:
             j0, j1, j2 = a - 1, a, a + 1
         elif a == 0 and ok(1) and ok(2):
             j0, j1, j2 = 0, 1, 2
+        elif self.fine_failed[k] and ok(a - 2) and ok(a - 1) and np.isfinite(self.e[k][a]):
+            # the finer run failed, so nothing is known on the refining side: the
+            # order is taken from the three values ending at the anchor
+            j0, j1, j2 = a - 2, a - 1, a
         else:
             return None
         e = self.e[k]
@@ -192,6 +196,10 @@ class LocalBudget:
                 E = abs(tail_from) + 2.0 * abs(d2)
                 return dict(p=np.nan, E=E, unbounded=False, pts=(j0, j1, j2))
             return dict(p=np.nan, E=np.inf, unbounded=True, pts=(j0, j1, j2))
+        if abs(d2) <= res:
+            # the second change is below resolution: nothing is left beyond the
+            # last point, so the anchor carries what lies between it and that point
+            return dict(p=np.inf, E=abs(tail_from), unbounded=False, pts=(j0, j1, j2))
         ratio = d1 / d2
         f = lambda p: (h[j0]**p - h[j1]**p) / (h[j1]**p - h[j2]**p) - ratio
         lo, hi = 1e-6, 30.0

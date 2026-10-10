@@ -40,6 +40,9 @@ CONFIGS = {
     "v1.2-constant": dict(fail_unconverged=True, kw=dict(V12, resid_margin=0.0)),
     "v1.2-nores": dict(fail_unconverged=True, kw=dict(V12, res_frac=0.0)),
     "v1.2-screened": dict(fail_unconverged=True, kw=dict(V12, use_screen=True)),
+    # the nested-solver class removed: every nested-solver parameter declared as a
+    # discretisation parameter (referee point 10)
+    "v1.2-nested-as-disc": dict(fail_unconverged=True, kw=dict(V12), kinds_map={"nested-solver": "discretisation"}),
 }
 
 
@@ -71,11 +74,12 @@ def replay(case, ob, tg, cfg, starts=None):
     kw = dict(cfg["kw"])
     if case.floor is not None:
         kw.setdefault("noise_floor", case.floor)
+    kinds = cfg.get("kinds") or [cfg.get("kinds_map", {}).get(k, k) for k in case.KINDS]
     out = dict(case=case.key, ob=ob, target=tg, n=len(starts), reachable=bool(feas),
                accepted=0, missed=0, declined_reach=0, declined_unreach=0, start_failed=0,
-               pen=[], runs=[], unconv=0, worst=0.0, misses=[])
+               pen=[], runs=[], unconv=0, worst=0.0, misses=[], orders=[])
     for a in starts:
-        r = run_protocol(look, case.LAD, a, eps, hs=case.HS, kinds=case.KINDS,
+        r = run_protocol(look, case.LAD, a, eps, hs=case.HS, kinds=kinds,
                          models=case.models, **kw)
         out["runs"].append(r["runs"])
         if r["certified"]:
@@ -84,6 +88,7 @@ def replay(case, ob, tg, cfg, starts=None):
             e = err[q] / eps
             out["worst"] = max(out["worst"], e)
             out["unconv"] += not case.converged(q)
+            out["orders"].append((_orders(r.get("budget"), case.KINDS), err[q] / eps))
             if e > 1:
                 out["missed"] += 1
                 out["misses"].append((a, q, e))
@@ -98,6 +103,23 @@ def replay(case, ob, tg, cfg, starts=None):
     return out
 
 
+def _orders(lb, kinds):
+    """Observed orders along the discretisation axes at the accepted setting: the
+    order of the offset fit and that of the three-point local check (NaN where an
+    axis was not fitted or the local changes alternate)."""
+    if lb is None:
+        return []
+    out = []
+    for k, kd in enumerate(kinds):
+        if kd != "discretisation":
+            continue
+        pf = lb.pk[k] if k < len(getattr(lb, "pk", [])) else np.nan
+        loc = getattr(lb, "local", {}).get(k)
+        pl = loc["p"] if isinstance(loc, dict) else np.nan
+        out.append((float(pf), float(pl)))
+    return out
+
+
 def summarise(o):
     pen = o["pen"]
     return dict(case=o["case"], ob=o["ob"], target=o["target"], n=o["n"],
@@ -107,7 +129,11 @@ def summarise(o):
                 pen_med=float(np.median(pen)) if pen else float("nan"),
                 pen_max=float(np.max(pen)) if pen else float("nan"),
                 runs_med=float(np.median(o["runs"])) if o["runs"] else float("nan"),
-                unconv=o["unconv"], worst=o["worst"])
+                unconv=o["unconv"], worst=o["worst"],
+                low_order=sum(1 for ords, e in o["orders"]
+                              if any(np.isfinite(x) and x < 1 for pr in ords for x in pr)),
+                low_order_missed=sum(1 for ords, e in o["orders"] if e > 1 and
+                                     any(np.isfinite(x) and x < 1 for pr in ords for x in pr)))
 
 
 def run_config(name, cases=None, verbose=True):
@@ -134,12 +160,38 @@ def run_config(name, cases=None, verbose=True):
 
 
 if __name__ == "__main__":
-    names = sys.argv[1:] or ["v1.2"]
+    # python pooled.py CONFIG [CONFIG ...] [--only KEY,KEY] [--skip KEY,KEY]
+    # With --only or --skip the rows of the selected cases replace those already in
+    # data/pooled_<config>.json, so a case whose tensor is rebuilt can be redone alone.
+    args = sys.argv[1:]
+    only = skip = None
+    if "--only" in args:
+        i = args.index("--only"); only = set(args[i + 1].split(",")); del args[i:i + 2]
+    if "--skip" in args:
+        i = args.index("--skip"); skip = set(args[i + 1].split(",")); del args[i:i + 2]
+    names = args or ["v1.2"]
     out_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+    loaders = [("L", C._manufactured), ("2D-1", lambda: [C._dfg1()]), ("2D-2", lambda: [C._dfg2()]),
+               ("LMP", C._lammps), ("GMX", C._gromacs), ("ABINIT", lambda: [C._abinit()]),
+               ("QE", lambda: [C._qe()])]
+    sel = lambda key: (only is None or key in only) and (skip is None or key not in skip)
+    cases = []
+    for _, load in loaders:
+        try:
+            got = load()
+        except FileNotFoundError as exc:
+            print(f"skipping: {exc}", flush=True)
+            continue
+        cases += [c for c in got if sel(c.key)]
     for name in names:
         print(f"=== configuration {name}: {CONFIGS[name]}", flush=True)
-        rows = run_config(name)
-        json.dump(rows, open(os.path.join(out_dir, f"pooled_{name}.json"), "w"), indent=1)
+        rows = run_config(name, cases)
+        path = os.path.join(out_dir, f"pooled_{name}.json")
+        if (only or skip) and os.path.exists(path):
+            done = {r["case"] for r in rows}
+            old = [r for r in json.load(open(path)) if r["case"] not in done]
+            rows = old + rows
+        json.dump(rows, open(path, "w"), indent=1)
         tot = lambda k: sum(r[k] for r in rows)
         print(f"TOTAL {name}: replays {tot('n')}, accepted {tot('accepted')}, missed "
               f"{tot('missed')}, declined though reachable {tot('declined_reach')}, "

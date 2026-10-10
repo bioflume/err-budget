@@ -81,3 +81,22 @@ def test_runfailed_is_recorded_not_raised():
 def test_v12_is_the_default_configuration():
     assert V12["joint_check"] and V12["local_order_check"] and V12["resid_margin"] == 5.0
     assert V12["cancel_rule"] == "none"
+
+
+def test_failed_finer_run_uses_the_order_up_to_the_setting():
+    # The error stalls and then falls again (an extremum that moves in jumps); the
+    # run one step finer than the candidate answer fails.  Without a measurement on
+    # the refining side the order is taken from the three values ending at the
+    # setting: the changes grow, so the error cannot be bounded and the target is
+    # declined rather than accepted on the strength of the coarse-side fit.
+    err = [-77.4, -29.0, -13.1, -2.49, -2.48, -1.66, -0.61]
+    x = [16, 24, 32, 48, 64, 96, 128]
+    lad = [x, [1e-4, 1e-6]]
+    look = lambda i: ((np.nan, 1.0) if i[0] == 6 else
+                      (1.0 + 1e-4 * err[i[0]] + 1e-9 * lad[1][i[1]], float(x[i[0]] ** 2)))
+    hs = [[1.0 / n for n in x], lad[1]]
+    kinds = ["discretisation", "nested-solver"]
+    r11 = run_protocol(look, lad, (5, 1), 1e-4, hs=hs, kinds=kinds, **V11)
+    assert r11["certified"] and abs(look(r11["proposal"])[0] - 1.0) > 1e-4
+    r = run_protocol(look, lad, (5, 1), 1e-4, hs=hs, kinds=kinds, **V12)
+    assert not r["certified"] and r["declined"] == "unbounded_axis"

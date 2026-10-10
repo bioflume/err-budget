@@ -1,0 +1,23 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: pip install -e ".[dev,paper]"
+      - run: pytest -q
+      # the frozen program must not change after the held-out tests were registered
+      - name: frozen-source check
+        run: |
+          if git rev-parse -q --verify refs/tags/v1.2.0-frozen >/dev/null; then
+            git diff --exit-code v1.2.0-frozen -- src/knobs || (echo "src/knobs differs from the frozen program"; exit 1)
+          fi

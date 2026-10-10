@@ -45,6 +45,44 @@ def f_rhs(x, y, z):
     return -(1 + x) * lap - dudx
 
 
+# At n = 24 the global assembly and the direct solve of the projection of the
+# boundary data exceed the 7 GB of the development machine.  From this size on the
+# forms are assembled over chunks of elements and the projection is solved by
+# conjugate gradients to a relative residual of 1e-14 (verified at n = 8 and 16 to change
+# both observables by less than 1e-12 relative; `python heldout_fem.py check`).
+LOWMEM_N = 24
+_CHUNK = 12000
+
+
+def _assemble_lowmem(m, a, l):
+    import scipy.sparse.linalg as spla
+    from skfem import Basis, BilinearForm, ElementTetP2, LinearForm
+    from skfem.helpers import dot
+
+    @BilinearForm
+    def mass(u, v, w):
+        return u * v
+
+    @LinearForm
+    def gload(v, w):
+        return u_ex(*w.x) * v
+
+    A = b = M = f = None
+    nel = m.t.shape[1]
+    for s0 in range(0, nel, _CHUNK):
+        cb = Basis(m, ElementTetP2(), intorder=4, elements=np.arange(s0, min(s0 + _CHUNK, nel)))
+        parts = (a.assemble(cb), l.assemble(cb), mass.assemble(cb), gload.assemble(cb))
+        if A is None:
+            A, b, M, f = parts
+        else:
+            A, b, M, f = A + parts[0], b + parts[1], M + parts[2], f + parts[3]
+        del cb
+    x, info = spla.cg(M.tocsr(), f, rtol=1e-14, atol=0.0, maxiter=5000)
+    if info != 0:
+        raise RuntimeError("projection of the boundary data did not converge")
+    return A.tocsr(), b, x
+
+
 def run(theta: dict):
     import pyamg
     import scipy.sparse.linalg as spla
@@ -57,7 +95,7 @@ def run(theta: dict):
     th = float(theta["amg_theta"])
     t0 = time.perf_counter()
     m = MeshTet.init_tensor(*(np.linspace(0, 1, n + 1),) * 3)
-    ib = Basis(m, ElementTetP2(), intorder=4)
+    ib = Basis(m, ElementTetP2(), intorder=4) if n < LOWMEM_N else None
 
     @BilinearForm
     def a(u, v, w):
@@ -67,10 +105,13 @@ def run(theta: dict):
     def l(v, w):
         return f_rhs(*w.x) * v
 
-    A = a.assemble(ib)
-    b = l.assemble(ib)
-    x = ib.project(lambda X: u_ex(*X))          # boundary values (interpolated)
-    D = ib.get_dofs().all()
+    if n < LOWMEM_N:
+        A = a.assemble(ib)
+        b = l.assemble(ib)
+        x = ib.project(lambda X: u_ex(*X))      # boundary values (L2 projection)
+    else:
+        A, b, x = _assemble_lowmem(m, a, l)
+    D = (ib if ib is not None else Basis(m, ElementTetP2(), intorder=1)).get_dofs().all()
     Ai, bi, xi, I = condense(A, b, x=x, D=D)
     ml = pyamg.smoothed_aggregation_solver(Ai.tocsr(), strength=("symmetric", {"theta": th}))
     M = ml.aspreconditioner()
@@ -80,7 +121,14 @@ def run(theta: dict):
     x[I] = sol
     converged = info == 0
     # observables
-    mean = float(Functional(lambda w: w["u"]).assemble(ib, u=ib.interpolate(x)))
+    if n < LOWMEM_N:
+        mean = float(Functional(lambda w: w["u"]).assemble(ib, u=ib.interpolate(x)))
+    else:
+        mean, nel = 0.0, m.t.shape[1]
+        for s0 in range(0, nel, _CHUNK):
+            cb = Basis(m, ElementTetP2(), intorder=4,
+                       elements=np.arange(s0, min(s0 + _CHUNK, nel)))
+            mean += float(Functional(lambda w: w["u"]).assemble(cb, u=cb.interpolate(x)))
     fb = FacetBasis(m, ElementTetP2(), facets=m.facets_satisfying(lambda X: X[0] > 1 - 1e-12),
                     intorder=4)
     flux = float(Functional(lambda w: (1.0 + w.x[0]) * grad(w["u"])[0]).assemble(
@@ -91,7 +139,23 @@ def run(theta: dict):
             dict(cg_its=its[0], converged=bool(converged), dofs=int(A.shape[0])))
 
 
+def _check(n=16):
+    """The low-memory path against the standard one at size n."""
+    global LOWMEM_N
+    th = dict(n=n, cg_rtol=1e-10, amg_theta=0.0)
+    o1 = run(th)[0]
+    LOWMEM_N = n
+    o2 = run(th)[0]
+    LOWMEM_N = 24
+    for k in o1:
+        print(k, o1[k], o2[k], f"relative difference {abs(o1[k]-o2[k])/abs(o1[k]):.1e}")
+
+
 if __name__ == "__main__":
+    import sys
+    if sys.argv[1:2] == ["check"]:
+        _check(int(sys.argv[2]) if len(sys.argv) > 2 else 12)
+        raise SystemExit
     for n in LAD[0]:
         o, c, w, i = run(dict(n=n, cg_rtol=1e-10, amg_theta=0.0))
         print(n, {k: f"{abs(v-EXACT[k])/abs(EXACT[k]):.2e}" for k, v in o.items()}, f"{c:.3g}",

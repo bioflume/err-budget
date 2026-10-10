@@ -94,28 +94,53 @@ ensembles; it does not pay back for a single run.
 
 **The certificate is measured, not proven.** You get a computed estimate with a
 calibrated margin and a stopping rule that is re-verified at every step. On four
-test problems with exact solutions (L2-L5, 22 cases) and on OpenFOAM, Quantum
+test problems with exact solutions (L2-L5) and on OpenFOAM, Quantum
 ESPRESSO, ABINIT, GROMACS and LAMMPS, the article reports every miss and its
 cause; `paper/README.md` maps each number to the script that produces it. That
 is stronger than a heuristic and weaker than a proof, and we would rather say so.
 
-**Options added in version 1.1.** `Knob(..., model="exponential")` for
-spectral or plane-wave cutoffs; `tune(..., floor_probe=[...])` to measure the
-round-off floor of a single-precision or noisy code and decline targets below
-it; `resid_margin=5` to scale the safety factor with the quality of the fits
-(recommended with the exponential model and for observables such as extremum
-locations whose convergence is irregular).
+## Telling it that a run failed or did not converge
+
+A run whose nested solver stopped at its iteration limit is not an answer. Return
+`{"drag": cd, "converged": False}` (or raise `knobs.RunFailed`) and the run is
+recorded with its cost but never proposed and never fitted. The drivers in `paper/`
+show how to read this from OpenFOAM (`residualControl` not met before `endTime`),
+Quantum ESPRESSO and ABINIT logs.
+
+## What version 1.2 checks before it accepts a setting
+
+- the observed order along every discretisation parameter (three runs through the
+  current value): a list that starts before the asymptotic range, or an error that
+  stalls between two grids, is refined or declined instead of extrapolated;
+- the interaction of the parameters, by refining them all together by one step
+  (one extra run): errors of different parameters that cancel at one setting but
+  not at the next are not credited;
+- a safety factor that grows with the misfit of the error models.
+
+The default configuration is `knobs.V12`; `knobs.V11` reproduces the previous
+version. `Knob(..., model="exponential")` for spectral or plane-wave cutoffs;
+`tune(..., floor_probe=[...])` measures the round-off floor of a single-precision or
+noisy code and declines targets below ten times it; `screen=True` turns on the
+preliminary sweep (fewer runs, more expensive recommendations). See `CHANGELOG.md`.
+
+## Citing
+
+See `CITATION.cff`. The archived release with the solver outputs of every run in the
+article is on Zenodo (DOI in `CITATION.cff`).
 
 ## Layout
 
 ```
 src/knobs/
   api.py             Knob, tune, TuneResult -- the public interface
-  _core.py           measurement, the screen/walk/audit procedure, floor check
+  _core.py           measurement, local-order and joint checks, the search, floor check
   _asymptotic.py     the balance law e_k ~ q_k/p_k (secondary result)
   problems/          test problems with exact ground truth
 examples/            quickstart, bring-your-own-solver, declaration falsified
 paper/               everything needed to reproduce the paper: reproduce.sh
+hamilton/            Slurm kit for the cluster studies (Durham Hamilton; adaptable)
+PREREGISTRATION.md   held-out tests fixed before they were run
+CHANGELOG.md         changes between versions and the comparisons behind them
 tests/               behavioural guarantees the paper claims
 DESIGN_NOTES.md      why the method is shaped this way, including what failed
 ```

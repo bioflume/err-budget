@@ -7,3 +7,4 @@ paper/data/*.partial
 hamilton/results/
 hamilton/*/logs/
 *.sif
+paper/data/old_pooled/
