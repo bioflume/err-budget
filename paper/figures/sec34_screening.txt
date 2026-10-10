@@ -1,0 +1,33 @@
+  1/24 combos, 328 runs, 0s
+  7/24 combos, 328 runs, 0s
+  13/24 combos, 328 runs, 0s
+  19/24 combos, 328 runs, 0s
+
+================================================================================
+8-knob screening: cheap (N=16,steps=10) -> production (N=64,steps=40)
+24 parameter combinations, 328 solver runs, 0s
+
+  energy:
+    knob            class             missed by screen  kept needlessly
+    N               discretisation            0/24             9/24
+    steps           discretisation            0/24             9/24
+    newton_tol      nested solver             9/24             0/24
+    gmres_tol       nested solver             0/24             0/24
+    ilu_drop        cost-only                 0/24             0/24
+    gmres_restart   nested solver             0/24             0/24
+    precond_freq    cost-only                 0/24             0/24
+    newton_max      nested solver             0/24             0/24
+    -> misses among nested-solver knobs: 9   among all others: 0
+  gradient:
+    knob            class             missed by screen  kept needlessly
+    N               discretisation            0/24             0/24
+    steps           discretisation            0/24             9/24
+    newton_tol      nested solver             9/24             0/24
+    gmres_tol       nested solver             0/24             0/24
+    ilu_drop        cost-only                 0/24             0/24
+    gmres_restart   nested solver             0/24             0/24
+    precond_freq    cost-only                 0/24             0/24
+    newton_max      nested solver             0/24             0/24
+    -> misses among nested-solver knobs: 9   among all others: 0
+
+  a screening run costs 5.02e+05, a production run 1.78e+07 -> 35x cheaper

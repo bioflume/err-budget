@@ -1,0 +1,2121 @@
+[
+ {
+  "case": "L2",
+  "ob": "energy",
+  "target": 0.00727882408644963,
+  "n": 625,
+  "reachable": true,
+  "accepted": 625,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.724,
+  "pen_max": 14.4,
+  "runs_med": 48.0,
+  "unconv": 0,
+  "worst": 0.7931722795500473,
+  "miss_list": []
+ },
+ {
+  "case": "L2",
+  "ob": "energy",
+  "target": 0.002183647225934889,
+  "n": 625,
+  "reachable": true,
+  "accepted": 625,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.128,
+  "pen_max": 2.48,
+  "runs_med": 57.0,
+  "unconv": 0,
+  "worst": 0.7025108313364707,
+  "miss_list": []
+ },
+ {
+  "case": "L2",
+  "ob": "energy",
+  "target": 0.000727882408644963,
+  "n": 625,
+  "reachable": true,
+  "accepted": 625,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.0,
+  "pen_max": 1.3275862068965518,
+  "runs_med": 64.0,
+  "unconv": 0,
+  "worst": 0.6491317315844292,
+  "miss_list": []
+ },
+ {
+  "case": "L2",
+  "ob": "dissipation",
+  "target": 0.032216249751957325,
+  "n": 625,
+  "reachable": true,
+  "accepted": 625,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.0,
+  "pen_max": 3.6,
+  "runs_med": 55.0,
+  "unconv": 0,
+  "worst": 0.7447699401847196,
+  "miss_list": []
+ },
+ {
+  "case": "L2",
+  "ob": "dissipation",
+  "target": 0.009664874925587198,
+  "n": 625,
+  "reachable": true,
+  "accepted": 625,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 2.48,
+  "pen_max": 7.792,
+  "runs_med": 59.0,
+  "unconv": 0,
+  "worst": 0.6620059238419498,
+  "miss_list": []
+ },
+ {
+  "case": "L2",
+  "ob": "dissipation",
+  "target": 0.003221624975195732,
+  "n": 625,
+  "reachable": true,
+  "accepted": 625,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 2.164335664335664,
+  "pen_max": 6.293706293706293,
+  "runs_med": 65.0,
+  "unconv": 0,
+  "worst": 0.5467490845975642,
+  "miss_list": []
+ },
+ {
+  "case": "L3",
+  "ob": "energy",
+  "target": 0.01,
+  "n": 432,
+  "reachable": true,
+  "accepted": 432,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.0,
+  "pen_max": 1.0,
+  "runs_med": 45.0,
+  "unconv": 0,
+  "worst": 0.30663189469823754,
+  "miss_list": []
+ },
+ {
+  "case": "L3",
+  "ob": "energy",
+  "target": 0.003,
+  "n": 432,
+  "reachable": true,
+  "accepted": 432,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.0,
+  "pen_max": 1.0,
+  "runs_med": 53.0,
+  "unconv": 0,
+  "worst": 0.25232128350428173,
+  "miss_list": []
+ },
+ {
+  "case": "L3",
+  "ob": "gradient",
+  "target": 0.01,
+  "n": 432,
+  "reachable": true,
+  "accepted": 432,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.0,
+  "pen_max": 1.0,
+  "runs_med": 44.0,
+  "unconv": 0,
+  "worst": 0.6603378452737787,
+  "miss_list": []
+ },
+ {
+  "case": "L3",
+  "ob": "gradient",
+  "target": 0.003,
+  "n": 432,
+  "reachable": true,
+  "accepted": 432,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.0,
+  "pen_max": 1.0,
+  "runs_med": 51.0,
+  "unconv": 0,
+  "worst": 0.5551836708447327,
+  "miss_list": []
+ },
+ {
+  "case": "L4",
+  "ob": "inhibitor_mass",
+  "target": 0.01,
+  "n": 576,
+  "reachable": true,
+  "accepted": 576,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.0,
+  "pen_max": 1.0,
+  "runs_med": 47.0,
+  "unconv": 0,
+  "worst": 0.015081892358628581,
+  "miss_list": []
+ },
+ {
+  "case": "L4",
+  "ob": "inhibitor_mass",
+  "target": 0.003,
+  "n": 576,
+  "reachable": true,
+  "accepted": 576,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.1830314585319353,
+  "pen_max": 4.715538608198284,
+  "runs_med": 49.0,
+  "unconv": 0,
+  "worst": 0.6475846318594892,
+  "miss_list": []
+ },
+ {
+  "case": "L4",
+  "ob": "pattern_sharpness",
+  "target": 0.01,
+  "n": 576,
+  "reachable": true,
+  "accepted": 576,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 8.094788255775937,
+  "pen_max": 9.916435839433866,
+  "runs_med": 53.0,
+  "unconv": 0,
+  "worst": 0.32803083719333986,
+  "miss_list": []
+ },
+ {
+  "case": "L4",
+  "ob": "pattern_sharpness",
+  "target": 0.003,
+  "n": 576,
+  "reachable": true,
+  "accepted": 432,
+  "missed": 0,
+  "declined_reach": 144,
+  "declined_unreach": 0,
+  "pen_med": 8.078731994987752,
+  "pen_max": 8.078731994987752,
+  "runs_med": 53.0,
+  "unconv": 0,
+  "worst": 0.03176153351399717,
+  "miss_list": []
+ },
+ {
+  "case": "L5",
+  "ob": "psi_min",
+  "target": 0.01,
+  "n": 700,
+  "reachable": true,
+  "accepted": 0,
+  "missed": 0,
+  "declined_reach": 700,
+  "declined_unreach": 0,
+  "pen_med": NaN,
+  "pen_max": NaN,
+  "runs_med": 106.0,
+  "unconv": 0,
+  "worst": 0.0,
+  "miss_list": []
+ },
+ {
+  "case": "L5",
+  "ob": "psi_min",
+  "target": 0.003,
+  "n": 700,
+  "reachable": true,
+  "accepted": 0,
+  "missed": 0,
+  "declined_reach": 700,
+  "declined_unreach": 0,
+  "pen_med": NaN,
+  "pen_max": NaN,
+  "runs_med": 106.0,
+  "unconv": 0,
+  "worst": 0.0,
+  "miss_list": []
+ },
+ {
+  "case": "L5",
+  "ob": "y_min",
+  "target": 0.001,
+  "n": 700,
+  "reachable": true,
+  "accepted": 700,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 3.2224965618188985,
+  "pen_max": 3.2224965618188985,
+  "runs_med": 89.0,
+  "unconv": 0,
+  "worst": 0.7509009712842947,
+  "miss_list": []
+ },
+ {
+  "case": "L5",
+  "ob": "y_min",
+  "target": 0.0003,
+  "n": 700,
+  "reachable": true,
+  "accepted": 700,
+  "missed": 348,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 6.45881757298781,
+  "pen_max": 12.571051011006896,
+  "runs_med": 83.0,
+  "unconv": 0,
+  "worst": 1.82729938060336,
+  "miss_list": [
+   [
+    [
+     0,
+     0,
+     2,
+     0
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     2,
+     1
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     2,
+     2
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     2,
+     3
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     3,
+     0
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     3,
+     1
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     3,
+     2
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     3,
+     3
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     4,
+     0
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     4,
+     1
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     4,
+     2
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     4,
+     3
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     1,
+     2,
+     0
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     1,
+     2,
+     1
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     1,
+     2,
+     2
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     1,
+     2,
+     3
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     1,
+     3,
+     0
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     1,
+     3,
+     1
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     1,
+     3,
+     2
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     1,
+     3,
+     3
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ]
+  ]
+ },
+ {
+  "case": "L5",
+  "ob": "omega_lid",
+  "target": 0.01,
+  "n": 700,
+  "reachable": true,
+  "accepted": 700,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.3344591973696573,
+  "pen_max": 5.260624269776983,
+  "runs_med": 80.0,
+  "unconv": 0,
+  "worst": 0.6293771867771797,
+  "miss_list": []
+ },
+ {
+  "case": "L5",
+  "ob": "omega_lid",
+  "target": 0.003,
+  "n": 700,
+  "reachable": true,
+  "accepted": 23,
+  "missed": 0,
+  "declined_reach": 677,
+  "declined_unreach": 0,
+  "pen_med": 2605.7332726303334,
+  "pen_max": 2605.7332726303334,
+  "runs_med": 105.0,
+  "unconv": 21,
+  "worst": 0.9610647902820911,
+  "miss_list": []
+ },
+ {
+  "case": "2D-1",
+  "ob": "cd",
+  "target": 0.01,
+  "n": 780,
+  "reachable": true,
+  "accepted": 780,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 23.23721590909091,
+  "pen_max": 36.146780303030305,
+  "runs_med": 72.0,
+  "unconv": 0,
+  "worst": 0.8048594777516329,
+  "miss_list": []
+ },
+ {
+  "case": "2D-1",
+  "ob": "cd",
+  "target": 0.003,
+  "n": 780,
+  "reachable": true,
+  "accepted": 780,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 8.869565217391305,
+  "pen_max": 15.652173913043478,
+  "runs_med": 84.0,
+  "unconv": 0,
+  "worst": 0.3058156108317503,
+  "miss_list": []
+ },
+ {
+  "case": "2D-1",
+  "ob": "cd",
+  "target": 0.001,
+  "n": 780,
+  "reachable": true,
+  "accepted": 780,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 3.769696071895909,
+  "pen_max": 277.82801273979703,
+  "runs_med": 106.5,
+  "unconv": 0,
+  "worst": 0.5506686431000442,
+  "miss_list": []
+ },
+ {
+  "case": "2D-1",
+  "ob": "dp",
+  "target": 0.03,
+  "n": 780,
+  "reachable": true,
+  "accepted": 780,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.6761904761904762,
+  "pen_max": 2.641269841269841,
+  "runs_med": 70.0,
+  "unconv": 0,
+  "worst": 0.6201204988406955,
+  "miss_list": []
+ },
+ {
+  "case": "2D-1",
+  "ob": "dp",
+  "target": 0.01,
+  "n": 780,
+  "reachable": true,
+  "accepted": 780,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 6.458830001833853,
+  "pen_max": 6.458830001833853,
+  "runs_med": 113.0,
+  "unconv": 0,
+  "worst": 0.6117011054842597,
+  "miss_list": []
+ },
+ {
+  "case": "2D-1",
+  "ob": "cl",
+  "target": 0.1,
+  "n": 780,
+  "reachable": true,
+  "accepted": 780,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.5681818181818181,
+  "pen_max": 417.50852272727275,
+  "runs_med": 72.0,
+  "unconv": 0,
+  "worst": 0.3219385913730408,
+  "miss_list": []
+ },
+ {
+  "case": "2D-1",
+  "ob": "cl",
+  "target": 0.03,
+  "n": 780,
+  "reachable": true,
+  "accepted": 780,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 14.174715909090908,
+  "pen_max": 2971.590909090909,
+  "runs_med": 73.0,
+  "unconv": 1,
+  "worst": 0.8558581783652046,
+  "miss_list": []
+ },
+ {
+  "case": "2D-2",
+  "ob": "cd_max",
+  "target": 0.1,
+  "n": 207,
+  "reachable": true,
+  "accepted": 198,
+  "missed": 0,
+  "declined_reach": 9,
+  "declined_unreach": 0,
+  "pen_med": 1.0,
+  "pen_max": 1.0,
+  "runs_med": 33.0,
+  "unconv": 0,
+  "worst": 0.050622546483897406,
+  "miss_list": []
+ },
+ {
+  "case": "2D-2",
+  "ob": "cd_max",
+  "target": 0.03,
+  "n": 207,
+  "reachable": true,
+  "accepted": 198,
+  "missed": 0,
+  "declined_reach": 9,
+  "declined_unreach": 0,
+  "pen_med": 1.0,
+  "pen_max": 1.0,
+  "runs_med": 33.0,
+  "unconv": 0,
+  "worst": 0.16874182161299137,
+  "miss_list": []
+ },
+ {
+  "case": "2D-2",
+  "ob": "cd_max",
+  "target": 0.01,
+  "n": 207,
+  "reachable": true,
+  "accepted": 198,
+  "missed": 0,
+  "declined_reach": 9,
+  "declined_unreach": 0,
+  "pen_med": 1.0,
+  "pen_max": 7.665029469548134,
+  "runs_med": 34.0,
+  "unconv": 0,
+  "worst": 0.6342838356633209,
+  "miss_list": []
+ },
+ {
+  "case": "2D-2",
+  "ob": "cl_max",
+  "target": 0.1,
+  "n": 207,
+  "reachable": true,
+  "accepted": 198,
+  "missed": 0,
+  "declined_reach": 9,
+  "declined_unreach": 0,
+  "pen_med": 3.2858546168958744,
+  "pen_max": 5.489194499017682,
+  "runs_med": 35.0,
+  "unconv": 0,
+  "worst": 0.28137955542243437,
+  "miss_list": []
+ },
+ {
+  "case": "2D-2",
+  "ob": "st",
+  "target": 0.1,
+  "n": 207,
+  "reachable": true,
+  "accepted": 198,
+  "missed": 0,
+  "declined_reach": 9,
+  "declined_unreach": 0,
+  "pen_med": 1.7406679764243613,
+  "pen_max": 1.7406679764243613,
+  "runs_med": 37.0,
+  "unconv": 0,
+  "worst": 0.44077245587913444,
+  "miss_list": []
+ },
+ {
+  "case": "2D-2",
+  "ob": "st",
+  "target": 0.03,
+  "n": 207,
+  "reachable": true,
+  "accepted": 188,
+  "missed": 0,
+  "declined_reach": 19,
+  "declined_unreach": 0,
+  "pen_med": 2.751052631578947,
+  "pen_max": 2.751052631578947,
+  "runs_med": 51.0,
+  "unconv": 0,
+  "worst": 0.328757641130488,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-20",
+  "ob": "energy_per_ion",
+  "target": 0.0001,
+  "n": 100,
+  "reachable": true,
+  "accepted": 100,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.266762533925449,
+  "pen_max": 2.292675849121221,
+  "runs_med": 35.5,
+  "unconv": 0,
+  "worst": 0.4938610248928297,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-20",
+  "ob": "energy_per_ion",
+  "target": 1e-05,
+  "n": 100,
+  "reachable": true,
+  "accepted": 100,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.4690519351173954,
+  "pen_max": 1.4690519351173954,
+  "runs_med": 41.0,
+  "unconv": 0,
+  "worst": 0.46266549107240795,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-20",
+  "ob": "energy_per_ion",
+  "target": 1e-06,
+  "n": 100,
+  "reachable": true,
+  "accepted": 50,
+  "missed": 1,
+  "declined_reach": 50,
+  "declined_unreach": 0,
+  "pen_med": 1.2815414874620519,
+  "pen_max": 19.43777601549995,
+  "runs_med": 41.0,
+  "unconv": 0,
+  "worst": 1.6459682235333004,
+  "miss_list": [
+   [
+    [
+     0,
+     4,
+     1
+    ],
+    [
+     0,
+     4,
+     1
+    ],
+    1.6459682235333004
+   ]
+  ]
+ },
+ {
+  "case": "LMP-40",
+  "ob": "energy_per_ion",
+  "target": 0.0001,
+  "n": 62,
+  "reachable": true,
+  "accepted": 62,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.283647712405059,
+  "pen_max": 1.9452250192481428,
+  "runs_med": 30.5,
+  "unconv": 0,
+  "worst": 0.6976685349146412,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-40",
+  "ob": "energy_per_ion",
+  "target": 1e-05,
+  "n": 62,
+  "reachable": true,
+  "accepted": 36,
+  "missed": 0,
+  "declined_reach": 26,
+  "declined_unreach": 0,
+  "pen_med": 1.5117000821816466,
+  "pen_max": 1.8124843979703258,
+  "runs_med": 29.0,
+  "unconv": 0,
+  "worst": 0.08283925623839827,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-40",
+  "ob": "energy_per_ion",
+  "target": 1e-06,
+  "n": 62,
+  "reachable": true,
+  "accepted": 0,
+  "missed": 0,
+  "declined_reach": 62,
+  "declined_unreach": 0,
+  "pen_med": NaN,
+  "pen_max": NaN,
+  "runs_med": 31.0,
+  "unconv": 0,
+  "worst": 0.0,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-64",
+  "ob": "energy_per_ion",
+  "target": 0.0001,
+  "n": 58,
+  "reachable": true,
+  "accepted": 58,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 2.0996877189518908,
+  "pen_max": 2.2730840773899357,
+  "runs_med": 22.0,
+  "unconv": 0,
+  "worst": 0.6976704493538335,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-64",
+  "ob": "energy_per_ion",
+  "target": 1e-05,
+  "n": 58,
+  "reachable": true,
+  "accepted": 25,
+  "missed": 0,
+  "declined_reach": 33,
+  "declined_unreach": 0,
+  "pen_med": 1.6360519885996487,
+  "pen_max": 1.6360519885996487,
+  "runs_med": 30.0,
+  "unconv": 0,
+  "worst": 0.1365874523719541,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-64",
+  "ob": "energy_per_ion",
+  "target": 1e-06,
+  "n": 58,
+  "reachable": true,
+  "accepted": 7,
+  "missed": 0,
+  "declined_reach": 51,
+  "declined_unreach": 0,
+  "pen_med": 1.060124240680662,
+  "pen_max": 1.060124240680662,
+  "runs_med": 30.5,
+  "unconv": 0,
+  "worst": 0.474646670478576,
+  "miss_list": []
+ },
+ {
+  "case": "GMX-d",
+  "ob": "potential",
+  "target": 1e-05,
+  "n": 225,
+  "reachable": true,
+  "accepted": 225,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.847726272183489,
+  "pen_max": 3.2143466895505424,
+  "runs_med": 42.0,
+  "unconv": 0,
+  "worst": 0.6264197322589389,
+  "miss_list": []
+ },
+ {
+  "case": "GMX-d",
+  "ob": "potential",
+  "target": 1e-06,
+  "n": 225,
+  "reachable": true,
+  "accepted": 225,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 2.265273635199801,
+  "pen_max": 2.2696025665946555,
+  "runs_med": 57.0,
+  "unconv": 0,
+  "worst": 0.40677945745207766,
+  "miss_list": []
+ },
+ {
+  "case": "GMX-s",
+  "ob": "potential",
+  "target": 0.0001,
+  "n": 225,
+  "reachable": true,
+  "accepted": 225,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.2116377348801075,
+  "pen_max": 3.480403756718816,
+  "runs_med": 36.0,
+  "unconv": 0,
+  "worst": 0.5825983673087863,
+  "miss_list": []
+ },
+ {
+  "case": "GMX-s",
+  "ob": "potential",
+  "target": 3e-05,
+  "n": 225,
+  "reachable": true,
+  "accepted": 0,
+  "missed": 0,
+  "declined_reach": 225,
+  "declined_unreach": 0,
+  "pen_med": NaN,
+  "pen_max": NaN,
+  "runs_med": 0.0,
+  "unconv": 0,
+  "worst": 0.0,
+  "miss_list": []
+ },
+ {
+  "case": "GMX-s",
+  "ob": "potential",
+  "target": 1e-05,
+  "n": 225,
+  "reachable": true,
+  "accepted": 0,
+  "missed": 0,
+  "declined_reach": 225,
+  "declined_unreach": 0,
+  "pen_med": NaN,
+  "pen_max": NaN,
+  "runs_med": 0.0,
+  "unconv": 0,
+  "worst": 0.0,
+  "miss_list": []
+ },
+ {
+  "case": "ABINIT",
+  "ob": "energy",
+  "target": 0.01,
+  "n": 336,
+  "reachable": true,
+  "accepted": 336,
+  "missed": 48,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.3703520122189465,
+  "pen_max": 1.3703520122189465,
+  "runs_med": 52.0,
+  "unconv": 0,
+  "worst": 1.3140721265784623,
+  "miss_list": [
+   [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     0,
+     0,
+     2
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     0,
+     2,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     0,
+     2,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     0,
+     2,
+     2
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     0,
+     3,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     0,
+     3,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     0,
+     3,
+     2
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     1,
+     1,
+     2
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     1,
+     2,
+     0
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ],
+   [
+    [
+     0,
+     1,
+     2,
+     1
+    ],
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    1.3140721265784623
+   ]
+  ]
+ },
+ {
+  "case": "ABINIT",
+  "ob": "energy",
+  "target": 0.003,
+  "n": 336,
+  "reachable": true,
+  "accepted": 264,
+  "missed": 36,
+  "declined_reach": 72,
+  "declined_unreach": 0,
+  "pen_med": 7.07750753219766,
+  "pen_max": 7.07750753219766,
+  "runs_med": 59.5,
+  "unconv": 0,
+  "worst": 4.123427829321245,
+  "miss_list": [
+   [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     1,
+     0,
+     2
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     1,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     1,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     1,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     1,
+     2,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     1,
+     2,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     1,
+     2,
+     2
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     1,
+     3,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     1,
+     3,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     1,
+     3,
+     2
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     2,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     2,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     2,
+     0,
+     2
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     2,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     2,
+     1,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     2,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     2,
+     2,
+     0
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ],
+   [
+    [
+     0,
+     2,
+     2,
+     1
+    ],
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    4.123427829321245
+   ]
+  ]
+ },
+ {
+  "case": "ABINIT",
+  "ob": "force",
+  "target": 0.1,
+  "n": 336,
+  "reachable": true,
+  "accepted": 336,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 14.666863899505897,
+  "pen_max": 14.666863899505897,
+  "runs_med": 88.5,
+  "unconv": 0,
+  "worst": 0.5253817407516816,
+  "miss_list": []
+ },
+ {
+  "case": "QE",
+  "ob": "energy",
+  "target": 0.001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.1359091841135573,
+  "pen_max": 1.1359091841135573,
+  "runs_med": 56.0,
+  "unconv": 0,
+  "worst": 0.5330619650276794,
+  "miss_list": []
+ },
+ {
+  "case": "QE",
+  "ob": "energy",
+  "target": 0.0001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 23,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.1455018357877857,
+  "pen_max": 2.9274531302671263,
+  "runs_med": 67.0,
+  "unconv": 0,
+  "worst": 1.230855223044591,
+  "miss_list": [
+   [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     0,
+     0,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     0,
+     3,
+     0,
+     0
+    ],
+    [
+     2,
+     3,
+     0,
+     2
+    ],
+    1.230855223044591
+   ],
+   [
+    [
+     0,
+     3,
+     0,
+     1
+    ],
+    [
+     2,
+     3,
+     0,
+     2
+    ],
+    1.230855223044591
+   ],
+   [
+    [
+     0,
+     3,
+     0,
+     2
+    ],
+    [
+     2,
+     3,
+     0,
+     2
+    ],
+    1.230855223044591
+   ],
+   [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     1,
+     0,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     1,
+     1,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     1,
+     3,
+     0,
+     0
+    ],
+    [
+     2,
+     3,
+     0,
+     2
+    ],
+    1.230855223044591
+   ],
+   [
+    [
+     1,
+     3,
+     0,
+     1
+    ],
+    [
+     2,
+     3,
+     0,
+     2
+    ],
+    1.230855223044591
+   ],
+   [
+    [
+     1,
+     3,
+     0,
+     2
+    ],
+    [
+     2,
+     3,
+     0,
+     2
+    ],
+    1.230855223044591
+   ],
+   [
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     2,
+     1,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     2,
+     3,
+     0,
+     1
+    ],
+    [
+     2,
+     3,
+     0,
+     2
+    ],
+    1.230855223044591
+   ],
+   [
+    [
+     2,
+     3,
+     0,
+     2
+    ],
+    [
+     2,
+     3,
+     0,
+     2
+    ],
+    1.230855223044591
+   ],
+   [
+    [
+     3,
+     0,
+     0,
+     1
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     3,
+     0,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     3,
+     1,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     4,
+     0,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ]
+  ]
+ },
+ {
+  "case": "QE",
+  "ob": "force",
+  "target": 0.1,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "pen_med": 1.5330462882330662,
+  "pen_max": 4.175480631087183,
+  "runs_med": 47.0,
+  "unconv": 0,
+  "worst": 0.803341235635123,
+  "miss_list": []
+ }
+]

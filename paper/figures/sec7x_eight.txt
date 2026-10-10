@@ -1,0 +1,30 @@
+  screened (default): 20/200 starts done
+  screened (default): 40/200 starts done
+  screened (default): 60/200 starts done
+  screened (default): 80/200 starts done
+  screened (default): 100/200 starts done
+  screened (default): 120/200 starts done
+  screened (default): 140/200 starts done
+  screened (default): 160/200 starts done
+  screened (default): 180/200 starts done
+  screened (default): 200/200 starts done
+
+8-parameter L3, screened (default) mode, energy 1e-2, 200 starts:
+  certified 200, missed 0, worst error 0.31 eps, distinct recommendations 7
+  median runs 48 (max 87), median calibration cost 154 production runs at the start setting
+  penalty against the 5-parameter grid optimum: median 1.84, worst 3.47; against the cheapest attaining setting among the 6480 8-parameter runs made: median 2.45
+  full: 20/200 starts done
+  full: 40/200 starts done
+  full: 60/200 starts done
+  full: 80/200 starts done
+  full: 100/200 starts done
+  full: 120/200 starts done
+  full: 140/200 starts done
+  full: 160/200 starts done
+  full: 180/200 starts done
+  full: 200/200 starts done
+
+8-parameter L3, full mode, energy 1e-2, 200 starts:
+  certified 200, missed 0, worst error 0.30 eps, distinct recommendations 1
+  median runs 109 (max 212), median calibration cost 233 production runs at the start setting
+  penalty against the 5-parameter grid optimum: median 0.75, worst 0.75; against the cheapest attaining setting among the 6480 8-parameter runs made: median 1.00

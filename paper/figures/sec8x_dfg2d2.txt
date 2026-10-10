@@ -1,0 +1,131 @@
+====================================================================================================
+OpenFOAM pimpleFoam, DFG 2D-2 (Re = 100): 240/240 grid settings, 3/3 reference runs
+====================================================================================================
+reference (n_arc 64, dt 2.5e-4): {'cd_max': 3.23351, 'cl_max': 1.001631, 'st': 0.30092}
+relative uncertainty (dt x2, mesh one level coarser): {'cd_max': '6.6e-04', 'cl_max': '5.9e-03', 'st': '2.3e-03'}
+published intervals (Schaefer & Turek 1996): {'cd_max': (3.22, 3.24), 'cl_max': (0.99, 1.01), 'st': (0.295, 0.305)}
+
+mesh convergence at dt = 5e-4 (n_arc 24, 32, 48, 64) and Richardson limit:
+  cd_max  24: 3.240974, 32: 3.238458, 48: 3.235460, 64: 3.233439;  observed order 0.15, limit 3.187072, n_arc 64 off by 1.5e-02
+  cl_max  24: 1.014782, 32: 1.015194, 48: 1.007392, 64: 1.001553;  not monotone: no observed order
+  st      24: 0.295475, 32: 0.298204, 48: 0.300224, 64: 0.300913;  observed order 2.07, limit 0.301760, n_arc 64 off by 2.8e-03
+usable settings: 207; failed or not shedding: 33
+
+relative error at the tightest solver tolerances that ran (rows: n_arc; columns: dt;
+* = the tightest pair failed and a looser one is shown):
+  cd_max
+    n_arc  12:  5.01e-03   5.91e-03   6.91e-03   6.33e-03 
+    n_arc  16:  3.08e-03   3.62e-03   4.09e-03   4.45e-03 
+    n_arc  24:  1.51e-03*  1.86e-03   2.06e-03   2.31e-03 
+    n_arc  32:  1.27e-03*  1.45e-03   1.43e-03   1.53e-03 
+    n_arc  48:  4.45e-04*  5.27e-04*  5.59e-04*  6.03e-04 
+  cl_max
+    n_arc  12:  9.07e-02   7.91e-02   6.84e-02   6.02e-02 
+    n_arc  16:  2.78e-02   2.22e-02   1.60e-02   9.92e-03 
+    n_arc  24:  6.92e-03*  9.53e-03   1.13e-02   1.31e-02 
+    n_arc  32:  1.05e-02*  1.21e-02   1.27e-02   1.35e-02 
+    n_arc  48:  4.13e-03*  5.41e-03*  5.61e-03*  5.75e-03 
+  st
+    n_arc  12:  7.13e-02   6.86e-02   6.66e-02   6.48e-02 
+    n_arc  16:  4.39e-02   4.19e-02   4.09e-02   4.03e-02 
+    n_arc  24:  2.04e-02*  1.88e-02   1.83e-02   1.81e-02 
+    n_arc  32:  1.12e-02*  9.56e-03   9.14e-03   9.03e-03 
+    n_arc  48:  4.47e-03*  2.83e-03*  2.41e-03*  2.31e-03 
+
+failed settings, by n_arc (rows) and dt (columns), out of 12 tolerance pairs:
+    n_arc  12:   0   0   0   0
+    n_arc  16:   0   0   0   0
+    n_arc  24:   5   0   0   0
+    n_arc  32:   8   2   0   0
+    n_arc  48:   9   5   4   0
+
+part of the error due to the solver tolerances (loosest against tightest that ran), by mesh, dt = 1e-3:
+  cd_max  1.4e-04  8.2e-05  1.2e-04  1.3e-04  1.2e-04
+  cl_max  1.1e-03  1.1e-03  1.3e-03  1.5e-03  3.2e-03
+  st      7.3e-06  5.8e-05  2.0e-04  3.6e-04  1.1e-03
+
+separability of mesh and time step (Appendix: rho = |interaction| / larger main effect),
+adjacent levels, every usable tolerance pair:
+  cd_max  blocks 111, median rho 0.19, rho > 0.5 in 8%, rho > 1 in 4%
+  cl_max  blocks 111, median rho 0.12, rho > 0.5 in 13%, rho > 1 in 2%
+  st      blocks 111, median rho 0.02, rho > 0.5 in 0%, rho > 1 in 0%
+
+transfer of thresholds (as Table 3), pooled over the three observables (failure rate / comparisons):
+  parameter  phi=0.01   phi=0.05   phi=0.1    phi=0.25   phi=0.5   
+  n_arc          0% /90      0% /90      0% /90      0% /90      0% /90 
+  dt             0% /114    32% /114    39% /114    32% /114    28% /114
+  outer_tol     19% /147    24% /147    12% /147     7% /147     5% /147
+  p_tol         16% /174     3% /174     1% /174     0% /174     0% /174
+
+--- cd_max, target 1e-02 relative
+  method                     certified 198/207, missed 0, declined 9 (9 attainable), distinct recommendations 6, penalty median 1.00 worst 7.67, runs median 34, worst error 0.63 eps
+  method, gated margin       certified 197/207, missed 0, declined 10 (10 attainable), distinct recommendations 8, penalty median 1.74 worst 7.67, runs median 35, worst error 0.63 eps
+  sequential @eps            attained 185/207, penalty median 11.19, runs median 4
+  sequential @eps/10         attained 177/207, penalty median 28.77, runs median 5
+  coordinate search @eps     attained 207/207, penalty median 16.34, runs median 6
+  coordinate search @eps/10  attained 207/207, penalty median 35.75, runs median 7
+  reference acceptance       attained 1/1, penalty median 1.00, runs median 207
+
+--- cd_max, target 3e-03 relative  [below ten times the reference uncertainty: graded with a band of 0.22 eps]
+  method                     certified 195/207, missed 168, declined 12 (12 attainable), distinct recommendations 10, penalty median 0.50 worst 33.02, runs median 34, worst error 1.20 eps
+      misses beyond the band (certain): 0; within it (possible): 168
+      miss: n_arc=12, dt=0.004, outer_tol=1e-02, p_tol=1e-06 -> n_arc=16, dt=0.004, outer_tol=1e-02, p_tol=1e-06: true 1.08 eps, estimate 0.50 eps
+      miss: n_arc=12, dt=0.004, outer_tol=1e-02, p_tol=1e-08 -> n_arc=16, dt=0.004, outer_tol=1e-02, p_tol=1e-06: true 1.08 eps, estimate 0.50 eps
+      miss: n_arc=12, dt=0.004, outer_tol=1e-03, p_tol=1e-06 -> n_arc=16, dt=0.004, outer_tol=1e-02, p_tol=1e-06: true 1.08 eps, estimate 0.50 eps
+      miss: n_arc=12, dt=0.004, outer_tol=1e-03, p_tol=1e-08 -> n_arc=16, dt=0.004, outer_tol=1e-02, p_tol=1e-06: true 1.08 eps, estimate 0.50 eps
+  method, gated margin       certified 195/207, missed 129, declined 12 (12 attainable), distinct recommendations 9, penalty median 0.72 worst 45.63, runs median 36, worst error 1.20 eps
+      misses beyond the band (certain): 0; within it (possible): 129
+      miss: n_arc=12, dt=0.004, outer_tol=1e-02, p_tol=1e-06 -> n_arc=16, dt=0.004, outer_tol=1e-02, p_tol=1e-06: true 1.08 eps, estimate 0.51 eps
+      miss: n_arc=12, dt=0.004, outer_tol=1e-02, p_tol=1e-08 -> n_arc=16, dt=0.004, outer_tol=1e-02, p_tol=1e-06: true 1.08 eps, estimate 0.51 eps
+      miss: n_arc=12, dt=0.004, outer_tol=1e-03, p_tol=1e-06 -> n_arc=16, dt=0.004, outer_tol=1e-02, p_tol=1e-06: true 1.08 eps, estimate 0.51 eps
+      miss: n_arc=12, dt=0.004, outer_tol=1e-03, p_tol=1e-08 -> n_arc=16, dt=0.004, outer_tol=1e-02, p_tol=1e-06: true 1.08 eps, estimate 0.51 eps
+  sequential @eps            attained 95/207, penalty median 3.33, runs median 4
+  sequential @eps/10         attained 147/207, penalty median 33.02, runs median 6
+  coordinate search @eps     attained 116/207, penalty median 4.39, runs median 6
+  coordinate search @eps/10  attained 207/207, penalty median 45.63, runs median 8
+  reference acceptance       attained 0/1, penalty median 0.47, runs median 207
+
+--- cd_max 1e-03: below twice the reference uncertainty; not graded
+
+--- cl_max 1e-02: below twice the reference uncertainty; not graded
+
+--- cl_max 3e-03: below twice the reference uncertainty; not graded
+
+--- cl_max 1e-03: below twice the reference uncertainty; not graded
+
+--- st, target 1e-02 relative  [below ten times the reference uncertainty: graded with a band of 0.23 eps]
+  method                     certified 0/207, missed 0, declined 207 (207 attainable), distinct recommendations 0, penalty median nan worst nan, runs median 54, worst error 0.00 eps
+      misses beyond the band (certain): 0; within it (possible): 0
+  method, gated margin       certified 0/207, missed 0, declined 207 (207 attainable), distinct recommendations 0, penalty median nan worst nan, runs median 54, worst error 0.00 eps
+      misses beyond the band (certain): 0; within it (possible): 0
+  sequential @eps            attained 65/207, penalty median 2.61, runs median 5
+  sequential @eps/10         attained 148/207, penalty median 12.15, runs median 6
+  coordinate search @eps     attained 105/207, penalty median 4.07, runs median 7
+  coordinate search @eps/10  attained 207/207, penalty median 16.59, runs median 8
+  reference acceptance       attained 0/1, penalty median 0.91, runs median 207
+
+--- st 3e-03: below twice the reference uncertainty; not graded
+
+--- st 1e-03: below twice the reference uncertainty; not graded
+
+graded instead against FEATFLOW level 6 ( {'cd_max': 3.22, 'cl_max': 0.9859, 'st': 0.30188} ):
+  the OpenFOAM reference differs from it by cd_max 4.2e-03, cl_max 1.6e-02, st 3.2e-03
+  cd_max  3e-02: method certified 198/207, missed 0, declined 9 (9 attainable), distinct recommendations 1, penalty median 1.00 worst 1.00, runs median 33, worst error 0.31 eps
+                 sequential @eps attained 185/207, coordinate search @eps/10 attained 207/207
+  cd_max  1e-02: method certified 198/207, missed 12, declined 9 (9 attainable), distinct recommendations 6, penalty median 1.00 worst 7.67, runs median 34, worst error 1.06 eps
+                 sequential @eps attained 149/207, coordinate search @eps/10 attained 207/207
+  cl_max  3e-02: method certified 198/207, missed 0, declined 9 (9 attainable), distinct recommendations 2, penalty median 3.15 worst 3.31, runs median 39, worst error 0.83 eps
+                 sequential @eps attained 173/207, coordinate search @eps/10 attained 207/207
+  cl_max  1e-02: method certified 198/207, missed 198, declined 9 (9 attainable), distinct recommendations 10, penalty median 13.09 worst 27.66, runs median 41, worst error 2.99 eps
+                 sequential @eps attained 0/207, coordinate search @eps/10 attained 0/207
+  st      3e-02: method certified 188/207, missed 0, declined 19 (19 attainable), distinct recommendations 1, penalty median 2.75 worst 2.75, runs median 51, worst error 0.43 eps
+                 sequential @eps attained 94/207, coordinate search @eps/10 attained 207/207
+  st      1e-02: method certified 0/207, missed 0, declined 207 (207 attainable), distinct recommendations 0, penalty median nan worst nan, runs median 54, worst error 0.00 eps
+                 sequential @eps attained 39/207, coordinate search @eps/10 attained 207/207
+
+drag at 3e-3: 168 misses, 168 of them with estimated mesh and time-step errors of opposite sign
+
+error budget at a common user setting (n_arc 24, dt 2e-3, outer 1e-2, p 1e-6):
+  cd_max  n_arc 66%, dt 32%, outer_tol 0%, p_tol 1%;  true error 1.86e-03
+  cl_max  n_arc 66%, dt 32%, outer_tol 0%, p_tol 2%;  true error 9.43e-03
+  st      n_arc 97%, dt 3%, outer_tol 0%, p_tol 0%;  true error 1.88e-02

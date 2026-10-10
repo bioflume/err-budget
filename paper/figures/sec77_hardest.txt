@@ -1,0 +1,11 @@
+============================================================================================
+calibrate at the HARDEST ensemble member (nu = 0.02) and transport upward
+============================================================================================
+  energy       target 1e-02  ->  N=128, steps=25, newton_tol=0.0001, gmres_tol=0.01
+               transports to 22/22 members, worst margin 0.24x, cost 3.33e+04 work units
+  energy       target 3e-03  ->  N=128, steps=25, newton_tol=1e-06, gmres_tol=0.01
+               transports to 22/22 members, worst margin 0.71x, cost 4.8e+04 work units
+  dissipation  target 1e-02  ->  N=512, steps=25, newton_tol=0.0001, gmres_tol=0.0001
+               transports to 22/22 members, worst margin 0.35x, cost 2.05e+05 work units
+  dissipation  target 3e-03  ->  N=512, steps=400, newton_tol=1e-10, gmres_tol=1e-10
+               transports to 22/22 members, worst margin 0.43x, cost 4.29e+06 work units

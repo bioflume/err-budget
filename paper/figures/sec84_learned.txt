@@ -1,0 +1,23 @@
+the surrogate's own error does not go to zero:
+  level 0: relative error in the learned viscosity 6.200e-02
+  level 1: relative error in the learned viscosity 3.200e-02
+  level 2: relative error in the learned viscosity 1.700e-02
+  level 3: relative error in the learned viscosity 9.500e-03
+  level 4: relative error in the learned viscosity 5.750e-03
+  level 5: relative error in the learned viscosity 3.875e-03
+  ... floor = 2.0e-03, reached at level ~5
+
+error attainable with the surrogate fully trained (level 5), classical parameters at their finest:
+  |Q - Q*| = 4.991e-04   <- no configuration can do better
+
+target 3e-02 (attainable               ) -> certified                      true error 2.48e-03 (met)
+   limited by: model_level
+target 1e-02 (attainable               ) -> certified                      true error 2.48e-03 (met)
+   limited by: model_level
+target 3e-03 (attainable               ) -> certified                      true error 7.50e-04 (met)
+   limited by: model_level
+target 1e-03 (attainable               ) -> certified                      true error 3.76e-04 (met)
+   limited by: model_level
+target 3e-04 (BELOW THE SURROGATE FLOOR) -> REFUSED (target unreachable)   true error 4.99e-04 (missed)
+target 1e-04 (BELOW THE SURROGATE FLOOR) -> REFUSED (target unreachable)   true error 4.99e-04 (missed)
+target 3e-05 (BELOW THE SURROGATE FLOOR) -> REFUSED (target unreachable)   true error 4.99e-04 (missed)

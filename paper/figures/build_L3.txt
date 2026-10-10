@@ -1,0 +1,63 @@
+  0/432  0s
+  50/432  3s
+  100/432  10s
+  150/432  16s
+  200/432  27s
+  250/432  42s
+  300/432  72s
+  350/432  127s
+  400/432  251s
+tensor: 432 runs in 421s
+
+======================================================================================
+=== energy  (exact 5.58149210) ===
+  at N=64,st=40,nt=1e-05,gt=1e-05,dr=1e-02:  estimated error +5.085e-02  (true +1.690e-02)
+    knob          p_hat   residual r_k    budget share   masked?
+    N              2.26   +1.427e-02    100.0%         False
+    steps          2.02   +5.006e-06      0.0%         False
+    newton_tol     1.88   +1.314e-06      0.0%         True
+    gmres_tol      6.00   +4.798e-23      0.0%         True
+    ilu_drop       0.25   -5.593e-09      0.0%         False
+
+  rel target 1e-02 (abs 5.581e-02)   true optimum N=64,st=10,nt=1e-05,gt=1e-02,dr=1e-01
+    safe ................. 432/432 (100.0%)
+    penalty vs optimum ... median 1.00x  p90 1.09x  max 1.09x
+    starts already accurate (144): cost saved median 9.58x  p90 43.55x  max 73.3x
+    starts that missed target (288): fixed 288/288, cost median 2.16x more
+    calibration .......... median 153.8x the user's own run, 52 distinct runs
+
+  rel target 3e-03 (abs 1.674e-02)   true optimum N=128,st=10,nt=1e-05,gt=1e-02,dr=1e-02
+    safe ................. 432/432 (100.0%)
+    penalty vs optimum ... median 1.00x  p90 1.00x  max 1.00x
+    starts already accurate (72): cost saved median 4.29x  p90 8.93x  max 12.9x
+    starts that missed target (360): fixed 360/360, cost median 7.73x more
+    calibration .......... median 437.2x the user's own run, 60 distinct runs
+
+======================================================================================
+=== gradient  (exact 46.88453366) ===
+  at N=64,st=40,nt=1e-05,gt=1e-05,dr=1e-02:  estimated error -9.343e-01  (true -3.121e-01)
+    knob          p_hat   residual r_k    budget share   masked?
+    N              1.93   -3.245e-01    100.0%         False
+    steps          2.02   +9.426e-05      0.0%         False
+    newton_tol     1.88   +1.018e-05      0.0%         True
+    gmres_tol      6.00   +5.825e-23      0.0%         True
+    ilu_drop       0.25   -1.021e-07      0.0%         False
+
+  rel target 1e-02 (abs 4.688e-01)   true optimum N=64,st=10,nt=1e-05,gt=1e-02,dr=1e-01
+    safe ................. 432/432 (100.0%)
+    penalty vs optimum ... median 1.09x  p90 1.09x  max 1.09x
+    starts already accurate (144): cost saved median 9.58x  p90 43.55x  max 73.3x
+    starts that missed target (288): fixed 288/288, cost median 2.17x more
+    calibration .......... median 152.9x the user's own run, 58 distinct runs
+
+  rel target 3e-03 (abs 1.407e-01)   true optimum N=128,st=10,nt=1e-05,gt=1e-02,dr=1e-02
+    safe ................. 432/432 (100.0%)
+    penalty vs optimum ... median 1.00x  p90 1.00x  max 1.00x
+    starts already accurate (72): cost saved median 4.29x  p90 8.93x  max 12.9x
+    starts that missed target (360): fixed 360/360, cost median 7.73x more
+    calibration .......... median 448.4x the user's own run, 66 distinct runs
+
+======================================================================================
+=== does the protocol find the cost minimum of the neutral knob? ===
+  energy     picks the cost-minimising drop tolerance in 232/432 (54%).  chosen [232   0 200]  optimal [432   0   0]  (0=1e-1,1=1e-2,2=1e-3)
+  gradient   picks the cost-minimising drop tolerance in 160/432 (37%).  chosen [160   0 272]  optimal [432   0   0]  (0=1e-1,1=1e-2,2=1e-3)

@@ -1,0 +1,207 @@
+mesh 12 ready (242s)
+task 0 {'n_arc': 12, 'dt': 0.004, 'outer_tol': 0.01, 'p_tol': 0.0001}: {'cd_max': 3.249879281455824, 'cl_max': 0.9111796329774686, 'st': 0.279434044569236} cpu 10s wall 13s
+task 1 {'n_arc': 12, 'dt': 0.004, 'outer_tol': 0.01, 'p_tol': 1e-06}: {'cd_max': 3.24996679605421, 'cl_max': 0.911879012223897, 'st': 0.27947897303332836} cpu 12s wall 14s
+task 2 {'n_arc': 12, 'dt': 0.004, 'outer_tol': 0.01, 'p_tol': 1e-08}: {'cd_max': 3.2499627559369317, 'cl_max': 0.9118799725973964, 'st': 0.2794792274806839} cpu 14s wall 17s
+task 3 {'n_arc': 12, 'dt': 0.004, 'outer_tol': 0.001, 'p_tol': 0.0001}: {'cd_max': 3.2497298150803546, 'cl_max': 0.9107167841507713, 'st': 0.2794524359703036} cpu 13s wall 15s
+task 4 {'n_arc': 12, 'dt': 0.004, 'outer_tol': 0.001, 'p_tol': 1e-06}: {'cd_max': 3.2497310273818214, 'cl_max': 0.9108325055635091, 'st': 0.279460118453497} cpu 15s wall 17s
+task 5 {'n_arc': 12, 'dt': 0.004, 'outer_tol': 0.001, 'p_tol': 1e-08}: {'cd_max': 3.2497276699859894, 'cl_max': 0.9107428685450152, 'st': 0.27945996819111213} cpu 18s wall 20s
+task 6 {'n_arc': 12, 'dt': 0.004, 'outer_tol': 0.0001, 'p_tol': 0.0001}: {'cd_max': 3.249724454732835, 'cl_max': 0.9106486973581797, 'st': 0.2794541428451815} cpu 15s wall 17s
+task 7 {'n_arc': 12, 'dt': 0.004, 'outer_tol': 0.0001, 'p_tol': 1e-06}: {'cd_max': 3.2497132346957613, 'cl_max': 0.9107417415199066, 'st': 0.2794578796631865} cpu 17s wall 19s
+task 8 {'n_arc': 12, 'dt': 0.004, 'outer_tol': 0.0001, 'p_tol': 1e-08}: {'cd_max': 3.249711670895231, 'cl_max': 0.9107349867558463, 'st': 0.27945872352032114} cpu 21s wall 23s
+task 9 {'n_arc': 12, 'dt': 0.004, 'outer_tol': 1e-05, 'p_tol': 0.0001}: {'cd_max': 3.2497039431457084, 'cl_max': 0.9106035483220958, 'st': 0.27945670594246697} cpu 105s wall 115s
+task 18 {'n_arc': 16, 'dt': 0.004, 'outer_tol': 0.0001, 'p_tol': 0.0001}: {'cd_max': 3.2434243280972788, 'cl_max': 0.9735924326241705, 'st': 0.2877217555276195} cpu 19s wall 22s
+task 20 {'n_arc': 16, 'dt': 0.004, 'outer_tol': 0.0001, 'p_tol': 1e-08}: {'cd_max': 3.243506208482107, 'cl_max': 0.9737479810753559, 'st': 0.28772591299653555} cpu 40s wall 44s
+task 22 {'n_arc': 16, 'dt': 0.004, 'outer_tol': 1e-05, 'p_tol': 1e-06}: {'cd_max': 3.2434831804148443, 'cl_max': 0.9737765769161415, 'st': 0.2877240166917135} cpu 38s wall 42s
+task 23 {'n_arc': 16, 'dt': 0.004, 'outer_tol': 1e-05, 'p_tol': 1e-08}: {'cd_max': 3.243484532476203, 'cl_max': 0.9737721285894387, 'st': 0.28772415456643885} cpu 55s wall 62s
+task 24 {'n_arc': 12, 'dt': 0.002, 'outer_tol': 0.01, 'p_tol': 0.0001}: {'cd_max': 3.2526075359677327, 'cl_max': 0.9224234398362601, 'st': 0.28028225860791495} cpu 17s wall 19s
+task 25 {'n_arc': 12, 'dt': 0.002, 'outer_tol': 0.01, 'p_tol': 1e-06}: {'cd_max': 3.2526560546239924, 'cl_max': 0.9224546852802463, 'st': 0.2802866511059708} cpu 20s wall 23s
+task 26 {'n_arc': 12, 'dt': 0.002, 'outer_tol': 0.01, 'p_tol': 1e-08}: {'cd_max': 3.252679898456763, 'cl_max': 0.9225027108301147, 'st': 0.28028827053311045} cpu 24s wall 27s
+task 27 {'n_arc': 12, 'dt': 0.002, 'outer_tol': 0.001, 'p_tol': 0.0001}: {'cd_max': 3.2526075359677327, 'cl_max': 0.9224234398362601, 'st': 0.28028225860791495} cpu 18s wall 20s
+task 28 {'n_arc': 12, 'dt': 0.002, 'outer_tol': 0.001, 'p_tol': 1e-06}: {'cd_max': 3.2526560546239924, 'cl_max': 0.9224546852802463, 'st': 0.2802866511059708} cpu 21s wall 24s
+task 30 {'n_arc': 12, 'dt': 0.002, 'outer_tol': 0.0001, 'p_tol': 0.0001}: {'cd_max': 3.252604486233502, 'cl_max': 0.9223738714528337, 'st': 0.2802851809576054} cpu 22s wall 24s
+task 31 {'n_arc': 12, 'dt': 0.002, 'outer_tol': 0.0001, 'p_tol': 1e-06}: {'cd_max': 3.2526210673138887, 'cl_max': 0.9223711517334643, 'st': 0.28028590862026664} cpu 26s wall 29s
+task 33 {'n_arc': 12, 'dt': 0.002, 'outer_tol': 1e-05, 'p_tol': 0.0001}: {'cd_max': 3.2526044741633555, 'cl_max': 0.9223643592416162, 'st': 0.28028538267099395} cpu 242s wall 255s
+task 41 {'n_arc': 16, 'dt': 0.002, 'outer_tol': 0.001, 'p_tol': 1e-08}: {'cd_max': 3.245237916361765, 'cl_max': 0.9794104508263816, 'st': 0.2883121712498292} cpu 53s wall 57s
+task 43 {'n_arc': 16, 'dt': 0.002, 'outer_tol': 0.0001, 'p_tol': 1e-06}: {'cd_max': 3.2452271839342353, 'cl_max': 0.9793778063480414, 'st': 0.28831118106871373} cpu 45s wall 49s
+task 45 {'n_arc': 16, 'dt': 0.002, 'outer_tol': 1e-05, 'p_tol': 0.0001}: {'cd_max': 3.2452097250889005, 'cl_max': 0.97926897956314, 'st': 0.2883097137567985} cpu 327s wall 343s
+task 54 {'n_arc': 12, 'dt': 0.001, 'outer_tol': 0.0001, 'p_tol': 0.0001}: {'cd_max': 3.255949087381506, 'cl_max': 0.9331681754147704, 'st': 0.28086626399935205} cpu 38s wall 41s
+task 56 {'n_arc': 12, 'dt': 0.001, 'outer_tol': 0.0001, 'p_tol': 1e-08}: {'cd_max': 3.2558659807623997, 'cl_max': 0.933071452609488, 'st': 0.28086858734236064} cpu 52s wall 56s
+task 58 {'n_arc': 12, 'dt': 0.001, 'outer_tol': 1e-05, 'p_tol': 1e-06}: {'cd_max': 3.2558649911126976, 'cl_max': 0.9330719846736947, 'st': 0.2808685390342533} cpu 53s wall 57s
+task 59 {'n_arc': 12, 'dt': 0.001, 'outer_tol': 1e-05, 'p_tol': 1e-08}: {'cd_max': 3.2558652915275275, 'cl_max': 0.9330714055924118, 'st': 0.2808685453318815} cpu 65s wall 70s
+mesh 24 ready (1125s)
+task 60 {'n_arc': 24, 'dt': 0.004, 'outer_tol': 0.01, 'p_tol': 0.0001}: {'cd_max': 3.2377475026094737, 'cl_max': 1.0040519690004337, 'st': 0.294480053763062} cpu 38s wall 46s
+task 61 {'n_arc': 24, 'dt': 0.004, 'outer_tol': 0.01, 'p_tol': 1e-06}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 30s
+task 62 {'n_arc': 24, 'dt': 0.004, 'outer_tol': 0.01, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 31s
+task 63 {'n_arc': 24, 'dt': 0.004, 'outer_tol': 0.001, 'p_tol': 0.0001}: {'cd_max': 3.2375614991979953, 'cl_max': 1.004842715607737, 'st': 0.2947255250412465} cpu 43s wall 51s
+task 64 {'n_arc': 24, 'dt': 0.004, 'outer_tol': 0.001, 'p_tol': 1e-06}: {'cd_max': 3.2386470342692752, 'cl_max': 1.0081951058585552, 'st': 0.29480553587749986} cpu 77s wall 85s
+task 65 {'n_arc': 24, 'dt': 0.004, 'outer_tol': 0.001, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 32s
+task 66 {'n_arc': 24, 'dt': 0.004, 'outer_tol': 0.0001, 'p_tol': 0.0001}: {'cd_max': 3.2382672429719124, 'cl_max': 1.0079020831709398, 'st': 0.2947861805936463} cpu 59s wall 66s
+task 67 {'n_arc': 24, 'dt': 0.004, 'outer_tol': 0.0001, 'p_tol': 1e-06}: {'cd_max': 3.2384116781026853, 'cl_max': 1.008520175166354, 'st': 0.29478652319632953} cpu 104s wall 113s
+task 68 {'n_arc': 24, 'dt': 0.004, 'outer_tol': 0.0001, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 32s
+task 70 {'n_arc': 24, 'dt': 0.004, 'outer_tol': 1e-05, 'p_tol': 1e-06}: {'cd_max': 3.2383936651591716, 'cl_max': 1.00856031981648, 'st': 0.2947856459856771} cpu 131s wall 141s
+task 71 {'n_arc': 24, 'dt': 0.004, 'outer_tol': 1e-05, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 33s
+task 82 {'n_arc': 16, 'dt': 0.001, 'outer_tol': 1e-05, 'p_tol': 1e-06}: {'cd_max': 3.2467424498589885, 'cl_max': 0.985581654930523, 'st': 0.28859930927429195} cpu 82s wall 88s
+task 83 {'n_arc': 16, 'dt': 0.001, 'outer_tol': 1e-05, 'p_tol': 1e-08}: {'cd_max': 3.2467425392479883, 'cl_max': 0.985581128950469, 'st': 0.28859932598469346} cpu 110s wall 116s
+task 96 {'n_arc': 12, 'dt': 0.0005, 'outer_tol': 0.01, 'p_tol': 0.0001}: {'cd_max': 3.2540200622306887, 'cl_max': 0.9415931083923406, 'st': 0.28140672073200473} cpu 39s wall 43s
+task 97 {'n_arc': 12, 'dt': 0.0005, 'outer_tol': 0.01, 'p_tol': 1e-06}: {'cd_max': 3.2540962456933524, 'cl_max': 0.9416159230588743, 'st': 0.281406892590974} cpu 47s wall 50s
+task 98 {'n_arc': 12, 'dt': 0.0005, 'outer_tol': 0.01, 'p_tol': 1e-08}: {'cd_max': 3.2540928748950035, 'cl_max': 0.9416200018186099, 'st': 0.28140726133480515} cpu 59s wall 63s
+task 99 {'n_arc': 12, 'dt': 0.0005, 'outer_tol': 0.001, 'p_tol': 0.0001}: {'cd_max': 3.253925302529652, 'cl_max': 0.9413056836343572, 'st': 0.28140634713626184} cpu 55s wall 59s
+task 100 {'n_arc': 12, 'dt': 0.0005, 'outer_tol': 0.001, 'p_tol': 1e-06}: {'cd_max': 3.2539948441168813, 'cl_max': 0.941342105335629, 'st': 0.2814063060515823} cpu 64s wall 68s
+task 101 {'n_arc': 12, 'dt': 0.0005, 'outer_tol': 0.001, 'p_tol': 1e-08}: {'cd_max': 3.2539942769383434, 'cl_max': 0.9413426778531571, 'st': 0.28140630862239235} cpu 80s wall 85s
+task 102 {'n_arc': 12, 'dt': 0.0005, 'outer_tol': 0.0001, 'p_tol': 0.0001}: {'cd_max': 3.253925253479428, 'cl_max': 0.9413008237218469, 'st': 0.28140616188045064} cpu 69s wall 73s
+task 103 {'n_arc': 12, 'dt': 0.0005, 'outer_tol': 0.0001, 'p_tol': 1e-06}: {'cd_max': 3.2539947010977484, 'cl_max': 0.9413374783042794, 'st': 0.2814062332108769} cpu 80s wall 85s
+task 104 {'n_arc': 12, 'dt': 0.0005, 'outer_tol': 0.0001, 'p_tol': 1e-08}: {'cd_max': 3.2539948024886542, 'cl_max': 0.941338778378873, 'st': 0.28140624567704436} cpu 93s wall 98s
+task 105 {'n_arc': 12, 'dt': 0.0005, 'outer_tol': 1e-05, 'p_tol': 0.0001}: {'cd_max': 3.253925224810519, 'cl_max': 0.9413007004512941, 'st': 0.2814061621178382} cpu 935s wall 973s
+task 106 {'n_arc': 12, 'dt': 0.0005, 'outer_tol': 1e-05, 'p_tol': 1e-06}: {'cd_max': 3.253994701090221, 'cl_max': 0.9413374783153134, 'st': 0.2814062332106631} cpu 78s wall 83s
+task 107 {'n_arc': 12, 'dt': 0.0005, 'outer_tol': 1e-05, 'p_tol': 1e-08}: {'cd_max': 3.2539943747995594, 'cl_max': 0.9413377058151278, 'st': 0.2814062468686734} cpu 96s wall 101s
+task 108 {'n_arc': 24, 'dt': 0.002, 'outer_tol': 0.01, 'p_tol': 0.0001}: {'cd_max': 3.2393742811805097, 'cl_max': 1.0103322474255099, 'st': 0.29523395580968875} cpu 57s wall 64s
+task 109 {'n_arc': 24, 'dt': 0.002, 'outer_tol': 0.01, 'p_tol': 1e-06}: {'cd_max': 3.239532815300648, 'cl_max': 1.0110802290122773, 'st': 0.2952626160816931} cpu 83s wall 90s
+task 110 {'n_arc': 24, 'dt': 0.002, 'outer_tol': 0.01, 'p_tol': 1e-08}: {'cd_max': 3.2396202274631696, 'cl_max': 1.011513254085202, 'st': 0.295277719779463} cpu 115s wall 124s
+task 111 {'n_arc': 24, 'dt': 0.002, 'outer_tol': 0.001, 'p_tol': 0.0001}: {'cd_max': 3.2393742811805097, 'cl_max': 1.0103322474255099, 'st': 0.29523395580968875} cpu 56s wall 63s
+task 112 {'n_arc': 24, 'dt': 0.002, 'outer_tol': 0.001, 'p_tol': 1e-06}: {'cd_max': 3.2395290346883834, 'cl_max': 1.0111357941380574, 'st': 0.29527042078515614} cpu 97s wall 105s
+task 113 {'n_arc': 24, 'dt': 0.002, 'outer_tol': 0.001, 'p_tol': 1e-08}: {'cd_max': 3.239583886933171, 'cl_max': 1.011157344294528, 'st': 0.29527298080228176} cpu 141s wall 149s
+task 114 {'n_arc': 24, 'dt': 0.002, 'outer_tol': 0.0001, 'p_tol': 0.0001}: {'cd_max': 3.2395104589028016, 'cl_max': 1.0110475345029606, 'st': 0.2952672209643343} cpu 78s wall 87s
+task 115 {'n_arc': 24, 'dt': 0.002, 'outer_tol': 0.0001, 'p_tol': 1e-06}: {'cd_max': 3.2395265500696597, 'cl_max': 1.0111639792519747, 'st': 0.29526963544700785} cpu 114s wall 122s
+task 116 {'n_arc': 24, 'dt': 0.002, 'outer_tol': 0.0001, 'p_tol': 1e-08}: {'cd_max': 3.239536775601003, 'cl_max': 1.0111768023527823, 'st': 0.2952703373184494} cpu 189s wall 199s
+task 87 {'n_arc': 32, 'dt': 0.004, 'outer_tol': 0.001, 'p_tol': 0.0001}: {'cd_max': 3.23543768960068, 'cl_max': 1.002562294635661, 'st': 0.29750102922842664} cpu 95s wall 108s
+task 90 {'n_arc': 32, 'dt': 0.004, 'outer_tol': 0.0001, 'p_tol': 0.0001}: {'cd_max': 3.2372673135554293, 'cl_max': 1.010591694185918, 'st': 0.29756501910994704} cpu 123s wall 136s
+task 94 {'n_arc': 32, 'dt': 0.004, 'outer_tol': 1e-05, 'p_tol': 1e-06}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 48s
+task 95 {'n_arc': 32, 'dt': 0.004, 'outer_tol': 1e-05, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 52s
+task 117 {'n_arc': 24, 'dt': 0.002, 'outer_tol': 1e-05, 'p_tol': 0.0001}: {'cd_max': 3.239536872172921, 'cl_max': 1.0111386877764974, 'st': 0.2952688185240199} cpu 575s wall 598s
+task 120 {'n_arc': 16, 'dt': 0.0005, 'outer_tol': 0.01, 'p_tol': 0.0001}: {'cd_max': 3.248027370553152, 'cl_max': 0.9920247491114867, 'st': 0.28879815308428664} cpu 61s wall 66s
+task 121 {'n_arc': 16, 'dt': 0.0005, 'outer_tol': 0.01, 'p_tol': 1e-06}: {'cd_max': 3.2479935704263325, 'cl_max': 0.9918953895821361, 'st': 0.2887982003511897} cpu 78s wall 84s
+task 122 {'n_arc': 16, 'dt': 0.0005, 'outer_tol': 0.01, 'p_tol': 1e-08}: {'cd_max': 3.2480004785307144, 'cl_max': 0.9919044685644633, 'st': 0.2887994970299254} cpu 105s wall 111s
+task 124 {'n_arc': 16, 'dt': 0.0005, 'outer_tol': 0.001, 'p_tol': 1e-06}: {'cd_max': 3.2479046859761285, 'cl_max': 0.9916977862396805, 'st': 0.28880081657907913} cpu 103s wall 110s
+task 126 {'n_arc': 16, 'dt': 0.0005, 'outer_tol': 0.0001, 'p_tol': 0.0001}: {'cd_max': 3.2479061485659755, 'cl_max': 0.9917772342976884, 'st': 0.2888005325247069} cpu 105s wall 112s
+task 128 {'n_arc': 16, 'dt': 0.0005, 'outer_tol': 0.0001, 'p_tol': 1e-08}: {'cd_max': 3.2479031542785584, 'cl_max': 0.9916945541334734, 'st': 0.28880088435531487} cpu 170s wall 178s
+task 130 {'n_arc': 16, 'dt': 0.0005, 'outer_tol': 1e-05, 'p_tol': 1e-06}: {'cd_max': 3.2479029405413313, 'cl_max': 0.9916939830296704, 'st': 0.2888008104014124} cpu 128s wall 136s
+task 131 {'n_arc': 16, 'dt': 0.0005, 'outer_tol': 1e-05, 'p_tol': 1e-08}: {'cd_max': 3.2479030032929743, 'cl_max': 0.9916944499765641, 'st': 0.2888008730846868} cpu 181s wall 190s
+task 132 {'n_arc': 32, 'dt': 0.002, 'outer_tol': 0.01, 'p_tol': 0.0001}: {'cd_max': 3.2373478035302163, 'cl_max': 1.010391990248222, 'st': 0.29795255129854714} cpu 105s wall 118s
+task 133 {'n_arc': 32, 'dt': 0.002, 'outer_tol': 0.01, 'p_tol': 1e-06}: {'cd_max': 3.2381624376757934, 'cl_max': 1.013100578690065, 'st': 0.2980358154396712} cpu 160s wall 174s
+task 134 {'n_arc': 32, 'dt': 0.002, 'outer_tol': 0.01, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 216s
+task 135 {'n_arc': 32, 'dt': 0.002, 'outer_tol': 0.001, 'p_tol': 0.0001}: {'cd_max': 3.2376778506381045, 'cl_max': 1.011970458590808, 'st': 0.29796921342080157} cpu 114s wall 128s
+task 136 {'n_arc': 32, 'dt': 0.002, 'outer_tol': 0.001, 'p_tol': 1e-06}: {'cd_max': 3.237993861083467, 'cl_max': 1.013475962845891, 'st': 0.29805021838325735} cpu 194s wall 208s
+task 137 {'n_arc': 32, 'dt': 0.002, 'outer_tol': 0.001, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 358s
+task 140 {'n_arc': 32, 'dt': 0.002, 'outer_tol': 0.0001, 'p_tol': 1e-08}: {'cd_max': 3.238207452143577, 'cl_max': 1.0135338580357802, 'st': 0.29804425286220315} cpu 2301s wall 2700s
+task 144 {'n_arc': 24, 'dt': 0.001, 'outer_tol': 0.01, 'p_tol': 0.0001}: {'cd_max': 3.2405837839827507, 'cl_max': 1.0142704879222633, 'st': 0.29535306019687557} cpu 70s wall 78s
+task 145 {'n_arc': 24, 'dt': 0.001, 'outer_tol': 0.01, 'p_tol': 1e-06}: {'cd_max': 3.2404514417385704, 'cl_max': 1.0136608676476038, 'st': 0.29538705993092457} cpu 103s wall 110s
+task 146 {'n_arc': 24, 'dt': 0.001, 'outer_tol': 0.01, 'p_tol': 1e-08}: {'cd_max': 3.240457112311785, 'cl_max': 1.013670814093976, 'st': 0.2953869951266672} cpu 149s wall 157s
+task 147 {'n_arc': 24, 'dt': 0.001, 'outer_tol': 0.001, 'p_tol': 0.0001}: {'cd_max': 3.240189295576195, 'cl_max': 1.0129093569100873, 'st': 0.2954098600146821} cpu 94s wall 112s
+task 148 {'n_arc': 24, 'dt': 0.001, 'outer_tol': 0.001, 'p_tol': 1e-06}: {'cd_max': 3.2401908355190976, 'cl_max': 1.0129882764618094, 'st': 0.29541411745814367} cpu 140s wall 282s
+task 149 {'n_arc': 24, 'dt': 0.001, 'outer_tol': 0.001, 'p_tol': 1e-08}: {'cd_max': 3.2401971308254183, 'cl_max': 1.0130452375123293, 'st': 0.2954151100027708} cpu 200s wall 242s
+task 150 {'n_arc': 24, 'dt': 0.001, 'outer_tol': 0.0001, 'p_tol': 0.0001}: {'cd_max': 3.2401913987098254, 'cl_max': 1.0129731098487063, 'st': 0.2954128562211035} cpu 113s wall 122s
+task 151 {'n_arc': 24, 'dt': 0.001, 'outer_tol': 0.0001, 'p_tol': 1e-06}: {'cd_max': 3.240187415035661, 'cl_max': 1.01298533641358, 'st': 0.2954140779084631} cpu 166s wall 176s
+task 152 {'n_arc': 24, 'dt': 0.001, 'outer_tol': 0.0001, 'p_tol': 1e-08}: {'cd_max': 3.2401898207736233, 'cl_max': 1.0129913396279357, 'st': 0.29541426989539704} cpu 235s wall 245s
+task 153 {'n_arc': 24, 'dt': 0.001, 'outer_tol': 1e-05, 'p_tol': 0.0001}: {'cd_max': 3.2401959470849504, 'cl_max': 1.012990487207092, 'st': 0.2954131254119323} cpu 1123s wall 1150s
+Traceback (most recent call last):
+  File "/home/claude/repro/paper/exp56_dfg2d2_build.py", line 193, in <module>
+    worker()
+  File "/home/claude/repro/paper/exp56_dfg2d2_build.py", line 135, in worker
+    if run_task(i) == "ran":
+       ^^^^^^^^^^^
+  File "/home/claude/repro/paper/exp56_dfg2d2_build.py", line 109, in run_task
+    if not spin(th["n_arc"], block=False):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/claude/repro/paper/exp56_dfg2d2_build.py", line 97, in spin
+    solver().mesh(int(na))
+  File "/home/claude/repro/paper/openfoam_dfg2d2.py", line 221, in mesh
+    self._sh(["pimpleFoam"], d)
+  File "/home/claude/repro/paper/openfoam_dfg2d2.py", line 172, in _sh
+    raise RuntimeError(f"{' '.join(cmd)} failed:\n{r.stdout[-2000:]}\n{r.stderr[-2000:]}")
+RuntimeError: pimpleFoam failed:
+OSIX.C at line 494
+    PWD is not the cwd() - reverting to physical description
+--> FOAM Warning : 
+    From function Foam::fileName Foam::cwd_L()
+    in file POSIX.C at line 494
+    PWD is not the cwd() - reverting to physical description
+--> FOAM Warning : 
+    From function Foam::fileName Foam::cwd_L()
+    in file POSIX.C at line 494
+    PWD is not the cwd() - reverting to physical description
+--> FOAM Warning : 
+    From function Foam::fileName Foam::cwd_L()
+    in file POSIX.C at line 494
+    PWD is not the cwd() - reverting to physical description
+--> FOAM Warning : 
+    From function Foam::fileName Foam::cwd_L()
+    in file POSIX.C at line 494
+    PWD is not the cwd() - reverting to physical description
+--> FOAM Warning : 
+    From function Foam::fileName Foam::cwd_L()
+    in file POSIX.C at line 494
+    PWD is not the cwd() - reverting to physical description
+--> FOAM Warning : 
+    From function Foam::fileName Foam::cwd_L()
+    in file POSIX.C at line 494
+    PWD is not the cwd() - reverting to physical description
+--> FOAM Warning : 
+    From function Foam::fileName Foam::cwd_L()
+    in file POSIX.C at line 494
+    PWD is not the cwd() - reverting to physical description
+--> FOAM Warning : 
+    From function Foam::fileName Foam::cwd_L()
+    in file POSIX.C at line 494
+    PWD is not the cwd() - reverting to physical description
+--> FOAM Warning : 
+    From function Foam::fileName Foam::cwd_L()
+    in file POSIX.C at line 494
+    PWD is not the cwd() - reverting to physical description
+--> FOAM Warning : 
+    From function Foam::fileName Foam::cwd_L()
+    in file POSIX.C at line 494
+    PWD is not the cwd() - reverting to physical description
+--> FOAM Warning : 
+    From function Foam::fileName Foam::cwd_L()
+    in file POSIX.C at line 494
+    PWD is not the cwd() - reverting to physical description
+--> FOAM Warning : 
+    From function Foam::fileName Foam::cwd_L()
+    in file POSIX.C at line 494
+    PWD is not the cwd() - reverting to physical description
+
+#0  Foam::error::printStack(Foam::Ostream&) at ??:?
+#1  Foam::sigFpe::sigHandler(int) at ??:?
+#2  ? in /lib/x86_64-linux-gnu/libc.so.6
+#3  Foam::GAMGSolver::scale(Foam::Field<double>&, Foam::Field<double>&, Foam::lduMatrix const&, Foam::FieldField<Foam::Field, double> const&, Foam::UPtrList<Foam::lduInterfaceField const> const&, Foam::Field<double> const&, unsigned char) const at ??:?
+#4  Foam::GAMGSolver::Vcycle(Foam::PtrList<Foam::lduMatrix::smoother> const&, Foam::Field<double>&, Foam::Field<double> const&, Foam::Field<double>&, Foam::Field<double>&, Foam::Field<double>&, Foam::Field<double>&, Foam::Field<double>&, Foam::PtrList<Foam::Field<double> >&, Foam::PtrList<Foam::Field<double> >&, unsigned char) const at ??:?
+#5  Foam::GAMGSolver::solve(Foam::Field<double>&, Foam::Field<double> const&, unsigned char) const at ??:?
+#6  Foam::fvMatrix<double>::solveSegregated(Foam::dictionary const&) at ??:?
+#7  ? at ??:?
+#8  Foam::fvMesh::solve(Foam::fvMatrix<double>&, Foam::dictionary const&) const at ??:?
+#9  ? in /usr/bin/pimpleFoam
+#10  ? in /lib/x86_64-linux-gnu/libc.so.6
+#11  __libc_start_main in /lib/x86_64-linux-gnu/libc.so.6
+#12  ? in /usr/bin/pimpleFoam
+
+mesh 48 ready (3692s)
+task 156 {'n_arc': 48, 'dt': 0.004, 'outer_tol': 0.01, 'p_tol': 0.0001}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 107s
+task 157 {'n_arc': 48, 'dt': 0.004, 'outer_tol': 0.01, 'p_tol': 1e-06}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 136s
+task 158 {'n_arc': 48, 'dt': 0.004, 'outer_tol': 0.01, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 146s
+task 159 {'n_arc': 48, 'dt': 0.004, 'outer_tol': 0.001, 'p_tol': 0.0001}: {'cd_max': 3.2344372658002762, 'cl_max': 1.003903048836706, 'st': 0.29957939928388794} cpu 730s wall 1101s
+task 160 {'n_arc': 48, 'dt': 0.004, 'outer_tol': 0.001, 'p_tol': 1e-06}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 143s
+task 161 {'n_arc': 48, 'dt': 0.004, 'outer_tol': 0.001, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 149s
+task 162 {'n_arc': 48, 'dt': 0.004, 'outer_tol': 0.0001, 'p_tol': 0.0001}: {'cd_max': 3.2348726742835177, 'cl_max': 1.0054916521031196, 'st': 0.2995772126696305} cpu 854s wall 1269s
+task 166 {'n_arc': 48, 'dt': 0.004, 'outer_tol': 1e-05, 'p_tol': 1e-06}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 141s
+task 167 {'n_arc': 48, 'dt': 0.004, 'outer_tol': 1e-05, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 153s
+task 192 {'n_arc': 48, 'dt': 0.002, 'outer_tol': 0.01, 'p_tol': 0.0001}: {'cd_max': 3.2502853057554537, 'cl_max': 0.9908401183578246, 'st': 0.3000192244811055} cpu 387s wall 597s
+task 193 {'n_arc': 48, 'dt': 0.002, 'outer_tol': 0.01, 'p_tol': 1e-06}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 144s
+task 194 {'n_arc': 48, 'dt': 0.002, 'outer_tol': 0.01, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 152s
+task 196 {'n_arc': 48, 'dt': 0.002, 'outer_tol': 0.001, 'p_tol': 1e-06}: {'cd_max': 3.235541992830968, 'cl_max': 1.0064556662867712, 'st': 0.30007739249951215} cpu 1199s wall 1810s
+task 200 {'n_arc': 48, 'dt': 0.002, 'outer_tol': 0.0001, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 148s
+task 201 {'n_arc': 48, 'dt': 0.002, 'outer_tol': 1e-05, 'p_tol': 0.0001}: {'cd_max': 3.2352185741481323, 'cl_max': 1.0070845836985667, 'st': 0.300071346242914} cpu 2165s wall 3149s
+task 203 {'n_arc': 48, 'dt': 0.002, 'outer_tol': 1e-05, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 140s
+task 214 {'n_arc': 32, 'dt': 0.0005, 'outer_tol': 1e-05, 'p_tol': 1e-06}: {'cd_max': 3.2384577093640914, 'cl_max': 1.015192280168921, 'st': 0.29820426590374705} cpu 598s wall 840s
+task 215 {'n_arc': 32, 'dt': 0.0005, 'outer_tol': 1e-05, 'p_tol': 1e-08}: {'cd_max': 3.238458438193328, 'cl_max': 1.0151937858459417, 'st': 0.2982043458705027} cpu 904s wall 1314s
+task 218 {'n_arc': 48, 'dt': 0.001, 'outer_tol': 0.01, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 169s
+task 219 {'n_arc': 48, 'dt': 0.001, 'outer_tol': 0.001, 'p_tol': 0.0001}: {'cd_max': 3.234800437576048, 'cl_max': 1.004462663462294, 'st': 0.3001719208903199} cpu 380s wall 598s
+task 221 {'n_arc': 48, 'dt': 0.001, 'outer_tol': 0.001, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 179s
+task 222 {'n_arc': 48, 'dt': 0.001, 'outer_tol': 0.0001, 'p_tol': 0.0001}: {'cd_max': 3.2352592554907047, 'cl_max': 1.0069212571654813, 'st': 0.30019793644328663} cpu 533s wall 835s
+task 224 {'n_arc': 48, 'dt': 0.001, 'outer_tol': 0.0001, 'p_tol': 1e-08}: {'cd_max': nan, 'cl_max': nan, 'st': nan} cpu infs wall 277s
+task 225 {'n_arc': 48, 'dt': 0.001, 'outer_tol': 1e-05, 'p_tol': 0.0001}: {'cd_max': 3.2353276214530426, 'cl_max': 1.0072727173696439, 'st': 0.3001956459718044} cpu 4064s wall 6241s
+task 231 {'n_arc': 48, 'dt': 0.0005, 'outer_tol': 0.001, 'p_tol': 0.0001}: {'cd_max': 3.2354245601739984, 'cl_max': 1.0071978771300716, 'st': 0.3002223220654616} cpu 663s wall 1003s
+task 232 {'n_arc': 48, 'dt': 0.0005, 'outer_tol': 0.001, 'p_tol': 1e-06}: {'cd_max': 3.23542467916309, 'cl_max': 1.0072186873148692, 'st': 0.3002243344128307} cpu 1058s wall 1572s
+task 234 {'n_arc': 48, 'dt': 0.0005, 'outer_tol': 0.0001, 'p_tol': 0.0001}: {'cd_max': 3.2354539950367958, 'cl_max': 1.0073509835360166, 'st': 0.30022200320484554} cpu 825s wall 1226s
+task 235 {'n_arc': 48, 'dt': 0.0005, 'outer_tol': 0.0001, 'p_tol': 1e-06}: {'cd_max': 3.2354539990758786, 'cl_max': 1.007358997941957, 'st': 0.30022468412658254} cpu 1286s wall 1715s
+task 237 {'n_arc': 48, 'dt': 0.0005, 'outer_tol': 1e-05, 'p_tol': 0.0001}: {'cd_max': 3.235463459736632, 'cl_max': 1.0073903150941925, 'st': 0.30022193424701915} cpu 8242s wall 10823s
+all tasks done

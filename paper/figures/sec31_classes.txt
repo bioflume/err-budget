@@ -1,0 +1,50 @@
+
+=== energy, anchor mid ===
+  knob             err_range  plateau   mono  cost_slope interior   inferred       true           
+  N                 5.86e-02     0.50   1.00       1.534        0   nested-solver  discretisation    <-- MISMATCH
+  steps             4.45e-05     0.50   1.00       0.613        0   nested-solver  discretisation    <-- MISMATCH
+  newton_tol        9.14e-02     1.00   1.00       1.236        0   nested-solver  nested-solver  
+  gmres_tol         2.89e-07     0.50   1.00       0.199        0   cost-only      nested-solver     <-- MISMATCH
+  ilu_drop          1.37e-08     0.50   0.50      -0.085        0   cost-only      cost-only      
+  gmres_restart     0.00e+00     1.00   1.00      -0.000        0   cost-only      nested-solver     <-- MISMATCH
+  precond_freq      7.64e-10     0.50   0.50       0.136        0   cost-only      cost-only      
+  newton_max        0.00e+00     1.00   1.00      -0.000        0   cost-only      nested-solver     <-- MISMATCH
+  correct: 3/8
+
+=== energy, anchor off-centre ===
+  knob             err_range  plateau   mono  cost_slope interior   inferred       true           
+  N                 0.00e+00     1.00   1.00       1.501        0   cost-only      discretisation    <-- MISMATCH
+  steps             1.19e-02     1.00   0.33       0.511        0   nested-solver  discretisation    <-- MISMATCH
+  newton_tol        1.02e-01     1.00   1.00       1.257        0   nested-solver  nested-solver  
+  gmres_tol         0.00e+00     1.00   1.00      -0.000        0   cost-only      nested-solver     <-- MISMATCH
+  ilu_drop          0.00e+00     1.00   1.00       0.202        0   cost-only      cost-only      
+  gmres_restart     0.00e+00     1.00   1.00      -0.000        0   cost-only      nested-solver     <-- MISMATCH
+  precond_freq      0.00e+00     1.00   1.00       0.752        0   cost-only      cost-only      
+  newton_max        0.00e+00     1.00   1.00      -0.000        0   cost-only      nested-solver     <-- MISMATCH
+  correct: 3/8
+
+=== gradient, anchor mid ===
+  knob             err_range  plateau   mono  cost_slope interior   inferred       true           
+  N                 9.83e-02     0.50   1.00       1.534        0   nested-solver  discretisation    <-- MISMATCH
+  steps             1.06e-04     0.50   1.00       0.613        0   nested-solver  discretisation    <-- MISMATCH
+  newton_tol        6.46e-02     1.00   0.50       1.236        0   nested-solver  nested-solver  
+  gmres_tol         1.48e-06     1.00   0.50       0.199        0   nested-solver  nested-solver  
+  ilu_drop          2.74e-08     0.50   1.00      -0.085        0   cost-only      cost-only      
+  gmres_restart     0.00e+00     1.00   1.00      -0.000        0   cost-only      nested-solver     <-- MISMATCH
+  precond_freq      2.07e-09     0.50   0.50       0.136        0   cost-only      cost-only      
+  newton_max        0.00e+00     1.00   1.00      -0.000        0   cost-only      nested-solver     <-- MISMATCH
+  correct: 4/8
+
+=== gradient, anchor off-centre ===
+  knob             err_range  plateau   mono  cost_slope interior   inferred       true           
+  N                 2.17e-01     0.50   1.00       1.501        0   nested-solver  discretisation    <-- MISMATCH
+  steps             1.41e-02     1.00   0.33       0.511        0   nested-solver  discretisation    <-- MISMATCH
+  newton_tol        9.49e-02     1.00   1.00       1.257        0   nested-solver  nested-solver  
+  gmres_tol         0.00e+00     1.00   1.00      -0.000        0   cost-only      nested-solver     <-- MISMATCH
+  ilu_drop          0.00e+00     1.00   1.00       0.202        0   cost-only      cost-only      
+  gmres_restart     0.00e+00     1.00   1.00      -0.000        0   cost-only      nested-solver     <-- MISMATCH
+  precond_freq      0.00e+00     1.00   1.00       0.752        0   cost-only      cost-only      
+  newton_max        0.00e+00     1.00   1.00      -0.000        0   cost-only      nested-solver     <-- MISMATCH
+  correct: 3/8
+
+38 runs, 0s

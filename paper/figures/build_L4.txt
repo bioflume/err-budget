@@ -1,0 +1,30 @@
+  0/576  0s
+  100/576  2s
+  200/576  6s
+  300/576  15s
+  400/576  30s
+  500/576  74s
+tensor: 576 runs in 164s
+
+==============================================================================================
+L4  2D Gray-Scott reaction-diffusion, 5 params, 576 starting points
+observable          target     meets   penalty(med/p90)  already-ok: saved  missed: fixed  calib
+inhibitor_mass      1e-02rel  100.0%   1.00/ 1.00      41.44x (384)    192/192       20.8x
+inhibitor_mass      3e-03rel  100.0%   1.18/ 1.18      36.69x (384)    192/192       20.7x
+pattern_sharpness   1e-02rel  100.0%   8.46/ 8.46       1.37x (168)    408/408      420.0x
+pattern_sharpness   3e-03rel  100.0%   8.08/ 8.08       1.85x ( 78)    498/498      550.1x
+
+==============================================================================================
+error budget at a mid configuration (what the user is told)
+  inhibitor_mass:
+    N            order 2.02   residual +8.716e-04    51.1% of the budget
+    steps        order 1.93   residual +6.957e-04    40.8% of the budget
+    n_react      order 1.98   residual -1.144e-04     6.7% of the budget
+    gmres_tol    order 1.40   residual +2.379e-05     1.4% of the budget
+    ilu_drop     order 6.00   residual -7.511e-11     0.0% of the budget
+  pattern_sharpness:
+    N            order 1.93   residual -7.148e-03    93.5% of the budget
+    steps        order 1.98   residual +4.195e-04     5.5% of the budget
+    n_react      order 1.98   residual -7.698e-05     1.0% of the budget
+    gmres_tol    order 1.83   residual +1.810e-06     0.0% of the budget
+    ilu_drop     order 6.00   residual -3.199e-11     0.0% of the budget

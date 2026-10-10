@@ -1,0 +1,16 @@
+
+L2: correlation of log work units with log CPU time over the grid: 0.597
+  cell                        same rec.  cert (wu/cpu)  missed  pen wu->wu pen cpu->cpu  pen wu->cpu
+  energy 1e-02                 199/625     625/625          0        1.72         2.09         2.25
+  energy 3e-03                   1/625     625/625          0        1.13         1.14         1.99
+  energy 1e-03                 468/625     625/625          0        1.00         1.03         1.03
+  dissipation 1e-02            263/625     625/625          0        1.00         1.31         1.22
+  dissipation 3e-03            166/625     625/625          0        2.48         1.97         2.04
+  dissipation 1e-03            271/625     625/625          0        2.16         3.72         2.09
+
+L3: correlation of log work units with log CPU time over the grid: 0.957
+  cell                        same rec.  cert (wu/cpu)  missed  pen wu->wu pen cpu->cpu  pen wu->cpu
+  energy 1e-02                 420/432     432/432          0        1.00         1.00         1.00
+  energy 3e-03                   0/432     432/432          0        1.00         1.00         1.26
+  gradient 1e-02               420/432     432/432          0        1.00         1.00         1.00
+  gradient 3e-03                 0/432     432/432          0        1.00         1.00         1.26

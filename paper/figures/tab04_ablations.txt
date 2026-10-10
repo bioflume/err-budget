@@ -1,0 +1,23 @@
+  done L2 energy 0.01
+  done L2 energy 0.003
+  done L2 energy 0.001
+  done L2 dissipation 0.01
+  done L2 dissipation 0.003
+  done L2 dissipation 0.001
+  done L3 energy 0.01
+  done L3 energy 0.003
+  done L3 gradient 0.01
+  done L3 gradient 0.003
+  done L4 inhibitor_mass 0.01
+  done L4 inhibitor_mass 0.003
+  done L4 pattern_sharpness 0.01
+  done L4 pattern_sharpness 0.003
+
+====================================================================================================
+variant                      replays certified   safety  missed  med pen worst pen  hit cap  cycled worst err/eps
+method                          7782      7638   100.0%       0     1.13     14.40        0       0          0.79
+propose predicted optimum       7782      3839   100.0%       0     1.00      9.92     5883    5883          0.70
+Phase 2 coarsen only            7782      7638   100.0%       0     1.13     14.40        0       0          0.79
+method, screened                7782      7638   100.0%       0     3.41     59.71        0       0          0.79
+screen at user's setting        7782      7674   100.0%       0     4.48   1132.20        0       0          0.88
+audit uses one difference       7782      7638   100.0%       0     3.41     59.71        0       0          0.79
