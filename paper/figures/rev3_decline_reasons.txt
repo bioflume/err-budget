@@ -28,3 +28,4 @@ GMX-s   potential          1e-04    not_reached 156
 GMX-s   potential          3e-05    below_floor 225
 GMX-s   potential          1e-05    below_floor 225
 ABINIT  energy             3e-03    not_reached 105
+TOTAL {'not_reached': 3162, 'unbounded_axis': 110, 'unmeasured_axis': 99, 'start_failed': 1486, 'below_floor': 450}
