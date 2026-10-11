@@ -50,7 +50,8 @@ def heldout_case(key):
 
 
 rows = []
-cases = [heldout_case("H1"), heldout_case("H2")]
+cases = [heldout_case(k) for k in ("H1", "H2")
+         if os.path.exists(os.path.join(C.D, f"heldout_{k}.pkl"))]
 j5 = os.path.join(HERE, "..", "hamilton", "results", "j5_tensor.pkl")
 if os.path.exists(j5):
     sys.path.insert(0, os.path.join(HERE, "..", "hamilton", "J5_abc3d"))
