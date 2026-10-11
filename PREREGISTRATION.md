@@ -195,3 +195,44 @@ At the time of the freeze:
 - H3 had not been run.
 
 No replay of the program on any of them had been made.
+
+## Amendment 1 — 11 October 2026, after the replay of H1 and H2, before H3 was run
+
+**What the replay found.** The replay of H1 and H2 with the frozen program
+(`paper/figures/rev3_heldout.txt`) found one failure. For H2, observable v_max at the
+target 3e-2, 9 of the 66 accepted settings missed the target, by at most 3% of it.
+All nine returned the same setting:
+
+- N = 64;
+- `residualControl` 1e-3;
+- linear tolerance 1e-6.
+
+At that setting, the one-step changes along N and along `residualControl` were
+0.21 ε and 0.26 ε. Both are below three times the resolution of 0.1 ε. So neither
+parameter took part in the joint-refinement check, and the check was skipped.
+
+The interaction it would have measured is real. Under the loose `residualControl`,
+v_max does not converge along N: its error is −1.03, −0.82, −0.89 and −1.21 times
+the target at N = 64, 96, 128 and 192. The reason is the same as for OpenFOAM DFG
+2D-1 in the article: the solver error grows with mesh refinement.
+
+**Version 1.2.1.** The only change from the frozen program is that a parameter takes
+part in the joint check if its one-step change exceeds the resolution itself (0.1 ε)
+rather than three times it (`joint_res=1.0`; `knobs.V121`; release 1.2.1). With this
+change:
+
+- H2 has no misses, with the same acceptances;
+- H1 is unchanged.
+
+The effect on the development problems is reported in the article. It was not
+known when this amendment was written.
+
+**What is registered now.** H3 has not been run. When it is, it will be replayed with:
+
+- the frozen program `v1.2.0-frozen`, as registered above;
+- version 1.2.1 (`python paper/exp62_heldout.py --current`).
+
+Both results will be reported. The grading, targets and declarations of H3 are
+unchanged. The results of H1 and H2 for the frozen program stand as the held-out
+result of version 1.2. Those for version 1.2.1 on H1 and H2 are not held-out results,
+because the change was made after seeing them.

@@ -100,3 +100,11 @@ def test_failed_finer_run_uses_the_order_up_to_the_setting():
     assert r11["certified"] and abs(look(r11["proposal"])[0] - 1.0) > 1e-4
     r = run_protocol(look, lad, (5, 1), 1e-4, hs=hs, kinds=kinds, **V12)
     assert not r["certified"] and r["declined"] == "unbounded_axis"
+
+
+def test_v121_includes_small_resolved_changes_in_the_joint_check():
+    # the frozen 1.2 skips the joint check when every one-step change is below three
+    # times the resolution; 1.2.1 includes changes above the resolution itself
+    from knobs import V121
+    assert V12.get("joint_res", 3.0) == 3.0 and V121["joint_res"] == 1.0
+    assert {k: v for k, v in V121.items() if k != "joint_res"} == V12

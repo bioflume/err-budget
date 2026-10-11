@@ -15,9 +15,11 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: pip install -e ".[dev,paper]"
       - run: pytest -q
-      # the frozen program must not change after the held-out tests were registered
+      # the program frozen for the held-out tests must still be the registered one
       - name: frozen-source check
         run: |
           if git rev-parse -q --verify refs/tags/v1.2.0-frozen >/dev/null; then
-            git diff --exit-code v1.2.0-frozen -- src/knobs || (echo "src/knobs differs from the frozen program"; exit 1)
+            d=$(mktemp -d); git archive v1.2.0-frozen src/knobs | tar -x -C "$d"
+            h=$(cd "$d/src/knobs" && for f in $(ls *.py | sort); do printf '%s  %s\n' "$(sha256sum "$f" | cut -d' ' -f1)" "$f"; done | sha256sum | cut -d' ' -f1)
+            grep -q "$h" PREREGISTRATION.md || (echo "the tagged frozen source does not match PREREGISTRATION.md"; exit 1)
           fi

@@ -1,0 +1,1802 @@
+{
+ "L2|energy|0.00727882408644963": {
+  "program": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.256,
+   "runs": 54.0,
+   "K": 150.51241134751774
+  },
+  "seq-1": {
+   "reached": 602,
+   "missed": 23,
+   "declined": 0,
+   "pen": 16.28,
+   "runs": 5.0,
+   "K": 6.074985104022537
+  },
+  "seq-3": {
+   "reached": 605,
+   "missed": 20,
+   "declined": 0,
+   "pen": 20.8,
+   "runs": 5.0,
+   "K": 6.038571428571428
+  },
+  "seq-10": {
+   "reached": 610,
+   "missed": 15,
+   "declined": 0,
+   "pen": 32.0,
+   "runs": 6.0,
+   "K": 6.20722586699879
+  },
+  "coord-10": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 41.488,
+   "runs": 7.0,
+   "K": 10.827290076335878
+  },
+  "ref": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 625.0,
+   "K": 16920.102
+  }
+ },
+ "L2|energy|0.002183647225934889": {
+  "program": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.54,
+   "runs": 64.0,
+   "K": 165.92420977011494
+  },
+  "seq-1": {
+   "reached": 591,
+   "missed": 34,
+   "declined": 0,
+   "pen": 10.464,
+   "runs": 5.0,
+   "K": 6.041284403669724
+  },
+  "seq-3": {
+   "reached": 595,
+   "missed": 30,
+   "declined": 0,
+   "pen": 17.528,
+   "runs": 6.0,
+   "K": 6.256941766293868
+  },
+  "seq-10": {
+   "reached": 595,
+   "missed": 30,
+   "declined": 0,
+   "pen": 31.648,
+   "runs": 6.0,
+   "K": 4.59915378955114
+  },
+  "coord-10": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 40.08,
+   "runs": 7.0,
+   "K": 6.36607799852833
+  },
+  "ref": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 625.0,
+   "K": 8460.051
+  }
+ },
+ "L2|energy|0.000727882408644963": {
+  "program": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.1752873563218391,
+   "runs": 67.0,
+   "K": 133.84368583162217
+  },
+  "seq-1": {
+   "reached": 553,
+   "missed": 72,
+   "declined": 0,
+   "pen": 6.32183908045977,
+   "runs": 6.0,
+   "K": 6.487851908985731
+  },
+  "seq-3": {
+   "reached": 565,
+   "missed": 60,
+   "declined": 0,
+   "pen": 12.166666666666666,
+   "runs": 6.0,
+   "K": 4.5259381898454745
+  },
+  "seq-10": {
+   "reached": 565,
+   "missed": 60,
+   "declined": 0,
+   "pen": 12.166666666666666,
+   "runs": 6.0,
+   "K": 4.537711646998461
+  },
+  "coord-10": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 14.39655172413793,
+   "runs": 7.0,
+   "K": 6.36607799852833
+  },
+  "ref": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 625.0,
+   "K": 3038.811422413793
+  }
+ },
+ "L2|dissipation|0.032216249751957325": {
+  "program": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.256,
+   "runs": 54.0,
+   "K": 138.04343971631207
+  },
+  "seq-1": {
+   "reached": 605,
+   "missed": 20,
+   "declined": 0,
+   "pen": 16.0,
+   "runs": 5.0,
+   "K": 6.077102803738318
+  },
+  "seq-3": {
+   "reached": 605,
+   "missed": 20,
+   "declined": 0,
+   "pen": 19.2,
+   "runs": 5.0,
+   "K": 6.326291079812207
+  },
+  "seq-10": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 28.8,
+   "runs": 6.0,
+   "K": 6.487851908985731
+  },
+  "coord-10": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 35.056,
+   "runs": 7.0,
+   "K": 11.139402560455192
+  },
+  "ref": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 625.0,
+   "K": 16920.102
+  }
+ },
+ "L2|dissipation|0.009664874925587198": {
+  "program": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.784,
+   "runs": 64.0,
+   "K": 145.06560283687944
+  },
+  "seq-1": {
+   "reached": 585,
+   "missed": 40,
+   "declined": 0,
+   "pen": 10.4,
+   "runs": 5.0,
+   "K": 6.3645726055612775
+  },
+  "seq-3": {
+   "reached": 585,
+   "missed": 40,
+   "declined": 0,
+   "pen": 15.52,
+   "runs": 6.0,
+   "K": 6.7185
+  },
+  "seq-10": {
+   "reached": 615,
+   "missed": 10,
+   "declined": 0,
+   "pen": 29.344,
+   "runs": 6.0,
+   "K": 4.708074534161491
+  },
+  "coord-10": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 37.648,
+   "runs": 7.0,
+   "K": 6.4523199875853505
+  },
+  "ref": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 625.0,
+   "K": 8460.051
+  }
+ },
+ "L2|dissipation|0.003221624975195732": {
+  "program": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.2167832167832169,
+   "runs": 75.0,
+   "K": 176.57758620689654
+  },
+  "seq-1": {
+   "reached": 565,
+   "missed": 60,
+   "declined": 0,
+   "pen": 6.993006993006993,
+   "runs": 6.0,
+   "K": 6.844091360476663
+  },
+  "seq-3": {
+   "reached": 565,
+   "missed": 60,
+   "declined": 0,
+   "pen": 13.503496503496503,
+   "runs": 6.0,
+   "K": 4.688068756319515
+  },
+  "seq-10": {
+   "reached": 565,
+   "missed": 60,
+   "declined": 0,
+   "pen": 15.503496503496503,
+   "runs": 6.0,
+   "K": 4.606339687299208
+  },
+  "coord-10": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 17.517482517482517,
+   "runs": 7.0,
+   "K": 6.430418719211823
+  },
+  "ref": {
+   "reached": 625,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 625.0,
+   "K": 3697.574737762238
+  }
+ },
+ "L3|energy|0.01": {
+  "program": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 47.0,
+   "K": 158.86325143874086
+  },
+  "seq-1": {
+   "reached": 234,
+   "missed": 198,
+   "declined": 0,
+   "pen": 10.424205304483577,
+   "runs": 5.0,
+   "K": 6.0769846020244955
+  },
+  "seq-3": {
+   "reached": 378,
+   "missed": 54,
+   "declined": 0,
+   "pen": 8.087509481296895,
+   "runs": 6.0,
+   "K": 8.143737951959935
+  },
+  "seq-10": {
+   "reached": 378,
+   "missed": 54,
+   "declined": 0,
+   "pen": 20.199496151801604,
+   "runs": 6.0,
+   "K": 5.106332069033378
+  },
+  "coord-10": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 28.37312333355045,
+   "runs": 7.0,
+   "K": 6.155180844964054
+  },
+  "ref": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 432.0,
+   "K": 2834.43470627415
+  }
+ },
+ "L3|energy|0.003": {
+  "program": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 54.0,
+   "K": 75.23178577217568
+  },
+  "seq-1": {
+   "reached": 135,
+   "missed": 297,
+   "declined": 0,
+   "pen": 3.1698048803862284,
+   "runs": 6.0,
+   "K": 5.023704248980397
+  },
+  "seq-3": {
+   "reached": 351,
+   "missed": 81,
+   "declined": 0,
+   "pen": 4.056422477770041,
+   "runs": 6.0,
+   "K": 4.914027369898901
+  },
+  "seq-10": {
+   "reached": 351,
+   "missed": 81,
+   "declined": 0,
+   "pen": 4.056422477770041,
+   "runs": 6.0,
+   "K": 4.914027369898901
+  },
+  "coord-10": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 4.992837194058918,
+   "runs": 7.0,
+   "K": 6.155180844964054
+  },
+  "ref": {
+   "reached": 0,
+   "missed": 432,
+   "declined": 0,
+   "pen": NaN,
+   "runs": 432.0,
+   "K": NaN
+  }
+ },
+ "L3|gradient|0.01": {
+  "program": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 46.0,
+   "K": 152.90557636830084
+  },
+  "seq-1": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 9.330643551562495,
+   "runs": 6.0,
+   "K": 7.2226742460319615
+  },
+  "seq-3": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 23.368557393100346,
+   "runs": 6.0,
+   "K": 4.921367976425133
+  },
+  "seq-10": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 23.368557393100346,
+   "runs": 6.0,
+   "K": 4.921367976425133
+  },
+  "coord-10": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 23.368557393100346,
+   "runs": 7.0,
+   "K": 6.922090049249766
+  },
+  "ref": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 432.0,
+   "K": 2834.43470627415
+  }
+ },
+ "L3|gradient|0.003": {
+  "program": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 53.0,
+   "K": 56.35664837314988
+  },
+  "seq-1": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 4.112180430478247,
+   "runs": 6.0,
+   "K": 4.921367976425133
+  },
+  "seq-3": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 4.112180430478247,
+   "runs": 6.0,
+   "K": 4.921367976425133
+  },
+  "seq-10": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 4.112180430478247,
+   "runs": 6.0,
+   "K": 4.921367976425133
+  },
+  "coord-10": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 4.112180430478247,
+   "runs": 7.0,
+   "K": 6.922090049249766
+  },
+  "ref": {
+   "reached": 432,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 432.0,
+   "K": 498.7773414738177
+  }
+ },
+ "L4|inhibitor_mass|0.01": {
+  "program": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 56.0,
+   "K": 1074.0813274547188
+  },
+  "seq-1": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 36.868160152526215,
+   "runs": 5.0,
+   "K": 9.180129372962377
+  },
+  "seq-3": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 36.868160152526215,
+   "runs": 5.0,
+   "K": 9.180129372962377
+  },
+  "seq-10": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 45.3302192564347,
+   "runs": 5.0,
+   "K": 9.327448011556749
+  },
+  "coord-10": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 57.65295519542421,
+   "runs": 6.0,
+   "K": 18.30091182567013
+  },
+  "ref": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 576.0,
+   "K": 92006.87883698761
+  }
+ },
+ "L4|inhibitor_mass|0.003": {
+  "program": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.1830314585319353,
+   "runs": 55.0,
+   "K": 772.1813427714023
+  },
+  "seq-1": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 36.868160152526215,
+   "runs": 5.0,
+   "K": 9.180129372962377
+  },
+  "seq-3": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 45.3302192564347,
+   "runs": 5.0,
+   "K": 9.327448011556749
+  },
+  "seq-10": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 48.25667302192564,
+   "runs": 5.0,
+   "K": 9.15499320193501
+  },
+  "coord-10": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 159.0296472831268,
+   "runs": 7.0,
+   "K": 16.524865365800807
+  },
+  "ref": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 576.0,
+   "K": 92006.87883698761
+  }
+ },
+ "L4|pattern_sharpness|0.01": {
+  "program": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 8.094788255775937,
+   "runs": 65.0,
+   "K": 50.914890451132536
+  },
+  "seq-1": {
+   "reached": 540,
+   "missed": 36,
+   "declined": 0,
+   "pen": 8.580273938955393,
+   "runs": 6.0,
+   "K": 7.142767066927504
+  },
+  "seq-3": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 15.22565692407015,
+   "runs": 6.0,
+   "K": 5.546831146875529
+  },
+  "seq-10": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 20.60498088933072,
+   "runs": 6.0,
+   "K": 5.771567969467787
+  },
+  "coord-10": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 23.965287124736324,
+   "runs": 8.0,
+   "K": 7.54561074627912
+  },
+  "ref": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 576.0,
+   "K": 3203.595955807303
+  }
+ },
+ "L4|pattern_sharpness|0.003": {
+  "program": {
+   "reached": 60,
+   "missed": 0,
+   "declined": 516,
+   "pen": 12.302062382913142,
+   "runs": 76.0,
+   "K": 34.67503716330012
+  },
+  "seq-1": {
+   "reached": 540,
+   "missed": 36,
+   "declined": 0,
+   "pen": 13.877026231591774,
+   "runs": 6.0,
+   "K": 5.540623046585987
+  },
+  "seq-3": {
+   "reached": 564,
+   "missed": 12,
+   "declined": 0,
+   "pen": 17.11468618998846,
+   "runs": 6.0,
+   "K": 5.818198724609623
+  },
+  "seq-10": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 21.903424622599506,
+   "runs": 7.0,
+   "K": 5.548505520016912
+  },
+  "coord-10": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 33.650996728805126,
+   "runs": 8.0,
+   "K": 5.588958986070743
+  },
+  "ref": {
+   "reached": 576,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 576.0,
+   "K": 2660.9361958471127
+  }
+ },
+ "L5|psi_min|0.01": {
+  "program": {
+   "reached": 0,
+   "missed": 0,
+   "declined": 676,
+   "pen": NaN,
+   "runs": 105.0,
+   "K": NaN
+  },
+  "seq-1": {
+   "reached": 649,
+   "missed": 27,
+   "declined": 0,
+   "pen": 6.808425083170809,
+   "runs": 7.0,
+   "K": 6.729714568142049
+  },
+  "seq-3": {
+   "reached": 655,
+   "missed": 21,
+   "declined": 0,
+   "pen": 18.81615380435608,
+   "runs": 7.0,
+   "K": 4.1983925616253845
+  },
+  "seq-10": {
+   "reached": 669,
+   "missed": 7,
+   "declined": 0,
+   "pen": 18.81615380435608,
+   "runs": 7.0,
+   "K": 4.285658321430122
+  },
+  "coord-10": {
+   "reached": 676,
+   "missed": 0,
+   "declined": 0,
+   "pen": 18.81615380435608,
+   "runs": 8.0,
+   "K": 5.309107736092199
+  },
+  "ref": {
+   "reached": 676,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 676.0,
+   "K": 5799.52493941122
+  }
+ },
+ "L5|psi_min|0.003": {
+  "program": {
+   "reached": 0,
+   "missed": 0,
+   "declined": 676,
+   "pen": NaN,
+   "runs": 105.0,
+   "K": NaN
+  },
+  "seq-1": {
+   "reached": 14,
+   "missed": 662,
+   "declined": 0,
+   "pen": 3.722366719846798,
+   "runs": 7.0,
+   "K": 4.843117162610671
+  },
+  "seq-3": {
+   "reached": 0,
+   "missed": 676,
+   "declined": 0,
+   "pen": NaN,
+   "runs": 7.0,
+   "K": NaN
+  },
+  "seq-10": {
+   "reached": 0,
+   "missed": 676,
+   "declined": 0,
+   "pen": NaN,
+   "runs": 7.0,
+   "K": NaN
+  },
+  "coord-10": {
+   "reached": 0,
+   "missed": 676,
+   "declined": 0,
+   "pen": NaN,
+   "runs": 8.0,
+   "K": NaN
+  },
+  "ref": {
+   "reached": 0,
+   "missed": 676,
+   "declined": 0,
+   "pen": NaN,
+   "runs": 676.0,
+   "K": NaN
+  }
+ },
+ "L5|y_min|0.001": {
+  "program": {
+   "reached": 665,
+   "missed": 0,
+   "declined": 11,
+   "pen": 6.882546908049767,
+   "runs": 81.0,
+   "K": 1550.5426207305943
+  },
+  "seq-1": {
+   "reached": 668,
+   "missed": 8,
+   "declined": 0,
+   "pen": 7.224192530099164,
+   "runs": 5.0,
+   "K": 6.473744268640158
+  },
+  "seq-3": {
+   "reached": 673,
+   "missed": 3,
+   "declined": 0,
+   "pen": 7.518843645195795,
+   "runs": 5.0,
+   "K": 6.474786349883391
+  },
+  "seq-10": {
+   "reached": 673,
+   "missed": 3,
+   "declined": 0,
+   "pen": 11.534607001825654,
+   "runs": 6.0,
+   "K": 5.986834558087492
+  },
+  "coord-10": {
+   "reached": 676,
+   "missed": 0,
+   "declined": 0,
+   "pen": 12.15586823120662,
+   "runs": 7.0,
+   "K": 8.151024431167297
+  },
+  "ref": {
+   "reached": 676,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 676.0,
+   "K": 39915.5024399022
+  }
+ },
+ "L5|y_min|0.0003": {
+  "program": {
+   "reached": 601,
+   "missed": 0,
+   "declined": 75,
+   "pen": 8.611034307400793,
+   "runs": 88.0,
+   "K": 4991.192832229601
+  },
+  "seq-1": {
+   "reached": 136,
+   "missed": 540,
+   "declined": 0,
+   "pen": 76.34121438674933,
+   "runs": 5.0,
+   "K": 3.8124186194994554
+  },
+  "seq-3": {
+   "reached": 270,
+   "missed": 406,
+   "declined": 0,
+   "pen": 30.000674741143744,
+   "runs": 6.0,
+   "K": 4.196841758766516
+  },
+  "seq-10": {
+   "reached": 284,
+   "missed": 392,
+   "declined": 0,
+   "pen": 34.68935840027105,
+   "runs": 6.0,
+   "K": 4.295174402029286
+  },
+  "coord-10": {
+   "reached": 300,
+   "missed": 376,
+   "declined": 0,
+   "pen": 30.000674741143744,
+   "runs": 7.0,
+   "K": 5.305662905871832
+  },
+  "ref": {
+   "reached": 676,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 676.0,
+   "K": 12714.860945681578
+  }
+ },
+ "L5|omega_lid|0.01": {
+  "program": {
+   "reached": 673,
+   "missed": 0,
+   "declined": 3,
+   "pen": 2.3355375006676047,
+   "runs": 72.0,
+   "K": 570.1543863739516
+  },
+  "seq-1": {
+   "reached": 180,
+   "missed": 496,
+   "declined": 0,
+   "pen": 9.788417771186847,
+   "runs": 5.0,
+   "K": 5.210675117826485
+  },
+  "seq-3": {
+   "reached": 601,
+   "missed": 75,
+   "declined": 0,
+   "pen": 9.749700503792969,
+   "runs": 7.0,
+   "K": 6.717102849120172
+  },
+  "seq-10": {
+   "reached": 666,
+   "missed": 10,
+   "declined": 0,
+   "pen": 21.11457635272291,
+   "runs": 7.0,
+   "K": 4.285528556436976
+  },
+  "coord-10": {
+   "reached": 676,
+   "missed": 0,
+   "declined": 0,
+   "pen": 21.11457635272291,
+   "runs": 8.0,
+   "K": 5.352753113926333
+  },
+  "ref": {
+   "reached": 0,
+   "missed": 676,
+   "declined": 0,
+   "pen": NaN,
+   "runs": 676.0,
+   "K": NaN
+  }
+ },
+ "L5|omega_lid|0.003": {
+  "program": {
+   "reached": 0,
+   "missed": 0,
+   "declined": 676,
+   "pen": NaN,
+   "runs": 106.0,
+   "K": NaN
+  },
+  "seq-1": {
+   "reached": 178,
+   "missed": 498,
+   "declined": 0,
+   "pen": 34.77377823749125,
+   "runs": 7.0,
+   "K": 267.1474382197753
+  },
+  "seq-3": {
+   "reached": 481,
+   "missed": 195,
+   "declined": 0,
+   "pen": 22.17126499945345,
+   "runs": 7.0,
+   "K": 4.0753165845875285
+  },
+  "seq-10": {
+   "reached": 503,
+   "missed": 173,
+   "declined": 0,
+   "pen": 17.7267463018637,
+   "runs": 7.0,
+   "K": 4.132659234277556
+  },
+  "coord-10": {
+   "reached": 508,
+   "missed": 168,
+   "declined": 0,
+   "pen": 17.7267463018637,
+   "runs": 8.0,
+   "K": 5.237315022282146
+  },
+  "ref": {
+   "reached": 0,
+   "missed": 676,
+   "declined": 0,
+   "pen": NaN,
+   "runs": 676.0,
+   "K": NaN
+  }
+ },
+ "2D-1|cd|0.01": {
+  "program": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 7.745738636363637,
+   "runs": 76.5,
+   "K": 113.15691904821462
+  },
+  "seq-1": {
+   "reached": 464,
+   "missed": 144,
+   "declined": 0,
+   "pen": 23.738340435606062,
+   "runs": 5.0,
+   "K": 7.093773205783427
+  },
+  "seq-3": {
+   "reached": 602,
+   "missed": 6,
+   "declined": 0,
+   "pen": 20.845170454545453,
+   "runs": 5.0,
+   "K": 7.197608066370272
+  },
+  "seq-10": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 87.82765151515152,
+   "runs": 6.0,
+   "K": 7.264937915743971
+  },
+  "coord-10": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 112.28598484848484,
+   "runs": 8.0,
+   "K": 10.271149818471741
+  },
+  "ref": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 608.0,
+   "K": 46565.50907512626
+  }
+ },
+ "2D-1|cd|0.003": {
+  "program": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 8.791185280273856,
+   "runs": 96.0,
+   "K": 100.15656348289696
+  },
+  "seq-1": {
+   "reached": 268,
+   "missed": 340,
+   "declined": 0,
+   "pen": 9.207408765816982,
+   "runs": 5.0,
+   "K": 7.1779919945707125
+  },
+  "seq-3": {
+   "reached": 594,
+   "missed": 14,
+   "declined": 0,
+   "pen": 12.27177700348432,
+   "runs": 6.0,
+   "K": 7.282689967170208
+  },
+  "seq-10": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 35.6787089675408,
+   "runs": 8.0,
+   "K": 5.115973871428025
+  },
+  "coord-10": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 35.6787089675408,
+   "runs": 8.0,
+   "K": 6.444952697844583
+  },
+  "ref": {
+   "reached": 0,
+   "missed": 608,
+   "declined": 0,
+   "pen": NaN,
+   "runs": 608.0,
+   "K": NaN
+  }
+ },
+ "2D-1|cd|0.001": {
+  "program": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 6.563486655309483,
+   "runs": 125.0,
+   "K": 76.5086551252849
+  },
+  "seq-1": {
+   "reached": 460,
+   "missed": 148,
+   "declined": 0,
+   "pen": 4.723334279765284,
+   "runs": 6.0,
+   "K": 7.165448250721498
+  },
+  "seq-3": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 5.524020442930153,
+   "runs": 8.0,
+   "K": 6.118525177969368
+  },
+  "seq-10": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 6.5733863335226195,
+   "runs": 8.0,
+   "K": 6.0054062929807355
+  },
+  "coord-10": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 6.5733863335226195,
+   "runs": 9.0,
+   "K": 6.956406791760058
+  },
+  "ref": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 608.0,
+   "K": 930.7813284749826
+  }
+ },
+ "2D-1|dp|0.03": {
+  "program": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 3.0,
+   "runs": 70.0,
+   "K": 444.00822679924244
+  },
+  "seq-1": {
+   "reached": 560,
+   "missed": 48,
+   "declined": 0,
+   "pen": 36.146780303030305,
+   "runs": 5.0,
+   "K": 6.940103202231933
+  },
+  "seq-3": {
+   "reached": 560,
+   "missed": 48,
+   "declined": 0,
+   "pen": 36.146780303030305,
+   "runs": 5.0,
+   "K": 6.940103202231933
+  },
+  "seq-10": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 62.74396306818182,
+   "runs": 5.0,
+   "K": 7.207118281724956
+  },
+  "coord-10": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 62.74396306818182,
+   "runs": 6.0,
+   "K": 10.512758845736064
+  },
+  "ref": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 608.0,
+   "K": 139696.52722537878
+  }
+ },
+ "2D-1|dp|0.01": {
+  "program": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 7.8686868686868685,
+   "runs": 78.0,
+   "K": 223.91153692851196
+  },
+  "seq-1": {
+   "reached": 464,
+   "missed": 144,
+   "declined": 0,
+   "pen": 23.738340435606062,
+   "runs": 5.0,
+   "K": 7.093773205783427
+  },
+  "seq-3": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 20.914654356060606,
+   "runs": 5.0,
+   "K": 7.207118281724956
+  },
+  "seq-10": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 139.66477272727272,
+   "runs": 7.0,
+   "K": 7.141432270399019
+  },
+  "coord-10": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 139.66477272727272,
+   "runs": 8.0,
+   "K": 10.018775121113713
+  },
+  "ref": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 608.0,
+   "K": 46565.50907512626
+  }
+ },
+ "2D-1|cl|0.1": {
+  "program": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.6363636363636365,
+   "runs": 83.0,
+   "K": 2301.1632359479026
+  },
+  "seq-1": {
+   "reached": 560,
+   "missed": 48,
+   "declined": 0,
+   "pen": 65.65435606060606,
+   "runs": 5.0,
+   "K": 6.831078520932606
+  },
+  "seq-3": {
+   "reached": 564,
+   "missed": 44,
+   "declined": 0,
+   "pen": 104.64275568181819,
+   "runs": 5.0,
+   "K": 6.691023234577922
+  },
+  "seq-10": {
+   "reached": 568,
+   "missed": 40,
+   "declined": 0,
+   "pen": 233.4659090909091,
+   "runs": 5.0,
+   "K": 6.873617930988409
+  },
+  "coord-10": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 173.72585227272728,
+   "runs": 6.0,
+   "K": 9.322498057997908
+  },
+  "ref": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 608.0,
+   "K": 139696.52722537878
+  }
+ },
+ "2D-1|cl|0.03": {
+  "program": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 14.174715909090908,
+   "runs": 80.0,
+   "K": 382.4621844244758
+  },
+  "seq-1": {
+   "reached": 564,
+   "missed": 44,
+   "declined": 0,
+   "pen": 104.64275568181819,
+   "runs": 5.0,
+   "K": 6.873617930988409
+  },
+  "seq-3": {
+   "reached": 568,
+   "missed": 40,
+   "declined": 0,
+   "pen": 233.4659090909091,
+   "runs": 5.0,
+   "K": 6.873617930988409
+  },
+  "seq-10": {
+   "reached": 574,
+   "missed": 34,
+   "declined": 0,
+   "pen": 269.9943181818182,
+   "runs": 6.0,
+   "K": 7.469540495926963
+  },
+  "coord-10": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 263.48295454545456,
+   "runs": 7.0,
+   "K": 10.275830881089027
+  },
+  "ref": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 608.0,
+   "K": 139696.52722537878
+  }
+ },
+ "2D-2|cd_max|0.1": {
+  "program": {
+   "reached": 174,
+   "missed": 0,
+   "declined": 10,
+   "pen": 1.2917485265225934,
+   "runs": 36.0,
+   "K": 156.36918063099506
+  },
+  "seq-1": {
+   "reached": 159,
+   "missed": 25,
+   "declined": 0,
+   "pen": 9.460707269155208,
+   "runs": 4.0,
+   "K": 6.075017111567421
+  },
+  "seq-3": {
+   "reached": 159,
+   "missed": 25,
+   "declined": 0,
+   "pen": 9.460707269155208,
+   "runs": 4.0,
+   "K": 6.075017111567421
+  },
+  "seq-10": {
+   "reached": 159,
+   "missed": 25,
+   "declined": 0,
+   "pen": 9.460707269155208,
+   "runs": 4.0,
+   "K": 6.075017111567421
+  },
+  "coord-10": {
+   "reached": 184,
+   "missed": 0,
+   "declined": 0,
+   "pen": 12.778978388998036,
+   "runs": 5.0,
+   "K": 9.460827804937136
+  },
+  "ref": {
+   "reached": 184,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 184.0,
+   "K": 4783.556974459727
+  }
+ },
+ "2D-2|cd_max|0.03": {
+  "program": {
+   "reached": 174,
+   "missed": 0,
+   "declined": 10,
+   "pen": 1.2917485265225934,
+   "runs": 36.0,
+   "K": 156.36918063099506
+  },
+  "seq-1": {
+   "reached": 159,
+   "missed": 25,
+   "declined": 0,
+   "pen": 9.460707269155208,
+   "runs": 4.0,
+   "K": 6.075017111567421
+  },
+  "seq-3": {
+   "reached": 159,
+   "missed": 25,
+   "declined": 0,
+   "pen": 9.460707269155208,
+   "runs": 4.0,
+   "K": 6.075017111567421
+  },
+  "seq-10": {
+   "reached": 160,
+   "missed": 24,
+   "declined": 0,
+   "pen": 9.473477406679764,
+   "runs": 4.0,
+   "K": 6.066912781475708
+  },
+  "coord-10": {
+   "reached": 184,
+   "missed": 0,
+   "declined": 0,
+   "pen": 13.271119842829078,
+   "runs": 5.0,
+   "K": 9.235414599561603
+  },
+  "ref": {
+   "reached": 184,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 184.0,
+   "K": 4783.556974459727
+  }
+ },
+ "2D-2|cd_max|0.01": {
+  "program": {
+   "reached": 172,
+   "missed": 0,
+   "declined": 12,
+   "pen": 2.6453831041257367,
+   "runs": 38.0,
+   "K": 100.64418228041512
+  },
+  "seq-1": {
+   "reached": 159,
+   "missed": 25,
+   "declined": 0,
+   "pen": 9.460707269155208,
+   "runs": 4.0,
+   "K": 6.075017111567421
+  },
+  "seq-3": {
+   "reached": 160,
+   "missed": 24,
+   "declined": 0,
+   "pen": 9.473477406679764,
+   "runs": 4.0,
+   "K": 6.066912781475708
+  },
+  "seq-10": {
+   "reached": 149,
+   "missed": 35,
+   "declined": 0,
+   "pen": 28.774066797642433,
+   "runs": 5.0,
+   "K": 6.072478050528578
+  },
+  "coord-10": {
+   "reached": 184,
+   "missed": 0,
+   "declined": 0,
+   "pen": 37.281925343811395,
+   "runs": 6.0,
+   "K": 7.8720511724966435
+  },
+  "ref": {
+   "reached": 184,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 184.0,
+   "K": 4783.556974459727
+  }
+ },
+ "2D-2|cl_max|0.1": {
+  "program": {
+   "reached": 172,
+   "missed": 0,
+   "declined": 12,
+   "pen": 4.544204322200393,
+   "runs": 36.0,
+   "K": 75.39904885430177
+  },
+  "seq-1": {
+   "reached": 159,
+   "missed": 25,
+   "declined": 0,
+   "pen": 9.460707269155208,
+   "runs": 4.0,
+   "K": 6.075017111567421
+  },
+  "seq-3": {
+   "reached": 150,
+   "missed": 34,
+   "declined": 0,
+   "pen": 12.570726915520629,
+   "runs": 5.0,
+   "K": 6.373675242221542
+  },
+  "seq-10": {
+   "reached": 152,
+   "missed": 32,
+   "declined": 0,
+   "pen": 28.645383104125738,
+   "runs": 5.0,
+   "K": 6.160324096027035
+  },
+  "coord-10": {
+   "reached": 184,
+   "missed": 0,
+   "declined": 0,
+   "pen": 30.865422396856587,
+   "runs": 6.0,
+   "K": 8.847814822390056
+  },
+  "ref": {
+   "reached": 184,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 184.0,
+   "K": 4783.556974459727
+  }
+ },
+ "2D-2|st|0.1": {
+  "program": {
+   "reached": 174,
+   "missed": 0,
+   "declined": 10,
+   "pen": 1.7406679764243613,
+   "runs": 37.0,
+   "K": 135.74915349887135
+  },
+  "seq-1": {
+   "reached": 159,
+   "missed": 25,
+   "declined": 0,
+   "pen": 9.460707269155208,
+   "runs": 4.0,
+   "K": 6.075017111567421
+  },
+  "seq-3": {
+   "reached": 159,
+   "missed": 25,
+   "declined": 0,
+   "pen": 9.460707269155208,
+   "runs": 4.0,
+   "K": 6.075017111567421
+  },
+  "seq-10": {
+   "reached": 148,
+   "missed": 36,
+   "declined": 0,
+   "pen": 26.789783889980356,
+   "runs": 5.0,
+   "K": 6.1181388764379125
+  },
+  "coord-10": {
+   "reached": 184,
+   "missed": 0,
+   "declined": 0,
+   "pen": 35.750491159135564,
+   "runs": 6.0,
+   "K": 8.00153520863052
+  },
+  "ref": {
+   "reached": 184,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 184.0,
+   "K": 4783.556974459727
+  }
+ },
+ "2D-2|st|0.03": {
+  "program": {
+   "reached": 161,
+   "missed": 0,
+   "declined": 23,
+   "pen": 2.751052631578947,
+   "runs": 45.0,
+   "K": 79.70814999043428
+  },
+  "seq-1": {
+   "reached": 76,
+   "missed": 108,
+   "declined": 0,
+   "pen": 9.053684210526317,
+   "runs": 4.0,
+   "K": 5.755127540412081
+  },
+  "seq-3": {
+   "reached": 148,
+   "missed": 36,
+   "declined": 0,
+   "pen": 7.176842105263159,
+   "runs": 5.0,
+   "K": 6.1181388764379125
+  },
+  "seq-10": {
+   "reached": 106,
+   "missed": 78,
+   "declined": 0,
+   "pen": 33.83815789473684,
+   "runs": 6.0,
+   "K": 3.054354368997221
+  },
+  "coord-10": {
+   "reached": 184,
+   "missed": 0,
+   "declined": 0,
+   "pen": 46.701052631578946,
+   "runs": 7.0,
+   "K": 2.933132828509189
+  },
+  "ref": {
+   "reached": 184,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 184.0,
+   "K": 1281.4897368421057
+  }
+ },
+ "QE|energy|0.001": {
+  "program": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.1359091841135573,
+   "runs": 48.0,
+   "K": 112.1490458277031
+  },
+  "seq-1": {
+   "reached": 450,
+   "missed": 30,
+   "declined": 0,
+   "pen": 4.8477380876617495,
+   "runs": 4.0,
+   "K": 5.609693408494692
+  },
+  "seq-3": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 5.662502032821637,
+   "runs": 4.0,
+   "K": 5.572134095536171
+  },
+  "seq-10": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 6.431905761901083,
+   "runs": 5.0,
+   "K": 5.575130938264502
+  },
+  "coord-10": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 7.631348591872024,
+   "runs": 6.0,
+   "K": 8.720165061246558
+  },
+  "ref": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 480.0,
+   "K": 4558.685807012143
+  }
+ },
+ "QE|energy|0.0001": {
+  "program": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.1455018357877857,
+   "runs": 66.0,
+   "K": 113.4622347639785
+  },
+  "seq-1": {
+   "reached": 240,
+   "missed": 240,
+   "declined": 0,
+   "pen": 3.4429007383188144,
+   "runs": 5.0,
+   "K": 5.286369862031993
+  },
+  "seq-3": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 3.4863939911693387,
+   "runs": 6.0,
+   "K": 6.624317554523918
+  },
+  "seq-10": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 5.007086153524859,
+   "runs": 7.0,
+   "K": 6.8815813142235776
+  },
+  "coord-10": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 14.224730637058055,
+   "runs": 9.0,
+   "K": 6.3658501092213085
+  },
+  "ref": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 480.0,
+   "K": 1665.2664184513026
+  }
+ },
+ "QE|force|0.1": {
+  "program": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 5.636966045276689,
+   "runs": 60.0,
+   "K": 104.30562624274368
+  },
+  "seq-1": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 6.9302825213415,
+   "runs": 4.0,
+   "K": 5.4728466308798795
+  },
+  "seq-3": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 9.763430925721815,
+   "runs": 4.0,
+   "K": 4.58640069595177
+  },
+  "seq-10": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 25.57016617082449,
+   "runs": 5.0,
+   "K": 3.5654906356638945
+  },
+  "coord-10": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 25.57016617082449,
+   "runs": 6.0,
+   "K": 4.916352320027595
+  },
+  "ref": {
+   "reached": 480,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0971562200226974,
+   "runs": 480.0,
+   "K": 5195.437183460247
+  }
+ }
+}

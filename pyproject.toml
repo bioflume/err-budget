@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "knobs"
-version = "1.2.0"
+version = "1.2.1"
 description = "Choose a black-box solver's numerical parameters for a target accuracy in a chosen observable, at close to minimal cost."
 readme = "README.md"
 requires-python = ">=3.9"

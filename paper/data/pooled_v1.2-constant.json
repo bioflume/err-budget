@@ -1,0 +1,1544 @@
+[
+ {
+  "case": "L2",
+  "ob": "energy",
+  "target": 0.00727882408644963,
+  "n": 625,
+  "reachable": true,
+  "accepted": 625,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.5,
+  "pen_max": 15.584,
+  "runs_med": 52.0,
+  "unconv": 0,
+  "worst": 0.7835850148790735,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L2",
+  "ob": "energy",
+  "target": 0.002183647225934889,
+  "n": 625,
+  "reachable": true,
+  "accepted": 625,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.128,
+  "pen_max": 1.54,
+  "runs_med": 61.0,
+  "unconv": 0,
+  "worst": 0.7025108313364707,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L2",
+  "ob": "energy",
+  "target": 0.000727882408644963,
+  "n": 625,
+  "reachable": true,
+  "accepted": 625,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.0,
+  "pen_max": 1.3275862068965518,
+  "runs_med": 68.0,
+  "unconv": 0,
+  "worst": 0.6491317315844292,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L2",
+  "ob": "dissipation",
+  "target": 0.032216249751957325,
+  "n": 625,
+  "reachable": true,
+  "accepted": 625,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.5,
+  "pen_max": 3.6,
+  "runs_med": 54.0,
+  "unconv": 0,
+  "worst": 0.772999335575808,
+  "low_order": 31,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L2",
+  "ob": "dissipation",
+  "target": 0.009664874925587198,
+  "n": 625,
+  "reachable": true,
+  "accepted": 625,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.128,
+  "pen_max": 14.4,
+  "runs_med": 59.0,
+  "unconv": 0,
+  "worst": 0.7232294359313384,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L2",
+  "ob": "dissipation",
+  "target": 0.003221624975195732,
+  "n": 625,
+  "reachable": true,
+  "accepted": 625,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.2167832167832169,
+  "pen_max": 26.097902097902097,
+  "runs_med": 75.0,
+  "unconv": 0,
+  "worst": 0.6630346284501876,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L3",
+  "ob": "energy",
+  "target": 0.01,
+  "n": 432,
+  "reachable": true,
+  "accepted": 432,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.0,
+  "pen_max": 1.0,
+  "runs_med": 47.0,
+  "unconv": 0,
+  "worst": 0.30663189469823754,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L3",
+  "ob": "energy",
+  "target": 0.003,
+  "n": 432,
+  "reachable": true,
+  "accepted": 432,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.0,
+  "pen_max": 1.0,
+  "runs_med": 54.0,
+  "unconv": 0,
+  "worst": 0.25232128350428173,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L3",
+  "ob": "gradient",
+  "target": 0.01,
+  "n": 432,
+  "reachable": true,
+  "accepted": 432,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.0,
+  "pen_max": 1.0,
+  "runs_med": 46.0,
+  "unconv": 0,
+  "worst": 0.6603378452737787,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L3",
+  "ob": "gradient",
+  "target": 0.003,
+  "n": 432,
+  "reachable": true,
+  "accepted": 432,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.0,
+  "pen_max": 1.0,
+  "runs_med": 54.0,
+  "unconv": 0,
+  "worst": 0.5551836708447327,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L4",
+  "ob": "inhibitor_mass",
+  "target": 0.01,
+  "n": 576,
+  "reachable": true,
+  "accepted": 576,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.0,
+  "pen_max": 1.0,
+  "runs_med": 56.0,
+  "unconv": 0,
+  "worst": 0.015081892358628581,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L4",
+  "ob": "inhibitor_mass",
+  "target": 0.003,
+  "n": 576,
+  "reachable": true,
+  "accepted": 576,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.1830314585319353,
+  "pen_max": 7.628312678741659,
+  "runs_med": 55.0,
+  "unconv": 0,
+  "worst": 0.6475846318594892,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L4",
+  "ob": "pattern_sharpness",
+  "target": 0.01,
+  "n": 576,
+  "reachable": true,
+  "accepted": 576,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 8.094788255775937,
+  "pen_max": 9.916435839433866,
+  "runs_med": 65.0,
+  "unconv": 0,
+  "worst": 0.7251700816519924,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L4",
+  "ob": "pattern_sharpness",
+  "target": 0.003,
+  "n": 576,
+  "reachable": true,
+  "accepted": 60,
+  "missed": 0,
+  "declined_reach": 516,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 12.302062382913142,
+  "pen_max": 21.66743265653281,
+  "runs_med": 76.0,
+  "unconv": 0,
+  "worst": 0.5961565758817464,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L5",
+  "ob": "psi_min",
+  "target": 0.01,
+  "n": 700,
+  "reachable": true,
+  "accepted": 0,
+  "missed": 0,
+  "declined_reach": 676,
+  "declined_unreach": 0,
+  "start_failed": 24,
+  "pen_med": NaN,
+  "pen_max": NaN,
+  "runs_med": 103.5,
+  "unconv": 0,
+  "worst": 0.0,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L5",
+  "ob": "psi_min",
+  "target": 0.003,
+  "n": 700,
+  "reachable": true,
+  "accepted": 0,
+  "missed": 0,
+  "declined_reach": 676,
+  "declined_unreach": 0,
+  "start_failed": 24,
+  "pen_med": NaN,
+  "pen_max": NaN,
+  "runs_med": 103.5,
+  "unconv": 0,
+  "worst": 0.0,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L5",
+  "ob": "y_min",
+  "target": 0.001,
+  "n": 700,
+  "reachable": true,
+  "accepted": 665,
+  "missed": 0,
+  "declined_reach": 11,
+  "declined_unreach": 0,
+  "start_failed": 24,
+  "pen_med": 3.2224965618188985,
+  "pen_max": 20.276033666025945,
+  "runs_med": 86.5,
+  "unconv": 0,
+  "worst": 0.7509009712842947,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L5",
+  "ob": "y_min",
+  "target": 0.0003,
+  "n": 700,
+  "reachable": true,
+  "accepted": 601,
+  "missed": 433,
+  "declined_reach": 75,
+  "declined_unreach": 0,
+  "start_failed": 24,
+  "pen_med": 7.5361143428447175,
+  "pen_max": 9.375060324804439,
+  "runs_med": 69.5,
+  "unconv": 0,
+  "worst": 1.0795136419603317,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": [
+   [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     6,
+     1,
+     1,
+     3
+    ],
+    1.0795136419603317
+   ],
+   [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     6,
+     1,
+     1,
+     3
+    ],
+    1.0795136419603317
+   ],
+   [
+    [
+     0,
+     0,
+     0,
+     2
+    ],
+    [
+     6,
+     1,
+     1,
+     3
+    ],
+    1.0795136419603317
+   ],
+   [
+    [
+     0,
+     0,
+     0,
+     3
+    ],
+    [
+     6,
+     1,
+     1,
+     3
+    ],
+    1.0795136419603317
+   ],
+   [
+    [
+     0,
+     0,
+     1,
+     0
+    ],
+    [
+     6,
+     1,
+     1,
+     3
+    ],
+    1.0795136419603317
+   ],
+   [
+    [
+     0,
+     0,
+     1,
+     1
+    ],
+    [
+     6,
+     1,
+     1,
+     3
+    ],
+    1.0795136419603317
+   ],
+   [
+    [
+     0,
+     0,
+     1,
+     2
+    ],
+    [
+     6,
+     1,
+     1,
+     3
+    ],
+    1.0795136419603317
+   ],
+   [
+    [
+     0,
+     0,
+     1,
+     3
+    ],
+    [
+     6,
+     1,
+     1,
+     3
+    ],
+    1.0795136419603317
+   ],
+   [
+    [
+     0,
+     0,
+     2,
+     0
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     2,
+     1
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     2,
+     2
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     2,
+     3
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     3,
+     0
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     3,
+     1
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     3,
+     2
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     3,
+     3
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     4,
+     0
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     4,
+     1
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     4,
+     2
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ],
+   [
+    [
+     0,
+     0,
+     4,
+     3
+    ],
+    [
+     6,
+     1,
+     2,
+     3
+    ],
+    1.0758584003152567
+   ]
+  ]
+ },
+ {
+  "case": "L5",
+  "ob": "omega_lid",
+  "target": 0.01,
+  "n": 700,
+  "reachable": true,
+  "accepted": 673,
+  "missed": 0,
+  "declined_reach": 3,
+  "declined_unreach": 0,
+  "start_failed": 24,
+  "pen_med": 1.3344591973696573,
+  "pen_max": 2.621296451150249,
+  "runs_med": 76.0,
+  "unconv": 0,
+  "worst": 0.5854883042075852,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "L5",
+  "ob": "omega_lid",
+  "target": 0.003,
+  "n": 700,
+  "reachable": true,
+  "accepted": 0,
+  "missed": 0,
+  "declined_reach": 676,
+  "declined_unreach": 0,
+  "start_failed": 24,
+  "pen_med": NaN,
+  "pen_max": NaN,
+  "runs_med": 105.0,
+  "unconv": 0,
+  "worst": 0.0,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-20",
+  "ob": "energy_per_ion",
+  "target": 0.0001,
+  "n": 100,
+  "reachable": true,
+  "accepted": 100,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.266762533925449,
+  "pen_max": 2.061342667080579,
+  "runs_med": 43.5,
+  "unconv": 0,
+  "worst": 0.4938610248928297,
+  "low_order": 34,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-20",
+  "ob": "energy_per_ion",
+  "target": 1e-05,
+  "n": 100,
+  "reachable": true,
+  "accepted": 100,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.4690519351173954,
+  "pen_max": 1.4690519351173954,
+  "runs_med": 48.0,
+  "unconv": 0,
+  "worst": 0.08284289729126318,
+  "low_order": 100,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-20",
+  "ob": "energy_per_ion",
+  "target": 1e-06,
+  "n": 100,
+  "reachable": true,
+  "accepted": 0,
+  "missed": 0,
+  "declined_reach": 100,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": NaN,
+  "pen_max": NaN,
+  "runs_med": 44.5,
+  "unconv": 0,
+  "worst": 0.0,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-40",
+  "ob": "energy_per_ion",
+  "target": 0.0001,
+  "n": 62,
+  "reachable": true,
+  "accepted": 62,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.283647712405059,
+  "pen_max": 1.9452250192481428,
+  "runs_med": 34.0,
+  "unconv": 0,
+  "worst": 0.6976685349146412,
+  "low_order": 58,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-40",
+  "ob": "energy_per_ion",
+  "target": 1e-05,
+  "n": 62,
+  "reachable": true,
+  "accepted": 16,
+  "missed": 0,
+  "declined_reach": 46,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.5117000821816466,
+  "pen_max": 1.8124843979703258,
+  "runs_med": 30.5,
+  "unconv": 0,
+  "worst": 0.08283925623839827,
+  "low_order": 9,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-40",
+  "ob": "energy_per_ion",
+  "target": 1e-06,
+  "n": 62,
+  "reachable": true,
+  "accepted": 0,
+  "missed": 0,
+  "declined_reach": 62,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": NaN,
+  "pen_max": NaN,
+  "runs_med": 31.0,
+  "unconv": 0,
+  "worst": 0.0,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-64",
+  "ob": "energy_per_ion",
+  "target": 0.0001,
+  "n": 58,
+  "reachable": true,
+  "accepted": 58,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 2.0996877189518908,
+  "pen_max": 2.2730840773899357,
+  "runs_med": 25.0,
+  "unconv": 0,
+  "worst": 0.2199275280764794,
+  "low_order": 24,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-64",
+  "ob": "energy_per_ion",
+  "target": 1e-05,
+  "n": 58,
+  "reachable": true,
+  "accepted": 13,
+  "missed": 0,
+  "declined_reach": 45,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.6360519885996487,
+  "pen_max": 1.6360519885996487,
+  "runs_med": 31.0,
+  "unconv": 0,
+  "worst": 0.1365874523719541,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "LMP-64",
+  "ob": "energy_per_ion",
+  "target": 1e-06,
+  "n": 58,
+  "reachable": true,
+  "accepted": 0,
+  "missed": 0,
+  "declined_reach": 58,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": NaN,
+  "pen_max": NaN,
+  "runs_med": 31.0,
+  "unconv": 0,
+  "worst": 0.0,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "GMX-d",
+  "ob": "potential",
+  "target": 1e-05,
+  "n": 225,
+  "reachable": true,
+  "accepted": 225,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.7658406809038305,
+  "pen_max": 3.2143466895505424,
+  "runs_med": 52.0,
+  "unconv": 0,
+  "worst": 0.3846270256750874,
+  "low_order": 123,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "GMX-d",
+  "ob": "potential",
+  "target": 1e-06,
+  "n": 225,
+  "reachable": true,
+  "accepted": 225,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 2.067530049689691,
+  "pen_max": 2.2696025665946555,
+  "runs_med": 60.0,
+  "unconv": 0,
+  "worst": 0.40677945745207766,
+  "low_order": 112,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "GMX-s",
+  "ob": "potential",
+  "target": 0.0001,
+  "n": 225,
+  "reachable": true,
+  "accepted": 225,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.2116377348801075,
+  "pen_max": 3.480403756718816,
+  "runs_med": 44.0,
+  "unconv": 0,
+  "worst": 0.24031289156501182,
+  "low_order": 210,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "GMX-s",
+  "ob": "potential",
+  "target": 3e-05,
+  "n": 225,
+  "reachable": true,
+  "accepted": 0,
+  "missed": 0,
+  "declined_reach": 225,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": NaN,
+  "pen_max": NaN,
+  "runs_med": 0.0,
+  "unconv": 0,
+  "worst": 0.0,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "GMX-s",
+  "ob": "potential",
+  "target": 1e-05,
+  "n": 225,
+  "reachable": true,
+  "accepted": 0,
+  "missed": 0,
+  "declined_reach": 225,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": NaN,
+  "pen_max": NaN,
+  "runs_med": 0.0,
+  "unconv": 0,
+  "worst": 0.0,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "ABINIT",
+  "ob": "energy",
+  "target": 0.01,
+  "n": 336,
+  "reachable": true,
+  "accepted": 336,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.3703520122189465,
+  "pen_max": 1.3703520122189465,
+  "runs_med": 61.0,
+  "unconv": 0,
+  "worst": 0.10904026329238238,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "ABINIT",
+  "ob": "energy",
+  "target": 0.003,
+  "n": 336,
+  "reachable": true,
+  "accepted": 252,
+  "missed": 0,
+  "declined_reach": 84,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 7.07750753219766,
+  "pen_max": 7.07750753219766,
+  "runs_med": 64.0,
+  "unconv": 0,
+  "worst": 0.021364542657024466,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "ABINIT",
+  "ob": "force",
+  "target": 0.1,
+  "n": 336,
+  "reachable": true,
+  "accepted": 336,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 14.666863899505897,
+  "pen_max": 14.666863899505897,
+  "runs_med": 92.0,
+  "unconv": 0,
+  "worst": 0.7764502011036373,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "QE",
+  "ob": "energy",
+  "target": 0.001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.0499225759920412,
+  "pen_max": 1.5566715454396594,
+  "runs_med": 47.0,
+  "unconv": 0,
+  "worst": 0.7887566686122636,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "QE",
+  "ob": "energy",
+  "target": 0.0001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 40,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.1455018357877857,
+  "pen_max": 1.2198308983157198,
+  "runs_med": 67.0,
+  "unconv": 0,
+  "worst": 1.083497901298403,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": [
+   [
+    [
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     0,
+     0,
+     0,
+     1
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     0,
+     0,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     0,
+     1,
+     0,
+     0
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     0,
+     1,
+     0,
+     1
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     1,
+     0,
+     0,
+     0
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     1,
+     0,
+     0,
+     1
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     1,
+     0,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     1,
+     1,
+     0,
+     0
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     1,
+     1,
+     0,
+     1
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     1,
+     1,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     2,
+     0,
+     0,
+     0
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     2,
+     0,
+     0,
+     1
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     2,
+     0,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     2,
+     1,
+     0,
+     0
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     2,
+     1,
+     0,
+     1
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     2,
+     1,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     3,
+     0,
+     0,
+     0
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     3,
+     0,
+     0,
+     1
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ],
+   [
+    [
+     3,
+     0,
+     0,
+     2
+    ],
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    1.083497901298403
+   ]
+  ]
+ },
+ {
+  "case": "QE",
+  "ob": "force",
+  "target": 0.1,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 3.764164747384519,
+  "pen_max": 5.308359820170626,
+  "runs_med": 54.0,
+  "unconv": 0,
+  "worst": 0.8082570470444816,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "2D-1",
+  "ob": "cd",
+  "target": 0.01,
+  "n": 780,
+  "reachable": true,
+  "accepted": 608,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 172,
+  "pen_med": 7.745738636363637,
+  "pen_max": 12.048926767676768,
+  "runs_med": 63.0,
+  "unconv": 0,
+  "worst": 0.35912370250445014,
+  "low_order": 436,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "2D-1",
+  "ob": "cd",
+  "target": 0.003,
+  "n": 780,
+  "reachable": true,
+  "accepted": 608,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 172,
+  "pen_med": 1.5555555555555556,
+  "pen_max": 17.967235161073415,
+  "runs_med": 68.0,
+  "unconv": 0,
+  "worst": 0.7846717393831171,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "2D-1",
+  "ob": "cd",
+  "target": 0.001,
+  "n": 780,
+  "reachable": true,
+  "accepted": 608,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 172,
+  "pen_med": 2.7818095778913494,
+  "pen_max": 2.7818095778913494,
+  "runs_med": 94.5,
+  "unconv": 0,
+  "worst": 0.4706116516140306,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "2D-1",
+  "ob": "dp",
+  "target": 0.03,
+  "n": 780,
+  "reachable": true,
+  "accepted": 608,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 172,
+  "pen_med": 3.0,
+  "pen_max": 4.7272727272727275,
+  "runs_med": 57.5,
+  "unconv": 0,
+  "worst": 0.2585701512092674,
+  "low_order": 608,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "2D-1",
+  "ob": "dp",
+  "target": 0.01,
+  "n": 780,
+  "reachable": true,
+  "accepted": 608,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 172,
+  "pen_med": 4.724905303030303,
+  "pen_max": 7.745738636363637,
+  "runs_med": 63.0,
+  "unconv": 0,
+  "worst": 0.4215470275462992,
+  "low_order": 440,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "2D-1",
+  "ob": "cl",
+  "target": 0.1,
+  "n": 780,
+  "reachable": true,
+  "accepted": 608,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 172,
+  "pen_med": 1.5681818181818181,
+  "pen_max": 2.772727272727273,
+  "runs_med": 67.5,
+  "unconv": 0,
+  "worst": 0.20559013032975426,
+  "low_order": 70,
+  "low_order_missed": 0,
+  "miss_list": []
+ },
+ {
+  "case": "2D-1",
+  "ob": "cl",
+  "target": 0.03,
+  "n": 780,
+  "reachable": true,
+  "accepted": 608,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 172,
+  "pen_med": 2.159090909090909,
+  "pen_max": 182.578125,
+  "runs_med": 65.0,
+  "unconv": 0,
+  "worst": 0.7262517200581184,
+  "low_order": 136,
+  "low_order_missed": 0,
+  "miss_list": []
+ }
+]

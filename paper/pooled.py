@@ -21,6 +21,10 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from knobs import run_protocol, V11, V12
+try:
+    from knobs import V121
+except ImportError:                      # the frozen program of the held-out tests
+    V121 = dict(V12, joint_res=1.0)
 import cases as C
 
 # Program configurations compared in the article.  "v1.1" is the version of
@@ -30,8 +34,10 @@ CONFIGS = {
     # version 1.1 (revision 2): constant safety factor, unconverged runs accepted
     "v1.1": dict(fail_unconverged=False, kw=dict(V11)),
     "v1.1+gated": dict(fail_unconverged=False, kw=dict(V11, resid_margin=5.0)),
-    # version 1.2, the default of this article
+    # version 1.2, frozen for the held-out tests
     "v1.2": dict(fail_unconverged=True, kw=dict(V12)),
+    # version 1.2.1, the default of the released program (amendment after H2)
+    "v1.2.1": dict(fail_unconverged=True, kw=dict(V121)),
     # version 1.2 with one component removed (ablations of Table 3)
     "v1.2-accept-unconverged": dict(fail_unconverged=False, kw=dict(V12)),
     "v1.2-nolocal": dict(fail_unconverged=True, kw=dict(V12, local_order_check=False)),

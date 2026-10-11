@@ -31,7 +31,7 @@ class LocalBudget:
     def __init__(self, lookup, ladders, anchor, hs=None, fs_cap=None,
                  resid_margin=0.0, models=None, unfit="order1", kinds=None,
                  local_order=False, resolution=0.0, resid_mode="relative",
-                 cancel_rule="credit"):
+                 cancel_rule="credit", joint_res=3.0):
         """lookup(idx) -> (Q, cost);  ladders: settings;  hs: refinement scalars.
 
         models[k] is "power" (default: e_k(h) = c (h^p - h_a^p)) or
@@ -62,6 +62,9 @@ class LocalBudget:
         self.resolution = float(resolution or 0.0)
         self.resid_mode = resid_mode
         self.cancel_rule = cancel_rule
+        # a parameter takes part in the joint check if its one-step change exceeds
+        # joint_res times the resolution (3 in the frozen version 1.2, 1 from 1.2.1)
+        self.joint_res = float(joint_res)
         self.cancelled = False
         self.local = {}
         self.joint = None
@@ -352,7 +355,7 @@ class LocalBudget:
             j = a[k] + 1
             if j >= self.m[k] or j not in self.sampled[k] or not np.isfinite(self.e[k][j]):
                 continue
-            if abs(self.e[k][j]) <= 3.0 * self.resolution or self.e[k][j] == 0.0:
+            if abs(self.e[k][j]) <= self.joint_res * self.resolution or self.e[k][j] == 0.0:
                 continue
             R.append(k)
         if len(R) < 2 or not np.isfinite(self.E0):
@@ -661,6 +664,10 @@ V12 = dict(resid_margin=5.0, joint_check=True, local_order_check=True, res_frac=
            cancel_rule="none")
 V11 = dict(resid_margin=0.0, joint_check=False, local_order_check=False, res_frac=0.0,
            cancel_rule="credit")
+# Version 1.2.1: the joint check includes every parameter whose one-step change exceeds
+# the resolution, not three times it.  Found by the held-out problem H2, where the check
+# was skipped at a setting that missed (PREREGISTRATION.md, amendment).
+V121 = dict(V12, joint_res=1.0)
 
 
 def run_protocol(lookup, ladders, anchor, eps, mode="optimistic", max_iter=40,
@@ -670,7 +677,7 @@ def run_protocol(lookup, ladders, anchor, eps, mode="optimistic", max_iter=40,
                  screen_at="tight", audit_factor=2.0, models=None,
                  noise_floor=None, floor_factor=10.0, unfit="order1",
                  joint_check=False, local_order_check=False, cancel_rule="credit",
-                 resid_mode="relative", res_frac=0.0):
+                 resid_mode="relative", res_frac=0.0, joint_res=3.0):
     """Screen, walk, audit.
 
     Every configuration is evaluated at most once for the whole protocol.
@@ -718,7 +725,7 @@ def run_protocol(lookup, ladders, anchor, eps, mode="optimistic", max_iter=40,
                          resid_margin=resid_margin, models=models, unfit=unfit,
                          kinds=kinds, local_order=local_order_check,
                          resolution=max(noise_floor or 0.0, res_frac * eps),
-                         resid_mode=resid_mode, cancel_rule=cancel_rule)
+                         resid_mode=resid_mode, cancel_rule=cancel_rule, joint_res=joint_res)
         lb.on_charge = _note_tag
         lb.sweep(fine_reach=fine_reach, active=active)
         lb.per_knob_error()

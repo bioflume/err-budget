@@ -1,8 +1,13 @@
 """Held-out tests H1 and H2 (and H3 if its Hamilton results are present), replayed
 with the frozen program exactly as fixed in PREREGISTRATION.md.
 
-The script refuses to run if the program's source differs from the frozen one.
-    python exp62_heldout.py
+    python exp62_heldout.py            # the frozen program (git tag v1.2.0-frozen), as
+                                       # registered, and version 1.1 for comparison
+    python exp62_heldout.py --current  # the released program (version 1.2.1, the
+                                       # amendment registered after H2 and before H3)
+
+The frozen source is extracted from the git tag and its hash checked against
+PREREGISTRATION.md before anything is replayed.
 """
 import glob
 import hashlib
@@ -11,15 +16,27 @@ import os
 import pickle
 import sys
 
+import subprocess
+import tempfile
+
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+CURRENT = "--current" in sys.argv
+if CURRENT:
+    SRC = os.path.join(HERE, "..", "src", "knobs")
+else:
+    tmp = tempfile.mkdtemp(prefix="knobs_frozen_")
+    arch = subprocess.run(["git", "archive", "v1.2.0-frozen", "src/knobs"], cwd=os.path.join(HERE, ".."),
+                          capture_output=True, check=True).stdout
+    subprocess.run(["tar", "-x", "-C", tmp], input=arch, check=True)
+    sys.path.insert(0, os.path.join(tmp, "src"))
+    SRC = os.path.join(tmp, "src", "knobs")
 sys.path.insert(0, HERE)
+import knobs
+assert os.path.dirname(knobs.__file__) == os.path.abspath(SRC) or CURRENT, knobs.__file__
 import cases as C
 import pooled as P
-
-FROZEN = os.environ.get("KNOBS_FROZEN_HASH", "")
-SRC = os.path.join(HERE, "..", "src", "knobs")
 
 
 def source_hash():
@@ -30,9 +47,13 @@ def source_hash():
 
 reg = open(os.path.join(HERE, "..", "PREREGISTRATION.md")).read()
 h = source_hash()
-if h not in reg:
-    raise SystemExit(f"source hash {h} is not the frozen one recorded in PREREGISTRATION.md")
-print(f"frozen program verified (sha256 {h[:16]}...)")
+if not CURRENT:
+    if h not in reg:
+        raise SystemExit(f"source hash {h} is not the frozen one recorded in PREREGISTRATION.md")
+    print(f"frozen program verified (sha256 {h[:16]}...), from {SRC}")
+else:
+    print(f"current program, knobs {knobs.__version__} (sha256 {h[:16]}...)")
+CFGS = ("v1.2.1",) if CURRENT else ("v1.2", "v1.1")
 
 
 def heldout_case(key):
@@ -74,7 +95,7 @@ for case in cases:
                      if case.usable(i) else np.nan)
         print(f"  {ob:<6} error against the first parameter at the finest others: "
               + "  ".join(f"{x:.2e}" for x in e))
-    for cfg in ("v1.2", "v1.1"):
+    for cfg in CFGS:
         for ob, tgs in case.targets.items():
             for tg in tgs:
                 s = P.summarise(P.replay(case, ob, tg, P.CONFIGS[cfg]))
@@ -85,4 +106,5 @@ for case in cases:
                       f"declined(reachable) {s['declined_reach']:<4} declined(unreachable) "
                       f"{s['declined_unreach']:<4} penalty {s['pen_med']:.2f}/{s['pen_max']:.2f} "
                       f"runs {s['runs_med']:.0f} worst {s['worst']:.2f}", flush=True)
-json.dump(rows, open(os.path.join(C.D, "heldout_replay.json"), "w"), indent=1)
+json.dump(rows, open(os.path.join(C.D, "heldout_replay_current.json" if CURRENT
+                             else "heldout_replay.json"), "w"), indent=1)

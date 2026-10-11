@@ -34,7 +34,8 @@ def fig_dfg():
     na = LAD[0]
     tight = lambda a: (a, len(LAD[1]) - 1, len(LAD[2]) - 1, 0)
     tut = lambda a: (a, 0, LAD[2].index(1e-6), 0)
-    fig, axs = plt.subplots(1, 3, figsize=(7.0, 2.3))
+    fig, axs = plt.subplots(1, 3, figsize=(7.0, 2.6))
+    nf = []
     for ax, ob, lab in zip(axs, ["cd", "dp", "cl"], ["drag $c_D$", "pressure difference $\\Delta p$",
                                                      "lift $c_L$"]):
         ex = c.exact[ob]
@@ -45,13 +46,24 @@ def fig_dfg():
         if ob == "cd" and "cd_vm" in T[tight(0)][0]:
             e3 = [abs(T[tight(a)][0]["cd_vm"] - ex) / abs(ex) for a in range(len(na))]
             ax.loglog(na, e3, ":", color=INK2, lw=1.0, label="tightest, v1.1 post-processing")
+        fine = os.path.join(C.D, "dfg_fine.json")
+        if os.path.exists(fine):
+            import json
+            fj = json.load(open(fine))
+            nf = [int(n) for n in sorted(fj, key=int) if int(n) > max(na)]
+            if nf:
+                ef = [abs(fj[str(n)]["obs"][ob] - ex) / abs(ex) for n in nf]
+                ax.loglog([na[-1]] + nf, [e1[-1]] + ef, "--o", color=BLUE, ms=3.5, mfc="white",
+                          lw=1.0, label="tightest, beyond the study grid")
         ax.set_title(lab, fontsize=8, color=INK)
         ax.set_xlabel("cells per quarter cylinder, $n_\\mathrm{arc}$")
-        ax.set_xticks(na); ax.set_xticklabels([str(n) for n in na], fontsize=6)
+        allx = sorted(set(na) | set(nf if os.path.exists(fine) and nf else []))
+        ax.set_xticks(allx); ax.set_xticklabels([str(n) for n in allx], fontsize=6)
         ax.minorticks_off()
     axs[0].set_ylabel("relative error")
-    axs[0].legend(fontsize=6, loc="lower left")
-    fig.tight_layout()
+    h, l = axs[0].get_legend_handles_labels()
+    fig.legend(h, l, fontsize=6.5, loc="lower center", ncol=4, bbox_to_anchor=(0.5, -0.01))
+    fig.tight_layout(rect=(0, 0.08, 1, 1))
     fig.savefig(os.path.join(OUT, "fig_dfg_mesh.pdf"))
     plt.close(fig)
 
@@ -70,28 +82,43 @@ def fig_search():
         lb = LocalBudget(look, LAD, a, hs=c.HS, kinds=c.KINDS, local_order=True,
                          resid_margin=5.0, resolution=0.1 * eps, cancel_rule="none")
         lb.sweep(); lb.per_knob_error(); lb.refine_path(n_levels=0)
+        if np.isfinite(lb.E0) and abs(lb.E0) <= eps:      # as the program does
+            lb.joint_correct(look, eps, cancel_rule="none")
         steps.append((a, [abs(x) / eps if np.isfinite(x) else np.nan for x in lb.rk],
                       abs(lb.E0) / eps, abs(T[a][0][ob] - c.exact[ob]) / eps))
-    names = ["mesh $n_\\mathrm{arc}$", "residualControl", "GAMG tolerance", "coarsest level"]
-    cols = [BLUE, ORANGE, AQUA, YELLOW]
-    fig, ax = plt.subplots(figsize=(3.4, 2.4))
+    names = ["mesh $n_\\mathrm{arc}$", "residualControl", "GAMG tolerance"]
+    cols = [BLUE, ORANGE, AQUA]
+    marks = ["o", "s", "^"]
+    fig, ax = plt.subplots(figsize=(3.4, 2.7))
     x = np.arange(len(steps))
-    bottom = np.zeros(len(steps))
+    TOP, BOT = 3e3, 1e-3
+    clip = lambda v: np.clip(v, BOT, TOP)
     for k in range(3):
-        v = np.array([s[1][k] if np.isfinite(s[1][k]) else 0 for s in steps])
-        ax.bar(x, v, 0.6, bottom=bottom, color=cols[k], label=names[k], edgecolor="white", lw=1)
-        bottom += v
-    ax.plot(x, [s[2] for s in steps], "D", color=INK, ms=4, label="estimate (with margin)")
-    ax.plot(x, [s[3] for s in steps], "x", color=INK, ms=6, mew=1.5, label="true error")
+        v = np.array([s[1][k] for s in steps], float)
+        fin = np.isfinite(v) & (v > 0)
+        ax.plot(x[fin], clip(v[fin]), marks[k], color=cols[k], ms=4, mfc="white", mew=1.2,
+                label=f"budget: {names[k]}")
+        inf = ~np.isfinite(v)
+        if inf.any():
+            ax.plot(x[inf], np.full(inf.sum(), TOP * 0.6), marker=r"$\uparrow$", ls="none",
+                    color=cols[k], ms=8)
+    est = np.array([s[2] for s in steps], float)
+    ax.plot(x[np.isfinite(est)], clip(est[np.isfinite(est)]), "D", color=INK, ms=4.5,
+            label="estimate $\\widehat{E}$ (with margin)")
+    if (~np.isfinite(est)).any():
+        ax.plot(x[~np.isfinite(est)], np.full((~np.isfinite(est)).sum(), TOP * 0.6), marker=r"$\uparrow$",
+                ls="none", color=INK, ms=9)
+    ax.plot(x, clip(np.array([s[3] for s in steps])), "x", color=INK, ms=6, mew=1.5,
+            label="true error")
     ax.axhline(1.0, color=INK2, lw=0.8, ls="--")
-    ax.text(len(steps) - 0.5, 1.03, "target", fontsize=6, color=INK2, ha="right", va="bottom")
-    ax.set_yscale("log")
+    ax.text(len(steps) - 0.6, 1.15, "target", fontsize=6, color=INK2, ha="right", va="bottom")
+    ax.set_yscale("log"); ax.set_ylim(BOT, TOP)
     ax.set_xticks(x)
     ax.set_xticklabels([f"{LAD[0][a[0]]}\n{LAD[1][a[1]]:.0e}\n{LAD[2][a[2]]:.0e}" for a, *_ in steps],
-                       fontsize=5.5)
-    ax.set_xlabel("setting at each step ($n_\\mathrm{arc}$, residualControl, GAMG)", fontsize=7)
+                       fontsize=5)
+    ax.set_xlabel("setting at each step ($n_\\mathrm{arc}$, residualControl, GAMG tolerance)", fontsize=6.5)
     ax.set_ylabel("error / target")
-    ax.legend(fontsize=5.5, loc="upper right")
+    ax.legend(fontsize=5.5, loc="upper center", bbox_to_anchor=(0.5, 1.32), ncol=2)
     fig.tight_layout()
     fig.savefig(os.path.join(OUT, "fig_search.pdf"))
     plt.close(fig)

@@ -1,0 +1,92 @@
+
+L2
+  parameter        class           floor  phi=0.01  phi=0.05  phi=0.1   phi=0.25  phi=0.5  
+  N                discretisation  no            0%        0%        0%        0%        0%
+  N                discretisation  yes           0%        0%        0%        0%        0%
+  time steps       discretisation  no            6%        6%        3%        3%       13%
+  time steps       discretisation  yes          20%       17%       16%       14%       13%
+  Newton tol       nested-solver   no           46%       27%       21%       13%       10%
+  Newton tol       nested-solver   yes          19%       16%       14%       12%        9%
+  GMRES tol        nested-solver   no           25%       18%       16%       13%       10%
+  GMRES tol        nested-solver   yes          20%       17%       15%       12%       10%
+
+L3
+  parameter        class           floor  phi=0.01  phi=0.05  phi=0.1   phi=0.25  phi=0.5  
+  N                discretisation  no            0%        0%        0%        0%        0%
+  N                discretisation  yes           0%        0%        0%        0%        0%
+  time steps       discretisation  no           26%       25%       25%       17%        0%
+  time steps       discretisation  yes          25%       25%       25%       17%        0%
+  Newton tol       nested-solver   no            1%        0%        0%        0%        0%
+  Newton tol       nested-solver   yes           0%        0%        0%        0%        0%
+  GMRES tol        nested-solver   no            1%        0%        0%        0%        0%
+  GMRES tol        nested-solver   yes           0%        0%        0%        0%        0%
+  ILU drop         cost-only       no            1%        0%        0%        0%        0%
+  ILU drop         cost-only       yes           0%        0%        0%        0%        0%
+
+L4
+  parameter        class           floor  phi=0.01  phi=0.05  phi=0.1   phi=0.25  phi=0.5  
+  N                discretisation  no            0%        0%        0%        0%        0%
+  N                discretisation  yes           0%        0%        0%        0%        0%
+  split steps      discretisation  no            0%        0%        0%        2%        0%
+  split steps      discretisation  yes          12%        8%        8%        9%        6%
+  react substeps   discretisation  no           12%       12%       19%       12%       19%
+  react substeps   discretisation  yes          50%       33%       29%       29%       27%
+  GMRES tol        nested-solver   no           26%        6%        3%        2%        1%
+  GMRES tol        nested-solver   yes           0%        0%        0%        0%        0%
+  ILU drop         cost-only       no           15%        4%        2%        1%        1%
+  ILU drop         cost-only       yes           0%        0%        0%        0%        0%
+
+L5
+  parameter        class           floor  phi=0.01  phi=0.05  phi=0.1   phi=0.25  phi=0.5  
+  N                discretisation  no            0%        0%        0%        0%        0%
+  N                discretisation  yes           0%        0%        0%        0%        0%
+  Newton tol       nested-solver   no            2%        1%        1%        0%        0%
+  Newton tol       nested-solver   yes           1%        1%        1%        0%        0%
+  GMRES tol        nested-solver   no           18%       13%       12%       10%        7%
+  GMRES tol        nested-solver   yes          12%       10%        8%        6%        5%
+  ILU drop         cost-only       no            6%        9%        8%        6%        6%
+  ILU drop         cost-only       yes           6%        4%        3%        3%        2%
+
+OpenFOAM DFG 2D-1
+  parameter        class           floor  phi=0.01  phi=0.05  phi=0.1   phi=0.25  phi=0.5  
+  n_arc            discretisation  no            0%        0%       19%       19%       31%
+  n_arc            discretisation  yes          26%       26%       26%       26%       25%
+  residualControl  nested-solver   no            0%        0%        0%        1%        1%
+  residualControl  nested-solver   yes           0%        0%        0%        0%        0%
+  GAMG tol         nested-solver   no           16%        7%       18%       13%        7%
+  GAMG tol         nested-solver   yes          15%       14%       14%       12%       14%
+  coarsest level   cost-only       no           25%       12%        8%        3%        1%
+  coarsest level   cost-only       yes           5%        4%        3%        2%        1%
+
+OpenFOAM DFG 2D-2
+  parameter        class           floor  phi=0.01  phi=0.05  phi=0.1   phi=0.25  phi=0.5  
+  n_arc            discretisation  no            0%        0%        0%        0%        0%
+  n_arc            discretisation  yes           9%        9%        9%        9%        9%
+  dt               discretisation  no            0%       32%       39%       32%       28%
+  dt               discretisation  yes          77%       77%       57%       42%       25%
+  residualControl  nested-solver   no           19%       24%       12%        7%        5%
+  residualControl  nested-solver   yes           1%        1%        1%        1%        1%
+  GAMG tol         nested-solver   no           16%        3%        1%        0%        0%
+  GAMG tol         nested-solver   yes           0%        0%        0%        0%        0%
+
+ABINIT Si
+  parameter        class           floor  phi=0.01  phi=0.05  phi=0.1   phi=0.25  phi=0.5  
+  ecut             discretisation  no            0%        0%        0%        0%        0%
+  ecut             discretisation  yes           0%        0%        0%        0%        0%
+  ngkpt            discretisation  no            0%        0%        0%        0%        0%
+  ngkpt            discretisation  yes           0%        0%        0%        0%        0%
+  toldfe           nested-solver   no            0%        0%        0%        0%        0%
+  toldfe           nested-solver   yes           0%        0%        0%        0%        0%
+  nline            cost-only       no            0%        0%        0%        0%        0%
+  nline            cost-only       yes           0%        0%        0%        0%        0%
+
+Quantum ESPRESSO Si
+  parameter        class           floor  phi=0.01  phi=0.05  phi=0.1   phi=0.25  phi=0.5  
+  ecutwfc          discretisation  no           12%        6%        0%        1%        1%
+  ecutwfc          discretisation  yes           2%        2%        2%        0%        0%
+  k-mesh           discretisation  no            0%        0%        0%        0%        0%
+  k-mesh           discretisation  yes           6%        0%        0%        0%        0%
+  conv_thr         nested-solver   no            2%        5%       22%        5%        2%
+  conv_thr         nested-solver   yes          12%       12%       12%        4%        2%
+  mixing_beta      cost-only       no           25%       15%       10%        4%        2%
+  mixing_beta      cost-only       yes           5%        5%        4%        2%        1%

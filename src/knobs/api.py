@@ -29,7 +29,7 @@ from typing import Any, Callable, Sequence
 
 import numpy as np
 
-from ._core import run_protocol, V12
+from ._core import run_protocol, V12, V121
 
 KINDS = ("discretisation", "nested-solver", "cost-only")
 
@@ -211,7 +211,7 @@ def tune(solver: Callable, knobs: Sequence[Knob], target: float,
         ``"converged": False`` or by raising ``RunFailed``.  Set True to use such
         runs as answers (the behaviour of version 1.1).
     The remaining keyword arguments override the default configuration of
-    version 1.2 (``knobs.V12``: residual-gated safety factor, joint-refinement
+    version 1.2.1 (``knobs.V121``: residual-gated safety factor, joint-refinement
     check, local-order check, no credit for cancellation between parameters).
     floor_probe : two or more settings (dicts of keyword arguments for
         ``solver``) refined beyond every candidate value, or differing only in
@@ -303,7 +303,7 @@ def tune(solver: Callable, knobs: Sequence[Knob], target: float,
         if verbose:
             print(f"  round-off floor: {floor:.3g} (from {len(vals)} runs)")
 
-    cfg = dict(V12)
+    cfg = dict(V121)
     cfg.update(protocol_kwargs)
     r = run_protocol(lookup, ladders, start_idx, eps, hs=hs, kinds=kinds,
                      use_screen=screen, models=models, noise_floor=floor, **cfg)

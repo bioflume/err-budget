@@ -19,5 +19,5 @@ k=6 F=3 : declines below 8.9e-05..8.9e-05 relative (1 distinct floors) | 1e-04: 
 k=6 F=5 : declines below 1.5e-04..1.5e-04 relative (1 distinct floors) | 1e-04: acc 0-0, miss 0-0; 3e-05: acc 0-0, miss 0-0; 1e-05: acc 0-0, miss 0-0
 k=6 F=10: declines below 3.0e-04..3.0e-04 relative (1 distinct floors) | 1e-04: acc 0-0, miss 0-0; 3e-05: acc 0-0, miss 0-0; 1e-05: acc 0-0, miss 0-0
 k=6 F=20: declines below 6.0e-04..6.0e-04 relative (1 distinct floors) | 1e-04: acc 0-0, miss 0-0; 3e-05: acc 0-0, miss 0-0; 1e-05: acc 0-0, miss 0-0
-gmx_d: three probe runs cost 7.1 default runs (148.1 ms/step in all); calibration of one search at 1e-05: median 1806.6 ms/step (87 default runs); probe/calibration 0.08
-gmx: three probe runs cost 7.9 default runs (140.1 ms/step in all); calibration of one search at 1e-04: median 2015.6 ms/step (114 default runs); probe/calibration 0.07
+gmx_d: three probe runs cost 8.4 default runs (174.8 ms/step in all); calibration of one search at 1e-05: median 1806.6 ms/step (87 default runs); probe/calibration 0.10
+gmx: three probe runs cost 9.5 default runs (168.2 ms/step in all); calibration of one search at 1e-04: median 2015.6 ms/step (114 default runs); probe/calibration 0.08
