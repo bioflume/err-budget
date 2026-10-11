@@ -87,10 +87,14 @@ declaration wrong and you lose efficiency, not correctness.
 
 ## Two things worth knowing before you use it
 
-**Calibration is not free.** It costs tens to a couple of hundred times one
-production run. You cannot certify an answer without computing a better one, so
+**Calibration is not free.** In the article's tests it cost about a hundred to a few
+hundred runs at the returned setting (more where convergence is irregular). You cannot certify an answer without computing a better one, so
 part of that is irreducible. It pays back if you are running parameter studies or
 ensembles; it does not pay back for a single run.
+
+**It declines rather than guesses.** Where an observable converges irregularly, or a
+target can only be met through a lucky cancellation, it declines and says which parameter
+it could not bound. Extend that parameter's list of values and run it again.
 
 **The certificate is measured, not proven.** You get a computed estimate with a
 calibrated margin and a stopping rule that is re-verified at every step. On four

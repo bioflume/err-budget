@@ -4,48 +4,58 @@ cd_max  1e-01   admitted      v1.1+gated    starts 207 start-failed 0 accepted 1
 cd_max  1e-01   admitted      v1.2-credit   starts 207 start-failed 23 accepted 174 missed 0 declined(reach) 10 pen 1.29 worst 0.06
 cd_max  1e-01   admitted      v1.2-nojoint  starts 207 start-failed 23 accepted 174 missed 0 declined(reach) 10 pen 1.29 worst 0.06
 cd_max  1e-01   admitted      v1.2          starts 207 start-failed 23 accepted 174 missed 0 declined(reach) 10 pen 1.29 worst 0.06
+cd_max  1e-01   admitted      v1.2.1        starts 207 start-failed 23 accepted 174 missed 0 declined(reach) 10 pen 1.29 worst 0.06
 cd_max  3e-02   admitted      v1.1          starts 207 start-failed 0 accepted 198 missed 0 declined(reach) 9 pen 1.00 worst 0.17
 cd_max  3e-02   admitted      v1.1+gated    starts 207 start-failed 0 accepted 198 missed 0 declined(reach) 9 pen 1.00 worst 0.21
 cd_max  3e-02   admitted      v1.2-credit   starts 207 start-failed 23 accepted 174 missed 0 declined(reach) 10 pen 1.29 worst 0.20
 cd_max  3e-02   admitted      v1.2-nojoint  starts 207 start-failed 23 accepted 174 missed 0 declined(reach) 10 pen 1.29 worst 0.20
 cd_max  3e-02   admitted      v1.2          starts 207 start-failed 23 accepted 174 missed 0 declined(reach) 10 pen 1.29 worst 0.20
+cd_max  3e-02   admitted      v1.2.1        starts 207 start-failed 23 accepted 174 missed 0 declined(reach) 10 pen 1.29 worst 0.20
 cd_max  1e-02   admitted      v1.1          starts 207 start-failed 0 accepted 198 missed 0 declined(reach) 9 pen 1.00 worst 0.63
 cd_max  1e-02   admitted      v1.1+gated    starts 207 start-failed 0 accepted 197 missed 0 declined(reach) 10 pen 1.74 worst 0.63
 cd_max  1e-02   admitted      v1.2-credit   starts 207 start-failed 23 accepted 173 missed 0 declined(reach) 11 pen 1.67 worst 0.59
 cd_max  1e-02   admitted      v1.2-nojoint  starts 207 start-failed 23 accepted 172 missed 0 declined(reach) 12 pen 2.65 worst 0.70
 cd_max  1e-02   admitted      v1.2          starts 207 start-failed 23 accepted 172 missed 0 declined(reach) 12 pen 2.65 worst 0.70
+cd_max  1e-02   admitted      v1.2.1        starts 207 start-failed 23 accepted 172 missed 0 declined(reach) 12 pen 2.65 worst 0.70
 cd_max  3e-03   NOT admitted  v1.1          starts 207 start-failed 0 accepted 195 missed 168 declined(reach) 12 pen 0.50 worst 1.20
 cd_max  3e-03   NOT admitted  v1.1+gated    starts 207 start-failed 0 accepted 195 missed 129 declined(reach) 12 pen 0.72 worst 1.20
 cd_max  3e-03   NOT admitted  v1.2-credit   starts 207 start-failed 23 accepted 173 missed 115 declined(reach) 11 pen 0.47 worst 1.03
 cd_max  3e-03   NOT admitted  v1.2-nojoint  starts 207 start-failed 23 accepted 165 missed 0 declined(reach) 19 pen 4.21 worst 0.73
 cd_max  3e-03   NOT admitted  v1.2          starts 207 start-failed 23 accepted 165 missed 0 declined(reach) 19 pen 4.21 worst 0.73
+cd_max  3e-03   NOT admitted  v1.2.1        starts 207 start-failed 23 accepted 165 missed 0 declined(reach) 19 pen 4.21 worst 0.73
 cl_max  1e-01   admitted      v1.1          starts 207 start-failed 0 accepted 198 missed 0 declined(reach) 9 pen 3.29 worst 0.28
 cl_max  1e-01   admitted      v1.1+gated    starts 207 start-failed 0 accepted 198 missed 0 declined(reach) 9 pen 4.40 worst 0.28
 cl_max  1e-01   admitted      v1.2-credit   starts 207 start-failed 23 accepted 172 missed 0 declined(reach) 12 pen 4.54 worst 0.16
 cl_max  1e-01   admitted      v1.2-nojoint  starts 207 start-failed 23 accepted 172 missed 0 declined(reach) 12 pen 4.54 worst 0.16
 cl_max  1e-01   admitted      v1.2          starts 207 start-failed 23 accepted 172 missed 0 declined(reach) 12 pen 4.54 worst 0.16
+cl_max  1e-01   admitted      v1.2.1        starts 207 start-failed 23 accepted 172 missed 0 declined(reach) 12 pen 4.54 worst 0.16
 cl_max  3e-02   NOT admitted  v1.1          starts 207 start-failed 0 accepted 198 missed 0 declined(reach) 9 pen 3.15 worst 0.29
 cl_max  3e-02   NOT admitted  v1.1+gated    starts 207 start-failed 0 accepted 198 missed 0 declined(reach) 9 pen 3.15 worst 0.45
 cl_max  3e-02   NOT admitted  v1.2-credit   starts 207 start-failed 23 accepted 171 missed 0 declined(reach) 13 pen 3.15 worst 0.45
 cl_max  3e-02   NOT admitted  v1.2-nojoint  starts 207 start-failed 23 accepted 171 missed 0 declined(reach) 13 pen 3.15 worst 0.45
 cl_max  3e-02   NOT admitted  v1.2          starts 207 start-failed 23 accepted 171 missed 0 declined(reach) 13 pen 3.15 worst 0.45
+cl_max  3e-02   NOT admitted  v1.2.1        starts 207 start-failed 23 accepted 171 missed 0 declined(reach) 13 pen 3.15 worst 0.45
 cl_max  1e-02   NOT admitted  v1.1          starts 207 start-failed 0 accepted 198 missed 196 declined(reach) 9 pen 7.48 worst 1.39
 cl_max  1e-02   NOT admitted  v1.1+gated    starts 207 start-failed 0 accepted 198 missed 6 declined(reach) 9 pen 21.71 worst 1.33
 cl_max  1e-02   NOT admitted  v1.2-credit   starts 207 start-failed 23 accepted 173 missed 4 declined(reach) 11 pen 14.02 worst 1.33
 cl_max  1e-02   NOT admitted  v1.2-nojoint  starts 207 start-failed 23 accepted 173 missed 4 declined(reach) 11 pen 14.02 worst 1.33
 cl_max  1e-02   NOT admitted  v1.2          starts 207 start-failed 23 accepted 173 missed 4 declined(reach) 11 pen 14.02 worst 1.33
+cl_max  1e-02   NOT admitted  v1.2.1        starts 207 start-failed 23 accepted 173 missed 4 declined(reach) 11 pen 14.02 worst 1.33
 st      1e-01   admitted      v1.1          starts 207 start-failed 0 accepted 198 missed 0 declined(reach) 9 pen 1.74 worst 0.44
 st      1e-01   admitted      v1.1+gated    starts 207 start-failed 0 accepted 198 missed 0 declined(reach) 9 pen 1.74 worst 0.44
 st      1e-01   admitted      v1.2-credit   starts 207 start-failed 23 accepted 174 missed 0 declined(reach) 10 pen 1.74 worst 0.44
 st      1e-01   admitted      v1.2-nojoint  starts 207 start-failed 23 accepted 174 missed 0 declined(reach) 10 pen 1.74 worst 0.44
 st      1e-01   admitted      v1.2          starts 207 start-failed 23 accepted 174 missed 0 declined(reach) 10 pen 1.74 worst 0.44
+st      1e-01   admitted      v1.2.1        starts 207 start-failed 23 accepted 174 missed 0 declined(reach) 10 pen 1.74 worst 0.44
 st      3e-02   admitted      v1.1          starts 207 start-failed 0 accepted 188 missed 0 declined(reach) 19 pen 2.75 worst 0.33
 st      3e-02   admitted      v1.1+gated    starts 207 start-failed 0 accepted 188 missed 0 declined(reach) 19 pen 2.75 worst 0.33
 st      3e-02   admitted      v1.2-credit   starts 207 start-failed 23 accepted 161 missed 0 declined(reach) 23 pen 2.75 worst 0.33
 st      3e-02   admitted      v1.2-nojoint  starts 207 start-failed 23 accepted 161 missed 0 declined(reach) 23 pen 2.75 worst 0.33
 st      3e-02   admitted      v1.2          starts 207 start-failed 23 accepted 161 missed 0 declined(reach) 23 pen 2.75 worst 0.33
+st      3e-02   admitted      v1.2.1        starts 207 start-failed 23 accepted 161 missed 0 declined(reach) 23 pen 2.75 worst 0.33
 st      1e-02   NOT admitted  v1.1          starts 207 start-failed 0 accepted 0 missed 0 declined(reach) 207 pen nan worst 0.00
 st      1e-02   NOT admitted  v1.1+gated    starts 207 start-failed 0 accepted 0 missed 0 declined(reach) 207 pen nan worst 0.00
 st      1e-02   NOT admitted  v1.2-credit   starts 207 start-failed 23 accepted 0 missed 0 declined(reach) 184 pen nan worst 0.00
 st      1e-02   NOT admitted  v1.2-nojoint  starts 207 start-failed 23 accepted 0 missed 0 declined(reach) 184 pen nan worst 0.00
 st      1e-02   NOT admitted  v1.2          starts 207 start-failed 23 accepted 0 missed 0 declined(reach) 184 pen nan worst 0.00
+st      1e-02   NOT admitted  v1.2.1        starts 207 start-failed 23 accepted 0 missed 0 declined(reach) 184 pen nan worst 0.00

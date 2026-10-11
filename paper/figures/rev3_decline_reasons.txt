@@ -1,0 +1,30 @@
+L4      pattern_sharpness  3e-03    not_reached 516
+L5      psi_min            1e-02    not_reached 656, start_failed 24, unbounded_axis 15, unmeasured_axis 5
+L5      psi_min            3e-03    not_reached 656, start_failed 24, unbounded_axis 15, unmeasured_axis 5
+L5      y_min              1e-03    start_failed 24, unbounded_axis 8, unmeasured_axis 3
+L5      y_min              3e-04    start_failed 24, unbounded_axis 72, unmeasured_axis 3
+L5      omega_lid          1e-02    start_failed 24, unmeasured_axis 3
+L5      omega_lid          3e-03    not_reached 673, start_failed 24, unmeasured_axis 3
+2D-1    cd                 1e-02    start_failed 172
+2D-1    cd                 3e-03    start_failed 172
+2D-1    cd                 1e-03    start_failed 172
+2D-1    dp                 3e-02    start_failed 172
+2D-1    dp                 1e-02    start_failed 172
+2D-1    cl                 1e-01    start_failed 172
+2D-1    cl                 3e-02    start_failed 172
+2D-2    cd_max             1e-01    start_failed 23, unmeasured_axis 10
+2D-2    cd_max             3e-02    start_failed 23, unmeasured_axis 10
+2D-2    cd_max             1e-02    start_failed 23, unmeasured_axis 12
+2D-2    cl_max             1e-01    start_failed 23, unmeasured_axis 12
+2D-2    st                 1e-01    start_failed 23, unmeasured_axis 10
+2D-2    st                 3e-02    start_failed 23, unmeasured_axis 23
+LMP-20  energy_per_ion     1e-05    not_reached 78
+LMP-20  energy_per_ion     1e-06    not_reached 100
+LMP-40  energy_per_ion     1e-05    not_reached 49
+LMP-40  energy_per_ion     1e-06    not_reached 62
+LMP-64  energy_per_ion     1e-05    not_reached 53
+LMP-64  energy_per_ion     1e-06    not_reached 58
+GMX-s   potential          1e-04    not_reached 156
+GMX-s   potential          3e-05    below_floor 225
+GMX-s   potential          1e-05    below_floor 225
+ABINIT  energy             3e-03    not_reached 105

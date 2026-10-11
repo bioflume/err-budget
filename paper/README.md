@@ -47,7 +47,7 @@ the article to the script that produces it.
 | Table 5 and Section 6.2: held-out H1, H2 (H3 after the cluster run) | `exp61_heldout_build.py H1/H2`, `exp62_heldout.py` (frozen, from the tag or `frozen_src/`), `exp62_heldout.py --current` | `figures/rev3_heldout*.txt`, `figures/tab_heldout.tex` |
 | Section 6.2: post-hoc check of the amendment | `posthoc_v121.py` | — |
 | Table 6 and Section 6.3: baselines | `exp72_baselines_pooled.py` | `figures/rev3_baselines_pooled.txt`, `figures/tab_baselines.tex` |
-| Section 6.1: decline reasons | (inline in the article's text; reproduced by `run_protocol(...)["declined"]`) | — |
+| Section 6.1: decline reasons | `exp73_decline_reasons.py` | `figures/rev3_decline_reasons.txt` |
 | Fig. 3: one search | `exp63_figures.py` | `figures/fig_search.pdf` |
 | Fig. 4: L5 stall | `exp63_figures.py` | `figures/fig_l5_stall.pdf` |
 | Fig. 5, Section 7.1: 2D-1 rebuilt with exact centroids; n_arc 96 and 128 | `exp46_dfg_build.py`, `exp69_dfg_fine.py`, `exp63_figures.py` | `data/dfg_tensor_v12.pkl`, `data/dfg_fine.json`, `figures/fig_dfg_mesh.pdf` |

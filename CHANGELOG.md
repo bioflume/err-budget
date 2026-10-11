@@ -1,10 +1,26 @@
 # Changelog
 
-All notable changes to `knobs`. The article describes version 1.2; the comparisons
+All notable changes to `knobs`. The article describes version 1.2.1; the comparisons
 with earlier versions that used to be in the article are recorded here, with the
 script that reproduces each.
 
-## 1.2.0 — revision 3 of the article
+## 1.2.1 — revision 3 of the article (released default)
+
+- **The joint-refinement check now includes every parameter whose one-step change exceeds
+  the resolution** (`joint_res=1.0`), instead of three times the resolution.
+  - Found by the pre-registered held-out problem H2 (OpenFOAM cavity at Re = 1000). There,
+    for v_max at 3e-2, version 1.2 accepted a setting from 9 starts that missed by up to 3%,
+    because both one-step changes were below 0.3 ε and the check was skipped.
+  - Registered as an amendment in `PREREGISTRATION.md` before the third held-out problem was
+    run.
+  - Default configuration: `knobs.V121`. `knobs.V12` reproduces the frozen version
+    (git tag `v1.2.0-frozen`, copy in `paper/frozen_src`).
+- Effect on the development problems (`paper/pooled.py v1.2.1`):
+  - 17,610 starts accepted instead of 17,612;
+  - no misses in either version;
+  - 12 of 53 cells change.
+
+## 1.2.0 — revision 3 of the article (frozen for the held-out tests)
 
 The default configuration is `knobs.V12`. Every number in the article is for it unless
 stated otherwise. `knobs.V11` reproduces version 1.1 exactly, so that the comparisons
