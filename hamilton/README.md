@@ -25,7 +25,7 @@ cores are faster.
 On a login node, about 30–60 minutes:
 
 ```bash
-tar xzf knobs-1.2.0.tar.gz && cd knobs-1.2.0/hamilton
+tar xzf knobs-1.2.1.tar.gz && cd knobs-1.2.1/hamilton
 nano config.sh          # check WORK (scratch), SB_EXTRA (account, if needed), OF_MODE
 bash setup_env.sh
 ```
@@ -81,11 +81,20 @@ bash collect.sh
 
 This runs the five analysis scripts and writes `results/j1.txt` … `results/j5.txt`
 and the tensors (`results/*.pkl`, `results/*.json`). It then packs them into
-`hamilton_results.tar.gz`, a few MB. Send me that file; the article's
-tables are regenerated from it with `paper/exp60_hamilton.py`.
+`hamilton_results.tar.gz`, a few MB. Copy that file to the machine with the article's
+repository and run
+
+```bash
+python paper/exp60_hamilton.py hamilton_results.tar.gz
+```
+
+which unpacks it, replays the held-out problem H3 with the frozen program (from the git
+tag, or from `paper/frozen_src` in a release) and with version 1.2.1, regenerates the
+tables, and prints the numbers that replace the `[J1]`…`[J5]` placeholders of the article
+and the response letter.
 
 ## Notes
 
-- **Held-out test (J5).** J5 is the held-out test of the frozen program. Its problem, parameters, targets and grading rule are fixed in `../PREREGISTRATION.md`, together with the SHA-256 of the program's source. Please do not change `abc_hpc.py` or the targets before running it.
+- **Held-out test (J5).** J5 is the held-out test of the frozen program (version 1.2) and, by the amendment of 11 October 2026, of version 1.2.1. Its problem, parameters, targets and grading rule are fixed in `../PREREGISTRATION.md`, together with the SHA-256 of the frozen source. Do not change `abc_hpc.py` or the targets before running it.
 - **Costs.** Costs are core-seconds: OpenFOAM's `ExecutionTime` times the number of ranks. J4 times whole-node runs, with `--exclusive`.
 - **Disk.** Case directories are deleted after each task. Only the force time series (J2) and the observables are kept, so the total is under 1 GB.

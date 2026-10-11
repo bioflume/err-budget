@@ -1,4 +1,4 @@
-frozen program verified (sha256 34dd3f440eb50317...)
+frozen program verified (sha256 34dd3f440eb50317...), from /tmp/knobs_frozen_6jvo1v6r/src/knobs
 
 H1: 3D Poisson, scikit-fem: 105 settings, 105 usable, 0 not converged
   mean   error against the first parameter at the finest others: 2.43e-02  1.14e-02  3.81e-03  1.71e-03  5.31e-04  2.28e-04  6.80e-05

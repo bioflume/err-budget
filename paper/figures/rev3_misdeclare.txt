@@ -1,0 +1,52 @@
+====================================================================================================
+L3, full (default): cells [('energy', 0.01), ('energy', 0.003), ('gradient', 0.01), ('gradient', 0.003)]
+  declaration                         starts  accepted  missed  med pen worst pen  med runs
+  correct                               1728      1728       0     1.00      3.12        50
+  N as nested-solver                    1728      1728       0     1.00      3.12        50
+  N as cost-only                        1728      1728       0     1.00      3.12        50
+  time steps as nested-solver           1728      1728       0     1.00      5.68        48
+  time steps as cost-only               1728      1728       0     1.00      5.68        50
+  Newton tol. as discretisation         1728      1728       0     1.00      3.12        50
+  Newton tol. as cost-only              1728      1728       0     1.00      3.12        50
+  GMRES tol. as discretisation          1728      1728       0     1.00      1.00        52
+  GMRES tol. as cost-only               1728      1728       0     1.00      3.12        51
+  ILU drop tol. as discretisation       1728      1728       0     1.00      5.68        51
+  ILU drop tol. as nested-solver        1728      1728       0     1.00      3.12        50
+====================================================================================================
+L3, preliminary sweep: cells [('energy', 0.01), ('energy', 0.003), ('gradient', 0.01), ('gradient', 0.003)]
+  declaration                         starts  accepted  missed  med pen worst pen  med runs
+  correct                               1728      1728       0     2.51      4.51        26
+  N as nested-solver                    1728      1728       0     1.00      1.00        40
+  N as cost-only                        1728      1728       0     2.51      5.68        25
+  time steps as nested-solver           1728      1728       0     1.00      1.00        39
+  time steps as cost-only               1728      1728       0     1.00      1.00        27
+  Newton tol. as discretisation         1728      1728       0     1.55     25.65        27
+  Newton tol. as cost-only              1728      1728       0     1.90     25.65        20
+  GMRES tol. as discretisation          1728      1728       0     3.07     10.42        18
+  GMRES tol. as cost-only               1728      1728       0     2.51      4.51        19
+  ILU drop tol. as discretisation       1728      1728       0     2.85      6.25        25
+  ILU drop tol. as nested-solver        1728      1728       0     3.12      5.68        34
+====================================================================================================
+OpenFOAM DFG 2D-1, full (default): cells [('cd', 0.003), ('cl', 0.03)]
+  declaration                         starts  accepted  missed  med pen worst pen  med runs
+  correct                               1560      1216       0    14.17     96.30        77
+  n_arc as nested-solver                1560      1216       0    14.17     96.30        73
+  n_arc as cost-only                    1560      1216       0    14.17     96.30        70
+  residualControl as discretisation     1560      1216       0    14.17    204.28        77
+  residualControl as cost-only          1560      1216       0    14.17     48.69        75
+  GAMG tol. as discretisation           1560      1216       0    14.17     96.30        77
+  GAMG tol. as cost-only                1560      1216       0    14.17     65.66        77
+  coarsest level as discretisation      1560      1213       0    14.17     96.30        77
+  coarsest level as nested-solver       1560      1216       0    14.17     97.97        77
+====================================================================================================
+OpenFOAM DFG 2D-1, preliminary sweep: cells [('cd', 0.003), ('cl', 0.03)]
+  declaration                         starts  accepted  missed  med pen worst pen  med runs
+  correct                               1560      1216       0     8.79     48.69        67
+  n_arc as nested-solver                1560      1216       0    14.17     96.30        65
+  n_arc as cost-only                    1560      1216       0     7.59    204.28        51
+  residualControl as discretisation     1560      1216       0     8.79    176.31        65
+  residualControl as cost-only          1560      1216       0     6.46     62.54        59
+  GAMG tol. as discretisation           1560      1216       0    14.17     96.30        81
+  GAMG tol. as cost-only                1560      1216       0    14.17     48.69        45
+  coarsest level as discretisation      1560      1216       0     7.59     48.69        59
+  coarsest level as nested-solver       1560      1216       0    14.17     97.97        79

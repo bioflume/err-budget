@@ -89,7 +89,7 @@ def fig_search():
     names = ["mesh $n_\\mathrm{arc}$", "residualControl", "GAMG tolerance"]
     cols = [BLUE, ORANGE, AQUA]
     marks = ["o", "s", "^"]
-    fig, ax = plt.subplots(figsize=(3.4, 2.7))
+    fig, ax = plt.subplots(figsize=(7.0, 2.5))
     x = np.arange(len(steps))
     TOP, BOT = 3e3, 1e-3
     clip = lambda v: np.clip(v, BOT, TOP)
@@ -118,7 +118,7 @@ def fig_search():
                        fontsize=5)
     ax.set_xlabel("setting at each step ($n_\\mathrm{arc}$, residualControl, GAMG tolerance)", fontsize=6.5)
     ax.set_ylabel("error / target")
-    ax.legend(fontsize=5.5, loc="upper center", bbox_to_anchor=(0.5, 1.32), ncol=2)
+    ax.legend(fontsize=6, loc="upper left", bbox_to_anchor=(1.01, 1.0), ncol=1)
     fig.tight_layout()
     fig.savefig(os.path.join(OUT, "fig_search.pdf"))
     plt.close(fig)
@@ -139,7 +139,7 @@ def fig_l5():
         ax.annotate(f"{p:.1f}", (np.sqrt(N[j] * N[j + 1]), np.sqrt(e[j] * e[j + 1])),
                     fontsize=6, color=INK2, textcoords="offset points", xytext=(0, 4), ha="center")
     ax.axhline(3e-4, color=INK2, lw=0.8, ls="--")
-    ax.text(N[0], 3.3e-4, "tightest target, $3\\times10^{-4}$", fontsize=6, color=INK2)
+    ax.text(N[0], 2.4e-4, "tightest target, $3\\times10^{-4}$", fontsize=6, color=INK2, va="top")
     ax.set_xticks(N); ax.set_xticklabels([str(n) for n in N]); ax.minorticks_off()
     ax.set_xlabel("grid points per side, $N$")
     ax.set_ylabel("relative error of $y_\\mathrm{min}$")

@@ -36,7 +36,36 @@ the article to the script that produces it.
   tolerances this count can differ by one between SciPy builds, which changes L2 costs by up
   to 0.25%. In our checks this changed no number in the article.
 
-## Where each result comes from
+## Where each result of the current article comes from (revision 3, version 1.2.1)
+
+| Result | Script | Output |
+|---|---|---|
+| Table 3 (pooled), Table 4 (ablation), totals in the text | `pooled.py v1.2.1 v1.2 v1.1 v1.2-nojoint …` then `exp70_tables.py` | `data/pooled_*.json`, `figures/tab_pooled.tex`, `figures/tab_ablation.tex` |
+| Pooled totals, low-order acceptances, step-cap hits | `summ.py v1.2.1 v1.2 v1.1` | stdout |
+| Case registry (every tensor, declaration, reference, admission rule) | `cases.py` | — |
+| Section 4.1: L2–L5 convergence flags | `exp57_flags.py` | `data/flags_L*.pkl` |
+| Table 5 and Section 6.2: held-out H1, H2 (H3 after the cluster run) | `exp61_heldout_build.py H1/H2`, `exp62_heldout.py` (frozen, from the tag or `frozen_src/`), `exp62_heldout.py --current` | `figures/rev3_heldout*.txt`, `figures/tab_heldout.tex` |
+| Section 6.2: post-hoc check of the amendment | `posthoc_v121.py` | — |
+| Table 6 and Section 6.3: baselines | `exp72_baselines_pooled.py` | `figures/rev3_baselines_pooled.txt`, `figures/tab_baselines.tex` |
+| Section 6.1: decline reasons | (inline in the article's text; reproduced by `run_protocol(...)["declined"]`) | — |
+| Fig. 3: one search | `exp63_figures.py` | `figures/fig_search.pdf` |
+| Fig. 4: L5 stall | `exp63_figures.py` | `figures/fig_l5_stall.pdf` |
+| Fig. 5, Section 7.1: 2D-1 rebuilt with exact centroids; n_arc 96 and 128 | `exp46_dfg_build.py`, `exp69_dfg_fine.py`, `exp63_figures.py` | `data/dfg_tensor_v12.pkl`, `data/dfg_fine.json`, `figures/fig_dfg_mesh.pdf` |
+| Section 7.2: 2D-2, every target and configuration | `exp71_dfg2_detail.py` | `figures/rev3_dfg2_detail.txt` |
+| Section 7.3, Supplement S4: GROMACS floor sensitivity, probe cost | `exp58_floor_sensitivity.py v1.2` | `figures/rev3_floor_sensitivity.txt`, `figures/tab_floor.tex` |
+| Section 7.4: ABINIT SCF convergence check | `exp68_abinit_scf.py` | `figures/rev3_abinit_scf.txt` |
+| Appendix A: accuracy of the estimate | `exp66_estimate_v12.py` | `figures/rev3_estimate.txt`, `figures/tab_estimate.tex` |
+| Appendix B: base safety factor | `exp67_margin_v12.py` | `figures/rev3_margin.txt` |
+| Section 3.2, Supplement S2: transfer with a resolution floor | `exp64_transfer_floor.py` | `figures/rev3_transfer_floor.txt`, `figures/tab_transfer.tex` |
+| Supplement S3: misdeclared classes | `exp65_misdeclare_v12.py` | `figures/rev3_misdeclare.txt`, `figures/tab_misdeclare.tex` |
+| Supplement S5: LAMMPS and GROMACS baselines | `exp72_baselines_pooled.py` (cells `LMP-*`, `GMX-d`) | `data/baselines_lmp_gmx.json`, `figures/tab_lmpbase.tex` |
+| Cluster studies J1–J5 | `../hamilton/` (see its README), then `exp60_hamilton.py hamilton_results.tar.gz` | `../hamilton/results/` |
+| Behavioural claims (38 tests) | `pytest ../tests` | — |
+
+The sections below map the results of earlier versions of the article. Those studies are
+now in the supplement or in `../CHANGELOG.md`.
+
+## Where each result of revision 2 came from
 
 | Article | Script | Output (`figures/`) |
 |---|---|---|

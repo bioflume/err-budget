@@ -20,7 +20,7 @@ FS = [1.0, 1.1, 1.2, 1.25, 1.35, 1.5, 2.0]
 cs = [c for c in C._manufactured()] + [C._dfg1()]
 res = {}
 for F in FS:
-    cfg = dict(P.CONFIGS["v1.2"]); cfg["kw"] = dict(cfg["kw"], fs_cap=F)
+    cfg = dict(P.CONFIGS["v1.2.1"]); cfg["kw"] = dict(cfg["kw"], fs_cap=F)
     for case in cs:
         acc = miss = 0; pm = []
         for ob, tgs in case.targets.items():

@@ -101,13 +101,14 @@ def ablation_table(cfgs):
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
-    R, R11 = load("v1.2"), load("v1.1")
+    R, R11 = load("v1.2.1"), load("v1.1")
     open(os.path.join(OUT, "tab_pooled.tex"), "w").write(pooled_table(R, R11))
-    for name in ["v1.2", "v1.1"]:
+    for name in ["v1.2.1", "v1.2", "v1.1"]:
         X = load(name)
         if X:
             print(name, totals(X))
-    abl = [("v1.2", "Version 1.2 (default)"),
+    abl = [("v1.2.1", "Version 1.2.1 (default)"),
+           ("v1.2", "Version 1.2 (frozen)"),
            ("v1.2-nojoint", "without the joint check"),
            ("v1.2-nolocal", "without the local-order check"),
            ("v1.2-credit", "crediting cancellation"),
@@ -185,3 +186,81 @@ def transfer_table():
 
 
 open(os.path.join(OUT, "tab_transfer.tex"), "w").write(transfer_table())
+
+
+def heldout_table():
+    p1 = os.path.join(D, "heldout_replay.json"); p2 = os.path.join(D, "heldout_replay_current.json")
+    if not os.path.exists(p1):
+        return ""
+    R = json.load(open(p1)); Rc = json.load(open(p2)) if os.path.exists(p2) else []
+    get = lambda rows, cfg: {(r["case"], r["ob"], r["target"]): r for r in rows if r["config"] == cfg}
+    v12, v11, v121 = get(R, "v1.2"), get(R, "v1.1"), get(Rc, "v1.2.1")
+    obs = {"mean": "mean", "flux": "flux", "u_min": "$u_{\\min}$", "v_max": "$v_{\\max}$",
+           "v_min": "$v_{\\min}$", "ek": "$E_k$", "eps": "$\\epsilon$", "umax": "$u_{\\max}$"}
+    out, last = [], None
+    for k, r in v12.items():
+        case = k[0]
+        if last is not None and case != last:
+            out.append("\\addlinespace[1pt]")
+        o, c = v11.get(k), v121.get(k)
+        out.append(f"{case if case != last else ''} & {obs.get(k[1], k[1])} & {tex_tg(k[2])} & {r['n']} & "
+                   f"{r['start_failed']} & {r['accepted']} & {r['missed']} & {r['declined_reach'] + r['declined_unreach']} & "
+                   f"{tex_num(r['pen_med'])} & {r['runs_med']:.0f} & "
+                   f"{(str(o['accepted']) + '/' + str(o['missed'])) if o else '---'} & "
+                   f"{(str(c['accepted']) + '/' + str(c['missed'])) if c else '---'} \\\\")
+        last = case
+    return "\n".join(out)
+
+
+open(os.path.join(OUT, "tab_heldout.tex"), "w").write(heldout_table())
+
+
+def estimate_table():
+    p = os.path.join(D, "estimate_v12.json")
+    if not os.path.exists(p):
+        return ""
+    R = json.load(open(p))
+    out = ["\\begin{tabular}{llrrrrrrrr}", "\\toprule",
+           "& & & Raw & \\multicolumn{3}{c}{Version 1.1} & \\multicolumn{3}{c}{Version 1.2.1} \\\\",
+           "\\cmidrule(lr){5-7}\\cmidrule(lr){8-10}",
+           "Problem & Observable & Settings & opt. & 10th pct. & Median & Opt. & 10th pct. & Median & Opt. \\\\",
+           "\\midrule"]
+    last = None
+    for r in R:
+        lab = LABEL.get(r["case"], r["case"]) if r["case"] != last else ""
+        last = r["case"]
+        a, b = r["v11"], r["v12"]
+        out.append(f"{lab} & {OBS.get(r['ob'], r['ob'])} & {r['n']} & {r['raw']:.0f}\\% & {a[0]:.2f} & {a[1]:.2f} & "
+                   f"{a[2]:.1f}\\% & {b[0]:.2f} & {b[1]:.2f} & {b[2]:.1f}\\% \\\\")
+    out += ["\\bottomrule", "\\end{tabular}"]
+    return "\n".join(out)
+
+
+open(os.path.join(OUT, "tab_estimate.tex"), "w").write(estimate_table())
+
+
+def lmp_table():
+    p = os.path.join(D, "baselines_lmp_gmx.json")
+    if not os.path.exists(p):
+        return ""
+    R = json.load(open(p))
+    lab = {"LMP-20": "LAMMPS 8,000", "LMP-40": "LAMMPS 64,000", "LMP-64": "LAMMPS 262,144",
+           "GMX-d": "GROMACS double"}
+    procs = [("program", "This program"), ("seq-1", "Sequential, $\\delta=\\varepsilon$"),
+             ("seq-10", "Sequential, $\\delta=\\varepsilon/10$"),
+             ("coord-10", "Coordinate, $\\delta=\\varepsilon/10$"), ("ref", "Reference acceptance")]
+    out = ["\\begin{tabular}{ll" + "r" * len(procs) + "}", "\\toprule",
+           "Case & Target & " + " & ".join(p[1] for p in procs) + " \\\\", "\\midrule"]
+    for k, v in R.items():
+        c, ob, tg = k.split("|")
+        cells = []
+        for p, _ in procs:
+            x = v[p]; n = x["reached"] + x["missed"] + x["declined"]
+            pen = "---" if not np.isfinite(x["pen"]) else f"{x['pen']:.2f}"
+            cells.append(f"{x['reached']}/{n} ({pen})")
+        out.append(f"{lab[c]} & {tex_tg(float(tg))} & " + " & ".join(cells) + " \\\\")
+    out += ["\\bottomrule", "\\end{tabular}"]
+    return "\n".join(out)
+
+
+open(os.path.join(OUT, "tab_lmpbase.tex"), "w").write(lmp_table())

@@ -26,12 +26,18 @@ CURRENT = "--current" in sys.argv
 if CURRENT:
     SRC = os.path.join(HERE, "..", "src", "knobs")
 else:
+    # the frozen source from the git tag; in a release without the git history, the
+    # copy in paper/frozen_src (its hash is checked below either way)
     tmp = tempfile.mkdtemp(prefix="knobs_frozen_")
     arch = subprocess.run(["git", "archive", "v1.2.0-frozen", "src/knobs"], cwd=os.path.join(HERE, ".."),
-                          capture_output=True, check=True).stdout
-    subprocess.run(["tar", "-x", "-C", tmp], input=arch, check=True)
-    sys.path.insert(0, os.path.join(tmp, "src"))
-    SRC = os.path.join(tmp, "src", "knobs")
+                          capture_output=True)
+    if arch.returncode == 0 and arch.stdout:
+        subprocess.run(["tar", "-x", "-C", tmp], input=arch.stdout, check=True)
+        sys.path.insert(0, os.path.join(tmp, "src"))
+        SRC = os.path.join(tmp, "src", "knobs")
+    else:
+        sys.path.insert(0, os.path.join(HERE, "frozen_src"))
+        SRC = os.path.join(HERE, "frozen_src", "knobs")
 sys.path.insert(0, HERE)
 import knobs
 assert os.path.dirname(knobs.__file__) == os.path.abspath(SRC) or CURRENT, knobs.__file__

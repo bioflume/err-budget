@@ -17,7 +17,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cases as C
-from knobs import LocalBudget, V11, V12
+from knobs import LocalBudget, V11, V121 as V12
 
 
 def estimate(case, ob, a, eps, cfg, joint):
@@ -31,7 +31,8 @@ def estimate(case, ob, a, eps, cfg, joint):
 
     lb = LocalBudget(look, case.LAD, a, hs=case.HS, fs_cap=1.25, resid_margin=cfg["resid_margin"],
                      models=case.models, kinds=case.KINDS, local_order=cfg["local_order_check"],
-                     resolution=cfg["res_frac"] * eps, cancel_rule=cfg["cancel_rule"])
+                     resolution=cfg["res_frac"] * eps, cancel_rule=cfg["cancel_rule"],
+                     joint_res=cfg.get("joint_res", 3.0))
     lb.sweep(fine_reach=1)
     lb.per_knob_error()
     raw = float(np.nansum([r for r in lb.rk if np.isfinite(r)]))

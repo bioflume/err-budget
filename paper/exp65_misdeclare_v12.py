@@ -38,7 +38,7 @@ for case in (L3, C._dfg1()):
         print(f"  {'declaration':<34} {'starts':>7} {'accepted':>9} {'missed':>7} "
               f"{'med pen':>8} {'worst pen':>9} {'med runs':>9}")
         for lab, kinds in conf:
-            cfg = dict(P.CONFIGS["v1.2"]); cfg["kw"] = dict(cfg["kw"], use_screen=scr)
+            cfg = dict(P.CONFIGS["v1.2.1"]); cfg["kw"] = dict(cfg["kw"], use_screen=scr)
             cfg["kinds"] = kinds
             n = acc = miss = 0; pen = []; runs = []
             for ob, tg in cells:

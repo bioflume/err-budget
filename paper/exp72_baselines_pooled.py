@@ -15,6 +15,7 @@ pooled:
            to decide divided by the cost of one run at the returned setting
            (median of cell medians) -- the same unit for every procedure.
     python exp72_baselines_pooled.py [CASE ...]
+    KNOBS_BASE_OUT=baselines_lmp_gmx.json python exp72_baselines_pooled.py LMP-20 LMP-40 LMP-64 GMX-d
 """
 import json
 import os
@@ -96,7 +97,7 @@ def cell(case, ob, tg, cfg):
 
 def main():
     keys = sys.argv[1:] or ["L2", "L3", "L4", "L5", "2D-1", "2D-2", "QE"]
-    cfg = P.CONFIGS["v1.2"]
+    cfg = P.CONFIGS[os.environ.get("KNOBS_CFG", "v1.2.1")]
     loaders = [C._manufactured, lambda: [C._dfg1()], lambda: [C._dfg2()], lambda: [C._qe()],
                C._lammps, C._gromacs, lambda: [C._abinit()]]
     cases = [c for L in loaders for c in L() if c.key in keys]
@@ -119,7 +120,8 @@ def main():
                                              round(float(np.median(v["pen"])), 2) if v["pen"] else None,
                                              int(np.median(v["runs"])))
                                          for p, v in o.items()}, flush=True)
-    json.dump(res, open(os.path.join(C.D, "baselines_pooled.json"), "w"), indent=1)
+    out = "baselines_pooled.json" if not sys.argv[1:] else os.environ.get("KNOBS_BASE_OUT", "baselines_pooled.json")
+    json.dump(res, open(os.path.join(C.D, out), "w"), indent=1)
     # pooled per case group
     groups = {"L2-L4": ["L2", "L3", "L4"], "L5": ["L5"], "2D-1": ["2D-1"], "2D-2": ["2D-2"], "QE": ["QE"]}
     for g, ks in groups.items():

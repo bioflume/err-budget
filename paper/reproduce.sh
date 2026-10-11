@@ -72,6 +72,29 @@ step sec8x_parallel  python exp55_parallel.py
 # DFG 2D-2: the grid takes about 24 CPU-hours; build it with dfg2d2_job/ (see its README)
 if [ -f data/dfg2d2_tensor.pkl ]; then step sec8x_dfg2d2 python exp56_dfg2d2.py; fi
 
+echo "######## 2b. Revision 3 (version 1.2.1): pooled table, held-out tests, analyses"
+step rev3_flags        python exp57_flags.py
+if [ ! -f data/heldout_H1.pkl ]; then step rev3_build_H1 python exp61_heldout_build.py H1; fi
+if [ ! -f data/heldout_H2.pkl ]; then step rev3_build_H2 python exp61_heldout_build.py H2; fi
+step rev3_fine          python exp69_dfg_fine.py
+step rev3_pooled        python pooled.py v1.2.1 v1.2 v1.1 v1.2-nojoint v1.2-nolocal v1.2-credit \
+                             v1.2-constant v1.2-nores v1.2-accept-unconverged v1.2-nested-as-disc \
+                             v1.2-screened v1.1+gated
+step rev3_summary       python summ.py v1.2.1 v1.2 v1.1
+step rev3_heldout       python exp62_heldout.py
+step rev3_heldout_current python exp62_heldout.py --current
+step rev3_baselines_pooled python exp72_baselines_pooled.py
+KNOBS_BASE_OUT=baselines_lmp_gmx.json step rev3_baselines_lmp python exp72_baselines_pooled.py LMP-20 LMP-40 LMP-64 GMX-d
+step rev3_dfg2_detail   python exp71_dfg2_detail.py
+step rev3_floor_sensitivity python exp58_floor_sensitivity.py v1.2
+step rev3_abinit_scf    python exp68_abinit_scf.py
+step rev3_estimate      python exp66_estimate_v12.py
+step rev3_margin        python exp67_margin_v12.py
+step rev3_transfer_floor python exp64_transfer_floor.py
+step rev3_misdeclare    python exp65_misdeclare_v12.py
+step rev3_figures       python exp63_figures.py
+step rev3_tables        python exp70_tables.py
+
 echo "######## 3. Figures"
 KNOBS_FIG_DIR=figures/ python make_solution_figure.py
 KNOBS_FIG_DIR=figures/ python make_lammps_figure.py

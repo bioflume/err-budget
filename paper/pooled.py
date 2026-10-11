@@ -83,11 +83,14 @@ def replay(case, ob, tg, cfg, starts=None):
     kinds = cfg.get("kinds") or [cfg.get("kinds_map", {}).get(k, k) for k in case.KINDS]
     out = dict(case=case.key, ob=ob, target=tg, n=len(starts), reachable=bool(feas),
                accepted=0, missed=0, declined_reach=0, declined_unreach=0, start_failed=0,
-               pen=[], runs=[], unconv=0, worst=0.0, misses=[], orders=[])
+               pen=[], runs=[], unconv=0, worst=0.0, misses=[], orders=[], hit_cap=0,
+               max_steps=0)
     for a in starts:
         r = run_protocol(look, case.LAD, a, eps, hs=case.HS, kinds=kinds,
                          models=case.models, **kw)
         out["runs"].append(r["runs"])
+        out["hit_cap"] += bool(r.get("hit_cap"))
+        out["max_steps"] = max(out["max_steps"], int(r.get("iters", 0)))
         if r["certified"]:
             q = tuple(r["proposal"])
             out["accepted"] += 1
@@ -135,7 +138,8 @@ def summarise(o):
                 pen_med=float(np.median(pen)) if pen else float("nan"),
                 pen_max=float(np.max(pen)) if pen else float("nan"),
                 runs_med=float(np.median(o["runs"])) if o["runs"] else float("nan"),
-                unconv=o["unconv"], worst=o["worst"],
+                unconv=o["unconv"], worst=o["worst"], hit_cap=o["hit_cap"],
+                max_steps=o["max_steps"],
                 low_order=sum(1 for ords, e in o["orders"]
                               if any(np.isfinite(x) and x < 1 for pr in ords for x in pr)),
                 low_order_missed=sum(1 for ords, e in o["orders"] if e > 1 and

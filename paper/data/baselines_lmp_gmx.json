@@ -1,0 +1,486 @@
+{
+ "LMP-20|energy_per_ion|0.0001": {
+  "program": {
+   "reached": 100,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.8609399517973961,
+   "runs": 44.0
+  },
+  "seq-1": {
+   "reached": 100,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.9572847383713539,
+   "runs": 4.0
+  },
+  "seq-3": {
+   "reached": 100,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.2355265570381917,
+   "runs": 5.0
+  },
+  "seq-10": {
+   "reached": 100,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.2355265570381917,
+   "runs": 5.0
+  },
+  "coord-10": {
+   "reached": 100,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.2355265570381917,
+   "runs": 6.0
+  },
+  "ref": {
+   "reached": 100,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 100.0
+  }
+ },
+ "LMP-20|energy_per_ion|1e-05": {
+  "program": {
+   "reached": 22,
+   "missed": 0,
+   "declined": 78,
+   "pen": 1.8826510020893528,
+   "runs": 43.5
+  },
+  "seq-1": {
+   "reached": 100,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.7647558221592903,
+   "runs": 5.0
+  },
+  "seq-3": {
+   "reached": 100,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.9382519131640523,
+   "runs": 5.5
+  },
+  "seq-10": {
+   "reached": 100,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.5169934402555065,
+   "runs": 6.0
+  },
+  "coord-10": {
+   "reached": 100,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.5169934402555065,
+   "runs": 6.0
+  },
+  "ref": {
+   "reached": 100,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 100.0
+  }
+ },
+ "LMP-20|energy_per_ion|1e-06": {
+  "program": {
+   "reached": 0,
+   "missed": 0,
+   "declined": 100,
+   "pen": NaN,
+   "runs": 44.5
+  },
+  "seq-1": {
+   "reached": 95,
+   "missed": 5,
+   "declined": 0,
+   "pen": 1.713345444151617,
+   "runs": 6.0
+  },
+  "seq-3": {
+   "reached": 100,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.5163675452575234,
+   "runs": 6.0
+  },
+  "seq-10": {
+   "reached": 100,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.5163675452575234,
+   "runs": 6.0
+  },
+  "coord-10": {
+   "reached": 100,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.5163675452575234,
+   "runs": 6.0
+  },
+  "ref": {
+   "reached": 100,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 100.0
+  }
+ },
+ "LMP-40|energy_per_ion|0.0001": {
+  "program": {
+   "reached": 62,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.9452250192481428,
+   "runs": 31.0
+  },
+  "seq-1": {
+   "reached": 62,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.8595221799713473,
+   "runs": 4.0
+  },
+  "seq-3": {
+   "reached": 62,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.9654204383275793,
+   "runs": 4.0
+  },
+  "seq-10": {
+   "reached": 62,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.9654204383275793,
+   "runs": 4.5
+  },
+  "coord-10": {
+   "reached": 62,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.9654204383275793,
+   "runs": 5.0
+  },
+  "ref": {
+   "reached": 62,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 62.0
+  }
+ },
+ "LMP-40|energy_per_ion|1e-05": {
+  "program": {
+   "reached": 13,
+   "missed": 0,
+   "declined": 49,
+   "pen": 1.8124843979703258,
+   "runs": 30.0
+  },
+  "seq-1": {
+   "reached": 62,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.52739462465359,
+   "runs": 4.5
+  },
+  "seq-3": {
+   "reached": 62,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.4677254613032122,
+   "runs": 5.0
+  },
+  "seq-10": {
+   "reached": 62,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.4677254613032122,
+   "runs": 5.0
+  },
+  "coord-10": {
+   "reached": 62,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.4677254613032122,
+   "runs": 5.0
+  },
+  "ref": {
+   "reached": 62,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 62.0
+  }
+ },
+ "LMP-40|energy_per_ion|1e-06": {
+  "program": {
+   "reached": 0,
+   "missed": 0,
+   "declined": 62,
+   "pen": NaN,
+   "runs": 31.0
+  },
+  "seq-1": {
+   "reached": 61,
+   "missed": 1,
+   "declined": 0,
+   "pen": 1.6324173626701497,
+   "runs": 5.0
+  },
+  "seq-3": {
+   "reached": 62,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.4390534046785923,
+   "runs": 5.0
+  },
+  "seq-10": {
+   "reached": 62,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.2456894466870347,
+   "runs": 5.0
+  },
+  "coord-10": {
+   "reached": 62,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.2456894466870347,
+   "runs": 5.0
+  },
+  "ref": {
+   "reached": 62,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 62.0
+  }
+ },
+ "LMP-64|energy_per_ion|0.0001": {
+  "program": {
+   "reached": 58,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.2730840773899357,
+   "runs": 32.0
+  },
+  "seq-1": {
+   "reached": 57,
+   "missed": 1,
+   "declined": 0,
+   "pen": 2.10057739992005,
+   "runs": 4.0
+  },
+  "seq-3": {
+   "reached": 58,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.3527593868667624,
+   "runs": 5.0
+  },
+  "seq-10": {
+   "reached": 58,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.3527593868667624,
+   "runs": 5.0
+  },
+  "coord-10": {
+   "reached": 58,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.3527593868667624,
+   "runs": 5.0
+  },
+  "ref": {
+   "reached": 58,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 58.0
+  }
+ },
+ "LMP-64|energy_per_ion|1e-05": {
+  "program": {
+   "reached": 5,
+   "missed": 0,
+   "declined": 53,
+   "pen": 1.9291314011141203,
+   "runs": 31.0
+  },
+  "seq-1": {
+   "reached": 58,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.6933982829177772,
+   "runs": 5.0
+  },
+  "seq-3": {
+   "reached": 58,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.5414612483661485,
+   "runs": 5.0
+  },
+  "seq-10": {
+   "reached": 58,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.390453496807072,
+   "runs": 5.0
+  },
+  "coord-10": {
+   "reached": 58,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.390453496807072,
+   "runs": 5.0
+  },
+  "ref": {
+   "reached": 58,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 58.0
+  }
+ },
+ "LMP-64|energy_per_ion|1e-06": {
+  "program": {
+   "reached": 0,
+   "missed": 0,
+   "declined": 58,
+   "pen": NaN,
+   "runs": 31.0
+  },
+  "seq-1": {
+   "reached": 58,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.3136366432693394,
+   "runs": 5.0
+  },
+  "seq-3": {
+   "reached": 58,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.1037690927453654,
+   "runs": 5.0
+  },
+  "seq-10": {
+   "reached": 58,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.1037690927453654,
+   "runs": 5.0
+  },
+  "coord-10": {
+   "reached": 58,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.1037690927453654,
+   "runs": 5.0
+  },
+  "ref": {
+   "reached": 58,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 58.0
+  }
+ },
+ "GMX-d|potential|1e-05": {
+  "program": {
+   "reached": 225,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.706649355027438,
+   "runs": 55.0
+  },
+  "seq-1": {
+   "reached": 183,
+   "missed": 42,
+   "declined": 0,
+   "pen": 2.232058060209797,
+   "runs": 5.0
+  },
+  "seq-3": {
+   "reached": 206,
+   "missed": 19,
+   "declined": 0,
+   "pen": 2.1831647958122797,
+   "runs": 5.0
+  },
+  "seq-10": {
+   "reached": 225,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.2746241898390793,
+   "runs": 6.0
+  },
+  "coord-10": {
+   "reached": 225,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.432519053898815,
+   "runs": 7.0
+  },
+  "ref": {
+   "reached": 225,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 225.0
+  }
+ },
+ "GMX-d|potential|1e-06": {
+  "program": {
+   "reached": 225,
+   "missed": 0,
+   "declined": 0,
+   "pen": 2.253348763571303,
+   "runs": 68.0
+  },
+  "seq-1": {
+   "reached": 203,
+   "missed": 22,
+   "declined": 0,
+   "pen": 1.7052652784112017,
+   "runs": 6.0
+  },
+  "seq-3": {
+   "reached": 217,
+   "missed": 8,
+   "declined": 0,
+   "pen": 1.594576472545953,
+   "runs": 6.0
+  },
+  "seq-10": {
+   "reached": 221,
+   "missed": 4,
+   "declined": 0,
+   "pen": 1.274719811422549,
+   "runs": 6.0
+  },
+  "coord-10": {
+   "reached": 225,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.274719811422549,
+   "runs": 7.0
+  },
+  "ref": {
+   "reached": 225,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.0,
+   "runs": 225.0
+  }
+ }
+}
