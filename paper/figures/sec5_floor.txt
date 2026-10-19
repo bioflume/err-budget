@@ -1,0 +1,44 @@
+========================================================================================
+M13  what is the resolution floor of our own observables?
+========================================================================================
+  same configuration, three evaluations: spread 0.000e+00 (deterministic code, so this is 0)
+  observable magnitude 46.5725; float64 eps 2.22e-16; 4096 grid points
+  round-off floor of the summation ~ |Q| * eps * sqrt(N^2) = 6.618e-13 absolute, 1.421e-14 relative
+  the residual reported for gmres_tol was 5.8e-23 absolute = 1.2e-24 relative
+  -> that is 1.1e+10x BELOW the round-off floor. It is a
+     fitted coefficient indistinguishable from zero, not a measurement.
+     Correct statement: the parameter's contribution is below the
+     resolution of the measurement, 1e-14 relative.
+
+========================================================================================
+M9c  does a recommendation transfer across a PHYSICAL parameter?
+========================================================================================
+  calibrated at nu = 0.05, relative target 3e-03
+  recommendation: {'N': 256, 'steps': 50, 'newton_tol': 0.0001, 'gmres_tol': 0.0001}
+
+  nu      exact Q      Q(recommended)   rel. error   target   verdict
+   0.02     0.186367        0.185321    5.612e-03  3e-03   FAILS
+   0.03     0.235480        0.234701    3.305e-03  3e-03   FAILS
+   0.04     0.275908        0.275290    2.240e-03  3e-03   holds
+   0.05     0.310402        0.309880    1.683e-03  3e-03   holds
+   0.06     0.340469        0.340015    1.333e-03  3e-03   holds
+   0.08     0.390788        0.390443    8.830e-04  3e-03   holds
+   0.10     0.431455        0.431169    6.640e-04  3e-03   holds
+   0.15     0.505197        0.505006    3.781e-04  3e-03   holds
+   0.20     0.552738        0.552590    2.674e-04  3e-03   holds
+
+  the recommendation transfers to 7/9 physical settings
+
+========================================================================================
+M4  F_s calibrated on L2 only; L3 and L4 held out
+========================================================================================
+
+  F_s    L2 (calibration set)          L3 (held out)
+         safe   med pen  worst        safe   med pen  worst
+  1.00   100.0%    1.01x   28.80x        0.0%    1.00x    1.00x
+  1.10   100.0%    1.06x   14.40x        0.0%    1.00x    1.00x
+  1.25   100.0%    1.43x   14.40x      100.0%    1.00x    1.00x
+  1.50   100.0%    2.27x   14.40x      100.0%    1.00x    5.68x
+  2.00   100.0%    2.63x   28.80x      100.0%    3.34x    8.93x
+
+  (safe = worst cell; med pen = median over cells; worst = worst over all starts)

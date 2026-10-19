@@ -1,0 +1,7 @@
+# The Python stack the article's numbers were produced with (Ubuntu 24.04, Python 3.11).
+# Replays with newer NumPy/SciPy give identical counts; this file pins the original.
+numpy==1.26.4
+scipy==1.13.1
+matplotlib>=3.5
+sympy>=1.9
+pytest>=7

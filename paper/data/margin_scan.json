@@ -1,0 +1,1080 @@
+[
+ {
+  "cell": "L2 energy 1e-02",
+  "role": "calibration",
+  "fmin": 1.0,
+  "row": {
+   "1.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.0,
+    "pen_max": 14.4
+   },
+   "1.05": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.0,
+    "pen_max": 14.4
+   },
+   "1.1": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.1,
+    "pen_max": 14.4
+   },
+   "1.15": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.1,
+    "pen_max": 14.4
+   },
+   "1.2": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.1,
+    "pen_max": 14.4
+   },
+   "1.25": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.724,
+    "pen_max": 14.4
+   },
+   "1.35": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.056,
+    "pen_max": 14.4
+   },
+   "1.5": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.056,
+    "pen_max": 14.4
+   },
+   "2.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.056,
+    "pen_max": 28.8
+   },
+   "3.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.056,
+    "pen_max": 28.8
+   }
+  }
+ },
+ {
+  "cell": "L2 energy 3e-03",
+  "role": "calibration",
+  "fmin": 1.0,
+  "row": {
+   "1.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.128,
+    "pen_max": 28.8
+   },
+   "1.05": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.128,
+    "pen_max": 2.48
+   },
+   "1.1": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.128,
+    "pen_max": 2.48
+   },
+   "1.15": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.128,
+    "pen_max": 2.48
+   },
+   "1.2": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.128,
+    "pen_max": 2.48
+   },
+   "1.25": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.128,
+    "pen_max": 2.48
+   },
+   "1.35": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.54,
+    "pen_max": 2.48
+   },
+   "1.5": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.48,
+    "pen_max": 2.48
+   },
+   "2.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.784,
+    "pen_max": 3.696
+   },
+   "3.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.784,
+    "pen_max": 3.696
+   }
+  }
+ },
+ {
+  "cell": "L2 energy 1e-03",
+  "role": "calibration",
+  "fmin": 1.0,
+  "row": {
+   "1.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.0,
+    "pen_max": 1.3275862068965518
+   },
+   "1.05": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.0,
+    "pen_max": 1.3275862068965518
+   },
+   "1.1": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.0,
+    "pen_max": 1.3275862068965518
+   },
+   "1.15": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.0,
+    "pen_max": 1.3275862068965518
+   },
+   "1.2": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.0,
+    "pen_max": 1.3275862068965518
+   },
+   "1.25": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.0,
+    "pen_max": 1.3275862068965518
+   },
+   "1.35": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.6350574712643677,
+    "pen_max": 3.5977011494252875
+   },
+   "1.5": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.6350574712643677,
+    "pen_max": 3.5977011494252875
+   },
+   "2.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.7988505747126435,
+    "pen_max": 3.5977011494252875
+   },
+   "3.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.7988505747126435,
+    "pen_max": 3.5977011494252875
+   }
+  }
+ },
+ {
+  "cell": "L2 dissipation 1e-02",
+  "role": "calibration",
+  "fmin": 1.0,
+  "row": {
+   "1.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.0,
+    "pen_max": 3.6
+   },
+   "1.05": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.0,
+    "pen_max": 3.6
+   },
+   "1.1": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.0,
+    "pen_max": 3.6
+   },
+   "1.15": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.0,
+    "pen_max": 3.6
+   },
+   "1.2": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.0,
+    "pen_max": 3.6
+   },
+   "1.25": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.0,
+    "pen_max": 3.6
+   },
+   "1.35": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.056,
+    "pen_max": 3.6
+   },
+   "1.5": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.056,
+    "pen_max": 2.056
+   },
+   "2.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.056,
+    "pen_max": 2.056
+   },
+   "3.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.056,
+    "pen_max": 2.056
+   }
+  }
+ },
+ {
+  "cell": "L2 dissipation 3e-03",
+  "role": "calibration",
+  "fmin": 1.0,
+  "row": {
+   "1.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.028,
+    "pen_max": 7.792
+   },
+   "1.05": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.028,
+    "pen_max": 7.792
+   },
+   "1.1": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.028,
+    "pen_max": 7.792
+   },
+   "1.15": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.028,
+    "pen_max": 7.792
+   },
+   "1.2": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.48,
+    "pen_max": 7.792
+   },
+   "1.25": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.48,
+    "pen_max": 7.792
+   },
+   "1.35": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 3.0,
+    "pen_max": 7.792
+   },
+   "1.5": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.48,
+    "pen_max": 7.792
+   },
+   "2.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.48,
+    "pen_max": 7.792
+   },
+   "3.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.48,
+    "pen_max": 7.792
+   }
+  }
+ },
+ {
+  "cell": "L2 dissipation 1e-03",
+  "role": "calibration",
+  "fmin": 1.0,
+  "row": {
+   "1.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 1.083916083916084,
+    "pen_max": 6.293706293706293
+   },
+   "1.05": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.164335664335664,
+    "pen_max": 6.293706293706293
+   },
+   "1.1": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.164335664335664,
+    "pen_max": 6.293706293706293
+   },
+   "1.15": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.164335664335664,
+    "pen_max": 6.293706293706293
+   },
+   "1.2": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.164335664335664,
+    "pen_max": 6.293706293706293
+   },
+   "1.25": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.164335664335664,
+    "pen_max": 6.293706293706293
+   },
+   "1.35": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 2.164335664335664,
+    "pen_max": 6.293706293706293
+   },
+   "1.5": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 3.4055944055944054,
+    "pen_max": 6.293706293706293
+   },
+   "2.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 3.4055944055944054,
+    "pen_max": 13.531468531468532
+   },
+   "3.0": {
+    "certified": 625,
+    "safe": 625,
+    "n": 625,
+    "pen_med": 3.4055944055944054,
+    "pen_max": 13.531468531468532
+   }
+  }
+ },
+ {
+  "cell": "L3 energy 1e-02rel",
+  "role": "held out",
+  "fmin": 1.0,
+  "row": {
+   "1.0": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.05": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.1": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.15": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.2": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.25": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.35": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.5": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "2.0": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "3.0": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   }
+  }
+ },
+ {
+  "cell": "L3 energy 3e-03rel",
+  "role": "held out",
+  "fmin": 1.2,
+  "row": {
+   "1.0": {
+    "certified": 432,
+    "safe": 0,
+    "n": 432,
+    "pen_med": 0.17597065840668386,
+    "pen_max": 0.17597065840668386
+   },
+   "1.05": {
+    "certified": 432,
+    "safe": 0,
+    "n": 432,
+    "pen_med": 0.17597065840668386,
+    "pen_max": 0.17597065840668386
+   },
+   "1.1": {
+    "certified": 432,
+    "safe": 0,
+    "n": 432,
+    "pen_med": 0.17597065840668386,
+    "pen_max": 0.17597065840668386
+   },
+   "1.15": {
+    "certified": 432,
+    "safe": 6,
+    "n": 432,
+    "pen_med": 0.17597065840668386,
+    "pen_max": 1.0
+   },
+   "1.2": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.25": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.35": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.5": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "2.0": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "3.0": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   }
+  }
+ },
+ {
+  "cell": "L3 gradient 1e-02rel",
+  "role": "held out",
+  "fmin": 1.0,
+  "row": {
+   "1.0": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.05": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.1": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.15": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.2": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.25": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.35": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.5": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 5.682765576116167,
+    "pen_max": 5.682765576116167
+   },
+   "2.0": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 5.682765576116167,
+    "pen_max": 5.682765576116167
+   },
+   "3.0": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 5.682765576116167,
+    "pen_max": 5.682765576116167
+   }
+  }
+ },
+ {
+  "cell": "L3 gradient 3e-03rel",
+  "role": "held out",
+  "fmin": 1.0,
+  "row": {
+   "1.0": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.05": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.1": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.15": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.2": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.25": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.35": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.5": {
+    "certified": 432,
+    "safe": 432,
+    "n": 432,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "2.0": {
+    "certified": 0,
+    "safe": 0,
+    "n": 432,
+    "pen_med": NaN,
+    "pen_max": NaN
+   },
+   "3.0": {
+    "certified": 0,
+    "safe": 0,
+    "n": 432,
+    "pen_med": NaN,
+    "pen_max": NaN
+   }
+  }
+ },
+ {
+  "cell": "L4 inhibitor_mass 1e-02rel",
+  "role": "held out",
+  "fmin": 1.0,
+  "row": {
+   "1.0": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.05": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.1": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.15": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.2": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.25": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.35": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "1.5": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "2.0": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   },
+   "3.0": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.0,
+    "pen_max": 1.0
+   }
+  }
+ },
+ {
+  "cell": "L4 inhibitor_mass 3e-03rel",
+  "role": "held out",
+  "fmin": 1.0,
+  "row": {
+   "1.0": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.1830314585319353,
+    "pen_max": 4.715538608198284
+   },
+   "1.05": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.1830314585319353,
+    "pen_max": 4.715538608198284
+   },
+   "1.1": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.1830314585319353,
+    "pen_max": 4.715538608198284
+   },
+   "1.15": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.1830314585319353,
+    "pen_max": 4.715538608198284
+   },
+   "1.2": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.1830314585319353,
+    "pen_max": 1.1830314585319353
+   },
+   "1.25": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.1830314585319353,
+    "pen_max": 4.715538608198284
+   },
+   "1.35": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.1830314585319353,
+    "pen_max": 4.715538608198284
+   },
+   "1.5": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 4.715538608198284,
+    "pen_max": 28.719876072449953
+   },
+   "2.0": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 7.628312678741659,
+    "pen_max": 7.628312678741659
+   },
+   "3.0": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 7.628312678741659,
+    "pen_max": 7.628312678741659
+   }
+  }
+ },
+ {
+  "cell": "L4 pattern_sharpness 1e-02rel",
+  "role": "held out",
+  "fmin": 1.0,
+  "row": {
+   "1.0": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.2039356527251996,
+    "pen_max": 9.916435839433866
+   },
+   "1.05": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 1.2039356527251996,
+    "pen_max": 9.916435839433866
+   },
+   "1.1": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 6.011205009435011,
+    "pen_max": 9.916435839433866
+   },
+   "1.15": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 6.011205009435011,
+    "pen_max": 9.916435839433866
+   },
+   "1.2": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 6.011205009435011,
+    "pen_max": 9.916435839433866
+   },
+   "1.25": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 8.094788255775937,
+    "pen_max": 9.916435839433866
+   },
+   "1.35": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 8.094788255775937,
+    "pen_max": 9.916435839433866
+   },
+   "1.5": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 8.094788255775937,
+    "pen_max": 9.916435839433866
+   },
+   "2.0": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 8.094788255775937,
+    "pen_max": 16.58140248911696
+   },
+   "3.0": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 8.094788255775937,
+    "pen_max": 16.58140248911696
+   }
+  }
+ },
+ {
+  "cell": "L4 pattern_sharpness 3e-03rel",
+  "role": "held out",
+  "fmin": 1.0,
+  "row": {
+   "1.0": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 8.078731994987752,
+    "pen_max": 9.591809192705497
+   },
+   "1.05": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 8.078731994987752,
+    "pen_max": 9.591809192705497
+   },
+   "1.1": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 8.078731994987752,
+    "pen_max": 16.482918242184216
+   },
+   "1.15": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 8.078731994987752,
+    "pen_max": 16.482918242184216
+   },
+   "1.2": {
+    "certified": 576,
+    "safe": 576,
+    "n": 576,
+    "pen_med": 8.078731994987752,
+    "pen_max": 12.646570345853386
+   },
+   "1.25": {
+    "certified": 432,
+    "safe": 432,
+    "n": 576,
+    "pen_med": 8.078731994987752,
+    "pen_max": 8.078731994987752
+   },
+   "1.35": {
+    "certified": 432,
+    "safe": 432,
+    "n": 576,
+    "pen_med": 8.078731994987752,
+    "pen_max": 8.078731994987752
+   },
+   "1.5": {
+    "certified": 432,
+    "safe": 432,
+    "n": 576,
+    "pen_med": 9.433858590091575,
+    "pen_max": 10.788985185195397
+   },
+   "2.0": {
+    "certified": 0,
+    "safe": 0,
+    "n": 576,
+    "pen_med": NaN,
+    "pen_max": NaN
+   },
+   "3.0": {
+    "certified": 0,
+    "safe": 0,
+    "n": 576,
+    "pen_med": NaN,
+    "pen_max": NaN
+   }
+  }
+ }
+]

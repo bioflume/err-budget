@@ -1,0 +1,69 @@
+====================================================================================================
+Quantum ESPRESSO 6.7, Si with a displaced atom; 480/480 runs usable
+reference: E = -16.9241675300 Ry, |F| = 2.02938044e-02 Ry/bohr; relative uncertainty 1.2e-06 (E), 4.2e-03 (F)
+====================================================================================================
+
+relative error against conv_thr at ecutwfc = 48 Ry, 6x6x6 k-points, beta = 0.7:
+  energy  total 6.2e-06  1.4e-06  1.3e-06  1.3e-06  1.3e-06
+          from conv_thr alone 4.9e-06  9.4e-08  0.0e+00  0.0e+00  0.0e+00
+  force   total 1.4e-02  1.5e-02  1.5e-02  1.5e-02  1.5e-02
+          from conv_thr alone 1.1e-03  2.9e-04  1.3e-05  5.0e-06  0.0e+00
+
+loosest conv_thr whose own contribution stays below 10% of the total error, by ecutwfc and k-points (beta = 0.7):
+  energy:
+    ecut   12 Ry: 1e-04  1e-04  1e-04  1e-04   (nk = 2, 3, 4, 6)
+    ecut   16 Ry: 1e-04  1e-04  1e-04  1e-04   (nk = 2, 3, 4, 6)
+    ecut   20 Ry: 1e-04  1e-04  1e-04  1e-04   (nk = 2, 3, 4, 6)
+    ecut   24 Ry: 1e-04  1e-04  1e-04  1e-06   (nk = 2, 3, 4, 6)
+    ecut   28 Ry: 1e-04  1e-04  1e-06  1e-06   (nk = 2, 3, 4, 6)
+    ecut   32 Ry: 1e-04  1e-04  1e-06  1e-06   (nk = 2, 3, 4, 6)
+    ecut   40 Ry: 1e-04  1e-04  1e-06  1e-06   (nk = 2, 3, 4, 6)
+    ecut   48 Ry: 1e-04  1e-04  1e-06  1e-06   (nk = 2, 3, 4, 6)
+  force:
+    ecut   12 Ry: 1e-04  1e-08  1e-06  1e-06   (nk = 2, 3, 4, 6)
+    ecut   16 Ry: 1e-06  1e-04  1e-06  1e-06   (nk = 2, 3, 4, 6)
+    ecut   20 Ry: 1e-06  1e-06  1e-06  1e-06   (nk = 2, 3, 4, 6)
+    ecut   24 Ry: 1e-06  1e-06  1e-04  1e-04   (nk = 2, 3, 4, 6)
+    ecut   28 Ry: 1e-06  1e-04  1e-06  1e-06   (nk = 2, 3, 4, 6)
+    ecut   32 Ry: 1e-06  1e-06  1e-06  1e-04   (nk = 2, 3, 4, 6)
+    ecut   40 Ry: 1e-04  1e-04  1e-06  1e-04   (nk = 2, 3, 4, 6)
+    ecut   48 Ry: 1e-06  1e-06  1e-06  1e-04   (nk = 2, 3, 4, 6)
+
+--- energy, target 1e-03 relative
+  method, power        certified 480/480, missed 0, declined 0 (0 attainable), distinct recommendations 2, penalty median 1.58 worst 3.00, runs median 52, worst error 0.20 eps
+  method, exponential  certified 480/480, missed 0, declined 0 (0 attainable), distinct recommendations 1, penalty median 1.14 worst 1.14, runs median 56, worst error 0.53 eps
+  method, exp. + gated certified 480/480, missed 0, declined 0 (0 attainable), distinct recommendations 1, penalty median 1.14 worst 1.14, runs median 56, worst error 0.53 eps
+  sequential @eps              attained 450/480, penalty median 4.40, runs median 4
+  sequential @eps/10           attained 480/480, penalty median 6.43, runs median 5
+  coordinate search @eps       attained 480/480, penalty median 4.40, runs median 6
+  coordinate search @eps/10    attained 480/480, penalty median 7.63, runs median 7
+  reference acceptance         attained 1/1, penalty median 1.00, runs median 480
+  budget at the pw.x-default start: ecutwfc 82%, nk 18%, conv_thr 0%, mixing_beta 0%
+
+--- energy, target 1e-04 relative
+  method, power        certified 480/480, missed 0, declined 0 (0 attainable), distinct recommendations 1, penalty median 2.43 worst 2.43, runs median 78, worst error 0.15 eps
+  method, exponential  certified 480/480, missed 23, declined 0 (0 attainable), distinct recommendations 5, penalty median 1.15 worst 2.93, runs median 67, worst error 1.23 eps
+  method, exp. + gated certified 480/480, missed 0, declined 0 (0 attainable), distinct recommendations 1, penalty median 1.15 worst 1.15, runs median 65, worst error 0.54 eps
+  sequential @eps              attained 240/480, penalty median 2.35, runs median 5
+  sequential @eps/10           attained 480/480, penalty median 5.01, runs median 7
+  coordinate search @eps       attained 330/480, penalty median 2.79, runs median 7
+  coordinate search @eps/10    attained 480/480, penalty median 14.22, runs median 12
+  reference acceptance         attained 1/1, penalty median 1.00, runs median 480
+  budget at the pw.x-default start: ecutwfc 82%, nk 18%, conv_thr 0%, mixing_beta 0%
+
+--- energy 1e-05: below ten times the reference uncertainty; skipped
+
+--- force, target 1e-01 relative
+  method, power        certified 480/480, missed 0, declined 0 (0 attainable), distinct recommendations 5, penalty median 2.22 worst 4.16, runs median 50, worst error 0.80 eps
+  method, exponential  certified 480/480, missed 0, declined 0 (0 attainable), distinct recommendations 7, penalty median 1.53 worst 4.18, runs median 47, worst error 0.80 eps
+  method, exp. + gated certified 480/480, missed 0, declined 0 (0 attainable), distinct recommendations 9, penalty median 2.42 worst 7.33, runs median 51, worst error 0.89 eps
+  sequential @eps              attained 480/480, penalty median 6.93, runs median 4
+  sequential @eps/10           attained 480/480, penalty median 25.57, runs median 5
+  coordinate search @eps       attained 480/480, penalty median 6.93, runs median 6
+  coordinate search @eps/10    attained 480/480, penalty median 25.57, runs median 7
+  reference acceptance         attained 1/1, penalty median 1.10, runs median 480
+  budget at the pw.x-default start: ecutwfc 22%, nk 72%, conv_thr 0%, mixing_beta 5%
+
+--- force 3e-02: below ten times the reference uncertainty; skipped
+
+--- force 1e-02: below ten times the reference uncertainty; skipped

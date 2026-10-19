@@ -1,0 +1,17 @@
+================================================================================================
+what degrades as the ladder closes up?
+================================================================================================
+  spacing              h range observable                Ehat/Etrue  optimistic  fit resid
+                                                 p10 / median / p90
+  2.0x / 100.0x          16.0x energy          1.25 /  1.31 /   1.87        0.2%      0.003
+  2.0x / 100.0x          16.0x dissipation     1.25 /  1.48 /   1.81        0.0%      0.004
+  1.6x / 10.0x            6.6x energy          1.21 /  1.23 /   2.03        0.0%      0.017
+  1.6x / 10.0x            6.6x dissipation     1.28 /  1.32 /   1.98        0.0%      0.009
+  1.4x / 5.0x             3.9x energy          1.22 /  1.24 /   2.15        0.0%      0.066
+  1.4x / 5.0x             3.9x dissipation     1.27 /  1.32 /   2.11        0.0%      0.026
+  1.2x / 3.0x             2.1x energy          1.23 /  1.24 /   2.29        0.0%      0.142
+  1.2x / 3.0x             2.1x dissipation     1.25 /  1.27 /   2.26        0.0%      0.123
+
+  'optimistic' is the fraction of anchors where the margined estimate is
+  smaller than the true error.  'fit resid' is the median normalised
+  residual of the offset power-law fit, the method's own diagnostic.

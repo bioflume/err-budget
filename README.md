@@ -1,1 +1,113 @@
-# knobs-paper
+# knobs-paper: the article's code, data and reproduction
+
+This repository reproduces the article
+
+> G. Kabacaoğlu, *knobs: choosing the numerical parameters of a black-box solver for a
+> target accuracy in one observable*, Computer Physics Communications (Computer Programs
+> in Physics), 2026.
+
+It holds the program exactly as the article describes it (version 1.2.1), every analysis
+script, the stored solver output of every run, the tables and figures, the pre-registered
+held-out tests, and the cluster jobs. It is a record: the program here does not change
+except by a new, documented version.
+
+If you want to **use** the method on your own solver rather than check the article, use
+the library repository instead: <https://github.com/bioflume/knobs>. It is the same
+engine with a command-line tool, job files and a user guide.
+
+## Layout
+
+```
+src/knobs/           the program, version 1.2.1 -- byte-identical to the article's;
+                     the held-out replays check its hash, so do not edit it here
+paper/               everything that reproduces the article on one machine:
+                     run_v6_analyses.sh (revision 4), reproduce.sh (revisions 2-3), the
+                     analysis scripts, the stored solver output (data/), tables and
+                     figures -- start with paper/README.md
+hamilton/            everything that runs on Durham's Hamilton cluster (jobs J1-J5,
+                     including the pre-registered held-out test H3) -- the runbook is
+                     hamilton/README.md
+tests/               the behavioural claims of the article as tests (pytest)
+examples/            three small examples of the Python API
+PREREGISTRATION.md   the held-out tests, fixed before they were run (do not edit)
+CHANGELOG.md         what changed between versions, with the comparisons behind it
+DESIGN_NOTES.md      why the method is shaped this way, including what failed
+THIRD_PARTY_RESULTS.md  the production codes driven through their input files
+CITATION.cff         how to cite
+```
+
+## Reproducing the article
+
+Three tiers, from cheap to expensive; `paper/README.md` has the details and maps every
+number, table and figure to the script that produces it.
+
+| Tier | Command | Needs | Time |
+|---|---|---|---|
+| A. Replay the stored solver output | `cd paper && bash run_v6_analyses.sh before` | Python 3.9+ with NumPy, SciPy, Matplotlib, SymPy, pytest | 2–4 h on 2 cores |
+| B. Rebuild the solver output | `cd paper && ./reproduce.sh`, then `dfg2d2_job/` | tier A plus LAMMPS, GROMACS, ABINIT, OpenFOAM, Quantum ESPRESSO | ~16 CPU-hours + 40 CPU-hours |
+| C. Cluster studies J1–J5 | `hamilton/README.md` | a SLURM cluster | 1–3 days |
+
+Quick start for tier A:
+
+```bash
+git clone https://github.com/bioflume/knobs-paper.git && cd knobs-paper
+python -m venv .venv && source .venv/bin/activate
+pip install -e ".[paper]"
+pytest -q                                   # 52 tests, about 80 s
+cd paper && bash run_v6_analyses.sh check   # what the machine has
+bash run_v6_analyses.sh before              # the revision-4 analyses
+```
+
+Three steps of tier A call a solver (A03 ABINIT, A04 LAMMPS, half of A12 GROMACS); they
+fail cleanly without it and the rest goes on. The article's own environment (Python
+3.11, NumPy 1.26.4, SciPy 1.13.1, Ubuntu 24.04) is listed in `paper/README.md`; NumPy
+2.x and SciPy 1.18 give identical counts.
+
+## The program
+
+```python
+from knobs import Knob, tune
+
+result = tune(solver,
+              [Knob("N",    [32, 64, 128, 256],        kind="discretisation"),
+               Knob("dt",   [1e-2, 5e-3, 2.5e-3],      kind="discretisation"),
+               Knob("rtol", [1e-4, 1e-6, 1e-8, 1e-10], kind="nested-solver")],
+              observable="drag", target=1e-3, start={"N": 64, "dt": 5e-3, "rtol": 1e-10})
+print(result)
+```
+
+`src/knobs/api.py` is the public interface (`Knob`, `tune`, `TuneResult`, `RunFailed`),
+`src/knobs/_core.py` the measurement, the local-order and joint checks and the search,
+`src/knobs/_asymptotic.py` the balance law of the secondary result, and
+`src/knobs/problems/` the test problems with exact solutions. The default configuration is
+`knobs.V121`; `knobs.V12` is the frozen version of the held-out tests (git tag
+`v1.2.0-frozen`, copy in `paper/frozen_src`), `knobs.V11` the previous version.
+`examples/` shows the API on the test problems; the library repository has the user guide.
+
+## Versions and tags
+
+| Tag / version | Meaning |
+|---|---|
+| `v1.2.0-frozen` | the program frozen before the held-out tests (SHA-256 of the source in `PREREGISTRATION.md`) |
+| `v1.2.1` | the released default after the amendment of 11 October 2026; the article's version |
+| `main` | this: revision 4 (patch v6 analyses, the revision-4 results of Part V, the restructured layout) |
+
+## Tests
+
+```bash
+pip install -e ".[dev]" && pytest
+```
+
+The tests encode the article's claims: that recommendations meet their target from a
+range of starting points, that unreachable targets are refused, that the diagnostics never
+contradict the recommendation, that the measurement recovers an error imposed analytically,
+and (`tests/test_spec_v121.py`) the behaviour of version 1.2.1 as Section 4 describes it.
+
+## Citing
+
+See `CITATION.cff`. The archived release with the solver outputs of every run is on Zenodo
+(DOI in `CITATION.cff` once minted).
+
+## Licence
+
+MIT.

@@ -1,0 +1,34 @@
+
+==============================================================================================
+GROMACS [gmx] 1728 SPC waters (5184 atoms); 225/225 configurations evaluable
+==============================================================================================
+
+target: relative error 1e-05 in the potential energy
+                             setting                                           rel. error   ms/step
+  GROMACS defaults           rcoulomb=1.0, fourier=0.12, order=4, rtol=1e-05    1.591e-05     17.6   MISSES
+  cautious user              rcoulomb=1.4, fourier=0.08, order=6, rtol=1e-06    1.654e-05     55.5   MISSES
+  this method                rcoulomb=1.4, fourier=0.08, order=4, rtol=1e-06    1.665e-05     54.2   MISSES
+  cheapest that attains it   rcoulomb=1.0, fourier=0.12, order=5, rtol=1e-05    5.408e-06     17.1
+  -> method vs GROMACS defaults: 0.33x cheaper
+  -> method vs cheapest attaining: 3.17x, 66 GROMACS runs used
+
+target: relative error 1e-06 in the potential energy
+                             setting                                           rel. error   ms/step
+  GROMACS defaults           rcoulomb=1.0, fourier=0.12, order=4, rtol=1e-05    1.591e-05     17.6   MISSES
+  cautious user              rcoulomb=1.4, fourier=0.08, order=6, rtol=1e-06    1.654e-05     55.5   MISSES
+  this method                rcoulomb=1.4, fourier=0.08, order=6, rtol=1e-06    1.654e-05     55.5   MISSES
+  cheapest that attains it   rcoulomb=1.2, fourier=0.12, order=5, rtol=1e-05    8.484e-07     19.1
+  -> method vs GROMACS defaults: 0.32x cheaper
+  -> method vs cheapest attaining: 2.91x, 66 GROMACS runs used
+
+==============================================================================================
+error budget the method reports for GROMACS
+  rcoulomb         residual -2.905e-01     9.4% of the budget
+  fourierspacing   residual +7.163e-01    23.3% of the budget
+  pme_order        residual -1.497e-01     4.9% of the budget
+  ewald_rtol       residual +1.919e+00    62.4% of the budget
+
+cost of pme-order at rcoulomb=1.0, fourier=0.12, rtol=1e-5 (GROMACS default order is 4):
+  order 4:  rel. error 1.591e-05   17.6 ms/step
+  order 5:  rel. error 5.408e-06   17.1 ms/step
+  order 6:  rel. error 1.379e-06   18.1 ms/step

@@ -1,0 +1,50 @@
+====================================================================================================
+Burgers (nu = 0.05) with SciPy's adaptive BDF integrator;  exact values {'energy': 1.3738482866506079, 'peak_gradient': 4.428812329234833}
+====================================================================================================
+
+error at the finest controller settings, by N:
+  energy         2.4e-03  6.5e-04  1.7e-04  4.2e-05  1.0e-05
+  peak_gradient  3.1e-01  1.3e-01  4.1e-02  1.1e-02  2.8e-03
+
+error against rtol at N = 512, atol = 1e-10, max_step = 0.01:
+  energy         1.5e-04  4.4e-05  1.1e-05  1.0e-05
+  peak_gradient  2.9e-03  2.8e-03  2.8e-03  2.8e-03
+
+transfer of thresholds (as Table 3): failure rate per parameter
+  parameter  phi=0.01   phi=0.05   phi=0.1    phi=0.25   phi=0.5   
+  N                  0%         0%         0%         0%         0%
+  rtol              11%        26%        22%        15%        11%
+  atol              24%        10%        10%         5%         2%
+  max_step          46%        38%        32%        23%        21%
+
+declared classes: {'N': 'discretisation', 'rtol': 'nested-solver', 'atol': 'nested-solver', 'max_step': 'discretisation'}
+  energy         1e-02  certified 320/320, missed 0, declined 0 (0 attainable), distinct recommendations 5, penalty median 1.61 worst 2.14, runs median 37, worst error 0.60 eps
+      sequential @eps              attained 320/320, penalty median 11.37, runs median 4
+      sequential @eps/10           attained 320/320, penalty median 12.77, runs median 4
+      coordinate search @eps       attained 320/320, penalty median 11.37, runs median 6
+      coordinate search @eps/10    attained 320/320, penalty median 12.77, runs median 6
+      reference acceptance         attained 1/1, penalty median 1.00, runs median 320
+  energy         1e-03  certified 320/320, missed 0, declined 0 (0 attainable), distinct recommendations 3, penalty median 1.00 worst 2.80, runs median 43, worst error 0.69 eps
+      sequential @eps              attained 312/320, penalty median 3.83, runs median 4
+      sequential @eps/10           attained 320/320, penalty median 8.67, runs median 5
+      coordinate search @eps       attained 312/320, penalty median 3.83, runs median 6
+      coordinate search @eps/10    attained 320/320, penalty median 11.20, runs median 8
+      reference acceptance         attained 1/1, penalty median 1.00, runs median 320
+  peak_gradient  1e-02  certified 0/320, missed 0, declined 320 (320 attainable), distinct recommendations 0, penalty median nan worst nan, runs median 67, worst error 0.00 eps
+      sequential @eps              attained 68/320, penalty median 1.36, runs median 5
+      sequential @eps/10           attained 320/320, penalty median 2.42, runs median 5
+      coordinate search @eps       attained 88/320, penalty median 1.61, runs median 7
+      coordinate search @eps/10    attained 320/320, penalty median 2.42, runs median 7
+      reference acceptance         attained 0/1, penalty median 0.64, runs median 320
+  peak_gradient  1e-03  certified 0/320, missed 0, declined 320 (0 attainable), distinct recommendations 0, penalty median nan worst nan, runs median 67, worst error 0.00 eps
+      sequential @eps              attained 0/320, penalty median nan, runs median 5
+      sequential @eps/10           attained 0/320, penalty median nan, runs median 6
+      coordinate search @eps       attained 0/320, penalty median nan, runs median 7
+      coordinate search @eps/10    attained 0/320, penalty median nan, runs median 8
+      reference acceptance         attained 0/1, penalty median nan, runs median 320
+
+declared classes: {'N': 'discretisation', 'rtol': 'discretisation', 'atol': 'discretisation', 'max_step': 'discretisation'}
+  energy         1e-02  certified 320/320, missed 0, declined 0 (0 attainable), distinct recommendations 5, penalty median 1.61 worst 2.14, runs median 37, worst error 0.60 eps
+  energy         1e-03  certified 320/320, missed 0, declined 0 (0 attainable), distinct recommendations 3, penalty median 1.00 worst 2.80, runs median 43, worst error 0.69 eps
+  peak_gradient  1e-02  certified 0/320, missed 0, declined 320 (320 attainable), distinct recommendations 0, penalty median nan worst nan, runs median 67, worst error 0.00 eps
+  peak_gradient  1e-03  certified 0/320, missed 0, declined 320 (0 attainable), distinct recommendations 0, penalty median nan worst nan, runs median 67, worst error 0.00 eps

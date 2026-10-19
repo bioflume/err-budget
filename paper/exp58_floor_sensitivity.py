@@ -1,0 +1,83 @@
+"""Sensitivity of the GROMACS round-off floor to the number of probe settings and
+to the factor (referee points 22 and 23 of revision 3).
+
+The six converged settings of exp44_gromacs_floor.py give six values of the
+potential energy per build (figures/sec82_floor.txt).  For every subset of k of
+them (k = 2..6) the floor is their spread; for each factor F the program
+declines targets below F times the floor.  For each (k, F) we report, over all
+subsets, the range of the declining threshold and, replaying the mixed-precision
+tensor with that floor, the accepted starts and the misses against the
+double-precision reference.  The probe's cost is reported relative to the
+calibration cost of one search.
+"""
+import itertools
+import os
+import pickle
+import sys
+
+import numpy as np
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import cases as C
+import pooled as P
+
+VALS = {"gmx": [-73672.5625, -73672.4297, -73672.8672, -73671.8906, -73670.6719, -73672.8672],
+        "gmx_d": [-73671.3702, -73671.3702, -73671.3702, -73671.3702, -73671.3701, -73671.3702]}
+CFG = sys.argv[1] if len(sys.argv) > 1 else "v1.2"
+case = [c for c in C._gromacs() if c.key == "GMX-s"][0]
+QD = case.exact["potential"]
+v = np.array(VALS["gmx"])
+print(f"configuration {CFG}; mixed-precision values of the six converged settings: {v.tolist()}")
+TARGETS = [1e-4, 3e-5, 1e-5]
+for k in range(2, 7):
+    floors = sorted({float(np.ptp(v[list(s)])) for s in itertools.combinations(range(6), k)})
+    for F in (3, 5, 10, 20):
+        thr = [F * f / abs(QD) for f in floors]
+        line = (f"k={k} F={F:<2}: declines below {min(thr):.1e}..{max(thr):.1e} relative "
+                f"({len(floors)} distinct floors)")
+        cells = []
+        for tg in TARGETS:
+            acc_lo = miss_hi = None
+            res = []
+            for f in (min(floors), max(floors)):
+                case.floor = f
+                cfg = dict(P.CONFIGS[CFG])
+                kw = dict(cfg["kw"]); kw["floor_factor"] = F
+                cfg = dict(cfg, kw=kw)
+                o = P.replay(case, "potential", tg, cfg)
+                res.append((o["accepted"], o["missed"]))
+            cells.append(f"{tg:.0e}: acc {res[0][0]}-{res[1][0]}, miss {res[0][1]}-{res[1][1]}")
+        print(line + " | " + "; ".join(cells), flush=True)
+
+# cost of the probe (referee point 22).  The three probe settings and the GROMACS
+# default setting are timed together now, so that machine load cancels in their
+# ratio; the ratio is applied to the tensor's cost of the default setting and set
+# against the calibration cost of the searches (sum of the costs of the runs each
+# search requests), median over all starts.
+from gromacs_water import GromacsWater
+from knobs import run_protocol
+CONVERGED = [dict(rcoulomb=rc, fourierspacing=fs, pme_order=po, ewald_rtol=rt)   # as exp44
+             for rc, fs, po, rt in [(1.4, 0.06, 8, 1e-8), (1.4, 0.05, 8, 1e-9), (1.5, 0.06, 8, 1e-9)]]
+DEFAULT = dict(rcoulomb=1.0, fourierspacing=0.12, pme_order=4, ewald_rtol=1e-5)
+didx = (1, 2, 0, 1)
+for build, key in (("gmx_d", "GMX-d"), ("gmx", "GMX-s")):
+    cs = [c for c in C._gromacs() if c.key == key][0]
+    g = GromacsWater(nbox=2, nsteps=40, binary=build)
+    td = [g.run(DEFAULT)[1] for _ in range(3)]
+    tp = [g.run(th)[1] for th in CONVERGED[:3]]
+    ratio = sum(tp) / np.median(td)
+    probe_cost = ratio * cs.tensor[didx][1]
+    tg = cs.targets["potential"][0]
+    eps = tg * abs(cs.exact["potential"])
+    look = lambda i: ((cs.tensor[tuple(i)][0]["potential"], cs.tensor[tuple(i)][1])
+                      if np.isfinite(cs.tensor[tuple(i)][1]) else (np.nan, np.inf))
+    cal = []
+    for a in cs.grid():
+        if not cs.usable(a):
+            continue
+        r = run_protocol(look, cs.LAD, a, eps, hs=cs.HS, kinds=cs.KINDS, **P.CONFIGS[CFG]["kw"])
+        cal.append(r["protocol_cost"])
+    print(f"{build}: three probe runs cost {ratio:.1f} default runs ({probe_cost*1e3:.1f} ms/step in all); "
+          f"calibration of one search at {tg:.0e}: median {np.median(cal)*1e3:.1f} ms/step "
+          f"({np.median(cal)/cs.tensor[didx][1]:.0f} default runs); probe/calibration "
+          f"{probe_cost/np.median(cal):.2f}", flush=True)

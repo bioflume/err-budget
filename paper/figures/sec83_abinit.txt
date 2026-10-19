@@ -1,0 +1,105 @@
+
+====================================================================================================
+ABINIT 9.10.4, bulk Si with one displaced atom; 336/336 configurations evaluable
+reference: E = -8.7060058490 Ha, |F| = 9.75745943e-03 Ha/Bohr
+====================================================================================================
+
+--- observable: energy (reference -8.7060058) ------------------------------------------------------
+  target 1e-02 rel
+    tutorial-like start        ecut=12, ngkpt=3, toldfe=1e-08, nline=4            1.07e-02     1.1s   MISSES
+    method, power model        ecut=32, ngkpt=6, toldfe=1e-12, nline=2            5.27e-05    33.3s   (declined)   est 3.60e-02, 90 runs
+    method, exponential model  ecut=28, ngkpt=2, toldfe=1e-06, nline=2            1.09e-03     1.0s   est 9.21e-03, 62 runs
+    method, exp. + gated model ecut=28, ngkpt=2, toldfe=1e-08, nline=2            1.09e-03     1.1s   est 9.21e-03, 60 runs
+    cheapest attaining         ecut=16, ngkpt=2, toldfe=1e-06, nline=2            7.20e-03     0.7s
+    all 336 starts, power       model: 0 certified, 0 missed, median penalty nan, median runs 73
+    all 336 starts, exponential model: 336 certified, 48 missed, median penalty 1.37, median runs 52
+    all 336 starts, exp. + gated model: 336 certified, 48 missed, median penalty 1.51, median runs 51
+  target 3e-03 rel
+    tutorial-like start        ecut=12, ngkpt=3, toldfe=1e-08, nline=4            1.07e-02     1.1s   MISSES
+    method, power model        ecut=32, ngkpt=6, toldfe=1e-12, nline=2            5.27e-05    33.3s   (declined)   est 3.60e-02, 90 runs
+    method, exponential model  ecut=32, ngkpt=4, toldfe=1e-06, nline=2            6.41e-05     5.5s   est 2.61e-03, 73 runs
+    method, exp. + gated model ecut=32, ngkpt=4, toldfe=1e-08, nline=2            6.41e-05     6.8s   est 2.74e-03, 72 runs
+    cheapest attaining         ecut=24, ngkpt=2, toldfe=1e-06, nline=2            1.87e-03     0.8s
+    all 336 starts, power       model: 0 certified, 0 missed, median penalty nan, median runs 73
+    all 336 starts, exponential model: 264 certified, 36 missed, median penalty 7.08, median runs 60
+    all 336 starts, exp. + gated model: 246 certified, 36 missed, median penalty 8.77, median runs 62
+  target 1e-03 rel
+    tutorial-like start        ecut=12, ngkpt=3, toldfe=1e-08, nline=4            1.07e-02     1.1s   MISSES
+    method, power model        ecut=32, ngkpt=6, toldfe=1e-12, nline=2            5.27e-05    33.3s   (declined)   est 3.60e-02, 90 runs
+    method, exponential model  ecut=32, ngkpt=6, toldfe=1e-12, nline=2            5.27e-05    33.3s   (declined)   est 3.40e-03, 90 runs
+    method, exp. + gated model ecut=32, ngkpt=6, toldfe=1e-12, nline=2            5.27e-05    33.3s   (declined)   est 3.46e-03, 90 runs
+    cheapest attaining         ecut=32, ngkpt=2, toldfe=1e-06, nline=2            8.80e-04     1.2s
+    all 336 starts, power       model: 0 certified, 0 missed, median penalty nan, median runs 73
+    all 336 starts, exponential model: 0 certified, 0 missed, median penalty nan, median runs 73
+    all 336 starts, exp. + gated model: 0 certified, 0 missed, median penalty nan, median runs 73
+
+--- observable: force (reference 0.0097574594) -------------------------------------------------------
+  target 1e-01 rel
+    tutorial-like start        ecut=12, ngkpt=3, toldfe=1e-08, nline=4            7.92e-02     1.1s
+    method, power model        ecut=32, ngkpt=6, toldfe=1e-12, nline=2            2.11e-02    33.3s   (declined)   est 4.50e-01, 83 runs
+    method, exponential model  ecut=24, ngkpt=6, toldfe=1e-06, nline=2            1.44e-02     8.9s   est 2.95e-02, 115 runs
+    method, exp. + gated model ecut=24, ngkpt=6, toldfe=1e-10, nline=2            1.43e-02    13.0s   est 7.77e-02, 92 runs
+    cheapest attaining         ecut=8, ngkpt=3, toldfe=1e-06, nline=2             2.49e-02     0.6s
+    all 336 starts, power       model: 48 certified, 0 missed, median penalty 2.50, median runs 69
+    all 336 starts, exponential model: 336 certified, 0 missed, median penalty 14.67, median runs 88
+    all 336 starts, exp. + gated model: 336 certified, 0 missed, median penalty 21.26, median runs 75
+  target 3e-02 rel
+    tutorial-like start        ecut=12, ngkpt=3, toldfe=1e-08, nline=4            7.92e-02     1.1s   MISSES
+    method, power model        ecut=32, ngkpt=6, toldfe=1e-12, nline=2            2.11e-02    33.3s   (declined)   est 4.50e-01, 83 runs
+    method, exponential model  ecut=24, ngkpt=6, toldfe=1e-06, nline=2            1.44e-02     8.9s   est 2.95e-02, 115 runs
+    method, exp. + gated model ecut=32, ngkpt=6, toldfe=1e-12, nline=2            2.11e-02    33.3s   (declined)   est 9.21e-02, 83 runs
+    cheapest attaining         ecut=8, ngkpt=3, toldfe=1e-06, nline=2             2.49e-02     0.6s
+    all 336 starts, power       model: 0 certified, 0 missed, median penalty nan, median runs 72
+    all 336 starts, exponential model: 260 certified, 44 missed, median penalty 14.67, median runs 92
+    all 336 starts, exp. + gated model: 0 certified, 0 missed, median penalty nan, median runs 72
+  target 1e-02 rel
+    tutorial-like start        ecut=12, ngkpt=3, toldfe=1e-08, nline=4            7.92e-02     1.1s   MISSES
+    method, power model        ecut=32, ngkpt=6, toldfe=1e-12, nline=2            2.11e-02    33.3s   (declined)   est 4.50e-01, 83 runs
+    method, exponential model  ecut=32, ngkpt=6, toldfe=1e-12, nline=2            2.11e-02    33.3s   (declined)   est 3.33e-02, 83 runs
+    method, exp. + gated model ecut=32, ngkpt=6, toldfe=1e-12, nline=2            2.11e-02    33.3s   (declined)   est 9.21e-02, 83 runs
+    cheapest attaining         ecut=8, ngkpt=4, toldfe=1e-06, nline=2             4.72e-03     0.9s
+    all 336 starts, power       model: 0 certified, 0 missed, median penalty nan, median runs 72
+    all 336 starts, exponential model: 0 certified, 0 missed, median penalty nan, median runs 72
+    all 336 starts, exp. + gated model: 0 certified, 0 missed, median penalty nan, median runs 72
+
+====================================================================================================
+the prediction: a setting acceptable for the energy is not acceptable
+for the force.  Both observables come from the SAME runs.
+====================================================================================================
+  cheapest setting reaching 1e-02 relative in the energy : ecut=16, ngkpt=2, toldfe=1e-06, nline=2   (0.7s)
+  cheapest setting reaching 1e-02 relative in the force  : ecut=8, ngkpt=4, toldfe=1e-06, nline=2   (0.9s)
+  that setting gives 2.74e-01 relative in the force -- FAILS the same 1e-02 target
+  that setting gives 1.23e-02 relative in the energy -- FAILS the same 1e-02 target
+
+====================================================================================================
+error budget the method reports for ABINIT
+  energy, power model at the tutorial start: estimate +5.312e-01, true error +9.299e-02
+    ecut     residual +5.299e-01    99.8% of the budget   (declared discretisation)
+    ngkpt    residual +1.246e-03     0.2% of the budget   (declared discretisation)
+    toldfe   residual +0.000e+00     0.0% of the budget   (declared nested-solver)
+    nline    residual +1.587e-12     0.0% of the budget   (declared cost-only)
+  energy, exponential model at the tutorial start: estimate +6.230e-01, true error +9.299e-02
+    ecut     residual +6.218e-01    99.8% of the budget   (declared discretisation)
+    ngkpt    residual +1.246e-03     0.2% of the budget   (declared discretisation)
+    toldfe   residual +0.000e+00     0.0% of the budget   (declared nested-solver)
+    nline    residual +1.587e-12     0.0% of the budget   (declared cost-only)
+  energy, exp. + gated model at the tutorial start: estimate +6.230e-01, true error +9.299e-02
+    ecut     residual +6.218e-01    99.8% of the budget   (declared discretisation)
+    ngkpt    residual +1.246e-03     0.2% of the budget   (declared discretisation)
+    toldfe   residual +0.000e+00     0.0% of the budget   (declared nested-solver)
+    nline    residual +1.587e-12     0.0% of the budget   (declared cost-only)
+  force, power model at the tutorial start: estimate +3.032e-04, true error -7.729e-04
+    ecut     residual +9.960e-05    32.8% of the budget   (declared discretisation)
+    ngkpt    residual +2.036e-04    67.1% of the budget   (declared discretisation)
+    toldfe   residual +6.838e-09     0.0% of the budget   (declared nested-solver)
+    nline    residual -2.052e-09     0.0% of the budget   (declared cost-only)
+  force, exponential model at the tutorial start: estimate +2.043e-04, true error -7.729e-04
+    ecut     residual +6.738e-07     0.3% of the budget   (declared discretisation)
+    ngkpt    residual +2.036e-04    99.7% of the budget   (declared discretisation)
+    toldfe   residual +6.838e-09     0.0% of the budget   (declared nested-solver)
+    nline    residual -2.052e-09     0.0% of the budget   (declared cost-only)
+  force, exp. + gated model at the tutorial start: estimate +2.043e-04, true error -7.729e-04
+    ecut     residual +6.738e-07     0.3% of the budget   (declared discretisation)
+    ngkpt    residual +2.036e-04    99.7% of the budget   (declared discretisation)
+    toldfe   residual +6.838e-09     0.0% of the budget   (declared nested-solver)
+    nline    residual -2.052e-09     0.0% of the budget   (declared cost-only)

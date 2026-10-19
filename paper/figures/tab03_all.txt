@@ -1,0 +1,37 @@
+
+L2: failure rate of a threshold calibrated at the finest setting of the other parameters
+  parameter      class           phi=0.01   phi=0.05   phi=0.1    phi=0.25   phi=0.5   
+  N              discretisation          0%         0%         0%         0%         0%
+  steps          discretisation          6%         6%         3%         3%        13%
+  newton_tol     nested-solver          46%        27%        21%        13%        10%
+  gmres_tol      nested-solver          25%        18%        16%        13%        10%
+
+L3: failure rate of a threshold calibrated at the finest setting of the other parameters
+  parameter      class           phi=0.01   phi=0.05   phi=0.1    phi=0.25   phi=0.5   
+  N              discretisation          0%         0%         0%         0%         0%
+  steps          discretisation         26%        25%        25%        17%         0%
+  newton_tol     nested-solver           1%         0%         0%         0%         0%
+  gmres_tol      nested-solver           1%         0%         0%         0%         0%
+  ilu_drop       cost-only               1%         0%         0%         0%         0%
+
+L4: failure rate of a threshold calibrated at the finest setting of the other parameters
+  parameter      class           phi=0.01   phi=0.05   phi=0.1    phi=0.25   phi=0.5   
+  N              discretisation          0%         0%         0%         0%         0%
+  steps          discretisation          0%         0%         0%         2%         0%
+  n_react        discretisation         12%        12%        19%        12%        19%
+  gmres_tol      nested-solver          26%         6%         3%         2%         1%
+  ilu_drop       cost-only              15%         4%         2%         1%         1%
+
+L5: failure rate of a threshold calibrated at the finest setting of the other parameters
+  parameter      class           phi=0.01   phi=0.05   phi=0.1    phi=0.25   phi=0.5   
+  N              discretisation          0%         0%         0%         0%         0%
+  newton_tol     nested-solver           2%         1%         1%         0%         0%
+  gmres_tol      nested-solver          18%        13%        12%        10%         7%
+  ilu_drop       cost-only               6%         9%         8%         6%         6%
+
+DFG 2D-1 (OpenFOAM): failure rate of a threshold calibrated at the finest setting of the other parameters
+  parameter      class           phi=0.01   phi=0.05   phi=0.1    phi=0.25   phi=0.5   
+  n_arc          discretisation          0%         0%         0%         0%         0%
+  res_ctrl       nested-solver           0%         0%         0%         5%         3%
+  lin_tol        nested-solver          12%        10%        12%         8%         8%
+  n_coarsest     cost-only              11%         2%         0%         0%         0%

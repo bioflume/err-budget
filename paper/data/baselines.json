@@ -1,0 +1,828 @@
+[
+ {
+  "cell": "L2 energy 1e-02",
+  "method": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 1.724,
+   "runs": 48.0
+  },
+  "seq@eps": {
+   "n": 625,
+   "certified": 625,
+   "safe": 602,
+   "pen": 15.888,
+   "runs": 5.0
+  },
+  "seq@eps/3": {
+   "n": 625,
+   "certified": 625,
+   "safe": 605,
+   "pen": 19.2,
+   "runs": 5.0
+  },
+  "seq@eps/10": {
+   "n": 625,
+   "certified": 625,
+   "safe": 610,
+   "pen": 31.552,
+   "runs": 6.0
+  },
+  "coord@eps": {
+   "n": 625,
+   "certified": 625,
+   "safe": 622,
+   "pen": 16.0,
+   "runs": 7.0
+  },
+  "coord@eps/3": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 22.496,
+   "runs": 7.0
+  },
+  "coord@eps/10": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 41.488,
+   "runs": 8.0
+  },
+  "ref": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 1.0,
+   "runs": 625
+  }
+ },
+ {
+  "cell": "L2 energy 3e-03",
+  "method": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 1.128,
+   "runs": 57.0
+  },
+  "seq@eps": {
+   "n": 625,
+   "certified": 625,
+   "safe": 591,
+   "pen": 9.6,
+   "runs": 5.0
+  },
+  "seq@eps/3": {
+   "n": 625,
+   "certified": 625,
+   "safe": 595,
+   "pen": 15.776,
+   "runs": 6.0
+  },
+  "seq@eps/10": {
+   "n": 625,
+   "certified": 625,
+   "safe": 595,
+   "pen": 30.896,
+   "runs": 6.0
+  },
+  "coord@eps": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 11.248,
+   "runs": 7.0
+  },
+  "coord@eps/3": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 20.744,
+   "runs": 8.0
+  },
+  "coord@eps/10": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 40.08,
+   "runs": 8.0
+  },
+  "ref": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 1.0,
+   "runs": 625
+  }
+ },
+ {
+  "cell": "L2 energy 1e-03",
+  "method": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 1.0,
+   "runs": 64.0
+  },
+  "seq@eps": {
+   "n": 625,
+   "certified": 625,
+   "safe": 553,
+   "pen": 5.666666666666667,
+   "runs": 6.0
+  },
+  "seq@eps/3": {
+   "n": 625,
+   "certified": 625,
+   "safe": 565,
+   "pen": 11.097701149425287,
+   "runs": 6.0
+  },
+  "seq@eps/10": {
+   "n": 625,
+   "certified": 625,
+   "safe": 565,
+   "pen": 11.097701149425287,
+   "runs": 6.0
+  },
+  "coord@eps": {
+   "n": 625,
+   "certified": 625,
+   "safe": 623,
+   "pen": 7.4511494252873565,
+   "runs": 8.0
+  },
+  "coord@eps/3": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 14.39655172413793,
+   "runs": 8.0
+  },
+  "coord@eps/10": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 14.39655172413793,
+   "runs": 8.0
+  },
+  "ref": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 1.0,
+   "runs": 625
+  }
+ },
+ {
+  "cell": "L2 dissipation 1e-02",
+  "method": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 1.0,
+   "runs": 55.0
+  },
+  "seq@eps": {
+   "n": 625,
+   "certified": 625,
+   "safe": 605,
+   "pen": 15.888,
+   "runs": 5.0
+  },
+  "seq@eps/3": {
+   "n": 625,
+   "certified": 625,
+   "safe": 605,
+   "pen": 18.6,
+   "runs": 5.0
+  },
+  "seq@eps/10": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 28.8,
+   "runs": 6.0
+  },
+  "coord@eps": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 16.0,
+   "runs": 7.0
+  },
+  "coord@eps/3": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 20.8,
+   "runs": 7.0
+  },
+  "coord@eps/10": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 35.056,
+   "runs": 8.0
+  },
+  "ref": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 1.0,
+   "runs": 625
+  }
+ },
+ {
+  "cell": "L2 dissipation 3e-03",
+  "method": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 2.48,
+   "runs": 59.0
+  },
+  "seq@eps": {
+   "n": 625,
+   "certified": 625,
+   "safe": 585,
+   "pen": 9.3,
+   "runs": 5.0
+  },
+  "seq@eps/3": {
+   "n": 625,
+   "certified": 625,
+   "safe": 585,
+   "pen": 14.4,
+   "runs": 6.0
+  },
+  "seq@eps/10": {
+   "n": 625,
+   "certified": 625,
+   "safe": 615,
+   "pen": 29.344,
+   "runs": 6.0
+  },
+  "coord@eps": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 10.4,
+   "runs": 7.0
+  },
+  "coord@eps/3": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 17.528,
+   "runs": 8.0
+  },
+  "coord@eps/10": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 37.648,
+   "runs": 8.0
+  },
+  "ref": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 1.0,
+   "runs": 625
+  }
+ },
+ {
+  "cell": "L2 dissipation 1e-03",
+  "method": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 2.164335664335664,
+   "runs": 65.0
+  },
+  "seq@eps": {
+   "n": 625,
+   "certified": 625,
+   "safe": 565,
+   "pen": 6.293706293706293,
+   "runs": 6.0
+  },
+  "seq@eps/3": {
+   "n": 625,
+   "certified": 625,
+   "safe": 565,
+   "pen": 12.825174825174825,
+   "runs": 6.0
+  },
+  "seq@eps/10": {
+   "n": 625,
+   "certified": 625,
+   "safe": 565,
+   "pen": 13.832167832167832,
+   "runs": 6.0
+  },
+  "coord@eps": {
+   "n": 625,
+   "certified": 625,
+   "safe": 624,
+   "pen": 7.660839160839161,
+   "runs": 8.0
+  },
+  "coord@eps/3": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 16.454545454545453,
+   "runs": 8.0
+  },
+  "coord@eps/10": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 17.517482517482517,
+   "runs": 8.0
+  },
+  "ref": {
+   "n": 625,
+   "certified": 625,
+   "safe": 625,
+   "pen": 1.0,
+   "runs": 625
+  }
+ },
+ {
+  "cell": "L3 energy 1e-02",
+  "method": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 1.0,
+   "runs": 45.0
+  },
+  "seq@eps": {
+   "n": 432,
+   "certified": 432,
+   "safe": 234,
+   "pen": 2.4593874819566457,
+   "runs": 5.0
+  },
+  "seq@eps/3": {
+   "n": 432,
+   "certified": 432,
+   "safe": 378,
+   "pen": 6.148875586474681,
+   "runs": 6.0
+  },
+  "seq@eps/10": {
+   "n": 432,
+   "certified": 432,
+   "safe": 378,
+   "pen": 17.70200173552382,
+   "runs": 6.0
+  },
+  "coord@eps": {
+   "n": 432,
+   "certified": 432,
+   "safe": 234,
+   "pen": 2.4593874819566457,
+   "runs": 7.0
+  },
+  "coord@eps/3": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 8.893464891361672,
+   "runs": 8.0
+  },
+  "coord@eps/10": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 28.37312333355045,
+   "runs": 8.0
+  },
+  "ref": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 1.0,
+   "runs": 432
+  }
+ },
+ {
+  "cell": "L3 energy 3e-03",
+  "method": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 1.0,
+   "runs": 53.0
+  },
+  "seq@eps": {
+   "n": 432,
+   "certified": 432,
+   "safe": 135,
+   "pen": 1.082021685412734,
+   "runs": 6.0
+  },
+  "seq@eps/3": {
+   "n": 432,
+   "certified": 432,
+   "safe": 351,
+   "pen": 3.115032900516387,
+   "runs": 6.0
+  },
+  "seq@eps/10": {
+   "n": 432,
+   "certified": 432,
+   "safe": 351,
+   "pen": 3.115032900516387,
+   "runs": 6.0
+  },
+  "coord@eps": {
+   "n": 432,
+   "certified": 432,
+   "safe": 135,
+   "pen": 1.5649888724496406,
+   "runs": 8.0
+  },
+  "coord@eps/3": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 4.992837194058918,
+   "runs": 8.0
+  },
+  "coord@eps/10": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 4.992837194058918,
+   "runs": 8.0
+  },
+  "ref": {
+   "n": 432,
+   "certified": 432,
+   "safe": 0,
+   "pen": 0.17597065840668386,
+   "runs": 432
+  }
+ },
+ {
+  "cell": "L3 gradient 1e-02",
+  "method": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 1.0,
+   "runs": 44.0
+  },
+  "seq@eps": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 9.330643551562495,
+   "runs": 6.0
+  },
+  "seq@eps/3": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 23.368557393100346,
+   "runs": 6.0
+  },
+  "seq@eps/10": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 23.368557393100346,
+   "runs": 6.0
+  },
+  "coord@eps": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 9.330643551562495,
+   "runs": 8.0
+  },
+  "coord@eps/3": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 23.368557393100346,
+   "runs": 8.0
+  },
+  "coord@eps/10": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 23.368557393100346,
+   "runs": 8.0
+  },
+  "ref": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 1.0,
+   "runs": 432
+  }
+ },
+ {
+  "cell": "L3 gradient 3e-03",
+  "method": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 1.0,
+   "runs": 51.0
+  },
+  "seq@eps": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 4.112180430478247,
+   "runs": 6.0
+  },
+  "seq@eps/3": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 4.112180430478247,
+   "runs": 6.0
+  },
+  "seq@eps/10": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 4.112180430478247,
+   "runs": 6.0
+  },
+  "coord@eps": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 4.112180430478247,
+   "runs": 8.0
+  },
+  "coord@eps/3": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 4.112180430478247,
+   "runs": 8.0
+  },
+  "coord@eps/10": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 4.112180430478247,
+   "runs": 8.0
+  },
+  "ref": {
+   "n": 432,
+   "certified": 432,
+   "safe": 432,
+   "pen": 1.0,
+   "runs": 432
+  }
+ },
+ {
+  "cell": "L4 mass 1e-02",
+  "method": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 1.0,
+   "runs": 47.0
+  },
+  "seq@eps": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 36.868160152526215,
+   "runs": 5.0
+  },
+  "seq@eps/3": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 36.868160152526215,
+   "runs": 5.0
+  },
+  "seq@eps/10": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 45.3302192564347,
+   "runs": 5.0
+  },
+  "coord@eps": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 36.868160152526215,
+   "runs": 7.0
+  },
+  "coord@eps/3": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 36.868160152526215,
+   "runs": 7.0
+  },
+  "coord@eps/10": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 57.65295519542421,
+   "runs": 7.0
+  },
+  "ref": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 1.0,
+   "runs": 576
+  }
+ },
+ {
+  "cell": "L4 mass 3e-03",
+  "method": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 1.1830314585319353,
+   "runs": 49.0
+  },
+  "seq@eps": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 36.868160152526215,
+   "runs": 5.0
+  },
+  "seq@eps/3": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 45.3302192564347,
+   "runs": 5.0
+  },
+  "seq@eps/10": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 48.25667302192564,
+   "runs": 5.0
+  },
+  "coord@eps": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 36.868160152526215,
+   "runs": 7.0
+  },
+  "coord@eps/3": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 57.65295519542421,
+   "runs": 7.0
+  },
+  "coord@eps/10": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 159.0296472831268,
+   "runs": 8.0
+  },
+  "ref": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 1.0,
+   "runs": 576
+  }
+ },
+ {
+  "cell": "L4 sharpness 1e-02",
+  "method": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 8.094788255775937,
+   "runs": 53.0
+  },
+  "seq@eps": {
+   "n": 576,
+   "certified": 576,
+   "safe": 540,
+   "pen": 8.148722995703212,
+   "runs": 6.0
+  },
+  "seq@eps/3": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 15.22565692407015,
+   "runs": 6.0
+  },
+  "seq@eps/10": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 20.60498088933072,
+   "runs": 6.0
+  },
+  "coord@eps": {
+   "n": 576,
+   "certified": 576,
+   "safe": 558,
+   "pen": 8.580273938955393,
+   "runs": 8.0
+  },
+  "coord@eps/3": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 17.944979860358515,
+   "runs": 8.0
+  },
+  "coord@eps/10": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 23.965287124736324,
+   "runs": 9.0
+  },
+  "ref": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 1.0,
+   "runs": 576
+  }
+ },
+ {
+  "cell": "L4 sharpness 3e-03",
+  "method": {
+   "n": 576,
+   "certified": 432,
+   "safe": 432,
+   "pen": 8.078731994987752,
+   "runs": 48.0
+  },
+  "seq@eps": {
+   "n": 576,
+   "certified": 576,
+   "safe": 540,
+   "pen": 13.824845641784172,
+   "runs": 6.0
+  },
+  "seq@eps/3": {
+   "n": 576,
+   "certified": 576,
+   "safe": 564,
+   "pen": 17.11468618998846,
+   "runs": 6.0
+  },
+  "seq@eps/10": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 21.903424622599506,
+   "runs": 7.0
+  },
+  "coord@eps": {
+   "n": 576,
+   "certified": 576,
+   "safe": 552,
+   "pen": 14.879930743855654,
+   "runs": 8.0
+  },
+  "coord@eps/3": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 19.905787381982652,
+   "runs": 9.0
+  },
+  "coord@eps/10": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 33.650996728805126,
+   "runs": 9.0
+  },
+  "ref": {
+   "n": 576,
+   "certified": 576,
+   "safe": 576,
+   "pen": 1.0,
+   "runs": 576
+  }
+ }
+]

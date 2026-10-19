@@ -1,0 +1,78 @@
+====================================================================================================
+L5  driven cavity with a boundary layer (delta = 0.05, nu = 0.01), 700 configurations
+exact values: {'psi_min': -0.0352353176, 'y_min': 0.8855961735, 'omega_lid': -24.0}
+====================================================================================================
+
+error against N at the tightest tolerances (observed order between levels):
+  psi_min    2.4e-01  1.3e-01  7.9e-02  3.7e-02  2.0e-02  9.3e-03  5.3e-03
+  order         1.49     1.74     1.88     2.03     1.94     1.97
+  y_min      2.3e-02  8.7e-03  3.9e-03  7.5e-04  7.4e-04  5.0e-04  1.8e-04
+  order         2.42     2.76     4.09     0.01     0.99     3.45
+  omega_lid  1.7e-01  8.0e-02  4.6e-02  2.0e-02  1.2e-02  5.1e-03  2.9e-03
+  order         1.82     1.94     1.98     1.99     2.00     2.00
+
+share of the configurations whose Newton iteration did not converge: 15/700
+
+--- psi_min, target 1e-02 relative
+  method                         certified 0/700, missed 0, declined 700 (700 attainable), distinct recommendations 0, penalty median nan worst nan, runs median 106, worst error 0.00 eps
+  method, gated margin alpha=5   certified 0/700, missed 0, declined 700 (700 attainable), distinct recommendations 0, penalty median nan worst nan, runs median 106, worst error 0.00 eps
+  sequential @eps                attained 673/700, penalty median 6.81, runs median 7
+  sequential @eps/10             attained 693/700, penalty median 23.23, runs median 7
+  coordinate search @eps         attained 700/700, penalty median 6.81, runs median 9
+  coordinate search @eps/10      attained 700/700, penalty median 23.23, runs median 9
+  reference acceptance           attained 1/1, penalty median 1.00, runs median 700
+
+--- psi_min, target 3e-03 relative
+  method                         certified 0/700, missed 0, declined 700 (700 attainable), distinct recommendations 0, penalty median nan worst nan, runs median 106, worst error 0.00 eps
+  method, gated margin alpha=5   certified 0/700, missed 0, declined 700 (700 attainable), distinct recommendations 0, penalty median nan worst nan, runs median 106, worst error 0.00 eps
+  sequential @eps                attained 14/700, penalty median 3.50, runs median 7
+  sequential @eps/10             attained 0/700, penalty median 4.33, runs median 7
+  coordinate search @eps         attained 14/700, penalty median 3.50, runs median 9
+  coordinate search @eps/10      attained 0/700, penalty median 4.33, runs median 9
+  reference acceptance           attained 0/1, penalty median 0.37, runs median 700
+
+--- y_min, target 1e-03 relative
+  method                         certified 700/700, missed 0, declined 0 (0 attainable), distinct recommendations 1, penalty median 3.22 worst 3.22, runs median 89, worst error 0.75 eps
+  method, gated margin alpha=5   certified 700/700, missed 0, declined 0 (0 attainable), distinct recommendations 9, penalty median 6.88 worst 20.28, runs median 78, worst error 0.75 eps
+  sequential @eps                attained 692/700, penalty median 7.52, runs median 5
+  sequential @eps/10             attained 697/700, penalty median 12.16, runs median 6
+  coordinate search @eps         attained 696/700, penalty median 7.52, runs median 7
+  coordinate search @eps/10      attained 700/700, penalty median 14.81, runs median 8
+  reference acceptance           attained 1/1, penalty median 1.00, runs median 700
+
+--- y_min, target 3e-04 relative
+  method                         certified 700/700, missed 348, declined 0 (0 attainable), distinct recommendations 3, penalty median 6.46 worst 12.57, runs median 83, worst error 1.83 eps
+      miss: start (0, 0, 2, 0) -> (6, 1, 2, 3), true 1.08 eps, estimate 1.00 eps
+      miss: start (0, 0, 2, 1) -> (6, 1, 2, 3), true 1.08 eps, estimate 1.00 eps
+      miss: start (0, 0, 2, 2) -> (6, 1, 2, 3), true 1.08 eps, estimate 1.00 eps
+      miss: start (0, 0, 2, 3) -> (6, 1, 2, 3), true 1.08 eps, estimate 1.00 eps
+      miss: start (0, 0, 3, 0) -> (6, 1, 2, 3), true 1.08 eps, estimate 1.00 eps
+  method, gated margin alpha=5   certified 700/700, missed 8, declined 0 (0 attainable), distinct recommendations 4, penalty median 8.61 worst 3546.97, runs median 96, worst error 1.83 eps
+      miss: start (2, 1, 1, 1) -> (5, 1, 1, 1), true 1.83 eps, estimate 0.63 eps
+      miss: start (3, 0, 1, 0) -> (5, 1, 1, 1), true 1.83 eps, estimate 0.63 eps
+      miss: start (3, 0, 1, 1) -> (5, 1, 1, 1), true 1.83 eps, estimate 0.63 eps
+      miss: start (3, 1, 1, 1) -> (5, 1, 1, 1), true 1.83 eps, estimate 0.63 eps
+      miss: start (4, 0, 1, 0) -> (5, 1, 1, 1), true 1.83 eps, estimate 0.63 eps
+  sequential @eps                attained 160/700, penalty median 2.74, runs median 5
+  sequential @eps/10             attained 280/700, penalty median 4.72, runs median 6
+  coordinate search @eps         attained 181/700, penalty median 2.82, runs median 7
+  coordinate search @eps/10      attained 324/700, penalty median 4.87, runs median 8
+  reference acceptance           attained 1/1, penalty median 1.00, runs median 700
+
+--- omega_lid, target 1e-02 relative
+  method                         certified 700/700, missed 0, declined 0 (0 attainable), distinct recommendations 3, penalty median 1.33 worst 5.26, runs median 80, worst error 0.63 eps
+  method, gated margin alpha=5   certified 700/700, missed 0, declined 0 (0 attainable), distinct recommendations 10, penalty median 2.34 worst 3.93, runs median 73, worst error 0.59 eps
+  sequential @eps                attained 204/700, penalty median 1.40, runs median 5
+  sequential @eps/10             attained 690/700, penalty median 18.26, runs median 7
+  coordinate search @eps         attained 204/700, penalty median 1.40, runs median 7
+  coordinate search @eps/10      attained 700/700, penalty median 16.55, runs median 9
+  reference acceptance           attained 0/1, penalty median 0.42, runs median 700
+
+--- omega_lid, target 3e-03 relative
+  method                         certified 23/700, missed 0, declined 677 (677 attainable), distinct recommendations 2, penalty median 2605.73 worst 2605.73, runs median 105, worst error 0.96 eps
+  method, gated margin alpha=5   certified 23/700, missed 0, declined 677 (677 attainable), distinct recommendations 2, penalty median 2628.05 worst 2628.05, runs median 105, worst error 0.96 eps
+  sequential @eps                attained 124/700, penalty median 3.37, runs median 6
+  sequential @eps/10             attained 527/700, penalty median 8.82, runs median 7
+  coordinate search @eps         attained 124/700, penalty median 3.38, runs median 9
+  coordinate search @eps/10      attained 532/700, penalty median 8.82, runs median 9
+  reference acceptance           attained 0/1, penalty median 0.51, runs median 700

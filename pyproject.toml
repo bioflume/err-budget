@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "knobs"
+version = "1.2.1"
+description = "knobs 1.2.1, the program of the article, with the scripts, data and cluster jobs that reproduce it"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+dependencies = ["numpy>=1.20", "scipy>=1.12"]
+
+[project.optional-dependencies]
+paper = ["matplotlib>=3.5", "sympy>=1.9", "pytest>=7"]
+dev = ["pytest>=7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

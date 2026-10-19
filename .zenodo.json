@@ -1,0 +1,18 @@
+{
+  "title": "knobs 1.2.0: choosing the numerical parameters of a black-box solver for a target accuracy in one observable",
+  "upload_type": "software",
+  "version": "1.2.0",
+  "license": "MIT",
+  "creators": [
+    {"name": "Kabacaoğlu, Gökberk",
+     "affiliation": "Department of Mathematical Sciences, Durham University"}
+  ],
+  "description": "Python program that chooses mesh, time step, nested-solver tolerances and cost-only settings of a black-box solver so that one scalar observable meets a target accuracy, with a per-parameter error budget. The deposit contains the package, the tests, the solver outputs of every run reported in the accompanying article, the pre-registration of the held-out tests, the scripts that regenerate every table and figure, and the Slurm kit for the cluster studies.",
+  "keywords": ["solution verification", "error budget", "solver tolerances",
+               "numerical parameter selection", "discretisation error", "OpenFOAM",
+               "LAMMPS", "GROMACS", "Quantum ESPRESSO", "ABINIT"],
+  "related_identifiers": [
+    {"relation": "isSupplementTo", "identifier": "https://github.com/GITHUB_USER/knobs", "scheme": "url"}
+  ],
+  "access_right": "open"
+}

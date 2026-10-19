@@ -1,0 +1,18 @@
+gmx    floor probe (first three settings): 0.4375 kJ/mol, relative 5.94e-06; declines targets below 5.9e-05
+gmx    six converged settings: spread 2.1953 kJ/mol, relative 2.98e-05   values [-73672.5625, -73672.4297, -73672.8672, -73671.8906, -73670.6719, -73672.8672]
+gmx_d  floor probe (first three settings): 0.0000 kJ/mol, relative 2.85e-10; declines targets below 2.9e-09
+gmx_d  six converged settings: spread 0.0002 kJ/mol, relative 2.28e-09   values [-73671.3702, -73671.3702, -73671.3702, -73671.3702, -73671.3701, -73671.3702]
+without floor probe (v1.0)
+  mixed precision, target 1e-04 (above the floor): certified from 225/225 starts, 0 of them miss the target against the double-precision reference (worst error 5.83e-05); 0 declined at the floor check
+  mixed precision, target 3e-05 (above the floor): certified from 152/225 starts, 0 of them miss the target against the double-precision reference (worst error 1.75e-05); 0 declined at the floor check
+  mixed precision, target 1e-05 (below the floor): certified from 9/225 starts, 6 of them miss the target against the double-precision reference (worst error 1.58e-05); 0 declined at the floor check
+  mixed precision, target 3e-06 (below the floor): certified from 6/225 starts, 6 of them miss the target against the double-precision reference (worst error 9.59e-06); 0 declined at the floor check
+  mixed precision, target 1e-06 (below the floor): certified from 0/225 starts, 0 of them miss the target against the double-precision reference (worst error 0.00e+00); 0 declined at the floor check
+with floor probe (v1.1)
+  mixed precision, target 1e-04 (above the floor): certified from 225/225 starts, 0 of them miss the target against the double-precision reference (worst error 5.83e-05); 0 declined at the floor check
+  mixed precision, target 3e-05 (above the floor): certified from 0/225 starts, 0 of them miss the target against the double-precision reference (worst error 0.00e+00); 225 declined at the floor check
+  mixed precision, target 1e-05 (below the floor): certified from 0/225 starts, 0 of them miss the target against the double-precision reference (worst error 0.00e+00); 225 declined at the floor check
+  mixed precision, target 3e-06 (below the floor): certified from 0/225 starts, 0 of them miss the target against the double-precision reference (worst error 0.00e+00); 225 declined at the floor check
+  mixed precision, target 1e-06 (below the floor): certified from 0/225 starts, 0 of them miss the target against the double-precision reference (worst error 0.00e+00); 225 declined at the floor check
+double precision, target 1e-05: 0/225 starts declined at the floor check
+double precision, target 1e-06: 0/225 starts declined at the floor check

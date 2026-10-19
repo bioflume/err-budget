@@ -1,0 +1,38 @@
+frozen program verified (sha256 34dd3f440eb50317...), from /tmp/knobs_frozen_6jvo1v6r/src/knobs
+
+H1: 3D Poisson, scikit-fem: 105 settings, 105 usable, 0 not converged
+  mean   error against the first parameter at the finest others: 2.43e-02  1.14e-02  3.81e-03  1.71e-03  5.31e-04  2.28e-04  6.80e-05
+  flux   error against the first parameter at the finest others: 1.50e-01  9.66e-02  4.74e-02  2.76e-02  1.26e-02  7.12e-03  3.19e-03
+  v1.2  mean   1e-03   starts 105  start-failed 0    accepted 105  missed 0   declined(reachable) 0    declined(unreachable) 0    penalty 1.72/3.87 runs 35 worst 0.53
+  v1.2  mean   3e-04   starts 105  start-failed 0    accepted 105  missed 0   declined(reachable) 0    declined(unreachable) 0    penalty 4.58/4.58 runs 47 worst 0.24
+  v1.2  flux   3e-02   starts 105  start-failed 0    accepted 105  missed 0   declined(reachable) 0    declined(unreachable) 0    penalty 5.61/5.61 runs 36 worst 0.42
+  v1.2  flux   1e-02   starts 105  start-failed 0    accepted 105  missed 0   declined(reachable) 0    declined(unreachable) 0    penalty 15.12/15.12 runs 44 worst 0.32
+  v1.2  flux   3e-03   starts 105  start-failed 0    accepted 0    missed 0   declined(reachable) 105  declined(unreachable) 0    penalty nan/nan runs 49 worst 0.00
+  v1.1  mean   1e-03   starts 105  start-failed 0    accepted 105  missed 0   declined(reachable) 0    declined(unreachable) 0    penalty 1.72/3.87 runs 34 worst 0.53
+  v1.1  mean   3e-04   starts 105  start-failed 0    accepted 105  missed 0   declined(reachable) 0    declined(unreachable) 0    penalty 4.58/4.58 runs 47 worst 0.24
+  v1.1  flux   3e-02   starts 105  start-failed 0    accepted 105  missed 0   declined(reachable) 0    declined(unreachable) 0    penalty 4.50/5.61 runs 41 worst 0.44
+  v1.1  flux   1e-02   starts 105  start-failed 0    accepted 105  missed 0   declined(reachable) 0    declined(unreachable) 0    penalty 15.12/15.12 runs 45 worst 0.81
+  v1.1  flux   3e-03   starts 105  start-failed 0    accepted 0    missed 0   declined(reachable) 105  declined(unreachable) 0    penalty nan/nan runs 49 worst 0.00
+
+H2: cavity Re 1000, OpenFOAM: 105 settings, 105 usable, 37 not converged
+  u_min  error against the first parameter at the finest others: 1.23e-01  6.82e-02  3.19e-02  1.90e-02  9.01e-03  5.31e-03  2.43e-03
+  v_max  error against the first parameter at the finest others: 1.53e-01  8.45e-02  3.73e-02  2.19e-02  1.03e-02  6.01e-03  2.73e-03
+  v_min  error against the first parameter at the finest others: 1.75e-01  1.08e-01  4.59e-02  2.85e-02  1.18e-02  6.81e-03  3.11e-03
+  v1.2  u_min  3e-02   starts 105  start-failed 37   accepted 66   missed 0   declined(reachable) 2    declined(unreachable) 0    penalty 1.00/1.00 runs 19 worst 0.87
+  v1.2  u_min  1e-02   starts 105  start-failed 37   accepted 66   missed 0   declined(reachable) 2    declined(unreachable) 0    penalty 1.49/1.49 runs 24 worst 0.79
+  v1.2  u_min  3e-03   starts 105  start-failed 37   accepted 60   missed 0   declined(reachable) 8    declined(unreachable) 0    penalty 1.73/1.73 runs 31 worst 0.82
+  v1.2  v_max  3e-02   starts 105  start-failed 37   accepted 66   missed 9   declined(reachable) 2    declined(unreachable) 0    penalty 1.00/2.09 runs 17 worst 1.03
+  v1.2  v_max  1e-02   starts 105  start-failed 37   accepted 66   missed 0   declined(reachable) 2    declined(unreachable) 0    penalty 1.00/1.70 runs 26 worst 0.91
+  v1.2  v_max  3e-03   starts 105  start-failed 37   accepted 0    missed 0   declined(reachable) 68   declined(unreachable) 0    penalty nan/nan runs 37 worst 0.00
+  v1.2  v_min  3e-02   starts 105  start-failed 37   accepted 66   missed 0   declined(reachable) 2    declined(unreachable) 0    penalty 2.09/2.09 runs 19 worst 0.63
+  v1.2  v_min  1e-02   starts 105  start-failed 37   accepted 66   missed 0   declined(reachable) 2    declined(unreachable) 0    penalty 3.75/9.87 runs 28 worst 0.70
+  v1.2  v_min  3e-03   starts 105  start-failed 37   accepted 0    missed 0   declined(reachable) 0    declined(unreachable) 68   penalty nan/nan runs 37 worst 0.00
+  v1.1  u_min  3e-02   starts 105  start-failed 0    accepted 105  missed 3   declined(reachable) 0    declined(unreachable) 0    penalty 1.00/2.13 runs 32 worst 1.21
+  v1.1  u_min  1e-02   starts 105  start-failed 0    accepted 105  missed 0   declined(reachable) 0    declined(unreachable) 0    penalty 1.00/1.49 runs 31 worst 0.92
+  v1.1  u_min  3e-03   starts 105  start-failed 0    accepted 105  missed 0   declined(reachable) 0    declined(unreachable) 0    penalty 1.73/1.73 runs 44 worst 0.82
+  v1.1  v_max  3e-02   starts 105  start-failed 0    accepted 105  missed 18  declined(reachable) 0    declined(unreachable) 0    penalty 1.00/1.00 runs 29 worst 1.03
+  v1.1  v_max  1e-02   starts 105  start-failed 0    accepted 105  missed 0   declined(reachable) 0    declined(unreachable) 0    penalty 1.00/3.75 runs 35 worst 0.91
+  v1.1  v_max  3e-03   starts 105  start-failed 0    accepted 105  missed 0   declined(reachable) 0    declined(unreachable) 0    penalty 3.70/10.16 runs 48 worst 0.91
+  v1.1  v_min  3e-02   starts 105  start-failed 0    accepted 105  missed 0   declined(reachable) 0    declined(unreachable) 0    penalty 2.09/2.09 runs 36 worst 0.63
+  v1.1  v_min  1e-02   starts 105  start-failed 0    accepted 105  missed 0   declined(reachable) 0    declined(unreachable) 0    penalty 3.75/3.75 runs 44 worst 0.62
+  v1.1  v_min  3e-03   starts 105  start-failed 0    accepted 0    missed 0   declined(reachable) 0    declined(unreachable) 105  penalty nan/nan runs 49 worst 0.00

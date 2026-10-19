@@ -1,0 +1,273 @@
+{
+ "floor_probe_abs": 0.4375,
+ "floor_probe_rel": 5.938534857852152e-06,
+ "spread6_rel": 3e-05,
+ "rows": [
+  {
+   "target": 0.0001,
+   "settings": 225,
+   "within_target_by_chance": 206,
+   "largest_error_of_those": 8.551347670475592e-05,
+   "v1.2.1": {
+    "accepted": 69,
+    "missed": 0,
+    "declined_reach": 156,
+    "declined_unreach": 0,
+    "distinct": 7,
+    "worst": 0.15841730603363266,
+    "pen_med": 3.217704855209607,
+    "reasons": {
+     "not_reached": 156
+    }
+   },
+   "v1.2.1-noprobe": {
+    "accepted": 69,
+    "missed": 0,
+    "declined_reach": 156,
+    "declined_unreach": 0,
+    "distinct": 7,
+    "worst": 0.15841730603363266,
+    "pen_med": 3.217704855209607,
+    "reasons": {
+     "not_reached": 156
+    }
+   },
+   "v1.1": {
+    "accepted": 225,
+    "missed": 0,
+    "declined_reach": 0,
+    "declined_unreach": 0,
+    "distinct": 22,
+    "worst": 0.5825983673087863,
+    "pen_med": 1.2116377348801075,
+    "reasons": {}
+   },
+   "v1.1-noprobe": {
+    "accepted": 225,
+    "missed": 0,
+    "declined_reach": 0,
+    "declined_unreach": 0,
+    "distinct": 22,
+    "worst": 0.5825983673087863,
+    "pen_med": 1.2116377348801075,
+    "reasons": {}
+   }
+  },
+  {
+   "target": 3e-05,
+   "settings": 225,
+   "within_target_by_chance": 160,
+   "largest_error_of_those": 2.9203434033530608e-05,
+   "v1.2.1": {
+    "accepted": 0,
+    "missed": 0,
+    "declined_reach": 225,
+    "declined_unreach": 0,
+    "distinct": 0,
+    "worst": 0.0,
+    "pen_med": NaN,
+    "reasons": {
+     "below_floor": 225
+    }
+   },
+   "v1.2.1-noprobe": {
+    "accepted": 0,
+    "missed": 0,
+    "declined_reach": 225,
+    "declined_unreach": 0,
+    "distinct": 0,
+    "worst": 0.0,
+    "pen_med": NaN,
+    "reasons": {
+     "not_reached": 225
+    }
+   },
+   "v1.1": {
+    "accepted": 0,
+    "missed": 0,
+    "declined_reach": 225,
+    "declined_unreach": 0,
+    "distinct": 0,
+    "worst": 0.0,
+    "pen_med": NaN,
+    "reasons": {
+     "below_floor": 225
+    }
+   },
+   "v1.1-noprobe": {
+    "accepted": 152,
+    "missed": 0,
+    "declined_reach": 73,
+    "declined_unreach": 0,
+    "distinct": 12,
+    "worst": 0.5818827568912099,
+    "pen_med": 1.8788038893464578,
+    "reasons": {
+     "not_reached": 73
+    }
+   }
+  },
+  {
+   "target": 1e-05,
+   "settings": 225,
+   "within_target_by_chance": 51,
+   "largest_error_of_those": 9.585066736503409e-06,
+   "v1.2.1": {
+    "accepted": 0,
+    "missed": 0,
+    "declined_reach": 225,
+    "declined_unreach": 0,
+    "distinct": 0,
+    "worst": 0.0,
+    "pen_med": NaN,
+    "reasons": {
+     "below_floor": 225
+    }
+   },
+   "v1.2.1-noprobe": {
+    "accepted": 0,
+    "missed": 0,
+    "declined_reach": 225,
+    "declined_unreach": 0,
+    "distinct": 0,
+    "worst": 0.0,
+    "pen_med": NaN,
+    "reasons": {
+     "not_reached": 225
+    }
+   },
+   "v1.1": {
+    "accepted": 0,
+    "missed": 0,
+    "declined_reach": 225,
+    "declined_unreach": 0,
+    "distinct": 0,
+    "worst": 0.0,
+    "pen_med": NaN,
+    "reasons": {
+     "below_floor": 225
+    }
+   },
+   "v1.1-noprobe": {
+    "accepted": 9,
+    "missed": 6,
+    "declined_reach": 216,
+    "declined_unreach": 0,
+    "distinct": 4,
+    "worst": 1.5841730603363264,
+    "pen_med": 2.994401543300067,
+    "reasons": {
+     "not_reached": 216
+    }
+   }
+  },
+  {
+   "target": 3e-06,
+   "settings": 225,
+   "within_target_by_chance": 13,
+   "largest_error_of_those": 2.373988694825795e-06,
+   "v1.2.1": {
+    "accepted": 0,
+    "missed": 0,
+    "declined_reach": 225,
+    "declined_unreach": 0,
+    "distinct": 0,
+    "worst": 0.0,
+    "pen_med": NaN,
+    "reasons": {
+     "below_floor": 225
+    }
+   },
+   "v1.2.1-noprobe": {
+    "accepted": 0,
+    "missed": 0,
+    "declined_reach": 225,
+    "declined_unreach": 0,
+    "distinct": 0,
+    "worst": 0.0,
+    "pen_med": NaN,
+    "reasons": {
+     "not_reached": 225
+    }
+   },
+   "v1.1": {
+    "accepted": 0,
+    "missed": 0,
+    "declined_reach": 225,
+    "declined_unreach": 0,
+    "distinct": 0,
+    "worst": 0.0,
+    "pen_med": NaN,
+    "reasons": {
+     "below_floor": 225
+    }
+   },
+   "v1.1-noprobe": {
+    "accepted": 6,
+    "missed": 6,
+    "declined_reach": 219,
+    "declined_unreach": 0,
+    "distinct": 1,
+    "worst": 3.195022245501136,
+    "pen_med": 3.1669592699999702,
+    "reasons": {
+     "not_reached": 219
+    }
+   }
+  },
+  {
+   "target": 1e-06,
+   "settings": 225,
+   "within_target_by_chance": 4,
+   "largest_error_of_those": 7.833029280953099e-07,
+   "v1.2.1": {
+    "accepted": 0,
+    "missed": 0,
+    "declined_reach": 225,
+    "declined_unreach": 0,
+    "distinct": 0,
+    "worst": 0.0,
+    "pen_med": NaN,
+    "reasons": {
+     "below_floor": 225
+    }
+   },
+   "v1.2.1-noprobe": {
+    "accepted": 0,
+    "missed": 0,
+    "declined_reach": 225,
+    "declined_unreach": 0,
+    "distinct": 0,
+    "worst": 0.0,
+    "pen_med": NaN,
+    "reasons": {
+     "not_reached": 225
+    }
+   },
+   "v1.1": {
+    "accepted": 0,
+    "missed": 0,
+    "declined_reach": 225,
+    "declined_unreach": 0,
+    "distinct": 0,
+    "worst": 0.0,
+    "pen_med": NaN,
+    "reasons": {
+     "below_floor": 225
+    }
+   },
+   "v1.1-noprobe": {
+    "accepted": 0,
+    "missed": 0,
+    "declined_reach": 225,
+    "declined_unreach": 0,
+    "distinct": 0,
+    "worst": 0.0,
+    "pen_med": NaN,
+    "reasons": {
+     "not_reached": 225
+    }
+   }
+  }
+ ]
+}

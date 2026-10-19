@@ -1,0 +1,9 @@
+ecut   24 Ha: E = -8.6971169450 Ha, |F| = 1.00739600e-02 Ha/Bohr (54 s)
+ecut   30 Ha: E = -8.7048883626 Ha, |F| = 9.71623580e-03 Ha/Bohr (92 s)
+ecut   36 Ha: E = -8.7059470383 Ha, |F| = 9.75948020e-03 Ha/Bohr (164 s)
+residual uncertainty of the reference: 1.22e-04 relative (energy), 4.45e-03 relative (force)
+  energy target 1e-02:   82.2 times the uncertainty -> admitted
+  energy target 3e-03:   24.7 times the uncertainty -> admitted
+  force  target 1e-01:   22.5 times the uncertainty -> admitted
+  force  target 3e-02:    6.7 times the uncertainty -> not admitted
+  force  target 1e-02:    2.2 times the uncertainty -> not admitted

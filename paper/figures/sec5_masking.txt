@@ -1,0 +1,37 @@
+==========================================================================================
+5.1  masking on L2 at the finest mesh and time step (N=512, 400 steps)
+==========================================================================================
+  energy: remaining discretisation error 8.85e-05 relative
+    Newton  tolerance 1e-02 vs 1e-10: change 1.43e-01 relative  (161935.675% of the discretisation error)
+    Newton  tolerance 1e-04 vs 1e-10: change 2.60e-07 relative  (0.293% of the discretisation error)
+    Newton  tolerance 1e-06 vs 1e-10: change 2.60e-07 relative  (0.293% of the discretisation error)
+    Newton  tolerance 1e-08 vs 1e-10: change 2.60e-07 relative  (0.293% of the discretisation error)
+    GMRES   tolerance 1e-02 vs 1e-10: change 2.42e-09 relative  (0.003% of the discretisation error)
+    GMRES   tolerance 1e-04 vs 1e-10: change 1.34e-11 relative  (0.000% of the discretisation error)
+    GMRES   tolerance 1e-06 vs 1e-10: change 1.47e-14 relative  (0.000% of the discretisation error)
+    GMRES   tolerance 1e-08 vs 1e-10: change 9.70e-16 relative  (0.000% of the discretisation error)
+  dissipation: remaining discretisation error 3.94e-04 relative
+    Newton  tolerance 1e-02 vs 1e-10: change 4.94e-01 relative  (125457.775% of the discretisation error)
+    Newton  tolerance 1e-04 vs 1e-10: change 8.44e-07 relative  (0.214% of the discretisation error)
+    Newton  tolerance 1e-06 vs 1e-10: change 8.44e-07 relative  (0.214% of the discretisation error)
+    Newton  tolerance 1e-08 vs 1e-10: change 8.44e-07 relative  (0.214% of the discretisation error)
+    GMRES   tolerance 1e-02 vs 1e-10: change 5.00e-10 relative  (0.000% of the discretisation error)
+    GMRES   tolerance 1e-04 vs 1e-10: change 4.64e-12 relative  (0.000% of the discretisation error)
+    GMRES   tolerance 1e-06 vs 1e-10: change 4.79e-14 relative  (0.000% of the discretisation error)
+    GMRES   tolerance 1e-08 vs 1e-10: change 2.68e-15 relative  (0.000% of the discretisation error)
+
+==========================================================================================
+5.1  masking on L3: budget at the anchor N=64, 40 steps, tolerances 1e-5, drop 1e-2
+==========================================================================================
+  energy: N 99.956%, steps 0.035%, newton_tol 0.009%, gmres_tol 0.000%, ilu_drop 0.000%
+  gradient: N 99.968%, steps 0.029%, newton_tol 0.003%, gmres_tol 0.000%, ilu_drop 0.000%
+
+==========================================================================================
+5.3  the same runs, two observables (L2, relative targets)
+==========================================================================================
+  target 1e-03, energy: optimum (3, 0, 1, 0); cheapest with both tolerances at 1e-10 costs 3.9 times the optimum
+  target 1e-03, dissipation: optimum (3, 0, 0, 0); cheapest with both tolerances at 1e-10 costs 17.2 times the optimum
+    energy-optimal setting: dissipation error 4.311e-04 against 3.104e-04 permitted -> FAILS
+  target 1e-04, energy: optimum (4, 1, 2, 0); cheapest with both tolerances at 1e-10 costs 2.5 times the optimum
+  target 1e-04, dissipation: not attainable on the grid
+    energy-optimal setting: dissipation error 1.827e-04 against 3.104e-05 permitted -> FAILS
