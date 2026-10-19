@@ -159,6 +159,29 @@ def _gromacs():
                  {"potential": [1e-4, 3e-5, 1e-5]}, floor=0.4375, cost_note="wall s")]
 
 
+def abinit_uncertainty(REF):
+    """Relative uncertainty of the ABINIT reference used for grading.
+
+    Until revision 4 this was the value measured on the 30-Ha reference of revision 2
+    (figures/sec83_reference.txt: 1.22e-4 in the energy, 4.45e-3 in the force), although
+    the tensor is graded against the 48-Ha reference (abinit_silicon.py, reference()).
+    paper/exp75_abinit_reference.py measures the uncertainty of the 48-Ha reference with
+    the recipe used for Quantum ESPRESSO and writes data/abinit_reference_v6.json; that
+    value is used if the reference it measured is the one in the tensor."""
+    unc = {"energy": 1.22e-4, "force": 4.45e-3}
+    f = os.path.join(D, "abinit_reference_v6.json")
+    if os.path.exists(f) and os.environ.get("KNOBS_ABINIT_UNC", "measured") == "measured":
+        import json
+        m = json.load(open(f))
+        same = all(abs(m["ref"][o] - REF[o]) <= 1e-8 * abs(REF[o]) for o in ("energy", "force"))
+        if same:
+            unc = {o: float(m["unc"][o]) for o in ("energy", "force")}
+        else:
+            print(f"cases.py: {f} measured a different reference ({m['ref']} against {dict(REF)}); "
+                  "keeping the revision-2 uncertainty", flush=True)
+    return unc
+
+
 def _abinit():
     LAD = [[8.0, 12.0, 16.0, 20.0, 24.0, 28.0, 32.0], [2, 3, 4, 6],
            [1e-6, 1e-8, 1e-10, 1e-12], [2, 4, 6]]
@@ -168,7 +191,27 @@ def _abinit():
                 ["discretisation", "discretisation", "nested-solver", "cost-only"], dict(REF),
                 {"energy": [1e-2, 3e-3, 1e-3], "force": [1e-1, 3e-2, 1e-2]},
                 models=["exponential", "power", "power", "power"],
-                unc={"energy": 1.22e-4, "force": 4.45e-3}, cost_note="CPU s")
+                unc=abinit_uncertainty(REF), cost_note="CPU s")
+
+
+def _dfg2_refined():
+    """Revision 4: DFG 2D-2 refined on Hamilton (job J2).  Parameters n_arc 24-96, time
+    step, PIMPLE residualControl, GAMG tolerance, relaxation time and averaging window;
+    forces from OpenFOAM's forceCoeffs function object; reference n_arc 192, dt 1.25e-4,
+    whose uncertainty is measured against two other reference runs and the window
+    variants (hamilton/J2_dfg2d2/analyse_j2.py, which writes the case specification)."""
+    p = os.path.normpath(os.path.join(os.path.dirname(D), "..", "hamilton", "results", "j2_tensor.pkl"))
+    if not os.path.exists(p):
+        raise FileNotFoundError(p)
+    z = pickle.load(open(p, "rb"))
+    if "case" not in z:
+        raise FileNotFoundError(f"{p} was written by the revision-3 analyse_j2.py; re-run the "
+                                "revision-4 analyse_j2.py to add the case specification")
+    s = z["case"]
+    t = {tuple(i): (v[0], v[1], dict(v[2])) for i, v in z["tensor"].items()}
+    return Case("2D-2h", "OpenFOAM DFG 2D-2 (refined, current release)", t, s["LAD"], s["HS"],
+                s["KINDS"], dict(s["exact"]), {k: list(v) for k, v in s["targets"].items()},
+                models=list(s["models"]), unc=dict(s["unc"]), cost_note="core-seconds")
 
 
 def _qe():
@@ -183,6 +226,15 @@ def _qe():
                 cost_note="CPU s")
 
 
-def all_cases(dfg1_cost="deterministic"):
-    return (_manufactured() + [_dfg1(dfg1_cost), _dfg2()] + _lammps() + _gromacs()
-            + [_abinit(), _qe()])
+def all_cases(dfg1_cost="deterministic", refined_2d2=True):
+    """Every development case.  With refined_2d2 (revision 4) the refined 2D-2 study of
+    the Hamilton job J2 is appended as case "2D-2h" when its results are present; the
+    revision-3 2D-2 case stays in the list, and the tables choose which one to show."""
+    out = (_manufactured() + [_dfg1(dfg1_cost), _dfg2()] + _lammps() + _gromacs()
+           + [_abinit(), _qe()])
+    if refined_2d2:
+        try:
+            out.append(_dfg2_refined())
+        except FileNotFoundError:
+            pass
+    return out

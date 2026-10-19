@@ -49,6 +49,20 @@ CONFIGS = {
     # the nested-solver class removed: every nested-solver parameter declared as a
     # discretisation parameter (referee point 10)
     "v1.2-nested-as-disc": dict(fail_unconverged=True, kw=dict(V12), kinds_map={"nested-solver": "discretisation"}),
+    # Revision 4: the same ablations taken relative to the released default, version
+    # 1.2.1, so that Table 4 compares every row with the configuration of Table 3.
+    "v1.2.1-accept-unconverged": dict(fail_unconverged=False, kw=dict(V121)),
+    "v1.2.1-nolocal": dict(fail_unconverged=True, kw=dict(V121, local_order_check=False)),
+    "v1.2.1-nojoint": dict(fail_unconverged=True, kw=dict(V121, joint_check=False)),
+    "v1.2.1-credit": dict(fail_unconverged=True, kw=dict(V121, cancel_rule="credit")),
+    "v1.2.1-constant": dict(fail_unconverged=True, kw=dict(V121, resid_margin=0.0)),
+    "v1.2.1-nores": dict(fail_unconverged=True, kw=dict(V121, res_frac=0.0)),
+    "v1.2.1-screened": dict(fail_unconverged=True, kw=dict(V121, use_screen=True)),
+    "v1.2.1-nested-as-disc": dict(fail_unconverged=True, kw=dict(V121),
+                                  kinds_map={"nested-solver": "discretisation"}),
+    # Revision 4, referee point on GROMACS: version 1.2.1 without the round-off probe
+    "v1.2.1-noprobe": dict(fail_unconverged=True, kw=dict(V121), no_floor=True),
+    "v1.1-noprobe": dict(fail_unconverged=False, kw=dict(V11), no_floor=True),
 }
 
 
@@ -78,13 +92,14 @@ def replay(case, ob, tg, cfg, starts=None):
     c_opt = min((T[i][1] for i in feas), default=np.nan)
     starts = [i for i in G if case.usable(i)] if starts is None else starts
     kw = dict(cfg["kw"])
-    if case.floor is not None:
+    if case.floor is not None and not cfg.get("no_floor"):
         kw.setdefault("noise_floor", case.floor)
     kinds = cfg.get("kinds") or [cfg.get("kinds_map", {}).get(k, k) for k in case.KINDS]
     out = dict(case=case.key, ob=ob, target=tg, n=len(starts), reachable=bool(feas),
                accepted=0, missed=0, declined_reach=0, declined_unreach=0, start_failed=0,
                pen=[], runs=[], unconv=0, worst=0.0, misses=[], orders=[], hit_cap=0,
-               max_steps=0)
+               max_steps=0, proposals={}, proposals_missed={}, unconv_from_converged=0,
+               unconv_settings={}, reasons={}, feasible=len(feas), good=len(good))
     for a in starts:
         r = run_protocol(look, case.LAD, a, eps, hs=case.HS, kinds=kinds,
                          models=case.models, **kw)
@@ -94,21 +109,31 @@ def replay(case, ob, tg, cfg, starts=None):
         if r["certified"]:
             q = tuple(r["proposal"])
             out["accepted"] += 1
+            # Revision 4: distinct accepted settings (counts over starts are not
+            # independent samples; Section 5.3 promises the number of distinct settings)
+            out["proposals"][q] = out["proposals"].get(q, 0) + 1
             e = err[q] / eps
             out["worst"] = max(out["worst"], e)
-            out["unconv"] += not case.converged(q)
+            if not case.converged(q):
+                out["unconv"] += 1
+                out["unconv_settings"][q] = out["unconv_settings"].get(q, 0) + 1
+                out["unconv_from_converged"] += bool(case.converged(tuple(a)))
             out["orders"].append((_orders(r.get("budget"), case.KINDS), err[q] / eps))
             if e > 1:
                 out["missed"] += 1
                 out["misses"].append((a, q, e))
+                out["proposals_missed"][q] = out["proposals_missed"].get(q, 0) + 1
             if feas:
                 out["pen"].append(T[q][1] / c_opt)
-        elif r.get("declined") == "start_failed":
-            out["start_failed"] += 1
-        elif feas:
-            out["declined_reach"] += 1
         else:
-            out["declined_unreach"] += 1
+            why = r.get("declined") or "not_reached"
+            out["reasons"][why] = out["reasons"].get(why, 0) + 1
+            if why == "start_failed":
+                out["start_failed"] += 1
+            elif feas:
+                out["declined_reach"] += 1
+            else:
+                out["declined_unreach"] += 1
     return out
 
 
@@ -143,7 +168,15 @@ def summarise(o):
                 low_order=sum(1 for ords, e in o["orders"]
                               if any(np.isfinite(x) and x < 1 for pr in ords for x in pr)),
                 low_order_missed=sum(1 for ords, e in o["orders"] if e > 1 and
-                                     any(np.isfinite(x) and x < 1 for pr in ords for x in pr)))
+                                     any(np.isfinite(x) and x < 1 for pr in ords for x in pr)),
+                # revision 4 bookkeeping (no effect on any count above)
+                distinct=len(o.get("proposals", {})),
+                distinct_missed=len(o.get("proposals_missed", {})),
+                accepted_settings=[[list(q), c] for q, c in sorted(o.get("proposals", {}).items())],
+                unconv_distinct=len(o.get("unconv_settings", {})),
+                unconv_from_converged=o.get("unconv_from_converged", 0),
+                reasons=dict(o.get("reasons", {})),
+                feasible=o.get("feasible"), good=o.get("good"))
 
 
 def run_config(name, cases=None, verbose=True):
@@ -181,7 +214,11 @@ if __name__ == "__main__":
         i = args.index("--skip"); skip = set(args[i + 1].split(",")); del args[i:i + 2]
     names = args or ["v1.2"]
     out_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+    # Revision 4: "2D-2h" is the refined DFG 2D-2 study of the Hamilton job J2; it is
+    # loaded only when hamilton/results/j2_tensor.pkl exists, so the default pooled
+    # table is unchanged until it does (select it with --only 2D-2h).
     loaders = [("L", C._manufactured), ("2D-1", lambda: [C._dfg1()]), ("2D-2", lambda: [C._dfg2()]),
+               ("2D-2h", lambda: [C._dfg2_refined()]),
                ("LMP", C._lammps), ("GMX", C._gromacs), ("ABINIT", lambda: [C._abinit()]),
                ("QE", lambda: [C._qe()])]
     sel = lambda key: (only is None or key in only) and (skip is None or key not in skip)

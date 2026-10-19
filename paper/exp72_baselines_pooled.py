@@ -1,5 +1,7 @@
 """The program and three procedures in common use, graded as the pooled table
-(referee points 15, 16 and 20).
+(referee points 15, 16 and 20 of revision 3; revision 4: coordinate search at every
+threshold, GROMACS, ABINIT and LAMMPS in the same table, the round-off floor applied
+to the program exactly as in Table 3, and the sweep order printed).
 
 For every admitted cell of the selected cases and every start whose own run
 converged, each procedure returns a setting.  A returned setting *reaches* the
@@ -14,8 +16,19 @@ pooled:
   K:       calibration cost in production runs, i.e. the summed cost of the runs used
            to decide divided by the cost of one run at the returned setting
            (median of cell medians) -- the same unit for every procedure.
-    python exp72_baselines_pooled.py [CASE ...]
-    KNOBS_BASE_OUT=baselines_lmp_gmx.json python exp72_baselines_pooled.py LMP-20 LMP-40 LMP-64 GMX-d
+
+The sequential and coordinate procedures take the parameters in the order of the
+case's parameter list (cases.py): discretisation parameters first, then the
+nested-solver tolerances, then the cost-only parameter (GROMACS: rcoulomb,
+fourierspacing, pme-order, ewald-rtol).  A cost-only parameter is treated like any
+other: it is refined one position at a time until the observable stops moving by
+more than delta, which for a parameter that does not move the observable is after
+one trial.
+
+    python exp72_baselines_pooled.py                 # every case (2D-2h if present)
+    python exp72_baselines_pooled.py L2 L3 2D-1      # selected cases
+    KNOBS_CFG=v1.2.1 (default) | v1.2 | v1.1         # the program's configuration
+Writes data/baselines_v6.json (all cells) and prints the pooled groups.
 """
 import json
 import os
@@ -28,6 +41,13 @@ import cases as C
 import pooled as P
 from baselines import seq, coord, ref_check
 from knobs import run_protocol
+
+PROCS = {"program": None, "seq-1": 1.0, "seq-3": 3.0, "seq-10": 10.0,
+         "coord-1": 1.0, "coord-3": 3.0, "coord-10": 10.0, "ref": None}
+GROUPS = [("L2-L4", ["L2", "L3", "L4"]), ("L5", ["L5"]), ("2D-1", ["2D-1"]),
+          ("2D-2 (rev. 3)", ["2D-2"]), ("2D-2 (refined)", ["2D-2h"]),
+          ("LAMMPS", ["LMP-20", "LMP-40", "LMP-64"]), ("GROMACS double", ["GMX-d"]),
+          ("GROMACS mixed", ["GMX-s"]), ("ABINIT", ["ABINIT"]), ("QE", ["QE"])]
 
 
 def counting(look):
@@ -59,15 +79,16 @@ def cell(case, ob, tg, cfg):
             return np.nan, (T[i][1] if np.isfinite(T[i][1]) else np.inf)
         return T[i][0][ob], T[i][1]
 
-    procs = {"program": None, "seq-1": 1.0, "seq-3": 3.0, "seq-10": 10.0, "coord-10": 10.0,
-             "ref": None}
-    out = {p: dict(reached=0, missed=0, declined=0, pen=[], runs=[], K=[]) for p in procs}
+    out = {p: dict(reached=0, missed=0, declined=0, pen=[], runs=[], K=[]) for p in PROCS}
     kw = dict(cfg["kw"])
+    if case.floor is not None and not cfg.get("no_floor"):
+        kw.setdefault("noise_floor", case.floor)       # as in Table 3 (pooled.replay)
+    kinds = [cfg.get("kinds_map", {}).get(k, k) for k in case.KINDS]
     for a in good:
-        for p, div in procs.items():
+        for p, div in PROCS.items():
             lk = counting(look)
             if p == "program":
-                r = run_protocol(lk, case.LAD, a, eps, hs=case.HS, kinds=case.KINDS,
+                r = run_protocol(lk, case.LAD, a, eps, hs=case.HS, kinds=kinds,
                                  models=case.models, **kw)
                 if not r["certified"]:
                     out[p]["declined"] += 1
@@ -95,14 +116,27 @@ def cell(case, ob, tg, cfg):
     return out
 
 
-def main():
-    keys = sys.argv[1:] or ["L2", "L3", "L4", "L5", "2D-1", "2D-2", "QE"]
-    cfg = P.CONFIGS[os.environ.get("KNOBS_CFG", "v1.2.1")]
+def load_cases(keys):
     loaders = [C._manufactured, lambda: [C._dfg1()], lambda: [C._dfg2()], lambda: [C._qe()],
-               C._lammps, C._gromacs, lambda: [C._abinit()]]
-    cases = [c for L in loaders for c in L() if c.key in keys]
+               C._lammps, C._gromacs, lambda: [C._abinit()], lambda: [C._dfg2_refined()]]
+    out = []
+    for L in loaders:
+        try:
+            out += [c for c in L() if keys is None or c.key in keys]
+        except FileNotFoundError as exc:
+            print(f"skipping: {exc}", flush=True)
+    return out
+
+
+def main():
+    keys = sys.argv[1:] or None
+    cfgname = os.environ.get("KNOBS_CFG", "v1.2.1")
+    cfg = P.CONFIGS[cfgname]
     res = {}
-    for case in cases:
+    for case in load_cases(keys):
+        print(f"{case.key}: sweep order of the baselines = parameter order "
+              f"{[k[0] for k in case.KINDS]} (d discretisation, n nested solver, c cost-only)",
+              flush=True)
         for ob, tgs in case.targets.items():
             for tg in tgs:
                 if not case.admitted(ob, tg):
@@ -120,17 +154,28 @@ def main():
                                              round(float(np.median(v["pen"])), 2) if v["pen"] else None,
                                              int(np.median(v["runs"])))
                                          for p, v in o.items()}, flush=True)
-    out = "baselines_pooled.json" if not sys.argv[1:] else os.environ.get("KNOBS_BASE_OUT", "baselines_pooled.json")
-    json.dump(res, open(os.path.join(C.D, out), "w"), indent=1)
-    # pooled per case group
-    groups = {"L2-L4": ["L2", "L3", "L4"], "L5": ["L5"], "2D-1": ["2D-1"], "2D-2": ["2D-2"], "QE": ["QE"]}
-    for g, ks in groups.items():
+    # one file for every case: a run on selected cases replaces only their cells
+    path = os.path.join(C.D, os.environ.get("KNOBS_BASE_OUT", "baselines_v6.json"))
+    doc = dict(config=cfgname, cells={})
+    if os.path.exists(path):
+        old = json.load(open(path))
+        if old.get("config") == cfgname:
+            doc = old
+    doc["cells"].update(res)
+    json.dump(doc, open(path, "w"), indent=1)
+    summary(doc["cells"])
+
+
+def summary(res):
+    for g, ks in GROUPS:
         rows = {k: v for k, v in res.items() if k.split("|")[0] in ks}
         if not rows:
             continue
         print(f"\n{g}: {len(rows)} cells")
-        for p in ["program", "seq-1", "seq-3", "seq-10", "coord-10", "ref"]:
-            R = [v[p] for v in rows.values()]
+        for p in PROCS:
+            R = [v[p] for v in rows.values() if p in v]
+            if not R:
+                continue
             pen = [r["pen"] for r in R if np.isfinite(r["pen"])]
             Ks = [r["K"] for r in R if np.isfinite(r["K"])]
             print(f"  {p:<9} reached {sum(r['reached'] for r in R):>6} missed {sum(r['missed'] for r in R):>5} "

@@ -1,6 +1,8 @@
 """Why the program declines (Section 6.1): the reason reported by run_protocol for every
 declined start of every admitted cell, with version 1.2.1.
     python exp73_decline_reasons.py
+Revision 4: one 2D-2 study only, as in Table 3 (KNOBS_TABLE3_2D2=refined, the default,
+uses the refined study 2D-2h when its results are present; =rev3 the study of revision 3).
 """
 import collections
 import os
@@ -15,7 +17,11 @@ from knobs import run_protocol
 
 cfg = P.CONFIGS["v1.2.1"]
 total = collections.Counter()
-for case in C.all_cases():
+CASES = C.all_cases()
+if any(c.key == "2D-2h" for c in CASES):
+    drop = "2D-2" if os.environ.get("KNOBS_TABLE3_2D2", "refined") == "refined" else "2D-2h"
+    CASES = [c for c in CASES if c.key != drop]
+for case in CASES:
     T = case.tensor
     for ob, tgs in case.targets.items():
         for tg in tgs:

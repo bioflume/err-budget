@@ -2,7 +2,7 @@
 # One-off setup on a Hamilton login node (about 30-60 minutes, mostly downloads
 # and the GROMACS build).  Re-running it is safe: finished steps are skipped.
 #
-#   cd knobs-1.2.0/hamilton && bash setup_env.sh
+#   cd knobs-1.2.1/hamilton && bash setup_env.sh
 set -e
 cd "$(dirname "$0")"
 source ./config.sh
@@ -21,6 +21,9 @@ if ! micromamba env list | grep -q "^ *$KNOBS_ENV "; then
         "qe>=7.3" "lammps=*=*openmpi*" openmpi cmake make
 fi
 micromamba activate "$KNOBS_ENV"
+# revision 4: SymPy (exact values of the manufactured problems L3-L5, used by the
+# pooled analyses) and pytest (the test suite), also into an existing environment
+python -c "import sympy, pytest" 2>/dev/null || micromamba install -y -n "$KNOBS_ENV" -c conda-forge sympy pytest
 pip install -e "$KNOBS_ROOT" >/dev/null
 echo "pw.x:  $(command -v pw.x)";  pw.x -h 2>&1 | head -1 || true
 LMP=$(command -v lmp || command -v lmp_mpi || true)

@@ -17,7 +17,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cases as C
 import grids
-from knobs import LocalBudget, run_protocol, V12
+from knobs import LocalBudget, run_protocol, V12, V121
 
 OUT = os.environ.get("KNOBS_FIG_DIR", os.path.join(os.path.dirname(os.path.abspath(__file__)), "figures"))
 BLUE, ORANGE, AQUA, YELLOW = "#2a78d6", "#eb6834", "#1baf7a", "#eda100"
@@ -69,32 +69,54 @@ def fig_dfg():
 
 
 def fig_search():
-    """The search from the tutorial settings at n_arc = 32 for the lift at 3e-2."""
+    """The search from the tutorial settings at n_arc = 32 for the lift at 3e-2.
+
+    Revision 4: drawn with version 1.2.1 (the configuration of every other result),
+    with the fourth parameter (nCellsInCoarsestLevel) in the tick labels, Phase 2
+    shaded, and the cost-only pass shown as a last point if it changes the setting."""
     c = C._dfg1(cost="deterministic")
     T, LAD, ob = c.tensor, c.LAD, "cl"
     eps = 3e-2 * abs(c.exact[ob])
     look = lambda i: ((T[tuple(i)][0][ob], T[tuple(i)][1]) if c.converged(tuple(i))
                       else (np.nan, T[tuple(i)][1]))
     start = (LAD[0].index(32), 0, LAD[2].index(1e-6), 0)
-    r = run_protocol(look, LAD, start, eps, hs=c.HS, kinds=c.KINDS, **V12)
+    cfg = dict(V121)
+    r = run_protocol(look, LAD, start, eps, hs=c.HS, kinds=c.KINDS, **cfg)
+    path = list(r["trace"])
+    final = tuple(r["proposal"])
+    cost_pass = final != tuple(path[-1])
+    if cost_pass:
+        path.append(final)
     steps = []
-    for a in r["trace"]:
+    for n, a in enumerate(path):
         lb = LocalBudget(look, LAD, a, hs=c.HS, kinds=c.KINDS, local_order=True,
-                         resid_margin=5.0, resolution=0.1 * eps, cancel_rule="none")
+                         resid_margin=cfg["resid_margin"], resolution=cfg["res_frac"] * eps,
+                         cancel_rule=cfg["cancel_rule"], joint_res=cfg["joint_res"])
         lb.sweep(); lb.per_knob_error(); lb.refine_path(n_levels=0)
         if np.isfinite(lb.E0) and abs(lb.E0) <= eps:      # as the program does
-            lb.joint_correct(look, eps, cancel_rule="none")
+            lb.joint_correct(look, eps, cancel_rule=cfg["cancel_rule"])
         steps.append((a, [abs(x) / eps if np.isfinite(x) else np.nan for x in lb.rk],
                       abs(lb.E0) / eps, abs(T[a][0][ob] - c.exact[ob]) / eps))
+    # Phase 1 ends at the first setting whose estimate is within the target
+    est_all = [s_[2] for s_ in steps]
+    p1_end = next((n for n, v in enumerate(est_all) if np.isfinite(v) and v <= 1.0), len(steps) - 1)
     names = ["mesh $n_\\mathrm{arc}$", "residualControl", "GAMG tolerance"]
     cols = [BLUE, ORANGE, AQUA]
     marks = ["o", "s", "^"]
-    fig, ax = plt.subplots(figsize=(7.0, 2.5))
+    fig, ax = plt.subplots(figsize=(7.0, 2.7))
     x = np.arange(len(steps))
     TOP, BOT = 3e3, 1e-3
     clip = lambda v: np.clip(v, BOT, TOP)
+    last_walk = len(steps) - 1 - (1 if cost_pass else 0)
+    if last_walk > p1_end:
+        ax.axvspan(p1_end + 0.5, last_walk + 0.5, color=GRID, alpha=0.6, lw=0)
+        ax.text(0.5 * (p1_end + last_walk) + 0.5, TOP * 0.25, "Phase 2", fontsize=6, color=INK2,
+                ha="center")
+    ax.text(0.5 * p1_end, TOP * 0.25, "Phase 1", fontsize=6, color=INK2, ha="center")
+    if cost_pass:
+        ax.text(len(steps) - 1, TOP * 0.25, "cost-only\npass", fontsize=5.5, color=INK2, ha="center")
     for k in range(3):
-        v = np.array([s[1][k] for s in steps], float)
+        v = np.array([s_[1][k] for s_ in steps], float)
         fin = np.isfinite(v) & (v > 0)
         ax.plot(x[fin], clip(v[fin]), marks[k], color=cols[k], ms=4, mfc="white", mew=1.2,
                 label=f"budget: {names[k]}")
@@ -102,26 +124,35 @@ def fig_search():
         if inf.any():
             ax.plot(x[inf], np.full(inf.sum(), TOP * 0.6), marker=r"$\uparrow$", ls="none",
                     color=cols[k], ms=8)
-    est = np.array([s[2] for s in steps], float)
+    est = np.array([s_[2] for s_ in steps], float)
     ax.plot(x[np.isfinite(est)], clip(est[np.isfinite(est)]), "D", color=INK, ms=4.5,
             label="estimate $\\widehat{E}$ (with margin)")
     if (~np.isfinite(est)).any():
         ax.plot(x[~np.isfinite(est)], np.full((~np.isfinite(est)).sum(), TOP * 0.6), marker=r"$\uparrow$",
                 ls="none", color=INK, ms=9)
-    ax.plot(x, clip(np.array([s[3] for s in steps])), "x", color=INK, ms=6, mew=1.5,
+    ax.plot(x, clip(np.array([s_[3] for s_ in steps])), "x", color=INK, ms=6, mew=1.5,
             label="true error")
     ax.axhline(1.0, color=INK2, lw=0.8, ls="--")
     ax.text(len(steps) - 0.6, 1.15, "target", fontsize=6, color=INK2, ha="right", va="bottom")
     ax.set_yscale("log"); ax.set_ylim(BOT, TOP)
     ax.set_xticks(x)
-    ax.set_xticklabels([f"{LAD[0][a[0]]}\n{LAD[1][a[1]]:.0e}\n{LAD[2][a[2]]:.0e}" for a, *_ in steps],
-                       fontsize=5)
-    ax.set_xlabel("setting at each step ($n_\\mathrm{arc}$, residualControl, GAMG tolerance)", fontsize=6.5)
+    ax.set_xticklabels([f"{LAD[0][a[0]]}\n{LAD[1][a[1]]:.0e}\n{LAD[2][a[2]]:.0e}\n{LAD[3][a[3]]}"
+                        for a, *_ in steps], fontsize=5)
+    ax.set_xlabel("setting at each step ($n_\\mathrm{arc}$, residualControl, GAMG tolerance, "
+                  "nCellsInCoarsestLevel)", fontsize=6.5)
     ax.set_ylabel("error / target")
     ax.legend(fontsize=6, loc="upper left", bbox_to_anchor=(1.01, 1.0), ncol=1)
     fig.tight_layout()
     fig.savefig(os.path.join(OUT, "fig_search.pdf"))
     plt.close(fig)
+    # a text record for the caption and the response letter
+    with open(os.path.join(OUT, "fig_search_steps.txt"), "w") as fo:
+        fo.write(f"version 1.2.1; start {start}; accepted {r['certified']}; runs {r['runs']}; "
+                 f"Phase 1 ends at step {p1_end}; cost-only pass changed the setting: {cost_pass}\n")
+        for n, (a, rk, e, t) in enumerate(steps):
+            fo.write(f"step {n}: n_arc {LAD[0][a[0]]}, residualControl {LAD[1][a[1]]:.0e}, "
+                     f"GAMG {LAD[2][a[2]]:.0e}, coarsest {LAD[3][a[3]]}; estimate/target {e:.3g}, "
+                     f"true/target {t:.3g}\n")
     return steps, r
 
 

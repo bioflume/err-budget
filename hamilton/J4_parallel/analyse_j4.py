@@ -1,5 +1,5 @@
 """Analysis of J4: cost ordering and recommendations against the number of ranks.
-    python analyse_j4.py [config]
+    python analyse_j4.py [config]          # default: v1.2.1 (revision 4; was v1.2)
 """
 import json
 import os
@@ -17,7 +17,7 @@ from knobs import run_protocol
 import pooled as P
 
 RES = os.path.join(os.environ.get("WORK", "."), "parallel_hpc")
-CFG = P.CONFIGS[sys.argv[1] if len(sys.argv) > 1 else "v1.2"]
+CFG = P.CONFIGS[sys.argv[1] if len(sys.argv) > 1 else "v1.2.1"]
 
 
 def load(prefix):

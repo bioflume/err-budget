@@ -14,7 +14,7 @@ D = os.path.join(HERE, "data")
 OUT = os.path.join(HERE, "figures")
 
 LABEL = {"L2": "L2", "L3": "L3", "L4": "L4", "L5": "L5", "2D-1": "OpenFOAM 2D-1",
-         "2D-2": "OpenFOAM 2D-2", "LMP-20": "LAMMPS 8{,}000", "LMP-40": "LAMMPS 64{,}000",
+         "2D-2": "OpenFOAM 2D-2", "2D-2h": "OpenFOAM 2D-2", "LMP-20": "LAMMPS 8{,}000", "LMP-40": "LAMMPS 64{,}000",
          "LMP-64": "LAMMPS 262{,}144", "GMX-d": "GROMACS double", "GMX-s": "GROMACS mixed",
          "ABINIT": "ABINIT", "QE": "Quantum ESPRESSO"}
 OBS = {"energy": "energy", "dissipation": "dissipation", "gradient": "grad.\\ energy",
@@ -24,13 +24,26 @@ OBS = {"energy": "energy", "dissipation": "dissipation", "gradient": "grad.\\ en
        "cl_max": "$c_{L,\\max}$", "st": "St", "energy_per_ion": "energy",
        "potential": "energy", "force": "force"}
 ORDER = list(LABEL)
+PLAIN = {k: v.replace("{,}", ",") for k, v in LABEL.items()}
+# Revision 4: which 2D-2 study enters Table 3.  "refined" (default when the rows of the
+# Hamilton job J2 are present) shows case 2D-2h and drops the revision-3 case 2D-2;
+# "old" shows the revision-3 case.  Both are always in data/pooled_<config>.json.
+TABLE3_2D2 = os.environ.get("KNOBS_TABLE3_2D2", "refined")
 
 
-def load(cfg):
+def _select_2d2(R):
+    has_h = any(r["case"] == "2D-2h" for r in R)
+    drop = "2D-2" if (has_h and TABLE3_2D2 == "refined") else "2D-2h"
+    return [r for r in R if r["case"] != drop]
+
+
+def load(cfg, select=True):
     p = os.path.join(D, f"pooled_{cfg}.json")
     if not os.path.exists(p):
         return None
     R = json.load(open(p))
+    if select:
+        R = _select_2d2(R)
     return sorted(R, key=lambda r: (ORDER.index(r["case"]), list(OBS).index(r["ob"]), -r["target"]))
 
 
@@ -53,6 +66,7 @@ def totals(R):
     pm = [r["pen_med"] for r in R if r["accepted"] and np.isfinite(r["pen_med"])]
     return dict(cells=len(R), n=t("n"), sf=t("start_failed"), acc=t("accepted"), miss=t("missed"),
                 dr=t("declined_reach"), du=t("declined_unreach"), unconv=t("unconv"),
+                distinct=t("distinct"),
                 cells_miss=sum(1 for r in R if r["missed"]),
                 pen=float(np.median(pm)) if pm else np.nan,
                 geo=float(np.exp(np.mean(np.log(pm)))) if pm else np.nan,
@@ -71,20 +85,20 @@ def pooled_table(R, R11):
         o = by11.get((r["case"], r["ob"], r["target"]))
         v11 = f"{o['accepted']}/{o['missed']}" if o else "---"
         lines.append(f"{lab} & {OBS[r['ob']]} & {tex_tg(r['target'])} & {r['n']} & {r['start_failed']} & "
-                     f"{r['accepted']} & {r['missed']} & {r['declined_reach']} & {r['declined_unreach']} & "
+                     f"{r['accepted']} & {r.get('distinct', '---')} & {r['missed']} & {r['declined_reach']} & {r['declined_unreach']} & "
                      f"{tex_num(r['pen_med'])} & {tex_num(r['pen_max'])} & {r['runs_med']:.0f} & {v11} \\\\")
     T = totals(R)
     T11 = totals(R11) if R11 else None
     lines.append("\\midrule")
     lines.append(f"\\multicolumn{{3}}{{l}}{{All {T['cells']} cells}} & {T['n']} & {T['sf']} & {T['acc']} & "
-                 f"{T['miss']} & {T['dr']} & {T['du']} & {tex_num(T['pen'])} & & {T['runs']:.0f} & "
+                 f"{T['distinct']} & {T['miss']} & {T['dr']} & {T['du']} & {tex_num(T['pen'])} & & {T['runs']:.0f} & "
                  + (f"{T11['acc']}/{T11['miss']}" if T11 else "---") + " \\\\")
     return "\n".join(lines)
 
 
-def ablation_table(cfgs):
+def ablation_table(cfgs, base_cfg="v1.2.1"):
     rows = []
-    base = load("v1.2")
+    base = load(base_cfg)
     keys = {(r["case"], r["ob"], r["target"]) for r in base} if base else set()
     for name, lab in cfgs:
         R = load(name)
@@ -93,6 +107,7 @@ def ablation_table(cfgs):
         R = [r for r in R if (r["case"], r["ob"], r["target"]) in keys]
         T = totals(R)
         cells = sorted({r["case"] for r in R if r["missed"]}, key=ORDER.index)
+        cells = list(dict.fromkeys(LABEL[c] for c in cells))
         rows.append(f"{lab} & {T['acc']} & {T['miss']} & {T['cells_miss']} & {T['dr']} & "
                     f"{tex_num(T['pen'])} & {tex_num(T['geo'])} & {T['runs']:.0f} & "
                     f"{', '.join(cells) if cells else '---'} \\\\")
@@ -107,31 +122,46 @@ if __name__ == "__main__":
         X = load(name)
         if X:
             print(name, totals(X))
+    # Revision 4: every component is removed from version 1.2.1, the configuration of
+    # Table 3 (revision 3 removed them from the frozen version 1.2; that table is kept
+    # as tab_ablation_v12.tex for the response letter).
     abl = [("v1.2.1", "Version 1.2.1 (default)"),
-           ("v1.2", "Version 1.2 (frozen)"),
-           ("v1.2-nojoint", "without the joint check"),
-           ("v1.2-nolocal", "without the local-order check"),
-           ("v1.2-credit", "crediting cancellation"),
-           ("v1.2-constant", "constant safety factor"),
-           ("v1.2-nores", "without the resolution floor"),
-           ("v1.2-accept-unconverged", "accepting unconverged runs"),
-           ("v1.2-nested-as-disc", "nested solver declared discretisation"),
-           ("v1.2-screened", "with the preliminary sweep"),
+           ("v1.2", "Version 1.2 (frozen; joint check at three resolutions)"),
+           ("v1.2.1-nojoint", "without the joint check"),
+           ("v1.2.1-nolocal", "without the local-order check"),
+           ("v1.2.1-credit", "crediting cancellation"),
+           ("v1.2.1-constant", "constant safety factor"),
+           ("v1.2.1-nores", "without the resolution floor"),
+           ("v1.2.1-accept-unconverged", "accepting unconverged runs"),
+           ("v1.2.1-nested-as-disc", "nested solver declared discretisation"),
+           ("v1.2.1-screened", "with the preliminary sweep"),
            ("v1.1+gated", "version 1.1 with gated factor"),
            ("v1.1", "version 1.1")]
     open(os.path.join(OUT, "tab_ablation.tex"), "w").write(ablation_table(abl))
+    abl12 = [(n.replace("v1.2.1-", "v1.2-"), l) for n, l in abl if n.startswith("v1.2.1-")]
+    open(os.path.join(OUT, "tab_ablation_v12.tex"), "w").write(
+        ablation_table([("v1.2", "Version 1.2 (frozen)")] + abl12, base_cfg="v1.2"))
     print(open(os.path.join(OUT, "tab_ablation.tex")).read())
 
 
 def baselines_table():
-    p = os.path.join(D, "baselines_pooled.json")
-    if not os.path.exists(p):
-        return ""
-    res = json.load(open(p))
+    p = os.path.join(D, "baselines_v6.json")
+    if os.path.exists(p):
+        res = json.load(open(p))["cells"]
+    else:
+        p = os.path.join(D, "baselines_pooled.json")
+        if not os.path.exists(p):
+            return ""
+        res = json.load(open(p))
+    has_h = any(k.split("|")[0] == "2D-2h" for k in res)
+    two = (["2D-2h"] if (has_h and TABLE3_2D2 == "refined") else ["2D-2"])
     groups = [("L2--L4", ["L2", "L3", "L4"]), ("L5", ["L5"]), ("OpenFOAM 2D-1", ["2D-1"]),
-              ("OpenFOAM 2D-2", ["2D-2"]), ("Quantum ESPRESSO", ["QE"])]
+              ("OpenFOAM 2D-2", two), ("LAMMPS", ["LMP-20", "LMP-40", "LMP-64"]),
+              ("GROMACS double", ["GMX-d"]), ("GROMACS mixed", ["GMX-s"]), ("ABINIT", ["ABINIT"]),
+              ("Quantum ESPRESSO", ["QE"])]
     names = [("program", "This program"), ("seq-1", "Sequential, $\\delta=\\varepsilon$"),
              ("seq-3", "Sequential, $\\delta=\\varepsilon/3$"), ("seq-10", "Sequential, $\\delta=\\varepsilon/10$"),
+             ("coord-1", "Coordinate, $\\delta=\\varepsilon$"), ("coord-3", "Coordinate, $\\delta=\\varepsilon/3$"),
              ("coord-10", "Coordinate, $\\delta=\\varepsilon/10$"), ("ref", "Reference acceptance")]
     out = []
     for g, ks in groups:
@@ -140,7 +170,9 @@ def baselines_table():
             continue
         first = True
         for key, lab in names:
-            R = [v[key] for v in rows.values()]
+            R = [v[key] for v in rows.values() if key in v]
+            if not R:
+                continue
             pen = [r["pen"] for r in R if np.isfinite(r["pen"])]
             Ks = [r["K"] for r in R if np.isfinite(r["K"])]
             dec = sum(r["declined"] for r in R)
@@ -204,7 +236,7 @@ def heldout_table():
             out.append("\\addlinespace[1pt]")
         o, c = v11.get(k), v121.get(k)
         out.append(f"{case if case != last else ''} & {obs.get(k[1], k[1])} & {tex_tg(k[2])} & {r['n']} & "
-                   f"{r['start_failed']} & {r['accepted']} & {r['missed']} & {r['declined_reach'] + r['declined_unreach']} & "
+                   f"{r['start_failed']} & {r['accepted']} & {r.get('distinct', '---')} & {r['missed']} & {r['declined_reach'] + r['declined_unreach']} & "
                    f"{tex_num(r['pen_med'])} & {r['runs_med']:.0f} & "
                    f"{(str(o['accepted']) + '/' + str(o['missed'])) if o else '---'} & "
                    f"{(str(c['accepted']) + '/' + str(c['missed'])) if c else '---'} \\\\")
@@ -244,6 +276,8 @@ def lmp_table():
     if not os.path.exists(p):
         return ""
     R = json.load(open(p))
+    if isinstance(R, dict) and "cells" in R:          # revision 4 format of exp72: {config, cells}
+        R = R["cells"]
     lab = {"LMP-20": "LAMMPS 8,000", "LMP-40": "LAMMPS 64,000", "LMP-64": "LAMMPS 262,144",
            "GMX-d": "GROMACS double"}
     procs = [("program", "This program"), ("seq-1", "Sequential, $\\delta=\\varepsilon$"),
