@@ -11,6 +11,7 @@ reference is in docs/job-files.md; `knobs init` writes one with every field expl
 """
 from __future__ import annotations
 
+import inspect
 import json
 import os
 import re
@@ -19,7 +20,8 @@ from dataclasses import dataclass, field
 from typing import Any, Callable
 
 from .api import Knob, TuneResult, tune, KINDS
-from .runner import CommandSolver, JobError, placeholders, format_value
+from ._core import run_protocol
+from .runner import CommandSolver, JobError, placeholders, format_value, dry_render, parse_method
 
 KIND_ALIASES = {
     "discretisation": "discretisation", "discretization": "discretisation",
@@ -126,6 +128,14 @@ class JobSpec:
                      model=p.get("model", "power"), h=p.get("h"), start=p.get("start"))
             if q["model"] not in ("power", "exponential"):
                 errors.append(f"parameter {p['name']!r}: model must be 'power' or 'exponential'")
+            hh = q["h"]
+            if hh is not None and not (hh in ("value", "inverse") or
+                                       (isinstance(hh, list) and len(hh) == len(vals)
+                                        and all(isinstance(_num(x), (int, float)) for x in hh))):
+                errors.append(f"parameter {p['name']!r}: h must be 'value', 'inverse' or a list "
+                              f"of {len(vals)} numbers (one per value)")
+            elif isinstance(hh, list):
+                q["h"] = [float(_num(x)) for x in hh]
             if q["start"] is not None and q["start"] not in vals:
                 errors.append(f"parameter {p['name']!r}: start value {q['start']!r} is not "
                               f"among its values {vals!r}")
@@ -172,6 +182,21 @@ class JobSpec:
         if fp is not None and (not isinstance(fp, list) or len(fp) < 2
                                or not all(isinstance(x, dict) for x in fp)):
             errors.append("options.floor_probe must list two or more settings (dicts)")
+        engine_options = set(inspect.signature(run_protocol).parameters) - {
+            "lookup", "ladders", "anchor", "eps", "hs", "kinds", "models", "noise_floor", "use_screen"}
+        for key in list(options):
+            if key in ("screen", "accept_unconverged", "floor_probe", "configuration"):
+                continue
+            if key not in engine_options:
+                errors.append(f"options.{key} is not an option; the engine options are "
+                              f"{', '.join(sorted(engine_options))}")
+            else:
+                options[key] = _num(options[key])
+
+        timeout = d.get("timeout")
+        if timeout is not None and not (isinstance(timeout, (int, float)) and not isinstance(timeout, bool)
+                                        and timeout > 0):
+            errors.append("'timeout' must be a positive number of seconds")
 
         if command:
             known = set(names) | {"run_dir", "run_id", "job_dir"}
@@ -199,7 +224,40 @@ class JobSpec:
         if cost is not None and not isinstance(cost, dict):
             errors.append("'cost' must be 'wall' (default) or a dict saying how to read it")
             cost = None
+        if cost is not None and cost.get("source") == "file" and "path" not in cost:
+            errors.append("cost: 'source: file' needs 'path'")
         failure = dict(d.get("failure") or {})
+        if not isinstance(d.get("failure") or {}, dict):
+            errors.append("'failure' must be a mapping (failed_if_regex, unconverged_if_regex, "
+                          "converged_if_regex, allow_nonzero_exit, path)")
+            failure = {}
+        for key in set(failure) - {"failed_if_regex", "unconverged_if_regex", "converged_if_regex",
+                                   "allow_nonzero_exit", "path"}:
+            errors.append(f"failure.{key} is not a failure rule")
+        # every regular expression must compile
+        for what, spec in (("observable", obs), ("cost", cost or {})):
+            if "regex" in spec:
+                try:
+                    if re.compile(str(spec["regex"])).groups < 1:
+                        errors.append(f"{what}.regex needs one capture group around the number")
+                except re.error as exc:
+                    errors.append(f"{what}.regex does not compile: {exc}")
+            if parse_method(spec) not in ("regex", "json", "column", "last_number"):
+                errors.append(f"{what}.parse must be regex, json, column or last_number")
+        for key in ("failed_if_regex", "unconverged_if_regex", "converged_if_regex"):
+            pats = failure.get(key)
+            for pat in ([pats] if isinstance(pats, str) else pats or []):
+                try:
+                    re.compile(str(pat))
+                except re.error as exc:
+                    errors.append(f"failure.{key} {pat!r} does not compile: {exc}")
+        if solver and ":" in str(solver):
+            mod = str(solver).rsplit(":", 1)[0]
+            if mod.endswith(".py") and not os.path.isfile(mod if os.path.isabs(mod)
+                                                          else os.path.join(base_dir, mod)):
+                errors.append(f"solver file {mod!r} does not exist")
+        elif solver:
+            errors.append("solver must be 'module:function' or 'file.py:function'")
         unknown = set(d) - {"name", "command", "solver", "parameters", "target", "observable",
                             "relative", "start", "options", "workdir", "template_dir", "files",
                             "render_files", "env", "timeout", "keep_runs", "cost", "failure",
@@ -213,14 +271,19 @@ class JobSpec:
         workdir = workdir if os.path.isabs(workdir) else os.path.join(base_dir, workdir)
         output = d.get("output", "knobs_result")
         output = output if os.path.isabs(output) else os.path.join(base_dir, output)
-        return cls(parameters=params, target=float(target), observable=obs, command=command,
-                   solver=solver, name=str(d.get("name", "knobs job")),
-                   relative=bool(d.get("relative", False)), start=start, options=options,
-                   workdir=workdir, template_dir=tdir, files=files,
-                   render_files=d.get("render_files"), env=dict(d.get("env") or {}),
-                   timeout=d.get("timeout"), keep_runs=bool(d.get("keep_runs", True)),
-                   cost=cost, failure=failure, output=output, base_dir=base_dir,
-                   source_path=source_path)
+        job = cls(parameters=params, target=float(target), observable=obs, command=command,
+                  solver=solver, name=str(d.get("name", "knobs job")),
+                  relative=bool(d.get("relative", False)), start=start, options=options,
+                  workdir=workdir, template_dir=tdir, files=files,
+                  render_files=d.get("render_files"), env=dict(d.get("env") or {}),
+                  timeout=timeout, keep_runs=bool(d.get("keep_runs", True)),
+                  cost=cost, failure=failure, output=output, base_dir=base_dir,
+                  source_path=source_path)
+        try:                       # the engine's own checks on the candidate lists (direction, h)
+            job.knobs()
+        except (ValueError, TypeError, KeyError) as exc:
+            raise JobError(f"the job file cannot be used as written:\n  - {exc}") from None
+        return job
 
     # ---------------------------------------------------------------- building
     def knobs(self) -> list[Knob]:
@@ -311,6 +374,7 @@ def run_job(job: JobSpec, log: Callable[[str], None] | None = print, fresh: bool
     result = tune(solver, knobs, **job.tune_kwargs())
     elapsed = time.time() - t0
     if write:
+        os.makedirs(os.path.dirname(os.path.abspath(job.output)), exist_ok=True)
         result.to_json(job.output + ".json")
         with open(job.output + ".md", "w") as f:
             f.write(f"# {job.name}\n\n")
@@ -323,13 +387,17 @@ def run_job(job: JobSpec, log: Callable[[str], None] | None = print, fresh: bool
 def check_job(job: JobSpec, log: Callable[[str], None] = print, run: bool = True) -> bool:
     """Print the job and run the starting setting once.  Returns True if that run gave a number."""
     log(job.describe())
-    if not run:
-        return True
     start = {p["name"]: job.start.get(p["name"], p["values"][len(p["values"]) // 2])
              for p in job.parameters}
+    if job.command:
+        cmd = dry_render(job, start)           # unknown placeholders in templates show up here
+        log(f"command at the starting setting: {cmd}")
+    if not run:
+        log("(validation only; nothing was run)")
+        return True
     log("")
     log("running the starting setting once ...")
-    solver = CommandSolver(job, log=log, fresh=False)
+    solver = CommandSolver(job, log=log, fresh=False, retry_failed=True)
     try:
         out, cost = solver(**start)
     except Exception as exc:                                   # noqa: BLE001
@@ -354,10 +422,10 @@ name: my simulation
 #    The command runs inside a fresh directory made for that run ({{{{run_dir}}}}), so refer
 #    to scripts and inputs next to this file as {{{{job_dir}}}}/...
 #    Examples:
-#      python {{{{job_dir}}}}/solver.py --steps {{{{steps}}}} --tol {{{{tol}}}}
+#      python3 {{{{job_dir}}}}/solver.py --steps {{{{steps}}}} --tol {{{{tol}}}}
 #      lmp -in in.lammps -var cutoff {{{{cutoff}}}} -var order {{{{order}}}} > log.lammps
 #      blockMesh > log.mesh && simpleFoam > log.simpleFoam && tail -1 postProcessing/forceCoeffs/0/coefficient.dat
-command: python {{{{job_dir}}}}/solver.py --steps {{{{steps}}}} --tol {{{{tol}}}} --refresh {{{{refresh}}}}
+command: python3 {{{{job_dir}}}}/solver.py --steps {{{{steps}}}} --tol {{{{tol}}}} --refresh {{{{refresh}}}}
 
 # Files copied into every run directory with their placeholders filled in.  Use
 # template_dir for a whole case (an OpenFOAM case, a LAMMPS input deck); every text file
@@ -398,13 +466,16 @@ relative: false
 # cost: {{regex: "ExecutionTime\\\\s*=\\\\s*([0-9.]+)"}}
 # cost: {{regex: "work\\\\s*=\\\\s*([0-9.eE+-]+)"}}
 
-# When is a run a failure?  A non-zero exit code always is.  Add patterns that mark a
-# crash (failed_if_regex) or a run whose inner solver did not converge
-# (unconverged_if_regex, or converged_if_regex for a line that must appear).
+# When is a run a failure?  A non-zero exit code is (unless allow_nonzero_exit: true).
+# Add patterns that mark a crash (failed_if_regex) or a run whose inner solver did not
+# converge (unconverged_if_regex, or converged_if_regex for a line that must appear).
+# Patterns are searched in stdout, stderr, the files the observable and the cost are read
+# from, and any file named in path.
 failure:
   failed_if_regex: ["FOAM FATAL", "Traceback"]
   # unconverged_if_regex: "did not converge"
   # converged_if_regex: "SIMPLE solution converged"
+  # path: log.simpleFoam
 
 # 5. Options.  configuration v1.2.1 is the article's default; screen runs a cheap
 #    preliminary sweep (fewer runs, more expensive recommendations).

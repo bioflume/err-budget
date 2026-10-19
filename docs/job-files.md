@@ -46,7 +46,7 @@ A list; each entry has
 | `values` | at least two candidate values, **coarse (cheap, inaccurate) first, fine last** |
 | `start` | the value you would otherwise have used; the measurement begins there (default: the middle value) |
 | `model` | `power` (default) or `exponential` for a cutoff whose error decays exponentially; such values must increase |
-| `h` | how the refinement scalar follows from a value when the default is wrong: `value`, `inverse`, or a list of numbers, one per value, that decreases coarse to fine |
+| `h` | how the refinement scalar follows from a value when the default is wrong: `value` (the value itself decreases as it refines), `inverse` (1/value: the value increases as it refines), or a list of numbers, one per value, that decreases coarse to fine. Needed for an increasing list of values below 1, such as a cutoff radius in nm |
 
 The order matters: the tool must know which end is finer. Counts (mesh points, time steps)
 increase as they refine; tolerances decrease. An increasing list of values below 1 is
@@ -90,9 +90,15 @@ When is a run not an answer? A non-zero exit code or a time-out always is a fail
 
 | key | |
 |---|---|
-| `failed_if_regex` | a pattern (or list) on stdout/stderr that marks a crash: `"FOAM FATAL"`, `"Traceback"` |
+| `failed_if_regex` | a pattern (or list) that marks a crash: `"FOAM FATAL"`, `"Traceback"` |
 | `unconverged_if_regex` | a pattern that marks a run whose inner solver did not converge; the value is recorded but the run is never proposed or fitted unless `options.accept_unconverged` is true |
 | `converged_if_regex` | a pattern that must appear for the run to count as converged: `"SIMPLE solution converged"`, `"convergence has been achieved"` |
+| `path` | a file (or list of files) in the run directory to search as well |
+
+The patterns are searched in stdout, stderr, the files the observable and the cost are
+read from, and the files named in `path`. A solver whose output is redirected
+(`simpleFoam > log.simpleFoam`) is therefore covered when the observable or the cost comes
+from that log, or when `path: log.simpleFoam` is given.
 
 ### Files for each run
 
@@ -134,8 +140,15 @@ setting, the runner looks it up there, so
 - changing the target or the candidate values and running again reuses every run that is
   still needed.
 
-`knobs run --fresh` ignores the log; delete `workdir` to start over completely.
-`knobs runs job.yaml` prints the log as a table.
+Every record carries a fingerprint of the command, the observable, cost and failure rules,
+the environment and the template files. After you change any of those, the old records are
+not reused (the log says how many it is ignoring); runs made with the same job file are.
+`knobs check` runs the starting setting again even when the log holds a failed attempt, so
+a fixed command is actually tried. `knobs run --fresh` ignores the log altogether; delete
+`workdir` to start over completely. `knobs runs job.yaml` prints the log as a table.
+
+A time-out kills the whole process group of the command, so an `mpirun` that exceeded
+`timeout` does not linger.
 
 ## Exit codes
 
@@ -155,14 +168,14 @@ parameters:
 observable:
   name: u_centre
   source: file
-  path: postProcessing/probes/0/U
-  column: 2
+  path: postProcessing/probes/0/U          # lines like:  t (ux uy uz)
+  column: 2                                # brackets are ignored when the line is split
 target: 2e-3
 relative: true
 cost: {source: file, path: log.simpleFoam, regex: "ExecutionTime = ([0-9.]+) s"}
 failure:
   failed_if_regex: "FOAM FATAL"
-  converged_if_regex: "SIMPLE solution converged"
+  converged_if_regex: "SIMPLE solution converged"   # searched in log.simpleFoam too (the cost's file)
 env: {OMP_NUM_THREADS: "1"}
 timeout: 7200
 workdir: /scratch/me/cavity_runs

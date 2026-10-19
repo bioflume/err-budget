@@ -195,6 +195,8 @@ class TuneResult:
                 return int(v)
             if isinstance(v, np.bool_):
                 return bool(v)
+            if isinstance(v, np.ndarray):
+                return clean(v.tolist())
             return v
         d = {k: clean(getattr(self, k)) for k in self.__dataclass_fields__}
         d["knobs_version"] = __import__("knobs").__version__

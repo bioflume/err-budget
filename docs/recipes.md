@@ -60,7 +60,10 @@ keep_runs: false
 ```
 
 The `converged_if_regex` line is what makes a run that stopped at `endTime` without meeting
-`residualControl` a non-answer: without it, such runs would be fitted as if converged.
+`residualControl` a non-answer: without it, such runs would be fitted as if converged. The
+patterns are searched in stdout and stderr and in the files the observable and the cost
+come from, here `log.simpleFoam`; for a log that is neither, add `path: log.simpleFoam`
+under `failure`.
 For a parallel run, `decomposePar > log.decompose && mpirun -n 8 simpleFoam -parallel > log.simpleFoam`
 and a cost of `ExecutionTime` times 8 (put the factor in a small script, or accept that
 costs are compared only within one rank count). For a transient case (`pimpleFoam`), the
@@ -95,6 +98,7 @@ relative: true
 cost: {source: file, path: log.lammps, regex: "Loop time of ([0-9.]+)"}
 failure:
   failed_if_regex: ["ERROR", "Killed"]
+  path: stdout.lammps                       # the patterns are also searched here
 timeout: 3600
 ```
 
@@ -126,7 +130,7 @@ command: >
   echo Potential | gmx_d energy -f run.edr -o energy.xvg > log.energy 2>&1
 template_dir: case                      # holds md.mdp
 parameters:
-  - {name: rcoulomb,       kind: discretisation, values: [0.9, 1.0, 1.1, 1.2, 1.4], start: 1.0}
+  - {name: rcoulomb,       kind: discretisation, values: [0.9, 1.0, 1.1, 1.2, 1.4], start: 1.0, h: inverse}   # nm; larger is finer
   - {name: fourierspacing, kind: discretisation, values: [0.20, 0.16, 0.12, 0.10, 0.08], start: 0.12}
   - {name: pme_order,      kind: cost-only,      values: [4, 5, 6], start: 4}
   - {name: ewald_rtol,     kind: discretisation, values: [1e-4, 1e-5, 1e-6], start: 1e-5}
@@ -145,6 +149,7 @@ options:
     - {rcoulomb: 1.4, fourierspacing: 0.05, pme_order: 8, ewald_rtol: 1e-9}
 failure:
   failed_if_regex: ["Fatal error", "Segmentation fault"]
+  path: [log.grompp, log.energy]            # log.mdrun is searched already (the cost's file)
 timeout: 3600
 ```
 
@@ -167,7 +172,7 @@ parameters:
   - {name: ecutwfc,  kind: discretisation, model: exponential, values: [12, 16, 20, 24, 28, 32, 40, 48], start: 24}
   - {name: nk,       kind: discretisation, values: [2, 3, 4, 6], start: 4}
   - {name: conv_thr, kind: nested-solver,  values: [1e-4, 1e-6, 1e-8, 1e-10, 1e-12], start: 1e-8}
-  - {name: mixing,   kind: cost-only,      values: [0.3, 0.5, 0.7], start: 0.7}
+  - {name: mixing,   kind: cost-only,      values: [0.3, 0.5, 0.7], start: 0.7, h: inverse}
 observable:
   name: energy
   source: file

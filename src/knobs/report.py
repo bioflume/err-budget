@@ -51,19 +51,18 @@ def markdown(result) -> str:
 
 def run_table(log_path: str, limit: int | None = None) -> str:
     """The run log written by the command-line runner (runs.jsonl) as a text table."""
-    if not os.path.exists(log_path):
-        return "(no runs yet)"
-    rows = [json.loads(line) for line in open(log_path) if line.strip()]
+    from .runner import _read_log
+    rows = _read_log(log_path)
     if limit:
         rows = rows[-limit:]
     if not rows:
         return "(no runs yet)"
-    names = list(rows[0]["params"].keys())
+    names = list(dict.fromkeys(n for r in rows for n in r.get("params", {})))
     head = f"{'run':<5} " + " ".join(f"{n:>12}" for n in names) + f" {'value':>14} {'cost':>10} {'status':<10}"
     out = [head, "-" * len(head)]
     for r in rows:
-        vals = " ".join(f"{_fmt(r['params'][n]):>12}" for n in names)
+        vals = " ".join(f"{_fmt(r['params'].get(n, '-')):>12}" for n in names)
         v = r.get("value")
         vs = f"{v:>14.8g}" if isinstance(v, (int, float)) and v is not None else f"{'-':>14}"
-        out.append(f"{r.get('run_id', ''):<5} {vals} {vs} {r.get('cost', 0):>10.4g} {r.get('status', ''):<10}")
+        out.append(f"{r.get('run_id', ''):<5} {vals} {vs} {float(r.get('cost', 0) or 0):>10.4g} {r.get('status', ''):<10}")
     return "\n".join(out)

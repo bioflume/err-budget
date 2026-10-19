@@ -33,7 +33,7 @@ A job file is a page of YAML (or JSON, or TOML). Here is the one from
 `examples/04_command_line/`:
 
 ```yaml
-command: python {{job_dir}}/solver.py --steps {{steps}} --tol {{tol}} --refresh {{refresh}}
+command: python3 {{job_dir}}/solver.py --steps {{steps}} --tol {{tol}} --refresh {{refresh}}
 
 parameters:                      # values run COARSE (cheap) to FINE (accurate)
   - {name: steps,   kind: discretisation, values: [25, 50, 100, 200, 400, 800], start: 100}

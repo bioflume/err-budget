@@ -276,3 +276,115 @@ def test_example_job_file_loads():
     job = load_job(os.path.join(EXAMPLE, "job.yaml"))
     assert [p["name"] for p in job.parameters] == ["steps", "tol", "refresh"]
     assert job.cost == {"regex": r"work\s*=\s*([0-9]+)"}
+
+
+# ------------------------------------------------------------------ after review
+def test_check_retries_a_failed_start_after_the_command_is_fixed(tmp_path, capsys):
+    d = {"command": "definitely-not-a-program {{n}}", "parameters": [{"name": "n", "values": [1, 2]}],
+         "observable": "v", "target": 1, "workdir": "runs"}
+    assert check_job(JobSpec.from_dict(d, base_dir=str(tmp_path))) is False
+    d["command"] = "echo {{n}}"
+    assert check_job(JobSpec.from_dict(d, base_dir=str(tmp_path))) is True
+    assert "v = 2" in capsys.readouterr().out        # the start is the middle value, n=2
+
+
+def test_changed_job_file_does_not_reuse_old_runs(tmp_path):
+    (tmp_path / "s.py").write_text("import sys; print('a =', sys.argv[1]); print('b =', 2*int(sys.argv[1]))")
+    d = {"command": f"{PY} {{{{job_dir}}}}/s.py {{{{n}}}}", "parameters": [{"name": "n", "values": [1, 2, 3]}],
+         "observable": {"name": "v", "regex": r"a = (\d+)"}, "target": 1, "workdir": "runs"}
+    job = JobSpec.from_dict(d, base_dir=str(tmp_path))
+    assert CommandSolver(job, log=None)(n=1)[0]["v"] == 1.0
+    d["observable"] = {"name": "v", "regex": r"b = (\d+)"}
+    job2 = JobSpec.from_dict(d, base_dir=str(tmp_path))
+    s = CommandSolver(job2, log=None)
+    assert s.n_stale == 1 and s(n=1)[0]["v"] == 2.0 and s.n_cached == 0
+    # run ids keep counting across versions and with --fresh
+    s3 = CommandSolver(job2, log=None, fresh=True)
+    s3(n=1)
+    ids = [r["run_id"] for r in __import__("knobs.runner", fromlist=["_read_log"])._read_log(s.log_path)]
+    assert ids == ["0001", "0002", "0003"]
+
+
+def test_failure_patterns_see_redirected_output(tmp_path):
+    (tmp_path / "s.py").write_text("import sys; print('value 1\\nSIMPLE solution converged' if sys.argv[1]=='1' else 'value 2')")
+    d = {"command": f"{PY} {{{{job_dir}}}}/s.py {{{{n}}}} > log.txt", "parameters": [{"name": "n", "values": [1, 2, 3]}],
+         "observable": {"name": "v", "source": "file", "path": "log.txt", "regex": r"value (\d+)"},
+         "target": 1, "workdir": "runs", "failure": {"converged_if_regex": "SIMPLE solution converged"}}
+    s = CommandSolver(JobSpec.from_dict(d, base_dir=str(tmp_path)), log=None)
+    assert s(n=1)[0]["converged"] is True
+    assert s(n=2)[0]["converged"] is False
+    # a file that is neither the observable's nor the cost's: failure.path
+    d["observable"] = {"name": "v", "regex": r"value (\d+)"}
+    d["command"] = f"{PY} {{{{job_dir}}}}/s.py {{{{n}}}} | tee log.txt"
+    d["failure"] = {"failed_if_regex": "SIMPLE", "path": "log.txt"}
+    s = CommandSolver(JobSpec.from_dict(d, base_dir=str(tmp_path)), log=None)
+    with pytest.raises(RunFailed, match="matched"):
+        s(n=1)
+
+
+def test_timeout_kills_the_whole_process_group(tmp_path):
+    (tmp_path / "slow.py").write_text("import time, sys; time.sleep(3); open('done.txt','w').write('x')\n")
+    d = {"command": f"echo start && {PY} {{{{job_dir}}}}/slow.py {{{{n}}}}", "timeout": 0.5,
+         "parameters": [{"name": "n", "values": [1, 2]}], "observable": "v", "target": 1, "workdir": "runs"}
+    job = JobSpec.from_dict(d, base_dir=str(tmp_path))
+    with pytest.raises(RunFailed, match="timed out"):
+        CommandSolver(job, log=None)(n=1)
+    import time
+    time.sleep(3.5)
+    assert not os.path.exists(os.path.join(job.workdir, "run_0001", "done.txt"))
+
+
+def test_validation_catches_engine_refusals_and_bad_fields(tmp_path):
+    base = {"command": "echo {{r}}", "observable": "v", "target": 1}
+    with pytest.raises(JobError, match="refinement direction"):
+        JobSpec.from_dict(dict(base, parameters=[{"name": "r", "values": [0.9, 1.0, 1.2]}]))
+    job = JobSpec.from_dict(dict(base, parameters=[{"name": "r", "values": [0.9, 1.0, 1.2], "h": "inverse"}]))
+    assert job.knobs()[0].h[0] > job.knobs()[0].h[-1]
+    for bad, frag in [
+        (dict(base, parameters=[{"name": "r", "values": [1, 2], "h": [1.0]}]), "h must be"),
+        (dict(base, parameters=[{"name": "r", "values": [1, 2]}], timeout="1h"), "timeout"),
+        (dict(base, parameters=[{"name": "r", "values": [1, 2]}], cost={"source": "file", "regex": "x"}), "needs 'path'"),
+        (dict(base, parameters=[{"name": "r", "values": [1, 2]}], observable={"name": "v", "regex": "("}), "does not compile"),
+        (dict(base, parameters=[{"name": "r", "values": [1, 2]}], observable={"name": "v", "regex": "x"}), "capture group"),
+        (dict(base, parameters=[{"name": "r", "values": [1, 2]}], options={"resid_margn": 1}), "not an option"),
+        (dict(base, parameters=[{"name": "r", "values": [1, 2]}], failure={"fail_regex": "x"}), "not a failure rule"),
+        ({"solver": "nope.py:run", "parameters": [{"name": "r", "values": [1, 2]}], "observable": "v", "target": 1}, "does not exist"),
+    ]:
+        with pytest.raises(JobError, match=frag):
+            JobSpec.from_dict(bad, base_dir=str(tmp_path))
+    job = JobSpec.from_dict(dict(base, parameters=[{"name": "r", "values": [1, 2]}], options={"resid_margin": "1e-3"}))
+    assert job.tune_kwargs()["resid_margin"] == 1e-3
+
+
+def test_null_json_and_fortran_columns(tmp_path):
+    with pytest.raises(JobError, match="could not read"):
+        extract_number({"key": "flux"}, '{"flux": null}')
+    assert extract_number({"column": 2}, "1 -1.5D-03\n") == -1.5e-3
+    assert extract_number({"column": 2}, "0.5 (0.12 0.3 0.0)\n") == 0.12
+    (tmp_path / "m.py").write_text("def run(n):\n    return None\n")
+    job = JobSpec.from_dict({"solver": "m.py:run", "parameters": [{"name": "n", "values": [1, 2]}],
+                             "observable": "v", "target": 1, "workdir": "runs"}, base_dir=str(tmp_path))
+    with pytest.raises(RunFailed, match="not a number"):
+        CommandSolver(job, log=None)(n=1)
+
+
+def test_output_directory_is_created_and_log_table_survives_a_truncated_line(tmp_path):
+    job = _job(tmp_path, output="results/deep/out")
+    r = run_job(job, log=None)
+    assert os.path.exists(str(tmp_path / "results" / "deep" / "out.json")) and r.certified
+    with open(os.path.join(job.workdir, "runs.jsonl"), "a") as f:
+        f.write('{"run_id": "9999", "params": {"n": 1')          # a line cut off mid-write
+    from knobs.report import run_table
+    assert "9999" not in run_table(os.path.join(job.workdir, "runs.jsonl"))
+    s = CommandSolver(job, log=None)
+    assert len(s.cache) == r.runs_used or len(s.cache) >= 1
+
+
+def test_check_renders_templates_before_running(tmp_path, capsys):
+    case = tmp_path / "case"
+    case.mkdir()
+    (case / "input.txt").write_text("n = {{n}}; bad = {{nope}}\n")
+    d = {"command": "cat input.txt", "template_dir": "case",
+         "parameters": [{"name": "n", "values": [1, 2]}], "observable": "v", "target": 1}
+    with pytest.raises(JobError, match="unknown placeholder"):
+        check_job(JobSpec.from_dict(d, base_dir=str(tmp_path)), run=False)

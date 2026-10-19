@@ -60,6 +60,9 @@ def main(argv: list[str] | None = None) -> int:
     except JobError as exc:
         print(f"knobs: {exc}", file=sys.stderr)
         return 1
+    except (ValueError, KeyError, TypeError, OSError) as exc:
+        print(f"knobs: {type(exc).__name__}: {exc}", file=sys.stderr)
+        return 1
     except KeyboardInterrupt:
         print("\nknobs: interrupted; `knobs run` again resumes from the run log", file=sys.stderr)
         return 130
