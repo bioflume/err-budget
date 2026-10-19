@@ -15,8 +15,43 @@
   "runs_med": 35.0,
   "unconv": 0,
   "worst": 0.5348055177412091,
+  "hit_cap": 0,
+  "max_steps": 10,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 3,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     4,
+     1,
+     1
+    ],
+    7
+   ],
+   [
+    [
+     4,
+     2,
+     1
+    ],
+    60
+   ],
+   [
+    [
+     5,
+     1,
+     1
+    ],
+    38
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 41,
+  "good": 105,
   "config": "v1.2"
  },
  {
@@ -35,8 +70,35 @@
   "runs_med": 47.0,
   "unconv": 0,
   "worst": 0.240358126269157,
+  "hit_cap": 0,
+  "max_steps": 13,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 2,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     6,
+     1,
+     1
+    ],
+    5
+   ],
+   [
+    [
+     6,
+     2,
+     1
+    ],
+    100
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 24,
+  "good": 105,
   "config": "v1.2"
  },
  {
@@ -55,8 +117,27 @@
   "runs_med": 36.0,
   "unconv": 0,
   "worst": 0.41878345981236414,
+  "hit_cap": 0,
+  "max_steps": 11,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 1,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     4,
+     1,
+     1
+    ],
+    105
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 60,
+  "good": 105,
   "config": "v1.2"
  },
  {
@@ -75,8 +156,27 @@
   "runs_med": 44.0,
   "unconv": 0,
   "worst": 0.3196019664522873,
+  "hit_cap": 0,
+  "max_steps": 14,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 1,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     6,
+     1,
+     1
+    ],
+    105
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 29,
+  "good": 105,
   "config": "v1.2"
  },
  {
@@ -95,8 +195,20 @@
   "runs_med": 49.0,
   "unconv": 0,
   "worst": 0.0,
+  "hit_cap": 0,
+  "max_steps": 12,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 0,
+  "distinct_missed": 0,
+  "accepted_settings": [],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "not_reached": 105
+  },
+  "feasible": 1,
+  "good": 105,
   "config": "v1.2"
  },
  {
@@ -115,8 +227,43 @@
   "runs_med": 34.0,
   "unconv": 0,
   "worst": 0.5348055177412091,
+  "hit_cap": 0,
+  "max_steps": 10,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 3,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     4,
+     1,
+     1
+    ],
+    7
+   ],
+   [
+    [
+     4,
+     2,
+     1
+    ],
+    60
+   ],
+   [
+    [
+     5,
+     1,
+     1
+    ],
+    38
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 41,
+  "good": 105,
   "config": "v1.1"
  },
  {
@@ -135,8 +282,35 @@
   "runs_med": 47.0,
   "unconv": 0,
   "worst": 0.240358126269157,
+  "hit_cap": 0,
+  "max_steps": 13,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 2,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     6,
+     1,
+     1
+    ],
+    5
+   ],
+   [
+    [
+     6,
+     2,
+     1
+    ],
+    100
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 24,
+  "good": 105,
   "config": "v1.1"
  },
  {
@@ -155,8 +329,35 @@
   "runs_med": 41.0,
   "unconv": 0,
   "worst": 0.4397095214062498,
+  "hit_cap": 0,
+  "max_steps": 13,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 2,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     4,
+     0,
+     1
+    ],
+    98
+   ],
+   [
+    [
+     4,
+     1,
+     1
+    ],
+    7
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 60,
+  "good": 105,
   "config": "v1.1"
  },
  {
@@ -175,8 +376,35 @@
   "runs_med": 45.0,
   "unconv": 0,
   "worst": 0.8098410818732709,
+  "hit_cap": 0,
+  "max_steps": 14,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 2,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     5,
+     0,
+     1
+    ],
+    6
+   ],
+   [
+    [
+     6,
+     1,
+     1
+    ],
+    99
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 29,
+  "good": 105,
   "config": "v1.1"
  },
  {
@@ -195,8 +423,20 @@
   "runs_med": 49.0,
   "unconv": 0,
   "worst": 0.0,
+  "hit_cap": 0,
+  "max_steps": 12,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 0,
+  "distinct_missed": 0,
+  "accepted_settings": [],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "not_reached": 105
+  },
+  "feasible": 1,
+  "good": 105,
   "config": "v1.1"
  },
  {
@@ -215,8 +455,30 @@
   "runs_med": 19.0,
   "unconv": 0,
   "worst": 0.8683803764018363,
+  "hit_cap": 0,
+  "max_steps": 8,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 1,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     3,
+     0,
+     1
+    ],
+    66
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "start_failed": 37,
+   "unmeasured_axis": 2
+  },
+  "feasible": 44,
+  "good": 68,
   "config": "v1.2"
  },
  {
@@ -235,8 +497,30 @@
   "runs_med": 24.0,
   "unconv": 0,
   "worst": 0.7850275569891058,
+  "hit_cap": 0,
+  "max_steps": 8,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 1,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     5,
+     1,
+     2
+    ],
+    66
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "start_failed": 37,
+   "unmeasured_axis": 2
+  },
+  "feasible": 21,
+  "good": 68,
   "config": "v1.2"
  },
  {
@@ -255,8 +539,31 @@
   "runs_med": 31.0,
   "unconv": 0,
   "worst": 0.8242392610214191,
+  "hit_cap": 0,
+  "max_steps": 10,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 1,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     6,
+     3,
+     2
+    ],
+    60
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "start_failed": 37,
+   "unmeasured_axis": 2,
+   "not_reached": 6
+  },
+  "feasible": 5,
+  "good": 68,
   "config": "v1.2"
  },
  {
@@ -275,8 +582,46 @@
   "runs_med": 17.0,
   "unconv": 0,
   "worst": 1.0287759695014294,
+  "hit_cap": 0,
+  "max_steps": 7,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 3,
+  "distinct_missed": 1,
+  "accepted_settings": [
+   [
+    [
+     3,
+     0,
+     1
+    ],
+    9
+   ],
+   [
+    [
+     3,
+     1,
+     2
+    ],
+    54
+   ],
+   [
+    [
+     4,
+     0,
+     1
+    ],
+    3
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "start_failed": 37,
+   "unmeasured_axis": 2
+  },
+  "feasible": 38,
+  "good": 68,
   "config": "v1.2"
  },
  {
@@ -295,8 +640,38 @@
   "runs_med": 26.0,
   "unconv": 0,
   "worst": 0.9129499079501115,
+  "hit_cap": 0,
+  "max_steps": 7,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 2,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     5,
+     1,
+     2
+    ],
+    65
+   ],
+   [
+    [
+     5,
+     2,
+     2
+    ],
+    1
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "start_failed": 37,
+   "unmeasured_axis": 2
+  },
+  "feasible": 16,
+  "good": 68,
   "config": "v1.2"
  },
  {
@@ -315,8 +690,22 @@
   "runs_med": 37.0,
   "unconv": 0,
   "worst": 0.0,
+  "hit_cap": 0,
+  "max_steps": 11,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 0,
+  "distinct_missed": 0,
+  "accepted_settings": [],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "start_failed": 37,
+   "not_reached": 66,
+   "unmeasured_axis": 2
+  },
+  "feasible": 3,
+  "good": 68,
   "config": "v1.2"
  },
  {
@@ -335,8 +724,30 @@
   "runs_med": 19.0,
   "unconv": 0,
   "worst": 0.6321849467607469,
+  "hit_cap": 0,
+  "max_steps": 8,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 1,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     4,
+     0,
+     1
+    ],
+    66
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "start_failed": 37,
+   "unmeasured_axis": 2
+  },
+  "feasible": 41,
+  "good": 68,
   "config": "v1.2"
  },
  {
@@ -355,8 +766,46 @@
   "runs_med": 28.0,
   "unconv": 0,
   "worst": 0.6979649868858814,
+  "hit_cap": 0,
+  "max_steps": 11,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 3,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     5,
+     2,
+     1
+    ],
+    2
+   ],
+   [
+    [
+     5,
+     4,
+     2
+    ],
+    6
+   ],
+   [
+    [
+     6,
+     1,
+     2
+    ],
+    58
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "start_failed": 37,
+   "unmeasured_axis": 2
+  },
+  "feasible": 16,
+  "good": 68,
   "config": "v1.2"
  },
  {
@@ -375,8 +824,22 @@
   "runs_med": 37.0,
   "unconv": 0,
   "worst": 0.0,
+  "hit_cap": 0,
+  "max_steps": 11,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 0,
+  "distinct_missed": 0,
+  "accepted_settings": [],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "start_failed": 37,
+   "not_reached": 66,
+   "unmeasured_axis": 2
+  },
+  "feasible": 0,
+  "good": 68,
   "config": "v1.2"
  },
  {
@@ -395,8 +858,35 @@
   "runs_med": 32.0,
   "unconv": 0,
   "worst": 1.2063120599347381,
+  "hit_cap": 0,
+  "max_steps": 10,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 2,
+  "distinct_missed": 1,
+  "accepted_settings": [
+   [
+    [
+     2,
+     0,
+     0
+    ],
+    3
+   ],
+   [
+    [
+     3,
+     0,
+     1
+    ],
+    102
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 44,
+  "good": 68,
   "config": "v1.1"
  },
  {
@@ -415,8 +905,35 @@
   "runs_med": 31.0,
   "unconv": 0,
   "worst": 0.9180852987884156,
+  "hit_cap": 0,
+  "max_steps": 8,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 2,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     4,
+     2,
+     2
+    ],
+    59
+   ],
+   [
+    [
+     5,
+     1,
+     2
+    ],
+    46
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 21,
+  "good": 68,
   "config": "v1.1"
  },
  {
@@ -435,8 +952,27 @@
   "runs_med": 44.0,
   "unconv": 0,
   "worst": 0.8242392610214191,
+  "hit_cap": 0,
+  "max_steps": 11,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 1,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     6,
+     3,
+     2
+    ],
+    105
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 5,
+  "good": 68,
   "config": "v1.1"
  },
  {
@@ -455,8 +991,35 @@
   "runs_med": 29.0,
   "unconv": 0,
   "worst": 1.0287759695014294,
+  "hit_cap": 0,
+  "max_steps": 8,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 2,
+  "distinct_missed": 1,
+  "accepted_settings": [
+   [
+    [
+     3,
+     0,
+     1
+    ],
+    18
+   ],
+   [
+    [
+     3,
+     1,
+     2
+    ],
+    87
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 38,
+  "good": 68,
   "config": "v1.1"
  },
  {
@@ -475,8 +1038,43 @@
   "runs_med": 35.0,
   "unconv": 0,
   "worst": 0.9129499079501115,
+  "hit_cap": 0,
+  "max_steps": 10,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 3,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     5,
+     1,
+     2
+    ],
+    97
+   ],
+   [
+    [
+     5,
+     2,
+     2
+    ],
+    3
+   ],
+   [
+    [
+     6,
+     1,
+     2
+    ],
+    5
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 16,
+  "good": 68,
   "config": "v1.1"
  },
  {
@@ -495,8 +1093,35 @@
   "runs_med": 48.0,
   "unconv": 14,
   "worst": 0.9096184750016155,
+  "hit_cap": 0,
+  "max_steps": 13,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 2,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     6,
+     3,
+     0
+    ],
+    14
+   ],
+   [
+    [
+     6,
+     4,
+     2
+    ],
+    91
+   ]
+  ],
+  "unconv_distinct": 1,
+  "unconv_from_converged": 1,
+  "reasons": {},
+  "feasible": 3,
+  "good": 68,
   "config": "v1.1"
  },
  {
@@ -515,8 +1140,27 @@
   "runs_med": 36.0,
   "unconv": 0,
   "worst": 0.6321849467607469,
+  "hit_cap": 0,
+  "max_steps": 11,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 1,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     4,
+     0,
+     1
+    ],
+    105
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 41,
+  "good": 68,
   "config": "v1.1"
  },
  {
@@ -535,8 +1179,27 @@
   "runs_med": 44.0,
   "unconv": 0,
   "worst": 0.616136786283327,
+  "hit_cap": 0,
+  "max_steps": 12,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 1,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     6,
+     1,
+     2
+    ],
+    105
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 16,
+  "good": 68,
   "config": "v1.1"
  },
  {
@@ -555,8 +1218,20 @@
   "runs_med": 49.0,
   "unconv": 0,
   "worst": 0.0,
+  "hit_cap": 0,
+  "max_steps": 12,
   "low_order": 0,
   "low_order_missed": 0,
+  "distinct": 0,
+  "distinct_missed": 0,
+  "accepted_settings": [],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "not_reached": 105
+  },
+  "feasible": 0,
+  "good": 68,
   "config": "v1.1"
  }
 ]

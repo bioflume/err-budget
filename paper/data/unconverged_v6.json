@@ -1,0 +1,64 @@
+{
+ "configs": [
+  "v1.2.1",
+  "v1.2.1-accept-unconverged"
+ ],
+ "cases": {
+  "L5": {
+   "cells": 6,
+   "starts": 4200,
+   "own_unconv": 144,
+   "acc_a": 1939,
+   "acc_b": 2100,
+   "acc_b_from_unconv": 72,
+   "acc_b_from_conv": 2028,
+   "unconv_acc": 38,
+   "unconv_acc_from_conv": 28,
+   "missed_b": 0,
+   "changed_conv": 330,
+   "unconv_distinct": 3
+  },
+  "2D-1": {
+   "cells": 7,
+   "starts": 5460,
+   "own_unconv": 1204,
+   "acc_a": 4256,
+   "acc_b": 5460,
+   "acc_b_from_unconv": 1204,
+   "acc_b_from_conv": 4256,
+   "unconv_acc": 1,
+   "unconv_acc_from_conv": 0,
+   "missed_b": 0,
+   "changed_conv": 1218,
+   "unconv_distinct": 1
+  },
+  "2D-2": {
+   "cells": 6,
+   "starts": 1242,
+   "own_unconv": 138,
+   "acc_a": 1027,
+   "acc_b": 1176,
+   "acc_b_from_unconv": 118,
+   "acc_b_from_conv": 1058,
+   "unconv_acc": 0,
+   "unconv_acc_from_conv": 0,
+   "missed_b": 0,
+   "changed_conv": 45,
+   "unconv_distinct": 0
+  }
+ },
+ "total": {
+  "cells": 19,
+  "starts": 10902,
+  "own_unconv": 1486,
+  "acc_a": 7222,
+  "acc_b": 8736,
+  "acc_b_from_unconv": 1394,
+  "acc_b_from_conv": 7342,
+  "unconv_acc": 39,
+  "unconv_acc_from_conv": 28,
+  "missed_b": 0,
+  "changed_conv": 1593,
+  "unconv_distinct": 4
+ }
+}

@@ -1,486 +1,731 @@
 {
- "LMP-20|energy_per_ion|0.0001": {
-  "program": {
-   "reached": 100,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.8609399517973961,
-   "runs": 44.0
+ "config": "v1.2.1",
+ "cells": {
+  "LMP-20|energy_per_ion|0.0001": {
+   "program": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.8609399517973961,
+    "runs": 44.0,
+    "K": 59.394634415340846
+   },
+   "seq-1": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.9572847383713539,
+    "runs": 4.0,
+    "K": 4.742716991708136
+   },
+   "seq-3": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.2355265570381917,
+    "runs": 5.0,
+    "K": 5.187268743204981
+   },
+   "seq-10": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.2355265570381917,
+    "runs": 5.0,
+    "K": 5.020044767027395
+   },
+   "coord-1": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.9572847383713539,
+    "runs": 5.0,
+    "K": 5.665017691015318
+   },
+   "coord-3": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.2355265570381917,
+    "runs": 5.0,
+    "K": 6.042536009926707
+   },
+   "coord-10": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.2355265570381917,
+    "runs": 6.0,
+    "K": 5.777623064130327
+   },
+   "ref": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.0,
+    "runs": 100.0,
+    "K": 504.06670591499085
+   }
   },
-  "seq-1": {
-   "reached": 100,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.9572847383713539,
-   "runs": 4.0
+  "LMP-20|energy_per_ion|1e-05": {
+   "program": {
+    "reached": 22,
+    "missed": 0,
+    "declined": 78,
+    "pen": 1.8826510020893528,
+    "runs": 43.5,
+    "K": 55.263218963033
+   },
+   "seq-1": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.7647558221592903,
+    "runs": 5.0,
+    "K": 5.020044767027395
+   },
+   "seq-3": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.9382519131640523,
+    "runs": 5.5,
+    "K": 3.6772322019273185
+   },
+   "seq-10": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.5169934402555065,
+    "runs": 6.0,
+    "K": 3.5427941258541678
+   },
+   "coord-1": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.7647558221592903,
+    "runs": 6.0,
+    "K": 5.777623064130327
+   },
+   "coord-3": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.9382519131640523,
+    "runs": 6.0,
+    "K": 3.916624587054164
+   },
+   "coord-10": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.5169934402555065,
+    "runs": 6.0,
+    "K": 3.5427941258541678
+   },
+   "ref": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.0,
+    "runs": 100.0,
+    "K": 397.9172831651303
+   }
   },
-  "seq-3": {
-   "reached": 100,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.2355265570381917,
-   "runs": 5.0
+  "LMP-20|energy_per_ion|1e-06": {
+   "program": {
+    "reached": 0,
+    "missed": 0,
+    "declined": 100,
+    "pen": NaN,
+    "runs": 44.5,
+    "K": NaN
+   },
+   "seq-1": {
+    "reached": 95,
+    "missed": 5,
+    "declined": 0,
+    "pen": 1.713345444151617,
+    "runs": 6.0,
+    "K": 3.803958636685537
+   },
+   "seq-3": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.5163675452575234,
+    "runs": 6.0,
+    "K": 4.1169683650822835
+   },
+   "seq-10": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.5163675452575234,
+    "runs": 6.0,
+    "K": 4.936073689383927
+   },
+   "coord-1": {
+    "reached": 95,
+    "missed": 5,
+    "declined": 0,
+    "pen": 1.713345444151617,
+    "runs": 6.0,
+    "K": 3.803958636685537
+   },
+   "coord-3": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.5163675452575234,
+    "runs": 6.0,
+    "K": 4.1169683650822835
+   },
+   "coord-10": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.5163675452575234,
+    "runs": 6.0,
+    "K": 4.936073689383927
+   },
+   "ref": {
+    "reached": 100,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.0,
+    "runs": 100.0,
+    "K": 270.866722716193
+   }
   },
-  "seq-10": {
-   "reached": 100,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.2355265570381917,
-   "runs": 5.0
+  "LMP-40|energy_per_ion|0.0001": {
+   "program": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.9452250192481428,
+    "runs": 31.0,
+    "K": 46.53548197726973
+   },
+   "seq-1": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.8595221799713473,
+    "runs": 4.0,
+    "K": 3.8631107523985397
+   },
+   "seq-3": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.9654204383275793,
+    "runs": 4.0,
+    "K": 5.040003571582728
+   },
+   "seq-10": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.9654204383275793,
+    "runs": 4.5,
+    "K": 4.8386570480401545
+   },
+   "coord-1": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.8595221799713473,
+    "runs": 5.0,
+    "K": 4.813023314310456
+   },
+   "coord-3": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.9654204383275793,
+    "runs": 5.0,
+    "K": 5.8522307022272315
+   },
+   "coord-10": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.9654204383275793,
+    "runs": 5.0,
+    "K": 5.6321301990539006
+   },
+   "ref": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.0,
+    "runs": 62.0,
+    "K": 153.83802295154106
+   }
   },
-  "coord-10": {
-   "reached": 100,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.2355265570381917,
-   "runs": 6.0
+  "LMP-40|energy_per_ion|1e-05": {
+   "program": {
+    "reached": 13,
+    "missed": 0,
+    "declined": 49,
+    "pen": 1.8124843979703258,
+    "runs": 30.0,
+    "K": 37.52474368259372
+   },
+   "seq-1": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.52739462465359,
+    "runs": 4.5,
+    "K": 4.8386570480401545
+   },
+   "seq-3": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.4677254613032122,
+    "runs": 5.0,
+    "K": 2.9567699252785484
+   },
+   "seq-10": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.4677254613032122,
+    "runs": 5.0,
+    "K": 3.0139468881571028
+   },
+   "coord-1": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.52739462465359,
+    "runs": 5.0,
+    "K": 5.6321301990539006
+   },
+   "coord-3": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.4677254613032122,
+    "runs": 5.0,
+    "K": 2.995983312975941
+   },
+   "coord-10": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.4677254613032122,
+    "runs": 5.0,
+    "K": 3.0139468881571028
+   },
+   "ref": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.0,
+    "runs": 62.0,
+    "K": 119.5527250767077
+   }
   },
-  "ref": {
-   "reached": 100,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.0,
-   "runs": 100.0
-  }
- },
- "LMP-20|energy_per_ion|1e-05": {
-  "program": {
-   "reached": 22,
-   "missed": 0,
-   "declined": 78,
-   "pen": 1.8826510020893528,
-   "runs": 43.5
+  "LMP-40|energy_per_ion|1e-06": {
+   "program": {
+    "reached": 0,
+    "missed": 0,
+    "declined": 62,
+    "pen": NaN,
+    "runs": 31.0,
+    "K": NaN
+   },
+   "seq-1": {
+    "reached": 61,
+    "missed": 1,
+    "declined": 0,
+    "pen": 1.6324173626701497,
+    "runs": 5.0,
+    "K": 3.024297598462135
+   },
+   "seq-3": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.4390534046785923,
+    "runs": 5.0,
+    "K": 3.314183102764357
+   },
+   "seq-10": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.2456894466870347,
+    "runs": 5.0,
+    "K": 3.7888335007724074
+   },
+   "coord-1": {
+    "reached": 61,
+    "missed": 1,
+    "declined": 0,
+    "pen": 1.6324173626701497,
+    "runs": 5.0,
+    "K": 3.024297598462135
+   },
+   "coord-3": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.4390534046785923,
+    "runs": 5.0,
+    "K": 3.314183102764357
+   },
+   "coord-10": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.2456894466870347,
+    "runs": 5.0,
+    "K": 3.7888335007724074
+   },
+   "ref": {
+    "reached": 62,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.0,
+    "runs": 62.0,
+    "K": 79.08494977665958
+   }
   },
-  "seq-1": {
-   "reached": 100,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.7647558221592903,
-   "runs": 5.0
+  "LMP-64|energy_per_ion|0.0001": {
+   "program": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.2730840773899357,
+    "runs": 32.0,
+    "K": 33.39540821204025
+   },
+   "seq-1": {
+    "reached": 57,
+    "missed": 1,
+    "declined": 0,
+    "pen": 2.10057739992005,
+    "runs": 4.0,
+    "K": 4.079595845654709
+   },
+   "seq-3": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.3527593868667624,
+    "runs": 5.0,
+    "K": 3.9770608088942225
+   },
+   "seq-10": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.3527593868667624,
+    "runs": 5.0,
+    "K": 3.867830259056964
+   },
+   "coord-1": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.10057739992005,
+    "runs": 5.0,
+    "K": 5.102896102011073
+   },
+   "coord-3": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.3527593868667624,
+    "runs": 5.0,
+    "K": 4.473746671973867
+   },
+   "coord-10": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.3527593868667624,
+    "runs": 5.0,
+    "K": 4.12140212329137
+   },
+   "ref": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.0,
+    "runs": 58.0,
+    "K": 127.36693060983139
+   }
   },
-  "seq-3": {
-   "reached": 100,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.9382519131640523,
-   "runs": 5.5
+  "LMP-64|energy_per_ion|1e-05": {
+   "program": {
+    "reached": 5,
+    "missed": 0,
+    "declined": 53,
+    "pen": 1.9291314011141203,
+    "runs": 31.0,
+    "K": 23.273536648331863
+   },
+   "seq-1": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.6933982829177772,
+    "runs": 5.0,
+    "K": 3.867830259056964
+   },
+   "seq-3": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.5414612483661485,
+    "runs": 5.0,
+    "K": 3.293202625633265
+   },
+   "seq-10": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.390453496807072,
+    "runs": 5.0,
+    "K": 3.293202625633265
+   },
+   "coord-1": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.6933982829177772,
+    "runs": 5.0,
+    "K": 4.12140212329137
+   },
+   "coord-3": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.5414612483661485,
+    "runs": 5.0,
+    "K": 3.3211832210136887
+   },
+   "coord-10": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.390453496807072,
+    "runs": 5.0,
+    "K": 3.293202625633265
+   },
+   "ref": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.0,
+    "runs": 58.0,
+    "K": 91.67233283571227
+   }
   },
-  "seq-10": {
-   "reached": 100,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.5169934402555065,
-   "runs": 6.0
+  "LMP-64|energy_per_ion|1e-06": {
+   "program": {
+    "reached": 0,
+    "missed": 0,
+    "declined": 58,
+    "pen": NaN,
+    "runs": 31.0,
+    "K": NaN
+   },
+   "seq-1": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.3136366432693394,
+    "runs": 5.0,
+    "K": 3.293202625633265
+   },
+   "seq-3": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.1037690927453654,
+    "runs": 5.0,
+    "K": 3.4624215051698
+   },
+   "seq-10": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.1037690927453654,
+    "runs": 5.0,
+    "K": 3.4624215051698
+   },
+   "coord-1": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.3136366432693394,
+    "runs": 5.0,
+    "K": 3.293202625633265
+   },
+   "coord-3": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.1037690927453654,
+    "runs": 5.0,
+    "K": 3.4624215051698
+   },
+   "coord-10": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.1037690927453654,
+    "runs": 5.0,
+    "K": 3.4624215051698
+   },
+   "ref": {
+    "reached": 58,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.0,
+    "runs": 58.0,
+    "K": 50.37710867323927
+   }
   },
-  "coord-10": {
-   "reached": 100,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.5169934402555065,
-   "runs": 6.0
+  "GMX-d|potential|1e-05": {
+   "program": {
+    "reached": 225,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.706649355027438,
+    "runs": 55.0,
+    "K": 49.78763721533161
+   },
+   "seq-1": {
+    "reached": 183,
+    "missed": 42,
+    "declined": 0,
+    "pen": 2.232058060209797,
+    "runs": 5.0,
+    "K": 4.4120929504508
+   },
+   "seq-3": {
+    "reached": 206,
+    "missed": 19,
+    "declined": 0,
+    "pen": 2.1831647958122797,
+    "runs": 5.0,
+    "K": 5.312135790807034
+   },
+   "seq-10": {
+    "reached": 225,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.2746241898390793,
+    "runs": 6.0,
+    "K": 5.979648337599172
+   },
+   "coord-1": {
+    "reached": 225,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.232058060209797,
+    "runs": 6.0,
+    "K": 6.210393644279125
+   },
+   "coord-3": {
+    "reached": 225,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.432519053898815,
+    "runs": 7.0,
+    "K": 6.986828644717332
+   },
+   "coord-10": {
+    "reached": 225,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.432519053898815,
+    "runs": 7.0,
+    "K": 7.222546642226507
+   },
+   "ref": {
+    "reached": 225,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.0,
+    "runs": 225.0,
+    "K": 459.60246467126285
+   }
   },
-  "ref": {
-   "reached": 100,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.0,
-   "runs": 100.0
-  }
- },
- "LMP-20|energy_per_ion|1e-06": {
-  "program": {
-   "reached": 0,
-   "missed": 0,
-   "declined": 100,
-   "pen": NaN,
-   "runs": 44.5
-  },
-  "seq-1": {
-   "reached": 95,
-   "missed": 5,
-   "declined": 0,
-   "pen": 1.713345444151617,
-   "runs": 6.0
-  },
-  "seq-3": {
-   "reached": 100,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.5163675452575234,
-   "runs": 6.0
-  },
-  "seq-10": {
-   "reached": 100,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.5163675452575234,
-   "runs": 6.0
-  },
-  "coord-10": {
-   "reached": 100,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.5163675452575234,
-   "runs": 6.0
-  },
-  "ref": {
-   "reached": 100,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.0,
-   "runs": 100.0
-  }
- },
- "LMP-40|energy_per_ion|0.0001": {
-  "program": {
-   "reached": 62,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.9452250192481428,
-   "runs": 31.0
-  },
-  "seq-1": {
-   "reached": 62,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.8595221799713473,
-   "runs": 4.0
-  },
-  "seq-3": {
-   "reached": 62,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.9654204383275793,
-   "runs": 4.0
-  },
-  "seq-10": {
-   "reached": 62,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.9654204383275793,
-   "runs": 4.5
-  },
-  "coord-10": {
-   "reached": 62,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.9654204383275793,
-   "runs": 5.0
-  },
-  "ref": {
-   "reached": 62,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.0,
-   "runs": 62.0
-  }
- },
- "LMP-40|energy_per_ion|1e-05": {
-  "program": {
-   "reached": 13,
-   "missed": 0,
-   "declined": 49,
-   "pen": 1.8124843979703258,
-   "runs": 30.0
-  },
-  "seq-1": {
-   "reached": 62,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.52739462465359,
-   "runs": 4.5
-  },
-  "seq-3": {
-   "reached": 62,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.4677254613032122,
-   "runs": 5.0
-  },
-  "seq-10": {
-   "reached": 62,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.4677254613032122,
-   "runs": 5.0
-  },
-  "coord-10": {
-   "reached": 62,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.4677254613032122,
-   "runs": 5.0
-  },
-  "ref": {
-   "reached": 62,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.0,
-   "runs": 62.0
-  }
- },
- "LMP-40|energy_per_ion|1e-06": {
-  "program": {
-   "reached": 0,
-   "missed": 0,
-   "declined": 62,
-   "pen": NaN,
-   "runs": 31.0
-  },
-  "seq-1": {
-   "reached": 61,
-   "missed": 1,
-   "declined": 0,
-   "pen": 1.6324173626701497,
-   "runs": 5.0
-  },
-  "seq-3": {
-   "reached": 62,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.4390534046785923,
-   "runs": 5.0
-  },
-  "seq-10": {
-   "reached": 62,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.2456894466870347,
-   "runs": 5.0
-  },
-  "coord-10": {
-   "reached": 62,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.2456894466870347,
-   "runs": 5.0
-  },
-  "ref": {
-   "reached": 62,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.0,
-   "runs": 62.0
-  }
- },
- "LMP-64|energy_per_ion|0.0001": {
-  "program": {
-   "reached": 58,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.2730840773899357,
-   "runs": 32.0
-  },
-  "seq-1": {
-   "reached": 57,
-   "missed": 1,
-   "declined": 0,
-   "pen": 2.10057739992005,
-   "runs": 4.0
-  },
-  "seq-3": {
-   "reached": 58,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.3527593868667624,
-   "runs": 5.0
-  },
-  "seq-10": {
-   "reached": 58,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.3527593868667624,
-   "runs": 5.0
-  },
-  "coord-10": {
-   "reached": 58,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.3527593868667624,
-   "runs": 5.0
-  },
-  "ref": {
-   "reached": 58,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.0,
-   "runs": 58.0
-  }
- },
- "LMP-64|energy_per_ion|1e-05": {
-  "program": {
-   "reached": 5,
-   "missed": 0,
-   "declined": 53,
-   "pen": 1.9291314011141203,
-   "runs": 31.0
-  },
-  "seq-1": {
-   "reached": 58,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.6933982829177772,
-   "runs": 5.0
-  },
-  "seq-3": {
-   "reached": 58,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.5414612483661485,
-   "runs": 5.0
-  },
-  "seq-10": {
-   "reached": 58,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.390453496807072,
-   "runs": 5.0
-  },
-  "coord-10": {
-   "reached": 58,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.390453496807072,
-   "runs": 5.0
-  },
-  "ref": {
-   "reached": 58,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.0,
-   "runs": 58.0
-  }
- },
- "LMP-64|energy_per_ion|1e-06": {
-  "program": {
-   "reached": 0,
-   "missed": 0,
-   "declined": 58,
-   "pen": NaN,
-   "runs": 31.0
-  },
-  "seq-1": {
-   "reached": 58,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.3136366432693394,
-   "runs": 5.0
-  },
-  "seq-3": {
-   "reached": 58,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.1037690927453654,
-   "runs": 5.0
-  },
-  "seq-10": {
-   "reached": 58,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.1037690927453654,
-   "runs": 5.0
-  },
-  "coord-10": {
-   "reached": 58,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.1037690927453654,
-   "runs": 5.0
-  },
-  "ref": {
-   "reached": 58,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.0,
-   "runs": 58.0
-  }
- },
- "GMX-d|potential|1e-05": {
-  "program": {
-   "reached": 225,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.706649355027438,
-   "runs": 55.0
-  },
-  "seq-1": {
-   "reached": 183,
-   "missed": 42,
-   "declined": 0,
-   "pen": 2.232058060209797,
-   "runs": 5.0
-  },
-  "seq-3": {
-   "reached": 206,
-   "missed": 19,
-   "declined": 0,
-   "pen": 2.1831647958122797,
-   "runs": 5.0
-  },
-  "seq-10": {
-   "reached": 225,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.2746241898390793,
-   "runs": 6.0
-  },
-  "coord-10": {
-   "reached": 225,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.432519053898815,
-   "runs": 7.0
-  },
-  "ref": {
-   "reached": 225,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.0,
-   "runs": 225.0
-  }
- },
- "GMX-d|potential|1e-06": {
-  "program": {
-   "reached": 225,
-   "missed": 0,
-   "declined": 0,
-   "pen": 2.253348763571303,
-   "runs": 68.0
-  },
-  "seq-1": {
-   "reached": 203,
-   "missed": 22,
-   "declined": 0,
-   "pen": 1.7052652784112017,
-   "runs": 6.0
-  },
-  "seq-3": {
-   "reached": 217,
-   "missed": 8,
-   "declined": 0,
-   "pen": 1.594576472545953,
-   "runs": 6.0
-  },
-  "seq-10": {
-   "reached": 221,
-   "missed": 4,
-   "declined": 0,
-   "pen": 1.274719811422549,
-   "runs": 6.0
-  },
-  "coord-10": {
-   "reached": 225,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.274719811422549,
-   "runs": 7.0
-  },
-  "ref": {
-   "reached": 225,
-   "missed": 0,
-   "declined": 0,
-   "pen": 1.0,
-   "runs": 225.0
+  "GMX-d|potential|1e-06": {
+   "program": {
+    "reached": 225,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.253348763571303,
+    "runs": 68.0,
+    "K": 48.155410363844695
+   },
+   "seq-1": {
+    "reached": 203,
+    "missed": 22,
+    "declined": 0,
+    "pen": 1.7052652784112017,
+    "runs": 6.0,
+    "K": 5.831875545783634
+   },
+   "seq-3": {
+    "reached": 217,
+    "missed": 8,
+    "declined": 0,
+    "pen": 1.594576472545953,
+    "runs": 6.0,
+    "K": 6.061674327980412
+   },
+   "seq-10": {
+    "reached": 221,
+    "missed": 4,
+    "declined": 0,
+    "pen": 1.274719811422549,
+    "runs": 6.0,
+    "K": 6.139762265686189
+   },
+   "coord-1": {
+    "reached": 224,
+    "missed": 1,
+    "declined": 0,
+    "pen": 1.7052652784112017,
+    "runs": 7.0,
+    "K": 7.223753013006775
+   },
+   "coord-3": {
+    "reached": 225,
+    "missed": 0,
+    "declined": 0,
+    "pen": 2.0326850175659175,
+    "runs": 7.0,
+    "K": 7.589220349605253
+   },
+   "coord-10": {
+    "reached": 225,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.274719811422549,
+    "runs": 7.0,
+    "K": 7.369646753111562
+   },
+   "ref": {
+    "reached": 225,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.0,
+    "runs": 225.0,
+    "K": 322.19444432303175
+   }
   }
  }
 }

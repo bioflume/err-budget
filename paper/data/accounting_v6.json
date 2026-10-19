@@ -1,0 +1,974 @@
+[
+ {
+  "case": "L2",
+  "label": "L2",
+  "dims": [
+   5,
+   5,
+   5,
+   5
+  ],
+  "settings": 625,
+  "produced_value": 625,
+  "no_value": 0,
+  "not_converged": 0,
+  "converged": 625,
+  "starts": 625,
+  "start_failed": 0,
+  "ladders": [
+   [
+    32.0,
+    64.0,
+    128.0,
+    256.0,
+    512.0
+   ],
+   [
+    25.0,
+    50.0,
+    100.0,
+    200.0,
+    400.0
+   ],
+   [
+    0.01,
+    0.0001,
+    1e-06,
+    1e-08,
+    1e-10
+   ],
+   [
+    0.01,
+    0.0001,
+    1e-06,
+    1e-08,
+    1e-10
+   ]
+  ],
+  "kinds": [
+   "discretisation",
+   "discretisation",
+   "nested-solver",
+   "nested-solver"
+  ],
+  "models": null,
+  "reference": {
+   "energy": 1.3738482866506077,
+   "dissipation": 0.3104023614478108
+  },
+  "uncertainty": {},
+  "admitted": {
+   "energy": [
+    0.007278824086449631,
+    0.0021836472259348892,
+    0.0007278824086449631
+   ],
+   "dissipation": [
+    0.03221624975195732,
+    0.009664874925587196,
+    0.0032216249751957316
+   ]
+  },
+  "not_admitted": {
+   "energy": [],
+   "dissipation": []
+  },
+  "no_value_reasons": {},
+  "cost": "work units"
+ },
+ {
+  "case": "L3",
+  "label": "L3",
+  "dims": [
+   4,
+   4,
+   3,
+   3,
+   3
+  ],
+  "settings": 432,
+  "produced_value": 432,
+  "no_value": 0,
+  "not_converged": 0,
+  "converged": 432,
+  "starts": 432,
+  "start_failed": 0,
+  "ladders": [
+   [
+    16.0,
+    32.0,
+    64.0,
+    128.0
+   ],
+   [
+    10.0,
+    20.0,
+    40.0,
+    80.0
+   ],
+   [
+    0.01,
+    1e-05,
+    1e-08
+   ],
+   [
+    0.01,
+    1e-05,
+    1e-08
+   ],
+   [
+    0.1,
+    0.01,
+    0.001
+   ]
+  ],
+  "kinds": [
+   "discretisation",
+   "discretisation",
+   "nested-solver",
+   "nested-solver",
+   "cost-only"
+  ],
+  "models": null,
+  "reference": {
+   "energy": 5.581492102073773,
+   "gradient": 46.884533657419695
+  },
+  "uncertainty": {},
+  "admitted": {
+   "energy": [
+    0.01,
+    0.003
+   ],
+   "gradient": [
+    0.01,
+    0.003
+   ]
+  },
+  "not_admitted": {
+   "energy": [],
+   "gradient": []
+  },
+  "no_value_reasons": {},
+  "cost": "work units"
+ },
+ {
+  "case": "L4",
+  "label": "L4",
+  "dims": [
+   4,
+   4,
+   4,
+   3,
+   3
+  ],
+  "settings": 576,
+  "produced_value": 576,
+  "no_value": 0,
+  "not_converged": 0,
+  "converged": 576,
+  "starts": 576,
+  "start_failed": 0,
+  "ladders": [
+   [
+    16.0,
+    32.0,
+    64.0,
+    128.0
+   ],
+   [
+    5.0,
+    10.0,
+    20.0,
+    40.0
+   ],
+   [
+    1.0,
+    2.0,
+    4.0,
+    8.0
+   ],
+   [
+    0.01,
+    1e-05,
+    1e-08
+   ],
+   [
+    0.1,
+    0.01,
+    0.001
+   ]
+  ],
+  "kinds": [
+   "discretisation",
+   "discretisation",
+   "discretisation",
+   "nested-solver",
+   "cost-only"
+  ],
+  "models": null,
+  "reference": {
+   "inhibitor_mass": 9.869604401089358,
+   "pattern_sharpness": 0.7261649103311923
+  },
+  "uncertainty": {},
+  "admitted": {
+   "inhibitor_mass": [
+    0.01,
+    0.003
+   ],
+   "pattern_sharpness": [
+    0.01,
+    0.003
+   ]
+  },
+  "not_admitted": {
+   "inhibitor_mass": [],
+   "pattern_sharpness": []
+  },
+  "no_value_reasons": {},
+  "cost": "work units"
+ },
+ {
+  "case": "L5",
+  "label": "L5",
+  "dims": [
+   7,
+   5,
+   5,
+   4
+  ],
+  "settings": 700,
+  "produced_value": 700,
+  "no_value": 0,
+  "not_converged": 24,
+  "converged": 676,
+  "starts": 700,
+  "start_failed": 24,
+  "ladders": [
+   [
+    16.0,
+    24.0,
+    32.0,
+    48.0,
+    64.0,
+    96.0,
+    128.0
+   ],
+   [
+    0.01,
+    0.0001,
+    1e-06,
+    1e-08,
+    1e-10
+   ],
+   [
+    0.1,
+    0.01,
+    0.0001,
+    1e-06,
+    1e-08
+   ],
+   [
+    0.001,
+    0.0001,
+    1e-05,
+    1e-06
+   ]
+  ],
+  "kinds": [
+   "discretisation",
+   "nested-solver",
+   "nested-solver",
+   "cost-only"
+  ],
+  "models": null,
+  "reference": {
+   "psi_min": -0.035235317564326726,
+   "y_min": 0.8855961734773854,
+   "omega_lid": -24.00000000000002
+  },
+  "uncertainty": {},
+  "admitted": {
+   "psi_min": [
+    0.01,
+    0.003
+   ],
+   "y_min": [
+    0.001,
+    0.0003
+   ],
+   "omega_lid": [
+    0.01,
+    0.003
+   ]
+  },
+  "not_admitted": {
+   "psi_min": [],
+   "y_min": [],
+   "omega_lid": []
+  },
+  "no_value_reasons": {},
+  "cost": "work units"
+ },
+ {
+  "case": "2D-1",
+  "label": "OpenFOAM DFG 2D-1",
+  "dims": [
+   7,
+   6,
+   5,
+   4
+  ],
+  "settings": 840,
+  "produced_value": 780,
+  "no_value": 60,
+  "not_converged": 172,
+  "converged": 608,
+  "starts": 780,
+  "start_failed": 172,
+  "ladders": [
+   [
+    8.0,
+    12.0,
+    16.0,
+    24.0,
+    32.0,
+    48.0,
+    64.0
+   ],
+   [
+    0.01,
+    0.001,
+    0.0001,
+    1e-05,
+    1e-06,
+    1e-07
+   ],
+   [
+    0.0001,
+    1e-05,
+    1e-06,
+    1e-07,
+    1e-08
+   ],
+   [
+    10.0,
+    50.0,
+    250.0,
+    1000.0
+   ]
+  ],
+  "kinds": [
+   "discretisation",
+   "nested-solver",
+   "nested-solver",
+   "cost-only"
+  ],
+  "models": null,
+  "reference": {
+   "cd": 5.57953523384,
+   "cl": 0.010618948146,
+   "dp": 0.11752016697
+  },
+  "uncertainty": {},
+  "admitted": {
+   "cd": [
+    0.01,
+    0.003,
+    0.001
+   ],
+   "dp": [
+    0.03,
+    0.01
+   ],
+   "cl": [
+    0.1,
+    0.03
+   ]
+  },
+  "not_admitted": {
+   "cd": [],
+   "dp": [],
+   "cl": []
+  },
+  "no_value_reasons": {
+   "GAMG could not be set up (FOAM FATAL ERROR in GAMGSolver)": 60
+  },
+  "cost": "cells x iterations"
+ },
+ {
+  "case": "2D-2",
+  "label": "OpenFOAM DFG 2D-2",
+  "dims": [
+   5,
+   4,
+   4,
+   3
+  ],
+  "settings": 240,
+  "produced_value": 207,
+  "no_value": 33,
+  "not_converged": 23,
+  "converged": 184,
+  "starts": 207,
+  "start_failed": 23,
+  "ladders": [
+   [
+    12.0,
+    16.0,
+    24.0,
+    32.0,
+    48.0
+   ],
+   [
+    0.004,
+    0.002,
+    0.001,
+    0.0005
+   ],
+   [
+    0.01,
+    0.001,
+    0.0001,
+    1e-05
+   ],
+   [
+    0.0001,
+    1e-06,
+    1e-08
+   ]
+  ],
+  "kinds": [
+   "discretisation",
+   "discretisation",
+   "nested-solver",
+   "nested-solver"
+  ],
+  "models": null,
+  "reference": {
+   "cd_max": 3.2335104282597493,
+   "cl_max": 1.0016312374455971,
+   "st": 0.3009204482000929
+  },
+  "uncertainty": {
+   "cd_max": 0.0006620243110997053,
+   "cl_max": 0.005937533772613003,
+   "st": 0.0022960360042523077
+  },
+  "admitted": {
+   "cd_max": [
+    0.1,
+    0.03,
+    0.01
+   ],
+   "cl_max": [
+    0.1
+   ],
+   "st": [
+    0.1,
+    0.03
+   ]
+  },
+  "not_admitted": {
+   "cd_max": [
+    0.003
+   ],
+   "cl_max": [
+    0.03,
+    0.01
+   ],
+   "st": [
+    0.01
+   ]
+  },
+  "no_value_reasons": {
+   "floating-point exception in the solver (diverged)": 19,
+   "solver crashed (stack trace only; signal not stored)": 14
+  },
+  "cost": "CPU s"
+ },
+ {
+  "case": "LMP-20",
+  "label": "LAMMPS 8,000 ions",
+  "dims": [
+   5,
+   5,
+   4
+  ],
+  "settings": 100,
+  "produced_value": 100,
+  "no_value": 0,
+  "not_converged": 0,
+  "converged": 100,
+  "starts": 100,
+  "start_failed": 0,
+  "ladders": [
+   [
+    6.0,
+    8.0,
+    10.0,
+    12.0,
+    14.0
+   ],
+   [
+    0.01,
+    0.001,
+    0.0001,
+    1e-05,
+    1e-06
+   ],
+   [
+    4.0,
+    5.0,
+    6.0,
+    7.0
+   ]
+  ],
+  "kinds": [
+   "discretisation",
+   "discretisation",
+   "cost-only"
+  ],
+  "models": null,
+  "reference": {
+   "energy_per_ion": -4.461757200951505
+  },
+  "uncertainty": {},
+  "admitted": {
+   "energy_per_ion": [
+    0.0001,
+    1e-05,
+    1e-06
+   ]
+  },
+  "not_admitted": {
+   "energy_per_ion": []
+  },
+  "no_value_reasons": {},
+  "cost": "wall s"
+ },
+ {
+  "case": "LMP-40",
+  "label": "LAMMPS 64,000 ions",
+  "dims": [
+   4,
+   4,
+   4
+  ],
+  "settings": 64,
+  "produced_value": 62,
+  "no_value": 2,
+  "not_converged": 0,
+  "converged": 62,
+  "starts": 62,
+  "start_failed": 0,
+  "ladders": [
+   [
+    8.0,
+    10.0,
+    12.0,
+    14.0
+   ],
+   [
+    0.001,
+    0.0001,
+    1e-05,
+    1e-06
+   ],
+   [
+    4.0,
+    5.0,
+    6.0,
+    7.0
+   ]
+  ],
+  "kinds": [
+   "discretisation",
+   "discretisation",
+   "cost-only"
+  ],
+  "models": null,
+  "reference": {
+   "energy_per_ion": -4.461757200951505
+  },
+  "uncertainty": {},
+  "admitted": {
+   "energy_per_ion": [
+    0.0001,
+    1e-05,
+    1e-06
+   ]
+  },
+  "not_admitted": {
+   "energy_per_ion": []
+  },
+  "no_value_reasons": {
+   "no value (no message stored)": 2
+  },
+  "cost": "wall s"
+ },
+ {
+  "case": "LMP-64",
+  "label": "LAMMPS 262,144 ions",
+  "dims": [
+   4,
+   4,
+   4
+  ],
+  "settings": 64,
+  "produced_value": 58,
+  "no_value": 6,
+  "not_converged": 0,
+  "converged": 58,
+  "starts": 58,
+  "start_failed": 0,
+  "ladders": [
+   [
+    8.0,
+    10.0,
+    12.0,
+    14.0
+   ],
+   [
+    0.001,
+    0.0001,
+    1e-05,
+    1e-06
+   ],
+   [
+    4.0,
+    5.0,
+    6.0,
+    7.0
+   ]
+  ],
+  "kinds": [
+   "discretisation",
+   "discretisation",
+   "cost-only"
+  ],
+  "models": null,
+  "reference": {
+   "energy_per_ion": -4.461757200951506
+  },
+  "uncertainty": {},
+  "admitted": {
+   "energy_per_ion": [
+    0.0001,
+    1e-05,
+    1e-06
+   ]
+  },
+  "not_admitted": {
+   "energy_per_ion": []
+  },
+  "no_value_reasons": {
+   "no value (no message stored)": 6
+  },
+  "cost": "wall s"
+ },
+ {
+  "case": "GMX-d",
+  "label": "GROMACS double",
+  "dims": [
+   5,
+   5,
+   3,
+   3
+  ],
+  "settings": 225,
+  "produced_value": 225,
+  "no_value": 0,
+  "not_converged": 0,
+  "converged": 225,
+  "starts": 225,
+  "start_failed": 0,
+  "ladders": [
+   [
+    0.9,
+    1.0,
+    1.1,
+    1.2,
+    1.4
+   ],
+   [
+    0.2,
+    0.16,
+    0.12,
+    0.1,
+    0.08
+   ],
+   [
+    4.0,
+    5.0,
+    6.0
+   ],
+   [
+    0.0001,
+    1e-05,
+    1e-06
+   ]
+  ],
+  "kinds": [
+   "discretisation",
+   "discretisation",
+   "cost-only",
+   "discretisation"
+  ],
+  "models": null,
+  "reference": {
+   "potential": -73671.370207
+  },
+  "uncertainty": {},
+  "admitted": {
+   "potential": [
+    1e-05,
+    1e-06
+   ]
+  },
+  "not_admitted": {
+   "potential": []
+  },
+  "no_value_reasons": {},
+  "cost": "wall s"
+ },
+ {
+  "case": "GMX-s",
+  "label": "GROMACS mixed",
+  "dims": [
+   5,
+   5,
+   3,
+   3
+  ],
+  "settings": 225,
+  "produced_value": 225,
+  "no_value": 0,
+  "not_converged": 0,
+  "converged": 225,
+  "starts": 225,
+  "start_failed": 0,
+  "ladders": [
+   [
+    0.9,
+    1.0,
+    1.1,
+    1.2,
+    1.4
+   ],
+   [
+    0.2,
+    0.16,
+    0.12,
+    0.1,
+    0.08
+   ],
+   [
+    4.0,
+    5.0,
+    6.0
+   ],
+   [
+    0.0001,
+    1e-05,
+    1e-06
+   ]
+  ],
+  "kinds": [
+   "discretisation",
+   "discretisation",
+   "cost-only",
+   "discretisation"
+  ],
+  "models": null,
+  "reference": {
+   "potential": -73671.370207
+  },
+  "uncertainty": {},
+  "admitted": {
+   "potential": [
+    0.0001,
+    3e-05,
+    1e-05
+   ]
+  },
+  "not_admitted": {
+   "potential": []
+  },
+  "no_value_reasons": {},
+  "cost": "wall s"
+ },
+ {
+  "case": "ABINIT",
+  "label": "ABINIT Si",
+  "dims": [
+   7,
+   4,
+   4,
+   3
+  ],
+  "settings": 336,
+  "produced_value": 336,
+  "no_value": 0,
+  "not_converged": 0,
+  "converged": 336,
+  "starts": 336,
+  "start_failed": 0,
+  "ladders": [
+   [
+    8.0,
+    12.0,
+    16.0,
+    20.0,
+    24.0,
+    28.0,
+    32.0
+   ],
+   [
+    2.0,
+    3.0,
+    4.0,
+    6.0
+   ],
+   [
+    1e-06,
+    1e-08,
+    1e-10,
+    1e-12
+   ],
+   [
+    2.0,
+    4.0,
+    6.0
+   ]
+  ],
+  "kinds": [
+   "discretisation",
+   "discretisation",
+   "nested-solver",
+   "cost-only"
+  ],
+  "models": [
+   "exponential",
+   "power",
+   "power",
+   "power"
+  ],
+  "reference": {
+   "energy": -8.706005849,
+   "force": 0.0097574594297644
+  },
+  "uncertainty": {
+   "energy": 0.000122,
+   "force": 0.00445
+  },
+  "admitted": {
+   "energy": [
+    0.01,
+    0.003
+   ],
+   "force": [
+    0.1
+   ]
+  },
+  "not_admitted": {
+   "energy": [
+    0.001
+   ],
+   "force": [
+    0.03,
+    0.01
+   ]
+  },
+  "no_value_reasons": {},
+  "cost": "CPU s"
+ },
+ {
+  "case": "QE",
+  "label": "Quantum ESPRESSO Si",
+  "dims": [
+   8,
+   4,
+   5,
+   3
+  ],
+  "settings": 480,
+  "produced_value": 480,
+  "no_value": 0,
+  "not_converged": 0,
+  "converged": 480,
+  "starts": 480,
+  "start_failed": 0,
+  "ladders": [
+   [
+    12.0,
+    16.0,
+    20.0,
+    24.0,
+    28.0,
+    32.0,
+    40.0,
+    48.0
+   ],
+   [
+    2.0,
+    3.0,
+    4.0,
+    6.0
+   ],
+   [
+    0.0001,
+    1e-06,
+    1e-08,
+    1e-10,
+    1e-12
+   ],
+   [
+    0.3,
+    0.5,
+    0.7
+   ]
+  ],
+  "kinds": [
+   "discretisation",
+   "discretisation",
+   "nested-solver",
+   "cost-only"
+  ],
+  "models": [
+   "exponential",
+   "power",
+   "power",
+   "power"
+  ],
+  "reference": {
+   "energy": -16.92416753,
+   "force": 0.020293804370524023
+  },
+  "uncertainty": {
+   "energy": 1.1976955416437995e-06,
+   "force": 0.004226689904759061
+  },
+  "admitted": {
+   "energy": [
+    0.001,
+    0.0001
+   ],
+   "force": [
+    0.1
+   ]
+  },
+  "not_admitted": {
+   "energy": [
+    1e-05
+   ],
+   "force": [
+    0.03,
+    0.01
+   ]
+  },
+  "no_value_reasons": {},
+  "cost": "CPU s"
+ }
+]
