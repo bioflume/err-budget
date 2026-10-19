@@ -1,16 +1,158 @@
 # Reproducing the article
 
-`reproduce.sh` regenerates every number, table and figure in the article **from
-scratch**. It deletes `data/` and runs every solver again, including LAMMPS, GROMACS and
-ABINIT. Nothing is read from saved output unless you ask for it.
+This folder holds every script, every stored solver output and every table and figure of
+the article. There are three ways to reproduce it, from cheap to expensive:
+
+| Tier | What it does | Needs | Time |
+|---|---|---|---|
+| **A. Replay** | re-runs the program over the stored solver output in `data/` and regenerates every number, table and figure | Python with NumPy, SciPy, Matplotlib, SymPy, pytest | 2–4 hours on 2 cores |
+| **B. From scratch** | runs every solver again and rebuilds `data/`, then replays | tier A plus LAMMPS, GROMACS, ABINIT, OpenFOAM and Quantum ESPRESSO (versions below) | about 16 CPU-hours, plus the 2D-2 build (`dfg2d2_job/`, about 40 CPU-hours) |
+| **C. Cluster studies** | the five SLURM jobs J1–J5 of revision 4, including the pre-registered held-out test H3 | Durham's Hamilton (or any SLURM cluster, see `../hamilton/config.sh`) | 1–3 days of queue time, about 400–700 core-hours |
+
+Tier A is what a reader checking the article needs. Tier B is for someone who wants to
+regenerate the solver output itself. Tier C lives entirely in `../hamilton/`, whose README
+is the runbook.
+
+## Setup
 
 ```bash
-./reproduce.sh            # from scratch (about 10 hours on 2 cores)
-./reproduce.sh --cached   # re-analyse the stored solver output (about 2 hours)
+git clone <this repository> knobs-paper && cd knobs-paper
+python -m venv .venv && source .venv/bin/activate
+pip install -e ".[paper]"            # numpy, scipy, matplotlib, sympy, pytest and the knobs package
+cd paper && bash run_v6_analyses.sh check
 ```
 
-Each step writes its output to `figures/<step>.txt`. The table below maps every result in
-the article to the script that produces it.
+`check` lists what it finds: the Python stack, the `knobs` package (it must report
+`V121`), the solvers, and the git tag `v1.2.0-frozen` (or `frozen_src/`), which the
+held-out replays need. Missing solvers only matter for tier B and for the three steps of
+tier A that call them (A03, A04 and the second half of A12).
+
+The article's own environment is in the table at the end of this file. Replays with
+NumPy 2.x and SciPy 1.18 give identical counts (checked on 2026-10-19).
+
+## Tier A: replay the stored output
+
+### Revision 4 (current): `run_v6_analyses.sh`
+
+```bash
+bash run_v6_analyses.sh before                          # 2-4 hours on 2 cores
+bash run_v6_analyses.sh after hamilton_results.tar.gz   # once the cluster results are back
+bash run_v6_analyses.sh collect                         # RESULTS_SUMMARY.md and knobs_v6_results.tar.gz
+```
+
+Every step logs to `../logs/v6/<step>.txt` and records its exit status in
+`../logs/v6/STATUS.txt`. A failed step is reported and the script goes on, except the
+environment check and the tests. `KNOBS_JOBS` (default 2) sets how many pooled
+configurations run at once.
+
+**`before`** needs nothing from the cluster:
+
+| Step | Script | Produces | What it answers; what to check |
+|---|---|---|---|
+| A01 | `pytest ../tests -q` | — | all tests pass (52) |
+| A02 | `../tests/test_spec_v121.py` | — | 14 lines `ok`: the program's behaviour as Section 4 describes it |
+| A03 | `exp75_abinit_reference.py` | `data/abinit_reference_v6.json` | the uncertainty of the 48-Ha ABINIT reference with the Quantum ESPRESSO recipe; the log must say `REFERENCE REPRODUCED` (otherwise the revision-2 value is kept). It decides which ABINIT targets are graded, hence it runs before A05. **Needs ABINIT.** |
+| A04 | `exp74_pppm_mechanism.py` | `data/pppm_mechanism_v6.json` | why PPPM order 7 is cheapest (coarser FFT grid): 24 rows, 3 sizes × 2 settings × orders 4–7, and the "cheapest order" lines. **Needs the LAMMPS Python module.** |
+| A05 | `pooled.py <config>` × 20 | `data/pooled_<config>.json` | Table 3 and Table 4: v1.2.1, v1.2, v1.1, v1.1+gated, the eight ablations from v1.2.1 and the same eight from v1.2; every log ends with `TOTAL`. The 2D-1 rows of v1.2.1 show 780 starts and 608 accepted at all 7 targets, `missed` 0 everywhere. |
+| A06 | `summ.py v1.2.1 v1.2 v1.1` | — | pooled totals, low-order acceptances, step-cap hits |
+| A07 | `exp72_baselines_pooled.py` | `data/baselines_v6.json` | Table 6: sequential and coordinate searches against the program, with a "sweep order" line per case; LAMMPS, GROMACS double and mixed, ABINIT and QE included |
+| A08 | the same, `LMP-20 LMP-40 LMP-64 GMX-d` | `data/baselines_lmp_gmx.json` | Supplement S5 |
+| A09 | `exp76_accounting.py` | `data/accounting_v6.json` | Table 2 against Table 3: candidate lists m1×…×mp, settings without a value, not converged, converged, starts. 2D-1: 840 / 60 / 172 / 608 / 780. |
+| A10 | `exp77_reltol_2d1.py` | `data/reltol_2d1.json` | is the GAMG tolerance inactive when 10× below residualControl? Regime line `100 t/rc < 0.1 ... 78 settings, 0 not converged; largest change ... cd 0.0e+00` |
+| A11 | `exp78_gromacs_floor_v121.py` | `data/gromacs_floor_v121.json` | GROMACS mixed precision: 3e-5 and 1e-5 reachable only by chance (table below) |
+| A12 | `exp58_floor_sensitivity.py v1.2.1` | — | floor sensitivity; its second half times probe runs and **needs GROMACS** |
+| A13 | `exp79_unconverged.py` | `data/unconverged_v6.json` | accepting unconverged runs: 2D-1 row 5460 starts, 1204 whose own run did not converge, 4256 accepted by v1.2.1, 5460 with unconverged runs accepted; 1,514 extra acceptances in total |
+| A14 | `exp73_decline_reasons.py` | — | Section 6.1; a `TOTAL` line |
+| A15 | `exp62_heldout.py` | `data/heldout_replay.json` | Table 5: H1 and H2 with the frozen program; `frozen program verified (sha256 34dd3f44...)`; every row carries `distinct` |
+| A16 | `exp62_heldout.py --current` | `data/heldout_replay_current.json` | the same with v1.2.1 |
+| A17 | `exp71_dfg2_detail.py` | — | Section 7.2, every 2D-2 target and configuration |
+| A18–A21 | `exp65_misdeclare_v12.py`, `exp66_estimate_v12.py`, `exp67_margin_v12.py`, `exp64_transfer_floor.py` | — | Supplement S3, Appendix A, Appendix B, Supplement S2 (rerun because the admitted ABINIT cells may change after A03) |
+| A22 | `exp63_figures.py` | `figures/fig_search.pdf`, `figures/fig_search_steps.txt` | Fig. 3: 14 steps, Phase 1 ends at step 8, final setting (32, 1e-4, 1e-7, 10), error 0.225 ε, 146 runs; Fig. 4, Fig. 5 |
+| A23 | `exp70_tables.py` | `figures/tab_*.tex`, including `tab_ablation_v12.tex` | every table of the article |
+
+The deterministic replay of the GROMACS tensor (A11) must give exactly:
+
+| Target | Settings within the target by chance (of 225) | v1.2.1 | v1.1-noprobe |
+|---|---|---|---|
+| 1e-4 | 206 | 69 accepted (7 distinct), 0 missed | — |
+| 3e-5 | 160 | 0 accepted | 152 accepted, 0 missed |
+| 1e-5 | 51 | 0 accepted | 9 accepted, 6 missed (worst 1.58 ε) |
+| 3e-6 | 13 | 0 accepted | 6 accepted, 6 missed (worst 3.20 ε) |
+| 1e-6 | 4 | 0 accepted | — |
+
+**`after <archive>`** needs `hamilton_results.tar.gz` from `../hamilton/`:
+
+| Step | Script | What it does |
+|---|---|---|
+| B01 | `exp60_hamilton.py` | unpacks into `../hamilton/results`; prints J1–J5; replays H1–H3 with the frozen program and with v1.2.1 (`heldout_replay*.json` then contain case `H3`); regenerates the tables |
+| B02 | `pooled.py --only 2D-2h` × 20 | merges the refined 2D-2 study into every `pooled_<config>.json` (skipped, and reported, if `j2_tensor.pkl` lacks the case specification) |
+| B03 | `exp72_baselines_pooled.py 2D-2h` | 2D-2h baselines merged into `baselines_v6.json` |
+| B04–B06 | `exp76`, `exp79`, `exp73` | accounting, unconverged counts and decline reasons including 2D-2h |
+| B07 | `exp70_tables.py` | final tables; Table 3 uses the refined 2D-2 study (`KNOBS_TABLE3_2D2=refined`, the default) |
+
+**`collect`** runs `exp82_collect_v6.py`: `RESULTS_SUMMARY.md` in the repository root
+(headline numbers for every configuration with both 2D-2 studies, the held-out tables,
+accounting, baselines, every revision-4 analysis, the tails of `j1.txt`–`j5.txt`) and
+`knobs_v6_results.tar.gz` (the summary, every result file, tables, figures, logs and
+`hamilton/results` without the raw archive).
+
+### Earlier revisions: `reproduce.sh --cached`
+
+```bash
+./reproduce.sh --cached   # re-analyse the stored solver output of revisions 2 and 3 (about 2 hours)
+```
+
+Each step writes its output to `figures/<step>.txt`; the tables further down map every
+result of revisions 3 and 2 to its script. Those results are now in the supplement or in
+`../CHANGELOG.md`.
+
+## Tier B: rebuild the solver output from scratch
+
+```bash
+./reproduce.sh            # deletes data/*.pkl and data/*.json, runs every solver again (about 10 hours on 2 cores)
+```
+
+Then the DFG 2D-2 grid, which is a batch job of 243 OpenFOAM runs (about 40 CPU-hours;
+SLURM or one machine): see `dfg2d2_job/README.md`. Finally `run_v6_analyses.sh before`
+as in tier A.
+
+Nothing is read from saved output unless `--cached` is given. The stored solver output is
+in `data/` (pickled tensors, one per case, plus JSON result files), and `cases.py` is the
+registry of every case: its tensor, declarations, reference, admission rule and targets.
+
+- **Machine-dependent numbers:** the costs of every production code (wall-clock time for
+  LAMMPS and GROMACS, CPU time for OpenFOAM, ABINIT and Quantum ESPRESSO), the penalties
+  derived from them, the CPU-time replay of `exp52`, the 8-parameter study `exp54`
+  (which uses work units but whose recommendations are graded by them), and running times.
+- **Machine-independent numbers:** everything else, which reproduces exactly.
+- **One exception, the L2 cost model.** Its work-unit cost counts GMRES iterations. At loose
+  tolerances this count can differ by one between SciPy builds, which changes L2 costs by up
+  to 0.25%. In our checks this changed no number in the article.
+
+## Tier C: the cluster studies
+
+Everything that runs on the cluster is in `../hamilton/`: the five jobs, their drivers,
+the submit, status and collect scripts, and the runbook (`../hamilton/README.md`) that
+takes the results back to `run_v6_analyses.sh after`.
+
+## What is in this folder
+
+```
+run_v6_analyses.sh   revision 4: check | before | after <archive> | collect
+reproduce.sh         revisions 2 and 3, from scratch or --cached
+cases.py             the case registry (every tensor, declaration, reference, admission rule)
+pooled.py, summ.py   the pooled replay over every case and configuration, and its totals
+replay.py, grids.py, baselines.py   shared replay, grid and baseline code
+exp*.py              one script per analysis; the tables below say which result each one produces
+*_silicon.py, gromacs_water.py, lammps_*.py, openfoam_*.py, heldout_*.py
+                     drivers of the solvers (ABINIT, QE, GROMACS, LAMMPS, OpenFOAM, held-out problems)
+snfix.c              the snprintf shim for Quantum ESPRESSO 6.7 (see ../THIRD_PARTY_RESULTS.md)
+data/                stored solver output and result files
+figures/             tables (tab_*.tex), figures (fig_*.pdf) and the text output of every step
+frozen_src/          copy of version 1.2.0, the frozen program of the held-out tests
+dfg2d2_job/          batch build of the revision-2 2D-2 grid (SLURM or one machine)
+legacy/              scripts of earlier versions of the article, not needed
+```
 
 ## Environment used for the article
 
@@ -27,16 +169,8 @@ the article to the script that produces it.
 | OpenFOAM | v1912 (`apt install openfoam`); `simpleFoam`, `pimpleFoam`, `blockMesh`, `checkMesh` |
 | Quantum ESPRESSO | 6.7 (`apt install quantum-espresso`), run with the preloaded shim `snfix.c` (needs `gcc`) |
 
-- **Machine-dependent numbers:** the costs of every production code (wall-clock time for
-  LAMMPS and GROMACS, CPU time for OpenFOAM, ABINIT and Quantum ESPRESSO), the penalties
-  derived from them, the CPU-time replay of `exp52`, the 8-parameter study `exp54`
-  (which uses work units but whose recommendations are graded by them), and running times.
-- **Machine-independent numbers:** everything else, which reproduces exactly.
-- **One exception, the L2 cost model.** Its work-unit cost counts GMRES iterations. At loose
-  tolerances this count can differ by one between SciPy builds, which changes L2 costs by up
-  to 0.25%. In our checks this changed no number in the article.
 
-## Where each result of the current article comes from (revision 3, version 1.2.1)
+## Where each result of revision 3 came from (version 1.2.1)
 
 | Result | Script | Output |
 |---|---|---|

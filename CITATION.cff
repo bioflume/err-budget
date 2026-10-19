@@ -1,17 +1,17 @@
-cff-version: 1.2.0
+cff-version: 1.2.1
 message: "If you use knobs, please cite the article and the software release below."
 title: "knobs: choosing the numerical parameters of a black-box solver for a target accuracy in one observable"
 type: software
-version: 1.2.0
+version: 1.2.1
 date-released: "2026-10-31"            # TODO: set at release
 license: MIT
-repository-code: "https://github.com/GITHUB_USER/knobs"   # TODO: replace GITHUB_USER
+repository-code: "https://github.com/bioflume/knobs-paper"
 doi: "10.5281/zenodo.XXXXXXX"            # TODO: Zenodo concept DOI, minted at the first release
 authors:
   - family-names: "Kabacaoğlu"
     given-names: "Gökberk"
     email: "gokberk.kabacaoglu@durham.ac.uk"
-    affiliation: "Department of Mathematical Sciences, Durham University"
+    affiliation: "Department of Computer Science, Durham University"
     # orcid: "https://orcid.org/0000-0000-0000-0000"   # TODO
 keywords:
   - solution verification

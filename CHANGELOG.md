@@ -4,6 +4,31 @@ All notable changes to `knobs`. The article describes version 1.2.1; the compari
 with earlier versions that used to be in the article are recorded here, with the
 script that reproduces each.
 
+## Revision 4 of the article (program unchanged: 1.2.1)
+
+The program did not change. The repository did:
+
+- **New analyses** (`paper/run_v6_analyses.sh`, steps A01–A23, B01–B07, C01) for the
+  referee report on version 5: the ABINIT reference uncertainty with the Quantum ESPRESSO
+  recipe (`exp75`), the PPPM order mechanism (`exp74`), the accounting of Table 2 against
+  Table 3 (`exp76`), relTol in 2D-1 (`exp77`), the GROMACS floor with v1.2.1 (`exp78`),
+  unconverged runs start by start (`exp79`), the collection of every result
+  (`exp82`), ablations from v1.2.1 as well as from v1.2 (`pooled.py`, `exp70_tables.py`),
+  and `distinct` (accepted settings) in every pooled and held-out row.
+- **Cluster jobs** (`hamilton/`): the J1 function object now writes (it was configured to
+  write every 20,000th field write and never did); J2 spin-ups at Courant 0.65–0.87 with
+  retries at half the time step; refusal to reuse results of the old drivers; `collect_job.sh`.
+  Details in `hamilton/README.md`.
+- **Results of Part V** (everything that needs no cluster) regenerated on 2026-10-19 from
+  the stored tensors with NumPy 2.5.3 and SciPy 1.18.1: every count matches the revision-3
+  files. `abinit_reference_v6.json` and `pppm_mechanism_v6.json` need ABINIT and LAMMPS and
+  are not yet in `paper/data`; the cluster results (J1–J5, held-out problem H3) are not yet
+  in `hamilton/results`.
+- **Layout.** `hamilton/README.md` is now the complete runbook for the cluster studies, with
+  `hamilton/REPORT_TEMPLATE.md`; `paper/README.md` describes the three reproduction tiers;
+  the library for users of the method moved to its own repository
+  (<https://github.com/bioflume/knobs>).
+
 ## 1.2.1 — revision 3 of the article (released default)
 
 - **The joint-refinement check now includes every parameter whose one-step change exceeds
