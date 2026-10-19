@@ -1,0 +1,27 @@
+# Tune the three parameters of solver.py for an error of 1e-4 in u_final.
+#   knobs check job.yaml      # runs the starting setting once
+#   knobs run job.yaml        # about 60 runs, a few seconds
+name: stiff ODE, command-line solver
+
+command: python3 {{job_dir}}/solver.py --steps {{steps}} --tol {{tol}} --refresh {{refresh}}
+
+parameters:
+  - {name: steps,   kind: discretisation, values: [25, 50, 100, 200, 400, 800], start: 100}
+  - {name: tol,     kind: nested-solver,  values: [1e-2, 1e-4, 1e-6, 1e-8, 1e-10], start: 1e-10}
+  - {name: refresh, kind: cost-only,      values: [16, 8, 4, 2, 1],               start: 1}
+
+observable:
+  name: u_final
+  regex: "u_final\\s*=\\s*([-+0-9.eE]+)"
+
+target: 1e-4
+
+# the solver counts its own work; use that as the cost instead of wall-clock time
+cost: {regex: "work\\s*=\\s*([0-9]+)"}
+
+failure:
+  failed_if_regex: ["Traceback"]
+
+workdir: knobs_runs
+output: knobs_result
+keep_runs: false
