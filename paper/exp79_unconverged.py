@@ -19,7 +19,7 @@ and tabulates, per case and in total:
   changed           converged starts whose outcome differs between the two configurations
 
     python exp79_unconverged.py [CASE ...]
-    KNOBS_TABLE3_2D2=refined (default) | rev3, as for Table 3
+    ERRBUDGET_TABLE3_2D2=refined (default) | rev3, as for Table 3
 Writes data/unconverged_v6.json.
 """
 import json
@@ -45,7 +45,7 @@ def main():
     keys = set(sys.argv[1:]) or None
     cases = C.all_cases()
     if any(c.key == "2D-2h" for c in cases):
-        drop = "2D-2" if os.environ.get("KNOBS_TABLE3_2D2", "refined") == "refined" else "2D-2h"
+        drop = "2D-2" if os.environ.get("ERRBUDGET_TABLE3_2D2", "refined") == "refined" else "2D-2h"
         cases = [c for c in cases if c.key != drop]
     out, tot = {}, {}
     hdr = (f"{'case':<7} {'cells':>5} {'starts':>7} {'own unc.':>8} {'acc 1.2.1':>9} {'acc a-u':>8} "

@@ -16,8 +16,8 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
 import grids
-from knobs import run_protocol
-from knobs.problems import Burgers1D, Burgers2D
+from errbudget import run_protocol
+from errbudget.problems import Burgers1D, Burgers2D
 
 D = os.path.join(os.path.dirname(__file__), "data")
 MAKERS = {"L2": lambda: Burgers1D(nu=0.05, T=1.0), "L3": lambda: Burgers2D(nu=0.05, T=1.0)}

@@ -8,7 +8,7 @@ Discretisation knobs (N, steps) and pure-cost knobs (ilu_drop, precond_freq)
 should transfer.  Falsifiable either way.
 """
 import sys, os, time, pickle, os, numpy as np
-from knobs.problems import Burgers2D
+from errbudget.problems import Burgers2D
 
 NAMES = ["N","steps","newton_tol","gmres_tol","ilu_drop","gmres_restart",
          "precond_freq","newton_max"]

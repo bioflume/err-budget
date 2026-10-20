@@ -20,8 +20,8 @@ import sys
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs import run_protocol
-from knobs.problems import Burgers1D, Burgers2D, ReactionDiffusion2D
+from errbudget import run_protocol
+from errbudget.problems import Burgers1D, Burgers2D, ReactionDiffusion2D
 
 D = os.path.join(os.path.dirname(__file__), "data")
 FS = [1.00, 1.05, 1.10, 1.15, 1.20, 1.25, 1.35, 1.50, 2.00, 3.00]

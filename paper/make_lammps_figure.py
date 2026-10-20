@@ -10,10 +10,10 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs import run_protocol
+from errbudget import run_protocol
 from lammps_madelung import LammpsMadelung
 
-OUT = os.environ.get("KNOBS_FIG_DIR", "figures/")
+OUT = os.environ.get("ERRBUDGET_FIG_DIR", "figures/")
 C = ["#0072B2", "#D55E00", "#009E73", "#E69F00", "#CC79A7"]
 INK, MUTED = "#1a1a1a", "#6b6b6b"
 plt.rcParams.update({

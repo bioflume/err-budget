@@ -6,7 +6,7 @@ accurate you need it.  You get back a setting, an error estimate, and a statemen
 of whether the target was met -- plus, importantly, which parameters are being
 refined for nothing.
 
-    from knobs import Knob, tune
+    from errbudget import Knob, tune
 
     def run(N, dt, rtol):
         ...                      # your solver
@@ -145,7 +145,7 @@ class TuneResult:
     def __str__(self):
         w = 74
         L = ["=" * w,
-             f"knobs: recommendation for '{self.observable}'",
+             f"errbudget: recommendation for '{self.observable}'",
              "=" * w]
         if self.certified:
             L.append(f"  Target {self.target:.3g} MET. Estimated error "
@@ -211,7 +211,7 @@ def tune(solver: Callable, knobs: Sequence[Knob], target: float,
         ``"converged": False`` or by raising ``RunFailed``.  Set True to use such
         runs as answers (the behaviour of version 1.1).
     The remaining keyword arguments override the default configuration of
-    version 1.2.1 (``knobs.V121``: residual-gated safety factor, joint-refinement
+    version 1.2.1 (``errbudget.V121``: residual-gated safety factor, joint-refinement
     check, local-order check, no credit for cancellation between parameters).
     floor_probe : two or more settings (dicts of keyword arguments for
         ``solver``) refined beyond every candidate value, or differing only in

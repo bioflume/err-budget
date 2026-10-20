@@ -8,12 +8,12 @@ source ../config.sh
 activate_python
 mkdir -p logs
 if [ "${1:-}" = "smoke" ]; then
-    export KNOBS_SMOKE=1
+    export ERRBUDGET_SMOKE=1
     sbatch --parsable $SB_EXTRA -p test -n 2 -t 00:15:00 --mem=4G -J j2-smoke \
-        -o logs/smoke_%j.out --export=ALL,KNOBS_SMOKE=1 <<EOF
+        -o logs/smoke_%j.out --export=ALL,ERRBUDGET_SMOKE=1 <<EOF
 #!/bin/bash
-source "$KNOBS_ROOT/hamilton/config.sh"; activate_python; load_openfoam; cd "$HERE"
-export KNOBS_SMOKE=1 WORK="$WORK/smoke"
+source "$ERRBUDGET_ROOT/hamilton/config.sh"; activate_python; load_openfoam; cd "$HERE"
+export ERRBUDGET_SMOKE=1 WORK="$WORK/smoke"
 rm -rf "\$WORK/dfg2d2_hpc" "\$WORK/dfg2d2_cases"   # an earlier smoke test would be skipped, not re-run
 python dfg2d2_hpc.py spin && python -m farm dfg2d2_hpc array 0 1 && python -m farm dfg2d2_hpc status
 ls \$WORK/dfg2d2_hpc/*/series.npz && echo "SMOKE TEST PASSED" || echo "SMOKE TEST FAILED"
@@ -38,7 +38,7 @@ PYEOF
 SPIN=$(sbatch --parsable $SB_EXTRA -p "$SB_SHARED" -N 1 -n 32 -t 2-00:00:00 --mem=64G -J j2-spin \
     -o logs/spin_%j.out <<EOF
 #!/bin/bash
-source "$KNOBS_ROOT/hamilton/config.sh"; activate_python; load_openfoam; cd "$HERE"
+source "$ERRBUDGET_ROOT/hamilton/config.sh"; activate_python; load_openfoam; cd "$HERE"
 python dfg2d2_hpc.py spin
 EOF
 )

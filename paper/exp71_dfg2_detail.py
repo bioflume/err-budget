@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
 import cases as C
 import pooled as P
-from knobs import LocalBudget
+from errbudget import LocalBudget
 
 case = C._dfg2()
 print("reference uncertainty (relative):", {k: f"{v:.1e}" for k, v in case.unc.items()})

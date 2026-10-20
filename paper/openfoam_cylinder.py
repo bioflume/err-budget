@@ -56,10 +56,10 @@ UBAR = 2.0 * UM / 3.0
 # (e.g. a cluster module) already sets it and is left alone.
 ENV = dict(os.environ)
 ENV.setdefault("WM_PROJECT_DIR", "/usr/share/openfoam")
-# On a cluster OpenFOAM may live in a container: KNOBS_OF_WRAP is a command
+# On a cluster OpenFOAM may live in a container: ERRBUDGET_OF_WRAP is a command
 # prefix (shell syntax) put in front of every OpenFOAM executable, e.g.
 #   singularity exec of.sif bash -c 'source /usr/lib/openfoam/openfoam2406/etc/bashrc; exec "$@"' bash
-_WRAP = shlex.split(os.environ.get("KNOBS_OF_WRAP", ""))
+_WRAP = shlex.split(os.environ.get("ERRBUDGET_OF_WRAP", ""))
 
 
 def of_cmd(cmd):
@@ -210,7 +210,7 @@ relaxationFactors {{ equations {{ U {relax_u:g}; }} }}
 
 class DFGCylinder:
     def __init__(self, workdir=None, keep=False):
-        self.root = workdir or tempfile.mkdtemp(prefix="knobs_dfg_")
+        self.root = workdir or tempfile.mkdtemp(prefix="errbudget_dfg_")
         self.keep = keep
         self.meshes = {}
 

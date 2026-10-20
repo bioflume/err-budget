@@ -5,7 +5,7 @@ not belong to (10 misdeclarations), and the method is replayed from every
 start at 1e-2 and 3e-3 relative for both observables.  Declarations act in
 the screen (which parameters may be frozen, and at which setting influence is
 measured) and in the cost-only pass, so the screened mode -- the default of
-knobs.tune -- is the one that can be affected.  The full mode is reported too.
+errbudget.tune -- is the one that can be affected.  The full mode is reported too.
 """
 import os
 import sys

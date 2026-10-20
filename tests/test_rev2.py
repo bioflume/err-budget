@@ -4,7 +4,7 @@ import itertools
 import numpy as np
 import pytest
 
-from knobs import Knob, measure_floor, run_protocol, tune
+from errbudget import Knob, measure_floor, run_protocol, tune
 
 
 def _sep(ladders, p=(2.0, 1.0)):

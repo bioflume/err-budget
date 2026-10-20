@@ -13,7 +13,7 @@ reference plus the change from 8 to 10 k-points at a lower cutoff,
 and, for comparison, the rule of exp45_abinit_reference.py (the larger of the changes
 42 -> 48 Ha and 8 -> 10 k-points at 48 Ha).  It checks that the 48-Ha run reproduces the
 stored reference and writes data/abinit_reference_v6.json, which cases.py then uses
-(set KNOBS_ABINIT_UNC=rev2 to keep the old value).
+(set ERRBUDGET_ABINIT_UNC=rev2 to keep the old value).
 
     python exp75_abinit_reference.py        # 6 ABINIT runs, about an hour on 2 cores
 """

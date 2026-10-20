@@ -16,8 +16,8 @@ import time
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs import run_protocol
-from knobs.problems import Burgers2D
+from errbudget import run_protocol
+from errbudget.problems import Burgers2D
 import grids
 
 NAMES = ["N", "steps", "newton_tol", "gmres_tol", "ilu_drop", "gmres_restart",
@@ -30,7 +30,7 @@ HS = [[2 * np.pi / n for n in LAD[0]], [1.0 / s for s in LAD[1]], list(LAD[2]),
       list(LAD[3]), list(LAD[4]), [1.0 / r for r in LAD[5]], list(LAD[6]),
       [1.0 / m for m in LAD[7]]]
 OB, TG = "energy", 1e-2
-NSTART = int(os.environ.get("KNOBS_NSTART", 200))
+NSTART = int(os.environ.get("ERRBUDGET_NSTART", 200))
 CACHE = os.path.join(os.path.dirname(__file__), "data", "eight_cache.pkl")
 
 b = Burgers2D(nu=0.05, T=1.0)

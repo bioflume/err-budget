@@ -33,20 +33,20 @@ fields are written at 500 sampling times and deleted after the forces are extrac
 
 ## Option A: SLURM cluster
 
-1. Copy the package to the cluster:
+1. Copy the repository to the cluster:
    ```
-   tar xzf knobs-1.1.1.tar.gz
+   git clone <this repository> errbudget-paper
    ```
 2. Make Python ready: create a Python environment with numpy and scipy, then run
-   `pip install -e knobs-1.1.1`.
+   `pip install -e errbudget-paper`.
 3. Make OpenFOAM available. Any ESI-OpenCFD version from v1912 on works: `module load …`, then `source $FOAM_BASH`.
-4. Edit `paper/dfg2d2_job/env.sh`. It holds the module and venv lines, plus `KNOBS_DFG2_WORK` if you
+4. Edit `paper/dfg2d2_job/env.sh`. It holds the module and venv lines, plus `ERRBUDGET_DFG2_WORK` if you
    want the work directory on scratch.
 5. Add your site's account and partition lines to `slurm_spin.sh` and `slurm_tasks.sh`.
    For example, `#SBATCH --account=...` and `#SBATCH -p ...`.
 6. Submit:
    ```
-   cd knobs-1.1.1/paper/dfg2d2_job
+   cd errbudget-paper/paper/dfg2d2_job
    ./submit.sh
    ```
    This submits the spin-up array (6 jobs). The task array (243 jobs, at most 40 at once)
@@ -68,7 +68,7 @@ fields are written at 500 sampling times and deleted after the forces are extrac
 ## Option B: one machine
 
 ```
-cd knobs-1.1.1/paper/dfg2d2_job
+cd errbudget-paper/paper/dfg2d2_job
 ./run_local.sh 8      # 8 parallel workers (default: all cores)
 ./monitor.sh
 ./finish.sh           # when done

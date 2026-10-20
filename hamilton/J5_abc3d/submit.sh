@@ -9,8 +9,9 @@ mkdir -p logs
 if [ "${1:-}" = "smoke" ]; then
     sbatch $SB_EXTRA -p test -n 1 -t 00:15:00 --mem=4G -J j5-smoke -o logs/smoke_%j.out <<EOF
 #!/bin/bash
-source "$KNOBS_ROOT/hamilton/config.sh"; activate_python; load_openfoam; cd "$HERE"
-export KNOBS_SMOKE=1 WORK="$WORK/smoke"
+source "$ERRBUDGET_ROOT/hamilton/config.sh"; activate_python; load_openfoam; cd "$HERE"
+# abc_hpc.py is fixed by the pre-registration and reads the old name KNOBS_SMOKE
+export ERRBUDGET_SMOKE=1 KNOBS_SMOKE=1 WORK="$WORK/smoke"
 python -m farm abc_hpc array 0 1 && grep -h '"ek"' \$WORK/abc_hpc/*/result.json | head -1 && echo "SMOKE TEST PASSED" || echo "SMOKE TEST FAILED"
 EOF
     exit 0

@@ -17,7 +17,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cases as C
-from knobs import LocalBudget, V11, V121 as V12
+from errbudget import LocalBudget, V11, V121 as V12
 
 
 def estimate(case, ob, a, eps, cfg, joint):

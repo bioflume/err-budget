@@ -5,8 +5,8 @@ LAMMPS at 262,144 ions (the 64-setting grid of Section 8.1) is re-run with the
 OpenMP threads.  For each R or T: the correlation of the per-setting costs with
 the serial (or 1-thread) costs, the cost ratio of each parameter's steps, and
 the method's recommendation from every start.  On the 2-core machine used for
-the article only R, T = 1, 2 are possible; set KNOBS_RANKS="1 2 8 16" and
-KNOBS_THREADS="1 2 8" to repeat it on a cluster node.
+the article only R, T = 1, 2 are possible; set ERRBUDGET_RANKS="1 2 8 16" and
+ERRBUDGET_THREADS="1 2 8" to repeat it on a cluster node.
 """
 import itertools
 import os
@@ -20,12 +20,12 @@ import time
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs import run_protocol
+from errbudget import run_protocol
 from lammps_madelung import LammpsMadelung, MADELUNG, KE
 
 D = os.path.join(os.path.dirname(__file__), "data")
-RANKS = [int(r) for r in os.environ.get("KNOBS_RANKS", "1 2").split()]
-THREADS = [int(t) for t in os.environ.get("KNOBS_THREADS", "1 2").split()]
+RANKS = [int(r) for r in os.environ.get("ERRBUDGET_RANKS", "1 2").split()]
+THREADS = [int(t) for t in os.environ.get("ERRBUDGET_THREADS", "1 2").split()]
 
 # ---------------------------------------------------------------- LAMMPS
 N = 64
@@ -60,11 +60,11 @@ run {neval} pre no post no
 
 
 def lmp_run(th, ranks, neval=3, mem_gb=6):
-    d = tempfile.mkdtemp(prefix="knobs_lmp_")
+    d = tempfile.mkdtemp(prefix="errbudget_lmp_")
     open(os.path.join(d, "in.lmp"), "w").write(INPUT.format(
         r0=R0, n=N, cut=th[0], acc=th[1], order=th[2], neval=neval))
     cmd = ["mpirun", "--allow-run-as-root", "--oversubscribe", "-np", str(ranks),
-           os.environ.get("KNOBS_LMP", "lmp"), "-in", "in.lmp", "-log", "log.lammps", "-nocite"]
+           os.environ.get("ERRBUDGET_LMP", "lmp"), "-in", "in.lmp", "-log", "log.lammps", "-nocite"]
     try:
         r = subprocess.run(["bash", "-c", f"ulimit -v {int(mem_gb*1e6)}; " + " ".join(cmd)],
                            cwd=d, capture_output=True, text=True, timeout=900)

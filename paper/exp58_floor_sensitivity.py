@@ -93,7 +93,7 @@ with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "figures", "t
 import re
 import shutil
 from gromacs_water import GromacsWater
-from knobs import run_protocol
+from errbudget import run_protocol
 
 STORED = {}
 _rev3 = os.path.join(os.path.dirname(os.path.abspath(__file__)), "figures", "rev3_floor_sensitivity.txt")

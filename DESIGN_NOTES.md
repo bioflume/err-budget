@@ -1,4 +1,6 @@
-# knobs — working notes
+# errbudget (formerly knobs) — working notes
+
+These notes were written while the program was called knobs, and keep the names of that time.
 
 **Question.** An external user of someone else's solver cannot choose its numerical
 parameters. They lack the developer's intuition for how resolution and tolerances trade

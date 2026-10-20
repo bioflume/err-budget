@@ -39,7 +39,7 @@ except ImportError:                                   # fall back to the stored 
     _orig = grids.exact
     grids.exact = lambda P: dict(_acc[P["name"]]["reference"]) if P["name"] in _acc else _orig(P)
 import cases as C
-from knobs import V12, V121, LocalBudget, run_protocol
+from errbudget import V12, V121, LocalBudget, run_protocol
 
 
 def lookup(case, ob):

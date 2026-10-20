@@ -12,7 +12,7 @@ import sys, os, pickle, itertools
 import numpy as np
 sys.path.insert(0, os.path.dirname(__file__))
 from gromacs_water import GromacsWater
-from knobs import run_protocol, measure_floor
+from errbudget import run_protocol, measure_floor
 
 CONVERGED = [dict(rcoulomb=rc, fourierspacing=fs, pme_order=po, ewald_rtol=rt)
              for rc, fs, po, rt in [(1.4, 0.06, 8, 1e-8), (1.4, 0.05, 8, 1e-9),

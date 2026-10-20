@@ -1,7 +1,7 @@
 """Bring your own solver.
 
 Everything below the line marked YOUR SOLVER is ordinary code with no knowledge
-of `knobs`.  Replace it with your own and the rest of the file still works.
+of `errbudget`.  Replace it with your own and the rest of the file still works.
 
 The solver here integrates a stiff scalar ODE with an implicit trapezoidal rule
 and a fixed-point inner iteration, so it has the three parameter classes in
@@ -10,7 +10,7 @@ miniature: a step count (discretisation), an inner-iteration tolerance and cap
 The exact solution is known, so you can check the advice.
 """
 import numpy as np
-from knobs import Knob, tune
+from errbudget import Knob, tune
 
 LAM, T, U0 = -50.0, 1.0, 1.0          # u' = LAM*(u - cos t) - sin t
 

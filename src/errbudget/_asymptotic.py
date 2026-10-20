@@ -1,5 +1,5 @@
 """
-knobs: observable-targeted error budgets for black-box scientific solvers.
+errbudget: observable-targeted error budgets for black-box scientific solvers.
 
 Structural model
 ----------------

@@ -63,7 +63,7 @@ NPROCS = {24: 1, 32: 1, 48: 2, 64: 4, 96: 8, 128: 16, 192: 32}
 SPIN_DT = {24: 5e-4, 32: 5e-4, 48: 2.5e-4, 64: 2.5e-4, 96: 1.25e-4, 128: 1.25e-4, 192: 6.25e-5}
 SPIN_RETRIES = 2                 # halvings of the spin-up time step after a failure
 T_SPIN0, T_SPIN_MAPPED, T_TOT = 20.0, 5.0, 8.0
-SMOKE = os.environ.get("KNOBS_SMOKE") == "1"
+SMOKE = os.environ.get("ERRBUDGET_SMOKE") == "1"
 if SMOKE:            # a few minutes on the test partition
     NA, DT, OUTER, PTOL = [12, 16], [2e-3], [1e-3], [1e-6]
     REFS = [dict(n_arc=16, dt=2e-3, outer_tol=1e-4, p_tol=1e-8)]
@@ -282,7 +282,7 @@ def run(task, out):
         open(os.path.join(case, "STARTED"), "w").write("ok\n")
     _w(f"{case}/system/fvSolution", "dictionary", "fvSolution",
        fv_solution(th["outer_tol"], th["p_tol"], 50))
-    fields = os.environ.get("KNOBS_FO", "1") == "0"     # testing without function objects
+    fields = os.environ.get("ERRBUDGET_FO", "1") == "0"     # testing without function objects
     fo = "" if fields else OF.force_coeffs_fo("fc", magU=1.0, lref=0.1, aref=0.1 * 0.01, every=1)
     _w(f"{case}/system/controlDict", "dictionary", "controlDict",
        OF.control_dict(t0, t0 + T_TOT, dt, dt if fields else T_TOT / 8, functions=fo,

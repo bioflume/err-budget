@@ -47,8 +47,8 @@ case = C.Case("ABC3D", "OpenFOAM, 3D ABC flow (held out)", tensor, J.LAD, J.HS, 
 # The registered grading of the frozen program is done by paper/exp62_heldout.py, which
 # reads results/j5_tensor.pkl and replays the frozen source (and, with --current, the
 # released version 1.2.1).  The replay below uses the installed program, as a check.
-import knobs
-print(f"replay with the installed program, knobs {knobs.__version__} (the registered grading is "
+import errbudget
+print(f"replay with the installed program, errbudget {errbudget.__version__} (the registered grading is "
       "paper/exp62_heldout.py)")
 rows = []
 for cfg in ["v1.2.1"]:

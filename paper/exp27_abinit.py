@@ -29,7 +29,7 @@ import time
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs import LocalBudget, run_protocol
+from errbudget import LocalBudget, run_protocol
 from abinit_silicon import AbinitSilicon
 
 NAMES = ["ecut", "ngkpt", "toldfe", "nline"]

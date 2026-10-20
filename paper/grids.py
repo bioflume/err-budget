@@ -56,8 +56,8 @@ def load(P):
 
 
 def exact(P):
-    from knobs.problems import Burgers1D, Burgers2D, ReactionDiffusion2D
-    from knobs.problems import DrivenCavity
+    from errbudget.problems import Burgers1D, Burgers2D, ReactionDiffusion2D
+    from errbudget.problems import DrivenCavity
     p = {"L2": lambda: Burgers1D(nu=0.05, T=1.0), "L3": lambda: Burgers2D(nu=0.05, T=1.0),
          "L4": ReactionDiffusion2D, "L5": DrivenCavity}[P["name"]]()
     return p.exact_observables()

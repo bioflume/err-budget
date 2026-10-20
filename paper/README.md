@@ -16,13 +16,13 @@ is the runbook.
 ## Setup
 
 ```bash
-git clone <this repository> knobs-paper && cd knobs-paper
+git clone <this repository> errbudget-paper && cd errbudget-paper
 python -m venv .venv && source .venv/bin/activate
-pip install -e ".[paper]"            # numpy, scipy, matplotlib, sympy, pytest and the knobs package
+pip install -e ".[paper]"            # numpy, scipy, matplotlib, sympy, pytest and the errbudget package
 cd paper && bash run_v6_analyses.sh check
 ```
 
-`check` lists what it finds: the Python stack, the `knobs` package (it must report
+`check` lists what it finds: the Python stack, the `errbudget` package (it must report
 `V121`), the solvers, and the git tag `v1.2.0-frozen` (or `frozen_src/`), which the
 held-out replays need. Missing solvers only matter for tier B and for the three steps of
 tier A that call them (A03, A04 and the second half of A12).
@@ -37,12 +37,12 @@ NumPy 2.x and SciPy 1.18 give identical counts (checked on 2026-10-19).
 ```bash
 bash run_v6_analyses.sh before                          # 2-4 hours on 2 cores
 bash run_v6_analyses.sh after hamilton_results.tar.gz   # once the cluster results are back
-bash run_v6_analyses.sh collect                         # RESULTS_SUMMARY.md and knobs_v6_results.tar.gz
+bash run_v6_analyses.sh collect                         # RESULTS_SUMMARY.md and errbudget_v6_results.tar.gz
 ```
 
 Every step logs to `../logs/v6/<step>.txt` and records its exit status in
 `../logs/v6/STATUS.txt`. A failed step is reported and the script goes on, except the
-environment check and the tests. `KNOBS_JOBS` (default 2) sets how many pooled
+environment check and the tests. `ERRBUDGET_JOBS` (default 2) sets how many pooled
 configurations run at once.
 
 **`before`** needs nothing from the cluster:
@@ -90,12 +90,12 @@ The deterministic replay of the GROMACS tensor (A11) must give exactly:
 | B02 | `pooled.py --only 2D-2h` × 20 | merges the refined 2D-2 study into every `pooled_<config>.json` (skipped, and reported, if `j2_tensor.pkl` lacks the case specification) |
 | B03 | `exp72_baselines_pooled.py 2D-2h` | 2D-2h baselines merged into `baselines_v6.json` |
 | B04–B06 | `exp76`, `exp79`, `exp73` | accounting, unconverged counts and decline reasons including 2D-2h |
-| B07 | `exp70_tables.py` | final tables; Table 3 uses the refined 2D-2 study (`KNOBS_TABLE3_2D2=refined`, the default) |
+| B07 | `exp70_tables.py` | final tables; Table 3 uses the refined 2D-2 study (`ERRBUDGET_TABLE3_2D2=refined`, the default) |
 
 **`collect`** runs `exp82_collect_v6.py`: `RESULTS_SUMMARY.md` in the repository root
 (headline numbers for every configuration with both 2D-2 studies, the held-out tables,
 accounting, baselines, every revision-4 analysis, the tails of `j1.txt`–`j5.txt`) and
-`knobs_v6_results.tar.gz` (the summary, every result file, tables, figures, logs and
+`errbudget_v6_results.tar.gz` (the summary, every result file, tables, figures, logs and
 `hamilton/results` without the raw archive).
 
 ### Earlier revisions: `reproduce.sh --cached`
@@ -264,7 +264,7 @@ now in the supplement or in `../CHANGELOG.md`.
 | Table 9: transfer across ν | `exp30_transfer.py` | `tab09_transfer.txt` |
 | Section 7.7: calibrating at the hardest member | `exp37_calhardest.py` | `sec77_hardest.txt` |
 | Table 10: calibration cost and break-even; calibration runs vs distance | `exp42_calibration.py` | `tab10_calibration.txt` |
-| LAMMPS table, Fig. 3: LAMMPS at 8,000 / 64,000 / 262,144 ions | `exp22_lammps.py` (`KNOBS_LMP_N=20,40,64`), `make_lammps_figure.py` | `sec81_lammps_n*.txt` |
+| LAMMPS table, Fig. 3: LAMMPS at 8,000 / 64,000 / 262,144 ions | `exp22_lammps.py` (`ERRBUDGET_LMP_N=20,40,64`), `make_lammps_figure.py` | `sec81_lammps_n*.txt` |
 | Table 12: LAMMPS against baselines | `exp39_lmp_baselines.py` | `sec81_baselines.txt` |
 | Section 8.1: the certified misses and their cause | `exp43_lammps_misses.py` | `sec81_misses.txt` |
 | Table 13: GROMACS | `exp24_gromacs.py` | `sec82_gromacs_d.txt` |
@@ -283,7 +283,7 @@ now in the supplement or in `../CHANGELOG.md`.
 | Section 8.1, Table: OpenFOAM DFG 2D-1 | `exp46_dfg_build.py`, `exp46_dfg.py` | `build_dfg.txt`, `sec8x_dfg.txt` |
 | Section 8.1: OpenFOAM DFG 2D-2 (Re = 100) | `exp56_dfg2d2_build.py` (run through `dfg2d2_job/`, see its README), `exp56_dfg2d2.py` | `sec8x_dfg2d2.txt` |
 | Section 8.4: ABINIT and Quantum ESPRESSO | `exp27_abinit.py`, `exp45_abinit_reference.py`, `exp53_qe.py` | `sec83_*.txt`, `sec8x_qe.txt` |
-| Section 8.6: parallel execution | `exp55_parallel.py` (`KNOBS_RANKS`, `KNOBS_THREADS`) | `sec8x_parallel.txt` |
+| Section 8.6: parallel execution | `exp55_parallel.py` (`ERRBUDGET_RANKS`, `ERRBUDGET_THREADS`) | `sec8x_parallel.txt` |
 | Behavioural claims (31 tests) | `pytest ../tests` | — |
 
 Exhaustive grids are built before the analyses that use them:
@@ -296,7 +296,7 @@ Scripts in `legacy/` belong to earlier versions of the article and are not neede
 
 ## Version 1.1 (revision 2)
 
-The method changed in three places (see `src/knobs/_core.py`):
+The method changed in three places (see `src/errbudget/_core.py`):
 `unfit="order1"` (a parameter that cannot be fitted is charged its one-step change
 extrapolated at first order), the `noise_floor` check, and `models=[..."exponential"...]`.
 Every table was regenerated with version 1.1. The stored solver output in `data/` and

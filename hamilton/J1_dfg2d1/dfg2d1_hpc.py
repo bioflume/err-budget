@@ -28,8 +28,8 @@ which never happens: it now writes every iteration (writeControl timeStep,
 writeInterval 1) and the last line is the converged value.
 
     python -m farm dfg2d1_hpc array K NK [nprocs=1|8]
-    KNOBS_SMOKE=1  a few small tasks of each kind (submit.sh smoke)
-    KNOBS_FO=0     no function objects (testing)
+    ERRBUDGET_SMOKE=1  a few small tasks of each kind (submit.sh smoke)
+    ERRBUDGET_FO=0     no function objects (testing)
 """
 from __future__ import annotations
 
@@ -59,12 +59,12 @@ RT_RC = list(LAD[1])                 # residualControl of the grid, 1e-2 ... 1e-
 RT_TOL = list(LAD[2])                # GAMG tolerance of the grid, 1e-4 ... 1e-8
 RT_REL = [0.0, 0.01]                 # relTol 0.1 is the grid (n_arc 32, n_coarsest 10)
 GRID = list(itertools.product(*[range(len(l)) for l in LAD]))
-SMOKE = os.environ.get("KNOBS_SMOKE") == "1"
+SMOKE = os.environ.get("ERRBUDGET_SMOKE") == "1"
 if SMOKE:
     FO_LEVELS = [8, 16]
     RT_NARC, RT_RC, RT_TOL, RT_REL = 8, [1e-3], [1e-6], [0.0]
     GRID = [(0, 1, 2, 0), (1, 3, 4, 0)]
-FO_ON = os.environ.get("KNOBS_FO", "1") != "0"
+FO_ON = os.environ.get("ERRBUDGET_FO", "1") != "0"
 _P = {}
 
 

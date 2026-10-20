@@ -10,8 +10,8 @@ mkdir -p logs
 if [ "${1:-}" = "smoke" ]; then
     sbatch $SB_EXTRA -p test -n 1 -t 00:15:00 --mem=4G -J j1-smoke -o logs/smoke_%j.out <<EOF
 #!/bin/bash
-source "$KNOBS_ROOT/hamilton/config.sh"; activate_python; load_openfoam; cd "$HERE"
-export KNOBS_SMOKE=1 WORK="$WORK/smoke"
+source "$ERRBUDGET_ROOT/hamilton/config.sh"; activate_python; load_openfoam; cd "$HERE"
+export ERRBUDGET_SMOKE=1 WORK="$WORK/smoke"
 rm -rf "\$WORK/dfg2d1_hpc"          # results of an earlier smoke test would be skipped, not re-run
 python -m farm dfg2d1_hpc array 0 1
 python -m farm dfg2d1_hpc status

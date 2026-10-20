@@ -68,7 +68,7 @@ class GromacsWater:
                  binary: str = "gmx", ntmpi: int = 1):
         self.nsteps, self.threads, self.gmx = nsteps, threads, binary
         self.ntmpi = ntmpi              # thread-MPI ranks (parallel timing study)
-        self.dir = tempfile.mkdtemp(prefix="knobs_gmx_")
+        self.dir = tempfile.mkdtemp(prefix="errbudget_gmx_")
         self.nmol = 216 * nbox ** 3
         subprocess.run(
             [binary, "genconf", "-f", os.path.join(os.environ.get("GMXDATA", "/usr/share/gromacs"), "top", "spc216.gro"),

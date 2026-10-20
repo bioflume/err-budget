@@ -8,8 +8,8 @@ against the cheapest ROBUST configuration: one that meets the target and whose
 every finer neighbour does too.
 """
 import os, itertools, pickle, numpy as np
-from knobs import run_protocol
-from knobs.problems import ReactionDiffusion2D, Burgers2D
+from errbudget import run_protocol
+from errbudget.problems import ReactionDiffusion2D, Burgers2D
 
 def study(name, tensor, LAD, KINDS, HS, obs_list, exact, targets):
     ALL = list(itertools.product(*[range(len(l)) for l in LAD]))

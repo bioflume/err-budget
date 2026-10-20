@@ -5,11 +5,11 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.ticker import LogLocator
-from knobs import run_protocol, LocalBudget
-from knobs.problems import AdvectionDiffusion
-from knobs.problems import Burgers2D
+from errbudget import run_protocol, LocalBudget
+from errbudget.problems import AdvectionDiffusion
+from errbudget.problems import Burgers2D
 
-OUT = os.environ.get("KNOBS_FIG_DIR", "figures/") 
+OUT = os.environ.get("ERRBUDGET_FIG_DIR", "figures/") 
 C = ["#0072B2", "#D55E00", "#009E73", "#E69F00", "#CC79A7"]
 INK, MUTED = "#1a1a1a", "#6b6b6b"
 plt.rcParams.update({

@@ -18,7 +18,7 @@ from qe_silicon import QESilicon
 NAMES = ["ecutwfc", "nk", "conv_thr", "mixing_beta"]
 LAD = [[12.0, 16.0, 20.0, 24.0, 28.0, 32.0, 40.0, 48.0], [2, 3, 4, 6],
        [1e-4, 1e-6, 1e-8, 1e-10, 1e-12], [0.3, 0.5, 0.7]]
-SMOKE = os.environ.get("KNOBS_SMOKE") == "1"
+SMOKE = os.environ.get("ERRBUDGET_SMOKE") == "1"
 _P = {}
 
 

@@ -1,7 +1,7 @@
 """Does the certificate survive a learned component?"""
 import numpy as np
-from knobs import Knob, tune
-from knobs.problems import MLHybridBurgers1D
+from errbudget import Knob, tune
+from errbudget.problems import MLHybridBurgers1D
 
 p = MLHybridBurgers1D()
 EXACT = p.exact_observables()["dissipation"]

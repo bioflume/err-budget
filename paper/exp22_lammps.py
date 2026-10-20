@@ -19,13 +19,13 @@ import time
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs import run_protocol
+from errbudget import run_protocol
 from lammps_madelung import LammpsMadelung
 from lammps_subproc import run_one
 
 NAMES = ["cutoff", "kspace_accuracy", "kspace_order"]
 LAD = ([[6.0, 8.0, 10.0, 12.0, 14.0], [1e-2, 1e-3, 1e-4, 1e-5, 1e-6], [4, 5, 6, 7]]
-       if int(os.environ.get("KNOBS_LMP_N", "20")) <= 20 else
+       if int(os.environ.get("ERRBUDGET_LMP_N", "20")) <= 20 else
        [[8.0, 10.0, 12.0, 14.0], [1e-3, 1e-4, 1e-5, 1e-6], [4, 5, 6, 7]])
 KINDS = ["discretisation", "discretisation", "cost-only"]
 # refinement scalars: cutoff refines by growing, accuracy by shrinking, and the
@@ -33,7 +33,7 @@ KINDS = ["discretisation", "discretisation", "cost-only"]
 HS = [[1.0 / c for c in LAD[0]], list(LAD[1]), [1.0 / o for o in LAD[2]]]
 ALL = list(itertools.product(*[range(len(l)) for l in LAD]))
 
-NCELLS = int(os.environ.get("KNOBS_LMP_N", "20"))
+NCELLS = int(os.environ.get("ERRBUDGET_LMP_N", "20"))
 p = LammpsMadelung(n_cells=NCELLS, n_eval=3)
 EXACT = p.exact_observables()
 OB = "energy_per_ion"
@@ -101,7 +101,7 @@ for target in [1e-4, 1e-5]:
 
 # ---------------------------------------------------------------- diagnostics
 print(f"\n{'='*92}\nwhat the method reports about each LAMMPS parameter")
-from knobs import LocalBudget
+from errbudget import LocalBudget
 lb = LocalBudget(look, LAD, (2, 2, 2), hs=HS)
 lb.sweep(); lb.per_knob_error(); lb.refine_path(n_levels=0)
 tot = sum(abs(x) for x in lb.rk if np.isfinite(x)) or 1.0

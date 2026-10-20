@@ -1,6 +1,6 @@
 """Revision 4: write RESULTS_SUMMARY.md and pack every result the rewrite needs.
 
-    python exp82_collect_v6.py [archive.tar.gz]      # default ../knobs_v6_results.tar.gz
+    python exp82_collect_v6.py [archive.tar.gz]      # default ../errbudget_v6_results.tar.gz
 
 RESULTS_SUMMARY.md (in the repository root) records what was run and with which program,
 and the headline numbers read back from the result files: the pooled table for every
@@ -42,14 +42,14 @@ def _json(name):
 def versions():
     out = []
     try:
-        import knobs
-        src = os.path.dirname(knobs.__file__)
+        import errbudget
+        src = os.path.dirname(errbudget.__file__)
         sums = "".join(hashlib.sha256(open(f, "rb").read()).hexdigest() + "  " + os.path.basename(f) + "\n"
                        for f in sorted(glob.glob(os.path.join(src, "*.py"))))
-        out.append(f"- knobs {getattr(knobs, '__version__', '?')} from {src} "
+        out.append(f"- errbudget {getattr(errbudget, '__version__', '?')} from {src} "
                    f"(sha256 of the sources {hashlib.sha256(sums.encode()).hexdigest()[:16]}...)")
     except Exception as exc:                       # noqa: BLE001
-        out.append(f"- knobs: not importable ({exc})")
+        out.append(f"- errbudget: not importable ({exc})")
     try:
         g = subprocess.run(["git", "describe", "--tags", "--always", "--dirty"], cwd=ROOT,
                            capture_output=True, text=True)
@@ -158,8 +158,8 @@ def hamilton():
 
 
 def main():
-    arch = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "knobs_v6_results.tar.gz")
-    S = ["# Results for revision 4 (knobs v1.2.1)", "", "## Program and machine", ""] + versions()
+    arch = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "errbudget_v6_results.tar.gz")
+    S = ["# Results for revision 4 (errbudget v1.2.1)", "", "## Program and machine", ""] + versions()
     sections = [
         ("Pooled table (Table 3) and ablations (Table 4): totals per configuration", pooled_totals),
         ("Misses of the default configuration", misses),

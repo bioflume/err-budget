@@ -3,9 +3,9 @@ requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "knobs"
+name = "errbudget"
 version = "1.2.1"
-description = "knobs 1.2.1, the program of the article, with the scripts, data and cluster jobs that reproduce it"
+description = "errbudget 1.2.1, the program of the article, with the scripts, data and cluster jobs that reproduce it"
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}

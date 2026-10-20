@@ -4,8 +4,8 @@ Gray-Scott reaction-diffusion, Strang splitting, no Newton iteration, three
 competing discretisation errors.  Replayed from every starting configuration.
 """
 import sys, os, itertools, pickle, time, numpy as np
-from knobs import run_protocol
-from knobs.problems import ReactionDiffusion2D
+from errbudget import run_protocol
+from errbudget.problems import ReactionDiffusion2D
 
 NAMES = ["N", "steps", "n_react", "gmres_tol", "ilu_drop"]
 LAD   = [[16, 32, 64, 128], [5, 10, 20, 40], [1, 2, 4, 8],
@@ -63,7 +63,7 @@ for ob in ["inhibitor_mass", "pattern_sharpness"]:
               f"{np.median(cal):6.1f}x")
 
 print(f"\n{'='*94}\nerror budget at a mid configuration (what the user is told)")
-from knobs import LocalBudget
+from errbudget import LocalBudget
 for ob in ["inhibitor_mass", "pattern_sharpness"]:
     look = lambda i, ob=ob: (tensor[tuple(i)][0][ob], tensor[tuple(i)][1])
     lb = LocalBudget(look, LAD, (2, 2, 2, 1, 1), hs=HS)

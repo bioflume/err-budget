@@ -1,5 +1,5 @@
 import pytest
-from knobs import Knob
+from errbudget import Knob
 
 def test_ordering_inferred_for_counts_and_tolerances():
     assert Knob("N", [32, 64, 128]).h[0] > Knob("N", [32, 64, 128]).h[-1]

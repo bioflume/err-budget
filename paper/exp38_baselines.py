@@ -2,8 +2,8 @@
 import itertools, json, os, pickle, sys
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from knobs import run_protocol
-from knobs.problems import Burgers1D, Burgers2D, ReactionDiffusion2D
+from errbudget import run_protocol
+from errbudget.problems import Burgers1D, Burgers2D, ReactionDiffusion2D
 from baselines import seq, coord, ref_check
 
 D = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')

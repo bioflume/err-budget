@@ -1,7 +1,7 @@
 """Screening on the 5-knob 2D study: does it move the 440x calibration cost?"""
 import sys, os, itertools, pickle, numpy as np
-from knobs import run_protocol
-from knobs.problems import Burgers2D
+from errbudget import run_protocol
+from errbudget.problems import Burgers2D
 b=Burgers2D(nu=0.05,T=1.0); EXACT=b.exact_observables()
 tensor=pickle.load(open(os.path.join(os.path.dirname(__file__),"data","burgers2d_tensor.pkl"),"rb"))
 LAD=[[16,32,64,128],[10,20,40,80],[1e-2,1e-5,1e-8],[1e-2,1e-5,1e-8],[1e-1,1e-2,1e-3]]

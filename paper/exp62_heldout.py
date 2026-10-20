@@ -8,6 +8,11 @@ with the frozen program exactly as fixed in PREREGISTRATION.md.
 
 The frozen source is extracted from the git tag and its hash checked against
 PREREGISTRATION.md before anything is replayed.
+
+The program was called knobs when the held-out tests were registered, and the frozen
+source keeps that name (src/knobs at the tag, paper/frozen_src/knobs).  The replay scripts
+import the current name, errbudget, so in the frozen mode the frozen package is registered
+under that name before any of them is imported.
 """
 import glob
 import hashlib
@@ -24,11 +29,11 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 CURRENT = "--current" in sys.argv
 if CURRENT:
-    SRC = os.path.join(HERE, "..", "src", "knobs")
+    SRC = os.path.join(HERE, "..", "src", "errbudget")
 else:
     # the frozen source from the git tag; in a release without the git history, the
     # copy in paper/frozen_src (its hash is checked below either way)
-    tmp = tempfile.mkdtemp(prefix="knobs_frozen_")
+    tmp = tempfile.mkdtemp(prefix="errbudget_frozen_")
     arch = subprocess.run(["git", "archive", "v1.2.0-frozen", "src/knobs"], cwd=os.path.join(HERE, ".."),
                           capture_output=True)
     if arch.returncode == 0 and arch.stdout:
@@ -39,8 +44,17 @@ else:
         sys.path.insert(0, os.path.join(HERE, "frozen_src"))
         SRC = os.path.join(HERE, "frozen_src", "knobs")
 sys.path.insert(0, HERE)
-import knobs
-assert os.path.dirname(knobs.__file__) == os.path.abspath(SRC) or CURRENT, knobs.__file__
+if CURRENT:
+    import errbudget as program
+else:
+    import importlib
+    program = importlib.import_module("knobs")               # the frozen package, by its name
+    sys.modules["errbudget"] = program
+    for sub in ("_core", "_asymptotic", "api", "problems"):
+        mod = importlib.import_module(f"knobs.{sub}")
+        sys.modules[f"errbudget.{sub}"] = mod
+        setattr(program, sub, mod)
+assert os.path.dirname(program.__file__) == os.path.abspath(SRC) or CURRENT, program.__file__
 import cases as C
 import pooled as P
 
@@ -58,7 +72,7 @@ if not CURRENT:
         raise SystemExit(f"source hash {h} is not the frozen one recorded in PREREGISTRATION.md")
     print(f"frozen program verified (sha256 {h[:16]}...), from {SRC}")
 else:
-    print(f"current program, knobs {knobs.__version__} (sha256 {h[:16]}...)")
+    print(f"current program, errbudget {program.__version__} (sha256 {h[:16]}...)")
 CFGS = ("v1.2.1",) if CURRENT else ("v1.2", "v1.1")
 
 

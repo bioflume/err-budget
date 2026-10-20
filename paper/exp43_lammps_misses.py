@@ -2,7 +2,7 @@
 import sys, os, pickle, itertools
 import numpy as np
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs import run_protocol
+from errbudget import run_protocol
 from lammps_madelung import LammpsMadelung
 
 N = 64

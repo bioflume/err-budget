@@ -1,4 +1,4 @@
-"""knobs -- choose a solver's numerical parameters for a target accuracy.
+"""errbudget -- choose a solver's numerical parameters for a target accuracy.
 
 Public API:
     Knob, tune, TuneResult

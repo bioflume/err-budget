@@ -55,7 +55,7 @@ pseudos    "14si.psp"
 
 class AbinitSilicon:
     def __init__(self):
-        self.dir = tempfile.mkdtemp(prefix="knobs_abinit_")
+        self.dir = tempfile.mkdtemp(prefix="errbudget_abinit_")
 
     def __del__(self):
         shutil.rmtree(getattr(self, "dir", ""), ignore_errors=True)

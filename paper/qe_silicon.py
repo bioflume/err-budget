@@ -30,11 +30,11 @@ import time
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PSEUDO_DIR = os.environ.get("KNOBS_QE_PSEUDO_DIR",
+PSEUDO_DIR = os.environ.get("ERRBUDGET_QE_PSEUDO_DIR",
                             "/usr/share/abinit/psp/Pseudodojo_nc_sr_04_pbe_standard_psp8/")
 # The shim is needed only for the Ubuntu 24.04 package of pw.x 6.7.
-USE_SHIM = os.environ.get("KNOBS_QE_SHIM", "1") == "1"
-PW = os.environ.get("KNOBS_PW", "pw.x")
+USE_SHIM = os.environ.get("ERRBUDGET_QE_SHIM", "1") == "1"
+PW = os.environ.get("ERRBUDGET_PW", "pw.x")
 TEMPLATE = """&control
   calculation='scf', prefix='si', pseudo_dir='{pd}', outdir='./tmp', tprnfor=.true.
 /
@@ -55,7 +55,7 @@ K_POINTS automatic
 
 
 def _shim():
-    so = os.path.join(tempfile.gettempdir(), "knobs_snfix.so")
+    so = os.path.join(tempfile.gettempdir(), "errbudget_snfix.so")
     if not os.path.exists(so):
         subprocess.run(["gcc", "-shared", "-fPIC", "-O2", "-o", so,
                         os.path.join(HERE, "snfix.c")], check=True)
@@ -64,7 +64,7 @@ def _shim():
 
 class QESilicon:
     def __init__(self):
-        self.dir = tempfile.mkdtemp(prefix="knobs_qe_")
+        self.dir = tempfile.mkdtemp(prefix="errbudget_qe_")
         self.env = dict(os.environ, OMP_NUM_THREADS="1")
         if USE_SHIM:
             self.env["LD_PRELOAD"] = _shim()

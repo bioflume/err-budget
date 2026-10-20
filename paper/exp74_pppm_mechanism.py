@@ -16,7 +16,7 @@ failed run).  From LAMMPS's own log it records:
 The lattice, charges and pair style are those of lammps_madelung.py.
 
     python exp74_pppm_mechanism.py [n_cells ...]        # default 20 40 64
-    KNOBS_LMP_MEM_GB (default 6), KNOBS_LMP_TIMEOUT (s, default 1800), KNOBS_LMP_NEVAL (3)
+    ERRBUDGET_LMP_MEM_GB (default 6), ERRBUDGET_LMP_TIMEOUT (s, default 1800), ERRBUDGET_LMP_NEVAL (3)
 Writes data/pppm_mechanism_v6.json.  About 30 minutes on the article's machine.
 """
 import json
@@ -33,9 +33,9 @@ from lammps_madelung import MADELUNG, KE
 SETTINGS = [dict(cutoff=10.0, kspace_accuracy=1e-5), dict(cutoff=8.0, kspace_accuracy=1e-6)]
 ORDERS = [4, 5, 6, 7]
 R0 = 2.82
-MEM_GB = float(os.environ.get("KNOBS_LMP_MEM_GB", 6))
-TIMEOUT = float(os.environ.get("KNOBS_LMP_TIMEOUT", 1800))
-NEVAL = int(os.environ.get("KNOBS_LMP_NEVAL", 3))
+MEM_GB = float(os.environ.get("ERRBUDGET_LMP_MEM_GB", 6))
+TIMEOUT = float(os.environ.get("ERRBUDGET_LMP_TIMEOUT", 1800))
+NEVAL = int(os.environ.get("ERRBUDGET_LMP_NEVAL", 3))
 
 CHILD = r'''
 import json, resource, sys, time
@@ -103,7 +103,7 @@ def parse_log(txt):
 
 
 def run_one(n, theta, order):
-    fd, logf = tempfile.mkstemp(prefix="knobs_pppm_", suffix=".log")
+    fd, logf = tempfile.mkstemp(prefix="errbudget_pppm_", suffix=".log")
     os.close(fd)
     code = CHILD.format(mem=int(MEM_GB * 1e9), n=n, r0=R0, cut=theta["cutoff"],
                         acc=theta["kspace_accuracy"], order=order, neval=NEVAL, logf=logf)

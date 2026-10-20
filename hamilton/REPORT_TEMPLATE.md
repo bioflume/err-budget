@@ -1,7 +1,7 @@
 # Run report, cluster studies J1–J5
 
 Copy this file, fill it in while the jobs run, and send it back with
-`hamilton_results.tar.gz` (and `knobs_v6_results.tar.gz` once Section 6 of the runbook
+`hamilton_results.tar.gz` (and `errbudget_v6_results.tar.gz` once Section 6 of the runbook
 has been done).
 
 ## Machine and versions

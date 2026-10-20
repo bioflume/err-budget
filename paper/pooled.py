@@ -20,9 +20,9 @@ import time
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from knobs import run_protocol, V11, V12
+from errbudget import run_protocol, V11, V12
 try:
-    from knobs import V121
+    from errbudget import V121
 except ImportError:                      # the frozen program of the held-out tests
     V121 = dict(V12, joint_res=1.0)
 import cases as C

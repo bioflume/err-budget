@@ -17,7 +17,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from replay import grid, method_cell, baseline_cell, fmt_method
 from exp47_transfer import failure_rate, PHIS
-from knobs import LocalBudget
+from errbudget import LocalBudget
 import openfoam_dfg2d2 as F
 
 D = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
@@ -197,7 +197,7 @@ for o in OBS:
               f"{b['coordinate search @eps/10']['attained']}/{b['coordinate search @eps/10']['n']}")
 
 # the misses of the drag at 3e-3: signs of the estimated mesh and time-step errors
-from knobs import run_protocol
+from errbudget import run_protocol
 eps = 3e-3 * abs(R["cd_max"])
 lk = lambda i: (tensor[tuple(i)][0]["cd_max"], tensor[tuple(i)][1])
 n_miss = n_opp = 0

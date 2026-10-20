@@ -33,8 +33,8 @@ import sys
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs import LocalBudget
-from knobs.problems import Burgers1D, Burgers2D, ReactionDiffusion2D
+from errbudget import LocalBudget
+from errbudget.problems import Burgers1D, Burgers2D, ReactionDiffusion2D
 
 D = os.path.join(os.path.dirname(__file__), "data")
 FLOOR = 1e-14          # nothing below the double-precision resolution counts

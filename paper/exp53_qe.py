@@ -15,7 +15,7 @@ import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
 from qe_silicon import QESilicon
-from knobs import LocalBudget
+from errbudget import LocalBudget
 from replay import grid, method_cell, baseline_cell, fmt_method
 
 NAMES = ["ecutwfc", "nk", "conv_thr", "mixing_beta"]

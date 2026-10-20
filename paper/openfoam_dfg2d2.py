@@ -44,9 +44,9 @@ from openfoam_cylinder import (ENV, of_cmd, H, D, DEPTH, NU, _w, block_mesh_dict
 
 UM2 = 1.5                      # maximum inflow velocity of 2D-2
 UBAR2 = 2.0 * UM2 / 3.0        # = 1.0
-T_SPIN = float(os.environ.get("KNOBS_DFG2_TSPIN", 20.0))
-T_RELAX = float(os.environ.get("KNOBS_DFG2_TRELAX", 2.0))
-T_MEAS = float(os.environ.get("KNOBS_DFG2_TMEAS", 2.0))
+T_SPIN = float(os.environ.get("ERRBUDGET_DFG2_TSPIN", 20.0))
+T_RELAX = float(os.environ.get("ERRBUDGET_DFG2_TRELAX", 2.0))
+T_MEAS = float(os.environ.get("ERRBUDGET_DFG2_TMEAS", 2.0))
 RELAX_CHECKPOINT = 0.5          # checkpoint interval of the relaxation phase
 SAMPLE = 0.004                 # a multiple of every time step on the ladder
 # Published values for orientation only (Schaefer & Turek 1996 intervals; the
@@ -188,7 +188,7 @@ def _log_upto(log, upto):
 
 class DFG2D2:
     def __init__(self, workdir=None, spin=None):
-        self.root = workdir or tempfile.mkdtemp(prefix="knobs_dfg2_")
+        self.root = workdir or tempfile.mkdtemp(prefix="errbudget_dfg2_")
         os.makedirs(self.root, exist_ok=True)
         self.spin = spin or dict(dt=0.0005, outer_tol=1e-5, p_tol=1e-8)
         self.meshes = {}

@@ -14,5 +14,5 @@ set -e
 # SLURM runs a copy of this script, so use the submission directory
 cd "${SLURM_SUBMIT_DIR:-$(dirname "$0")}"
 source ./env.sh
-cd "$KNOBS_ROOT/paper"
+cd "$ERRBUDGET_ROOT/paper"
 $PYTHON exp56_dfg2d2_build.py task $SLURM_ARRAY_TASK_ID

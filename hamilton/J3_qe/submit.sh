@@ -9,8 +9,8 @@ mkdir -p logs
 if [ "${1:-}" = "smoke" ]; then
     sbatch $SB_EXTRA -p test -n 1 -t 00:15:00 --mem=4G -J j3-smoke -o logs/smoke_%j.out <<EOF
 #!/bin/bash
-source "$KNOBS_ROOT/hamilton/config.sh"; activate_python; cd "$HERE"
-export KNOBS_SMOKE=1 WORK="$WORK/smoke"
+source "$ERRBUDGET_ROOT/hamilton/config.sh"; activate_python; cd "$HERE"
+export ERRBUDGET_SMOKE=1 WORK="$WORK/smoke"
 pw.x -h 2>&1 | head -2
 python -m farm qe_hpc array 0 1 && python -m farm qe_hpc status
 grep -h '"energy"' \$WORK/qe_hpc/g_*/result.json | head -2 && echo "SMOKE TEST PASSED" || echo "SMOKE TEST FAILED"

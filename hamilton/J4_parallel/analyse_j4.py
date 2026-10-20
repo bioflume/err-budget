@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join(HERE, "..", "..", "paper"))
 import parallel_hpc as J
 import exp55_parallel as E
 from lammps_madelung import MADELUNG, KE
-from knobs import run_protocol
+from errbudget import run_protocol
 import pooled as P
 
 RES = os.path.join(os.environ.get("WORK", "."), "parallel_hpc")

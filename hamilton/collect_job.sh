@@ -5,5 +5,5 @@
 set -e
 cd "$(dirname "$0")"; HERE=$PWD
 source ./config.sh
-sbatch $SB_EXTRA -p "$SB_SHARED" -n 1 -t 08:00:00 --mem=16G -J knobs-collect \
+sbatch $SB_EXTRA -p "$SB_SHARED" -n 1 -t 08:00:00 --mem=16G -J errbudget-collect \
     -o "$HERE/collect_%j.out" --wrap "bash $HERE/collect.sh"

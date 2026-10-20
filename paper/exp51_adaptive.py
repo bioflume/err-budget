@@ -28,7 +28,7 @@ import scipy.sparse as sp
 from scipy.integrate import solve_ivp
 
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs.problems import Burgers1D
+from errbudget.problems import Burgers1D
 from replay import grid, method_cell, baseline_cell, fmt_method
 from exp47_transfer import failure_rate, PHIS
 

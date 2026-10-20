@@ -1,7 +1,7 @@
 """Behavioural guarantees. These are the claims the paper makes."""
 import numpy as np, pytest
-from knobs import Knob, tune
-from knobs.problems import Burgers1D
+from errbudget import Knob, tune
+from errbudget.problems import Burgers1D
 
 problem = Burgers1D(nu=0.05, T=1.0)
 EXACT = problem.exact_observables()
@@ -51,7 +51,7 @@ def test_misdeclared_cost_only_knob_is_reported():
 def test_reaction_diffusion_recommendation_meets_target():
     """A different domain and a different solver architecture: operator
     splitting, no Newton iteration, three competing discretisation errors."""
-    from knobs.problems import ReactionDiffusion2D
+    from errbudget.problems import ReactionDiffusion2D
     rd = ReactionDiffusion2D()
     ex = rd.exact_observables()["inhibitor_mass"]
 

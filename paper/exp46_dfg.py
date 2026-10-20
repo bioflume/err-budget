@@ -17,7 +17,7 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(__file__))
 from exp46_dfg_build import LAD, NAMES, CACHE
 from openfoam_cylinder import DFGCylinder, REF
-from knobs import LocalBudget, run_protocol, screen
+from errbudget import LocalBudget, run_protocol, screen
 from replay import grid, method_cell, baseline_cell, fmt_method
 from exp47_transfer import failure_rate, PHIS
 

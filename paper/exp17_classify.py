@@ -12,7 +12,7 @@ Signature features, all from one OAT sweep at one anchor:
   cost_interior 1 if cost has an interior minimum (neither end is cheapest)
 """
 import sys, os, pickle, os, time, numpy as np
-from knobs.problems import Burgers2D
+from errbudget.problems import Burgers2D
 
 NAMES = ["N","steps","newton_tol","gmres_tol","ilu_drop","gmres_restart",
          "precond_freq","newton_max"]

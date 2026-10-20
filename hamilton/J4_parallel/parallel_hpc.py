@@ -23,7 +23,7 @@ import exp55_parallel as E
 
 RANKS = [1, 2, 4, 8, 16, 32, 64]
 NBOX = 4
-SMOKE = os.environ.get("KNOBS_SMOKE") == "1"
+SMOKE = os.environ.get("ERRBUDGET_SMOKE") == "1"
 if SMOKE:
     RANKS, NBOX = [1, 2], 2
 NG = ["rcoulomb", "fourierspacing", "pme_order", "ewald_rtol"]

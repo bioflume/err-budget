@@ -1,8 +1,40 @@
 # Changelog
 
-All notable changes to `knobs`. The article describes version 1.2.1; the comparisons
-with earlier versions that used to be in the article are recorded here, with the
-script that reproduces each.
+All notable changes to `errbudget`, which was called `knobs` until revision 5 of the
+article. The article describes version 1.2.1; the comparisons with earlier versions that
+used to be in the article are recorded here, with the script that reproduces each. The
+entries below the rename keep the old name, as it was at the time.
+
+## Rename: `knobs` is now `errbudget` (program unchanged: 1.2.1)
+
+The program's name describes what it returns, an error budget. Only names changed:
+
+- **Package and imports.** `src/knobs` moved to `src/errbudget`, and every script, test,
+  example and cluster job imports `errbudget` (`errbudget.V121`, `errbudget.tune`, ...).
+  `_core.py`, the engine, is byte-identical; elsewhere in the package only docstrings and
+  the header line of the printed report (`errbudget: recommendation for ...`) changed. The
+  class `Knob` and the arguments named `knobs` keep their names: they name a numerical
+  parameter, not the program.
+- **Environment variables** `KNOBS_*` are now `ERRBUDGET_*` (for example `ERRBUDGET_JOBS`,
+  `ERRBUDGET_ROOT`, `ERRBUDGET_SMOKE`). On Hamilton, `config.sh` now defaults to the
+  micromamba environment `errbudget` and the scratch directory `/nobackup/$USER/errbudget`;
+  set `ERRBUDGET_ENV=knobs` or `WORK=/nobackup/$USER/knobs` to keep using an environment or
+  directory made before the rename.
+- **Repositories.** This repository is `errbudget-paper`, the library `errbudget`
+  (<https://github.com/bioflume/errbudget-paper>, <https://github.com/bioflume/errbudget>).
+- **Kept under the old name**, because they record the program as registered:
+  `PREREGISTRATION.md`, the tags `v1.2.0-frozen` and `v1.2.1`, `paper/frozen_src/knobs`,
+  and the registered J5 driver `hamilton/J5_abc3d/abc_hpc.py`, which still reads
+  `KNOBS_SMOKE` (the J5 smoke test sets both names). `paper/exp62_heldout.py` loads the
+  frozen program under its registered name, checks its hash against `PREREGISTRATION.md` as
+  before, and registers it as `errbudget` for the replay scripts.
+- **Metadata.** `.zenodo.json` now gives version 1.2.1 and the affiliation of the article
+  (Department of Computer Science).
+- **Checked:** the tests give the same results as before the rename; `exp70_tables.py`
+  reproduces every table of revision 5 byte for byte; `exp62_heldout.py` verifies the frozen
+  program and writes the same `data/heldout_replay*.json`, with the frozen program and with
+  `--current`. With `--current` it prints a new source hash, because the docstrings of the
+  package changed; this hash was never registered, and the frozen one is unchanged.
 
 ## Revision 5 of the article (program unchanged: 1.2.1)
 

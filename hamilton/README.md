@@ -41,9 +41,11 @@ turns those results into the numbers and tables of the article.
 
 ## 0. Rules that apply throughout
 
-1. **The held-out test (J5) stays as registered.** Do not change `src/knobs/`,
+1. **The held-out test (J5) stays as registered.** Do not change `src/errbudget/`,
    `../PREREGISTRATION.md`, `J5_abc3d/abc_hpc.py` or the H3 targets. J5 runs once. Its
-   results are reported as they come out, good or bad.
+   results are reported as they come out, good or bad. The program was called knobs when
+   J5 was registered; `abc_hpc.py` and the frozen program keep that name, which is why
+   the J5 smoke test also sets `KNOBS_SMOKE`.
 2. **Do not change numerical settings**: grids, candidate lists, targets, tolerances, time
    steps, meshes, references or grading rules. What may be changed is what stops a job from
    running: paths, module or container names, partitions, account, memory and time limits.
@@ -60,13 +62,13 @@ turns those results into the numbers and tables of the article.
 ## 1. One-off setup (login node, 30–60 minutes)
 
 ```bash
-git clone <this repository> knobs-paper && cd knobs-paper/hamilton
-nano config.sh        # WORK (scratch, default /nobackup/$USER/knobs); SB_EXTRA (account, if
+git clone <this repository> errbudget-paper && cd errbudget-paper/hamilton
+nano config.sh        # WORK (scratch, default /nobackup/$USER/errbudget); SB_EXTRA (account, if
                       # yours needs one); OF_MODE (container or module, see below)
 bash setup_env.sh     # safe to re-run: finished steps are skipped
 ```
 
-`setup_env.sh` installs micromamba in `~/bin`; creates the conda environment `knobs`
+`setup_env.sh` installs micromamba in `~/bin`; creates the conda environment `errbudget`
 (Python 3.11, NumPy, SciPy, SymPy, pytest, a current Quantum ESPRESSO, LAMMPS with OpenMPI,
 scikit-fem, pyamg, and this package in editable mode); pulls the OpenCFD container
 `opencfd/openfoam-default:2406` into `$WORK`; and builds GROMACS 2024 in double precision
@@ -197,15 +199,15 @@ H1–H3 with the frozen program and with v1.2.1, regenerates the tables; the lin
 `frozen program verified` must appear), then merges the refined 2D-2 study (`2D-2h`) into
 every pooled file, the baselines, the accounting, the unconverged counts, the decline
 reasons and the final tables (`exp70_tables.py`; Table 3 uses the refined study by default,
-`KNOBS_TABLE3_2D2=refined`). If `hamilton/results/j2_tensor.pkl` lacks the case
+`ERRBUDGET_TABLE3_2D2=refined`). If `hamilton/results/j2_tensor.pkl` lacks the case
 specification, the 2D-2h steps are skipped and reported: re-run the patched
 `J2_dfg2d2/analyse_j2.py` on Hamilton. `collect` writes `RESULTS_SUMMARY.md` in the
-repository root and `knobs_v6_results.tar.gz` beside it. The steps that do not need the
+repository root and `errbudget_v6_results.tar.gz` beside it. The steps that do not need the
 cluster (`run_v6_analyses.sh before`) are described in `../paper/README.md`; run them first.
 
 ## 7. What to send back
 
-1. `hamilton_results.tar.gz` (from Section 5) and, after Section 6, `knobs_v6_results.tar.gz`.
+1. `hamilton_results.tar.gz` (from Section 5) and, after Section 6, `errbudget_v6_results.tar.gz`.
 2. A report following `REPORT_TEMPLATE.md`: machine and versions, the five smoke-test lines,
    the final `status.sh` output, core-hours per job, resubmissions, tasks that failed for
    good with the first lines of their `error.txt`, the Courant numbers of the J2 spin-ups,

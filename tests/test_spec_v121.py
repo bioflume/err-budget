@@ -5,7 +5,7 @@ specify (look-ahead estimate, local-order check at every alignment, the exact
 condition for a positive order on non-uniform candidate lists, the exponential
 model, fits of nested-solver parameters, the residual gate, the joint check at its
 boundaries).  If a test fails, the text of Section 4 written from these tests is
-wrong; the program must not be changed to make it pass (src/knobs is fixed by the
+wrong; the program must not be changed to make it pass (src/errbudget is fixed by the
 pre-registration of the held-out tests).
 
     pytest tests/test_spec_v121.py -q          # or: python tests/test_spec_v121.py
@@ -14,7 +14,7 @@ import math
 
 import numpy as np
 
-from knobs import LocalBudget, V121
+from errbudget import LocalBudget, V121
 
 DISC = "discretisation"
 NEST = "nested-solver"

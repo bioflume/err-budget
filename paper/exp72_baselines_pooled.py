@@ -27,7 +27,7 @@ one trial.
 
     python exp72_baselines_pooled.py                 # every case (2D-2h if present)
     python exp72_baselines_pooled.py L2 L3 2D-1      # selected cases
-    KNOBS_CFG=v1.2.1 (default) | v1.2 | v1.1         # the program's configuration
+    ERRBUDGET_CFG=v1.2.1 (default) | v1.2 | v1.1         # the program's configuration
 Writes data/baselines_v6.json (all cells) and prints the pooled groups.
 """
 import json
@@ -40,7 +40,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cases as C
 import pooled as P
 from baselines import seq, coord, ref_check
-from knobs import run_protocol
+from errbudget import run_protocol
 
 PROCS = {"program": None, "seq-1": 1.0, "seq-3": 3.0, "seq-10": 10.0,
          "coord-1": 1.0, "coord-3": 3.0, "coord-10": 10.0, "ref": None}
@@ -130,7 +130,7 @@ def load_cases(keys):
 
 def main():
     keys = sys.argv[1:] or None
-    cfgname = os.environ.get("KNOBS_CFG", "v1.2.1")
+    cfgname = os.environ.get("ERRBUDGET_CFG", "v1.2.1")
     cfg = P.CONFIGS[cfgname]
     res = {}
     for case in load_cases(keys):
@@ -155,7 +155,7 @@ def main():
                                              int(np.median(v["runs"])))
                                          for p, v in o.items()}, flush=True)
     # one file for every case: a run on selected cases replaces only their cells
-    path = os.path.join(C.D, os.environ.get("KNOBS_BASE_OUT", "baselines_v6.json"))
+    path = os.path.join(C.D, os.environ.get("ERRBUDGET_BASE_OUT", "baselines_v6.json"))
     doc = dict(config=cfgname, cells={})
     if os.path.exists(path):
         old = json.load(open(path))

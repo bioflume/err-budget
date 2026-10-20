@@ -15,7 +15,7 @@ import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import grids
-from knobs.problems import Burgers1D, Burgers2D, ReactionDiffusion2D, DrivenCavity
+from errbudget.problems import Burgers1D, Burgers2D, ReactionDiffusion2D, DrivenCavity
 
 D = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 name = sys.argv[1]

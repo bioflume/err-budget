@@ -8,7 +8,7 @@ cd "$(dirname "$0")"
 source ./env.sh
 N=${1:-$(nproc)}
 mkdir -p logs
-cd "$KNOBS_ROOT/paper"
+cd "$ERRBUDGET_ROOT/paper"
 for w in $(seq 1 $N); do
   nohup $PYTHON exp56_dfg2d2_build.py worker >> dfg2d2_job/logs/worker_$w.out 2>&1 &
 done

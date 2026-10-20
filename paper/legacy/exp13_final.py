@@ -1,8 +1,8 @@
 """Consolidated headline numbers under the final configuration."""
 import sys, os, itertools, pickle, numpy as np
-from knobs import run_protocol
-from knobs.problems import Burgers1D
-from knobs.problems import Burgers2D
+from errbudget import run_protocol
+from errbudget.problems import Burgers1D
+from errbudget.problems import Burgers2D
 
 def study(name, exact, tensor, LAD, HS, obs_list, targets, rel=False):
     ALL=list(itertools.product(*[range(len(l)) for l in LAD]))

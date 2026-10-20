@@ -13,7 +13,7 @@ SLURM array) can run at once and an interrupted build resumes where it stopped.
 
 Grid: n_arc 5 x dt 4 x outer_tol 4 x p_tol 3 = 240 settings, plus 3 reference
 runs on finer meshes and time steps (the reference and its uncertainty).
-Work directory: $KNOBS_DFG2_WORK (default paper/work_dfg2d2).
+Work directory: $ERRBUDGET_DFG2_WORK (default paper/work_dfg2d2).
 """
 import fcntl
 import itertools
@@ -28,10 +28,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import openfoam_dfg2d2 as F
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-WORK = os.environ.get("KNOBS_DFG2_WORK", os.path.join(HERE, "work_dfg2d2"))
+WORK = os.environ.get("ERRBUDGET_DFG2_WORK", os.path.join(HERE, "work_dfg2d2"))
 # results of revision 3 (corrected wall-cell centroids) go to results_v12; the
 # spun-up meshes are shared, since only the post-processing changed
-RES = os.path.join(WORK, os.environ.get("KNOBS_DFG2_RESULTS", "results_v12"))
+RES = os.path.join(WORK, os.environ.get("ERRBUDGET_DFG2_RESULTS", "results_v12"))
 NAMES = ["n_arc", "dt", "outer_tol", "p_tol"]
 LAD = [[12, 16, 24, 32, 48], [0.004, 0.002, 0.001, 0.0005],
        [1e-2, 1e-3, 1e-4, 1e-5], [1e-4, 1e-6, 1e-8]]
@@ -40,7 +40,7 @@ REFS = [dict(n_arc=64, dt=0.00025, outer_tol=1e-5, p_tol=1e-8),     # the refere
         dict(n_arc=64, dt=0.0005, outer_tol=1e-5, p_tol=1e-8),      # its time-step error
         dict(n_arc=48, dt=0.00025, outer_tol=1e-5, p_tol=1e-8)]     # its mesh error
 SPIN = dict(dt=0.001, outer_tol=1e-4, p_tol=1e-8)
-CACHE = os.path.join(HERE, "data", os.environ.get("KNOBS_DFG2_CACHE", "dfg2d2_tensor_v12.pkl"))
+CACHE = os.path.join(HERE, "data", os.environ.get("ERRBUDGET_DFG2_CACHE", "dfg2d2_tensor_v12.pkl"))
 
 
 def tasks():

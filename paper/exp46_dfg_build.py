@@ -23,7 +23,7 @@ ALL = list(itertools.product(*[range(len(l)) for l in LAD]))
 # v1.2: wall-cell centroids corrected and a second-order pressure difference
 # added (openfoam_cylinder.py); the v1.1 tensor is kept as dfg_tensor.pkl
 CACHE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data",
-                     os.environ.get("KNOBS_DFG_CACHE", "dfg_tensor_v12.pkl"))
+                     os.environ.get("ERRBUDGET_DFG_CACHE", "dfg_tensor_v12.pkl"))
 
 if __name__ == "__main__":
     part = CACHE + ".partial"

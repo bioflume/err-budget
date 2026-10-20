@@ -20,8 +20,8 @@ import sys
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs import run_protocol
-from knobs.problems import Burgers1D
+from errbudget import run_protocol
+from errbudget.problems import Burgers1D
 
 D = os.path.join(os.path.dirname(__file__), "data")
 ALL = list(itertools.product(*[range(5) for _ in range(4)]))

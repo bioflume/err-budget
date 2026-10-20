@@ -15,4 +15,4 @@ hamilton/collect_*.out
 hamilton/hamilton_results.tar.gz
 *.sif
 RESULTS_SUMMARY.md
-knobs_v6_results.tar.gz
+errbudget_v6_results.tar.gz

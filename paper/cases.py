@@ -93,7 +93,7 @@ def _dfg1(cost="deterministic"):
     from openfoam_cylinder import REF
     # version-1.2 post-processing (exact cell centroids at the wall, second-order
     # wall pressure); the tensor of revision 2 is dfg_tensor.pkl
-    raw = pickle.load(open(os.path.join(D, os.environ.get("KNOBS_DFG_TENSOR", "dfg_tensor_v12.pkl")), "rb"))
+    raw = pickle.load(open(os.path.join(D, os.environ.get("ERRBUDGET_DFG_TENSOR", "dfg_tensor_v12.pkl")), "rb"))
     t = {}
     for i, v in raw.items():
         info = dict(v[2]) if len(v) > 2 else {}
@@ -170,7 +170,7 @@ def abinit_uncertainty(REF):
     value is used if the reference it measured is the one in the tensor."""
     unc = {"energy": 1.22e-4, "force": 4.45e-3}
     f = os.path.join(D, "abinit_reference_v6.json")
-    if os.path.exists(f) and os.environ.get("KNOBS_ABINIT_UNC", "measured") == "measured":
+    if os.path.exists(f) and os.environ.get("ERRBUDGET_ABINIT_UNC", "measured") == "measured":
         import json
         m = json.load(open(f))
         same = all(abs(m["ref"][o] - REF[o]) <= 1e-8 * abs(REF[o]) for o in ("energy", "force"))

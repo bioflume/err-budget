@@ -37,7 +37,7 @@ from openfoam_cylinder import (DFGCylinder, REF, NU, UBAR, D, DEPTH, _w, _foam_l
                                _interp_angle, fv_solution, control_dict, ENV)
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "dfg_plateau.json")
-WORK = os.environ.get("KNOBS_PLATEAU_WORK", "/tmp/knobs_plateau")
+WORK = os.environ.get("ERRBUDGET_PLATEAU_WORK", "/tmp/errbudget_plateau")
 
 
 def read_mesh(case):

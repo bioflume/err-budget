@@ -54,8 +54,8 @@ timeFormat general; timePrecision 10; runTimeModifiable false; adjustTimeStep no
 
 
 def decompose_dict(n):
-    """scotch (default); KNOBS_OF_DECOMP=simple for builds without scotch."""
-    m = os.environ.get("KNOBS_OF_DECOMP", "scotch")
+    """scotch (default); ERRBUDGET_OF_DECOMP=simple for builds without scotch."""
+    m = os.environ.get("ERRBUDGET_OF_DECOMP", "scotch")
     if m == "simple":
         return (f"numberOfSubdomains {n};\nmethod simple;\n"
                 f"simpleCoeffs {{ n ({n} 1 1); delta 0.001; }}\n")

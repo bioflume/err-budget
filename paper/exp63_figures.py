@@ -17,9 +17,9 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cases as C
 import grids
-from knobs import LocalBudget, run_protocol, V12, V121
+from errbudget import LocalBudget, run_protocol, V12, V121
 
-OUT = os.environ.get("KNOBS_FIG_DIR", os.path.join(os.path.dirname(os.path.abspath(__file__)), "figures"))
+OUT = os.environ.get("ERRBUDGET_FIG_DIR", os.path.join(os.path.dirname(os.path.abspath(__file__)), "figures"))
 BLUE, ORANGE, AQUA, YELLOW = "#2a78d6", "#eb6834", "#1baf7a", "#eda100"
 INK, INK2, GRID = "#0b0b0b", "#52514e", "#e4e3df"
 plt.rcParams.update({"font.size": 8, "axes.edgecolor": INK2, "axes.labelcolor": INK,

@@ -8,7 +8,7 @@ is on, so those two comparisons are made with screening enabled on both sides.
 import sys, os
 import numpy as np
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs import run_protocol
+from errbudget import run_protocol
 from grids import L2, L3, L4, hs, load, exact, grid
 
 VARIANTS = [

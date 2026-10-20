@@ -4,8 +4,8 @@ The only declaration that is unsafe to get wrong is calling an influential
 parameter 'cost-only'.  Here we do exactly that to the mesh, which in this
 problem carries the entire error budget, and watch the tool contradict us.
 """
-from knobs import Knob, tune
-from knobs.problems import Burgers1D
+from errbudget import Knob, tune
+from errbudget.problems import Burgers1D
 
 problem = Burgers1D(nu=0.05, T=1.0)
 EXACT = problem.exact_observables()["dissipation"]

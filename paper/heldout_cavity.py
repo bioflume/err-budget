@@ -98,7 +98,7 @@ def _extremum(x, y, kind):
 
 class Cavity:
     def __init__(self, workdir=None):
-        self.root = workdir or tempfile.mkdtemp(prefix="knobs_cavity_")
+        self.root = workdir or tempfile.mkdtemp(prefix="errbudget_cavity_")
         self.meshes = {}
 
     def _sh(self, cmd, cwd):

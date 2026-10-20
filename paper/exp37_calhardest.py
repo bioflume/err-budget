@@ -5,8 +5,8 @@ negative result into a usable rule, so it is worth testing rather than asserting
 import os, pickle, sys
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from knobs import run_protocol
-from knobs.problems import Burgers1D
+from errbudget import run_protocol
+from errbudget.problems import Burgers1D
 
 D = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 NAMES = ["N", "steps", "newton_tol", "gmres_tol"]

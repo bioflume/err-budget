@@ -12,5 +12,5 @@ set -e
 cd "${SLURM_SUBMIT_DIR:-$(dirname "$0")}"
 source ./env.sh
 LEVELS=(12 16 24 32 48 64)
-cd "$KNOBS_ROOT/paper"
+cd "$ERRBUDGET_ROOT/paper"
 $PYTHON exp56_dfg2d2_build.py spin ${LEVELS[$SLURM_ARRAY_TASK_ID]}

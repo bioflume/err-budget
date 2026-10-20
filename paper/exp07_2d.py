@@ -1,7 +1,7 @@
 """L3: 2D Burgers, five knobs, one of them accuracy-neutral."""
 import sys, os, itertools, pickle, time, os, numpy as np
-from knobs import LocalBudget, run_protocol
-from knobs.problems import Burgers2D
+from errbudget import LocalBudget, run_protocol
+from errbudget.problems import Burgers2D
 
 b = Burgers2D(nu=0.05, T=1.0)
 EXACT = b.exact_observables()

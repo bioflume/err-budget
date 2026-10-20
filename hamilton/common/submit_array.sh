@@ -15,7 +15,7 @@ D=""
 sbatch --parsable $SB_EXTRA $D -p "$SB_SHARED" -J "$NAME" -N 1 -n "$NP" -c 1 --mem="$MEM" -t "$TIME" \
     --array=0-$((NA - 1)) -o "$JOBDIR/logs/${NAME}_%a.out" <<EOF
 #!/bin/bash
-source "$KNOBS_ROOT/hamilton/config.sh"
+source "$ERRBUDGET_ROOT/hamilton/config.sh"
 activate_python
 load_openfoam
 cd "$JOBDIR"

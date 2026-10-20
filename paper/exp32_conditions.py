@@ -21,7 +21,7 @@ import sys
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs.problems import Burgers1D
+from errbudget.problems import Burgers1D
 
 D = os.path.join(os.path.dirname(__file__), "data")
 LAD = [[32, 64, 128, 256, 512], [25, 50, 100, 200, 400],

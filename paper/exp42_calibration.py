@@ -3,7 +3,7 @@ and calibration runs against the ladder distance between start and answer (L3)."
 import sys, os, collections
 import numpy as np
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs import run_protocol
+from errbudget import run_protocol
 from grids import L3, hs, load, exact, grid
 
 t, ex, H, ALL = load(L3), exact(L3), hs(L3), grid(L3)

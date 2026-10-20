@@ -4,8 +4,8 @@ We replay the protocol from all 625 configurations in the tensor sweep, so the
 result is a distribution over plausible users rather than one anecdote.
 """
 import sys, os, itertools, pickle, numpy as np
-from knobs import LocalBudget, run_protocol
-from knobs.problems import Burgers1D
+from errbudget import LocalBudget, run_protocol
+from errbudget.problems import Burgers1D
 
 b = Burgers1D(nu=0.05, T=1.0)
 EXACT = b.exact_observables()

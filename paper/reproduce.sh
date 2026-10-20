@@ -33,9 +33,9 @@ step build_L4        python exp20_reactdiff.py
 step build_fine      python exp33_fineladder.py
 step tab07_spacing   python exp34_spacing.py
 step sec77_hardest   python exp37_calhardest.py
-for N in 20 40 64; do step sec81_lammps_n$N env KNOBS_LMP_N=$N python exp22_lammps.py; done
+for N in 20 40 64; do step sec81_lammps_n$N env ERRBUDGET_LMP_N=$N python exp22_lammps.py; done
 step sec82_gromacs_d python exp24_gromacs.py
-step sec82_gromacs_mixed env KNOBS_GMX=gmx python exp24_gromacs.py
+step sec82_gromacs_mixed env ERRBUDGET_GMX=gmx python exp24_gromacs.py
 step sec83_abinit    python exp27_abinit.py
 step build_dfg       python exp46_dfg_build.py
 step sec5x_cavity    python exp48_cavity.py
@@ -86,7 +86,7 @@ step rev3_summary       python summ.py v1.2.1 v1.2 v1.1
 step rev3_heldout       python exp62_heldout.py
 step rev3_heldout_current python exp62_heldout.py --current
 step rev3_baselines_pooled python exp72_baselines_pooled.py
-KNOBS_BASE_OUT=baselines_lmp_gmx.json step rev3_baselines_lmp python exp72_baselines_pooled.py LMP-20 LMP-40 LMP-64 GMX-d
+ERRBUDGET_BASE_OUT=baselines_lmp_gmx.json step rev3_baselines_lmp python exp72_baselines_pooled.py LMP-20 LMP-40 LMP-64 GMX-d
 step rev3_dfg2_detail   python exp71_dfg2_detail.py
 step rev3_decline_reasons python exp73_decline_reasons.py
 step rev3_floor_sensitivity python exp58_floor_sensitivity.py v1.2
@@ -99,8 +99,8 @@ step rev3_figures       python exp63_figures.py
 step rev3_tables        python exp70_tables.py
 
 echo "######## 3. Figures"
-KNOBS_FIG_DIR=figures/ python make_solution_figure.py
-KNOBS_FIG_DIR=figures/ python make_lammps_figure.py
+ERRBUDGET_FIG_DIR=figures/ python make_solution_figure.py
+ERRBUDGET_FIG_DIR=figures/ python make_lammps_figure.py
 
 echo "######## 4. Behavioural claims"
 python -m pytest ../tests -q

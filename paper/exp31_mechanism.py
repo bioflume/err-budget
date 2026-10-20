@@ -19,7 +19,7 @@ import sys
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs.problems import Burgers1D
+from errbudget.problems import Burgers1D
 
 p = Burgers1D(nu=0.05, T=1.0)
 TOLREF = 1e-12

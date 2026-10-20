@@ -4,8 +4,8 @@ The solver here is 1D viscous Burgers, which has an exact solution via the
 Cole-Hopf transformation, so we can check afterwards whether the answer really
 met the target.  `tune` itself never sees the exact solution.
 """
-from knobs import Knob, tune
-from knobs.problems import Burgers1D
+from errbudget import Knob, tune
+from errbudget.problems import Burgers1D
 
 problem = Burgers1D(nu=0.05, T=1.0)
 

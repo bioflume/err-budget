@@ -3,7 +3,7 @@
     python exp81_bound_check.py
 
 Synthetic problems with exact errors and candidate lists of constant ratio; the released
-configuration (knobs.V121) is replayed through run_protocol from every start of the grid.
+configuration (errbudget.V121) is replayed through run_protocol from every start of the grid.
 
 1. Lemma 1: the local-order bound of the code equals the geometric extrapolation
    |D_j0| rho^(a - j0) / (1 - rho), rho = D_j1 / D_j0, at each of its alignments.
@@ -27,7 +27,7 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "src"))
-from knobs import LocalBudget, V121, run_protocol  # noqa: E402
+from errbudget import LocalBudget, V121, run_protocol  # noqa: E402
 
 PG = np.linspace(0.25, 6.0, 121)                     # order grid of the fit (Section 4.2)
 
@@ -147,7 +147,7 @@ print("\n4. Proposition 1, (A3): bilinear interaction b u0 u1 (u_k = h_k^p_k)")
 
 
 def estimate(look, idx, eps, joint):
-    """The estimate of run_protocol at one setting (knobs.V121), with or without the joint check."""
+    """The estimate of run_protocol at one setting (errbudget.V121), with or without the joint check."""
     lb = LocalBudget(look, LAD, idx, hs=HS, fs_cap=1.25, resid_margin=5.0, kinds=KINDS,
                      local_order=True, resolution=0.1 * eps, cancel_rule="none", joint_res=1.0)
     lb.sweep(); lb.per_knob_error(); lb.refine_path(n_levels=0)

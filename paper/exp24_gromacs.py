@@ -8,7 +8,7 @@ import time
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs import LocalBudget, run_protocol
+from errbudget import LocalBudget, run_protocol
 from gromacs_water import GromacsWater
 
 NAMES = ["rcoulomb", "fourierspacing", "pme_order", "ewald_rtol"]
@@ -21,7 +21,7 @@ HS = [[1.0 / c for c in LAD[0]], list(LAD[1]), [1.0 / o for o in LAD[2]],
       list(LAD[3])]
 ALL = list(itertools.product(*[range(len(l)) for l in LAD]))
 
-BINARY = os.environ.get("KNOBS_GMX", "gmx_d")
+BINARY = os.environ.get("ERRBUDGET_GMX", "gmx_d")
 CACHE = os.path.join(os.path.dirname(__file__), "data",
                      f"gromacs_tensor_{BINARY}.pkl")
 if os.path.exists(CACHE):

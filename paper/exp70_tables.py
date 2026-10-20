@@ -42,7 +42,7 @@ PLAIN = {k: v.replace("{,}", ",") for k, v in LABEL.items()}
 # Revision 4: which 2D-2 study enters Table 3.  "refined" (default when the rows of the
 # Hamilton job J2 are present) shows case 2D-2h and drops the revision-3 case 2D-2;
 # "old" shows the revision-3 case.  Both are always in data/pooled_<config>.json.
-TABLE3_2D2 = os.environ.get("KNOBS_TABLE3_2D2", "refined")
+TABLE3_2D2 = os.environ.get("ERRBUDGET_TABLE3_2D2", "refined")
 
 
 def _select_2d2(R):

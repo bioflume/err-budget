@@ -1,8 +1,8 @@
-# knobs-paper: the article's code, data and reproduction
+# errbudget-paper: the article's code, data and reproduction
 
 This repository reproduces the article
 
-> G. Kabacaoğlu, *knobs: choosing the numerical parameters of a black-box solver for a
+> G. Kabacaoğlu, *errbudget: choosing the numerical parameters of a black-box solver for a
 > target accuracy in one observable*, Computer Physics Communications (Computer Programs
 > in Physics), 2026.
 
@@ -12,14 +12,22 @@ held-out tests, and the cluster jobs. It is a record: the program here does not 
 except by a new, documented version.
 
 If you want to **use** the method on your own solver rather than check the article, use
-the library repository instead: <https://github.com/bioflume/knobs>. It is the same
+the library repository instead: <https://github.com/bioflume/errbudget>. It is the same
 engine with a command-line tool, job files and a user guide.
+
+**The name.** The program was called `knobs` until revision 5 of the article (October
+2026). Only the name changed: the package moved from `src/knobs` to `src/errbudget`, the
+engine (`_core.py`) is byte-identical, and every table of the article is reproduced byte
+for byte (`CHANGELOG.md`). The records fixed by the pre-registration keep the old name:
+`PREREGISTRATION.md`, the tags `v1.2.0-frozen` and `v1.2.1`, the frozen copy
+`paper/frozen_src/knobs` and the registered J5 driver `hamilton/J5_abc3d/abc_hpc.py`.
 
 ## Layout
 
 ```
-src/knobs/           the program, version 1.2.1 -- byte-identical to the article's;
-                     the held-out replays check its hash, so do not edit it here
+src/errbudget/       the program, version 1.2.1, as the article describes it; do not
+                     edit it here (the frozen program of the held-out tests is the tag
+                     v1.2.0-frozen, whose hash the replays check)
 paper/               everything that reproduces the article on one machine:
                      run_v6_analyses.sh (revision 4), reproduce.sh (revisions 2-3), the
                      analysis scripts, the stored solver output (data/), tables and
@@ -50,7 +58,7 @@ number, table and figure to the script that produces it.
 Quick start for tier A:
 
 ```bash
-git clone https://github.com/bioflume/knobs-paper.git && cd knobs-paper
+git clone https://github.com/bioflume/errbudget-paper.git && cd errbudget-paper
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[paper]"
 pytest -q                                   # 52 tests, about 80 s
@@ -66,7 +74,7 @@ fail cleanly without it and the rest goes on. The article's own environment (Pyt
 ## The program
 
 ```python
-from knobs import Knob, tune
+from errbudget import Knob, tune
 
 result = tune(solver,
               [Knob("N",    [32, 64, 128, 256],        kind="discretisation"),
@@ -76,12 +84,12 @@ result = tune(solver,
 print(result)
 ```
 
-`src/knobs/api.py` is the public interface (`Knob`, `tune`, `TuneResult`, `RunFailed`),
-`src/knobs/_core.py` the measurement, the local-order and joint checks and the search,
-`src/knobs/_asymptotic.py` the balance law of the secondary result, and
-`src/knobs/problems/` the test problems with exact solutions. The default configuration is
-`knobs.V121`; `knobs.V12` is the frozen version of the held-out tests (git tag
-`v1.2.0-frozen`, copy in `paper/frozen_src`), `knobs.V11` the previous version.
+`src/errbudget/api.py` is the public interface (`Knob`, `tune`, `TuneResult`, `RunFailed`),
+`src/errbudget/_core.py` the measurement, the local-order and joint checks and the search,
+`src/errbudget/_asymptotic.py` the balance law of the secondary result, and
+`src/errbudget/problems/` the test problems with exact solutions. The default configuration is
+`errbudget.V121`; `errbudget.V12` is the frozen version of the held-out tests (git tag
+`v1.2.0-frozen`, copy in `paper/frozen_src`), `errbudget.V11` the previous version.
 `examples/` shows the API on the test problems; the library repository has the user guide.
 
 ## Versions and tags
@@ -89,8 +97,8 @@ print(result)
 | Tag / version | Meaning |
 |---|---|
 | `v1.2.0-frozen` | the program frozen before the held-out tests (SHA-256 of the source in `PREREGISTRATION.md`) |
-| `v1.2.1` | the released default after the amendment of 11 October 2026; the article's version |
-| `main` | this: revision 4 (patch v6 analyses, the revision-4 results of Part V, the restructured layout) |
+| `v1.2.1` | the released default after the amendment of 11 October 2026; the article's version (package name `knobs`) |
+| `main` | this: revision 5 of the article (patch v7) and the rename to `errbudget` |
 
 ## Tests
 

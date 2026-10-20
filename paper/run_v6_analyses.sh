@@ -9,14 +9,14 @@
 #
 # Every step writes its output to ../logs/v6/<step>.txt and its exit status to
 # ../logs/v6/STATUS.txt; a failed step is reported and the script goes on, except the
-# environment check and the tests.  KNOBS_JOBS (default 2) pooled configurations run at once.
+# environment check and the tests.  ERRBUDGET_JOBS (default 2) pooled configurations run at once.
 set -u -o pipefail
 ORIG=$PWD
 cd "$(dirname "$0")"
 PAPER=$PWD
 LOG=$PAPER/../logs/v6
 mkdir -p "$LOG" data figures
-JOBS=${KNOBS_JOBS:-2}
+JOBS=${ERRBUDGET_JOBS:-2}
 PY=${PYTHON:-python}
 export PYTHONPATH="$PAPER/../src:$PAPER:${PYTHONPATH:-}"
 FAILED=()
@@ -57,7 +57,7 @@ check() {
     $PY - <<'EOF' || exit 1
 import importlib, shutil, sys
 ok = True
-for m in ("numpy", "scipy", "matplotlib", "sympy", "pytest", "knobs"):
+for m in ("numpy", "scipy", "matplotlib", "sympy", "pytest", "errbudget"):
     try:
         mod = importlib.import_module(m)
         print(f"{m:<10} {getattr(mod, '__version__', '')} {getattr(mod, '__file__', '')}")
@@ -69,9 +69,9 @@ except Exception as exc:
     print(f"lammps     python module MISSING ({exc}): exp74 cannot run")
 for exe in ("abinit", "gmx", "gmx_d", "git"):
     print(f"{exe:<10} {shutil.which(exe) or 'MISSING'}")
-import knobs
-print("knobs version", knobs.__version__, "V121" if hasattr(knobs, "V121") else "NO V121")
-sys.exit(0 if ok and hasattr(knobs, "V121") else 1)
+import errbudget
+print("errbudget version", errbudget.__version__, "V121" if hasattr(errbudget, "V121") else "NO V121")
+sys.exit(0 if ok and hasattr(errbudget, "V121") else 1)
 EOF
     git -C .. tag | grep -q v1.2.0-frozen && echo "git tag v1.2.0-frozen present" \
         || { [ -d frozen_src/knobs ] && echo "no git tag; paper/frozen_src present" \
@@ -90,8 +90,8 @@ before() {
     echo "== $(date '+%H:%M:%S') pooled tables: $MAIN $ABL121 $ABL12 ($JOBS at a time)"
     pooled_parallel A05_pooled $MAIN $ABL121 $ABL12
     step A06_summary $PY summ.py v1.2.1 v1.2 v1.1
-    step A07_baselines env KNOBS_CFG=v1.2.1 $PY exp72_baselines_pooled.py
-    step A08_baselines_lmp env KNOBS_CFG=v1.2.1 KNOBS_BASE_OUT=baselines_lmp_gmx.json \
+    step A07_baselines env ERRBUDGET_CFG=v1.2.1 $PY exp72_baselines_pooled.py
+    step A08_baselines_lmp env ERRBUDGET_CFG=v1.2.1 ERRBUDGET_BASE_OUT=baselines_lmp_gmx.json \
         $PY exp72_baselines_pooled.py LMP-20 LMP-40 LMP-64 GMX-d
     step A09_accounting $PY exp76_accounting.py
     step A10_reltol_2d1 $PY exp77_reltol_2d1.py
@@ -121,7 +121,7 @@ after() {
     if [ -f ../hamilton/results/j2_tensor.pkl ] && $PY -c "import cases; cases._dfg2_refined()" 2>/dev/null; then
         echo "== $(date '+%H:%M:%S') pooled tables, refined 2D-2 study only (merged into the files of 'before')"
         pooled_parallel B02_pooled_2d2h --only 2D-2h $MAIN $ABL121 $ABL12
-        step B03_baselines_2d2h env KNOBS_CFG=v1.2.1 $PY exp72_baselines_pooled.py 2D-2h
+        step B03_baselines_2d2h env ERRBUDGET_CFG=v1.2.1 $PY exp72_baselines_pooled.py 2D-2h
     else
         echo "   no refined 2D-2 case (hamilton/results/j2_tensor.pkl with a case specification): B02-B03 skipped"
         FAILED+=("B02_no_2d2h")

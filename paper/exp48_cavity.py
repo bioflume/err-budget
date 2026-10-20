@@ -12,7 +12,7 @@ import time
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
-from knobs.problems import DrivenCavity
+from errbudget.problems import DrivenCavity
 from replay import grid, method_cell, baseline_cell, fmt_method
 import grids
 
