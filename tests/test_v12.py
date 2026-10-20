@@ -4,7 +4,7 @@ import itertools
 import numpy as np
 import pytest
 
-from knobs import Knob, RunFailed, V11, V12, run_protocol, tune
+from errbudget import Parameter, RunFailed, V11, V12, run_protocol, tune
 
 KINDS2 = ["discretisation", "discretisation"]
 
@@ -63,8 +63,8 @@ def test_unconverged_runs_are_failed_runs():
             return {"q": q + 0.5, "converged": False}
         return {"q": q, "converged": True}
 
-    res = tune(solver, [Knob("n", [8, 16, 32, 64]),
-                        Knob("tol", tols, kind="nested-solver")],
+    res = tune(solver, [Parameter("n", [8, 16, 32, 64]),
+                        Parameter("tol", tols, kind="nested-solver")],
                target=2e-3, observable="q", start={"n": 16, "tol": 1e-4})
     assert res.certified and res.settings["tol"] != 1e-2
 
@@ -74,7 +74,7 @@ def test_runfailed_is_recorded_not_raised():
         if n == 64:
             raise RunFailed("out of memory")
         return 1.0 + 1.0 / n**2
-    res = tune(solver, [Knob("n", [8, 16, 32, 64])], target=2e-3, start={"n": 16})
+    res = tune(solver, [Parameter("n", [8, 16, 32, 64])], target=2e-3, start={"n": 16})
     assert res.settings["n"] != 64
 
 
@@ -105,6 +105,6 @@ def test_failed_finer_run_uses_the_order_up_to_the_setting():
 def test_v121_includes_small_resolved_changes_in_the_joint_check():
     # the frozen 1.2 skips the joint check when every one-step change is below three
     # times the resolution; 1.2.1 includes changes above the resolution itself
-    from knobs import V121
+    from errbudget import V121
     assert V12.get("joint_res", 3.0) == 3.0 and V121["joint_res"] == 1.0
     assert {k: v for k, v in V121.items() if k != "joint_res"} == V12

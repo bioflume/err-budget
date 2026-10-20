@@ -1,4 +1,4 @@
-# knobs
+# errbudget
 
 Choose a solver's numerical parameters to hit a target accuracy **in the quantity you
 actually care about**, at close to the cheapest cost that achieves it.
@@ -15,7 +15,7 @@ only through their input files, and on test problems with exact solutions; the a
 reports every miss and its cause (see *Citing*).
 
 ```bash
-pip install "knobs[yaml] @ git+https://github.com/bioflume/knobs"
+pip install "errbudget[yaml] @ git+https://github.com/bioflume/errbudget"
 ```
 
 ## Two ways to use it
@@ -24,9 +24,9 @@ pip install "knobs[yaml] @ git+https://github.com/bioflume/knobs"
 own binary, `python my_solver.py`):
 
 ```bash
-knobs init job.yaml      # writes an annotated job file: edit the command, the parameters, the target
-knobs check job.yaml     # validates it and runs your starting setting once
-knobs run job.yaml       # tunes, prints the report, writes knobs_result.json and .md
+errbudget init job.yaml    # writes an annotated job file: edit the command, the parameters, the target
+errbudget check job.yaml   # validates it and runs your starting setting once
+errbudget run job.yaml     # tunes, prints the report, writes errbudget_result.json and .md
 ```
 
 A job file is a page of YAML (or JSON, or TOML). Here is the one from
@@ -53,7 +53,7 @@ LAMMPS, GROMACS and plane-wave DFT codes.
 **From Python**, for a solver you can call as a function:
 
 ```python
-from knobs import Knob, tune
+from errbudget import Parameter, tune
 
 def solver(steps, inner_tol, inner_max, jac_every):
     ...                                  # your code, untouched
@@ -61,10 +61,10 @@ def solver(steps, inner_tol, inner_max, jac_every):
 
 result = tune(
     solver,
-    [Knob("steps",     [25, 50, 100, 200, 400, 800], kind="discretisation"),
-     Knob("inner_tol", [1e-2, 1e-4, 1e-6, 1e-8, 1e-10], kind="nested-solver"),
-     Knob("inner_max", [2, 4, 8, 16],               kind="nested-solver"),
-     Knob("jac_every", [16, 8, 4, 2, 1],            kind="cost-only")],
+    [Parameter("steps",     [25, 50, 100, 200, 400, 800], kind="discretisation"),
+     Parameter("inner_tol", [1e-2, 1e-4, 1e-6, 1e-8, 1e-10], kind="nested-solver"),
+     Parameter("inner_max", [2, 4, 8, 16],               kind="nested-solver"),
+     Parameter("jac_every", [16, 8, 4, 2, 1],            kind="cost-only")],
     target=1e-4, observable="u_final",
     start=dict(steps=100, inner_tol=1e-10, inner_max=16, jac_every=1))
 
@@ -111,7 +111,7 @@ lists the ones its measurements contradict. Without the sweep, a parameter decla
 5 % of the target, so a wrong declaration costs efficiency, not correctness.
 
 Values are listed from coarse to fine. For a parameter whose error decays exponentially
-(a plane-wave or spectral cutoff) add `model: exponential` (`Knob(..., model="exponential")`);
+(a plane-wave or spectral cutoff) add `model: exponential` (`Parameter(..., model="exponential")`);
 its values must increase.
 
 ## What it will tell you
@@ -143,7 +143,7 @@ That is stronger than a heuristic and weaker than a proof, and we would rather s
 ## Failed and unconverged runs
 
 A run whose nested solver stopped at its iteration limit is not an answer. From Python,
-return `{"drag": cd, "converged": False}` or raise `knobs.RunFailed`; from a job file, give
+return `{"drag": cd, "converged": False}` or raise `errbudget.RunFailed`; from a job file, give
 a pattern that marks it (`failure: {unconverged_if_regex: "did not converge"}`). A non-zero
 exit code is always a failure. Such runs are recorded with their cost but never proposed
 and never fitted. `accept_unconverged: true` restores the behaviour of version 1.1.
@@ -158,7 +158,7 @@ and never fitted. `accept_unconverged: true` restores the behaviour of version 1
   not credited;
 - a safety factor that grows with the misfit of the error models.
 
-The default configuration is the article's version 1.2.1 (`knobs.V121`); `v1.2` and `v1.1`
+The default configuration is the article's version 1.2.1 (`errbudget.V121`); `v1.2` and `v1.1`
 reproduce the earlier versions. For single-precision or otherwise noisy codes,
 `floor_probe` measures the round-off floor from two settings refined beyond every
 candidate value and declines targets below ten times it; `screen: true` runs a
@@ -171,15 +171,15 @@ preliminary sweep (fewer runs, more expensive recommendations).
 | `docs/guide.md` | how it works, how to choose values and a target, how to read the report, when it declines |
 | `docs/job-files.md` | the job-file reference (every field) |
 | `docs/recipes.md` | job files for OpenFOAM, LAMMPS, GROMACS, Quantum ESPRESSO / ABINIT, MPI codes, Python solvers |
-| `docs/api.md` | the Python API (`Knob`, `tune`, `TuneResult`, `RunFailed`, the engine) |
+| `docs/api.md` | the Python API (`Parameter`, `tune`, `TuneResult`, `RunFailed`, the engine) |
 | `examples/` | four runnable examples, including the command-line one |
 | `CHANGELOG.md` | what changed between versions |
 
 ## Install
 
 ```bash
-pip install "knobs[yaml] @ git+https://github.com/bioflume/knobs"     # with YAML job files
-pip install "knobs @ git+https://github.com/bioflume/knobs"           # Python API, JSON/TOML job files
+pip install "errbudget[yaml] @ git+https://github.com/bioflume/errbudget"   # with YAML job files
+pip install "errbudget @ git+https://github.com/bioflume/errbudget"         # Python API, JSON/TOML job files
 ```
 
 Python 3.9 or later, NumPy and SciPy. From a clone: `pip install -e ".[dev]"` and `pytest`
@@ -189,12 +189,12 @@ Python 3.9 or later, NumPy and SciPy. From a clone: `pip install -e ".[dev]"` an
 
 The method and its evaluation are described in
 
-> G. Kabacaoğlu, *knobs: choosing the numerical parameters of a black-box solver for a
+> G. Kabacaoğlu, *errbudget: choosing the numerical parameters of a black-box solver for a
 > target accuracy in one observable*, Computer Physics Communications, 2026.
 
 The engine in this package is version 1.2.1, the version the article describes
-(`knobs.ENGINE_VERSION`); the article's own repository, with every script, stored solver
-output and the cluster jobs, is <https://github.com/bioflume/knobs-paper>. See
+(`errbudget.ENGINE_VERSION`); the article's own repository, with every script, stored solver
+output and the cluster jobs, is <https://github.com/bioflume/errbudget-paper>. See
 `CITATION.cff`.
 
 ## Licence

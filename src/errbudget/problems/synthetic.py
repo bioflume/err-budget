@@ -8,7 +8,7 @@ def make_synthetic(c=(1.0, -0.6, 0.25), p=(2.0, 1.0, 1.0), q=(1.0, 1.0, 0.0),
     """A 'solver' whose error structure we impose analytically.
 
     Q(h) = Qstar + sum_k c_k h_k^p_k + interaction * h_1^p_1 h_2^p_2 + noise
-    cost = prod_k h_k^-q_k   (q_k = 0 means a log-cost knob)
+    cost = prod_k h_k^-q_k   (q_k = 0 means a log-cost parameter)
     """
     rng = np.random.default_rng(seed)
     Qstar = 1.0

@@ -14,7 +14,7 @@ Why this rung:
     and the heat equation is solved to machine precision in Fourier space.
     So we can validate against truth, not against a fine-grid surrogate.
 
-Four knobs: N, steps, newton_tol, gmres_tol.
+Four parameters: N, steps, newton_tol, gmres_tol.
 Two observables from the same run: energy and dissipation rate at T.  They are
 not minimised by the same configuration -- which matters, because users pick
 parameters once and then reuse them for every quantity they measure.

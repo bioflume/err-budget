@@ -1,5 +1,26 @@
 # Changelog
 
+## 2.0.0 — the package is now called errbudget
+
+Only names change. The engine is the same: `_core.py` is byte for byte that of 1.3.0, and
+`errbudget.ENGINE_VERSION` is still 1.2.1, the version the article describes.
+
+- **Package and command.** `pip install errbudget`, `import errbudget`, and the command
+  `errbudget` (`init`, `check`, `run`, `report`, `runs`, `version`; also `python -m errbudget`).
+- **`Knob` is now `Parameter`**, the second argument of `tune` is called `params`, and
+  `JobSpec.knobs()` is now `JobSpec.to_parameters()`. Error messages say "parameter".
+- **Defaults that carried the old name.** `errbudget init` writes `errbudget.yaml`; runs go to
+  `errbudget_runs` and the results to `errbudget_result.json` and `.md`; a saved result
+  records `errbudget_version`. A job file that sets `workdir` and `output` is unaffected. To
+  resume a tuning that 1.3.0 started with the default run directory, set
+  `workdir: knobs_runs`.
+- **Repositories.** <https://github.com/bioflume/errbudget>; the article's repository is
+  <https://github.com/bioflume/errbudget-paper>.
+- Kept: the engine's own names (for example `LocalBudget.per_knob_error`) and the job-file
+  format, which already used `parameters`.
+
+The entries below keep the old name.
+
 ## 1.3.0 — tooling around the article's engine
 
 The engine (`knobs/_core.py`, the defaults `V121`) is byte-for-byte version 1.2.1, the

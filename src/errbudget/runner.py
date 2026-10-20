@@ -211,9 +211,9 @@ def load_python_solver(ref: str, base_dir: str) -> Callable:
             path = mod if os.path.isabs(mod) else os.path.join(base_dir, mod)
             if not os.path.isfile(path):
                 raise JobError(f"solver file {mod!r} does not exist")
-            spec = importlib.util.spec_from_file_location("knobs_user_solver", path)
+            spec = importlib.util.spec_from_file_location("errbudget_user_solver", path)
             module = importlib.util.module_from_spec(spec)
-            sys.modules["knobs_user_solver"] = module
+            sys.modules["errbudget_user_solver"] = module
             spec.loader.exec_module(module)
         else:
             if base_dir not in sys.path:
@@ -266,7 +266,7 @@ class CommandSolver:
     """A callable solver built from a job file.  See the module docstring.
 
     fresh=True ignores the run log (but still appends to it); retry_failed=True runs a
-    setting again when the log holds only a failed run for it (what `knobs check` does,
+    setting again when the log holds only a failed run for it (what `errbudget check` does,
     so that a fixed command is actually tried).
     """
 
@@ -510,8 +510,8 @@ def prepare_run_dir(job, run_dir: str, params: dict, run_id: str = "0000") -> st
 
 def dry_render(job, params: dict) -> str:
     """Render the command and the template files for `params` in a temporary directory
-    (nothing is run); returns the rendered command.  Used by `knobs check`."""
-    tmp = tempfile.mkdtemp(prefix="knobs_check_")
+    (nothing is run); returns the rendered command.  Used by `errbudget check`."""
+    tmp = tempfile.mkdtemp(prefix="errbudget_check_")
     try:
         return prepare_run_dir(job, os.path.join(tmp, "run"), params, "check")
     finally:

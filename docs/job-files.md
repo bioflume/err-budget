@@ -2,15 +2,15 @@
 
 A job file describes one tuning: what to run, which parameters to vary, what to read
 from the output, and how accurate it has to be. It is YAML (`.yaml`, needs PyYAML:
-`pip install "knobs[yaml]"`), JSON (`.json`) or TOML (`.toml`, Python 3.11+). `knobs init`
+`pip install "errbudget[yaml]"`), JSON (`.json`) or TOML (`.toml`, Python 3.11+). `errbudget init`
 writes an annotated one to start from.
 
 ```bash
-knobs init job.yaml       # template
-knobs check job.yaml      # validate; run the starting setting once and show what was read
-knobs run job.yaml        # tune
-knobs runs job.yaml       # the run log
-knobs report knobs_result.json
+errbudget init job.yaml   # template
+errbudget check job.yaml  # validate; run the starting setting once and show what was read
+errbudget run job.yaml    # tune
+errbudget runs job.yaml   # the run log
+errbudget report errbudget_result.json
 ```
 
 ## The fields
@@ -107,7 +107,7 @@ from that log, or when `path: log.simpleFoam` is given.
 | `template_dir` | a directory copied into every run directory (an OpenFOAM case, a LAMMPS deck). Every text file in it that contains `{{` is rendered |
 | `files` | a mapping `source: destination` of single files to copy and render, the destination relative to the run directory |
 | `render_files` | if given, only these files (relative to the run directory) are rendered |
-| `workdir` | where run directories and the log go (default `knobs_runs`, next to the job file) |
+| `workdir` | where run directories and the log go (default `errbudget_runs`, next to the job file) |
 | `keep_runs` | keep run directories after the number is read (default true; set false to save disk) |
 | `timeout` | seconds per run; a run that exceeds it is a failed run |
 | `env` | environment variables for the command: `{OMP_NUM_THREADS: "1"}` |
@@ -126,8 +126,8 @@ Any other key is passed to the engine as an expert override (`resid_margin`, `jo
 
 ### `output`, `name`
 
-`output` is the stem of the result files (`knobs_result` → `knobs_result.json`,
-`knobs_result.md`); `name` is a title for the report.
+`output` is the stem of the result files (`errbudget_result` → `errbudget_result.json`,
+`errbudget_result.md`); `name` is a title for the report.
 
 ## The run log and resuming
 
@@ -135,24 +135,24 @@ Every run is appended to `<workdir>/runs.jsonl`: its parameters, value, cost, st
 (`ok`, `unconverged`, `failed`), exit code, directory and wall time. Before running a
 setting, the runner looks it up there, so
 
-- `knobs run` after an interruption continues where it stopped;
-- `knobs run` on a finished job answers everything from the log in seconds;
+- `errbudget run` after an interruption continues where it stopped;
+- `errbudget run` on a finished job answers everything from the log in seconds;
 - changing the target or the candidate values and running again reuses every run that is
   still needed.
 
 Every record carries a fingerprint of the command, the observable, cost and failure rules,
 the environment and the template files. After you change any of those, the old records are
 not reused (the log says how many it is ignoring); runs made with the same job file are.
-`knobs check` runs the starting setting again even when the log holds a failed attempt, so
-a fixed command is actually tried. `knobs run --fresh` ignores the log altogether; delete
-`workdir` to start over completely. `knobs runs job.yaml` prints the log as a table.
+`errbudget check` runs the starting setting again even when the log holds a failed attempt, so
+a fixed command is actually tried. `errbudget run --fresh` ignores the log altogether; delete
+`workdir` to start over completely. `errbudget runs job.yaml` prints the log as a table.
 
 A time-out kills the whole process group of the command, so an `mpirun` that exceeded
 `timeout` does not linger.
 
 ## Exit codes
 
-`knobs run` exits 0 when the target was met, 3 when it was not reachable with the values
+`errbudget run` exits 0 when the target was met, 3 when it was not reachable with the values
 given (the report says which parameter to extend), 1 on a job-file error.
 
 ## A complete example

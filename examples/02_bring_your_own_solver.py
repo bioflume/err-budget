@@ -1,7 +1,7 @@
 """Bring your own solver.
 
 Everything below the line marked YOUR SOLVER is ordinary code with no knowledge
-of `knobs`.  Replace it with your own and the rest of the file still works.
+of `errbudget`.  Replace it with your own and the rest of the file still works.
 
 The solver here integrates a stiff scalar ODE with an implicit trapezoidal rule
 and a fixed-point inner iteration, so it has the three parameter classes in
@@ -10,7 +10,7 @@ miniature: a step count (discretisation), an inner-iteration tolerance and cap
 The exact solution is known, so you can check the advice.
 """
 import numpy as np
-from knobs import Knob, tune
+from errbudget import Parameter, tune
 
 LAM, T, U0 = -50.0, 1.0, 1.0          # u' = LAM*(u - cos t) - sin t
 
@@ -43,15 +43,15 @@ def solver(steps, inner_tol, inner_max, jac_every):
 # -----------------------------------------------------------------------------
 
 
-knobs = [
-    Knob("steps",     [25, 50, 100, 200, 400, 800],      kind="discretisation"),
-    Knob("inner_tol", [1e-2, 1e-4, 1e-6, 1e-8, 1e-10],   kind="nested-solver"),
-    Knob("inner_max", [2, 4, 8, 16],                     kind="nested-solver"),
-    Knob("jac_every", [16, 8, 4, 2, 1],                  kind="cost-only"),
+params = [
+    Parameter("steps",     [25, 50, 100, 200, 400, 800],      kind="discretisation"),
+    Parameter("inner_tol", [1e-2, 1e-4, 1e-6, 1e-8, 1e-10],   kind="nested-solver"),
+    Parameter("inner_max", [2, 4, 8, 16],                     kind="nested-solver"),
+    Parameter("jac_every", [16, 8, 4, 2, 1],                  kind="cost-only"),
 ]
 
 start = dict(steps=100, inner_tol=1e-10, inner_max=16, jac_every=1)
-result = tune(solver, knobs, target=1e-4, observable="u_final", start=start)
+result = tune(solver, params, target=1e-4, observable="u_final", start=start)
 print(result)
 
 truth = exact(T)

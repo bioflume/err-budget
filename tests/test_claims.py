@@ -11,8 +11,8 @@ import math
 import numpy as np
 import pytest
 
-from knobs import Knob, tune
-from knobs._core import LocalBudget, run_protocol
+from errbudget import Parameter, tune
+from errbudget._core import LocalBudget, run_protocol
 
 
 # --------------------------------------------------------------- fixtures --
@@ -167,7 +167,7 @@ def test_misdeclared_cost_only_is_reported():
 def test_two_observables_need_not_agree():
     """Claim (S6.3): the cost-optimal setting for one observable can fail the
     same relative target for another computed from the same runs."""
-    from knobs.problems import Burgers1D
+    from errbudget.problems import Burgers1D
     import os
     import pickle
     path = os.path.join(os.path.dirname(__file__), "..", "paper", "data",
@@ -188,7 +188,7 @@ def test_two_observables_need_not_agree():
 def test_stabilised_exact_solution_agrees_where_the_spectral_route_is_valid():
     """Claim (S5): the log-space Cole-Hopf evaluation reproduces the spectral one
     at moderate viscosity, and is finite where the spectral one is not."""
-    from knobs.problems import Burgers1D
+    from errbudget.problems import Burgers1D
 
     def spectral(nu, Nf=1 << 15):
         x = 2 * np.pi * np.arange(Nf) / Nf
@@ -209,4 +209,4 @@ def test_stabilised_exact_solution_agrees_where_the_spectral_route_is_valid():
 def test_ladder_direction_guard():
     """Claim (S10): an ambiguous ladder direction is refused, not guessed."""
     with pytest.raises(ValueError, match="cannot infer the refinement direction"):
-        Knob("tol", [1e-8, 1e-6, 1e-4])
+        Parameter("tol", [1e-8, 1e-6, 1e-4])

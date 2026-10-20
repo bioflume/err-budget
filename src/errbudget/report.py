@@ -13,7 +13,7 @@ def _fmt(v) -> str:
 
 def markdown(result) -> str:
     """The recommendation as Markdown (a settings table and the diagnostics)."""
-    L = [f"## knobs: recommendation for `{result.observable}`", ""]
+    L = [f"## errbudget: recommendation for `{result.observable}`", ""]
     if result.certified:
         L.append(f"**Target {result.target:.3g} met.** Estimated error "
                  f"{abs(result.error_estimate):.3g}.")

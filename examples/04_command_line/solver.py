@@ -10,7 +10,7 @@ kinds of parameter in miniature:
     --tol       inner-iteration tolerance            (nested solver)
     --refresh   how often the iteration matrix is rebuilt (cost-only)
 
-knobs never looks inside this file.  It only runs it and reads the two lines it
+errbudget never looks inside this file.  It only runs it and reads the two lines it
 prints:  u_final = ...   and   work = ...
 """
 import argparse

@@ -3,8 +3,8 @@ requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "knobs"
-version = "1.3.0"
+name = "errbudget"
+version = "2.0.0"
 description = "Choose a black-box solver's numerical parameters for a target accuracy in one observable, at close to minimal cost."
 readme = "README.md"
 requires-python = ">=3.9"
@@ -26,11 +26,11 @@ examples = ["matplotlib>=3.5"]
 dev = ["pytest>=7", "pyyaml>=5"]
 
 [project.scripts]
-knobs = "knobs.cli:main"
+errbudget = "errbudget.cli:main"
 
 [project.urls]
-Repository = "https://github.com/bioflume/knobs"
-Article = "https://github.com/bioflume/knobs-paper"
+Repository = "https://github.com/bioflume/errbudget"
+Article = "https://github.com/bioflume/errbudget-paper"
 
 [tool.setuptools.packages.find]
 where = ["src"]

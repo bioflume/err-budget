@@ -1,6 +1,6 @@
 # Tune the three parameters of solver.py for an error of 1e-4 in u_final.
-#   knobs check job.yaml      # runs the starting setting once
-#   knobs run job.yaml        # about 60 runs, a few seconds
+#   errbudget check job.yaml      # runs the starting setting once
+#   errbudget run job.yaml        # about 60 runs, a few seconds
 name: stiff ODE, command-line solver
 
 command: python3 {{job_dir}}/solver.py --steps {{steps}} --tol {{tol}} --refresh {{refresh}}
@@ -22,6 +22,6 @@ cost: {regex: "work\\s*=\\s*([0-9]+)"}
 failure:
   failed_if_regex: ["Traceback"]
 
-workdir: knobs_runs
-output: knobs_result
+workdir: errbudget_runs
+output: errbudget_result
 keep_runs: false

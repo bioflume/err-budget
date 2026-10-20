@@ -5,7 +5,7 @@ __pycache__/
 .venv/
 build/
 dist/
-knobs_runs/
-knobs_result.json
-knobs_result.md
-examples/**/knobs_runs/
+errbudget_runs/
+errbudget_result.json
+errbudget_result.md
+examples/**/errbudget_runs/

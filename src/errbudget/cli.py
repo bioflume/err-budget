@@ -1,11 +1,11 @@
-"""The `knobs` command.
+"""The `errbudget` command.
 
-    knobs init [FILE]            write an annotated job file (default knobs.yaml)
-    knobs check FILE             validate the job file and run the starting setting once
-    knobs run FILE               tune; print the report; write FILE's output .json and .md
-    knobs report RESULT.json     print a saved result again
-    knobs runs FILE              show the run log of a job (what ran, what it gave)
-    knobs version
+    errbudget init [FILE]          write an annotated job file (default errbudget.yaml)
+    errbudget check FILE           validate the job file and run the starting setting once
+    errbudget run FILE             tune; print the report; write FILE's output .json and .md
+    errbudget report RESULT.json   print a saved result again
+    errbudget runs FILE            show the run log of a job (what ran, what it gave)
+    errbudget version
 """
 from __future__ import annotations
 
@@ -21,13 +21,13 @@ from .report import run_table
 
 
 def main(argv: list[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(prog="knobs",
+    ap = argparse.ArgumentParser(prog="errbudget",
                                  description="Choose a solver's numerical parameters for a target "
                                              "accuracy in one observable, at close to minimal cost.")
     sub = ap.add_subparsers(dest="cmd")
 
     p = sub.add_parser("init", help="write an annotated job file to start from")
-    p.add_argument("file", nargs="?", default="knobs.yaml")
+    p.add_argument("file", nargs="?", default="errbudget.yaml")
     p.add_argument("--force", action="store_true", help="overwrite an existing file")
 
     p = sub.add_parser("check", help="validate a job file and run the starting setting once")
@@ -41,7 +41,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--quiet", action="store_true", help="do not print each run")
     p.add_argument("--no-write", action="store_true", help="print only; write no result files")
 
-    p = sub.add_parser("report", help="print a saved result (knobs_result.json) again")
+    p = sub.add_parser("report", help="print a saved result (errbudget_result.json) again")
     p.add_argument("file")
     p.add_argument("--markdown", action="store_true")
 
@@ -58,25 +58,25 @@ def main(argv: list[str] | None = None) -> int:
     try:
         return _dispatch(a)
     except JobError as exc:
-        print(f"knobs: {exc}", file=sys.stderr)
+        print(f"errbudget: {exc}", file=sys.stderr)
         return 1
     except (ValueError, KeyError, TypeError, OSError) as exc:
-        print(f"knobs: {type(exc).__name__}: {exc}", file=sys.stderr)
+        print(f"errbudget: {type(exc).__name__}: {exc}", file=sys.stderr)
         return 1
     except KeyboardInterrupt:
-        print("\nknobs: interrupted; `knobs run` again resumes from the run log", file=sys.stderr)
+        print("\nerrbudget: interrupted; `errbudget run` again resumes from the run log", file=sys.stderr)
         return 130
 
 
 def _dispatch(a) -> int:
     if a.cmd == "version":
-        print(f"knobs {__version__} (engine {ENGINE_VERSION}, the article's version)")
+        print(f"errbudget {__version__} (engine {ENGINE_VERSION}, the article's version)")
         return 0
     if a.cmd == "init":
         path = init_job(a.file, overwrite=a.force)
         print(f"wrote {path}")
         print("next: edit it (the comments say what each part is), then")
-        print(f"      knobs check {path}   and   knobs run {path}")
+        print(f"      errbudget check {path}   and   errbudget run {path}")
         return 0
     if a.cmd == "check":
         job = load_job(a.file)
@@ -105,5 +105,5 @@ def _dispatch(a) -> int:
     return 2
 
 
-if __name__ == "__main__":                                   # python -m knobs.cli
+if __name__ == "__main__":                                   # python -m errbudget.cli
     sys.exit(main())

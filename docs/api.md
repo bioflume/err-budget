@@ -1,10 +1,10 @@
 # Python API
 
 ```python
-from knobs import Knob, tune, TuneResult, RunFailed
+from errbudget import Parameter, tune, TuneResult, RunFailed
 ```
 
-## `Knob(name, values, kind="discretisation", h=None, model="power")`
+## `Parameter(name, values, kind="discretisation", h=None, model="power")`
 
 One numerical parameter.
 
@@ -12,16 +12,16 @@ One numerical parameter.
 |---|---|
 | `name` | the keyword the solver function expects |
 | `values` | candidate settings, ordered coarse (cheap, inaccurate) to fine; at least two |
-| `kind` | `"discretisation"`, `"nested-solver"` or `"cost-only"` (`knobs.KINDS`) |
+| `kind` | `"discretisation"`, `"nested-solver"` or `"cost-only"` (`errbudget.KINDS`) |
 | `h` | optional map from a value to a refinement scalar that decreases as the setting gets finer. Default: the value itself for tolerances, `1/value` for counts (inferred when the values increase). An increasing list of values below 1 is refused as ambiguous: reverse it or give `h` |
 | `model` | `"power"` fits `e(h) = c (h^p - h_a^p)`; `"exponential"` fits `e(x) = c (exp(-b x) - exp(-b x_a))` in the setting `x` itself, for spectral or plane-wave cutoffs (values must increase) |
 
-## `tune(solver, knobs, target, observable=None, start=None, relative=False, screen=False, verbose=False, floor_probe=None, accept_unconverged=False, **engine)`
+## `tune(solver, params, target, observable=None, start=None, relative=False, screen=False, verbose=False, floor_probe=None, accept_unconverged=False, **engine)`
 
 | argument | |
 |---|---|
-| `solver` | a callable taking the knob names as keywords. It may return a number, a dict of named observables, or `(observables, cost)`. If no cost is returned, wall-clock time is used. A dict may carry `"converged": False`; the function may raise `RunFailed` |
-| `knobs` | the `Knob`s |
+| `solver` | a callable taking the parameter names as keywords. It may return a number, a dict of named observables, or `(observables, cost)`. If no cost is returned, wall-clock time is used. A dict may carry `"converged": False`; the function may raise `RunFailed` |
+| `params` | the `Parameter`s to tune |
 | `target` | the allowed error in the observable, absolute unless `relative` |
 | `observable` | which key of the returned dict to target; required when the dict has several entries |
 | `start` | the setting you would otherwise have used, as a dict; defaults to the middle of each list. The measurement is local, so this is where it begins |
@@ -30,7 +30,7 @@ One numerical parameter.
 | `verbose` | print every run |
 | `floor_probe` | two or more settings (dicts) refined beyond every candidate value; the spread of the observable over them is the round-off floor, and targets below `floor_factor` (10) times it are declined |
 | `accept_unconverged` | use runs reported as not converged as answers (version 1.1 behaviour) |
-| `**engine` | overrides of the default configuration `knobs.V121` (below) |
+| `**engine` | overrides of the default configuration `errbudget.V121` (below) |
 
 Returns a `TuneResult`.
 
@@ -62,8 +62,8 @@ not converge. The run is recorded with its cost and never proposed or fitted.
 
 ## Configurations
 
-`knobs.V121` (default), `knobs.V12`, `knobs.V11` are dicts of engine options;
-`knobs.CONFIGURATIONS` maps `"v1.2.1"`, `"v1.2"`, `"v1.1"` to them. The options that
+`errbudget.V121` (default), `errbudget.V12`, `errbudget.V11` are dicts of engine options;
+`errbudget.CONFIGURATIONS` maps `"v1.2.1"`, `"v1.2"`, `"v1.1"` to them. The options that
 distinguish them:
 
 | option | v1.1 | v1.2 | v1.2.1 | meaning |
@@ -77,31 +77,31 @@ distinguish them:
 
 Other engine options (`max_iter`, `fs_cap`, `floor_factor`, `unfit`, `walk_mode`,
 `phase2`, `screen_at`, `audit_factor`, `tau`, `drop`) are documented in
-`knobs/_core.py`; the last four exist to reproduce the article's ablations.
+`errbudget/_core.py`; the last four exist to reproduce the article's ablations.
 
 ## Job files from Python
 
 ```python
-from knobs import load_job, run_job
+from errbudget import load_job, run_job
 job = load_job("job.yaml")           # a JobSpec; JobSpec.from_dict(d, base_dir) for a dict
-result = run_job(job)                # the same as `knobs run`, returns the TuneResult
+result = run_job(job)                # the same as `errbudget run`, returns the TuneResult
 ```
 
-`knobs.runner.CommandSolver(job)` is the callable solver the job file describes, usable
+`errbudget.runner.CommandSolver(job)` is the callable solver the job file describes, usable
 with `tune` directly.
 
 ## The engine
 
-`knobs.run_protocol(lookup, ladders, anchor, eps, hs=..., kinds=..., **config)` is the
+`errbudget.run_protocol(lookup, ladders, anchor, eps, hs=..., kinds=..., **config)` is the
 protocol `tune` wraps: `lookup(index_tuple) -> (value, cost)`, ladders as lists of values,
-the start as a tuple of indices. `knobs.LocalBudget` is the local error budget at one
-anchor, `knobs.measure_floor(values)` the round-off floor, `knobs.screen(...)` the
+the start as a tuple of indices. `errbudget.LocalBudget` is the local error budget at one
+anchor, `errbudget.measure_floor(values)` the round-off floor, `errbudget.screen(...)` the
 preliminary sweep. These are what the article's replay scripts call; `tune` is the
 interface for everyone else.
 
 ## Test problems
 
-`knobs.problems` holds solvers with exact solutions, used by the tests and the examples:
+`errbudget.problems` holds solvers with exact solutions, used by the tests and the examples:
 `Burgers1D`, `Burgers2D`, `AdvectionDiffusion`, `ReactionDiffusion2D`, `DrivenCavity`,
 `MLHybridBurgers1D`, `make_synthetic`. Each has `run(theta) -> (observables, cost, wall, info)`
 and `exact_observables()`.

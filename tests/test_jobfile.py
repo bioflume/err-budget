@@ -6,11 +6,11 @@ import textwrap
 
 import pytest
 
-from knobs import load_job, run_job, JobSpec
-from knobs.jobfile import check_job, init_job
-from knobs.runner import (CommandSolver, JobError, RunFailed, extract_number, render,
+from errbudget import load_job, run_job, JobSpec
+from errbudget.jobfile import check_job, init_job
+from errbudget.runner import (CommandSolver, JobError, RunFailed, extract_number, render,
                           format_value)
-from knobs.cli import main
+from errbudget.cli import main
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 EXAMPLE = os.path.join(HERE, "..", "examples", "04_command_line")
@@ -69,7 +69,7 @@ def test_yaml_numbers_without_a_dot_are_numbers(tmp_path):
     assert job.target == 1e-3
     assert job.parameters[1]["values"] == [1e-2, 1e-4, 1e-6]
     assert job.start == {"n": 16}
-    assert job.knobs()[1].kind == "nested-solver"
+    assert job.to_parameters()[1].kind == "nested-solver"
 
 
 def test_json_and_toml_job_files(tmp_path):
@@ -227,7 +227,7 @@ def test_run_job_end_to_end_and_resume(tmp_path):
 
 
 def test_result_round_trip(tmp_path):
-    from knobs import TuneResult
+    from errbudget import TuneResult
     job = _job(tmp_path, output="res")
     r = run_job(job, log=None)
     back = TuneResult.load(str(tmp_path / "res.json"))
@@ -253,9 +253,9 @@ def test_cli_init_check_run_report(tmp_path, capsys, monkeypatch):
     assert "u_final = 0.54030" in out and "the job file works" in out
     assert main(["run", "job.yaml", "--quiet"]) == 0
     out = capsys.readouterr().out
-    assert "Target 0.0001 MET" in out and os.path.exists("knobs_result.json")
-    assert main(["report", "knobs_result.json"]) == 0
-    assert main(["report", "knobs_result.json", "--markdown"]) == 0
+    assert "Target 0.0001 MET" in out and os.path.exists("errbudget_result.json")
+    assert main(["report", "errbudget_result.json"]) == 0
+    assert main(["report", "errbudget_result.json", "--markdown"]) == 0
     assert main(["runs", "job.yaml", "--last", "3"]) == 0
     assert "steps" in capsys.readouterr().out
     assert main(["version"]) == 0
@@ -301,7 +301,7 @@ def test_changed_job_file_does_not_reuse_old_runs(tmp_path):
     # run ids keep counting across versions and with --fresh
     s3 = CommandSolver(job2, log=None, fresh=True)
     s3(n=1)
-    ids = [r["run_id"] for r in __import__("knobs.runner", fromlist=["_read_log"])._read_log(s.log_path)]
+    ids = [r["run_id"] for r in __import__("errbudget.runner", fromlist=["_read_log"])._read_log(s.log_path)]
     assert ids == ["0001", "0002", "0003"]
 
 
@@ -339,7 +339,7 @@ def test_validation_catches_engine_refusals_and_bad_fields(tmp_path):
     with pytest.raises(JobError, match="refinement direction"):
         JobSpec.from_dict(dict(base, parameters=[{"name": "r", "values": [0.9, 1.0, 1.2]}]))
     job = JobSpec.from_dict(dict(base, parameters=[{"name": "r", "values": [0.9, 1.0, 1.2], "h": "inverse"}]))
-    assert job.knobs()[0].h[0] > job.knobs()[0].h[-1]
+    assert job.to_parameters()[0].h[0] > job.to_parameters()[0].h[-1]
     for bad, frag in [
         (dict(base, parameters=[{"name": "r", "values": [1, 2], "h": [1.0]}]), "h must be"),
         (dict(base, parameters=[{"name": "r", "values": [1, 2]}], timeout="1h"), "timeout"),
@@ -374,7 +374,7 @@ def test_output_directory_is_created_and_log_table_survives_a_truncated_line(tmp
     assert os.path.exists(str(tmp_path / "results" / "deep" / "out.json")) and r.certified
     with open(os.path.join(job.workdir, "runs.jsonl"), "a") as f:
         f.write('{"run_id": "9999", "params": {"n": 1')          # a line cut off mid-write
-    from knobs.report import run_table
+    from errbudget.report import run_table
     assert "9999" not in run_table(os.path.join(job.workdir, "runs.jsonl"))
     s = CommandSolver(job, log=None)
     assert len(s.cache) == r.runs_used or len(s.cache) >= 1

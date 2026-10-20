@@ -4,7 +4,7 @@ import itertools
 import numpy as np
 import pytest
 
-from knobs import Knob, measure_floor, run_protocol, tune
+from errbudget import Parameter, measure_floor, run_protocol, tune
 
 
 def _sep(ladders, p=(2.0, 1.0)):
@@ -43,20 +43,20 @@ def test_failed_finer_run_is_not_treated_as_converged():
             assert abs(look(r["proposal"])[0] - exact) <= 0.03
 
 
-def test_exponential_knob_requires_increasing_values():
-    Knob("ecut", [10, 20, 30], model="exponential")
+def test_exponential_parameter_requires_increasing_values():
+    Parameter("ecut", [10, 20, 30], model="exponential")
     with pytest.raises(ValueError):
-        Knob("ecut", [30, 20, 10], model="exponential")
+        Parameter("ecut", [30, 20, 10], model="exponential")
     with pytest.raises(ValueError):
-        Knob("ecut", [10, 20, 30], model="gaussian")
+        Parameter("ecut", [10, 20, 30], model="gaussian")
 
 
 def test_exponential_model_recovers_exponential_convergence():
     ec = [8.0, 12.0, 16.0, 20.0, 24.0, 28.0]
     def solver(ecut, tol):
         return 1.0 + 0.5 * np.exp(-0.4 * ecut) + tol, ecut ** 1.5
-    res = tune(solver, [Knob("ecut", ec, model="exponential"),
-                        Knob("tol", [1e-2, 1e-4, 1e-6, 1e-8], kind="nested-solver")],
+    res = tune(solver, [Parameter("ecut", ec, model="exponential"),
+                        Parameter("tol", [1e-2, 1e-4, 1e-6, 1e-8], kind="nested-solver")],
                target=1e-4, start={"ecut": 16.0, "tol": 1e-4}, screen=False)
     assert res.certified
     q, _ = solver(**res.settings)
@@ -68,6 +68,6 @@ def test_tune_floor_probe_declines():
     def solver(n):
         calls["n"] += 1
         return 1.0 + 1.0 / n**2 + 1e-3 * (calls["n"] % 2), 1.0 * n
-    res = tune(solver, [Knob("n", [4, 8, 16, 32])], target=1e-4,
+    res = tune(solver, [Parameter("n", [4, 8, 16, 32])], target=1e-4,
                floor_probe=[{"n": 64}, {"n": 64}, {"n": 128}], screen=False)
     assert not res.certified

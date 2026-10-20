@@ -9,7 +9,7 @@ not want to pay for refinement that does not improve it. Choosing those paramete
 means either a convergence study for every parameter, at every setting of the others, or
 guessing on the safe side and overpaying, often by a factor of ten.
 
-`knobs` measures, at the setting you give it, how each parameter moves the observable and
+`errbudget` measures, at the setting you give it, how each parameter moves the observable and
 the cost, fits a convergence model to each, and walks to the cheapest setting whose
 estimated error is within your target. It then verifies that estimate at the proposed
 setting and refines or declines if the verification fails. The number of runs grows with
@@ -42,8 +42,8 @@ the number of parameters, not with the product of their candidate values.
   where the tool goes.
 - For a plane-wave or spectral cutoff, whose error decays exponentially rather than
   algebraically, say so (`model: exponential`); its values must increase.
-- A parameter that takes a few discrete, unordered values (a scheme name) is not a knob
-  in this sense; tune the others for each choice.
+- A parameter that takes a few discrete, unordered values (a scheme name) cannot be tuned
+  this way; tune the others for each choice.
 
 ## Choosing a target
 
@@ -130,13 +130,13 @@ work count) is better when runs share a machine. For parallel codes, use core-se
 
 The runner executes one run at a time, in the order the search needs (each setting
 depends on the previous ones). Put the parallelism inside the run: `mpirun -n 64 ...` in
-the command, and core-seconds as the cost. On a cluster, run `knobs run` inside one
+the command, and core-seconds as the cost. On a cluster, run `errbudget run` inside one
 allocation that is long enough for the whole tuning, or in a job that is resubmitted: the
 run log resumes the tuning where it stopped.
 
 ## Reproducibility
 
 Every run directory keeps `params.json`, `stdout.txt` and `stderr.txt`; `runs.jsonl` is
-the complete log; `knobs_result.json` holds the result with the search path and the
+the complete log; `errbudget_result.json` holds the result with the search path and the
 package version. The engine is deterministic: the same solver outputs give the same
 recommendation.

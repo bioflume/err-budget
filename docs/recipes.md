@@ -2,8 +2,8 @@
 
 These are starting points, not finished cases: the parameter lists, the output patterns
 and the file layouts are the ones the article used for the same codes (its repository,
-<https://github.com/bioflume/knobs-paper>, has the complete drivers). Adapt the command,
-the template files and the observable to your case, then `knobs check job.yaml`.
+<https://github.com/bioflume/errbudget-paper>, has the complete drivers). Adapt the command,
+the template files and the observable to your case, then `errbudget check job.yaml`.
 
 The pattern is always the same: a `template_dir` holding the case with `{{placeholders}}`
 in its input files, a `command` that runs the code inside the run directory, an
@@ -232,11 +232,11 @@ adds the run log and the result files.
 
 ## Checking a recipe
 
-1. `knobs check job.yaml` runs the starting setting once and prints the number it read and
+1. `errbudget check job.yaml` runs the starting setting once and prints the number it read and
    the cost. If it prints `FAILED`, look at `stdout.txt` and `stderr.txt` in the run
    directory it names: the command, the placeholders and the pattern are almost always the
    problem, and the fix takes a minute.
 2. Make the coarsest and the finest value of each parameter run once by hand (edit `start`
-   and run `knobs check`), so that you know the candidate lists are feasible.
-3. `knobs run job.yaml`. The first lines show the runs as they happen; an interrupted
+   and run `errbudget check`), so that you know the candidate lists are feasible.
+3. `errbudget run job.yaml`. The first lines show the runs as they happen; an interrupted
    tuning resumes with the same command.

@@ -1,7 +1,7 @@
 """Test problems with exact ground truth, for validating the method.
 
 Each exposes `exact_observables()` and a `run(theta)` returning observables and
-a cost, so any of them can be driven by `knobs.tune`.
+a cost, so any of them can be driven by `errbudget.tune`.
 """
 from .burgers1d import Burgers1D
 from .burgers2d import Burgers2D

@@ -1,11 +1,11 @@
 cff-version: 1.2.0
-message: "If you use knobs, please cite the article and the software release below."
-title: "knobs: choosing the numerical parameters of a black-box solver for a target accuracy in one observable"
+message: "If you use errbudget, please cite the article and the software release below."
+title: "errbudget: choosing the numerical parameters of a black-box solver for a target accuracy in one observable"
 type: software
-version: 1.3.0
-date-released: "2026-10-19"
+version: 2.0.0
+date-released: "2026-10-20"
 license: MIT
-repository-code: "https://github.com/bioflume/knobs"
+repository-code: "https://github.com/bioflume/errbudget"
 authors:
   - family-names: "Kabacaoğlu"
     given-names: "Gökberk"
@@ -19,7 +19,7 @@ keywords:
   - discretisation error
 preferred-citation:
   type: article
-  title: "knobs: choosing the numerical parameters of a black-box solver for a target accuracy in one observable"
+  title: "errbudget: choosing the numerical parameters of a black-box solver for a target accuracy in one observable"
   authors:
     - family-names: "Kabacaoğlu"
       given-names: "Gökberk"

@@ -1,13 +1,13 @@
 """Job files: a tuning described in YAML, JSON or TOML instead of Python.
 
-    knobs init                 # writes an annotated job file to start from
-    knobs check job.yaml       # validates it and runs your starting setting once
-    knobs run job.yaml         # tunes, prints the report, writes the result files
+    errbudget init             # writes an annotated job file to start from
+    errbudget check job.yaml   # validates it and runs your starting setting once
+    errbudget run job.yaml     # tunes, prints the report, writes the result files
 
 A job file says what to run (`command`, or `solver` for a Python function), which
 parameters to tune (`parameters`, each with its kind and candidate values), what to
 read from the output (`observable`) and how accurate it has to be (`target`).  The
-reference is in docs/job-files.md; `knobs init` writes one with every field explained.
+reference is in docs/job-files.md; `errbudget init` writes one with every field explained.
 """
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ import time
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
-from .api import Knob, TuneResult, tune, KINDS
+from .api import Parameter, TuneResult, tune, KINDS
 from ._core import run_protocol
 from .runner import CommandSolver, JobError, placeholders, format_value, dry_render, parse_method
 
@@ -53,11 +53,11 @@ class JobSpec:
     observable: dict                      # {"name", "source", "path", "parse", "regex"/"key"/"column", ...}
     command: str | None = None
     solver: str | None = None             # "module:function" or "file.py:function"
-    name: str = "knobs job"
+    name: str = "errbudget job"
     relative: bool = False
     start: dict = field(default_factory=dict)
     options: dict = field(default_factory=dict)
-    workdir: str = "knobs_runs"
+    workdir: str = "errbudget_runs"
     template_dir: str | None = None
     files: dict = field(default_factory=dict)
     render_files: list | None = None
@@ -66,7 +66,7 @@ class JobSpec:
     keep_runs: bool = True
     cost: dict | None = None
     failure: dict = field(default_factory=dict)
-    output: str = "knobs_result"
+    output: str = "errbudget_result"
     base_dir: str = "."
     source_path: str | None = None
 
@@ -267,12 +267,12 @@ class JobSpec:
         if errors:
             raise JobError("the job file cannot be used as written:\n  - " + "\n  - ".join(errors))
 
-        workdir = d.get("workdir", "knobs_runs")
+        workdir = d.get("workdir", "errbudget_runs")
         workdir = workdir if os.path.isabs(workdir) else os.path.join(base_dir, workdir)
-        output = d.get("output", "knobs_result")
+        output = d.get("output", "errbudget_result")
         output = output if os.path.isabs(output) else os.path.join(base_dir, output)
         job = cls(parameters=params, target=float(target), observable=obs, command=command,
-                  solver=solver, name=str(d.get("name", "knobs job")),
+                  solver=solver, name=str(d.get("name", "errbudget job")),
                   relative=bool(d.get("relative", False)), start=start, options=options,
                   workdir=workdir, template_dir=tdir, files=files,
                   render_files=d.get("render_files"), env=dict(d.get("env") or {}),
@@ -280,13 +280,13 @@ class JobSpec:
                   cost=cost, failure=failure, output=output, base_dir=base_dir,
                   source_path=source_path)
         try:                       # the engine's own checks on the candidate lists (direction, h)
-            job.knobs()
+            job.to_parameters()
         except (ValueError, TypeError, KeyError) as exc:
             raise JobError(f"the job file cannot be used as written:\n  - {exc}") from None
         return job
 
     # ---------------------------------------------------------------- building
-    def knobs(self) -> list[Knob]:
+    def to_parameters(self) -> list[Parameter]:
         out = []
         for p in self.parameters:
             h = None
@@ -297,7 +297,7 @@ class JobSpec:
             elif isinstance(p.get("h"), list):
                 table = {v: float(x) for v, x in zip(p["values"], p["h"])}
                 h = lambda v, table=table: table[v]
-            out.append(Knob(p["name"], p["values"], kind=p["kind"], h=h, model=p.get("model", "power")))
+            out.append(Parameter(p["name"], p["values"], kind=p["kind"], h=h, model=p.get("model", "power")))
         return out
 
     def tune_kwargs(self) -> dict:
@@ -369,9 +369,9 @@ def run_job(job: JobSpec, log: Callable[[str], None] | None = print, fresh: bool
             write: bool = True) -> TuneResult:
     """Tune the job's solver; write <output>.json and <output>.md unless write=False."""
     solver = CommandSolver(job, log=log, fresh=fresh)
-    knobs = job.knobs()
+    params = job.to_parameters()
     t0 = time.time()
-    result = tune(solver, knobs, **job.tune_kwargs())
+    result = tune(solver, params, **job.tune_kwargs())
     elapsed = time.time() - t0
     if write:
         os.makedirs(os.path.dirname(os.path.abspath(job.output)), exist_ok=True)
@@ -411,11 +411,11 @@ def check_job(job: JobSpec, log: Callable[[str], None] = print, run: bool = True
         f"{'' if out.get('converged', True) else '   (reported as not converged)'}")
     if job.relative:
         log(f"relative target {job.target:g} means an absolute error of {job.target * abs(out[name]):.3g}")
-    log("the job file works; next:  knobs run " + (job.source_path or "job.yaml"))
+    log("the job file works; next:  errbudget run " + (job.source_path or "job.yaml"))
     return True
 
 
-TEMPLATE_YAML = '''# knobs job file -- edit the five numbered parts, then:  knobs check {fname}  and  knobs run {fname}
+TEMPLATE_YAML = '''# errbudget job file -- edit the five numbered parts, then:  errbudget check {fname}  and  errbudget run {fname}
 name: my simulation
 
 # 1. The command that runs ONE simulation.  {{{{name}}}} is replaced by a parameter value.
@@ -487,15 +487,15 @@ options:
   #   - {{steps: 1600, tol: 1e-12, refresh: 1}}    # round-off floor; targets near it are
   #   - {{steps: 3200, tol: 1e-12, refresh: 1}}    # declined instead of searched for
 
-workdir: knobs_runs            # one directory per run, plus runs.jsonl (the log; a stopped
+workdir: errbudget_runs        # one directory per run, plus runs.jsonl (the log; a stopped
                                # tuning resumes from it)
-output: knobs_result           # writes knobs_result.json and knobs_result.md
+output: errbudget_result       # writes errbudget_result.json and errbudget_result.md
 timeout: 3600                  # seconds per run
 keep_runs: true
 '''
 
 
-def init_job(path: str = "knobs.yaml", overwrite: bool = False) -> str:
+def init_job(path: str = "errbudget.yaml", overwrite: bool = False) -> str:
     """Write an annotated job file; returns the path."""
     if os.path.exists(path) and not overwrite:
         raise JobError(f"{path} exists; choose another name or pass --force")

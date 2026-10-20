@@ -1,7 +1,7 @@
 """On a solver whose error we impose, the measurement must recover it."""
 import numpy as np
-from knobs import LocalBudget
-from knobs.problems import make_synthetic
+from errbudget import LocalBudget
+from errbudget.problems import make_synthetic
 
 def test_recovers_imposed_orders_and_residual():
     P, Q = (2.0, 1.0, 1.0), (1.0, 1.0, 0.0)
