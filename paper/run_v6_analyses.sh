@@ -106,6 +106,8 @@ before() {
     step A19_estimate $PY exp66_estimate_v12.py
     step A20_margin $PY exp67_margin_v12.py
     step A21_transfer_floor $PY exp64_transfer_floor.py
+    step A21b_numbers $PY exp80_v6_numbers.py
+    step A21c_bound_check $PY exp81_bound_check.py
     step A22_figures $PY exp63_figures.py
     step A23_tables $PY exp70_tables.py
     report

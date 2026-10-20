@@ -4,6 +4,43 @@ All notable changes to `knobs`. The article describes version 1.2.1; the compari
 with earlier versions that used to be in the article are recorded here, with the
 script that reproduces each.
 
+## Revision 5 of the article (program unchanged: 1.2.1)
+
+The program did not change. The article and its scripts did:
+
+- **A proposition on when the estimate bounds the error** (Section 4.8 of the article).
+  Every charge of the budget is the sum of a geometric series that continues a measured or
+  fitted change (Lemma 1). The estimate bounds the error when, along every parameter, the
+  changes beyond the current value decay at least as fast as one of these series, the
+  changes of all parameters have one common sign, and the non-additive part of the error is
+  at most (F_s - 1) times the sum of the errors along the parameters (Proposition 1). With
+  exact separable power laws, the program accepts if and only if the finest setting meets
+  0.8 eps and otherwise declines as `not_reached` (Corollary 1).
+  `paper/exp81_bound_check.py` (step A21c) checks the three statements against the code and
+  runs the synthetic counterexamples of the Remark: same-sign higher-order terms (missed by
+  up to 8%) and a bilinear interaction with a parameter at its finest value (up to 28%).
+- **The article reports the released program only.** The comparisons with earlier versions
+  moved to Section S15 of the supplement and to the sections below: the version-1.1 column
+  of Table 4, the version rows of Table 5 (the frozen program stays, as the joint-check
+  threshold 3 rho), the version-1.1 column of Table 6, the version-1.1 columns of Table A.1,
+  and the version comparisons in the text. `exp70_tables.py` writes the supplement tables
+  `tab_versions_summary.tex`, `tab_versions.tex` and `tab_estimate_v11.tex`.
+- **Results restated in terms of the components of the program.** `exp71_dfg2_detail.py`
+  adds v1.2.1 with cancellation credited (2D-2 drag at 3e-3: 116 of 172 accepted starts
+  miss, all at one setting, where a mesh error of +1.46 eps and a time-step error of
+  -1.20 eps are credited as cancelling while the true error is +1.03 eps) and prints the
+  budget there. `exp80_v6_numbers.py` adds the ABINIT and Quantum ESPRESSO budgets of the
+  fits alone, without the local-order check, and (part 5) the budget at the two L5 settings
+  that miss with a constant safety factor: at the finest mesh, where the local-order check
+  has nothing to check, the fits underestimate the error by a factor of 1.35, and only the
+  gated factor lifts the estimate (0.997 eps with the constant factor, 1.11 eps with the
+  gated one, true error 1.08 eps).
+- **Section 9 and the program summary** describe the package (<https://github.com/bioflume/knobs>,
+  1.3.0, engine 1.2.1, the `knobs` command and job files) and this repository with its three
+  reproduction tiers. The 2D-2 grid takes about 40 CPU-hours (revision 4 said 24).
+- `paper/README.md`: steps A21b and A21c, and the map of every result of revision 5 to its
+  script. `reproduce.sh`: the running time of the 2D-2 grid.
+
 ## Revision 4 of the article (program unchanged: 1.2.1)
 
 The program did not change. The repository did:
@@ -40,10 +77,18 @@ The program did not change. The repository did:
     run.
   - Default configuration: `knobs.V121`. `knobs.V12` reproduces the frozen version
     (git tag `v1.2.0-frozen`, copy in `paper/frozen_src`).
-- Effect on the development problems (`paper/pooled.py v1.2.1`):
-  - 17,610 starts accepted instead of 17,612;
-  - no misses in either version;
-  - 12 of 53 cells change.
+- Effect on the development problems (`paper/pooled.py v1.2.1`; supplement, Section S15):
+  - 17,610 starts accepted instead of 17,612; the only cell whose number of acceptances
+    changes is the GROMACS mixed-precision energy at 1e-4 (69 instead of 71);
+  - no misses in either version, and the median of the cell medians of the penalty stays
+    at 2.26;
+  - 12 of 53 cells change their returned settings. The largest changes are on L2, where
+    the larger joint check measures interactions that stop the search at finer settings:
+    the median penalty of the dissipation at 3e-3 rises from 1.22 to 2.16, and the worst
+    penalty of the energy at 7e-3 from 15.6 to 61.9.
+- Effect on the held-out problem H2 (not a held-out result, because the amendment was made
+  after the replay): the nine misses of v_max at 3e-2 disappear without a change of
+  acceptances; the median penalty of u_min at 3e-2 rises from 1.00 to 1.69.
 
 ## 1.2.0 — revision 3 of the article (frozen for the held-out tests)
 
@@ -75,7 +120,38 @@ below can be re-run.
 
 ### Measured effect (pooled over all development cases, `paper/pooled.py`)
 
-See Table 3 of the article and `paper/data/pooled_*.json`.
+See Tables S9 and S10 of the supplement (revision 5) and `paper/data/pooled_*.json`.
+Version 1.1, replayed in the full mode on the same stored runs:
+
+- accepted 19,888 starts and missed from 456 of them, which returned seven distinct
+  settings in five cells: the y-coordinate of the L5 minimum at 3e-4 (348), the ABINIT
+  energy at 1e-2 and 3e-3 (48 and 36, all from the starts at 8 Ha), the Quantum ESPRESSO
+  energy at 1e-4 (23) and LAMMPS at 8,000 ions and 1e-6 (1); 21 of its accepted settings
+  were unconverged runs; median penalty 1.54;
+- the L5 and ABINIT misses are the two symptoms the local-order check detects (an error
+  that stalls between grids, a list that starts before the asymptotic range); the Quantum
+  ESPRESSO misses come from an exponential fit that extrapolates too far, and the gated
+  safety factor alone removes them (v1.1+gated); the LAMMPS miss is caught by more than one
+  of the new checks;
+- versions 1.2 and 1.2.1 remove every miss at the cost of 2,278 acceptances and a median
+  penalty about 1.5 times higher (2.26).
+
+Elsewhere (supplement, Section S15):
+
+- held-out H1 and H2 with version 1.1: every start of H1 accepted at four targets without
+  a miss; on H2, with unconverged runs accepted, 105 of 105 starts accepted in eight cells,
+  with misses for v_max at 3e-2 (18 starts, one setting) and u_min at 3e-2 (3);
+- OpenFOAM 2D-2 below the admission threshold: for the drag at 3e-3, version 1.1 missed
+  from 168 of 195 accepted starts (median penalty 0.5) and version 1.2 with cancellation
+  credited from 115; for the lift at 1e-2, version 1.1 missed from 196 of 198;
+- GROMACS mixed precision without the floor probe: version 1.1 missed from 6 of 9 accepted
+  starts at 1e-5 (up to 1.58 eps) and from 6 of 6 at 3e-6 (up to 3.2 eps);
+- ABINIT: the budget of version 1.1 at 12 Ha and 3^3 k-points gives 99.8% of the energy
+  error to the cutoff and 99.7% of the force error to the k-points; with the power-law
+  model, version 1.1 declined every energy target and accepted the force only from the 48
+  starts at 24 and 28 Ha with the two coarsest k-meshes;
+- the estimate of version 1.1 was within the tightest graded target at 29 settings whose
+  true error exceeded it, all for the y-coordinate of the L5 minimum (Table S11).
 
 ## 1.1.0 — revision 2
 

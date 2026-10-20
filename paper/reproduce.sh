@@ -14,7 +14,9 @@
 # Wall-clock costs (LAMMPS, GROMACS and ABINIT timings) depend on the machine;
 # OpenFOAM, Quantum ESPRESSO and the 8-parameter L3 study (CPU time) also
 # depend on it; every other number is machine-independent.  About 16 CPU-hours
-# on 2 cores.
+# on 2 cores, plus about 40 CPU-hours for the DFG 2D-2 grid, which is built
+# separately (dfg2d2_job/).  The analyses of the current article then run with
+# run_v6_analyses.sh before.
 set -e
 cd "$(dirname "$0")"
 mkdir -p data figures logs

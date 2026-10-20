@@ -65,10 +65,12 @@ configurations run at once.
 | A14 | `exp73_decline_reasons.py` | — | Section 6.1; a `TOTAL` line |
 | A15 | `exp62_heldout.py` | `data/heldout_replay.json` | Table 5: H1 and H2 with the frozen program; `frozen program verified (sha256 34dd3f44...)`; every row carries `distinct` |
 | A16 | `exp62_heldout.py --current` | `data/heldout_replay_current.json` | the same with v1.2.1 |
-| A17 | `exp71_dfg2_detail.py` | — | Section 7.2, every 2D-2 target and configuration |
+| A17 | `exp71_dfg2_detail.py` | — | Section 7.2, every 2D-2 target and configuration, including v1.2.1 with cancellation credited (drag at 3e-3: `accepted 172 missed 116`) and the budget at the one setting it returns outside the target (r_k/eps 1.456 and -1.199 for the mesh and the time step, true error +1.031) |
 | A18–A21 | `exp65_misdeclare_v12.py`, `exp66_estimate_v12.py`, `exp67_margin_v12.py`, `exp64_transfer_floor.py` | — | Supplement S3, Appendix A, Appendix B, Supplement S2 (rerun because the admitted ABINIT cells may change after A03) |
+| A21b | `exp80_v6_numbers.py` | — | numbers that no table holds: the error budgets of ABINIT and Quantum ESPRESSO (v1.2.1, its fits alone, and v1.1), the Phase 1 gains of Fig. 3, the L5 joint check with cancellation credited, the L5 streamfunction minimum, and (part 5) the two L5 settings that miss with a constant safety factor: estimate/eps -0.997 with it and -1.112 with the gated factor, true error -1.080 |
+| A21c | `exp81_bound_check.py` | — | Section 4.8 (about 3 minutes): Lemma 1 against the code, `largest relative difference 2.3e-14` at three alignments; Corollary 1 `violated at 0 starts` at all five targets; same-sign higher-order terms `missed 400` at 3e-3, worst 1.083; opposite-sign terms `\|E\| > \|Ehat\| at 0`; the bilinear interaction `at 0 with the joint check and at 16 without it` for b = -60 and -40; at a parameter's finest value `missed 240`, worst 1.281 |
 | A22 | `exp63_figures.py` | `figures/fig_search.pdf`, `figures/fig_search_steps.txt` | Fig. 3: 14 steps, Phase 1 ends at step 8, final setting (32, 1e-4, 1e-7, 10), error 0.225 ε, 146 runs; Fig. 4, Fig. 5 |
-| A23 | `exp70_tables.py` | `figures/tab_*.tex`, including `tab_ablation_v12.tex` | every table of the article |
+| A23 | `exp70_tables.py` | `figures/tab_*.tex`, including `tab_ablation_v12.tex` and, for Section S15 of the supplement, `tab_versions_summary.tex`, `tab_versions.tex` and `tab_estimate_v11.tex` | every table of the article and of the supplement; the tables of the article carry no columns of earlier versions |
 
 The deterministic replay of the GROMACS tensor (A11) must give exactly:
 
@@ -169,6 +171,50 @@ legacy/              scripts of earlier versions of the article, not needed
 | OpenFOAM | v1912 (`apt install openfoam`); `simpleFoam`, `pimpleFoam`, `blockMesh`, `checkMesh` |
 | Quantum ESPRESSO | 6.7 (`apt install quantum-espresso`), run with the preloaded shim `snfix.c` (needs `gcc`) |
 
+
+## Where each result of the current article comes from (revision 5, version 1.2.1)
+
+Section, table and figure numbers are those of revision 5 of the article and its
+supplement. Every step is in `run_v6_analyses.sh before` (the step is given in brackets).
+The tables of the article report the released program only; the comparisons with earlier
+versions are in Section S15 of the supplement and in `../CHANGELOG.md`.
+
+| Result | Script [step] | Output |
+|---|---|---|
+| Table 4 (pooled), totals in Section 6.1 and in the abstract | `pooled.py v1.2.1` [A05], then `exp70_tables.py` [A23] | `data/pooled_v1.2.1.json`, `figures/tab_pooled.tex` |
+| Table 5 (ablation, including the frozen program's joint-check threshold); Sections 6.1 and 8 | `pooled.py v1.2.1-* v1.2` [A05], then `exp70_tables.py` | `figures/tab_ablation.tex` |
+| Section 4.8: Lemma 1, Proposition 1, Corollary 1 and the synthetic tests of the Remark | `exp81_bound_check.py` [A21c] | stdout |
+| Section 4.8, Remark: the L5 settings that miss with a constant safety factor | `exp80_v6_numbers.py`, part 5 [A21b] | stdout |
+| Section 4: the central rules of the specification | `../tests/test_spec_v121.py` [A02] | — |
+| Section 4.6 and Fig. 3: Phase 1 gains of the cost-only moves | `exp80_v6_numbers.py`, part 2 [A21b] | stdout |
+| Section 6.1: low-order acceptances, step cap | `summ.py v1.2.1 v1.2 v1.1` [A06] | stdout |
+| Section 6.1: decline reasons | `exp73_decline_reasons.py` [A14] | stdout |
+| Section 6.1: accepting unconverged runs | `exp79_unconverged.py` [A13] | `data/unconverged_v6.json` |
+| Section 6.1: the L5 joint check with cancellation credited; the L5 streamfunction minimum | `exp80_v6_numbers.py`, parts 3 and 4 [A21b] | stdout |
+| Table 3 and Section 5.2: accounting of every grid | `exp76_accounting.py` [A09] | `data/accounting_v6.json` |
+| Table 6 and Section 6.2: held-out H1, H2 (H3 after the cluster run) | `exp62_heldout.py` [A15, frozen], `exp62_heldout.py --current` [A16] | `data/heldout_replay*.json`, `figures/tab_heldout.tex` |
+| Table 7, Table S6, Sections 6.3 and 6.4: baselines and calibration cost | `exp72_baselines_pooled.py` [A07], then `exp70_tables.py` | `data/baselines_v6.json`, `figures/tab_baselines_compact.tex`, `figures/tab_baselines_full.tex` |
+| Table S4: LAMMPS and GROMACS double precision against the baselines | `exp72_baselines_pooled.py LMP-20 LMP-40 LMP-64 GMX-d` [A08] | `figures/tab_lmpbase.tex` |
+| Fig. 3, Fig. 4, Fig. 5 | `exp63_figures.py` [A22] | `figures/fig_search.pdf`, `figures/fig_l5_stall.pdf`, `figures/fig_dfg_mesh.pdf` |
+| Section 7.1: when the GAMG tolerance acts | `exp77_reltol_2d1.py` [A10] | `data/reltol_2d1.json` |
+| Section 7.2 and the Remark of Section 4.8: 2D-2 below the admission threshold, with and without credit for cancellation | `exp71_dfg2_detail.py` [A17] | stdout |
+| Section 7.3: PPPM grid and cost split (needs the LAMMPS Python module) | `exp74_pppm_mechanism.py` [A04] | `data/pppm_mechanism_v6.json` |
+| Section 7.3: GROMACS round-off floor | `exp78_gromacs_floor_v121.py` [A11] | `data/gromacs_floor_v121.json` |
+| Section 7.3, Section S4, Table S3: floor sensitivity and probe cost | `exp58_floor_sensitivity.py v1.2.1` [A12] | `figures/tab_floor.tex` |
+| Section 7.4: ABINIT reference uncertainty (needs ABINIT) | `exp75_abinit_reference.py` [A03] | `data/abinit_reference_v6.json` |
+| Section 7.4: error budgets of ABINIT and Quantum ESPRESSO (program and fits alone); ABINIT errors along the cutoff | `exp80_v6_numbers.py`, part 1 [A21b] | stdout |
+| Section 7.4: ABINIT misses without the local-order check | `pooled.py v1.2.1-nolocal` [A05] | `data/pooled_v1.2.1-nolocal.json` (`miss_list`) |
+| Appendix A, Table A.1 | `exp66_estimate_v12.py` [A19], then `exp70_tables.py` | `figures/tab_estimate.tex` |
+| Appendix B | `exp67_margin_v12.py` [A20] | stdout |
+| Section 3.2, Section S2, Table S1 | `exp64_transfer_floor.py` [A21] | `figures/tab_transfer.tex` |
+| Section S3, Table S2: misdeclared classes | `exp65_misdeclare_v12.py` [A18] | `figures/tab_misdeclare.tex` |
+| Section S15, Tables S9 and S10: earlier versions over every cell | `pooled.py v1.2 v1.1+gated v1.1` [A05], then `exp70_tables.py` | `figures/tab_versions_summary.tex`, `figures/tab_versions.tex` |
+| Section S15, Table S11: accuracy of the estimate of version 1.1 | `exp66_estimate_v12.py` [A19], then `exp70_tables.py` | `figures/tab_estimate_v11.tex` |
+| Section S15: held-out problems, 2D-2, GROMACS and ABINIT with earlier versions | `exp62_heldout.py` [A15], `exp71_dfg2_detail.py` [A17], `exp78_gromacs_floor_v121.py` [A11], `exp80_v6_numbers.py` [A21b] | stdout |
+| Cluster studies J1–J5 | `../hamilton/` (see its README), then `run_v6_analyses.sh after` | `../hamilton/results/` |
+
+The studies of Sections S8–S14 of the supplement were not repeated with version 1.2.1;
+their scripts are listed under revision 2 below.
 
 ## Where each result of revision 3 came from (version 1.2.1)
 

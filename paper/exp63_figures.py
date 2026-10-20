@@ -1,4 +1,4 @@
-"""Figures of revision 3:
+"""Figures of revisions 3 and 4:
   fig_dfg_mesh.pdf    OpenFOAM 2D-1: error against mesh level at the tightest and at the
                       tutorial solver settings (drag, pressure difference, lift), with
                       the version-1.1 post-processing for the drag
@@ -45,7 +45,7 @@ def fig_dfg():
         ax.loglog(na, e2, "-s", color=ORANGE, ms=3.5, label="tutorial solver settings")
         if ob == "cd" and "cd_vm" in T[tight(0)][0]:
             e3 = [abs(T[tight(a)][0]["cd_vm"] - ex) / abs(ex) for a in range(len(na))]
-            ax.loglog(na, e3, ":", color=INK2, lw=1.0, label="tightest, v1.1 post-processing")
+            ax.loglog(na, e3, ":", color=INK2, lw=1.0, label="tightest, vertex-mean cell centers")
         fine = os.path.join(C.D, "dfg_fine.json")
         if os.path.exists(fine):
             import json
@@ -53,8 +53,11 @@ def fig_dfg():
             nf = [int(n) for n in sorted(fj, key=int) if int(n) > max(na)]
             if nf:
                 ef = [abs(fj[str(n)]["obs"][ob] - ex) / abs(ex) for n in nf]
+                # the dashed line starts at the last level of the study grid; only the runs
+                # beyond it (iteration limit raised to 20,000) get open markers
                 ax.loglog([na[-1]] + nf, [e1[-1]] + ef, "--o", color=BLUE, ms=3.5, mfc="white",
-                          lw=1.0, label="tightest, beyond the study grid")
+                          lw=1.0, markevery=list(range(1, len(nf) + 1)),
+                          label="tightest, beyond the study grid")
         ax.set_title(lab, fontsize=8, color=INK)
         ax.set_xlabel("cells per quarter cylinder, $n_\\mathrm{arc}$")
         allx = sorted(set(na) | set(nf if os.path.exists(fine) and nf else []))
@@ -89,9 +92,13 @@ def fig_search():
         path.append(final)
     steps = []
     for n, a in enumerate(path):
+        # Revision 4 (second pass): fs_cap=1.25 and the error models, as run_protocol builds
+        # the budget; without fs_cap the base safety factor was 2 or 3 and every estimate
+        # marker was drawn about 1.6 times too high
         lb = LocalBudget(look, LAD, a, hs=c.HS, kinds=c.KINDS, local_order=True,
                          resid_margin=cfg["resid_margin"], resolution=cfg["res_frac"] * eps,
-                         cancel_rule=cfg["cancel_rule"], joint_res=cfg["joint_res"])
+                         cancel_rule=cfg["cancel_rule"], joint_res=cfg["joint_res"],
+                         fs_cap=1.25, models=c.models)
         lb.sweep(); lb.per_knob_error(); lb.refine_path(n_levels=0)
         if np.isfinite(lb.E0) and abs(lb.E0) <= eps:      # as the program does
             lb.joint_correct(look, eps, cancel_rule=cfg["cancel_rule"])
@@ -100,9 +107,10 @@ def fig_search():
     # Phase 1 ends at the first setting whose estimate is within the target
     est_all = [s_[2] for s_ in steps]
     p1_end = next((n for n, v in enumerate(est_all) if np.isfinite(v) and v <= 1.0), len(steps) - 1)
-    names = ["mesh $n_\\mathrm{arc}$", "residualControl", "GAMG tolerance"]
-    cols = [BLUE, ORANGE, AQUA]
-    marks = ["o", "s", "^"]
+    names = ["mesh $n_\\mathrm{arc}$", "residualControl", "GAMG tolerance",
+             "coarsest level (cost-only)"]
+    cols = [BLUE, ORANGE, AQUA, YELLOW]
+    marks = ["o", "s", "^", "v"]
     fig, ax = plt.subplots(figsize=(7.0, 2.7))
     x = np.arange(len(steps))
     TOP, BOT = 3e3, 1e-3
@@ -115,7 +123,7 @@ def fig_search():
     ax.text(0.5 * p1_end, TOP * 0.25, "Phase 1", fontsize=6, color=INK2, ha="center")
     if cost_pass:
         ax.text(len(steps) - 1, TOP * 0.25, "cost-only\npass", fontsize=5.5, color=INK2, ha="center")
-    for k in range(3):
+    for k in range(4):
         v = np.array([s_[1][k] for s_ in steps], float)
         fin = np.isfinite(v) & (v > 0)
         ax.plot(x[fin], clip(v[fin]), marks[k], color=cols[k], ms=4, mfc="white", mew=1.2,
@@ -136,9 +144,9 @@ def fig_search():
     ax.text(len(steps) - 0.6, 1.15, "target", fontsize=6, color=INK2, ha="right", va="bottom")
     ax.set_yscale("log"); ax.set_ylim(BOT, TOP)
     ax.set_xticks(x)
-    ax.set_xticklabels([f"{LAD[0][a[0]]}\n{LAD[1][a[1]]:.0e}\n{LAD[2][a[2]]:.0e}\n{LAD[3][a[3]]}"
-                        for a, *_ in steps], fontsize=5)
-    ax.set_xlabel("setting at each step ($n_\\mathrm{arc}$, residualControl, GAMG tolerance, "
+    ax.set_xticklabels([f"{n}\n\n{LAD[0][a[0]]}\n{LAD[1][a[1]]:.0e}\n{LAD[2][a[2]]:.0e}\n{LAD[3][a[3]]}"
+                        for n, (a, *_) in enumerate(steps)], fontsize=5)
+    ax.set_xlabel("step, and the setting at each step ($n_\\mathrm{arc}$, residualControl, GAMG tolerance, "
                   "nCellsInCoarsestLevel)", fontsize=6.5)
     ax.set_ylabel("error / target")
     ax.legend(fontsize=6, loc="upper left", bbox_to_anchor=(1.01, 1.0), ncol=1)
