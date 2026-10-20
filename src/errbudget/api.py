@@ -6,7 +6,7 @@ accurate you need it.  You get back a setting, an error estimate, and a statemen
 of whether the target was met -- plus, importantly, which parameters are being
 refined for nothing.
 
-    from errbudget import Knob, tune
+    from errbudget import Parameter, tune
 
     def run(N, dt, rtol):
         ...                      # your solver
@@ -14,9 +14,9 @@ refined for nothing.
 
     result = tune(
         run,
-        [Knob("N",    [32, 64, 128, 256],       kind="discretisation", h=lambda v: 1/v),
-         Knob("dt",   [1e-2, 5e-3, 2.5e-3],     kind="discretisation"),
-         Knob("rtol", [1e-4, 1e-6, 1e-8, 1e-10], kind="nested-solver")],
+        [Parameter("N",    [32, 64, 128, 256],       kind="discretisation", h=lambda v: 1/v),
+         Parameter("dt",   [1e-2, 5e-3, 2.5e-3],     kind="discretisation"),
+         Parameter("rtol", [1e-4, 1e-6, 1e-8, 1e-10], kind="nested-solver")],
         observable="drag", target=1e-3, start={"N": 64, "dt": 5e-3, "rtol": 1e-10})
 
     print(result)
@@ -40,7 +40,7 @@ class RunFailed(Exception):
     as unusable and never proposes or fits to it."""
 
 
-class Knob:
+class Parameter:
     """One numerical parameter of the solver.
 
     Parameters
@@ -80,10 +80,10 @@ class Knob:
         if model == "exponential":
             x = [float(v) for v in values]
             if not all(x[i + 1] > x[i] for i in range(len(x) - 1)):
-                raise ValueError(f"knob {name!r}: an exponential-model knob must "
+                raise ValueError(f"parameter {name!r}: an exponential-model parameter must "
                                  f"increase from coarse to fine, got {values!r}")
             if len(values) < 2:
-                raise ValueError(f"knob {name!r}: need at least two candidate values")
+                raise ValueError(f"parameter {name!r}: need at least two candidate values")
             if kind not in KINDS:
                 raise ValueError(f"kind must be one of {KINDS}, got {kind!r}")
             self.name, self.values, self.kind, self.h = name, list(values), kind, x
@@ -91,7 +91,7 @@ class Knob:
         if kind not in KINDS:
             raise ValueError(f"kind must be one of {KINDS}, got {kind!r}")
         if len(values) < 2:
-            raise ValueError(f"knob {name!r}: need at least two candidate values")
+            raise ValueError(f"parameter {name!r}: need at least two candidate values")
         self.name, self.values, self.kind = name, list(values), kind
         if h is not None:
             self.h = [float(h(v)) for v in self.values]
@@ -104,7 +104,7 @@ class Knob:
                 # written fine-to-coarse.  Guessing here silently accepts a
                 # reversed ladder, so refuse and ask.
                 raise ValueError(
-                    f"knob {name!r}: cannot infer the refinement direction from "
+                    f"parameter {name!r}: cannot infer the refinement direction from "
                     f"{self.values!r}. Values increase but are below 1, which "
                     f"looks like a tolerance ladder written fine-to-coarse. "
                     f"Reverse it, or pass h=... explicitly.")
@@ -112,7 +112,7 @@ class Knob:
             self.h = list(1.0 / v) if increasing else list(v)
         if not all(self.h[i + 1] < self.h[i] for i in range(len(self.h) - 1)):
             raise ValueError(
-                f"knob {name!r}: values must run coarse -> fine, so the refinement "
+                f"parameter {name!r}: values must run coarse -> fine, so the refinement "
                 f"scalar decreases. Got h = {self.h}. Pass h=... if the default "
                 f"(value, or 1/value for increasing values) is wrong.")
 
@@ -120,7 +120,7 @@ class Knob:
         return len(self.values)
 
     def __repr__(self):
-        return f"Knob({self.name!r}, {self.values!r}, kind={self.kind!r})"
+        return f"Parameter({self.name!r}, {self.values!r}, kind={self.kind!r})"
 
 
 @dataclass
@@ -181,7 +181,7 @@ class TuneResult:
         return "\n".join(L)
 
 
-def tune(solver: Callable, knobs: Sequence[Knob], target: float,
+def tune(solver: Callable, params: Sequence[Parameter], target: float,
          observable: str | None = None, start: dict | None = None,
          relative: bool = False, screen: bool = False, verbose: bool = False,
          floor_probe: Sequence[dict] | None = None,
@@ -191,10 +191,10 @@ def tune(solver: Callable, knobs: Sequence[Knob], target: float,
 
     Parameters
     ----------
-    solver : callable taking the knob names as keywords.  It may return
+    solver : callable taking the parameter names as keywords.  It may return
         a scalar, a dict of named observables, or a ``(value, cost)`` pair.  If
         no cost is returned, wall-clock time is measured.
-    knobs : the parameters to tune.
+    params : the parameters to tune.
     target : allowed error in the observable.  Absolute unless ``relative``.
     observable : which key of the returned dict to target.  Required if the
         solver returns a dict with more than one entry.
@@ -220,20 +220,20 @@ def tune(solver: Callable, knobs: Sequence[Knob], target: float,
         below ``floor_factor`` (default 10) times it are declined without
         searching.  Recommended for single-precision or otherwise noisy codes.
     """
-    names = [k.name for k in knobs]
-    ladders = [k.values for k in knobs]
-    hs = [k.h for k in knobs]
-    kinds = [k.kind for k in knobs]
-    models = [getattr(k, "model", "power") for k in knobs]
+    names = [k.name for k in params]
+    ladders = [k.values for k in params]
+    hs = [k.h for k in params]
+    kinds = [k.kind for k in params]
+    models = [getattr(k, "model", "power") for k in params]
 
     if start is None:
-        start_idx = tuple(len(k) // 2 for k in knobs)
+        start_idx = tuple(len(k) // 2 for k in params)
     else:
         missing = set(start) - set(names)
         if missing:
-            raise ValueError(f"start mentions unknown knobs: {sorted(missing)}")
+            raise ValueError(f"start mentions unknown parameters: {sorted(missing)}")
         start_idx = []
-        for k in knobs:
+        for k in params:
             v = start.get(k.name, k.values[len(k) // 2])
             if v not in k.values:
                 raise ValueError(f"start value {v!r} for {k.name!r} is not among "
@@ -321,11 +321,11 @@ def tune(solver: Callable, knobs: Sequence[Knob], target: float,
     settings = {names[i]: ladders[i][j] for i, j in enumerate(idx)}
 
     # which parameter holds the error, and which are being refined for nothing
-    rk = getattr(lb, "rk", [np.nan] * len(knobs))
+    rk = getattr(lb, "rk", [np.nan] * len(params))
     finite = [abs(v) for v in rk if np.isfinite(v)]
     tot = sum(finite) or 1.0
     shares = {names[i]: (abs(rk[i]) / tot if np.isfinite(rk[i]) else 0.0)
-              for i in range(len(knobs))}
+              for i in range(len(params))}
     limiting = max(shares, key=shares.get) if shares else None
     if limiting is not None and shares[limiting] < 0.5:
         limiting = None
@@ -337,12 +337,12 @@ def tune(solver: Callable, knobs: Sequence[Knob], target: float,
     # reports parameters as wasted that the method then declines to loosen,
     # which is advice contradicting itself.
     wasted = []
-    for k in range(len(knobs)):
+    for k in range(len(params)):
         coarsest = idx[k]
         for j in range(idx[k] - 1, -1, -1):
             if j not in lb.sampled[k]:
                 break
-            trial = tuple(j if i == k else idx[i] for i in range(len(knobs)))
+            trial = tuple(j if i == k else idx[i] for i in range(len(params)))
             if abs(lb.model_error(trial)) <= eps:
                 coarsest = j
             else:

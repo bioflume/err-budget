@@ -11,7 +11,7 @@ import math
 import numpy as np
 import pytest
 
-from errbudget import Knob, tune
+from errbudget import Parameter, tune
 from errbudget._core import LocalBudget, run_protocol
 
 
@@ -209,4 +209,4 @@ def test_stabilised_exact_solution_agrees_where_the_spectral_route_is_valid():
 def test_ladder_direction_guard():
     """Claim (S10): an ambiguous ladder direction is refused, not guessed."""
     with pytest.raises(ValueError, match="cannot infer the refinement direction"):
-        Knob("tol", [1e-8, 1e-6, 1e-4])
+        Parameter("tol", [1e-8, 1e-6, 1e-4])

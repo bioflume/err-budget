@@ -4,7 +4,7 @@ import itertools
 import numpy as np
 import pytest
 
-from errbudget import Knob, RunFailed, V11, V12, run_protocol, tune
+from errbudget import Parameter, RunFailed, V11, V12, run_protocol, tune
 
 KINDS2 = ["discretisation", "discretisation"]
 
@@ -63,8 +63,8 @@ def test_unconverged_runs_are_failed_runs():
             return {"q": q + 0.5, "converged": False}
         return {"q": q, "converged": True}
 
-    res = tune(solver, [Knob("n", [8, 16, 32, 64]),
-                        Knob("tol", tols, kind="nested-solver")],
+    res = tune(solver, [Parameter("n", [8, 16, 32, 64]),
+                        Parameter("tol", tols, kind="nested-solver")],
                target=2e-3, observable="q", start={"n": 16, "tol": 1e-4})
     assert res.certified and res.settings["tol"] != 1e-2
 
@@ -74,7 +74,7 @@ def test_runfailed_is_recorded_not_raised():
         if n == 64:
             raise RunFailed("out of memory")
         return 1.0 + 1.0 / n**2
-    res = tune(solver, [Knob("n", [8, 16, 32, 64])], target=2e-3, start={"n": 16})
+    res = tune(solver, [Parameter("n", [8, 16, 32, 64])], target=2e-3, start={"n": 16})
     assert res.settings["n"] != 64
 
 

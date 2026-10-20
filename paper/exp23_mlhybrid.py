@@ -1,6 +1,6 @@
 """Does the certificate survive a learned component?"""
 import numpy as np
-from errbudget import Knob, tune
+from errbudget import Parameter, tune
 from errbudget.problems import MLHybridBurgers1D
 
 p = MLHybridBurgers1D()
@@ -11,11 +11,11 @@ def solver(N, steps, gmres_tol, model_level):
                                  gmres_tol=gmres_tol, model_level=model_level))
     return obs, cost
 
-KN = [Knob("N", [32, 64, 128, 256, 512]),
-      Knob("steps", [25, 50, 100, 200, 400]),
-      Knob("gmres_tol", [1e-2, 1e-4, 1e-6, 1e-8, 1e-10], kind="nested-solver"),
-      Knob("model_level", [0, 1, 2, 3, 4, 5], kind="discretisation",
-           h=lambda L: p.surrogate_error(L))]
+KN = [Parameter("N", [32, 64, 128, 256, 512]),
+      Parameter("steps", [25, 50, 100, 200, 400]),
+      Parameter("gmres_tol", [1e-2, 1e-4, 1e-6, 1e-8, 1e-10], kind="nested-solver"),
+      Parameter("model_level", [0, 1, 2, 3, 4, 5], kind="discretisation",
+                h=lambda L: p.surrogate_error(L))]
 
 print("the surrogate's own error does not go to zero:")
 for L in [0, 1, 2, 3, 4, 5]:

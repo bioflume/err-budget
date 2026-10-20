@@ -5,13 +5,13 @@
 Every earlier rung was 1D with cheap linear algebra, so the cost half of the
 claim was never really tested.  Here each implicit step is a sparse 2D system
 that has to be preconditioned, and the preconditioner's own parameter joins the
-knobs.
+others.
 
 Ground truth by the method of manufactured solutions: we choose u, derive f
 symbolically, and the observables follow from the chosen u exactly.  No fine
 reference run is used as a stand-in for truth anywhere.
 
-Five knobs, and the fifth is a different species:
+Five parameters, and the fifth is a different species:
 
     N, steps, newton_tol, gmres_tol     trade accuracy against cost
     ilu_drop                            trades cost against cost
@@ -21,7 +21,7 @@ high; a tighter one does the reverse, so its cost curve has an interior
 minimum.  It has essentially no effect on the answer, because the GMRES
 stopping criterion -- not the preconditioner -- sets the accuracy.  Users
 routinely tune it as though it controlled accuracy.  A method that claims to
-say which knob matters should be able to say that this one does not.
+say which parameter matters should be able to say that this one does not.
 """
 from __future__ import annotations
 
@@ -91,7 +91,7 @@ class Burgers2D:
         ntol = float(theta["newton_tol"])
         gtol = float(theta["gmres_tol"])
         drop = float(theta["ilu_drop"])
-        # three further knobs, defaulted so earlier studies are unaffected
+        # three further parameters, defaulted so earlier studies are unaffected
         restart = int(theta.get("gmres_restart", 50))
         pfreq = int(theta.get("precond_freq", 1))     # refactorise every pfreq steps
         nmax = int(theta.get("newton_max", self.max_newton))

@@ -11,10 +11,12 @@ The program's name describes what it returns, an error budget. Only names change
 
 - **Package and imports.** `src/knobs` moved to `src/errbudget`, and every script, test,
   example and cluster job imports `errbudget` (`errbudget.V121`, `errbudget.tune`, ...).
-  `_core.py`, the engine, is byte-identical; elsewhere in the package only docstrings and
-  the header line of the printed report (`errbudget: recommendation for ...`) changed. The
-  class `Knob` and the arguments named `knobs` keep their names: they name a numerical
-  parameter, not the program.
+  `_core.py`, the engine, is byte-identical; elsewhere in the package only docstrings, the
+  header line of the printed report (`errbudget: recommendation for ...`) and the names
+  below changed.
+- **`Knob` is now `Parameter`**, the second argument of `tune` is called `params`, and the
+  error messages say "parameter". The examples, the tests and `paper/exp23_mlhybrid.py` use
+  the new name; the frozen program keeps `Knob`.
 - **Environment variables** `KNOBS_*` are now `ERRBUDGET_*` (for example `ERRBUDGET_JOBS`,
   `ERRBUDGET_ROOT`, `ERRBUDGET_SMOKE`). On Hamilton, `config.sh` now defaults to the
   micromamba environment `errbudget` and the scratch directory `/nobackup/$USER/errbudget`;
@@ -30,11 +32,11 @@ The program's name describes what it returns, an error budget. Only names change
   before, and registers it as `errbudget` for the replay scripts.
 - **Metadata.** `.zenodo.json` now gives version 1.2.1 and the affiliation of the article
   (Department of Computer Science).
-- **Checked:** the tests give the same results as before the rename; `exp70_tables.py`
+- **Checked:** all 52 tests pass; `exp70_tables.py`
   reproduces every table of revision 5 byte for byte; `exp62_heldout.py` verifies the frozen
   program and writes the same `data/heldout_replay*.json`, with the frozen program and with
-  `--current`. With `--current` it prints a new source hash, because the docstrings of the
-  package changed; this hash was never registered, and the frozen one is unchanged.
+  `--current`. With `--current` it prints a new source hash, because names and docstrings in
+  the package changed; this hash was never registered, and the frozen one is unchanged.
 
 ## Revision 5 of the article (program unchanged: 1.2.1)
 

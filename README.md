@@ -16,9 +16,9 @@ the library repository instead: <https://github.com/bioflume/errbudget>. It is t
 engine with a command-line tool, job files and a user guide.
 
 **The name.** The program was called `knobs` until revision 5 of the article (October
-2026). Only the name changed: the package moved from `src/knobs` to `src/errbudget`, the
-engine (`_core.py`) is byte-identical, and every table of the article is reproduced byte
-for byte (`CHANGELOG.md`). The records fixed by the pre-registration keep the old name:
+2026). Only names changed: the package moved from `src/knobs` to `src/errbudget`, and the
+class `Knob` is now `Parameter`. The engine (`_core.py`) is byte-identical, and every table
+of the article is reproduced byte for byte (`CHANGELOG.md`). The records fixed by the pre-registration keep the old name:
 `PREREGISTRATION.md`, the tags `v1.2.0-frozen` and `v1.2.1`, the frozen copy
 `paper/frozen_src/knobs` and the registered J5 driver `hamilton/J5_abc3d/abc_hpc.py`.
 
@@ -74,17 +74,17 @@ fail cleanly without it and the rest goes on. The article's own environment (Pyt
 ## The program
 
 ```python
-from errbudget import Knob, tune
+from errbudget import Parameter, tune
 
 result = tune(solver,
-              [Knob("N",    [32, 64, 128, 256],        kind="discretisation"),
-               Knob("dt",   [1e-2, 5e-3, 2.5e-3],      kind="discretisation"),
-               Knob("rtol", [1e-4, 1e-6, 1e-8, 1e-10], kind="nested-solver")],
+              [Parameter("N",    [32, 64, 128, 256],        kind="discretisation"),
+               Parameter("dt",   [1e-2, 5e-3, 2.5e-3],      kind="discretisation"),
+               Parameter("rtol", [1e-4, 1e-6, 1e-8, 1e-10], kind="nested-solver")],
               observable="drag", target=1e-3, start={"N": 64, "dt": 5e-3, "rtol": 1e-10})
 print(result)
 ```
 
-`src/errbudget/api.py` is the public interface (`Knob`, `tune`, `TuneResult`, `RunFailed`),
+`src/errbudget/api.py` is the public interface (`Parameter`, `tune`, `TuneResult`, `RunFailed`),
 `src/errbudget/_core.py` the measurement, the local-order and joint checks and the search,
 `src/errbudget/_asymptotic.py` the balance law of the secondary result, and
 `src/errbudget/problems/` the test problems with exact solutions. The default configuration is

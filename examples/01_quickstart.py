@@ -4,7 +4,7 @@ The solver here is 1D viscous Burgers, which has an exact solution via the
 Cole-Hopf transformation, so we can check afterwards whether the answer really
 met the target.  `tune` itself never sees the exact solution.
 """
-from errbudget import Knob, tune
+from errbudget import Parameter, tune
 from errbudget.problems import Burgers1D
 
 problem = Burgers1D(nu=0.05, T=1.0)
@@ -17,18 +17,18 @@ def solver(N, steps, newton_tol, gmres_tol):
     return obs, cost
 
 
-knobs = [
-    Knob("N",          [32, 64, 128, 256, 512],            kind="discretisation"),
-    Knob("steps",      [25, 50, 100, 200, 400],            kind="discretisation"),
-    Knob("newton_tol", [1e-2, 1e-4, 1e-6, 1e-8, 1e-10],    kind="nested-solver"),
-    Knob("gmres_tol",  [1e-2, 1e-4, 1e-6, 1e-8, 1e-10],    kind="nested-solver"),
+params = [
+    Parameter("N",          [32, 64, 128, 256, 512],            kind="discretisation"),
+    Parameter("steps",      [25, 50, 100, 200, 400],            kind="discretisation"),
+    Parameter("newton_tol", [1e-2, 1e-4, 1e-6, 1e-8, 1e-10],    kind="nested-solver"),
+    Parameter("gmres_tol",  [1e-2, 1e-4, 1e-6, 1e-8, 1e-10],    kind="nested-solver"),
 ]
 
 # A configuration a cautious user might well have picked: a middling mesh, and
 # both tolerances wound right down because tighter feels safer.
 start = dict(N=128, steps=100, newton_tol=1e-10, gmres_tol=1e-10)
 
-result = tune(solver, knobs, target=1e-3, observable="dissipation", start=start)
+result = tune(solver, params, target=1e-3, observable="dissipation", start=start)
 print(result)
 
 # --- check it against the exact solution (the tool did not get to see this) ---
