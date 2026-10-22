@@ -18,6 +18,10 @@ Only names change. The engine is the same: `_core.py` is byte for byte that of 1
   <https://github.com/bioflume/errbudget-paper>.
 - Kept: the engine's own names (for example `LocalBudget.per_knob_error`) and the job-file
   format, which already used `parameters`.
+- **Project pages.** A logo; a documentation site built from `docs/` and published at
+  <https://bioflume.github.io/errbudget/>; a contributing guide, a code of conduct, a security
+  policy, issue forms and a pull-request template. CI also runs on Python 3.14, and the
+  `dev` extra installs SymPy, which some of the test problems need.
 
 The entries below keep the old name.
 

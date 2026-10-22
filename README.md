@@ -1,6 +1,21 @@
-# errbudget
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/errbudget-logo-dark.svg">
+    <img alt="errbudget" src="docs/assets/errbudget-logo.svg" width="360">
+  </picture>
+</p>
 
-Choose a solver's numerical parameters to hit a target accuracy **in the quantity you care about**, at close to the cheapest cost that achieves it.
+<p align="center">
+  Choose a solver's numerical parameters to hit a target accuracy <b>in the quantity you
+  care about</b>, at close to the cheapest cost that achieves it.
+</p>
+
+<p align="center">
+  <a href="https://github.com/bioflume/errbudget/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/bioflume/errbudget/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://bioflume.github.io/errbudget/"><img alt="Documentation" src="https://img.shields.io/badge/docs-bioflume.github.io%2Ferrbudget-blue"></a>
+  <img alt="Python 3.9+" src="https://img.shields.io/badge/python-3.9%2B-blue">
+  <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue"></a>
+</p>
 
 You give it something that runs your solver (a Python function or a shell command), the
 numerical parameters with their candidate values, the observable you want, and how
@@ -162,6 +177,8 @@ preliminary sweep (fewer runs, more expensive recommendations).
 
 ## Documentation
 
+The documentation is at <https://bioflume.github.io/errbudget/>. The same pages are in `docs/`:
+
 | | |
 |---|---|
 | `docs/guide.md` | how it works, how to choose values and a target, how to read the report, when it declines |
@@ -179,7 +196,8 @@ pip install "errbudget @ git+https://github.com/bioflume/errbudget"         # Py
 ```
 
 Python 3.9 or later, NumPy and SciPy. From a clone: `pip install -e ".[dev]"` and `pytest`
-(about 80 s; the tests encode the article's claims, not just code health).
+(about 80 s; the tests encode the article's claims, not just code health). To contribute, see
+[CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Citing
 
