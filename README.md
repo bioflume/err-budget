@@ -22,8 +22,8 @@ numerical parameters with their candidate values, the observable you want, and h
 accurate you need it. It gives you a setting, an error estimate, and a statement of which
 parameter is limiting the accuracy and which ones you are refining for nothing.
 
-It does not needs adjoint, access to the solver's source, and analysis of your particular
-problem. It costs runs proportional to the *number* of parameters rather. It was tested on OpenFOAM, Quantum ESPRESSO, ABINIT, GROMACS and LAMMPS, driven
+It does not need an adjoint, access to the solver's source, and analysis of your particular
+problem. It costs runs proportional to the *number* of parameters. It was tested on OpenFOAM, Quantum ESPRESSO, ABINIT, GROMACS and LAMMPS, driven
 only through their input files, and on test problems with exact solutions; the article
 reports every miss and its cause.
 
@@ -142,11 +142,11 @@ certify an answer without computing a better one, so part of that is irreducible
 back if you are running parameter studies or ensembles; it does not pay back for a single
 run.
 
-**It does not guess (and declines) when it can find it.** Where an observable converges irregularly, or a target
+**It does not guess (and declines) when it cannot find it.** Where an observable converges irregularly, or a target
 can only be met through a lucky cancellation, it declines and says which parameter it could
 not bound. Extend that parameter's list of values and run it again.
 
-**The certificate is measured, there is not any proof.** You get a computed estimate with a calibrated
+**The certificate is measured only.** You get a computed estimate with a calibrated
 margin and a stopping rule that is re-verified at every step. On four test problems with
 exact solutions and on five production codes the article reports every miss and its cause.
 That is stronger than a heuristic and weaker than a proof.
