@@ -1,18 +1,16 @@
 # errbudget
 
-Choose a solver's numerical parameters to hit a target accuracy **in the quantity you
-actually care about**, at close to the cheapest cost that achieves it.
+Choose a solver's numerical parameters to hit a target accuracy **in the quantity you care about**, at close to the cheapest cost that achieves it.
 
 You give it something that runs your solver (a Python function or a shell command), the
 numerical parameters with their candidate values, the observable you want, and how
 accurate you need it. It gives you a setting, an error estimate, and a statement of which
 parameter is limiting the accuracy and which ones you are refining for nothing.
 
-It needs no adjoint, no access to the solver's source, and no analysis of your particular
-problem. It costs runs proportional to the *number* of parameters rather than to their
-product. It was tested on OpenFOAM, Quantum ESPRESSO, ABINIT, GROMACS and LAMMPS, driven
+It does not needs adjoint, access to the solver's source, and analysis of your particular
+problem. It costs runs proportional to the *number* of parameters rather. It was tested on OpenFOAM, Quantum ESPRESSO, ABINIT, GROMACS and LAMMPS, driven
 only through their input files, and on test problems with exact solutions; the article
-reports every miss and its cause (see *Citing*).
+reports every miss and its cause.
 
 ```bash
 pip install "errbudget[yaml] @ git+https://github.com/bioflume/errbudget"
@@ -97,15 +95,13 @@ the tool asks of you.
 | `nested-solver` | tolerance or iteration limit of a solver nested inside the outer problem | Newton tolerance, linear-solver relative tolerance, iteration caps, Krylov restart, SCF or constraint tolerance |
 | `cost-only` | changes cost but not the answer, often with an interior cost optimum | preconditioner fill or drop tolerance, how often a Jacobian or preconditioner is refreshed, neighbour-list rebuild frequency |
 
-**Why you declare it rather than the tool inferring it.** We tested inference and it scores
+**Errbudget does not infer your parameters.** We tested inference and it scores
 3–4 out of 8. The obstacle is structural: a nested-solver parameter that is *masked*,
-currently buried under another parameter's error, is indistinguishable from one that does
-nothing at all. In one of our tests even the mesh measured zero influence, because a loose
+currently buried under another parameter's error, is indistinguishable from one that does not do anything at all. In one of our tests even the mesh measured zero influence, because a loose
 Newton tolerance dominated so completely that refining the mesh changed nothing.
 
-**The tool falsifies what it cannot infer.** The only declaration that is unsafe to get
-wrong is calling an influential parameter `cost-only`, and that is exactly what a sweep
-detects: with `screen: true` the preliminary sweep tests every declaration and the report
+**Errbudget falsifies what cannot be inferred.** The only declaration that is unsafe to get
+wrong is calling an influential parameter `cost-only`, and that is detected by a sweep: with `screen: true` the preliminary sweep tests every declaration and the report
 lists the ones its measurements contradict. Without the sweep, a parameter declared
 `cost-only` is only moved to a cheaper value when the observable stays the same to within
 5 % of the target, so a wrong declaration costs efficiency, not correctness.
@@ -131,14 +127,14 @@ certify an answer without computing a better one, so part of that is irreducible
 back if you are running parameter studies or ensembles; it does not pay back for a single
 run.
 
-**It declines rather than guesses.** Where an observable converges irregularly, or a target
+**It does not guess (and declines) when it can find it.** Where an observable converges irregularly, or a target
 can only be met through a lucky cancellation, it declines and says which parameter it could
 not bound. Extend that parameter's list of values and run it again.
 
-**The certificate is measured, not proven.** You get a computed estimate with a calibrated
+**The certificate is measured, there is not any proof.** You get a computed estimate with a calibrated
 margin and a stopping rule that is re-verified at every step. On four test problems with
 exact solutions and on five production codes the article reports every miss and its cause.
-That is stronger than a heuristic and weaker than a proof, and we would rather say so.
+That is stronger than a heuristic and weaker than a proof.
 
 ## Failed and unconverged runs
 
