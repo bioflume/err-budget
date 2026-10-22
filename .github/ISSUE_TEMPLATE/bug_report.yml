@@ -1,0 +1,64 @@
+name: Bug report
+description: errbudget crashed, gave a wrong answer, or did not do what its documentation says.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a problem. A small case that shows it is the most useful thing you can send.
+
+        A result that declines to certify a setting is not necessarily a bug: errbudget declines when it cannot bound a parameter's error, and the report says which parameter (see the [documentation](https://bioflume.github.io/errbudget/)). Please report a security problem privately instead, as the [security policy](https://github.com/bioflume/errbudget/security/policy) describes.
+  - type: textarea
+    id: what-you-ran
+    attributes:
+      label: What you ran
+      description: >-
+        The job file, or the Python code that calls errbudget, and the command you ran.
+        If your solver cannot be shared, say what it is and how errbudget calls it.
+        The text is shown exactly as you paste it.
+      placeholder: |
+        # job.yaml
+        command: ./my_solver --mesh {{mesh}} --tol {{tol}}
+        ...
+
+        # the command
+        errbudget run job.yaml
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: >-
+        What errbudget printed or did. Paste the output or the error message in full,
+        including any traceback, between two lines of three backticks (```` ``` ````) so
+        that it is shown exactly as printed. For a tuning, the output of
+        `errbudget runs job.yaml` (what each run gave) helps too.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+      description: >-
+        What you expected instead, and why (for example an exact solution, or a
+        convergence study of your own).
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: errbudget version
+      description: Run `errbudget version` (or `python -m errbudget version`) and paste what it prints.
+      placeholder: errbudget 2.0.0 (engine 1.2.1, the article's version)
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Python version and operating system
+      description: NumPy and SciPy versions help too.
+      placeholder: Python 3.12.3, NumPy 2.1.3, SciPy 1.14.1, Ubuntu 24.04
+    validations:
+      required: true

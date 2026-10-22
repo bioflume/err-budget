@@ -1,0 +1,31 @@
+name: Feature request
+description: Suggest something errbudget should do, or do differently.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A change to the engine (`src/errbudget/_core.py`) changes results that the article reports, so it follows the [engine rule](https://github.com/bioflume/errbudget/blob/main/CONTRIBUTING.md#the-engine-rule). A feature in the tooling around it (the command, job files, the runner, the report) does not need this.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: >-
+        What you are trying to do, and what stops you. A concrete case (the solver, its
+        parameters, the observable and the target) helps.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: >-
+        What errbudget could do about it, for example a new option, a job-file field or a
+        change to the report.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: Other ways you have considered, including what you do now.
