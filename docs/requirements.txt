@@ -1,0 +1,4 @@
+# To build the documentation: pip install -r docs/requirements.txt
+sphinx>=7
+myst-parser>=3
+furo>=2024.8.6

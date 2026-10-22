@@ -5,6 +5,7 @@ __pycache__/
 .venv/
 build/
 dist/
+docs/_build/
 errbudget_runs/
 errbudget_result.json
 errbudget_result.md
