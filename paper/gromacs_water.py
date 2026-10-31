@@ -70,10 +70,13 @@ class GromacsWater:
         self.ntmpi = ntmpi              # thread-MPI ranks (parallel timing study)
         self.dir = tempfile.mkdtemp(prefix="errbudget_gmx_")
         self.nmol = 216 * nbox ** 3
-        subprocess.run(
+        g = subprocess.run(
             [binary, "genconf", "-f", os.path.join(os.environ.get("GMXDATA", "/usr/share/gromacs"), "top", "spc216.gro"),
              "-nbox", str(nbox), str(nbox), str(nbox), "-o", "conf.gro"],
-            cwd=self.dir, capture_output=True, check=True)
+            cwd=self.dir, capture_output=True)
+        if g.returncode != 0:
+            raise RuntimeError(f"{binary} genconf failed with exit status {g.returncode}:\n"
+                               + g.stderr.decode(errors="replace")[-1500:])
         with open(os.path.join(self.dir, "topol.top"), "w") as f:
             f.write(TOP.format(nmol=self.nmol))
 

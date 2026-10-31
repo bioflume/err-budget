@@ -5,6 +5,24 @@ article. The article describes version 1.2.1; the comparisons with earlier versi
 used to be in the article are recorded here, with the script that reproduces each. The
 entries below the rename keep the old name, as it was at the time.
 
+## Cluster jobs: J2 inlet fix and reruns (November 2026; program unchanged: 1.2.1)
+
+Only the cluster drivers changed (`hamilton/`, and failure messages in `paper/qe_silicon.py`,
+`paper/gromacs_water.py`, `paper/exp55_parallel.py`); `src/errbudget` is unchanged.
+
+- **J2: analytic inlet on mapped meshes.** `mapFields -consistent` also maps fixedValue
+  patches, so every mesh initialised from a coarser one ran with the coarser mesh's inlet
+  profile (flow rate off by up to 0.4 %). `spin()` restores and checks the analytic inlet
+  after mapping and records it; meshes and results from before the fix are refused.
+- **J2: spin-ups.** One SLURM job per mesh with a one-day limit; runs per mesh after their
+  spin-up; a launch failure (no time step) no longer halves the spin-up time step;
+  `SPUN_UP` records the mesh actually mapped from; `analyse_j2.py` reports whether the
+  reference runs converged and refuses an unconverged main reference.
+- **Task farm and monitoring.** Stale `error.txt` kept as `error_prev.txt`, attempts logged,
+  started-but-unfinished tasks counted; `coreh.sh` and `status.sh` report core-hours.
+- **J3, J4.** A run with no output raises (retried, with the program's error message); the
+  smoke tests check finite results.
+
 ## Rename: `knobs` is now `errbudget` (program unchanged: 1.2.1)
 
 The program's name describes what it returns, an error budget. Only names changed:

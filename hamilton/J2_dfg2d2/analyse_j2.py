@@ -58,8 +58,12 @@ def observe(z, t0, R, W):
     return obs, cost, conv
 
 
+REF_STATUS = {}
+
+
 def load():
     tensor, refs = {}, {}
+    old = []
     LAD = [J.NA, J.DT, J.OUTER, J.PTOL, RELAX, WIN]
     for task in J.TASKS():
         d = os.path.join(RES, task["id"])
@@ -68,7 +72,13 @@ def load():
             os.path.join(d, "result.json")) else None
         z = np.load(f) if os.path.exists(f) else None
         th = task["theta"]
+        if res is not None and res.get("inlet") != "analytic":
+            old.append(task["id"])
         if task["id"].startswith("ref_"):
+            if res is not None:
+                REF_STATUS[task["id"]] = dict(failed=res.get("failed"),
+                                              nonconverged_steps=res.get("nonconverged_steps"),
+                                              max_outer=res.get("max_outer"))
             if z is not None:
                 refs[task["id"]] = {(R, W): observe(z, res["t0"], R, W)
                                     for R in RELAX for W in WIN if R + W <= J.T_TOT + 1e-9}
@@ -84,6 +94,11 @@ def load():
                                    dict(converged=False))
                 else:
                     tensor[idx] = (o[0], o[1], dict(converged=o[2]))
+    if old and os.environ.get("ERRBUDGET_J2_ALLOW_OLD") != "1":
+        raise SystemExit(f"{len(old)} results come from before the inlet fix of November 2026 "
+                         f"(no inlet = analytic in result.json), e.g. {old[0]}: their mapped meshes "
+                         "had the coarser mesh's inlet profile.  Move them aside and rerun "
+                         "(ERRBUDGET_J2_ALLOW_OLD=1 analyses them anyway, for diagnosis only).")
     return LAD, tensor, refs
 
 
@@ -161,6 +176,14 @@ if __name__ == "__main__":
         pickle.dump(dict(LAD=LAD, tensor=tensor, refs=refs), open(os.path.join(OUT, "j2_tensor.pkl"), "wb"))
         raise SystemExit(f"the reference run {key0} is missing or has no complete shedding period "
                          f"in its window R {RW[0]:g}, W {RW[1]:g}")
+    print("reference runs (failed / steps at the outer-iteration limit / largest outer count):")
+    for k in sorted(REF_STATUS):
+        st = REF_STATUS[k]
+        print(f"  {k}: failed {bool(st['failed'])}, {st['nonconverged_steps']} steps at the limit, "
+              f"max outer {st['max_outer']}")
+    if REF_STATUS.get(key0, {}).get("nonconverged_steps"):
+        raise SystemExit(f"the reference run {key0} has steps at the outer-iteration limit: "
+                         "it is not converged; report it and do not grade against it")
     R0 = refs[key0][RW][0]
     var = []
     for k, v in refs.items():

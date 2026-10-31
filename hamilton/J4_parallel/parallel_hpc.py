@@ -48,6 +48,9 @@ def run(task, out):
             th = tuple(E.LADL[k][j] for k, j in enumerate(idx))
             e, c = E.lmp_run(th, task["R"])
             t[idx] = ({"energy_per_ion": e}, c)
+        if not any(np.isfinite(c) for _, c in t.values()):
+            # no setting ran at all: an infrastructure failure, not a result (error.txt, retried)
+            raise RuntimeError(f"no LAMMPS run succeeded on {task['R']} ranks; see this task's log")
         pickle.dump(t, open(os.path.join(out, "tensor.pkl"), "wb"))
     else:
         os.environ["GMXDATA"] = os.path.join(os.environ.get("GMX_DOUBLE_PREFIX", ""), "share", "gromacs")
@@ -56,7 +59,10 @@ def run(task, out):
         if task["kind"] == "gmx_ref":
             vals = []
             for th in [p.reference(), dict(p.reference(), fourierspacing=0.06, pme_order=10)]:
-                vals.append(p.run(th)[0]["potential"])
+                obs, c, w, info = p.run(th)
+                if not np.isfinite(obs["potential"]):
+                    raise RuntimeError(f"GROMACS reference run failed: {info}")
+                vals.append(obs["potential"])
             json.dump(dict(QS=vals[0], spread=abs(vals[1] - vals[0])),
                       open(os.path.join(out, "ref.json"), "w"))
         else:
@@ -67,5 +73,7 @@ def run(task, out):
             for idx in grid:
                 obs, c, w, info = p.run({NG[k]: LADG[k][j] for k, j in enumerate(idx)})
                 t[idx] = (obs, c)
+            if not any(np.isfinite(c) for _, c in t.values()):
+                raise RuntimeError(f"no GROMACS run succeeded on {task['R']} ranks; last: {info}")
             pickle.dump(t, open(os.path.join(out, "tensor.pkl"), "wb"))
     json.dump(dict(task), open(os.path.join(out, "result.json"), "w"))

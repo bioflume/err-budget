@@ -40,6 +40,14 @@ def run_one(mod, t):
     os.makedirs(out, exist_ok=True)
     if done(mod, t):
         return "done"
+    err = os.path.join(out, "error.txt")
+    if os.path.exists(err):
+        # from an earlier attempt: kept as error_prev.txt, so that a later time-out is not
+        # reported with an old error
+        os.replace(err, os.path.join(out, "error_prev.txt"))
+    with open(os.path.join(out, "attempts.txt"), "a") as fa:
+        fa.write(f"{time.strftime('%Y-%m-%d %H:%M:%S')} job {os.environ.get('SLURM_JOB_ID', '-')} "
+                 f"array {os.environ.get('SLURM_ARRAY_JOB_ID', '-')}_{os.environ.get('SLURM_ARRAY_TASK_ID', '-')}\n")
     t0 = time.time()
     try:
         mod.run(t, out)
@@ -65,7 +73,10 @@ def main():
     elif cmd == "status":
         n = sum(done(mod, t) for t in T)
         err = sum(os.path.exists(os.path.join(_dir(mod, t["id"]), "error.txt")) for t in T)
-        print(f"{modname}: {n}/{len(T)} done, {err} with errors")
+        started = sum(not done(mod, t) and not os.path.exists(os.path.join(_dir(mod, t["id"]), "error.txt"))
+                      and os.path.exists(os.path.join(_dir(mod, t["id"]), "attempts.txt")) for t in T)
+        print(f"{modname}: {n}/{len(T)} done, {err} with errors, {started} started and unfinished "
+              f"(running, or stopped by a time-out)")
     elif cmd == "array":
         k, nk = int(sys.argv[3]), int(sys.argv[4])
         for f in sys.argv[5:]:

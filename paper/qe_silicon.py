@@ -94,7 +94,8 @@ class QESilicon:
         e = re.search(r"^!\s+total energy\s+=\s+(-?[\d.]+) Ry", out, flags=re.M)
         f = re.search(r"atom\s+2 type\s+1\s+force =\s+(-?[\d.]+)\s+(-?[\d.]+)\s+(-?[\d.]+)", out)
         if r.returncode != 0 or not e or not f or "convergence NOT achieved" in out:
-            return nan, float("inf"), wall, {"unavailable": out[-300:]}
+            return nan, float("inf"), wall, {"unavailable": out[-300:], "returncode": r.returncode,
+                                             "stderr": r.stderr[-300:]}
         F = np.array([float(f.group(i)) for i in (1, 2, 3)])
         nit = re.search(r"convergence has been achieved in\s+(\d+) iterations", out)
         return ({"energy": float(e.group(1)), "force": float(np.linalg.norm(F))},

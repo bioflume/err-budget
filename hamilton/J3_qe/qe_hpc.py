@@ -38,5 +38,10 @@ def run(task, out):
     if "p" not in _P:
         _P["p"] = QESilicon()
     obs, cost, wall, info = _P["p"].run(task["theta"])
+    if "unavailable" in info and not info["unavailable"].strip():
+        # pw.x wrote nothing at all: it did not start (an infrastructure failure, not a
+        # result).  Raising makes the farm write error.txt and retry the task.
+        raise RuntimeError(f"pw.x wrote nothing to standard output (exit {info.get('returncode')}): "
+                           f"{info.get('stderr', '')}")
     json.dump(dict(task, obs=obs, cost=cost, wall=wall, info=info),
               open(os.path.join(out, "result.json"), "w"), indent=1)

@@ -29,6 +29,9 @@ need = ["ref", "e75", "k8", "k10"]
 if not all(k in R for k in need):
     raise SystemExit("reference runs not finished")
 REF = R["ref"]["obs"]
+if not all(np.isfinite(R[k]["obs"][ob]) for k in need for ob in REF):
+    raise SystemExit("a reference run (ref, e75, k8, k10) has no result, so nothing can be graded: "
+                     + "; ".join(f"{k}: {R[k]['info']}" for k in need))
 UNC = {ob: (abs(R["e75"]["obs"][ob] - REF[ob]) + abs(R["k10"]["obs"][ob] - R["k8"]["obs"][ob]))
        / abs(REF[ob]) for ob in REF}
 tensor = {tuple(r["idx"]): (r["obs"], r["cost"], r["info"]) for k, r in R.items() if k.startswith("g_")}
@@ -40,7 +43,7 @@ common = [i for i in tensor if np.isfinite(tensor[i][1]) and np.isfinite(oldt[i]
 for ob in REF:
     d = [abs(tensor[i][0][ob] - oldt[i][0][ob]) / abs(OREF[ob]) for i in common]
     print(f"  {ob}: largest relative difference between releases over {len(common)} settings: "
-          f"{max(d):.1e}; references differ by {abs(REF[ob]-OREF[ob])/abs(OREF[ob]):.1e}")
+          f"{max(d, default=float('nan')):.1e}; references differ by {abs(REF[ob]-OREF[ob])/abs(OREF[ob]):.1e}")
 if len(tensor) == 480:
     new = C.Case("QEc", "Quantum ESPRESSO (current)", {i: (v[0], v[1], dict(v[2])) for i, v in tensor.items()},
                  old.LAD, old.HS, old.KINDS, dict(REF), old.targets, models=old.models, unc=UNC)

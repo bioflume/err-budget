@@ -74,6 +74,8 @@ def lmp_run(th, ranks, neval=3, mem_gb=6):
     m = re.findall(r"^\s+0\s+(-?[\d.eE+-]+)\s+(-?[\d.eE+-]+)\s*$", log, flags=re.M)
     lt = re.findall(r"Loop time of ([\d.eE+-]+) on \d+ procs for (\d+) steps", log)
     if r.returncode != 0 or not m or len(lt) < 2:
+        sys.stderr.write(f"lmp_run {th} on {ranks} ranks: exit {r.returncode}\n"
+                         f"{r.stderr[-600:]}\n{log[-600:]}\n")
         return np.nan, np.inf
     e = (float(m[0][0]) + float(m[0][1])) / N**3
     return e, float(lt[-1][0]) / int(lt[-1][1])

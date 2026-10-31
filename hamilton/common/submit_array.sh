@@ -11,7 +11,7 @@ FILTERS="$*"
 source "$(dirname "$0")/../config.sh"
 mkdir -p "$JOBDIR/logs"
 D=""
-[ -n "$DEP" ] && D="--dependency=afterok:$DEP"
+[ -n "$DEP" ] && D="--dependency=afterok:$DEP --kill-on-invalid-dep=yes"
 sbatch --parsable $SB_EXTRA $D -p "$SB_SHARED" -J "$NAME" -N 1 -n "$NP" -c 1 --mem="$MEM" -t "$TIME" \
     --array=0-$((NA - 1)) -o "$JOBDIR/logs/${NAME}_%a.out" <<EOF
 #!/bin/bash

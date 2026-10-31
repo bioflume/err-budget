@@ -29,6 +29,16 @@ its spin-up diverged, i.e. Co_max ~ 54 n_arc dt).  They are now the article's va
 the time step, up to twice; the largest Courant number of every spin-up and every run
 is recorded; and one mesh level whose spin-up fails no longer stops the others.
 
+November 2026 (rerun on Hamilton).  mapFields -consistent maps the values of every
+patch, the fixedValue inlet included, so every mapped mesh started from the coarser
+mesh's inlet profile, interpolated, instead of the analytic one (flow rate off by up to
+0.4%; the spin-up and runs of revision 4 on Hamilton were affected).  spin() now writes
+the analytic inlet back after mapFields and checks it (_restore_inlet), records it in
+INLET_ANALYTIC, and spin() and run() refuse a mapped mesh without that record.  SPUN_UP
+records the mesh actually mapped from (the MAPPED file), and result.json records
+inlet = "analytic".  Measured on this mesh family, Co_max = 27.8 n_arc dt (not 54), so
+the spin-up steps below give Co_max 0.33-0.45.  The smoke test spins up its finer mesh
+in parallel, as production does.
     python dfg2d2_hpc.py spin [n_arc ...]      # sequential, coarse to fine
     python -m farm dfg2d2_hpc array K NK         # the runs (see submit.sh)
 """
@@ -120,10 +130,7 @@ def make_mesh(na):
     _w(f"{d}/constant/momentumTransport", "dictionary", "momentumTransport",
        "simulationType laminar;\n")
     OF._sh(["blockMesh"], d)
-    _, cy = _patch_centres(d, "inlet")
-    prof = 4.0 * UM2 * cy * (H - cy) / H**2
-    inlet = "nonuniform List<vector>\n%d\n(\n%s\n)" % (
-        len(prof), "\n".join(f"({u:.15g} 0 0)" for u in prof))
+    inlet = _inlet_value(_inlet_profile(d))
     _w(f"{d}/0/U", "volVectorField", "U", f"""dimensions [0 1 -1 0 0 0 0];
 internalField uniform (0 0 0);
 boundaryField
@@ -146,8 +153,66 @@ boundaryField
     frontAndBack { type empty; }
 }
 """)
+    open(os.path.join(d, INLET_OK), "w").write("analytic, written by make_mesh\n")
     open(os.path.join(d, "MESHED"), "w").write("ok\n")
     return d
+
+
+INLET_OK = "INLET_ANALYTIC"
+VEC = re.compile(r"\(([-+\d.eE]+) [-+\d.eE]+ [-+\d.eE]+\)")
+
+
+def _inlet_profile(d):
+    """The analytic inlet velocity (DFG 2D-2, U_m = 1.5) at the inlet face centres."""
+    _, cy = _patch_centres(d, "inlet")
+    return 4.0 * UM2 * cy * (H - cy) / H**2
+
+
+def _inlet_value(prof):
+    return "nonuniform List<vector>\n%d\n(\n%s\n)" % (
+        len(prof), "\n".join(f"({u:.15g} 0 0)" for u in prof))
+
+
+def _inlet_block(s):
+    """(start, end) of the body of the inlet entry in the boundaryField of a field file."""
+    b0 = s.index("boundaryField")
+    m = re.search(r"\binlet\b\s*\{", s[b0:])
+    j = b0 + m.end()
+    return j, s.index("}", j)
+
+
+def _inlet_deviation(d, t="0"):
+    """Largest |u_x - analytic| over the inlet faces of <d>/<t>/U (inf if not a list)."""
+    s = open(os.path.join(d, t, "U")).read()
+    j, k = _inlet_block(s)
+    v = np.array([float(x) for x in VEC.findall(s[j:k])])
+    prof = _inlet_profile(d)
+    return float(np.max(np.abs(v - prof))) if len(v) == len(prof) else float("inf")
+
+
+def _restore_inlet(d, t="0"):
+    """mapFields -consistent maps the values of every patch, the fixedValue inlet
+    included: write the analytic inlet of make_mesh back into <d>/<t>/U and check it."""
+    f = os.path.join(d, t, "U")
+    s = open(f).read()
+    before = _inlet_deviation(d, t)
+    j, k = _inlet_block(s)
+    s = s[:j] + f"\n        type fixedValue;\n        value {_inlet_value(_inlet_profile(d))};\n    " + s[k:]
+    open(f, "w").write(s)
+    after = _inlet_deviation(d, t)
+    if not after < 1e-12:
+        raise RuntimeError(f"the analytic inlet could not be restored in {f} (deviation {after:.2e})")
+    open(os.path.join(d, INLET_OK), "w").write(
+        f"analytic, restored after mapFields (largest change {before:.3e})\n")
+    return before
+
+
+def _check_inlet(na):
+    """Refuse a mapped mesh whose inlet was not restored (spun up before the fix)."""
+    d = mesh_dir(na)
+    if os.path.exists(os.path.join(d, "MAPPED")) and not os.path.exists(os.path.join(d, INLET_OK)):
+        raise RuntimeError(f"mesh {na} was mapped before the inlet fix (no {INLET_OK}): its inlet is the "
+                           f"coarser mesh's profile. Move {d} aside and spin it up again.")
 
 
 def spun(na):
@@ -167,6 +232,12 @@ def courant(logs):
     if not mx:
         return None, None
     return float(max(mx)), float(max(mx[-100:]))
+
+
+def _stepped(log):
+    """True if the solver log records at least one time step."""
+    return os.path.exists(log) and re.search(r"^Time = ", open(log, errors="replace").read(),
+                                                  re.M) is not None
 
 
 def _clean_times(d):
@@ -197,16 +268,23 @@ def spin(na, prev=None):
     time-out resumes at the time step it was using; each attempt and each resumed
     segment has its own log (log.spin_a<attempt>_s<segment>)."""
     if spun(na):
+        _check_inlet(na)
         return spun(na)
     d = make_mesh(na)
-    n = NPROCS[na] if not SMOKE else 1
+    n = NPROCS[na]                 # the smoke test too, so that it covers the parallel path
     if prev is None:
         t_end = T_SPIN0
     else:
         src = mesh_dir(prev)
         if not os.path.exists(os.path.join(d, "MAPPED")):
+            if os.path.exists(os.path.join(d, INLET_OK)):
+                os.remove(os.path.join(d, INLET_OK))
             OF._sh(["mapFields", src, "-consistent", "-sourceTime", "latestTime"], d)
-            open(os.path.join(d, "MAPPED"), "w").write(prev and str(prev))
+            change = _restore_inlet(d)
+            print(f"n_arc {na}: mapped from n_arc {prev}; analytic inlet restored "
+                  f"(mapFields had changed it by up to {change:.3e})", flush=True)
+            open(os.path.join(d, "MAPPED"), "w").write(str(prev))
+        _check_inlet(na)
         t_end = T_SPIN_MAPPED
     fa = os.path.join(d, "SPIN_ATTEMPT")
     attempt = int(open(fa).read().strip() or 0) if os.path.exists(fa) else 0
@@ -227,6 +305,12 @@ def spin(na, prev=None):
             err = None
             break
         except RuntimeError as exc:
+            if not _stepped(log):
+                # decomposePar, mpirun or the solver failed before the first time step: an
+                # installation or launch problem, not instability, so the time step is kept
+                # (on Hamilton such failures used up both halvings of revision 4)
+                raise RuntimeError(f"spin-up of n_arc {na} did not start (no time step; the "
+                                   f"time step is not reduced): {str(exc)[-700:]}")
             err = exc
             print(f"spin-up of n_arc {na} at dt {dt:g} failed (Courant max "
                   f"{courant([log])[0]}); restarting from the initial state at dt {dt / 2:g}",
@@ -240,8 +324,11 @@ def spin(na, prev=None):
         for p in [x for x in os.listdir(d) if x.startswith("processor")]:
             shutil.rmtree(os.path.join(d, p))
     co, co_last = courant(sorted(glob.glob(os.path.join(d, f"log.spin_a{attempt}_s*"))))
-    info = dict(t0=float(OF.latest_time(d)), dt=dt, mapped_from=prev, courant_max=co,
-                courant_max_last100=co_last, attempts=attempt + 1)
+    mp = os.path.join(d, "MAPPED")
+    info = dict(t0=float(OF.latest_time(d)), dt=dt,
+                mapped_from=int(open(mp).read().strip()) if os.path.exists(mp) else None,
+                courant_max=co, courant_max_last100=co_last, attempts=attempt + 1,
+                inlet="analytic", inlet_deviation_end=_inlet_deviation(d, OF.latest_time(d)))
     json.dump(info, open(os.path.join(d, "SPUN_UP"), "w"))
     return info
 
@@ -257,9 +344,9 @@ def TASKS():
             for o in OUTER:
                 for p in PTOL:
                     th = dict(n_arc=na, dt=dt, outer_tol=o, p_tol=p)
-                    T.append(dict(id=tid(th), theta=th, nprocs=NPROCS[na]))
+                    T.append(dict(id=tid(th), theta=th, nprocs=NPROCS[na], n_arc=na))
     for th in REFS:
-        T.append(dict(id="ref_" + tid(th), theta=th, nprocs=NPROCS[th["n_arc"]]))
+        T.append(dict(id="ref_" + tid(th), theta=th, nprocs=NPROCS[th["n_arc"]], n_arc=th["n_arc"]))
     return T
 
 
@@ -269,6 +356,7 @@ def run(task, out):
     info = spun(na)
     if info is None:
         raise RuntimeError(f"mesh {na} is not spun up (run: python dfg2d2_hpc.py spin)")
+    _check_inlet(na)
     t0 = info["t0"]
     md = mesh_dir(na)
     case = os.path.join(out, "case")
@@ -316,7 +404,8 @@ def run(task, out):
                nonconverged_steps=int(nc.sum()) if len(nc) else 0,
                max_outer=int(its.max()) if len(its) else None,
                cpu_total=float(cpu[-1]) if len(cpu) else None,
-               courant_max=co, courant_max_last100=co_last)
+               courant_max=co, courant_max_last100=co_last, inlet="analytic",
+               spun_up=info)
     try:
         if fields:
             from openfoam_cylinder import _wall_geometry
@@ -352,23 +441,36 @@ def run(task, out):
 
 if __name__ == "__main__":
     if sys.argv[1] == "spin":
-        levels = [int(x) for x in sys.argv[2:]] or sorted(set(NA + [r["n_arc"] for r in REFS]))
+        ALL = sorted(set(NA + [r["n_arc"] for r in REFS]))
+        levels = [int(x) for x in sys.argv[2:]] or ALL
         failed = []
         for na in sorted(levels):
-            # map from the next coarser spun-up mesh, if any (a level whose spin-up
-            # failed is skipped: the next one maps from the last that succeeded)
-            coarser = [m for m in sorted(set(NA + [r["n_arc"] for r in REFS])) if m < na and spun(m)]
+            # map from the next coarser mesh that is spun up with the analytic inlet, if any
+            # (a level whose spin-up failed is skipped: the next one maps from the last that
+            # succeeded); submit.sh runs one level per job, coarse to fine
+            coarser = [m for m in ALL if m < na and spun(m) and
+                       (not os.path.exists(os.path.join(mesh_dir(m), "MAPPED")) or
+                        os.path.exists(os.path.join(mesh_dir(m), INLET_OK)))]
             prev = coarser[-1] if coarser else None
+            mf = os.path.join(mesh_dir(na), "SPIN_FAILED")
             try:
                 print("spin", na, "from", prev, spin(na, prev), flush=True)
+                if os.path.exists(mf):
+                    os.remove(mf)
             except Exception as exc:                      # noqa: BLE001 - report, go on
                 failed.append(na)
+                os.makedirs(mesh_dir(na), exist_ok=True)
+                open(mf, "w").write(f"{exc}\n")
                 print(f"SPIN-UP FAILED for n_arc {na}: {exc}", flush=True)
+        # the summary file lists every level whose last spin-up failed
         pf = os.path.join(ROOT, "SPIN_FAILED")
-        if failed:
-            open(pf, "w").write(" ".join(map(str, failed)) + "\n")
-            print(f"SPIN-UP FAILED for n_arc {failed}; their runs will report 'not spun up'", flush=True)
+        bad = [m for m in ALL if os.path.exists(os.path.join(mesh_dir(m), "SPIN_FAILED"))]
+        if bad:
+            open(pf, "w").write(" ".join(map(str, bad)) + "\n")
         elif os.path.exists(pf):
-            os.remove(pf)                      # an earlier spin job failed; this one did not
+            os.remove(pf)
+        if failed:
+            print(f"SPIN-UP FAILED for n_arc {failed}; their runs will not start", flush=True)
         for na in sorted(levels):
             print("spun up:", na, spun(na), flush=True)
+        sys.exit(1 if failed else 0)         # a failed level stops the jobs that depend on it

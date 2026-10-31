@@ -19,6 +19,65 @@ Read it top to bottom once. The commands are meant to be pasted in order.
 The estimates come from per-cell timings on the article's machine (about 1.4 µs per cell
 and outer iteration for `pimpleFoam`); Hamilton's cores are faster.
 
+## November 2026: finishing J2 and J4 (read this first)
+
+The first campaign (20–31 October 2026) finished J1 and J5 (H3). J2, J3 and J4 have to be
+redone; J3 now runs on the article's machine, so only J2 and J4 come back to Hamilton.
+**J1 and J5 are final: do not submit them again, and leave `$WORK/dfg2d2_cases/mesh_24`,
+`$WORK/abc_hpc` and `$WORK/dfg2d1_hpc` as they are.**
+
+What went wrong, and what this version changes:
+
+- **J2, the inlet.** `mapFields -consistent` maps the values of every patch, the
+  fixedValue inlet included. Every mesh that was mapped from a coarser one (n_arc 32 and
+  finer, the references included) therefore ran with the coarser mesh's inlet profile,
+  interpolated, instead of the analytic one: the flow rate differs by up to 0.4 % (n_arc 48
+  mapped from 32), and the n_arc 48 runs differ from those of revision 3 by 4.7e-3 in the
+  Strouhal number. `spin()` now writes the analytic inlet back after mapping, checks it and
+  records it in `mesh_N/INLET_ANALYTIC`; the driver, `submit.sh` and `analyse_j2.py` refuse
+  meshes and results from before the fix. Only n_arc 24 (spun up from rest) is unaffected.
+- **J2, the spin-ups.** One job per mesh, on the cores its runs use, with a one-day limit,
+  each after the coarser one; the runs of a mesh start when its spin-up has succeeded, and
+  SLURM cancels whatever depends on a failed job. A spin-up that fails before its first time
+  step (decomposePar, mpirun) no longer halves the time step: in October such failures used up
+  both halvings, and the meshes were spun up at a quarter of the registered step. The 32-core
+  spin-up job that held its cores for seven days (5,376 of J2's 6,891 core-hours) cannot recur.
+- **Task farm.** An `error.txt` from an earlier attempt is kept as `error_prev.txt`, so a
+  time-out is no longer reported with an old error; every attempt is logged in
+  `attempts.txt`; `status.sh` counts tasks started and unfinished and prints the core-hours
+  of the reruns (`coreh.sh`).
+- **J3 and J4.** A run that produced no output at all (pw.x, LAMMPS or GROMACS did not
+  start) is now an error, retried, with the program's own error message, instead of a
+  stored NaN; the smoke tests can fail (the J3 one could not).
+
+### Steps
+
+1. **Code.** Use this repository at the commit of these changes (`git log -1`), not a copy
+   of an older version. In `hamilton/config.sh` set `WORK=/nobackup/$USER/knobs` and
+   `ERRBUDGET_ENV=knobs` (the environment and scratch folder of October), and carry over any
+   setting you changed there in October (OpenFOAM mode or module, decomposition method,
+   account).
+2. **Move the old J2 state aside** (never delete it):
+   ```bash
+   W=/nobackup/$USER/knobs; mkdir -p $W/before_inlet_fix
+   mv $W/dfg2d2_hpc $W/before_inlet_fix/
+   for m in 32 48 64 96 128 192; do mv $W/dfg2d2_cases/mesh_$m $W/before_inlet_fix/; done
+   mv $W/dfg2d2_cases/SPIN_FAILED $W/before_inlet_fix/ 2>/dev/null
+   ```
+3. **Smoke test** (15 minutes; its finer mesh is mapped and run on two ranks, as in production):
+   `cd J2_dfg2d2 && bash submit.sh smoke`; then `grep "SMOKE TEST" logs/smoke_*.out` must say PASSED.
+4. **Submit**: `bash submit.sh` (it refuses if J2 jobs are already queued). It prints one
+   spin-up job per mesh (32 to 192) and one array per mesh.
+5. **Monitor** daily with `bash ../status.sh`. Each spin-up log (`logs/spin<N>_*.out`)
+   should say "analytic inlet restored" and end with "spun up". The guard is 2,200 core-hours
+   for the rerun: if `status.sh` prints GUARD PASSED, stop and report. If a spin-up fails,
+   its dependants are cancelled; report the log. Time-outs: run `bash submit.sh` again once
+   the queue holds no J2 job (finished tasks are skipped).
+6. **Collect** as in Section 5 below (`bash collect_job.sh`).
+
+Expected cost: about 1,500–2,000 core-hours (base runs about 450, references about
+600–1,000, spin-ups about 150), 1–3 days.
+
 ## What is in this folder
 
 ```
