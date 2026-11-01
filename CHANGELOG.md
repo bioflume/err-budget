@@ -10,6 +10,25 @@ entries below the rename keep the old name, as it was at the time.
 Only the cluster drivers changed (`hamilton/`, and failure messages in `paper/qe_silicon.py`,
 `paper/gromacs_water.py`, `paper/exp55_parallel.py`); `src/errbudget` is unchanged.
 
+- **Container launches and local paths.** `config.sh` binds the node-local `/local` (where
+  SLURM puts `$TMPDIR`, and Open MPI its session directory) into the OpenFOAM container, and
+  reads `config.local.sh` (paths of codes in their own environments; the old `KNOBS_*`
+  names are accepted).
+- **Slowed-down runs.** mpirun runs OpenFOAM with `--bind-to none`, and J2 stops a run
+  whose linear solves take more than 0.1 s each over 15 minutes (`ofmodern.run`,
+  `ofmodern.TooSlow`: retried and resumed, not a failed setting). A resumed J2 run is
+  charged from the checkpoint it resumed from, so redone work is not counted twice; a
+  segment that fails before its first time step is retried, not stored as a failed setting.
+- **J4.** Jobs load `gcc/11.2` (the C++ runtime of the GROMACS build); whole-node tasks ask
+  for 64 tasks; each LAMMPS task checks one cheap setting first and reports LAMMPS's
+  messages (`exp55_parallel.LAST_ERROR`); `lmp_run` rejects a run whose log reports fewer
+  processes than ranks; `submit.sh` refuses results without a value.
+- **Resubmission.** `farm left` counts unfinished tasks; `submit.sh` skips meshes (J2) and
+  studies (J4) that are complete; the J2 smoke test runs on one node, exercises the watchdog
+  and fails if a run failed.
+- **Collection.** `JOBS="2 4" bash collect_job.sh` runs only the analyses of the reruns;
+  results moved aside (`before_*`, `failed_*`) are left out of `raw.tar.gz`.
+
 - **J2: analytic inlet on mapped meshes.** `mapFields -consistent` also maps fixedValue
   patches, so every mesh initialised from a coarser one ran with the coarser mesh's inlet
   profile (flow rate off by up to 0.4 %). `spin()` restores and checks the analytic inlet

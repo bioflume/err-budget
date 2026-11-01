@@ -11,7 +11,11 @@ from __future__ import annotations
 import glob
 import os
 import re
+import shlex
+import signal
 import subprocess
+import tempfile
+import time
 
 import numpy as np
 
@@ -62,22 +66,114 @@ def decompose_dict(n):
     return f"numberOfSubdomains {n};\nmethod {m};\n"
 
 
+class TooSlow(RuntimeError):
+    """A run stopped by the watchdog of run(): the machine, not the run, is at fault."""
+
+
+_ITERS = re.compile(r"No Iterations (\d+)")
+
+
+def _watch(p, log, limit, window, poll=60.0):
+    """Wait for the process p.  Every `poll` seconds, count the linear-solver work that the
+    log reports, each solve as one unit plus its iterations (the "No Iterations N" of every
+    "Solving for" line), and compare it with the time of the last `window` seconds.
+    Return None when p ends, or a description if a unit took more than `limit` seconds.
+
+    On Hamilton in October 2026, the J2 spin-up of n_arc 192 (32 ranks) ran at about
+    4 s per linear-solver iteration, against 2-5 ms on the coarser meshes, and the J2
+    reference at n_arc 128 and dt 2.5e-4 (16 ranks) took about 1,250 s per time step,
+    against 0.9 s at dt 1.25e-4 on another node; both used up their time limits (seven
+    days for the first).  Counting solver work separates such a slowdown from a hard
+    numerical problem, whose solves take many iterations at the normal cost each; a
+    solve that needs no iteration still counts, so that loose tolerances do not look
+    slow."""
+    t0, pos, rest, total = time.time(), 0, "", 0
+    hist = [(t0, 0)]
+    while True:
+        try:
+            p.wait(timeout=poll)
+            return None
+        except subprocess.TimeoutExpired:
+            pass
+        try:
+            with open(log, "rb") as f:
+                f.seek(pos)
+                chunk = f.read().decode(errors="replace")
+                pos = f.tell()
+        except OSError:
+            chunk = ""
+        text = rest + chunk
+        cut = text.rfind("\n") + 1
+        rest = text[cut:]
+        total += sum(1 + int(m) for m in _ITERS.findall(text[:cut]))
+        now = time.time()
+        hist.append((now, total))
+        old = [h for h in hist if now - h[0] >= window]
+        if not old:
+            continue
+        t_old, n_old = old[-1]
+        hist = [h for h in hist if h[0] >= t_old]
+        n = total - n_old
+        if now - t_old > limit * max(n, 1):
+            return (f"{n} linear solves and iterations in the last {(now - t_old) / 60:.1f} "
+                    f"minutes, {(now - t_old) / max(n, 1):.3g} s each (limit {limit:g} s)")
+
+
+def _kill(p):
+    """Stop p and everything it started (it leads its own process group)."""
+    for sig, wait in ((signal.SIGTERM, 60), (signal.SIGKILL, 30)):
+        try:
+            os.killpg(p.pid, sig)
+        except (ProcessLookupError, PermissionError):
+            return
+        try:
+            p.wait(timeout=wait)
+            return
+        except subprocess.TimeoutExpired:
+            pass
+
+
 def run(app, case, nprocs=1, log=None, extra=()):
-    """Run an OpenFOAM application, in parallel if nprocs > 1.  Returns stdout."""
+    """Run an OpenFOAM application, in parallel if nprocs > 1.
+
+    ERRBUDGET_OF_MPIRUN_OPTS: extra mpirun options (hamilton/config.sh sets
+    --bind-to none).  ERRBUDGET_OF_MAX_S_PER_ITER > 0 (with a log): stop the run and
+    raise TooSlow when, over the last ERRBUDGET_OF_WATCH_WINDOW seconds (default 900),
+    its linear solves and their iterations took longer than that each (_watch)."""
     if nprocs > 1:
         _w(f"{case}/system/decomposeParDict", "dictionary", "decomposeParDict",
            decompose_dict(nprocs))
         if not glob.glob(os.path.join(case, "processor0")):
             _sh(["decomposePar", "-force"], case)
-        cmd = ["mpirun", "-np", str(nprocs), app, "-parallel", *extra]
+        opts = shlex.split(os.environ.get("ERRBUDGET_OF_MPIRUN_OPTS", ""))
+        cmd = ["mpirun", *opts, "-np", str(nprocs), app, "-parallel", *extra]
     else:
         cmd = [app, *extra]
-    with open(log or os.devnull, "w") as fo:
-        r = subprocess.run(of_cmd(cmd), cwd=case, env=ENV, stdout=fo,
-                           stderr=subprocess.PIPE, text=True)
-    if r.returncode != 0:
-        tail = open(log).read()[-1500:] if log else ""
-        raise RuntimeError(f"{' '.join(cmd)} failed in {case}:\n{tail}\n{r.stderr[-1500:]}")
+    limit = float(os.environ.get("ERRBUDGET_OF_MAX_S_PER_ITER", "0") or 0)
+    window = float(os.environ.get("ERRBUDGET_OF_WATCH_WINDOW", "900") or 900)
+    slow = None
+    with open(log or os.devnull, "w") as fo, tempfile.TemporaryFile("w+") as fe:
+        p = subprocess.Popen(of_cmd(cmd), cwd=case, env=ENV, stdout=fo, stderr=fe, text=True,
+                             start_new_session=True)
+        try:
+            if limit > 0 and log:
+                slow = _watch(p, log, limit, window, poll=min(60.0, max(1.0, window / 5)))
+                if slow:
+                    _kill(p)
+            else:
+                p.wait()
+        except BaseException:
+            _kill(p)
+            raise
+        fe.seek(0)
+        err = fe.read()[-1500:]
+    if slow:
+        raise TooSlow(f"{' '.join(cmd)} in {case} on {os.uname().nodename} was stopped: {slow}. "
+                      "This is a slowdown of the machine (CPU binding or a busy node), not a "
+                      "property of the run; the task is retried when the job is resubmitted.")
+    if p.returncode != 0:
+        tail = open(log, errors="replace").read()[-1500:] if log else ""
+        raise RuntimeError(f"{' '.join(cmd)} failed in {case}:\n{tail}\n{err}")
 
 
 def _sh(cmd, cwd):

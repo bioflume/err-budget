@@ -59,23 +59,42 @@ run {neval} pre no post no
 """
 
 
+LAST_ERROR = ""          # why the last failed lmp_run failed (for the cluster job J4)
+
+
 def lmp_run(th, ranks, neval=3, mem_gb=6):
+    # On a cluster the memory limit and the MPI launcher may need changing (hamilton/config.sh):
+    # ERRBUDGET_LMP_MEM_GB (0: no limit) and ERRBUDGET_LMP_LAUNCH (with {R} for the ranks).
+    global LAST_ERROR
+    mem_gb = float(os.environ.get("ERRBUDGET_LMP_MEM_GB", mem_gb))
+    launch = os.environ.get("ERRBUDGET_LMP_LAUNCH", "mpirun --allow-run-as-root --oversubscribe -np {R}")
     d = tempfile.mkdtemp(prefix="errbudget_lmp_")
     open(os.path.join(d, "in.lmp"), "w").write(INPUT.format(
         r0=R0, n=N, cut=th[0], acc=th[1], order=th[2], neval=neval))
-    cmd = ["mpirun", "--allow-run-as-root", "--oversubscribe", "-np", str(ranks),
-           os.environ.get("ERRBUDGET_LMP", "lmp"), "-in", "in.lmp", "-log", "log.lammps", "-nocite"]
+    cmd = launch.format(R=ranks).split() + [
+        os.environ.get("ERRBUDGET_LMP", "lmp"), "-in", "in.lmp", "-log", "log.lammps", "-nocite"]
+    limit = f"ulimit -v {int(mem_gb*1e6)}; " if mem_gb > 0 else ""
     try:
-        r = subprocess.run(["bash", "-c", f"ulimit -v {int(mem_gb*1e6)}; " + " ".join(cmd)],
+        r = subprocess.run(["bash", "-c", limit + " ".join(cmd)],
                            cwd=d, capture_output=True, text=True, timeout=900)
     except subprocess.TimeoutExpired:
+        LAST_ERROR = f"timed out after 900 s: {limit}{' '.join(cmd)}"
         return np.nan, np.inf
     log = open(os.path.join(d, "log.lammps")).read() if os.path.exists(os.path.join(d, "log.lammps")) else ""
     m = re.findall(r"^\s+0\s+(-?[\d.eE+-]+)\s+(-?[\d.eE+-]+)\s*$", log, flags=re.M)
-    lt = re.findall(r"Loop time of ([\d.eE+-]+) on \d+ procs for (\d+) steps", log)
+    lt = re.findall(r"Loop time of ([\d.eE+-]+) on (\d+) procs for (\d+) steps", log)
+    if lt and int(lt[-1][1]) != ranks:
+        # an lmp built for another MPI (or without MPI) runs once per rank, each copy
+        # alone: the energy is right but the time is that of one rank
+        LAST_ERROR = (f"LAMMPS ran on {lt[-1][1]} process(es) instead of {ranks}: the mpirun "
+                      f"({launch}) does not match the MPI of {os.environ.get('ERRBUDGET_LMP', 'lmp')}")
+        sys.stderr.write(f"lmp_run {th} on {ranks} ranks: {LAST_ERROR}\n")
+        return np.nan, np.inf
+    lt = [(a, c) for a, b, c in lt]
     if r.returncode != 0 or not m or len(lt) < 2:
-        sys.stderr.write(f"lmp_run {th} on {ranks} ranks: exit {r.returncode}\n"
-                         f"{r.stderr[-600:]}\n{log[-600:]}\n")
+        LAST_ERROR = (f"exit {r.returncode}: {limit}{' '.join(cmd)}\nstdout: {r.stdout[-800:]}\n"
+                      f"stderr: {r.stderr[-1200:]}\nlog.lammps: {log[-800:]}")
+        sys.stderr.write(f"lmp_run {th} on {ranks} ranks: {LAST_ERROR}\n")
         return np.nan, np.inf
     e = (float(m[0][0]) + float(m[0][1])) / N**3
     return e, float(lt[-1][0]) / int(lt[-1][1])

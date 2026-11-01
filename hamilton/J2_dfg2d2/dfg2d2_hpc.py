@@ -38,7 +38,12 @@ INLET_ANALYTIC, and spin() and run() refuse a mapped mesh without that record.  
 records the mesh actually mapped from (the MAPPED file), and result.json records
 inlet = "analytic".  Measured on this mesh family, Co_max = 27.8 n_arc dt (not 54), so
 the spin-up steps below give Co_max 0.33-0.45.  The smoke test spins up its finer mesh
-in parallel, as production does.
+in parallel, as production does.  In October the spin-up of n_arc 192 (32 ranks; about 4 s per
+solver iteration against 2-5 ms on the coarser meshes) and the reference at n_arc 128
+and dt 2.5e-4 (16 ranks; about 1,250 s per time step against 0.9 s at dt 1.25e-4) used
+up their time limits.  mpirun now runs with --bind-to none (hamilton/config.sh), and a
+run that slow is stopped (ofmodern.TooSlow): it is not recorded as a failed setting;
+the task is retried and resumes from its last checkpoint.
     python dfg2d2_hpc.py spin [n_arc ...]      # sequential, coarse to fine
     python -m farm dfg2d2_hpc array K NK         # the runs (see submit.sh)
 """
@@ -81,6 +86,10 @@ if SMOKE:            # a few minutes on the test partition
     NPROCS.update({12: 1, 16: 2})
     SPIN_DT.update({12: 1e-3, 16: 5e-4})
 ROOT = os.path.join(os.environ.get("WORK", "."), "dfg2d2_cases")
+# the watchdog of ofmodern.run, for J2 only: a linear solve with its iterations takes 2-6 ms
+# on these meshes; stop a run at 0.1 s over 15 minutes (ERRBUDGET_OF_MAX_S_PER_ITER=0: never)
+os.environ.setdefault("ERRBUDGET_OF_MAX_S_PER_ITER", "0.1")
+os.environ.setdefault("ERRBUDGET_OF_WATCH_WINDOW", "900")
 # relaxation time and averaging window, derived from each run (1, 2, 4 time units)
 RELAX = [T_TOT / 8, T_TOT / 4, T_TOT / 2]
 WIN = [T_TOT / 8, T_TOT / 4, T_TOT / 2]
@@ -248,17 +257,21 @@ def _clean_times(d):
             shutil.rmtree(os.path.join(d, x), ignore_errors=True)
 
 
-def _drop_newest_checkpoint(d):
-    """Before resuming an interrupted spin-up: the newest checkpoint may have been cut
-    off mid-write (a SLURM time-out), so it is removed, in the case and in every
-    processor directory; the run resumes from the one before."""
+def _drop_newest_checkpoint(d, after=0.0):
+    """Before resuming an interrupted spin-up, or after a resumed run failed to start: the
+    newest checkpoint may have been cut off mid-write (a SLURM time-out, or a stop by the
+    watchdog), so it is removed, in the case and in every processor directory; the run
+    resumes from the one before.  Times up to `after` (the start of a run) are kept.
+    Returns the time removed, or None."""
     dirs = [d] + sorted(glob.glob(os.path.join(d, "processor*")))
     times = {x for q in dirs if os.path.isdir(q) for x in os.listdir(q)
-             if re.fullmatch(r"[\d.eE+-]+", x) and float(x) > 0}
-    if times:
-        newest = max(times, key=float)
-        for q in dirs:
-            shutil.rmtree(os.path.join(q, newest), ignore_errors=True)
+             if re.fullmatch(r"[\d.eE+-]+", x) and float(x) > after + 1e-9}
+    if not times:
+        return None
+    newest = max(times, key=float)
+    for q in dirs:
+        shutil.rmtree(os.path.join(q, newest), ignore_errors=True)
+    return newest
 
 
 def spin(na, prev=None):
@@ -304,6 +317,8 @@ def spin(na, prev=None):
             OF.run("pimpleFoam", d, nprocs=n, log=log)
             err = None
             break
+        except OF.TooSlow:
+            raise              # the machine, not the time step: resubmitting resumes it
         except RuntimeError as exc:
             if not _stepped(log):
                 # decomposePar, mpirun or the solver failed before the first time step: an
@@ -382,19 +397,36 @@ def run(task, out):
     failed = None
     try:
         OF.run("pimpleFoam", case, nprocs=n, log=log)
+    except OF.TooSlow:
+        raise                  # not a property of the setting: error.txt, retried, resumes
     except RuntimeError as exc:
+        if not _stepped(log):
+            # this segment did not reach a time step: a launch failure (mpirun, the
+            # container) or a checkpoint cut off mid-write, not a property of the setting
+            # (a diverging run fails after "Time = ").  Retried at the next submission,
+            # from the checkpoint before the newest one.
+            dropped = _drop_newest_checkpoint(case, after=t0)
+            raise RuntimeError(f"pimpleFoam did not start (log segment {seg}"
+                               + (f"; checkpoint {dropped} removed" if dropped else "")
+                               + f"):\n{str(exc)[-700:]}")
         failed = str(exc)[-800:]
-    # cost and convergence from every log segment (a resumed segment repeats the
-    # steps after the last checkpoint: the later record of each step is kept, and
-    # CPU time is accumulated per segment)
-    steps, offset = {}, 0.0
+    # cost and convergence from every log segment.  A resumed segment (after a time-out,
+    # or a stop by the watchdog of ofmodern.run) repeats the steps after the checkpoint it
+    # resumed from: its records replace the earlier ones from there on, and its CPU time is
+    # added to the CPU time at that checkpoint, so that work that was redone (or a stopped,
+    # slowed-down stretch) is not charged to the setting.
+    steps = {}
     for k in range(seg + 1):
         S = OF.log_steps(os.path.join(case, f"log.run{k}"))
-        nxt = [s for s in S]
-        for tt, ex, its, nc in nxt:
-            steps[round(tt, 10)] = (ex + offset, its, nc)
-        if S:
-            offset += S[-1][1]
+        if not S:
+            continue
+        t1 = round(S[0][0], 10)
+        before = [t for t in steps if t < t1]
+        base = steps[max(before)][0] if before else 0.0
+        for t in [t for t in steps if t >= t1]:
+            del steps[t]
+        for tt, ex, its, nc in S:
+            steps[round(tt, 10)] = (ex + base, its, nc)
     ts = np.array(sorted(steps))
     cpu = np.array([steps[t][0] for t in ts]) * n          # core-seconds
     its = np.array([steps[t][1] for t in ts])

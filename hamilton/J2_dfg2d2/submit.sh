@@ -13,15 +13,18 @@ source ../config.sh
 activate_python
 mkdir -p logs
 if [ "${1:-}" = "smoke" ]; then
-    sbatch --parsable $SB_EXTRA -p test -n 2 -t 00:15:00 --mem=4G -J j2-smoke \
+    sbatch --parsable $SB_EXTRA -p test -N 1 -n 2 -t 00:15:00 --mem=4G -J j2-smoke \
         -o logs/smoke_%j.out --export=ALL,ERRBUDGET_SMOKE=1 <<EOF
 #!/bin/bash
 source "$ERRBUDGET_ROOT/hamilton/config.sh"; activate_python; load_openfoam; cd "$HERE"
-export ERRBUDGET_SMOKE=1 WORK="$WORK/smoke"
+# a 10-second window, so that the watchdog reads the logs of the container runs here too
+export ERRBUDGET_SMOKE=1 WORK="$WORK/smoke" ERRBUDGET_OF_WATCH_WINDOW=10
 rm -rf "\$WORK/dfg2d2_hpc" "\$WORK/dfg2d2_cases"   # an earlier smoke test would be skipped, not re-run
 python dfg2d2_hpc.py spin && python -m farm dfg2d2_hpc array 0 1 && python -m farm dfg2d2_hpc status
+cat \$WORK/dfg2d2_hpc/*/error.txt 2>/dev/null | tail -n 20
+NOFAIL=\$(python -c "import glob,json; f=glob.glob('\$WORK/dfg2d2_hpc/*/result.json'); print(int(len(f) == 3 and all(json.load(open(x))['failed'] is None for x in f)))")
 if [ -f "\$WORK/dfg2d2_cases/mesh_16/INLET_ANALYTIC" ] && [ "\$(ls \$WORK/dfg2d2_hpc/*/series.npz 2>/dev/null | wc -l)" = 3 ] \
-   && ! ls \$WORK/dfg2d2_hpc/*/error.txt > /dev/null 2>&1; then
+   && [ "\$NOFAIL" = 1 ] && ! ls \$WORK/dfg2d2_hpc/*/error.txt > /dev/null 2>&1; then
     echo "SMOKE TEST PASSED"
 else
     echo "SMOKE TEST FAILED"
@@ -89,7 +92,10 @@ for spec in "24 1 12:00:00 4G" "32 1 12:00:00 4G" "48 2 12:00:00 8G" "64 4 16:00
     set -- $spec
     NA=$1; NP=$2; TIME=$3; MEM=$4
     N=$(python -m farm dfg2d2_hpc count n_arc=$NA)
-    [ "$N" = "0" ] && continue
+    if [ "$(python -m farm dfg2d2_hpc left n_arc=$NA)" = "0" ]; then
+        echo "n_arc $NA: all $N tasks done"
+        continue
+    fi
     J=$(bash $S dfg2d2_hpc "$HERE" "j2-na$NA" "$NP" "$TIME" "$MEM" "$N" "${SPINJOB[$NA]:-}" "n_arc=$NA")
     echo "n_arc $NA: $N tasks, array job $J${SPINJOB[$NA]:+ (after spin-up job ${SPINJOB[$NA]})}"
 done

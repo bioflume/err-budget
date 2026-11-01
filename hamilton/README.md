@@ -28,6 +28,14 @@ redone; J3 now runs on the article's machine, so only J2 and J4 come back to Ham
 
 What went wrong, and what this version changes:
 
+- **Container launches.** Open MPI writes its session directory under `$TMPDIR`, which
+  SLURM on Hamilton sets to node-local `/local/...`; `/local` does not exist in the
+  OpenFOAM container, so every parallel run failed with "mkdir /local: Read-only file
+  system" until it was bound in on 22 October. `config.sh` now binds `/local` (and uses
+  `/tmp` in the container where `/local` is absent).
+- **Paths of codes in their own environments** (`config.local.sh`, written in October for
+  LAMMPS and Quantum ESPRESSO): `config.sh` reads it before its defaults, and accepts the
+  old names (`KNOBS_LMP`, `KNOBS_PW`, `KNOBS_MPIRUN`).
 - **J2, the inlet.** `mapFields -consistent` maps the values of every patch, the
   fixedValue inlet included. Every mesh that was mapped from a coarser one (n_arc 32 and
   finer, the references included) therefore ran with the coarser mesh's inlet profile,
@@ -42,6 +50,24 @@ What went wrong, and what this version changes:
   step (decomposePar, mpirun) no longer halves the time step: in October such failures used up
   both halvings, and the meshes were spun up at a quarter of the registered step. The 32-core
   spin-up job that held its cores for seven days (5,376 of J2's 6,891 core-hours) cannot recur.
+- **J2, slowed-down runs.** The spin-up of n_arc 192 on 32 ranks ran at about 4 s per
+  linear-solver iteration, against 2–5 ms for the coarser meshes in the same job, and the
+  reference at n_arc 128 and dt 2.5e-4 on 16 ranks took about 1,250 s per time step, against
+  0.9 s for the one at dt 1.25e-4 on another node; both used up their time limits. mpirun now
+  runs with `--bind-to none`, and J2 stops a run whose linear solves and their iterations
+  take more than 0.1 s each over 15 minutes (normal: 2–6 ms; `ERRBUDGET_OF_MAX_S_PER_ITER`,
+  `ERRBUDGET_OF_WATCH_WINDOW`). Such a stop is an error, not a failed setting: the task is
+  retried at the next submission and resumes from its last checkpoint, and the work it
+  redoes is not charged to its cost. A resumed run that fails before its first time step
+  (a launch failure, or a checkpoint cut off mid-write) is an error too, retried from the
+  checkpoint before.
+- **J4.** LAMMPS works with the environment of `config.local.sh` (checked by the probe of
+  1 November). GROMACS needs the C++ runtime of the compiler that built it: every job now
+  loads `gcc/11.2` (`ERRBUDGET_MODULES`). Each task asks for 64 tasks on its whole node, so
+  that mpirun has a slot for every rank; every LAMMPS task first runs one cheap setting and
+  stops with LAMMPS's own messages if it fails; a LAMMPS run on fewer processes than ranks (an
+  mpirun that does not match the MPI of `lmp`) is a failed run; `submit.sh` refuses the
+  failed results of October.
 - **Task farm.** An `error.txt` from an earlier attempt is kept as `error_prev.txt`, so a
   time-out is no longer reported with an old error; every attempt is logged in
   `attempts.txt`; `status.sh` counts tasks started and unfinished and prints the core-hours
@@ -54,29 +80,35 @@ What went wrong, and what this version changes:
 
 1. **Code.** Use this repository at the commit of these changes (`git log -1`), not a copy
    of an older version. In `hamilton/config.sh` set `WORK=/nobackup/$USER/knobs` and
-   `ERRBUDGET_ENV=knobs` (the environment and scratch folder of October), and carry over any
-   setting you changed there in October (OpenFOAM mode or module, decomposition method,
-   account).
-2. **Move the old J2 state aside** (never delete it):
+   `ERRBUDGET_ENV=knobs` (the environment and scratch folder of October), copy
+   `config.local.sh` from the October copy into `hamilton/`, and carry over any other
+   setting you changed in October (OpenFOAM mode or module, decomposition method, account).
+2. **Move the old J2 and J4 state aside** (never delete it):
    ```bash
-   W=/nobackup/$USER/knobs; mkdir -p $W/before_inlet_fix
+   W=/nobackup/$USER/knobs; mkdir -p $W/before_inlet_fix $W/before_rerun
    mv $W/dfg2d2_hpc $W/before_inlet_fix/
    for m in 32 48 64 96 128 192; do mv $W/dfg2d2_cases/mesh_$m $W/before_inlet_fix/; done
    mv $W/dfg2d2_cases/SPIN_FAILED $W/before_inlet_fix/ 2>/dev/null
+   mv $W/parallel_hpc $W/before_rerun/
    ```
-3. **Smoke test** (15 minutes; its finer mesh is mapped and run on two ranks, as in production):
-   `cd J2_dfg2d2 && bash submit.sh smoke`; then `grep "SMOKE TEST" logs/smoke_*.out` must say PASSED.
-4. **Submit**: `bash submit.sh` (it refuses if J2 jobs are already queued). It prints one
-   spin-up job per mesh (32 to 192) and one array per mesh.
-5. **Monitor** daily with `bash ../status.sh`. Each spin-up log (`logs/spin<N>_*.out`)
+3. **Smoke tests** (15 minutes each; the J2 one maps its finer mesh and runs it on two
+   ranks, as in production): `bash submit.sh smoke` in `J2_dfg2d2` and in `J4_parallel`;
+   then `grep "SMOKE TEST" */logs/smoke_*.out` must say PASSED for both.
+4. **Submit**: `bash submit.sh` in each (they refuse if their jobs are already queued). J2
+   prints one spin-up job per mesh (32 to 192) and one array per mesh; J4 one array of whole
+   nodes.
+5. **Monitor** daily with `bash status.sh`. Each spin-up log (`J2_dfg2d2/logs/spin<N>_*.out`)
    should say "analytic inlet restored" and end with "spun up". The guard is 2,200 core-hours
-   for the rerun: if `status.sh` prints GUARD PASSED, stop and report. If a spin-up fails,
-   its dependants are cancelled; report the log. Time-outs: run `bash submit.sh` again once
-   the queue holds no J2 job (finished tasks are skipped).
-6. **Collect** as in Section 5 below (`bash collect_job.sh`).
+   for the J2 rerun: if `status.sh` prints GUARD PASSED, stop and report. A spin-up or a run
+   stopped as too slow ("was stopped" in its spin-up log or in an `error.txt`) and time-outs:
+   run `bash submit.sh` again once the queue holds no job of that study; finished tasks and
+   meshes are skipped, the others resume. If a spin-up fails for another reason, its
+   dependants are cancelled: report its log. A task or spin-up that fails twice for the same
+   reason: report it.
+6. **Collect** only the reruns: `JOBS="2 4" bash collect_job.sh` (Section 5 below).
 
-Expected cost: about 1,500–2,000 core-hours (base runs about 450, references about
-600–1,000, spin-ups about 150), 1–3 days.
+Expected cost: J2 about 1,500–2,000 core-hours (base runs about 450, references about
+600–1,000, spin-ups about 150), 1–3 days; J4 15 whole-node tasks of up to 12 hours.
 
 ## What is in this folder
 

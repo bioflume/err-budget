@@ -14,6 +14,8 @@ and this script runs them:
                                                  # of those whose fields match the filters
     python -m farm <module> one ID               # one task by id
     python -m farm <module> status               # counts
+    python -m farm <module> count [key=value ...] # tasks matching the filters
+    python -m farm <module> left [key=value ...]  # of those, the unfinished ones
 
 Results go to $WORK/<module>/<id>/.  A task whose result.json exists is skipped,
 so arrays can be resubmitted after time-outs; a task that raised writes
@@ -84,11 +86,11 @@ def main():
             T = [t for t in T if str(t.get(key)) == val]
         for i in range(k, len(T), nk):
             run_one(mod, T[i])
-    elif cmd == "count":
+    elif cmd in ("count", "left"):
         for f in sys.argv[3:]:
             key, val = f.split("=", 1)
             T = [t for t in T if str(t.get(key)) == val]
-        print(len(T))
+        print(len(T) if cmd == "count" else sum(not done(mod, t) for t in T))
     elif cmd == "one":
         t = [t for t in T if t["id"] == sys.argv[3]][0]
         print(run_one(mod, t))

@@ -38,8 +38,19 @@ def TASKS():
     return T
 
 
+def _check_lmp(R):
+    """Run the cheapest setting once and stop with LAMMPS's own messages if it fails.  In
+    October 2026 every run of J4 failed within a second, and a grid of failed runs was
+    stored as a finished task."""
+    th = tuple(lad[0] for lad in E.LADL)
+    e, c = E.lmp_run(th, R, neval=1)
+    if not np.isfinite(c):
+        raise RuntimeError(f"LAMMPS check on {R} rank(s) at {th} failed: {E.LAST_ERROR}")
+
+
 def run(task, out):
     if task["kind"] == "lmp":
+        _check_lmp(task["R"])
         t = {}
         grid = list(itertools.product(*[range(len(l)) for l in E.LADL]))
         if SMOKE:
