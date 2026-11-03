@@ -2,8 +2,11 @@
 
 Reads $WORK/dfg2d2_hpc/*/series.npz, builds the 6-parameter tensor, writes
 results/j2_tensor.pkl and prints:
-  * the reference and its uncertainty (two other reference runs, and the
-    relaxation/window variants of the finest one);
+  * the reference and its uncertainty: the reference is the run at n_arc 128 and
+    dt 1.25e-4 (the planned one at n_arc 192 diverged, November 2026), and its
+    uncertainty the largest relative change to the other converged reference run
+    (dt 2.5e-4), to its other relaxation/window variants, and from n_arc 96 to 128
+    at dt 2.5e-4;
   * error against mesh level at the finest other settings, with observed orders;
   * the replay of the program (default configuration, and version 1.1) from
     every usable start at every admitted target.
@@ -102,6 +105,7 @@ def load():
     return LAD, tensor, refs
 
 
+MAIN_REF = dict(n_arc=128, dt=1.25e-4, outer_tol=1e-5, p_tol=1e-8)   # see __main__
 TARGETS = {"cd_max": [1e-1, 3e-2, 1e-2, 3e-3, 1e-3], "cl_max": [1e-1, 3e-2, 1e-2, 3e-3],
            "st": [1e-1, 3e-2, 1e-2, 3e-3, 1e-3]}
 CONFIGS = ["v1.2.1", "v1.2", "v1.1", "v1.2.1-credit", "v1.2.1-nojoint"]
@@ -170,7 +174,11 @@ if __name__ == "__main__":
     if not refs:
         pickle.dump(dict(LAD=LAD, tensor=tensor, refs=refs), open(os.path.join(OUT, "j2_tensor.pkl"), "wb"))
         raise SystemExit("no reference runs yet")
-    key0 = "ref_" + J.tid(J.REFS[0])
+    # November 2026: the planned main reference, n_arc 192 at dt 1.25e-4 (J.REFS[0]), diverged on
+    # Hamilton (every one of its 32 steps reached the outer-iteration limit, then a floating-point
+    # exception).  The main reference is the run at n_arc 128 and dt 1.25e-4, whose uncertainty
+    # includes the change from the finest mesh of the grid, n_arc 96, to 128 (below).
+    key0 = "ref_" + J.tid(MAIN_REF)
     RW = (RELAX[1], WIN[2])
     if key0 not in refs or refs[key0].get(RW) is None:
         pickle.dump(dict(LAD=LAD, tensor=tensor, refs=refs), open(os.path.join(OUT, "j2_tensor.pkl"), "wb"))
@@ -185,21 +193,35 @@ if __name__ == "__main__":
         raise SystemExit(f"the reference run {key0} has steps at the outer-iteration limit: "
                          "it is not converged; report it and do not grade against it")
     R0 = refs[key0][RW][0]
-    var = []
+    # the uncertainty of the reference: the largest relative change to (i) every other converged
+    # reference run in the same window, (ii) every other window of the reference run, and
+    # (iii) the change from n_arc 96 to 128 at dt 2.5e-4: the base run at the finest values of
+    # the grid against the reference run at n_arc 128 and dt 2.5e-4
+    changes = {}
     for k, v in refs.items():
+        if REF_STATUS.get(k, {}).get("failed") or REF_STATUS.get(k, {}).get("nonconverged_steps"):
+            continue
         for rw, o in v.items():
-            if o is not None and not (k == key0 and rw == RW):
-                if rw == RW or k == key0:
-                    var.append(o[0])
-    unc = {o: max(abs(x[o] - R0[o]) / abs(R0[o]) for x in var) for o in R0}
-    print("reference (n_arc 192, dt 1.25e-4, R 2, W 4):", {k: round(v, 6) for k, v in R0.items()})
-    print("relative change of each other reference run and window from the reference:")
-    for k, v in refs.items():
-        for rw, o in sorted(v.items()):
             if o is not None and not (k == key0 and rw == RW) and (rw == RW or k == key0):
-                print(f"  {k} R {rw[0]:g} W {rw[1]:g}: " + "  ".join(
-                    f"{ob} {abs(o[0][ob] - R0[ob]) / abs(R0[ob]):.1e}" for ob in R0))
-    print("relative uncertainty (other references and windows):", {k: f"{v:.1e}" for k, v in unc.items()})
+                changes[f"{k} R {rw[0]:g} W {rw[1]:g}"] = {
+                    ob: abs(o[0][ob] - R0[ob]) / abs(R0[ob]) for ob in R0}
+    coarse_ref = "ref_" + J.tid(dict(MAIN_REF, dt=2.5e-4))
+    fin_all = (len(LAD[0]) - 1, len(LAD[1]) - 1, len(LAD[2]) - 1, len(LAD[3]) - 1, 1, 2)
+    if coarse_ref in refs and refs[coarse_ref].get(RW) is not None and np.isfinite(tensor[fin_all][1]):
+        q96, q128 = tensor[fin_all][0], refs[coarse_ref][RW][0]
+        changes["mesh n_arc 96 -> 128 at dt 2.5e-4"] = {
+            ob: abs(q96[ob] - q128[ob]) / abs(R0[ob]) for ob in R0}
+    else:
+        raise SystemExit("the mesh change from n_arc 96 to 128 cannot be measured (missing run)")
+    unc = {o: max(c[o] for c in changes.values()) for o in R0}
+    print(f"reference ({key0}, R {RW[0]:g}, W {RW[1]:g}):", {k: round(v, 6) for k, v in R0.items()})
+    for k, st in sorted(REF_STATUS.items()):
+        if st.get("failed"):
+            print(f"  not used: {k} (failed after {st['nonconverged_steps']} steps at the outer-iteration limit)")
+    print("relative change from the reference, by source:")
+    for k, c in changes.items():
+        print(f"  {k}: " + "  ".join(f"{ob} {c[ob]:.1e}" for ob in R0))
+    print("relative uncertainty (the largest change):", {k: f"{v:.1e}" for k, v in unc.items()})
     print("FEATFLOW level 6:", FEATFLOW, " differences:",
           {o: f"{abs(R0[o]-FEATFLOW[o])/FEATFLOW[o]:.1e}" for o in R0})
     fin = (len(LAD[1]) - 1, len(LAD[2]) - 1, len(LAD[3]) - 1, 1, 2)
