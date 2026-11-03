@@ -3910,157 +3910,6 @@
   "miss_list": []
  },
  {
-  "case": "ABINIT",
-  "ob": "energy",
-  "target": 0.01,
-  "n": 336,
-  "reachable": true,
-  "accepted": 336,
-  "missed": 0,
-  "declined_reach": 0,
-  "declined_unreach": 0,
-  "start_failed": 0,
-  "pen_med": 1.3703520122189465,
-  "pen_max": 25.569791501563554,
-  "runs_med": 37.0,
-  "unconv": 0,
-  "worst": 0.10904026329238238,
-  "hit_cap": 0,
-  "max_steps": 11,
-  "low_order": 0,
-  "low_order_missed": 0,
-  "distinct": 4,
-  "distinct_missed": 0,
-  "accepted_settings": [
-   [
-    [
-     5,
-     0,
-     0,
-     0
-    ],
-    242
-   ],
-   [
-    [
-     5,
-     0,
-     3,
-     0
-    ],
-    22
-   ],
-   [
-    [
-     5,
-     3,
-     1,
-     0
-    ],
-    54
-   ],
-   [
-    [
-     6,
-     3,
-     0,
-     0
-    ],
-    18
-   ]
-  ],
-  "unconv_distinct": 0,
-  "unconv_from_converged": 0,
-  "reasons": {},
-  "feasible": 240,
-  "good": 336,
-  "miss_list": []
- },
- {
-  "case": "ABINIT",
-  "ob": "energy",
-  "target": 0.003,
-  "n": 336,
-  "reachable": true,
-  "accepted": 189,
-  "missed": 0,
-  "declined_reach": 147,
-  "declined_unreach": 0,
-  "start_failed": 0,
-  "pen_med": 8.768452916358859,
-  "pen_max": 8.768452916358859,
-  "runs_med": 53.0,
-  "unconv": 0,
-  "worst": 0.021364289957953496,
-  "hit_cap": 0,
-  "max_steps": 13,
-  "low_order": 0,
-  "low_order_missed": 0,
-  "distinct": 1,
-  "distinct_missed": 0,
-  "accepted_settings": [
-   [
-    [
-     6,
-     2,
-     1,
-     0
-    ],
-    189
-   ]
-  ],
-  "unconv_distinct": 0,
-  "unconv_from_converged": 0,
-  "reasons": {
-   "not_reached": 147
-  },
-  "feasible": 144,
-  "good": 336,
-  "miss_list": []
- },
- {
-  "case": "ABINIT",
-  "ob": "force",
-  "target": 0.1,
-  "n": 336,
-  "reachable": true,
-  "accepted": 224,
-  "missed": 0,
-  "declined_reach": 112,
-  "declined_unreach": 0,
-  "start_failed": 0,
-  "pen_med": 54.59509463898058,
-  "pen_max": 54.59509463898058,
-  "runs_med": 86.0,
-  "unconv": 0,
-  "worst": 0.21139016094886556,
-  "hit_cap": 0,
-  "max_steps": 18,
-  "low_order": 0,
-  "low_order_missed": 0,
-  "distinct": 1,
-  "distinct_missed": 0,
-  "accepted_settings": [
-   [
-    [
-     6,
-     3,
-     3,
-     0
-    ],
-    224
-   ]
-  ],
-  "unconv_distinct": 0,
-  "unconv_from_converged": 0,
-  "reasons": {
-   "not_reached": 112
-  },
-  "feasible": 264,
-  "good": 336,
-  "miss_list": []
- },
- {
   "case": "QE",
   "ob": "energy",
   "target": 0.001,
@@ -4457,6 +4306,189 @@
   "reasons": {},
   "feasible": 458,
   "good": 480,
+  "miss_list": []
+ },
+ {
+  "case": "ABINIT",
+  "ob": "energy",
+  "target": 0.01,
+  "n": 336,
+  "reachable": true,
+  "accepted": 336,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.3703520122189465,
+  "pen_max": 25.569791501563554,
+  "runs_med": 37.0,
+  "unconv": 0,
+  "worst": 0.10904026329238238,
+  "hit_cap": 0,
+  "max_steps": 11,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 4,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     5,
+     0,
+     0,
+     0
+    ],
+    242
+   ],
+   [
+    [
+     5,
+     0,
+     3,
+     0
+    ],
+    22
+   ],
+   [
+    [
+     5,
+     3,
+     1,
+     0
+    ],
+    54
+   ],
+   [
+    [
+     6,
+     3,
+     0,
+     0
+    ],
+    18
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 240,
+  "good": 336,
+  "miss_list": []
+ },
+ {
+  "case": "ABINIT",
+  "ob": "energy",
+  "target": 0.003,
+  "n": 336,
+  "reachable": true,
+  "accepted": 189,
+  "missed": 0,
+  "declined_reach": 147,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 8.768452916358859,
+  "pen_max": 8.768452916358859,
+  "runs_med": 53.0,
+  "unconv": 0,
+  "worst": 0.021364289957953496,
+  "hit_cap": 0,
+  "max_steps": 13,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 1,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     6,
+     2,
+     1,
+     0
+    ],
+    189
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "not_reached": 147
+  },
+  "feasible": 144,
+  "good": 336,
+  "miss_list": []
+ },
+ {
+  "case": "ABINIT",
+  "ob": "energy",
+  "target": 0.001,
+  "n": 336,
+  "reachable": true,
+  "accepted": 0,
+  "missed": 0,
+  "declined_reach": 336,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": NaN,
+  "pen_max": NaN,
+  "runs_med": 52.5,
+  "unconv": 0,
+  "worst": 0.0,
+  "hit_cap": 0,
+  "max_steps": 12,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 0,
+  "distinct_missed": 0,
+  "accepted_settings": [],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "not_reached": 336
+  },
+  "feasible": 84,
+  "good": 336,
+  "miss_list": []
+ },
+ {
+  "case": "ABINIT",
+  "ob": "force",
+  "target": 0.1,
+  "n": 336,
+  "reachable": true,
+  "accepted": 224,
+  "missed": 0,
+  "declined_reach": 112,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 54.59509463898058,
+  "pen_max": 54.59509463898058,
+  "runs_med": 86.0,
+  "unconv": 0,
+  "worst": 0.21139016094886556,
+  "hit_cap": 0,
+  "max_steps": 18,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 1,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     6,
+     3,
+     3,
+     0
+    ],
+    224
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "not_reached": 112
+  },
+  "feasible": 264,
+  "good": 336,
   "miss_list": []
  }
 ]

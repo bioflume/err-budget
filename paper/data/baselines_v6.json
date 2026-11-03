@@ -3498,6 +3498,72 @@
     "runs": 336.0,
     "K": 2961.4310761372517
    }
+  },
+  "ABINIT|energy|0.001": {
+   "program": {
+    "reached": 0,
+    "missed": 0,
+    "declined": 336,
+    "pen": NaN,
+    "runs": 73.0,
+    "K": NaN
+   },
+   "seq-1": {
+    "reached": 84,
+    "missed": 252,
+    "declined": 0,
+    "pen": 5.499011637973579,
+    "runs": 5.0,
+    "K": 5.365102108174382
+   },
+   "seq-3": {
+    "reached": 336,
+    "missed": 0,
+    "declined": 0,
+    "pen": 4.042102779465976,
+    "runs": 6.0,
+    "K": 6.57739291266641
+   },
+   "seq-10": {
+    "reached": 336,
+    "missed": 0,
+    "declined": 0,
+    "pen": 4.533308521726216,
+    "runs": 6.0,
+    "K": 5.978191251104658
+   },
+   "coord-1": {
+    "reached": 144,
+    "missed": 192,
+    "declined": 0,
+    "pen": 3.394619983500507,
+    "runs": 7.0,
+    "K": 9.462494205644358
+   },
+   "coord-3": {
+    "reached": 336,
+    "missed": 0,
+    "declined": 0,
+    "pen": 4.042102779465976,
+    "runs": 7.0,
+    "K": 9.786512753230106
+   },
+   "coord-10": {
+    "reached": 336,
+    "missed": 0,
+    "declined": 0,
+    "pen": 4.533308521726216,
+    "runs": 7.0,
+    "K": 8.543164695511514
+   },
+   "ref": {
+    "reached": 336,
+    "missed": 0,
+    "declined": 0,
+    "pen": 1.0,
+    "runs": 336.0,
+    "K": 1533.50397975919
+   }
   }
  }
 }

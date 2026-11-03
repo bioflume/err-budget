@@ -1,0 +1,866 @@
+[
+ {
+  "n_cells": 20,
+  "ions": 8000,
+  "order": 4,
+  "cutoff": 10.0,
+  "kspace_accuracy": 1e-05,
+  "setup_s": 0.7221155059999944,
+  "per_eval_s": 0.18437238299999592,
+  "evals_s": [
+   0.18437238299999592,
+   0.23483481700000652,
+   0.16773726800001043
+  ],
+  "energy": -35693.879072816555,
+  "rel_error": 5.001807232148656e-06,
+  "g_ewald": 0.31189163,
+  "stencil_order": 4.0,
+  "acc_abs": 0.00015993701,
+  "acc_rel": 1.1107011e-05,
+  "grid": [
+   80,
+   80,
+   80
+  ],
+  "grid_points": 512000,
+  "grid_values_proc": 658503,
+  "fft_values_proc": 512000,
+  "fft": "double FFTW3",
+  "loop_time_10": 0.916711,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 0.10015,
+   "Kspace": 0.59608,
+   "Neigh": 0.21559,
+   "Comm": 0.0038061,
+   "Output": 0.0001091,
+   "Modify": 5.3045e-05,
+   "Other": 0.000922
+  }
+ },
+ {
+  "n_cells": 20,
+  "ions": 8000,
+  "order": 5,
+  "cutoff": 10.0,
+  "kspace_accuracy": 1e-05,
+  "setup_s": 0.08067924900001344,
+  "per_eval_s": 0.07152451400000359,
+  "evals_s": [
+   0.07841303800000787,
+   0.06918223799999623,
+   0.07152451400000359
+  ],
+  "energy": -35693.895512411545,
+  "rel_error": 4.541237711831365e-06,
+  "g_ewald": 0.31172304,
+  "stencil_order": 5.0,
+  "acc_abs": 0.00016192752,
+  "acc_rel": 1.1245244e-05,
+  "grid": [
+   54,
+   54,
+   54
+  ],
+  "grid_points": 157464,
+  "grid_values_proc": 226981,
+  "fft_values_proc": 157464,
+  "fft": "double FFTW3",
+  "loop_time_10": 0.486805,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 0.10102,
+   "Kspace": 0.16361,
+   "Neigh": 0.21792,
+   "Comm": 0.0034404,
+   "Output": 6.4155e-05,
+   "Modify": 1.0003e-05,
+   "Other": 0.0007399
+  }
+ },
+ {
+  "n_cells": 20,
+  "ions": 8000,
+  "order": 6,
+  "cutoff": 10.0,
+  "kspace_accuracy": 1e-05,
+  "setup_s": 0.0721257079999873,
+  "per_eval_s": 0.060770458000007466,
+  "evals_s": [
+   0.06552995599999178,
+   0.05616845100000489,
+   0.060770458000007466
+  ],
+  "energy": -35693.90737867946,
+  "rel_error": 4.208793918343528e-06,
+  "g_ewald": 0.3132567,
+  "stencil_order": 6.0,
+  "acc_abs": 0.00014521332,
+  "acc_rel": 1.0084507e-05,
+  "grid": [
+   45,
+   45,
+   45
+  ],
+  "grid_points": 91125,
+  "grid_values_proc": 140608,
+  "fft_values_proc": 91125,
+  "fft": "double FFTW3",
+  "loop_time_10": 0.448171,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 0.10711,
+   "Kspace": 0.11491,
+   "Neigh": 0.22212,
+   "Comm": 0.0032021,
+   "Output": 6.2241e-05,
+   "Modify": 8.586e-06,
+   "Other": 0.0007558
+  }
+ },
+ {
+  "n_cells": 20,
+  "ions": 8000,
+  "order": 7,
+  "cutoff": 10.0,
+  "kspace_accuracy": 1e-05,
+  "setup_s": 0.07039059299999906,
+  "per_eval_s": 0.06303570599999375,
+  "evals_s": [
+   0.06441019500000777,
+   0.057686947999997074,
+   0.06303570599999375
+  ],
+  "energy": -35693.892463525124,
+  "rel_error": 4.626654910818038e-06,
+  "g_ewald": 0.31311754,
+  "stencil_order": 7.0,
+  "acc_abs": 0.00014700279,
+  "acc_rel": 1.0208779e-05,
+  "grid": [
+   40,
+   40,
+   40
+  ],
+  "grid_points": 64000,
+  "grid_values_proc": 117649,
+  "fft_values_proc": 64000,
+  "fft": "double FFTW3",
+  "loop_time_10": 0.468283,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 0.11184,
+   "Kspace": 0.11226,
+   "Neigh": 0.23599,
+   "Comm": 0.0073531,
+   "Output": 5.454e-05,
+   "Modify": 9.845e-06,
+   "Other": 0.000771
+  }
+ },
+ {
+  "n_cells": 20,
+  "ions": 8000,
+  "order": 4,
+  "cutoff": 8.0,
+  "kspace_accuracy": 1e-06,
+  "setup_s": 8.538101584999993,
+  "per_eval_s": 3.638848379999999,
+  "evals_s": [
+   4.357459698000014,
+   3.4986219620000014,
+   3.638848379999999
+  ],
+  "energy": -35694.0211116192,
+  "rel_error": 1.0224669115034869e-06,
+  "g_ewald": 0.43285972,
+  "stencil_order": 4.0,
+  "acc_abs": 1.890907e-05,
+  "acc_rel": 1.3131623e-06,
+  "grid": [
+   192,
+   192,
+   192
+  ],
+  "grid_points": 7077888,
+  "grid_values_proc": 8365427,
+  "fft_values_proc": 7077888,
+  "fft": "double FFTW3",
+  "loop_time_10": 16.9272,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 0.047762,
+   "Kspace": 16.755,
+   "Neigh": 0.11967,
+   "Comm": 0.0037213,
+   "Output": 6.4777e-05,
+   "Modify": 1.599e-05,
+   "Other": 0.001225
+  }
+ },
+ {
+  "n_cells": 20,
+  "ions": 8000,
+  "order": 5,
+  "cutoff": 8.0,
+  "kspace_accuracy": 1e-06,
+  "setup_s": 0.5478077319999954,
+  "per_eval_s": 0.5219398640000037,
+  "evals_s": [
+   0.5219398640000037,
+   0.5452247610000001,
+   0.4996344780000044
+  ],
+  "energy": -35694.01961599378,
+  "rel_error": 1.064368155682562e-06,
+  "g_ewald": 0.43725679,
+  "stencil_order": 5.0,
+  "acc_abs": 1.4443663e-05,
+  "acc_rel": 1.0030569e-06,
+  "grid": [
+   120,
+   120,
+   120
+  ],
+  "grid_points": 1728000,
+  "grid_values_proc": 2146689,
+  "fft_values_proc": 1728000,
+  "fft": "double FFTW3",
+  "loop_time_10": 2.71745,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 0.047949,
+   "Kspace": 2.5496,
+   "Neigh": 0.11492,
+   "Comm": 0.0036598,
+   "Output": 7.3277e-05,
+   "Modify": 1.516e-05,
+   "Other": 0.001242
+  }
+ },
+ {
+  "n_cells": 20,
+  "ions": 8000,
+  "order": 6,
+  "cutoff": 8.0,
+  "kspace_accuracy": 1e-06,
+  "setup_s": 0.22896449399999597,
+  "per_eval_s": 0.22823004100000333,
+  "evals_s": [
+   0.22823004100000333,
+   0.2239800119999984,
+   0.3086456860000055
+  ],
+  "energy": -35694.03363479127,
+  "rel_error": 6.716193781580223e-07,
+  "g_ewald": 0.43901755,
+  "stencil_order": 6.0,
+  "acc_abs": 1.2814053e-05,
+  "acc_rel": 8.8988673e-07,
+  "grid": [
+   90,
+   90,
+   90
+  ],
+  "grid_points": 729000,
+  "grid_values_proc": 970299,
+  "fft_values_proc": 729000,
+  "fft": "double FFTW3",
+  "loop_time_10": 1.1272,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 0.050269,
+   "Kspace": 0.94865,
+   "Neigh": 0.12328,
+   "Comm": 0.0038941,
+   "Output": 5.9625e-05,
+   "Modify": 1.4727e-05,
+   "Other": 0.001024
+  }
+ },
+ {
+  "n_cells": 20,
+  "ions": 8000,
+  "order": 7,
+  "cutoff": 8.0,
+  "kspace_accuracy": 1e-06,
+  "setup_s": 0.12609127999999714,
+  "per_eval_s": 0.10781401999999218,
+  "evals_s": [
+   0.137683655999993,
+   0.10781401999999218,
+   0.10539683800000432
+  ],
+  "energy": -35694.02860781435,
+  "rel_error": 8.124544990952275e-07,
+  "g_ewald": 0.43617592,
+  "stencil_order": 7.0,
+  "acc_abs": 1.5514931e-05,
+  "acc_rel": 1.0774523e-06,
+  "grid": [
+   72,
+   72,
+   72
+  ],
+  "grid_points": 373248,
+  "grid_values_proc": 531441,
+  "fft_values_proc": 373248,
+  "fft": "double FFTW3",
+  "loop_time_10": 0.6057,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 0.043579,
+   "Kspace": 0.44809,
+   "Neigh": 0.10986,
+   "Comm": 0.0031204,
+   "Output": 5.8886e-05,
+   "Modify": 1.3418e-05,
+   "Other": 0.0009737
+  }
+ },
+ {
+  "n_cells": 40,
+  "ions": 64000,
+  "order": 4,
+  "cutoff": 10.0,
+  "kspace_accuracy": 1e-05,
+  "setup_s": 3.497160926999996,
+  "per_eval_s": 1.473940830999993,
+  "evals_s": [
+   1.2657442330000066,
+   1.884749499999998,
+   1.473940830999993
+  ],
+  "energy": -285550.95779128524,
+  "rel_error": 5.263724944131495e-06,
+  "g_ewald": 0.3086597,
+  "stencil_order": 4.0,
+  "acc_abs": 0.00019810984,
+  "acc_rel": 1.3757967e-05,
+  "grid": [
+   150,
+   150,
+   150
+  ],
+  "grid_points": 3375000,
+  "grid_values_proc": 3869893,
+  "fft_values_proc": 3375000,
+  "fft": "double FFTW3",
+  "loop_time_10": 8.01534,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 0.93977,
+   "Kspace": 5.2613,
+   "Neigh": 1.783,
+   "Comm": 0.022966,
+   "Output": 0.00038327,
+   "Modify": 1.5031e-05,
+   "Other": 0.007902
+  }
+ },
+ {
+  "n_cells": 40,
+  "ions": 64000,
+  "order": 5,
+  "cutoff": 10.0,
+  "kspace_accuracy": 1e-05,
+  "setup_s": 0.7150149779999992,
+  "per_eval_s": 0.7122467480000125,
+  "evals_s": [
+   0.7122467480000125,
+   0.6765653969999903,
+   0.7139981839999905
+  ],
+  "energy": -285551.16410720244,
+  "rel_error": 4.54121001089036e-06,
+  "g_ewald": 0.31172304,
+  "stencil_order": 5.0,
+  "acc_abs": 0.00016192752,
+  "acc_rel": 1.1245244e-05,
+  "grid": [
+   108,
+   108,
+   108
+  ],
+  "grid_points": 1259712,
+  "grid_values_proc": 1520875,
+  "fft_values_proc": 1259712,
+  "fft": "double FFTW3",
+  "loop_time_10": 4.53525,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 0.85264,
+   "Kspace": 1.9551,
+   "Neigh": 1.6999,
+   "Comm": 0.020664,
+   "Output": 0.00030082,
+   "Modify": 1.6504e-05,
+   "Other": 0.006609
+  }
+ },
+ {
+  "n_cells": 40,
+  "ions": 64000,
+  "order": 6,
+  "cutoff": 10.0,
+  "kspace_accuracy": 1e-05,
+  "setup_s": 0.549678694999983,
+  "per_eval_s": 0.5386307919999922,
+  "evals_s": [
+   0.5106409070000097,
+   0.5386307919999922,
+   0.557815622000021
+  ],
+  "energy": -285551.2590277367,
+  "rel_error": 4.208799868091611e-06,
+  "g_ewald": 0.3132567,
+  "stencil_order": 6.0,
+  "acc_abs": 0.00014521332,
+  "acc_rel": 1.0084507e-05,
+  "grid": [
+   90,
+   90,
+   90
+  ],
+  "grid_points": 729000,
+  "grid_values_proc": 912673,
+  "fft_values_proc": 729000,
+  "fft": "double FFTW3",
+  "loop_time_10": 3.87662,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 0.83792,
+   "Kspace": 1.2287,
+   "Neigh": 1.7797,
+   "Comm": 0.022647,
+   "Output": 0.00028889,
+   "Modify": 1.5549e-05,
+   "Other": 0.007339
+  }
+ },
+ {
+  "n_cells": 40,
+  "ions": 64000,
+  "order": 7,
+  "cutoff": 10.0,
+  "kspace_accuracy": 1e-05,
+  "setup_s": 0.4989798080000014,
+  "per_eval_s": 0.47303685099998916,
+  "evals_s": [
+   0.4902023409999856,
+   0.4418824299999926,
+   0.47303685099998916
+  ],
+  "energy": -285551.1397077412,
+  "rel_error": 4.626656520968104e-06,
+  "g_ewald": 0.31311754,
+  "stencil_order": 7.0,
+  "acc_abs": 0.00014700279,
+  "acc_rel": 1.0208779e-05,
+  "grid": [
+   80,
+   80,
+   80
+  ],
+  "grid_points": 512000,
+  "grid_values_proc": 704969,
+  "fft_values_proc": 512000,
+  "fft": "double FFTW3",
+  "loop_time_10": 3.58313,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 0.75009,
+   "Kspace": 1.1226,
+   "Neigh": 1.683,
+   "Comm": 0.020473,
+   "Output": 0.00030001,
+   "Modify": 1.5449e-05,
+   "Other": 0.006591
+  }
+ },
+ {
+  "n_cells": 40,
+  "ions": 64000,
+  "order": 4,
+  "cutoff": 8.0,
+  "kspace_accuracy": 1e-06,
+  "unavailable": "exit 1: ~~~~~~~~~~~~~^^^^^^\n  File \"/tmp/claude-0/-home-claude/d6de2c46-2cbf-5263-bd8e-e598e7fc9b5c/scratchpad/pylmp/site/lammps/core.py\", line 49, in __exit__\n    raise self.lmp._lammps_exception\nException: ERROR on proc 0: Failed to allocate 2717908992 bytes for array pppm:vg (src/memory.cpp:65)\nLast com\n"
+ },
+ {
+  "n_cells": 40,
+  "ions": 64000,
+  "order": 5,
+  "cutoff": 8.0,
+  "kspace_accuracy": 1e-06,
+  "setup_s": 12.996871243000015,
+  "per_eval_s": 6.143868341000001,
+  "evals_s": [
+   7.003640848999993,
+   5.940247345000017,
+   6.143868341000001
+  ],
+  "energy": -285552.17216697923,
+  "rel_error": 1.0110013278469057e-06,
+  "g_ewald": 0.43299599,
+  "stencil_order": 5.0,
+  "acc_abs": 1.8763296e-05,
+  "acc_rel": 1.3030388e-06,
+  "grid": [
+   225,
+   225,
+   225
+  ],
+  "grid_points": 11390625,
+  "grid_values_proc": 12812904,
+  "fft_values_proc": 11390625,
+  "fft": "double FFTW3",
+  "loop_time_10": 28.7664,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 0.33689,
+   "Kspace": 27.576,
+   "Neigh": 0.82656,
+   "Comm": 0.019292,
+   "Output": 0.00035787,
+   "Modify": 1.4129e-05,
+   "Other": 0.007461
+  }
+ },
+ {
+  "n_cells": 40,
+  "ions": 64000,
+  "order": 6,
+  "cutoff": 8.0,
+  "kspace_accuracy": 1e-06,
+  "setup_s": 2.4234091909999904,
+  "per_eval_s": 2.4322386350000045,
+  "evals_s": [
+   2.41683188799999,
+   2.4322386350000045,
+   3.0105693400000177
+  ],
+  "energy": -285552.2690787729,
+  "rel_error": 6.716178275298988e-07,
+  "g_ewald": 0.43901755,
+  "stencil_order": 6.0,
+  "acc_abs": 1.2814053e-05,
+  "acc_rel": 8.8988673e-07,
+  "grid": [
+   180,
+   180,
+   180
+  ],
+  "grid_points": 5832000,
+  "grid_values_proc": 6751269,
+  "fft_values_proc": 5832000,
+  "fft": "double FFTW3",
+  "loop_time_10": 13.074,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 0.33431,
+   "Kspace": 11.922,
+   "Neigh": 0.79227,
+   "Comm": 0.018315,
+   "Output": 0.00038328,
+   "Modify": 1.6492e-05,
+   "Other": 0.006864
+  }
+ },
+ {
+  "n_cells": 40,
+  "ions": 64000,
+  "order": 7,
+  "cutoff": 8.0,
+  "kspace_accuracy": 1e-06,
+  "setup_s": 1.22546835899999,
+  "per_eval_s": 1.349481446000027,
+  "evals_s": [
+   1.5110682749999569,
+   1.349481446000027,
+   1.2914821350000238
+  ],
+  "energy": -285552.2288636176,
+  "rel_error": 8.124506370996406e-07,
+  "g_ewald": 0.43617592,
+  "stencil_order": 7.0,
+  "acc_abs": 1.5514931e-05,
+  "acc_rel": 1.0774523e-06,
+  "grid": [
+   144,
+   144,
+   144
+  ],
+  "grid_points": 2985984,
+  "grid_values_proc": 3581577,
+  "fft_values_proc": 2985984,
+  "fft": "double FFTW3",
+  "loop_time_10": 7.02865,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 0.33846,
+   "Kspace": 5.8591,
+   "Neigh": 0.8057,
+   "Comm": 0.018303,
+   "Output": 0.00034539,
+   "Modify": 1.4319e-05,
+   "Other": 0.006731
+  }
+ },
+ {
+  "n_cells": 64,
+  "ions": 262144,
+  "order": 4,
+  "cutoff": 10.0,
+  "kspace_accuracy": 1e-05,
+  "setup_s": 15.75713756600004,
+  "per_eval_s": 8.837796462999961,
+  "evals_s": [
+   9.756746573999976,
+   8.837796462999961,
+   8.15420853300003
+  ],
+  "energy": -1169616.7231899598,
+  "rel_error": 5.263659234654722e-06,
+  "g_ewald": 0.3086597,
+  "stencil_order": 4.0,
+  "acc_abs": 0.00019810984,
+  "acc_rel": 1.3757967e-05,
+  "grid": [
+   240,
+   240,
+   240
+  ],
+  "grid_points": 13824000,
+  "grid_values_proc": 15069223,
+  "fft_values_proc": 13824000,
+  "fft": "double FFTW3",
+  "loop_time_10": 40.1628,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 3.0165,
+   "Kspace": 31.453,
+   "Neigh": 5.5863,
+   "Comm": 0.073079,
+   "Output": 0.0013404,
+   "Modify": 1.6948e-05,
+   "Other": 0.03255
+  }
+ },
+ {
+  "n_cells": 64,
+  "ions": 262144,
+  "order": 5,
+  "cutoff": 10.0,
+  "kspace_accuracy": 1e-05,
+  "setup_s": 3.632300471999997,
+  "per_eval_s": 4.297592369999961,
+  "evals_s": [
+   3.351129926999988,
+   4.297592369999961,
+   5.724769585999979
+  ],
+  "energy": -1169618.1443381917,
+  "rel_error": 4.048610985656068e-06,
+  "g_ewald": 0.31401574,
+  "stencil_order": 5.0,
+  "acc_abs": 0.00013687933,
+  "acc_rel": 9.5057431e-06,
+  "grid": [
+   180,
+   180,
+   180
+  ],
+  "grid_points": 5832000,
+  "grid_values_proc": 6539203,
+  "fft_values_proc": 5832000,
+  "fft": "double FFTW3",
+  "loop_time_10": 21.9762,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 3.0926,
+   "Kspace": 13.142,
+   "Neigh": 5.6396,
+   "Comm": 0.07002,
+   "Output": 0.0013668,
+   "Modify": 1.5569e-05,
+   "Other": 0.03103
+  }
+ },
+ {
+  "n_cells": 64,
+  "ions": 262144,
+  "order": 6,
+  "cutoff": 10.0,
+  "kspace_accuracy": 1e-05,
+  "setup_s": 2.3905807140000093,
+  "per_eval_s": 2.6145064240000124,
+  "evals_s": [
+   3.4614545370000087,
+   2.3972123919999717,
+   2.6145064240000124
+  ],
+  "energy": -1169617.9569801071,
+  "rel_error": 4.2087977329011965e-06,
+  "g_ewald": 0.3132567,
+  "stencil_order": 6.0,
+  "acc_abs": 0.00014521332,
+  "acc_rel": 1.0084507e-05,
+  "grid": [
+   144,
+   144,
+   144
+  ],
+  "grid_points": 2985984,
+  "grid_values_proc": 3442951,
+  "fft_values_proc": 2985984,
+  "fft": "double FFTW3",
+  "loop_time_10": 16.6955,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 3.2703,
+   "Kspace": 7.3953,
+   "Neigh": 5.9258,
+   "Comm": 0.070706,
+   "Output": 0.0014408,
+   "Modify": 1.5306e-05,
+   "Other": 0.03195
+  }
+ },
+ {
+  "n_cells": 64,
+  "ions": 262144,
+  "order": 7,
+  "cutoff": 10.0,
+  "kspace_accuracy": 1e-05,
+  "setup_s": 2.503736876000005,
+  "per_eval_s": 1.8728461200000197,
+  "evals_s": [
+   1.8728461200000197,
+   1.9587376449999852,
+   1.858086500000013
+  ],
+  "energy": -1169617.3735361535,
+  "rel_error": 4.707628564435697e-06,
+  "g_ewald": 0.31098827,
+  "stencil_order": 7.0,
+  "acc_abs": 0.00017051695,
+  "acc_rel": 1.1841747e-05,
+  "grid": [
+   125,
+   125,
+   125
+  ],
+  "grid_points": 1953125,
+  "grid_values_proc": 2406104,
+  "fft_values_proc": 1953125,
+  "fft": "double FFTW3",
+  "loop_time_10": 13.5602,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 3.0064,
+   "Kspace": 4.7823,
+   "Neigh": 5.6682,
+   "Comm": 0.069275,
+   "Output": 0.0012935,
+   "Modify": 1.8941e-05,
+   "Other": 0.03265
+  }
+ },
+ {
+  "n_cells": 64,
+  "ions": 262144,
+  "order": 4,
+  "cutoff": 8.0,
+  "kspace_accuracy": 1e-06,
+  "unavailable": "exit 1: ~~~~~~~~~~~~~^^^^^^\n  File \"/tmp/claude-0/-home-claude/d6de2c46-2cbf-5263-bd8e-e598e7fc9b5c/scratchpad/pylmp/site/lammps/core.py\", line 49, in __exit__\n    raise self.lmp._lammps_exception\nException: ERROR on proc 0: Failed to allocate 1953125000 bytes for array pppm:greensfn (src/memory.cpp:65)\nLa\n"
+ },
+ {
+  "n_cells": 64,
+  "ions": 262144,
+  "order": 5,
+  "cutoff": 8.0,
+  "kspace_accuracy": 1e-06,
+  "unavailable": "exit 1: ~~~~~~~~~~~~~^^^^^^\n  File \"/tmp/claude-0/-home-claude/d6de2c46-2cbf-5263-bd8e-e598e7fc9b5c/scratchpad/pylmp/site/lammps/core.py\", line 49, in __exit__\n    raise self.lmp._lammps_exception\nException: ERROR on proc 0: Failed to allocate 401947272 bytes for array pppm:vdx_brick (src/memory.cpp:65)\nLa\n"
+ },
+ {
+  "n_cells": 64,
+  "ions": 262144,
+  "order": 6,
+  "cutoff": 8.0,
+  "kspace_accuracy": 1e-06,
+  "setup_s": 21.967339127999992,
+  "per_eval_s": 11.000378094999974,
+  "evals_s": [
+   11.273393551000026,
+   10.982169752999994,
+   11.000378094999974
+  ],
+  "energy": -1169621.7855524723,
+  "rel_error": 9.354585808408595e-07,
+  "g_ewald": 0.43413315,
+  "stencil_order": 6.0,
+  "acc_abs": 1.7565532e-05,
+  "acc_rel": 1.2198587e-06,
+  "grid": [
+   270,
+   270,
+   270
+  ],
+  "grid_points": 19683000,
+  "grid_values_proc": 21717639,
+  "fft_values_proc": 19683000,
+  "fft": "double FFTW3",
+  "loop_time_10": 52.1935,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 1.5061,
+   "Kspace": 47.383,
+   "Neigh": 3.2041,
+   "Comm": 0.066322,
+   "Output": 0.00231,
+   "Modify": 1.6759e-05,
+   "Other": 0.0321
+  }
+ },
+ {
+  "n_cells": 64,
+  "ions": 262144,
+  "order": 7,
+  "cutoff": 8.0,
+  "kspace_accuracy": 1e-06,
+  "setup_s": 5.6950797289999855,
+  "per_eval_s": 7.725810584000101,
+  "evals_s": [
+   7.233063936000008,
+   8.068897532999927,
+   7.725810584000101
+  ],
+  "energy": -1169621.758777157,
+  "rel_error": 9.583508445516389e-07,
+  "g_ewald": 0.43377622,
+  "stencil_order": 7.0,
+  "acc_abs": 1.7941674e-05,
+  "acc_rel": 1.2459803e-06,
+  "grid": [
+   225,
+   225,
+   225
+  ],
+  "grid_points": 11390625,
+  "grid_values_proc": 12812904,
+  "fft_values_proc": 11390625,
+  "fft": "double FFTW3",
+  "loop_time_10": 34.26,
+  "procs": 1,
+  "breakdown_10": {
+   "Pair": 1.3789,
+   "Kspace": 29.758,
+   "Neigh": 3.0199,
+   "Comm": 0.070467,
+   "Output": 0.0014287,
+   "Modify": 1.4556e-05,
+   "Other": 0.03149
+  }
+ }
+]
