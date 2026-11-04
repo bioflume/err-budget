@@ -3809,5 +3809,863 @@
   "feasible": 264,
   "good": 336,
   "miss_list": []
+ },
+ {
+  "case": "2D-2h",
+  "ob": "cd_max",
+  "target": 0.1,
+  "n": 1260,
+  "reachable": true,
+  "accepted": 1179,
+  "missed": 0,
+  "declined_reach": 54,
+  "declined_unreach": 0,
+  "start_failed": 27,
+  "pen_med": 1.0,
+  "pen_max": 3.327396741189845,
+  "runs_med": 72.0,
+  "unconv": 0,
+  "worst": 0.052986077177728345,
+  "hit_cap": 0,
+  "max_steps": 15,
+  "low_order": 1179,
+  "low_order_missed": 0,
+  "distinct": 4,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    686
+   ],
+   [
+    [
+     0,
+     1,
+     0,
+     0,
+     0,
+     0
+    ],
+    183
+   ],
+   [
+    [
+     0,
+     2,
+     0,
+     0,
+     0,
+     0
+    ],
+    238
+   ],
+   [
+    [
+     1,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    72
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "unmeasured_axis": 54,
+   "start_failed": 27
+  },
+  "feasible": 1233,
+  "good": 1233,
+  "miss_list": []
+ },
+ {
+  "case": "2D-2h",
+  "ob": "cd_max",
+  "target": 0.03,
+  "n": 1260,
+  "reachable": true,
+  "accepted": 1179,
+  "missed": 0,
+  "declined_reach": 54,
+  "declined_unreach": 0,
+  "start_failed": 27,
+  "pen_med": 1.0,
+  "pen_max": 3.327396741189845,
+  "runs_med": 73.0,
+  "unconv": 0,
+  "worst": 0.1766202572590945,
+  "hit_cap": 0,
+  "max_steps": 15,
+  "low_order": 1179,
+  "low_order_missed": 0,
+  "distinct": 4,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    686
+   ],
+   [
+    [
+     0,
+     1,
+     0,
+     0,
+     0,
+     0
+    ],
+    183
+   ],
+   [
+    [
+     0,
+     2,
+     0,
+     0,
+     0,
+     0
+    ],
+    238
+   ],
+   [
+    [
+     1,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    72
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "unmeasured_axis": 54,
+   "start_failed": 27
+  },
+  "feasible": 1233,
+  "good": 1233,
+  "miss_list": []
+ },
+ {
+  "case": "2D-2h",
+  "ob": "cd_max",
+  "target": 0.01,
+  "n": 1260,
+  "reachable": true,
+  "accepted": 1149,
+  "missed": 0,
+  "declined_reach": 84,
+  "declined_unreach": 0,
+  "start_failed": 27,
+  "pen_med": 50.54793482379689,
+  "pen_max": 384.35164835164835,
+  "runs_med": 82.0,
+  "unconv": 0,
+  "worst": 0.4863161735123414,
+  "hit_cap": 0,
+  "max_steps": 17,
+  "low_order": 1149,
+  "low_order_missed": 0,
+  "distinct": 14,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    9
+   ],
+   [
+    [
+     1,
+     0,
+     0,
+     1,
+     0,
+     0
+    ],
+    18
+   ],
+   [
+    [
+     1,
+     1,
+     0,
+     2,
+     0,
+     0
+    ],
+    54
+   ],
+   [
+    [
+     2,
+     0,
+     1,
+     0,
+     0,
+     0
+    ],
+    27
+   ],
+   [
+    [
+     2,
+     1,
+     0,
+     0,
+     0,
+     0
+    ],
+    33
+   ],
+   [
+    [
+     2,
+     1,
+     1,
+     1,
+     0,
+     0
+    ],
+    54
+   ],
+   [
+    [
+     3,
+     2,
+     0,
+     0,
+     0,
+     0
+    ],
+    257
+   ],
+   [
+    [
+     3,
+     2,
+     0,
+     1,
+     0,
+     0
+    ],
+    86
+   ],
+   [
+    [
+     3,
+     2,
+     2,
+     0,
+     0,
+     0
+    ],
+    449
+   ],
+   [
+    [
+     3,
+     3,
+     0,
+     1,
+     0,
+     1
+    ],
+    8
+   ],
+   [
+    [
+     3,
+     3,
+     0,
+     1,
+     1,
+     0
+    ],
+    5
+   ],
+   [
+    [
+     3,
+     3,
+     0,
+     2,
+     0,
+     0
+    ],
+    5
+   ],
+   [
+    [
+     3,
+     3,
+     1,
+     0,
+     0,
+     0
+    ],
+    139
+   ],
+   [
+    [
+     4,
+     3,
+     0,
+     1,
+     0,
+     0
+    ],
+    5
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "unmeasured_axis": 57,
+   "unbounded_axis": 27,
+   "start_failed": 27
+  },
+  "feasible": 1233,
+  "good": 1233,
+  "miss_list": []
+ },
+ {
+  "case": "2D-2h",
+  "ob": "cl_max",
+  "target": 0.1,
+  "n": 1260,
+  "reachable": true,
+  "accepted": 1158,
+  "missed": 0,
+  "declined_reach": 75,
+  "declined_unreach": 0,
+  "start_failed": 27,
+  "pen_med": 1.6688139446760135,
+  "pen_max": 384.35164835164835,
+  "runs_med": 72.0,
+  "unconv": 0,
+  "worst": 0.26915333267302066,
+  "hit_cap": 0,
+  "max_steps": 18,
+  "low_order": 1158,
+  "low_order_missed": 0,
+  "distinct": 14,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     0,
+     0,
+     1,
+     0,
+     0,
+     0
+    ],
+    569
+   ],
+   [
+    [
+     0,
+     1,
+     0,
+     0,
+     0,
+     0
+    ],
+    263
+   ],
+   [
+    [
+     0,
+     2,
+     0,
+     0,
+     0,
+     0
+    ],
+    243
+   ],
+   [
+    [
+     1,
+     0,
+     0,
+     1,
+     0,
+     0
+    ],
+    20
+   ],
+   [
+    [
+     1,
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    12
+   ],
+   [
+    [
+     1,
+     0,
+     1,
+     0,
+     1,
+     0
+    ],
+    4
+   ],
+   [
+    [
+     1,
+     0,
+     2,
+     0,
+     0,
+     0
+    ],
+    18
+   ],
+   [
+    [
+     1,
+     1,
+     0,
+     0,
+     0,
+     1
+    ],
+    12
+   ],
+   [
+    [
+     1,
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    4
+   ],
+   [
+    [
+     1,
+     1,
+     1,
+     0,
+     0,
+     0
+    ],
+    2
+   ],
+   [
+    [
+     2,
+     1,
+     0,
+     0,
+     0,
+     2
+    ],
+    1
+   ],
+   [
+    [
+     2,
+     1,
+     0,
+     0,
+     1,
+     0
+    ],
+    6
+   ],
+   [
+    [
+     2,
+     1,
+     1,
+     0,
+     0,
+     0
+    ],
+    2
+   ],
+   [
+    [
+     4,
+     3,
+     0,
+     1,
+     0,
+     0
+    ],
+    2
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "unmeasured_axis": 75,
+   "start_failed": 27
+  },
+  "feasible": 1233,
+  "good": 1233,
+  "miss_list": []
+ },
+ {
+  "case": "2D-2h",
+  "ob": "cl_max",
+  "target": 0.03,
+  "n": 1260,
+  "reachable": true,
+  "accepted": 123,
+  "missed": 0,
+  "declined_reach": 1110,
+  "declined_unreach": 0,
+  "start_failed": 27,
+  "pen_med": 7.845395983327017,
+  "pen_max": 16.053808260704812,
+  "runs_med": 84.0,
+  "unconv": 0,
+  "worst": 0.9243397613426855,
+  "hit_cap": 0,
+  "max_steps": 14,
+  "low_order": 123,
+  "low_order_missed": 0,
+  "distinct": 6,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     0,
+     1,
+     1,
+     1,
+     0,
+     1
+    ],
+    1
+   ],
+   [
+    [
+     0,
+     1,
+     2,
+     0,
+     0,
+     1
+    ],
+    2
+   ],
+   [
+    [
+     1,
+     0,
+     0,
+     1,
+     0,
+     0
+    ],
+    18
+   ],
+   [
+    [
+     1,
+     1,
+     0,
+     2,
+     0,
+     0
+    ],
+    75
+   ],
+   [
+    [
+     2,
+     0,
+     1,
+     0,
+     0,
+     1
+    ],
+    18
+   ],
+   [
+    [
+     2,
+     0,
+     1,
+     0,
+     1,
+     0
+    ],
+    9
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "unmeasured_axis": 123,
+   "unbounded_axis": 33,
+   "not_reached": 954,
+   "start_failed": 27
+  },
+  "feasible": 1233,
+  "good": 1233,
+  "miss_list": []
+ },
+ {
+  "case": "2D-2h",
+  "ob": "st",
+  "target": 0.1,
+  "n": 1260,
+  "reachable": true,
+  "accepted": 1179,
+  "missed": 0,
+  "declined_reach": 54,
+  "declined_unreach": 0,
+  "start_failed": 27,
+  "pen_med": 1.0,
+  "pen_max": 3.327396741189845,
+  "runs_med": 72.0,
+  "unconv": 0,
+  "worst": 0.210435079052619,
+  "hit_cap": 0,
+  "max_steps": 15,
+  "low_order": 1179,
+  "low_order_missed": 0,
+  "distinct": 4,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    686
+   ],
+   [
+    [
+     0,
+     1,
+     0,
+     0,
+     0,
+     0
+    ],
+    183
+   ],
+   [
+    [
+     0,
+     2,
+     0,
+     0,
+     0,
+     0
+    ],
+    238
+   ],
+   [
+    [
+     1,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    72
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "unmeasured_axis": 54,
+   "start_failed": 27
+  },
+  "feasible": 1233,
+  "good": 1233,
+  "miss_list": []
+ },
+ {
+  "case": "2D-2h",
+  "ob": "st",
+  "target": 0.03,
+  "n": 1260,
+  "reachable": true,
+  "accepted": 1179,
+  "missed": 0,
+  "declined_reach": 54,
+  "declined_unreach": 0,
+  "start_failed": 27,
+  "pen_med": 1.6688139446760135,
+  "pen_max": 3.327396741189845,
+  "runs_med": 72.0,
+  "unconv": 0,
+  "worst": 0.70145026350873,
+  "hit_cap": 0,
+  "max_steps": 15,
+  "low_order": 1179,
+  "low_order_missed": 0,
+  "distinct": 4,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     0,
+     0,
+     1,
+     0,
+     0,
+     0
+    ],
+    551
+   ],
+   [
+    [
+     0,
+     1,
+     0,
+     0,
+     0,
+     0
+    ],
+    300
+   ],
+   [
+    [
+     0,
+     2,
+     0,
+     0,
+     0,
+     0
+    ],
+    238
+   ],
+   [
+    [
+     1,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    90
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "unmeasured_axis": 54,
+   "start_failed": 27
+  },
+  "feasible": 1233,
+  "good": 1233,
+  "miss_list": []
+ },
+ {
+  "case": "2D-2h",
+  "ob": "st",
+  "target": 0.01,
+  "n": 1260,
+  "reachable": true,
+  "accepted": 1161,
+  "missed": 0,
+  "declined_reach": 72,
+  "declined_unreach": 0,
+  "start_failed": 27,
+  "pen_med": 1.2669683257918551,
+  "pen_max": 2.1500914604794454,
+  "runs_med": 70.0,
+  "unconv": 0,
+  "worst": 0.49654150799593194,
+  "hit_cap": 0,
+  "max_steps": 13,
+  "low_order": 945,
+  "low_order_missed": 0,
+  "distinct": 3,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     2,
+     1,
+     0,
+     1,
+     0,
+     0
+    ],
+    216
+   ],
+   [
+    [
+     2,
+     1,
+     1,
+     0,
+     0,
+     0
+    ],
+    855
+   ],
+   [
+    [
+     2,
+     2,
+     0,
+     0,
+     0,
+     0
+    ],
+    90
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {
+   "unmeasured_axis": 72,
+   "start_failed": 27
+  },
+  "feasible": 612,
+  "good": 1233,
+  "miss_list": []
  }
 ]

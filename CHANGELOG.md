@@ -5,6 +5,28 @@ article. The article describes version 1.2.1; the comparisons with earlier versi
 used to be in the article are recorded here, with the script that reproduces each. The
 entries below the rename keep the old name, as it was at the time.
 
+## Results of the cluster reruns (November 2026; program unchanged: 1.2.1)
+
+- **Refined 2D-2 study (J2).** `hamilton/J2_dfg2d2/analyse_j2.py` grades against the run at
+  $n_\mathrm{arc}=128$, $\Delta t=1.25\times10^{-4}$: the planned reference at 192 diverged
+  (each of its 32 time steps reached the limit of 50 outer correctors). Its uncertainty, from
+  the mesh change 96 to 128, admits eight cells. The case `2D-2h` (1,620 settings from 180
+  runs; 1,260 with a value, 1,233 converged) replaces the coarser study in Tables 3, 4 and 7
+  (`exp70_tables.py`, `ERRBUDGET_TABLE3_2D2=refined`, the default); `data/pooled_*.json` hold
+  both studies. In the eight admitted cells v1.2.1 accepts 8,259 of 9,864 searches and misses
+  none. Below the admission threshold it accepts, from all 72 starts for the drag at
+  $3\times10^{-3}$ and all 64 for the lift at $10^{-2}$, settings at $n_\mathrm{arc}=32$ whose
+  finer run diverged, and every one misses (by 1.44 and up to 2.39 times the target): the
+  charge for a failed finer run assumes that the later changes halve (condition (A1) of
+  Proposition 1). The engine is not changed; treating such a parameter as unmeasured unless
+  three values through the current one ran removes these misses in replay and is left to a
+  later version.
+- **Totals with the refined study:** 56 cells, 32,091 replays, 24,842 accepted starts (305
+  distinct settings), no accepted setting outside an admitted target.
+- **J4.** The observables do not depend on the number of ranks (LAMMPS 1-64 MPI ranks,
+  GROMACS double precision 1-16 thread-MPI ranks); the timings grew with the number of ranks
+  and are not used.
+
 ## Cluster jobs: J2 inlet fix and reruns (November 2026; program unchanged: 1.2.1)
 
 Only the cluster drivers changed (`hamilton/`, and failure messages in `paper/qe_silicon.py`,

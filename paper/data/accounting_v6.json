@@ -489,6 +489,120 @@
   "cost": "CPU s"
  },
  {
+  "case": "2D-2h",
+  "label": "OpenFOAM DFG 2D-2 (refined, current release)",
+  "dims": [
+   5,
+   4,
+   3,
+   3,
+   3,
+   3
+  ],
+  "settings": 1620,
+  "produced_value": 1260,
+  "no_value": 360,
+  "not_converged": 27,
+  "converged": 1233,
+  "starts": 1260,
+  "start_failed": 27,
+  "ladders": [
+   [
+    24.0,
+    32.0,
+    48.0,
+    64.0,
+    96.0
+   ],
+   [
+    0.002,
+    0.001,
+    0.0005,
+    0.00025
+   ],
+   [
+    0.01,
+    0.001,
+    0.0001
+   ],
+   [
+    0.0001,
+    1e-06,
+    1e-08
+   ],
+   [
+    1.0,
+    2.0,
+    4.0
+   ],
+   [
+    1.0,
+    2.0,
+    4.0
+   ]
+  ],
+  "kinds": [
+   "discretisation",
+   "discretisation",
+   "nested-solver",
+   "nested-solver",
+   "discretisation",
+   "discretisation"
+  ],
+  "models": [
+   "power",
+   "power",
+   "power",
+   "power",
+   "exponential",
+   "power"
+  ],
+  "reference": {
+   "cd_max": 3.2296699764602566,
+   "cl_max": 0.9921133869403417,
+   "st": 0.30156820160293774
+  },
+  "uncertainty": {
+   "cd_max": 0.0004006763981490493,
+   "cl_max": 0.0028133087437022058,
+   "st": 0.0005467182702009304
+  },
+  "admitted": {
+   "cd_max": [
+    0.1,
+    0.03,
+    0.01
+   ],
+   "cl_max": [
+    0.1,
+    0.03
+   ],
+   "st": [
+    0.1,
+    0.03,
+    0.01
+   ]
+  },
+  "not_admitted": {
+   "cd_max": [
+    0.003,
+    0.001
+   ],
+   "cl_max": [
+    0.01,
+    0.003
+   ],
+   "st": [
+    0.003,
+    0.001
+   ]
+  },
+  "no_value_reasons": {
+   "no value (no message stored)": 360
+  },
+  "cost": "core-seconds"
+ },
+ {
   "case": "LMP-20",
   "label": "LAMMPS 8,000 ions",
   "dims": [
