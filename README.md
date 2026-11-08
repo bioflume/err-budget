@@ -85,7 +85,7 @@ print(result)
 ```
 
 ```
-  Target 0.0001 MET. Estimated error 2.08e-06.
+  Target 0.0001 MET. Estimated error 2.78e-06.
 
   setting:
     steps                25     (was 100)
@@ -196,7 +196,7 @@ pip install "errbudget @ git+https://github.com/bioflume/errbudget"         # Py
 ```
 
 Python 3.9 or later, NumPy and SciPy. From a clone: `pip install -e ".[dev]"` and `pytest`
-(about 80 s; the tests encode the article's claims, not just code health). To contribute, see
+(under a minute; the tests encode the article's claims, not just code health). To contribute, see
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Citing

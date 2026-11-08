@@ -24,16 +24,14 @@ and `yaml` is the extra that users install to read YAML job files.
 ## Running the tests
 
 ```bash
-pytest                          # the whole suite, a minute or two
+pytest                          # the whole suite, under a minute
 pytest tests/test_jobfile.py    # one file
 ```
 
 The tests encode the article's claims, not only the health of the code.
 `tests/test_tune.py` checks recommended settings against exact solutions, and
 `tests/test_spec_v121.py` pins the behaviour of the engine that Section 4 of the article
-specifies. One test is skipped unless `paper/data/burgers_tensor.pkl`, stored solver
-output from the article, is present. A fresh clone does not have it, so the skip is
-expected.
+specifies.
 
 ## Running the command-line example
 

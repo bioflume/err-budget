@@ -59,4 +59,4 @@ version the article describes; `knobs.ENGINE_VERSION` records it. New around it:
 - `unfit="order1"`, the `noise_floor` check, `models=[..."exponential"...]`.
 
 The complete history with the comparisons behind each change is in the article's
-repository: <https://github.com/bioflume/knobs-paper/blob/main/CHANGELOG.md>.
+repository: <https://github.com/bioflume/errbudget-paper/blob/main/CHANGELOG.md>.

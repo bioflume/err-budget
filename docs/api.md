@@ -75,9 +75,9 @@ distinguish them:
 | `res_frac` | 0 | 0.1 | 0.1 | differences below `res_frac` × target are treated as zero |
 | `cancel_rule` | credit | none | none | whether cancellation between parameters is credited |
 
-Other engine options (`max_iter`, `fs_cap`, `floor_factor`, `unfit`, `walk_mode`,
-`phase2`, `screen_at`, `audit_factor`, `tau`, `drop`) are documented in
-`errbudget/_core.py`; the last four exist to reproduce the article's ablations.
+Other engine options (`max_iter`, `fs_cap`, `floor_factor`, `unfit`, `tau`, `drop`,
+`walk_mode`, `phase2`, `screen_at`, `audit_factor`) are documented in
+`errbudget/_core.py`; the last four exist only to reproduce design ablations.
 
 ## Job files from Python
 
@@ -101,7 +101,7 @@ interface for everyone else.
 
 ## Test problems
 
-`errbudget.problems` holds solvers with exact solutions, used by the tests and the examples:
+`errbudget.problems` holds the article's test problems, solvers with exact solutions:
 `Burgers1D`, `Burgers2D`, `AdvectionDiffusion`, `ReactionDiffusion2D`, `DrivenCavity`,
 `MLHybridBurgers1D`, `make_synthetic`. Each has `run(theta) -> (observables, cost, wall, info)`
 and `exact_observables()`.
