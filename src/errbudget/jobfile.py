@@ -19,17 +19,17 @@ import time
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
-from .api import Parameter, TuneResult, tune, KINDS, CONFIGURATIONS
+from .api import Parameter, TuneResult, tune, CONFIGURATIONS
 from ._core import run_protocol
 from .runner import (BUILTIN_PLACEHOLDERS, CommandSolver, JobError, placeholders, format_value, dry_render,
                      parse_method)
 
 KIND_ALIASES = {
     "discretisation": "discretisation", "discretization": "discretisation",
-    "mesh": "discretisation", "resolution": "discretisation", "d": "discretisation",
+    "mesh": "discretisation", "resolution": "discretisation",
     "nested-solver": "nested-solver", "nested_solver": "nested-solver", "nested": "nested-solver",
-    "tolerance": "nested-solver", "solver": "nested-solver", "n": "nested-solver",
-    "cost-only": "cost-only", "cost_only": "cost-only", "cost": "cost-only", "c": "cost-only",
+    "tolerance": "nested-solver",
+    "cost-only": "cost-only", "cost_only": "cost-only", "cost": "cost-only",
 }
 TUNE_OPTIONS = ("screen", "accept_unconverged", "floor_probe", "configuration")
 FAILURE_RULES = ("failed_if_regex", "unconverged_if_regex", "converged_if_regex",
@@ -117,7 +117,7 @@ class JobSpec:
                 continue
             kind = KIND_ALIASES.get(str(p.get("kind", "discretisation")).lower())
             if kind is None:
-                errors.append(f"parameter {p['name']!r}: kind must be one of {KINDS} "
+                errors.append(f"parameter {p['name']!r}: kind must be one of {', '.join(KIND_ALIASES)} "
                               f"(got {p.get('kind')!r})")
             vals = p.get("values")
             if not isinstance(vals, list) or len(vals) < 2:

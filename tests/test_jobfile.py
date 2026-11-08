@@ -117,6 +117,16 @@ def test_kind_aliases_and_configurations():
         JobSpec.from_dict(dict(d, options={"configuration": "v9"}))
 
 
+def test_dropped_kind_aliases_are_refused():
+    base = {"command": "x {{n}}", "observable": "v", "target": 1}
+    accepted = ("discretisation, discretization, mesh, resolution, nested-solver, nested_solver, "
+                "nested, tolerance, cost-only, cost_only, cost")
+    for kind in ("d", "n", "c", "solver"):
+        with pytest.raises(JobError) as e:
+            JobSpec.from_dict(dict(base, parameters=[{"name": "n", "kind": kind, "values": [1, 2]}]))
+        assert f"parameter 'n': kind must be one of {accepted} (got {kind!r})" in str(e.value)
+
+
 # ------------------------------------------------------------------ the runner
 SOLVER = """
 import sys, json

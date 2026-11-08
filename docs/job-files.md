@@ -38,7 +38,7 @@ A list; each entry has
 | key | |
 |---|---|
 | `name` | the placeholder name |
-| `kind` | `discretisation` (default), `nested-solver` or `cost-only`; see the README. Aliases: `mesh`, `resolution`, `tolerance`, `nested`, `cost` |
+| `kind` | `discretisation` (default), `nested-solver` or `cost-only`; see the README. Aliases: `discretization`, `mesh`, `resolution`, `tolerance`, `nested`, `cost` |
 | `values` | at least two candidate values, **coarse (cheap, inaccurate) first, fine last** |
 | `start` | the value you would otherwise have used; the measurement begins there (default: the middle value) |
 | `model` | `power` (default) or `exponential` for a cutoff whose error decays exponentially; such values must increase |
