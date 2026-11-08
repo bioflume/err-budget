@@ -337,6 +337,16 @@ def test_validation_catches_engine_refusals_and_bad_fields(tmp_path):
     assert job.tune_kwargs()["resid_margin"] == 1e-3
 
 
+def test_failure_that_is_not_a_mapping_is_refused(tmp_path, capsys):
+    d = {"command": "x {{n}}", "parameters": [{"name": "n", "values": [1, 2]}], "observable": "v", "target": 1}
+    with pytest.raises(JobError, match="'failure' must be a mapping"):
+        JobSpec.from_dict(dict(d, failure=["FATAL"]))
+    p = tmp_path / "job.json"
+    p.write_text(json.dumps(dict(d, failure="FATAL")))
+    assert main(["check", str(p), "--no-run"]) == 1
+    assert "'failure' must be a mapping" in capsys.readouterr().err
+
+
 def test_null_json_and_fortran_columns():
     with pytest.raises(JobError, match="could not read"):
         extract_number({"key": "flux"}, '{"flux": null}')

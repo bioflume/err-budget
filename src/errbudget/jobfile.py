@@ -226,8 +226,8 @@ class JobSpec:
             cost = None
         if cost is not None and cost.get("source") == "file" and "path" not in cost:
             errors.append("cost: 'source: file' needs 'path'")
-        failure = dict(d.get("failure") or {})
-        if not isinstance(d.get("failure") or {}, dict):
+        failure = d.get("failure") or {}
+        if not isinstance(failure, dict):
             errors.append(f"'failure' must be a mapping ({', '.join(FAILURE_RULES)})")
             failure = {}
         for key in set(failure) - set(FAILURE_RULES):
