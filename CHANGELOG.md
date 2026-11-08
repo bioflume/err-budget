@@ -1,5 +1,35 @@
 # Changelog
 
+## Unreleased
+
+Every result is unchanged: the engine `_core.py` is byte for byte that of 2.0.0, version 1.2.1
+of the article. What goes is code that nothing used.
+
+- **Removed from job files.** The field `solver` (`module:function`, `file.py:function`); from
+  Python, call `tune`. A job file that still has it is refused as an unknown field. Run logs
+  written by 2.0.0 are still reused.
+- **Removed kind aliases.** `d`, `n`, `c` and `solver`; a job file that uses one is refused with
+  a message that lists the accepted spellings. The alias `discretization` is now documented.
+- **Removed `python -m errbudget.cli`.** Run the command as `errbudget` or `python -m errbudget`.
+- **Test problems.** `AdvectionDiffusion`, which nothing used, is removed, and `make_synthetic`
+  moved from `errbudget.problems` into `tests/test_synthetic.py`, its only user. Also gone: the
+  problems' `runner()` methods and the private module `_asymptotic`, which only used each
+  other; `AdvectionDiffusion(precond=...)`, which had no effect; the extra `examples`.
+- **Fixed: the floor probe of `tune`** reads its runs like every other run. Without
+  `observable=` it took the first value of a returned dict, which could be the `"converged"`
+  flag, and then declined nothing. A probe run that did not converge is now left out.
+- **Fixed: `failure:`** given as a string or a list is refused with the job-file message
+  instead of a Python error; the exit code is still 1.
+- **Fixed: `target: true`** in a job file is refused; it was read as an absolute target of 1.0.
+- **Tests.** Redundant, always-passing and never-running tests are gone; the suite takes under
+  a minute.
+- **Planned for engine 1.2.2, after the article is accepted.** Remove the engine's dead code
+  (about 75 lines: `refine_path(n_levels >= 2)`, `cancel_rule="path"`,
+  `resid_mode="additive"`, `unmeasured_rule`, `shares()`, `model_abs_error()`,
+  `propose(mode=...)`, `run_protocol(mode=...)`) and the ablation-only options `walk_mode`,
+  `phase2`, `screen_at` and `audit_factor` (about 65 lines). The results will be the same, and
+  "the engine is unchanged" will then read "the engine gives the same results".
+
 ## 2.0.0 — the package is now called errbudget
 
 Only names change. The engine is the same: `_core.py` is byte for byte that of 1.3.0, and
