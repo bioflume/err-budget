@@ -1,9 +1,6 @@
 """Reports: the result as Markdown, and the run log as a table."""
 from __future__ import annotations
 
-import json
-import os
-
 
 def _fmt(v) -> str:
     if isinstance(v, float):
@@ -63,6 +60,6 @@ def run_table(log_path: str, limit: int | None = None) -> str:
     for r in rows:
         vals = " ".join(f"{_fmt(r['params'].get(n, '-')):>12}" for n in names)
         v = r.get("value")
-        vs = f"{v:>14.8g}" if isinstance(v, (int, float)) and v is not None else f"{'-':>14}"
+        vs = f"{v:>14.8g}" if isinstance(v, (int, float)) else f"{'-':>14}"
         out.append(f"{r.get('run_id', ''):<5} {vals} {vs} {float(r.get('cost', 0) or 0):>10.4g} {r.get('status', ''):<10}")
     return "\n".join(out)

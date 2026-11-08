@@ -19,9 +19,10 @@ import time
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
-from .api import Parameter, TuneResult, tune, KINDS
+from .api import Parameter, TuneResult, tune, KINDS, CONFIGURATIONS
 from ._core import run_protocol
-from .runner import CommandSolver, JobError, placeholders, format_value, dry_render, parse_method
+from .runner import (BUILTIN_PLACEHOLDERS, CommandSolver, JobError, placeholders, format_value, dry_render,
+                     parse_method)
 
 KIND_ALIASES = {
     "discretisation": "discretisation", "discretization": "discretisation",
@@ -30,6 +31,9 @@ KIND_ALIASES = {
     "tolerance": "nested-solver", "solver": "nested-solver", "n": "nested-solver",
     "cost-only": "cost-only", "cost_only": "cost-only", "cost": "cost-only", "c": "cost-only",
 }
+TUNE_OPTIONS = ("screen", "accept_unconverged", "floor_probe", "configuration")
+FAILURE_RULES = ("failed_if_regex", "unconverged_if_regex", "converged_if_regex",
+                 "allow_nonzero_exit", "path")
 
 
 _NUM = re.compile(r"^[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?$")
@@ -91,11 +95,11 @@ class JobSpec:
                 {k: _num(v) for k, v in x.items()} if isinstance(x, dict) else x
                 for x in d["options"]["floor_probe"]])
 
-        def need(key, typ=None):
+        def need(key, typ):
             if key not in d:
                 errors.append(f"missing field {key!r}")
                 return None
-            if typ is not None and not isinstance(d[key], typ):
+            if not isinstance(d[key], typ):
                 errors.append(f"{key!r} must be {typ.__name__ if not isinstance(typ, tuple) else '/'.join(t.__name__ for t in typ)}")
                 return None
             return d[key]
@@ -173,7 +177,7 @@ class JobSpec:
 
         options = dict(d.get("options") or {})
         cfg = str(options.get("configuration", "v1.2.1"))
-        if cfg not in ("v1.2.1", "v1.2", "v1.1"):
+        if cfg not in CONFIGURATIONS:
             errors.append("options.configuration must be v1.2.1 (default), v1.2 or v1.1")
         for key in ("screen", "accept_unconverged"):
             if key in options and not isinstance(options[key], bool):
@@ -185,7 +189,7 @@ class JobSpec:
         engine_options = set(inspect.signature(run_protocol).parameters) - {
             "lookup", "ladders", "anchor", "eps", "hs", "kinds", "models", "noise_floor", "use_screen"}
         for key in list(options):
-            if key in ("screen", "accept_unconverged", "floor_probe", "configuration"):
+            if key in TUNE_OPTIONS:
                 continue
             if key not in engine_options:
                 errors.append(f"options.{key} is not an option; the engine options are "
@@ -199,7 +203,7 @@ class JobSpec:
             errors.append("'timeout' must be a positive number of seconds")
 
         if command:
-            known = set(names) | {"run_dir", "run_id", "job_dir"}
+            known = set(names) | set(BUILTIN_PLACEHOLDERS)
             for ph in placeholders(command):
                 if ph not in known:
                     errors.append(f"command uses {{{{{ph}}}}}, which is not a parameter")
@@ -228,11 +232,9 @@ class JobSpec:
             errors.append("cost: 'source: file' needs 'path'")
         failure = dict(d.get("failure") or {})
         if not isinstance(d.get("failure") or {}, dict):
-            errors.append("'failure' must be a mapping (failed_if_regex, unconverged_if_regex, "
-                          "converged_if_regex, allow_nonzero_exit, path)")
+            errors.append(f"'failure' must be a mapping ({', '.join(FAILURE_RULES)})")
             failure = {}
-        for key in set(failure) - {"failed_if_regex", "unconverged_if_regex", "converged_if_regex",
-                                   "allow_nonzero_exit", "path"}:
+        for key in set(failure) - set(FAILURE_RULES):
             errors.append(f"failure.{key} is not a failure rule")
         # every regular expression must compile
         for what, spec in (("observable", obs), ("cost", cost or {})):
@@ -301,7 +303,6 @@ class JobSpec:
         return out
 
     def tune_kwargs(self) -> dict:
-        from . import CONFIGURATIONS
         o = self.options
         kw: dict[str, Any] = dict(target=self.target, observable=self.observable["name"],
                                   start=self.start or None, relative=self.relative,
@@ -310,7 +311,7 @@ class JobSpec:
                                   floor_probe=o.get("floor_probe"))
         kw.update(CONFIGURATIONS[str(o.get("configuration", "v1.2.1"))])
         for key, val in o.items():
-            if key not in ("screen", "accept_unconverged", "floor_probe", "configuration"):
+            if key not in TUNE_OPTIONS:
                 kw[key] = val           # expert overrides, passed to the engine as given
         return kw
 
@@ -319,7 +320,7 @@ class JobSpec:
         L = [f"job: {self.name}"]
         L.append(f"runs: {self.command!r}" if self.command else f"solver: {self.solver}")
         L.append(f"observable: {self.observable['name']} "
-                 f"({self.observable.get('parse') or ('regex' if 'regex' in self.observable else 'json' if 'key' in self.observable else 'column' if 'column' in self.observable else 'last number')}"
+                 f"({self.observable.get('parse') or parse_method(self.observable).replace('_', ' ')}"
                  f" from {self.observable.get('source', 'file' if 'path' in self.observable else 'stdout')})")
         L.append(f"target: {self.target:g}{' relative' if self.relative else ' absolute'}")
         L.append("parameters (coarse -> fine):")

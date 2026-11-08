@@ -281,7 +281,7 @@ class CommandSolver:
         self.retry_failed = retry_failed
         self.cache: dict[str, dict] = {}
         self.n_stale = 0
-        rows = _read_log(self.log_path, warn=self._say)
+        rows = _read_log(self.log_path, warn=self.log)
         self.next_id = 1 + max((int(r.get("run_id", 0)) for r in rows), default=0)
         if not fresh:
             for r in rows:
@@ -290,9 +290,8 @@ class CommandSolver:
                 else:
                     self.n_stale += 1
             if self.n_stale:
-                self._say(f"  ({self.n_stale} logged runs belong to an earlier version of the "
-                          f"job file and are not reused)")
-        self.n_done = len(self.cache)
+                self.log(f"  ({self.n_stale} logged runs belong to an earlier version of the "
+                         f"job file and are not reused)")
         self.n_calls = 0
         self.n_cached = 0
         self._py = load_python_solver(job.solver, job.base_dir) if job.solver else None
@@ -307,9 +306,6 @@ class CommandSolver:
         with open(self.log_path, "a") as f:
             f.write(json.dumps(rec, default=str) + "\n")
 
-    def _say(self, msg: str) -> None:
-        self.log(msg)
-
     # -- the call the engine makes
     def __call__(self, **params):
         self.n_calls += 1
@@ -317,8 +313,8 @@ class CommandSolver:
         rec = self.cache.get(key)
         if rec is not None and not (self.retry_failed and rec["status"] == "failed"):
             self.n_cached += 1
-            self._say(f"  run {rec['run_id']:>4} (cached)  {self._pstr(params)}  -> "
-                      f"{self._vstr(rec)}")
+            self.log(f"  run {rec['run_id']:>4} (cached)  {self._pstr(params)}  -> "
+                     f"{self._vstr(rec)}")
             return self._outcome(rec)
         run_id = f"{self.next_id:04d}"
         self.next_id += 1
@@ -329,7 +325,7 @@ class CommandSolver:
         else:
             rec.update(self._run_command(run_id, params))
         self._record(rec)
-        self._say(f"  run {run_id:>4}           {self._pstr(params)}  -> {self._vstr(rec)}")
+        self.log(f"  run {run_id:>4}           {self._pstr(params)}  -> {self._vstr(rec)}")
         return self._outcome(rec)
 
     def _pstr(self, params: dict) -> str:
@@ -397,7 +393,7 @@ class CommandSolver:
             return {"status": "failed", "error": str(exc), "cost": 0.0, "run_dir": run_dir}
         env = dict(os.environ, **{k: str(v) for k, v in (job.env or {}).items()})
         t0 = time.perf_counter()
-        stdout, stderr, code, timed_out = "", "", None, False
+        code, timed_out = None, False
         proc = subprocess.Popen(command, shell=True, cwd=run_dir, env=env,
                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                 start_new_session=True)
@@ -485,7 +481,7 @@ def prepare_run_dir(job, run_dir: str, params: dict, run_id: str = "0000") -> st
     for src, dst in (job.files or {}).items():
         src_path = src if os.path.isabs(src) else os.path.join(job.base_dir, src)
         dst_path = os.path.join(run_dir, dst)
-        os.makedirs(os.path.dirname(dst_path) or run_dir, exist_ok=True)
+        os.makedirs(os.path.dirname(dst_path), exist_ok=True)
         shutil.copy(src_path, dst_path)
         targets.append(dst_path)
     if job.render_files is not None:
