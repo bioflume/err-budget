@@ -267,17 +267,3 @@ def test_failed_joint_run_credits_no_cancellation():
     rk = [r for r in lb.rk if np.isfinite(r)]
     floor = max(abs(lb.e[k][3]) for k in J["axes"])
     assert math.isclose(abs(J["E0_after"]), lb.Fs * max(sum(abs(r) for r in rk), floor), rel_tol=1e-12)
-
-
-if __name__ == "__main__":
-    import sys
-    failed = 0
-    for name, f in sorted(globals().items()):
-        if name.startswith("test_") and callable(f):
-            try:
-                f()
-                print(f"ok    {name}")
-            except Exception as exc:                      # noqa: BLE001
-                failed += 1
-                print(f"FAIL  {name}: {type(exc).__name__}: {exc}")
-    sys.exit(1 if failed else 0)

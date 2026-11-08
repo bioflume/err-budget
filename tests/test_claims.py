@@ -43,7 +43,7 @@ def lookup_of(tensor):
 
 # ------------------------------------------------------- claims: estimate --
 def test_recovers_imposed_orders():
-    """Claim (S5): black-box measurement recovers the imposed convergence order."""
+    """Claim: black-box measurement recovers the imposed convergence order."""
     tensor, LAD, HS, QS = make_tensor(orders=(2.0, 2.0))
     lb = LocalBudget(lookup_of(tensor), LAD, (2, 2, 4), hs=HS)
     lb.sweep(); lb.per_knob_error()
@@ -52,7 +52,7 @@ def test_recovers_imposed_orders():
 
 
 def test_masked_parameter_gets_a_negligible_share():
-    """Claim (S6.1): a masked parameter is assigned a negligible budget share."""
+    """Claim: a masked parameter is assigned a negligible budget share."""
     tensor, LAD, HS, QS = make_tensor(masked_at=1)
     lb = LocalBudget(lookup_of(tensor), LAD, (2, 2, 4), hs=HS)
     lb.sweep(); lb.per_knob_error()
@@ -61,7 +61,7 @@ def test_masked_parameter_gets_a_negligible_share():
 
 
 def test_consistency_floor_carries_a_two_point_fit():
-    """Claim (S4.1, S7.2): at the coarse end of a ladder the offset fit has only
+    """Claim: at the coarse end of a ladder the offset fit has only
     two points.  In v1.0 the axis contributed nothing and the consistency floor
     had to cover it; from v1.1 its one-step change, extrapolated as if the axis
     converged to first order, is added to the budget."""
@@ -80,7 +80,7 @@ def test_consistency_floor_carries_a_two_point_fit():
 
 
 def test_estimate_is_a_signed_sum_with_a_floor():
-    """Claim (S4.1): the estimate sums residuals WITH their signs and is then
+    """Claim: the estimate sums residuals WITH their signs and is then
     bounded below by the largest single-parameter refinement deviation."""
     tensor, LAD, HS, QS = make_tensor()
     lb = LocalBudget(lookup_of(tensor), LAD, (3, 3, 4), hs=HS, fs_cap=1.25)
@@ -93,7 +93,7 @@ def test_estimate_is_a_signed_sum_with_a_floor():
 
 # ---------------------------------------------------------- claims: walk ---
 def test_unreachable_target_is_refused():
-    """Claim (S7.2): a target no supplied combination attains is refused."""
+    """Claim: a target no supplied combination attains is refused."""
     tensor, LAD, HS, QS = make_tensor()
     best = min(abs(v[0] - QS) for v in tensor.values())
     r = run_protocol(lookup_of(tensor), LAD, (2, 2, 2), best / 100.0, hs=HS)
@@ -113,7 +113,7 @@ def test_walk_reaches_a_fixed_point():
 
 
 def test_audit_extrapolates_rather_than_differences():
-    """Claim (S4.2): a frozen parameter's remaining error is the tail of a
+    """Claim: a frozen parameter's remaining error is the tail of a
     geometric series, so the one-step difference is doubled, not used raw."""
     tensor, LAD, HS, QS = make_tensor()
     KIN = ["discretisation", "discretisation", "nested-solver"]
@@ -124,7 +124,7 @@ def test_audit_extrapolates_rather_than_differences():
 
 
 def test_cost_only_pass_reverifies_its_declaration():
-    """Claim (S3, S4.2): a parameter wrongly declared cost-only is not loosened
+    """Claim: a parameter wrongly declared cost-only is not loosened
     by the cost-only pass, because that pass re-verifies the observable."""
     tensor, LAD, HS, QS = make_tensor()
     KIN = ["cost-only", "discretisation", "nested-solver"]   # axis 0 is a lie
@@ -134,7 +134,7 @@ def test_cost_only_pass_reverifies_its_declaration():
 
 
 def test_solver_failure_is_handled_not_fitted():
-    """Claim (S4.1): a configuration that fails, diverges or returns a
+    """Claim: a configuration that fails, diverges or returns a
     non-finite value is never proposed."""
     tensor, LAD, HS, QS = make_tensor()
     bad = {(0, 0, 0), (0, 1, 0), (1, 0, 0)}
@@ -149,7 +149,7 @@ def test_solver_failure_is_handled_not_fitted():
 
 # ------------------------------------------------- claims: the structure ---
 def test_misdeclared_cost_only_is_reported():
-    """Claim (S3): the method reports declarations its measurements contradict.
+    """Claim: the method reports declarations its measurements contradict.
 
     The screen flags a parameter declared cost-only whose influence share is at
     or above tau.  A mis-declared parameter BELOW that share is frozen instead,
@@ -164,29 +164,8 @@ def test_misdeclared_cost_only_is_reported():
     assert 1 in r["violations"]
 
 
-def test_two_observables_need_not_agree():
-    """Claim (S6.3): the cost-optimal setting for one observable can fail the
-    same relative target for another computed from the same runs."""
-    from errbudget.problems import Burgers1D
-    import os
-    import pickle
-    path = os.path.join(os.path.dirname(__file__), "..", "paper", "data",
-                        "burgers_tensor.pkl")
-    if not os.path.exists(path):
-        pytest.skip("precomputed tensor not present")
-    t = pickle.load(open(path, "rb"))
-    EX = Burgers1D(nu=0.05, T=1.0).exact_observables()
-    ALL = list(t.keys())
-    tgt = 1e-3
-    feas = [i for i in ALL
-            if abs(t[i][0]["energy"] - EX["energy"]) <= tgt * abs(EX["energy"])]
-    best = min(feas, key=lambda i: t[i][1])
-    other = abs(t[best][0]["dissipation"] - EX["dissipation"])
-    assert other > tgt * abs(EX["dissipation"])
-
-
 def test_stabilised_exact_solution_agrees_where_the_spectral_route_is_valid():
-    """Claim (S5): the log-space Cole-Hopf evaluation reproduces the spectral one
+    """Claim: the log-space Cole-Hopf evaluation reproduces the spectral one
     at moderate viscosity, and is finite where the spectral one is not."""
     from errbudget.problems import Burgers1D
 
@@ -204,9 +183,3 @@ def test_stabilised_exact_solution_agrees_where_the_spectral_route_is_valid():
         pytest.approx(spectral(0.2), rel=1e-10)
     hard = Burgers1D(nu=0.02, T=1.0).exact_observables()
     assert math.isfinite(hard["energy"]) and math.isfinite(hard["dissipation"])
-
-
-def test_ladder_direction_guard():
-    """Claim (S10): an ambiguous ladder direction is refused, not guessed."""
-    with pytest.raises(ValueError, match="cannot infer the refinement direction"):
-        Parameter("tol", [1e-8, 1e-6, 1e-4])

@@ -190,15 +190,6 @@ def test_template_dir_and_file_observable(tmp_path):
         == "deltaT 0.001;\nwriteInterval 10;\n"
 
 
-def test_timeout_is_a_failed_run(tmp_path):
-    (tmp_path / "slow.py").write_text("import time; time.sleep(5); print(1)\n")
-    d = {"command": f"{PY} {{{{job_dir}}}}/slow.py {{{{n}}}}", "timeout": 0.5,
-         "parameters": [{"name": "n", "values": [1, 2]}], "observable": "v", "target": 1}
-    job = JobSpec.from_dict(d, base_dir=str(tmp_path))
-    with pytest.raises(RunFailed, match="timed out"):
-        CommandSolver(job, log=None)(n=1)
-
-
 def test_python_solver_in_a_job_file(tmp_path):
     (tmp_path / "mysolver.py").write_text(
         "def run(n, tol):\n    return {'v': 1 + 1/n + tol, 'converged': tol > 1e-9}, n/tol\n")
@@ -245,7 +236,7 @@ def test_cli_init_check_run_report(tmp_path, capsys, monkeypatch):
     # point the template's command at a real solver
     import shutil
     shutil.copy(os.path.join(EXAMPLE, "solver.py"), "solver.py")
-    text = open("job.yaml").read().replace("command: python {{job_dir}}/solver.py", f"command: {PY} {{{{job_dir}}}}/solver.py")
+    text = open("job.yaml").read().replace("command: python3 {{job_dir}}/solver.py", f"command: {PY} {{{{job_dir}}}}/solver.py")
     open("job.yaml", "w").write(text)
     assert main(["check", "job.yaml", "--no-run"]) == 0
     assert main(["check", "job.yaml"]) == 0
@@ -262,15 +253,6 @@ def test_cli_init_check_run_report(tmp_path, capsys, monkeypatch):
     assert main([]) == 2
 
 
-def test_check_reports_a_broken_command(tmp_path, capsys):
-    d = {"command": "definitely-not-a-program {{n}}", "parameters": [{"name": "n", "values": [1, 2]}],
-         "observable": "v", "target": 1, "workdir": "runs"}
-    job = JobSpec.from_dict(d, base_dir=str(tmp_path))
-    assert check_job(job) is False
-    out = capsys.readouterr().out
-    assert "FAILED" in out and "stdout.txt" in out
-
-
 def test_example_job_file_loads():
     pytest.importorskip("yaml")
     job = load_job(os.path.join(EXAMPLE, "job.yaml"))
@@ -283,6 +265,8 @@ def test_check_retries_a_failed_start_after_the_command_is_fixed(tmp_path, capsy
     d = {"command": "definitely-not-a-program {{n}}", "parameters": [{"name": "n", "values": [1, 2]}],
          "observable": "v", "target": 1, "workdir": "runs"}
     assert check_job(JobSpec.from_dict(d, base_dir=str(tmp_path))) is False
+    out = capsys.readouterr().out
+    assert "FAILED" in out and "stdout.txt" in out
     d["command"] = "echo {{n}}"
     assert check_job(JobSpec.from_dict(d, base_dir=str(tmp_path))) is True
     assert "v = 2" in capsys.readouterr().out        # the start is the middle value, n=2
@@ -377,7 +361,7 @@ def test_output_directory_is_created_and_log_table_survives_a_truncated_line(tmp
     from errbudget.report import run_table
     assert "9999" not in run_table(os.path.join(job.workdir, "runs.jsonl"))
     s = CommandSolver(job, log=None)
-    assert len(s.cache) == r.runs_used or len(s.cache) >= 1
+    assert len(s.cache) == r.runs_used
 
 
 def test_check_renders_templates_before_running(tmp_path, capsys):

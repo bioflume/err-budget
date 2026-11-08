@@ -19,7 +19,6 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: pip install -e ".[dev]"
       - run: pytest -q
-      - run: python tests/test_spec_v121.py
       - name: command-line example
         run: |
           cd examples/04_command_line
