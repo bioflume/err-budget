@@ -1,0 +1,8 @@
+J3 (Quantum ESPRESSO with a current release) was rerun on the article's machine type, not on Hamilton:
+the Hamilton run of 20 October 2026 never started pw.x (all 484 results NaN; kept in failed_on_hamilton/).
+  date       : 2026-11-01 (tasks 08:31-10:25 GMT, resumed once after a workspace restart)
+  machine    : Ubuntu 24.04.5 LTS VM, 2 vCPU Intel Xeon @ 2.10 GHz, 7 GB (the class of the article's machine)
+  pw.x       : Quantum ESPRESSO 7.6, conda-forge build qe-7.6-mpi_mpich_he3edec4_4 (MPICH 5.0.2), run serially, no shim
+  driver     : hamilton/J3_qe/qe_hpc.py and paper/qe_silicon.py of errbudget-paper 6eb1590 (unchanged), task farm, 484 tasks
+  cost       : CPU time of the pw.x process; it includes about 0.45 s of start-up of this build, measured on an empty input
+  analysis   : hamilton/J3_qe/analyse_j3.py v1.2.1 v1.1 v1.2 (unchanged)

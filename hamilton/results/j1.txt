@@ -1,0 +1,190 @@
+/home/grbj73/knobs-paper-main/src/knobs/_core.py:143: RuntimeWarning: invalid value encountered in scalar subtract
+  dg = g_k[hi] - g_k[hi - 1]
+forces function object against the article's post-processing (current release)
+ n_arc  iters  conv      Cd (FO)  Cd (fields)    Cd (v1.1)    err FO err fields  err v1.1      Cl FO  Cl fields
+     8    201     T     5.549858     5.491717     5.533460  5.32e-03   1.57e-02  8.26e-03   0.011301   0.010728
+    12    182     T     5.557596     5.518089     5.547279  3.93e-03   1.10e-02  5.78e-03   0.010857   0.010715
+    16    173     T     5.565347     5.539369     5.561585  2.54e-03   7.20e-03  3.22e-03   0.010737   0.010730
+    24    182     T     5.573486     5.560975     5.575910  1.08e-03   3.33e-03  6.50e-04   0.010605   0.010653
+    32    268     T     5.576268     5.569256     5.580475  5.86e-04   1.84e-03  1.68e-04   0.010644   0.010696
+    48    532     T     5.578421     5.575459     5.582939  2.00e-04   7.31e-04  6.10e-04   0.010662   0.010705
+    64    885     T     5.579119     5.577547     5.583153  7.46e-05   3.56e-04  6.48e-04   0.010665   0.010700
+    96   1811     T     5.579538     5.578912     5.582646  5.81e-07   1.12e-04  5.57e-04   0.010660   0.010686
+   128   3082     T     5.579649     5.579332     5.582130  2.04e-05   3.64e-05  4.65e-04   0.010654   0.010674
+   192   6465     T     5.579685     5.579572     5.581436  2.68e-05   6.57e-06  3.41e-04   0.010645   0.010659
+
+wall-cell centres: wall distance of the vertex mean relative to the centroid, and the viscous drag from each
+ n_arc  d centroid  offset min    median       max  cD visc (c)  cD visc (vm)   diff/cD  n*offset
+     8   3.501e-03  -2.528e-02 -2.237e-02 -1.809e-02     1.861423      1.903167  7.48e-03    -0.179
+    12   2.347e-03  -1.781e-02 -1.522e-02 -1.153e-02     1.937703      1.966893  5.23e-03    -0.183
+    16   1.764e-03  -1.373e-02 -1.152e-02 -8.431e-03     1.960345      1.982562  3.98e-03    -0.184
+    24   1.179e-03  -9.406e-03 -7.748e-03 -5.467e-03     1.970538      1.985474  2.68e-03    -0.186
+    32   8.852e-04  -7.151e-03 -5.835e-03 -4.040e-03     1.970311      1.981530  2.01e-03    -0.187
+    48   5.908e-04  -4.832e-03 -3.906e-03 -2.653e-03     1.966519      1.973998  1.34e-03    -0.187
+    64   4.434e-04  -3.649e-03 -2.936e-03 -1.974e-03     1.963244      1.968850  1.00e-03    -0.188
+    96   2.958e-04  -2.449e-03 -1.961e-03 -1.306e-03     1.959049      1.962783  6.69e-04    -0.188
+   128   2.219e-04  -1.843e-03 -1.472e-03 -9.753e-04     1.956611      1.959409  5.02e-04    -0.188
+   192   1.480e-04  -1.233e-03 -9.825e-04 -6.476e-04     1.953945      1.955809  3.34e-04    -0.189
+  (n*offset constant means the offset is a first-order fraction of the wall distance)
+
+grid with the current release: 840/840 settings, 60 failed, 172 not converged
+
+why the linear solves stopped, last 20 outer iterations of the 840 grid runs (relTol 0.1); fractions of the solves
+  GAMG (p): log10(tolerance / residualControl_p)
+   ratio  runs     abs     rel    both    zero     max   other
+      -6    28   0.000   1.000   0.000   0.000   0.000   0.000
+      -5    56   0.000   1.000   0.000   0.000   0.000   0.000
+      -4    84   0.000   1.000   0.000   0.000   0.000   0.000
+      -3   112   0.000   0.999   0.001   0.000   0.000   0.000
+      -2   140   0.457   0.301   0.241   0.000   0.000   0.000
+      -1   140   0.059   0.000   0.117   0.824   0.000   0.000
+       0   112   0.022   0.000   0.000   0.978   0.000   0.000
+       1    84   0.017   0.000   0.000   0.983   0.000   0.000
+       2    56   0.017   0.000   0.000   0.983   0.000   0.000
+       3    28   0.017   0.000   0.000   0.983   0.000   0.000
+  smoothSolver (U): log10(tolerance_U / residualControl_U) = log10(100 t / rc)
+   ratio  runs     abs     rel    both    zero     max   other
+      -4    28   0.000   1.000   0.000   0.000   0.000   0.000
+      -3    56   0.000   1.000   0.000   0.000   0.000   0.000
+      -2    84   0.000   0.970   0.030   0.000   0.000   0.000
+      -1   112   0.259   0.403   0.339   0.000   0.000   0.000
+       0   140   0.686   0.004   0.062   0.248   0.000   0.000
+       1   140   0.000   0.004   0.000   0.996   0.000   0.000
+       2   112   0.000   0.004   0.000   0.996   0.000   0.000
+       3    84   0.000   0.004   0.000   0.996   0.000   0.000
+       4    56   0.000   0.004   0.000   0.996   0.000   0.000
+       5    28   0.000   0.004   0.000   0.996   0.000   0.000
+  abs: stopped on the absolute tolerance only; rel: on relTol only; zero: no iteration (initial residual already below the tolerance); max: maxIter
+
+relTol study at n_arc 32: relative errors and outer iterations
+ resCtrl  GAMG tol  relTol  iters  conv    err cd    err cl    err dp  |d cd| vs 0.1    |d cl|    |d dp|
+   1e-02     1e-04     0.1     70     T  3.99e-03  6.20e-02  1.28e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-02     1e-04       0     66     T  3.96e-03  3.37e-02  9.00e-04       2.57e-05  9.57e-02  3.84e-04
+   1e-02     1e-04    0.01     66     T  3.97e-03  3.46e-02  8.91e-04       1.68e-05  9.66e-02  3.92e-04
+   1e-02     1e-05     0.1     64     T  2.33e-03  2.09e-01  2.24e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-02     1e-05       0     59     T  2.40e-03  2.50e-01  2.07e-03       7.17e-05  4.03e-02  1.69e-04
+   1e-02     1e-05    0.01     59     T  2.40e-03  2.59e-01  2.06e-03       7.68e-05  4.94e-02  1.78e-04
+   1e-02     1e-06     0.1     64     T  2.24e-03  1.95e-01  2.25e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-02     1e-06       0     57     T  2.32e-03  2.87e-01  2.07e-03       8.65e-05  9.16e-02  1.73e-04
+   1e-02     1e-06    0.01     58     T  2.30e-03  2.67e-01  2.13e-03       6.68e-05  7.22e-02  1.15e-04
+   1e-02     1e-07     0.1     64     T  2.24e-03  1.95e-01  2.25e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-02     1e-07       0     57     T  2.31e-03  2.84e-01  2.09e-03       7.37e-05  8.86e-02  1.58e-04
+   1e-02     1e-07    0.01     58     T  2.29e-03  2.67e-01  2.13e-03       5.74e-05  7.14e-02  1.15e-04
+   1e-02     1e-08     0.1     64     T  2.24e-03  1.95e-01  2.25e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-02     1e-08       0     57     T  2.31e-03  2.83e-01  2.09e-03       7.22e-05  8.83e-02  1.57e-04
+   1e-02     1e-08    0.01     58     T  2.29e-03  2.67e-01  2.13e-03       5.74e-05  7.14e-02  1.15e-04
+   1e-03     1e-04     0.1    495     T  1.86e-03  4.02e-03  2.79e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-03     1e-04       0    499     T  1.86e-03  4.08e-03  2.79e-03       2.24e-06  5.52e-05  4.84e-06
+   1e-03     1e-04    0.01    499     T  1.86e-03  3.98e-03  2.79e-03       7.02e-07  3.93e-05  2.35e-06
+   1e-03     1e-05     0.1    113     T  1.94e-03  5.28e-03  2.82e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-03     1e-05       0    108     T  1.94e-03  7.88e-03  2.81e-03       2.53e-06  2.60e-03  1.17e-05
+   1e-03     1e-05    0.01    108     T  1.94e-03  7.94e-03  2.81e-03       2.56e-06  2.66e-03  1.16e-05
+   1e-03     1e-06     0.1     98     T  1.88e-03  1.89e-03  2.82e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-03     1e-06       0     91     T  1.89e-03  1.98e-03  2.81e-03       6.56e-06  3.87e-03  8.07e-06
+   1e-03     1e-06    0.01     92     T  1.88e-03  4.54e-04  2.81e-03       4.52e-06  2.35e-03  5.38e-06
+   1e-03     1e-07     0.1     98     T  1.88e-03  2.11e-03  2.81e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-03     1e-07       0     90     T  1.88e-03  1.06e-03  2.81e-03       6.03e-06  3.17e-03  4.33e-06
+   1e-03     1e-07    0.01     91     T  1.88e-03  6.13e-06  2.81e-03       4.65e-06  2.10e-03  2.13e-06
+   1e-03     1e-08     0.1     98     T  1.88e-03  2.11e-03  2.81e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-03     1e-08       0     90     T  1.88e-03  7.72e-04  2.81e-03       5.46e-06  2.88e-03  3.70e-06
+   1e-03     1e-08    0.01     91     T  1.88e-03  2.81e-05  2.81e-03       4.38e-06  2.08e-03  2.27e-06
+   1e-04     1e-04     0.1    804     T  1.84e-03  6.10e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-04     1e-04       0    811     T  1.84e-03  6.21e-03  2.84e-03       3.94e-06  1.10e-04  4.00e-06
+   1e-04     1e-04    0.01    808     T  1.84e-03  6.25e-03  2.84e-03       6.15e-06  1.50e-04  6.62e-06
+   1e-04     1e-05     0.1    462     T  1.84e-03  6.61e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-04     1e-05       0    466     T  1.84e-03  6.68e-03  2.85e-03       2.97e-08  7.14e-05  6.36e-08
+   1e-04     1e-05    0.01    467     T  1.84e-03  6.58e-03  2.85e-03       1.49e-08  3.47e-05  2.17e-08
+   1e-04     1e-06     0.1    148     T  1.84e-03  6.92e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-04     1e-06       0    144     T  1.84e-03  6.98e-03  2.85e-03       1.55e-06  6.56e-05  1.26e-06
+   1e-04     1e-06    0.01    144     T  1.84e-03  6.98e-03  2.85e-03       1.57e-06  5.79e-05  1.21e-06
+   1e-04     1e-07     0.1    132     T  1.84e-03  6.76e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-04     1e-07       0    124     T  1.84e-03  6.93e-03  2.85e-03       1.92e-07  1.75e-04  2.08e-07
+   1e-04     1e-07    0.01    124     T  1.85e-03  6.94e-03  2.85e-03       2.76e-07  1.87e-04  3.29e-07
+   1e-04     1e-08     0.1    132     T  1.84e-03  6.75e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-04     1e-08       0    123     T  1.85e-03  6.94e-03  2.85e-03       2.15e-07  1.86e-04  1.21e-07
+   1e-04     1e-08    0.01    123     T  1.85e-03  6.95e-03  2.85e-03       3.67e-07  1.96e-04  3.14e-07
+   1e-05     1e-04     0.1   2000     F  1.84e-03  8.86e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-05     1e-04       0   2000     F  1.85e-03  7.35e-03  2.86e-03       1.59e-05  1.51e-03  1.86e-05
+   1e-05     1e-04    0.01   2000     F  1.83e-03  6.79e-03  2.85e-03       3.05e-06  2.08e-03  2.39e-07
+   1e-05     1e-05     0.1    747     T  1.84e-03  7.14e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-05     1e-05       0    761     T  1.84e-03  7.18e-03  2.85e-03       2.14e-07  4.44e-05  3.69e-07
+   1e-05     1e-05    0.01    753     T  1.84e-03  7.12e-03  2.85e-03       6.36e-07  1.26e-05  6.04e-07
+   1e-05     1e-06     0.1    436     T  1.84e-03  7.23e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-05     1e-06       0    435     T  1.84e-03  7.22e-03  2.85e-03       9.87e-09  5.52e-06  1.27e-08
+   1e-05     1e-06    0.01    437     T  1.84e-03  7.22e-03  2.85e-03       3.24e-09  7.23e-07  4.71e-08
+   1e-05     1e-07     0.1    177     T  1.84e-03  7.25e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-05     1e-07       0    170     T  1.84e-03  7.24e-03  2.85e-03       1.13e-07  1.41e-05  1.06e-07
+   1e-05     1e-07    0.01    171     T  1.84e-03  7.24e-03  2.85e-03       2.76e-09  1.04e-05  6.18e-09
+   1e-05     1e-08     0.1    165     T  1.84e-03  7.24e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-05     1e-08       0    155     T  1.84e-03  7.24e-03  2.85e-03       1.63e-08  4.04e-06  1.19e-08
+   1e-05     1e-08    0.01    156     T  1.84e-03  7.24e-03  2.85e-03       1.14e-08  2.62e-06  5.08e-09
+   1e-06     1e-04     0.1   2000     F  1.84e-03  8.86e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-06     1e-04       0   2000     F  1.85e-03  7.35e-03  2.86e-03       1.59e-05  1.51e-03  1.86e-05
+   1e-06     1e-04    0.01   2000     F  1.83e-03  6.79e-03  2.85e-03       3.05e-06  2.08e-03  2.39e-07
+   1e-06     1e-05     0.1   2000     F  1.84e-03  7.17e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-06     1e-05       0   2000     F  1.84e-03  7.21e-03  2.85e-03       4.38e-07  3.97e-05  3.95e-07
+   1e-06     1e-05    0.01   2000     F  1.84e-03  7.21e-03  2.85e-03       9.68e-07  3.84e-05  9.61e-07
+   1e-06     1e-06     0.1    702     T  1.84e-03  7.21e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-06     1e-06       0    702     T  1.84e-03  7.21e-03  2.85e-03       4.40e-08  1.66e-07  4.29e-08
+   1e-06     1e-06    0.01    703     T  1.84e-03  7.20e-03  2.85e-03       9.86e-09  7.34e-06  4.06e-09
+   1e-06     1e-07     0.1    446     T  1.84e-03  7.21e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-06     1e-07       0    439     T  1.84e-03  7.21e-03  2.85e-03       1.82e-09  9.28e-07  1.06e-09
+   1e-06     1e-07    0.01    441     T  1.84e-03  7.21e-03  2.85e-03       2.53e-09  1.01e-06  2.95e-09
+   1e-06     1e-08     0.1    207     T  1.84e-03  7.21e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-06     1e-08       0    198     T  1.84e-03  7.22e-03  2.85e-03       1.43e-08  8.95e-07  1.23e-08
+   1e-06     1e-08    0.01    198     T  1.84e-03  7.22e-03  2.85e-03       6.65e-09  9.36e-07  6.37e-09
+   1e-07     1e-04     0.1   2000     F  1.84e-03  8.86e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-07     1e-04       0   2000     F  1.85e-03  7.35e-03  2.86e-03       1.59e-05  1.51e-03  1.86e-05
+   1e-07     1e-04    0.01   2000     F  1.83e-03  6.79e-03  2.85e-03       3.05e-06  2.08e-03  2.39e-07
+   1e-07     1e-05     0.1   2000     F  1.84e-03  7.17e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-07     1e-05       0   2000     F  1.84e-03  7.21e-03  2.85e-03       4.38e-07  3.97e-05  3.95e-07
+   1e-07     1e-05    0.01   2000     F  1.84e-03  7.21e-03  2.85e-03       9.68e-07  3.84e-05  9.61e-07
+   1e-07     1e-06     0.1   2000     F  1.84e-03  7.21e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-07     1e-06       0   2000     F  1.84e-03  7.21e-03  2.85e-03       3.93e-08  5.73e-07  4.53e-08
+   1e-07     1e-06    0.01   2000     F  1.84e-03  7.22e-03  2.85e-03       2.76e-08  5.34e-06  2.40e-08
+   1e-07     1e-07     0.1    714     T  1.84e-03  7.22e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-07     1e-07       0    709     T  1.84e-03  7.22e-03  2.85e-03       1.36e-08  1.91e-06  1.30e-08
+   1e-07     1e-07    0.01    718     T  1.84e-03  7.22e-03  2.85e-03       1.22e-08  7.61e-07  1.38e-08
+   1e-07     1e-08     0.1    478     T  1.84e-03  7.22e-03  2.85e-03       0.00e+00  0.00e+00  0.00e+00
+   1e-07     1e-08       0    468     T  1.84e-03  7.22e-03  2.85e-03       1.89e-10  5.37e-08  5.02e-10
+   1e-07     1e-08    0.01    469     T  1.84e-03  7.22e-03  2.85e-03       1.91e-10  3.16e-08  3.48e-12
+
+function object against field post-processing over 608 converged grid runs: |d cD|/cD median 2.24e-03 max 1.04e-02; |d cL|/cL median 4.54e-03 max 5.46e-02
+  v1.2.1  v1912 (article)            cd  1e-02: starts 780 accepted 608 (14 distinct) missed 0 declined 0+0 penalty 7.75 runs 66
+  v1.2.1  v1912 (article)            cd  3e-03: starts 780 accepted 608 (8 distinct) missed 0 declined 0+0 penalty 8.79 runs 88
+  v1.2.1  v1912 (article)            cd  1e-03: starts 780 accepted 608 (2 distinct) missed 0 declined 0+0 penalty 6.56 runs 113
+  v1.2.1  v1912 (article)            dp  3e-02: starts 780 accepted 608 (6 distinct) missed 0 declined 0+0 penalty 3.00 runs 59
+  v1.2.1  v1912 (article)            dp  1e-02: starts 780 accepted 608 (9 distinct) missed 0 declined 0+0 penalty 7.87 runs 69
+  v1.2.1  v1912 (article)            cl  1e-01: starts 780 accepted 608 (12 distinct) missed 0 declined 0+0 penalty 1.64 runs 68
+  v1.2.1  v1912 (article)            cl  3e-02: starts 780 accepted 608 (13 distinct) missed 0 declined 0+0 penalty 14.17 runs 66
+  v1.2.1  current, fields            cd  1e-02: starts 780 accepted 608 (15 distinct) missed 0 declined 0+0 penalty 7.75 runs 66
+  v1.2.1  current, fields            cd  3e-03: starts 780 accepted 608 (8 distinct) missed 0 declined 0+0 penalty 8.79 runs 88
+  v1.2.1  current, fields            cd  1e-03: starts 780 accepted 608 (2 distinct) missed 0 declined 0+0 penalty 6.56 runs 113
+  v1.2.1  current, fields            dp  3e-02: starts 780 accepted 608 (6 distinct) missed 0 declined 0+0 penalty 3.00 runs 59
+  v1.2.1  current, fields            dp  1e-02: starts 780 accepted 608 (10 distinct) missed 0 declined 0+0 penalty 7.87 runs 69
+  v1.2.1  current, fields            cl  1e-01: starts 780 accepted 608 (11 distinct) missed 0 declined 0+0 penalty 1.64 runs 68
+  v1.2.1  current, fields            cl  3e-02: starts 780 accepted 608 (14 distinct) missed 0 declined 0+0 penalty 14.17 runs 66
+  v1.2.1  current, function object   cd  1e-02: starts 780 accepted 608 (9 distinct) missed 0 declined 0+0 penalty 23.24 runs 66
+  v1.2.1  current, function object   cd  3e-03: starts 780 accepted 608 (16 distinct) missed 0 declined 0+0 penalty 21.89 runs 70
+  v1.2.1  current, function object   cd  1e-03: starts 780 accepted 608 (5 distinct) missed 0 declined 0+0 penalty 7.47 runs 94
+  v1.2.1  current, function object   cl  1e-01: starts 780 accepted 608 (18 distinct) missed 0 declined 0+0 penalty 4.19 runs 61
+  v1.2.1  current, function object   cl  3e-02: starts 780 accepted 608 (9 distinct) missed 0 declined 0+0 penalty 17.94 runs 78
+  v1.1    v1912 (article)            cd  1e-02: starts 780 accepted 780 (4 distinct) missed 0 declined 0+0 penalty 7.75 runs 82
+  v1.1    v1912 (article)            cd  3e-03: starts 780 accepted 780 (6 distinct) missed 0 declined 0+0 penalty 1.56 runs 85
+  v1.1    v1912 (article)            cd  1e-03: starts 780 accepted 780 (2 distinct) missed 0 declined 0+0 penalty 2.78 runs 122
+  v1.1    v1912 (article)            dp  3e-02: starts 780 accepted 780 (3 distinct) missed 0 declined 0+0 penalty 3.00 runs 70
+  v1.1    v1912 (article)            dp  1e-02: starts 780 accepted 780 (4 distinct) missed 0 declined 0+0 penalty 4.72 runs 76
+  v1.1    v1912 (article)            cl  1e-01: starts 780 accepted 780 (6 distinct) missed 0 declined 0+0 penalty 1.57 runs 72
+  v1.1    v1912 (article)            cl  3e-02: starts 780 accepted 780 (14 distinct) missed 0 declined 0+0 penalty 2.16 runs 72
+  v1.1    current, fields            cd  1e-02: starts 780 accepted 780 (4 distinct) missed 0 declined 0+0 penalty 7.75 runs 82
+  v1.1    current, fields            cd  3e-03: starts 780 accepted 780 (6 distinct) missed 0 declined 0+0 penalty 1.56 runs 85
+  v1.1    current, fields            cd  1e-03: starts 780 accepted 780 (2 distinct) missed 0 declined 0+0 penalty 2.78 runs 125
+  v1.1    current, fields            dp  3e-02: starts 780 accepted 780 (3 distinct) missed 0 declined 0+0 penalty 3.00 runs 70
+  v1.1    current, fields            dp  1e-02: starts 780 accepted 780 (4 distinct) missed 0 declined 0+0 penalty 4.72 runs 76
+  v1.1    current, fields            cl  1e-01: starts 780 accepted 780 (6 distinct) missed 0 declined 0+0 penalty 1.57 runs 72
+  v1.1    current, fields            cl  3e-02: starts 780 accepted 780 (14 distinct) missed 0 declined 0+0 penalty 2.16 runs 72
+  v1.1    current, function object   cd  1e-02: starts 780 accepted 780 (7 distinct) missed 0 declined 0+0 penalty 9.59 runs 69
+  v1.1    current, function object   cd  3e-03: starts 780 accepted 780 (5 distinct) missed 0 declined 0+0 penalty 7.75 runs 96
+  v1.1    current, function object   cd  1e-03: starts 780 accepted 780 (7 distinct) missed 14 declined 0+0 penalty 1.53 runs 108
+  v1.1    current, function object   cl  1e-01: starts 780 accepted 780 (11 distinct) missed 0 declined 0+0 penalty 2.97 runs 75
+  v1.1    current, function object   cl  3e-02: starts 780 accepted 780 (18 distinct) missed 9 declined 0+0 penalty 13.56 runs 72

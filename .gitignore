@@ -8,7 +8,7 @@ paper/logs/
 paper/work_dfg2d2/
 paper/data/*.partial
 paper/data/old_pooled/
-hamilton/results/
+hamilton/results/raw.tar.gz
 hamilton/results_smoke/
 hamilton/*/logs/
 hamilton/collect_*.out

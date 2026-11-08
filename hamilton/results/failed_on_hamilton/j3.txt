@@ -1,0 +1,6 @@
+current pw.x: 480/480 settings; reference {'energy': nan, 'force': nan}; uncertainty {'energy': nan, 'force': nan}
+Traceback (most recent call last):
+  File "/home/grbj73/knobs-paper-main/hamilton/J3_qe/analyse_j3.py", line 43, in <module>
+    f"{max(d):.1e}; references differ by {abs(REF[ob]-OREF[ob])/abs(OREF[ob]):.1e}")
+       ^^^^^^
+ValueError: max() arg is an empty sequence

@@ -293,7 +293,10 @@ reasons and the final tables (`exp70_tables.py`; Table 3 uses the refined study 
 `ERRBUDGET_TABLE3_2D2=refined`). If `hamilton/results/j2_tensor.pkl` lacks the case
 specification, the 2D-2h steps are skipped and reported: re-run the patched
 `J2_dfg2d2/analyse_j2.py` on Hamilton. `collect` writes `RESULTS_SUMMARY.md` in the
-repository root and `errbudget_v6_results.tar.gz` beside it. The steps that do not need the
+repository root and `errbudget_v6_results.tar.gz` beside it. The small files of
+`hamilton/results` (everything but `raw.tar.gz`, 1 MB) are in the repository, so that
+`paper/pooled.py` replays the refined 2D-2 study (`2D-2h`) from a clone; the raw outputs
+(`raw.tar.gz`, 47 MB) go to the Zenodo archive. The steps that do not need the
 cluster (`run_v6_analyses.sh before`) are described in `../paper/README.md`; run them first.
 
 ## 7. What to send back

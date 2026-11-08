@@ -1,0 +1,21 @@
+current pw.x: 480/480 settings; reference {'energy': -16.92416741, 'force': 0.020293804370524023}; uncertainty {'energy': 1.1982864212013342e-06, 'force': 0.004227037801984755}
+  energy: largest relative difference between releases over 480 settings: 8.9e-09; references differ by 7.1e-09
+  force: largest relative difference between releases over 480 settings: 2.2e-05; references differ by 0.0e+00
+  v1.2.1 6.7      energy 1e-03: accepted 480/480 (7 distinct) missed 0 declined(reachable) 0 penalty 1.14
+  v1.2.1 6.7      energy 1e-04: accepted 480/480 (1 distinct) missed 0 declined(reachable) 0 penalty 1.15
+  v1.2.1 6.7      force  1e-01: accepted 480/480 (10 distinct) missed 0 declined(reachable) 0 penalty 5.64
+  v1.2.1 current  energy 1e-03: accepted 480/480 (10 distinct) missed 0 declined(reachable) 0 penalty 1.20
+  v1.2.1 current  energy 1e-04: accepted 480/480 (2 distinct) missed 0 declined(reachable) 0 penalty 1.02
+  v1.2.1 current  force  1e-01: accepted 480/480 (14 distinct) missed 0 declined(reachable) 0 penalty 2.50
+  v1.1   6.7      energy 1e-03: accepted 480/480 (1 distinct) missed 0 declined(reachable) 0 penalty 1.14
+  v1.1   6.7      energy 1e-04: accepted 480/480 (5 distinct) missed 23 declined(reachable) 0 penalty 1.15
+  v1.1   6.7      force  1e-01: accepted 480/480 (7 distinct) missed 0 declined(reachable) 0 penalty 1.53
+  v1.1   current  energy 1e-03: accepted 480/480 (4 distinct) missed 0 declined(reachable) 0 penalty 1.20
+  v1.1   current  energy 1e-04: accepted 480/480 (5 distinct) missed 20 declined(reachable) 0 penalty 1.02
+  v1.1   current  force  1e-01: accepted 480/480 (8 distinct) missed 0 declined(reachable) 0 penalty 1.48
+  v1.2   6.7      energy 1e-03: accepted 480/480 (7 distinct) missed 0 declined(reachable) 0 penalty 1.14
+  v1.2   6.7      energy 1e-04: accepted 480/480 (1 distinct) missed 0 declined(reachable) 0 penalty 1.15
+  v1.2   6.7      force  1e-01: accepted 480/480 (10 distinct) missed 0 declined(reachable) 0 penalty 5.64
+  v1.2   current  energy 1e-03: accepted 480/480 (10 distinct) missed 0 declined(reachable) 0 penalty 1.20
+  v1.2   current  energy 1e-04: accepted 480/480 (2 distinct) missed 0 declined(reachable) 0 penalty 1.02
+  v1.2   current  force  1e-01: accepted 480/480 (14 distinct) missed 0 declined(reachable) 0 penalty 2.50

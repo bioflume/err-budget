@@ -1,0 +1,1640 @@
+[
+ {
+  "case": "QE",
+  "ob": "energy",
+  "target": 0.001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.1359091841135573,
+  "pen_max": 1.6438495640920285,
+  "runs_med": 48.0,
+  "unconv": 0,
+  "worst": 0.7887566686122636,
+  "hit_cap": 0,
+  "max_steps": 12,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 7,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     1,
+     1,
+     0,
+     2
+    ],
+    276
+   ],
+   [
+    [
+     4,
+     0,
+     0,
+     2
+    ],
+    98
+   ],
+   [
+    [
+     4,
+     0,
+     1,
+     1
+    ],
+    45
+   ],
+   [
+    [
+     4,
+     0,
+     2,
+     1
+    ],
+    12
+   ],
+   [
+    [
+     4,
+     0,
+     3,
+     2
+    ],
+    41
+   ],
+   [
+    [
+     5,
+     0,
+     0,
+     2
+    ],
+    4
+   ],
+   [
+    [
+     5,
+     0,
+     1,
+     1
+    ],
+    4
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 405,
+  "good": 480,
+  "config": "v1.2.1",
+  "release": "6.7"
+ },
+ {
+  "case": "QE",
+  "ob": "energy",
+  "target": 0.0001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.1455018357877857,
+  "pen_max": 1.1455018357877857,
+  "runs_med": 66.0,
+  "unconv": 0,
+  "worst": 0.5358845558512272,
+  "hit_cap": 0,
+  "max_steps": 14,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 1,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     3,
+     2,
+     0,
+     2
+    ],
+    480
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 195,
+  "good": 480,
+  "config": "v1.2.1",
+  "release": "6.7"
+ },
+ {
+  "case": "QE",
+  "ob": "force",
+  "target": 0.1,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 5.636966045276689,
+  "pen_max": 7.327067851981057,
+  "runs_med": 60.0,
+  "unconv": 0,
+  "worst": 0.8082570470444816,
+  "hit_cap": 0,
+  "max_steps": 25,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 10,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     0,
+     3,
+     1,
+     2
+    ],
+    44
+   ],
+   [
+    [
+     0,
+     3,
+     3,
+     2
+    ],
+    52
+   ],
+   [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    10
+   ],
+   [
+    [
+     1,
+     3,
+     0,
+     2
+    ],
+    284
+   ],
+   [
+    [
+     2,
+     1,
+     1,
+     2
+    ],
+    31
+   ],
+   [
+    [
+     3,
+     1,
+     1,
+     2
+    ],
+    21
+   ],
+   [
+    [
+     3,
+     1,
+     4,
+     2
+    ],
+    19
+   ],
+   [
+    [
+     5,
+     1,
+     1,
+     2
+    ],
+    10
+   ],
+   [
+    [
+     6,
+     1,
+     0,
+     2
+    ],
+    2
+   ],
+   [
+    [
+     7,
+     1,
+     1,
+     2
+    ],
+    7
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 458,
+  "good": 480,
+  "config": "v1.2.1",
+  "release": "6.7"
+ },
+ {
+  "case": "QEc",
+  "ob": "energy",
+  "target": 0.001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.199649348513079,
+  "pen_max": 1.5836434855987993,
+  "runs_med": 43.0,
+  "unconv": 0,
+  "worst": 0.7887572650759703,
+  "hit_cap": 0,
+  "max_steps": 11,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 10,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     1,
+     1,
+     0,
+     2
+    ],
+    149
+   ],
+   [
+    [
+     1,
+     1,
+     2,
+     0
+    ],
+    23
+   ],
+   [
+    [
+     4,
+     0,
+     0,
+     2
+    ],
+    53
+   ],
+   [
+    [
+     4,
+     0,
+     1,
+     1
+    ],
+    106
+   ],
+   [
+    [
+     4,
+     0,
+     4,
+     2
+    ],
+    47
+   ],
+   [
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    64
+   ],
+   [
+    [
+     5,
+     0,
+     0,
+     1
+    ],
+    4
+   ],
+   [
+    [
+     5,
+     0,
+     1,
+     1
+    ],
+    12
+   ],
+   [
+    [
+     6,
+     0,
+     2,
+     2
+    ],
+    4
+   ],
+   [
+    [
+     6,
+     1,
+     0,
+     2
+    ],
+    18
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 405,
+  "good": 480,
+  "config": "v1.2.1",
+  "release": "current"
+ },
+ {
+  "case": "QEc",
+  "ob": "energy",
+  "target": 0.0001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.023897371033139,
+  "pen_max": 1.6583111215803952,
+  "runs_med": 68.0,
+  "unconv": 0,
+  "worst": 0.3694066507685229,
+  "hit_cap": 0,
+  "max_steps": 13,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 2,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     4,
+     2,
+     0,
+     2
+    ],
+    468
+   ],
+   [
+    [
+     7,
+     2,
+     0,
+     2
+    ],
+    12
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 195,
+  "good": 480,
+  "config": "v1.2.1",
+  "release": "current"
+ },
+ {
+  "case": "QEc",
+  "ob": "force",
+  "target": 0.1,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 2.500213196358837,
+  "pen_max": 6.516915230483512,
+  "runs_med": 53.0,
+  "unconv": 0,
+  "worst": 0.7997105100620505,
+  "hit_cap": 0,
+  "max_steps": 19,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 14,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     0,
+     3,
+     1,
+     1
+    ],
+    24
+   ],
+   [
+    [
+     0,
+     3,
+     3,
+     2
+    ],
+    18
+   ],
+   [
+    [
+     1,
+     1,
+     1,
+     2
+    ],
+    2
+   ],
+   [
+    [
+     1,
+     1,
+     2,
+     0
+    ],
+    8
+   ],
+   [
+    [
+     1,
+     3,
+     0,
+     2
+    ],
+    103
+   ],
+   [
+    [
+     2,
+     1,
+     1,
+     2
+    ],
+    33
+   ],
+   [
+    [
+     3,
+     1,
+     1,
+     1
+    ],
+    4
+   ],
+   [
+    [
+     3,
+     1,
+     4,
+     2
+    ],
+    16
+   ],
+   [
+    [
+     4,
+     1,
+     2,
+     2
+    ],
+    15
+   ],
+   [
+    [
+     4,
+     3,
+     0,
+     2
+    ],
+    65
+   ],
+   [
+    [
+     5,
+     1,
+     1,
+     2
+    ],
+    18
+   ],
+   [
+    [
+     6,
+     1,
+     0,
+     2
+    ],
+    2
+   ],
+   [
+    [
+     6,
+     1,
+     4,
+     2
+    ],
+    3
+   ],
+   [
+    [
+     6,
+     3,
+     0,
+     2
+    ],
+    169
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 458,
+  "good": 480,
+  "config": "v1.2.1",
+  "release": "current"
+ },
+ {
+  "case": "QE",
+  "ob": "energy",
+  "target": 0.001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.1359091841135573,
+  "pen_max": 1.1359091841135573,
+  "runs_med": 56.0,
+  "unconv": 0,
+  "worst": 0.5330619650276794,
+  "hit_cap": 0,
+  "max_steps": 15,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 1,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     1,
+     1,
+     0,
+     2
+    ],
+    480
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 405,
+  "good": 480,
+  "config": "v1.1",
+  "release": "6.7"
+ },
+ {
+  "case": "QE",
+  "ob": "energy",
+  "target": 0.0001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 23,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.1455018357877857,
+  "pen_max": 2.9274531302671263,
+  "runs_med": 67.0,
+  "unconv": 0,
+  "worst": 1.230855223044591,
+  "hit_cap": 0,
+  "max_steps": 14,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 5,
+  "distinct_missed": 2,
+  "accepted_settings": [
+   [
+    [
+     2,
+     3,
+     0,
+     2
+    ],
+    8
+   ],
+   [
+    [
+     3,
+     2,
+     0,
+     2
+    ],
+    432
+   ],
+   [
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    15
+   ],
+   [
+    [
+     5,
+     1,
+     0,
+     2
+    ],
+    4
+   ],
+   [
+    [
+     6,
+     1,
+     0,
+     2
+    ],
+    21
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 195,
+  "good": 480,
+  "config": "v1.1",
+  "release": "6.7"
+ },
+ {
+  "case": "QE",
+  "ob": "force",
+  "target": 0.1,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.5330462882330662,
+  "pen_max": 4.175480631087183,
+  "runs_med": 47.0,
+  "unconv": 0,
+  "worst": 0.803341235635123,
+  "hit_cap": 0,
+  "max_steps": 11,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 7,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     0,
+     1,
+     0,
+     2
+    ],
+    35
+   ],
+   [
+    [
+     0,
+     1,
+     1,
+     2
+    ],
+    179
+   ],
+   [
+    [
+     0,
+     2,
+     0,
+     2
+    ],
+    18
+   ],
+   [
+    [
+     1,
+     1,
+     0,
+     2
+    ],
+    10
+   ],
+   [
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    160
+   ],
+   [
+    [
+     6,
+     1,
+     0,
+     2
+    ],
+    15
+   ],
+   [
+    [
+     7,
+     1,
+     0,
+     2
+    ],
+    63
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 458,
+  "good": 480,
+  "config": "v1.1",
+  "release": "6.7"
+ },
+ {
+  "case": "QEc",
+  "ob": "energy",
+  "target": 0.001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.199649348513079,
+  "pen_max": 1.5836434855987993,
+  "runs_med": 48.0,
+  "unconv": 0,
+  "worst": 0.5330631505492506,
+  "hit_cap": 0,
+  "max_steps": 12,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 4,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     1,
+     1,
+     0,
+     2
+    ],
+    149
+   ],
+   [
+    [
+     1,
+     1,
+     2,
+     0
+    ],
+    23
+   ],
+   [
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    290
+   ],
+   [
+    [
+     6,
+     1,
+     0,
+     2
+    ],
+    18
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 405,
+  "good": 480,
+  "config": "v1.1",
+  "release": "current"
+ },
+ {
+  "case": "QEc",
+  "ob": "energy",
+  "target": 0.0001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 20,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.023897371033139,
+  "pen_max": 1.914159789771394,
+  "runs_med": 68.0,
+  "unconv": 0,
+  "worst": 1.2308670491932177,
+  "hit_cap": 0,
+  "max_steps": 13,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 5,
+  "distinct_missed": 2,
+  "accepted_settings": [
+   [
+    [
+     2,
+     3,
+     0,
+     2
+    ],
+    8
+   ],
+   [
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    12
+   ],
+   [
+    [
+     4,
+     2,
+     0,
+     2
+    ],
+    434
+   ],
+   [
+    [
+     6,
+     1,
+     0,
+     2
+    ],
+    22
+   ],
+   [
+    [
+     7,
+     2,
+     0,
+     2
+    ],
+    4
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 195,
+  "good": 480,
+  "config": "v1.1",
+  "release": "current"
+ },
+ {
+  "case": "QEc",
+  "ob": "force",
+  "target": 0.1,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.4825228566328998,
+  "pen_max": 2.2314386953043828,
+  "runs_med": 42.5,
+  "unconv": 0,
+  "worst": 0.803341235635123,
+  "hit_cap": 0,
+  "max_steps": 11,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 8,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     0,
+     1,
+     0,
+     2
+    ],
+    56
+   ],
+   [
+    [
+     0,
+     1,
+     1,
+     2
+    ],
+    75
+   ],
+   [
+    [
+     0,
+     1,
+     4,
+     2
+    ],
+    35
+   ],
+   [
+    [
+     1,
+     1,
+     0,
+     2
+    ],
+    8
+   ],
+   [
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    274
+   ],
+   [
+    [
+     4,
+     2,
+     0,
+     2
+    ],
+    15
+   ],
+   [
+    [
+     6,
+     1,
+     0,
+     2
+    ],
+    12
+   ],
+   [
+    [
+     7,
+     1,
+     0,
+     2
+    ],
+    5
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 458,
+  "good": 480,
+  "config": "v1.1",
+  "release": "current"
+ },
+ {
+  "case": "QE",
+  "ob": "energy",
+  "target": 0.001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.1359091841135573,
+  "pen_max": 1.6438495640920285,
+  "runs_med": 48.0,
+  "unconv": 0,
+  "worst": 0.7887566686122636,
+  "hit_cap": 0,
+  "max_steps": 12,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 7,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     1,
+     1,
+     0,
+     2
+    ],
+    276
+   ],
+   [
+    [
+     4,
+     0,
+     0,
+     2
+    ],
+    98
+   ],
+   [
+    [
+     4,
+     0,
+     1,
+     1
+    ],
+    45
+   ],
+   [
+    [
+     4,
+     0,
+     2,
+     1
+    ],
+    12
+   ],
+   [
+    [
+     4,
+     0,
+     3,
+     2
+    ],
+    41
+   ],
+   [
+    [
+     5,
+     0,
+     0,
+     2
+    ],
+    4
+   ],
+   [
+    [
+     5,
+     0,
+     1,
+     1
+    ],
+    4
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 405,
+  "good": 480,
+  "config": "v1.2",
+  "release": "6.7"
+ },
+ {
+  "case": "QE",
+  "ob": "energy",
+  "target": 0.0001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.1455018357877857,
+  "pen_max": 1.1455018357877857,
+  "runs_med": 66.0,
+  "unconv": 0,
+  "worst": 0.5358845558512272,
+  "hit_cap": 0,
+  "max_steps": 14,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 1,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     3,
+     2,
+     0,
+     2
+    ],
+    480
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 195,
+  "good": 480,
+  "config": "v1.2",
+  "release": "6.7"
+ },
+ {
+  "case": "QE",
+  "ob": "force",
+  "target": 0.1,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 5.636966045276689,
+  "pen_max": 7.327067851981057,
+  "runs_med": 60.0,
+  "unconv": 0,
+  "worst": 0.8082570470444816,
+  "hit_cap": 0,
+  "max_steps": 25,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 10,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     0,
+     3,
+     1,
+     2
+    ],
+    44
+   ],
+   [
+    [
+     0,
+     3,
+     3,
+     2
+    ],
+    52
+   ],
+   [
+    [
+     1,
+     1,
+     1,
+     1
+    ],
+    10
+   ],
+   [
+    [
+     1,
+     3,
+     0,
+     2
+    ],
+    284
+   ],
+   [
+    [
+     2,
+     1,
+     1,
+     2
+    ],
+    31
+   ],
+   [
+    [
+     3,
+     1,
+     1,
+     2
+    ],
+    21
+   ],
+   [
+    [
+     3,
+     1,
+     4,
+     2
+    ],
+    19
+   ],
+   [
+    [
+     5,
+     1,
+     1,
+     2
+    ],
+    10
+   ],
+   [
+    [
+     6,
+     1,
+     0,
+     2
+    ],
+    2
+   ],
+   [
+    [
+     7,
+     1,
+     1,
+     2
+    ],
+    7
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 458,
+  "good": 480,
+  "config": "v1.2",
+  "release": "6.7"
+ },
+ {
+  "case": "QEc",
+  "ob": "energy",
+  "target": 0.001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.199649348513079,
+  "pen_max": 1.5836434855987993,
+  "runs_med": 43.0,
+  "unconv": 0,
+  "worst": 0.7887572650759703,
+  "hit_cap": 0,
+  "max_steps": 11,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 10,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     1,
+     1,
+     0,
+     2
+    ],
+    149
+   ],
+   [
+    [
+     1,
+     1,
+     2,
+     0
+    ],
+    23
+   ],
+   [
+    [
+     4,
+     0,
+     0,
+     2
+    ],
+    53
+   ],
+   [
+    [
+     4,
+     0,
+     1,
+     1
+    ],
+    106
+   ],
+   [
+    [
+     4,
+     0,
+     4,
+     2
+    ],
+    47
+   ],
+   [
+    [
+     4,
+     1,
+     0,
+     2
+    ],
+    64
+   ],
+   [
+    [
+     5,
+     0,
+     0,
+     1
+    ],
+    4
+   ],
+   [
+    [
+     5,
+     0,
+     1,
+     1
+    ],
+    12
+   ],
+   [
+    [
+     6,
+     0,
+     2,
+     2
+    ],
+    4
+   ],
+   [
+    [
+     6,
+     1,
+     0,
+     2
+    ],
+    18
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 405,
+  "good": 480,
+  "config": "v1.2",
+  "release": "current"
+ },
+ {
+  "case": "QEc",
+  "ob": "energy",
+  "target": 0.0001,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 1.023897371033139,
+  "pen_max": 1.6583111215803952,
+  "runs_med": 68.0,
+  "unconv": 0,
+  "worst": 0.3694066507685229,
+  "hit_cap": 0,
+  "max_steps": 13,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 2,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     4,
+     2,
+     0,
+     2
+    ],
+    468
+   ],
+   [
+    [
+     7,
+     2,
+     0,
+     2
+    ],
+    12
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 195,
+  "good": 480,
+  "config": "v1.2",
+  "release": "current"
+ },
+ {
+  "case": "QEc",
+  "ob": "force",
+  "target": 0.1,
+  "n": 480,
+  "reachable": true,
+  "accepted": 480,
+  "missed": 0,
+  "declined_reach": 0,
+  "declined_unreach": 0,
+  "start_failed": 0,
+  "pen_med": 2.500213196358837,
+  "pen_max": 6.516915230483512,
+  "runs_med": 53.0,
+  "unconv": 0,
+  "worst": 0.7997105100620505,
+  "hit_cap": 0,
+  "max_steps": 19,
+  "low_order": 0,
+  "low_order_missed": 0,
+  "distinct": 14,
+  "distinct_missed": 0,
+  "accepted_settings": [
+   [
+    [
+     0,
+     3,
+     1,
+     1
+    ],
+    24
+   ],
+   [
+    [
+     0,
+     3,
+     3,
+     2
+    ],
+    18
+   ],
+   [
+    [
+     1,
+     1,
+     1,
+     2
+    ],
+    2
+   ],
+   [
+    [
+     1,
+     1,
+     2,
+     0
+    ],
+    8
+   ],
+   [
+    [
+     1,
+     3,
+     0,
+     2
+    ],
+    103
+   ],
+   [
+    [
+     2,
+     1,
+     1,
+     2
+    ],
+    33
+   ],
+   [
+    [
+     3,
+     1,
+     1,
+     1
+    ],
+    4
+   ],
+   [
+    [
+     3,
+     1,
+     4,
+     2
+    ],
+    16
+   ],
+   [
+    [
+     4,
+     1,
+     2,
+     2
+    ],
+    15
+   ],
+   [
+    [
+     4,
+     3,
+     0,
+     2
+    ],
+    65
+   ],
+   [
+    [
+     5,
+     1,
+     1,
+     2
+    ],
+    18
+   ],
+   [
+    [
+     6,
+     1,
+     0,
+     2
+    ],
+    2
+   ],
+   [
+    [
+     6,
+     1,
+     4,
+     2
+    ],
+    3
+   ],
+   [
+    [
+     6,
+     3,
+     0,
+     2
+    ],
+    169
+   ]
+  ],
+  "unconv_distinct": 0,
+  "unconv_from_converged": 0,
+  "reasons": {},
+  "feasible": 458,
+  "good": 480,
+  "config": "v1.2",
+  "release": "current"
+ }
+]

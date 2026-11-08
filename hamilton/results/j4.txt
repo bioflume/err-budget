@@ -1,0 +1,62 @@
+
+LAMMPS, 262,144 ions: 58 settings usable at every width [1, 2, 4, 8, 16, 32, 64]
+    1 ranks: median cost   2106.74 ms, rank correlation of costs with 1 rank(s): 1.000
+    2 ranks: median cost   2493.84 ms, rank correlation of costs with 1 rank(s): 0.987
+    4 ranks: median cost   3558.67 ms, rank correlation of costs with 1 rank(s): 0.978
+    8 ranks: median cost   6307.58 ms, rank correlation of costs with 1 rank(s): 0.807
+   16 ranks: median cost  11970.18 ms, rank correlation of costs with 1 rank(s): 0.690
+   32 ranks: median cost  16525.57 ms, rank correlation of costs with 1 rank(s): 0.792
+   64 ranks: median cost  31473.65 ms, rank correlation of costs with 1 rank(s): 0.773
+  target 1e-04,   1 ranks: accepted 58/58, missed 0, median penalty 1.20
+  target 1e-04,   2 ranks: accepted 58/58, missed 0, median penalty 1.14
+  target 1e-04,   4 ranks: accepted 58/58, missed 0, median penalty 1.08
+  target 1e-04,   8 ranks: accepted 58/58, missed 0, median penalty 1.24
+  target 1e-04,  16 ranks: accepted 58/58, missed 0, median penalty 1.86
+  target 1e-04,  32 ranks: accepted 58/58, missed 0, median penalty 1.23
+  target 1e-04,  64 ranks: accepted 58/58, missed 0, median penalty 1.06
+    same outcome at 2 ranks as at 1: 51/58
+    same outcome at 4 ranks as at 1: 41/58
+    same outcome at 8 ranks as at 1: 2/58
+    same outcome at 16 ranks as at 1: 11/58
+    same outcome at 32 ranks as at 1: 11/58
+    same outcome at 64 ranks as at 1: 10/58
+  target 1e-05,   1 ranks: accepted 5/58, missed 0, median penalty 1.38
+  target 1e-05,   2 ranks: accepted 18/58, missed 0, median penalty 1.59
+  target 1e-05,   4 ranks: accepted 17/58, missed 0, median penalty 1.34
+  target 1e-05,   8 ranks: accepted 14/58, missed 0, median penalty 1.15
+  target 1e-05,  16 ranks: accepted 14/58, missed 0, median penalty 1.59
+  target 1e-05,  32 ranks: accepted 14/58, missed 0, median penalty 1.45
+  target 1e-05,  64 ranks: accepted 17/58, missed 0, median penalty 1.05
+    same outcome at 2 ranks as at 1: 45/58
+    same outcome at 4 ranks as at 1: 46/58
+    same outcome at 8 ranks as at 1: 5/58
+    same outcome at 16 ranks as at 1: 47/58
+    same outcome at 32 ranks as at 1: 47/58
+    same outcome at 64 ranks as at 1: 46/58
+
+GROMACS reference -589370.795221 kJ/mol (spread of two converged settings 2.00e-06)
+
+GROMACS double, 13824 waters: 225 settings usable at every width [1, 2, 4, 8, 16]
+    1 ranks: median cost    123.72 ms, rank correlation of costs with 1 rank(s): 1.000
+    2 ranks: median cost    574.64 ms, rank correlation of costs with 1 rank(s): 0.921
+    4 ranks: median cost   1132.35 ms, rank correlation of costs with 1 rank(s): 0.893
+    8 ranks: median cost   2485.68 ms, rank correlation of costs with 1 rank(s): 0.319
+   16 ranks: median cost   7280.39 ms, rank correlation of costs with 1 rank(s): 0.114
+  target 1e-05,   1 ranks: accepted 225/225, missed 0, median penalty 1.76
+  target 1e-05,   2 ranks: accepted 225/225, missed 0, median penalty 1.18
+  target 1e-05,   4 ranks: accepted 225/225, missed 0, median penalty 1.09
+  target 1e-05,   8 ranks: accepted 225/225, missed 0, median penalty 1.04
+  target 1e-05,  16 ranks: accepted 225/225, missed 0, median penalty 1.02
+    same outcome at 2 ranks as at 1: 52/225
+    same outcome at 4 ranks as at 1: 59/225
+    same outcome at 8 ranks as at 1: 36/225
+    same outcome at 16 ranks as at 1: 2/225
+  target 1e-06,   1 ranks: accepted 225/225, missed 0, median penalty 1.91
+  target 1e-06,   2 ranks: accepted 225/225, missed 0, median penalty 1.18
+  target 1e-06,   4 ranks: accepted 225/225, missed 0, median penalty 1.10
+  target 1e-06,   8 ranks: accepted 225/225, missed 0, median penalty 1.04
+  target 1e-06,  16 ranks: accepted 225/225, missed 0, median penalty 1.11
+    same outcome at 2 ranks as at 1: 225/225
+    same outcome at 4 ranks as at 1: 0/225
+    same outcome at 8 ranks as at 1: 225/225
+    same outcome at 16 ranks as at 1: 0/225
