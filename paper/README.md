@@ -153,7 +153,6 @@ data/                stored solver output and result files
 figures/             tables (tab_*.tex), figures (fig_*.pdf) and the text output of every step
 frozen_src/          copy of version 1.2.0, the frozen program of the held-out tests
 dfg2d2_job/          batch build of the revision-2 2D-2 grid (SLURM or one machine)
-legacy/              scripts of earlier versions of the article, not needed
 ```
 
 ## Environment used for the article
@@ -292,7 +291,6 @@ Exhaustive grids are built before the analyses that use them:
 only to grade the method. The method itself never sees more than the configurations it
 chooses to evaluate.
 
-Scripts in `legacy/` belong to earlier versions of the article and are not needed.
 
 ## Version 1.1 (revision 2)
 
