@@ -28,6 +28,17 @@ import scipy.sparse as sp
 import scipy.sparse.linalg as spla
 
 
+def periodic_differences(N: int):
+    """Central-difference d/dx and d2/dx2 (CSR) on N periodic points of [0, 2pi)."""
+    h = 2 * np.pi / N
+    o = np.ones(N)
+    D = sp.diags([o, -o], [1, -1], shape=(N, N), format="lil") / (2 * h)
+    D[0, -1], D[-1, 0] = -1 / (2 * h), 1 / (2 * h)
+    L = sp.diags([o, -2 * o, o], [-1, 0, 1], shape=(N, N), format="lil") / h**2
+    L[0, -1], L[-1, 0] = 1 / h**2, 1 / h**2
+    return D.tocsr(), L.tocsr()
+
+
 class Burgers1D:
     def __init__(self, nu: float = 0.05, T: float = 1.0, max_newton: int = 25):
         self.nu, self.T, self.max_newton = nu, T, max_newton
@@ -75,15 +86,7 @@ class Burgers1D:
                 "dissipation": self.nu * float(np.sum(ux**2)) * dx}
 
     # ------------------------------------------------------------ operators
-    @staticmethod
-    def _ops(N: int):
-        h = 2 * np.pi / N
-        o = np.ones(N)
-        Dx = sp.diags([o, -o], [1, -1], shape=(N, N), format="lil") / (2 * h)
-        Dx[0, -1], Dx[-1, 0] = -1 / (2 * h), 1 / (2 * h)
-        Lx = sp.diags([o, -2 * o, o], [-1, 0, 1], shape=(N, N), format="lil") / h**2
-        Lx[0, -1], Lx[-1, 0] = 1 / h**2, 1 / h**2
-        return Dx.tocsr(), Lx.tocsr()
+    _ops = staticmethod(periodic_differences)
 
     def _F(self, u, Dx, Lx):
         return -u * (Dx @ u) + self.nu * (Lx @ u)
@@ -122,14 +125,9 @@ class Burgers1D:
                 J = self._J(v, Dx, Lx, dt, N)
                 cnt = [0]
                 cb = lambda _r: cnt.__setitem__(0, cnt[0] + 1)
-                try:
-                    dv, info = spla.gmres(J, -G, rtol=gtol, atol=0.0,
-                                          restart=min(50, N), maxiter=400,
-                                          callback=cb, callback_type="pr_norm")
-                except TypeError:
-                    dv, info = spla.gmres(J, -G, tol=gtol, atol=0.0,
-                                          restart=min(50, N), maxiter=400,
-                                          callback=cb, callback_type="pr_norm")
+                dv, info = spla.gmres(J, -G, rtol=gtol, atol=0.0,
+                                      restart=min(50, N), maxiter=400,
+                                      callback=cb, callback_type="pr_norm")
                 gmres_fail += info > 0
                 matvecs += max(cnt[0], 1)
                 v = v + dv
@@ -147,10 +145,3 @@ class Burgers1D:
         return obs, cost, wall, dict(matvecs=matvecs, newton_its=newton_its,
                                      newton_fail=int(newton_fail), gmres_fail=int(gmres_fail),
                                      converged=newton_fail == 0 and gmres_fail == 0)
-
-    def runner(self, observable: str):
-        def f(theta):
-            obs, cost, _, _ = self.run(theta)
-            return obs[observable], cost
-
-        return f

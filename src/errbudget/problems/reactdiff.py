@@ -33,6 +33,8 @@ import numpy as np
 import scipy.sparse as sp
 import scipy.sparse.linalg as spla
 
+from .burgers1d import periodic_differences
+
 
 def _manufactured(Du, Dv, F, k, rate):
     """Return callables for u, v, their sources, and grad v."""
@@ -68,11 +70,7 @@ class ReactionDiffusion2D:
     # ------------------------------------------------------------ operators
     @staticmethod
     def _laplacian(N):
-        h = 2 * np.pi / N
-        o = np.ones(N)
-        L1 = sp.diags([o, -2 * o, o], [-1, 0, 1], shape=(N, N), format="lil") / h**2
-        L1[0, -1], L1[-1, 0] = 1 / h**2, 1 / h**2
-        L1 = L1.tocsr()
+        _, L1 = periodic_differences(N)
         I = sp.identity(N, format="csr")
         return sp.kron(L1, I, "csr") + sp.kron(I, L1, "csr")
 
@@ -158,9 +156,3 @@ class ReactionDiffusion2D:
                "pattern_sharpness": float(np.sum(vx**2 + vy**2)) * h**2}
         return obs, float(cost), wall, dict(gmres=its, gmres_fail=int(gmres_fail),
                                             converged=gmres_fail == 0)
-
-    def runner(self, observable: str):
-        def f(theta):
-            obs, cost, _, _ = self.run(theta)
-            return obs[observable], cost
-        return f

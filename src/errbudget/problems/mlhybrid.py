@@ -21,8 +21,6 @@ cannot reach.
 """
 from __future__ import annotations
 
-import numpy as np
-
 from .burgers1d import Burgers1D
 
 

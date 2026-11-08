@@ -3,6 +3,7 @@ from __future__ import annotations
 import numpy as np
 import scipy.sparse as sp
 import scipy.sparse.linalg as spla
+from .burgers1d import periodic_differences
 
 
 class AdvectionDiffusion:
@@ -16,10 +17,9 @@ class AdvectionDiffusion:
     Cost: a deterministic flop proxy (noise-free, reproducible), plus wall time.
     """
 
-    def __init__(self, a=1.0, nu=0.02, T=1.0, modes=((1, 1.0), (3, 0.5)),
-                 warm_start=True, precond=True):
+    def __init__(self, a=1.0, nu=0.02, T=1.0, modes=((1, 1.0), (3, 0.5)), warm_start=True):
         self.a, self.nu, self.T, self.modes = a, nu, T, modes
-        self.warm_start, self.precond = warm_start, precond
+        self.warm_start = warm_start
 
     def exact_Q(self) -> float:
         return float(sum(np.pi * A**2 * np.exp(-2 * self.nu * m**2 * self.T)
@@ -29,17 +29,8 @@ class AdvectionDiffusion:
         return sum(A * np.sin(m * x) for m, A in self.modes)
 
     def operator(self, N):
-        h = 2 * np.pi / N
-        off = np.ones(N)
-        # central advection
-        Dx = sp.diags([off, -off], [1, -1], shape=(N, N), format="lil") / (2 * h)
-        Dx[0, -1] = -1 / (2 * h)
-        Dx[-1, 0] = 1 / (2 * h)
-        # laplacian
-        Lx = sp.diags([off, -2 * off, off], [-1, 0, 1], shape=(N, N), format="lil") / h**2
-        Lx[0, -1] = 1 / h**2
-        Lx[-1, 0] = 1 / h**2
-        return (-self.a * Dx.tocsr() + self.nu * Lx.tocsr())
+        Dx, Lx = periodic_differences(N)
+        return -self.a * Dx + self.nu * Lx
 
     def run(self, theta):
         import time as _time
@@ -63,24 +54,12 @@ class AdvectionDiffusion:
                 it[0] += 1
 
             x0 = u if self.warm_start else np.zeros(N)
-            try:
-                u, info = spla.gmres(M, b, x0=x0, rtol=tol, atol=0.0,
-                                     restart=min(50, N), maxiter=400,
-                                     callback=cb, callback_type="pr_norm")
-            except TypeError:  # older scipy
-                u, info = spla.gmres(M, b, x0=x0, tol=tol, atol=0.0,
-                                     restart=min(50, N), maxiter=400,
-                                     callback=cb, callback_type="pr_norm")
+            u, info = spla.gmres(M, b, x0=x0, rtol=tol, atol=0.0,
+                                 restart=min(50, N), maxiter=400,
+                                 callback=cb, callback_type="pr_norm")
             total_iters += max(it[0], 1)
         wall = _time.perf_counter() - t0
 
         Q = float(np.sum(u**2) * (2 * np.pi / N))       # spectrally accurate on periodic grid
         cost = float(N * (total_iters + 2 * steps))      # flop proxy
         return Q, cost, wall
-
-    def runner(self):
-        def f(theta):
-            Q, cost, _ = self.run(theta)
-            return Q, cost
-
-        return f

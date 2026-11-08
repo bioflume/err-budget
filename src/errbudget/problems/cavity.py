@@ -113,7 +113,7 @@ class DrivenCavity:
             return sp.csr_matrix((v, (r, c)), shape=(n1 * n1, n1 * n1))
         Dx, Dy = d1(1, 0), d1(0, 1)
         R = sp.csr_matrix((np.ones(nI), (np.arange(nI), inner)), shape=(nI, n1 * n1))
-        return dict(P=P, Lap=Lap, Om=Om, b=b, Dx=Dx, Dy=Dy, R=R, idx=idx, inner=inner, h=h)
+        return dict(P=P, Lap=Lap, Om=Om, b=b, Dx=Dx, Dy=Dy, R=R, inner=inner, h=h)
 
     def run(self, theta: dict):
         N = int(theta["N"])
@@ -148,7 +148,7 @@ class DrivenCavity:
         s = np.zeros(nI)
         r, parts = resid(s)
         r0 = np.linalg.norm(r)
-        cost, its, newton, converged = 0.0, 0, 0, False
+        cost, its, newton = 0.0, 0, 0
         gmres_fail = 0
         t0 = time.perf_counter()
         while newton < self.max_newton:
@@ -190,12 +190,9 @@ class DrivenCavity:
 
         def vertex(fm, f0, fp):
             den = fm - 2 * f0 + fp
-            if den <= 0:
-                return 0.0, f0
-            t = 0.5 * (fm - fp) / den
-            return t, f0 - 0.125 * (fm - fp) ** 2 / den
-        tx, _ = vertex(psi[i - 1, j], psi[i, j], psi[i + 1, j])
-        ty, _ = vertex(psi[i, j - 1], psi[i, j], psi[i, j + 1])
+            return 0.0 if den <= 0 else 0.5 * (fm - fp) / den
+        tx = vertex(psi[i - 1, j], psi[i, j], psi[i + 1, j])
+        ty = vertex(psi[i, j - 1], psi[i, j], psi[i, j + 1])
         dx2 = 0.5 * (psi[i - 1, j] - 2 * psi[i, j] + psi[i + 1, j])
         dy2 = 0.5 * (psi[i, j - 1] - 2 * psi[i, j] + psi[i, j + 1])
         bx = 0.5 * (psi[i + 1, j] - psi[i - 1, j])
@@ -208,9 +205,3 @@ class DrivenCavity:
                                             newton_converged=bool(converged),
                                             gmres_fail=int(gmres_fail),
                                             converged=bool(converged) and gmres_fail == 0)
-
-    def runner(self, observable: str):
-        def f(theta):
-            obs, cost, _, _ = self.run(theta)
-            return obs[observable], cost
-        return f

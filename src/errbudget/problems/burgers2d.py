@@ -31,6 +31,8 @@ import numpy as np
 import scipy.sparse as sp
 import scipy.sparse.linalg as spla
 
+from .burgers1d import periodic_differences
+
 
 def _manufactured(nu):
     """u(x,y,t) and the forcing f that makes it an exact solution."""
@@ -64,13 +66,7 @@ class Burgers2D:
     # ------------------------------------------------------------ operators
     @staticmethod
     def _ops(N):
-        h = 2 * np.pi / N
-        o = np.ones(N)
-        D1 = sp.diags([o, -o], [1, -1], shape=(N, N), format="lil") / (2 * h)
-        D1[0, -1], D1[-1, 0] = -1 / (2 * h), 1 / (2 * h)
-        L1 = sp.diags([o, -2 * o, o], [-1, 0, 1], shape=(N, N), format="lil") / h**2
-        L1[0, -1], L1[-1, 0] = 1 / h**2, 1 / h**2
-        D1, L1 = D1.tocsr(), L1.tocsr()
+        D1, L1 = periodic_differences(N)
         I = sp.identity(N, format="csr")
         Dx, Dy = sp.kron(D1, I, "csr"), sp.kron(I, D1, "csr")
         Lap = sp.kron(L1, I, "csr") + sp.kron(I, L1, "csr")
@@ -123,7 +119,7 @@ class Burgers2D:
                     nnzLU = ilu.L.nnz + ilu.U.nnz
                     M = spla.LinearOperator((n, n), ilu.solve)
                 except RuntimeError:
-                    ilu, nnzLU, M = None, 0, None
+                    nnzLU, M = 0, None
                 cost += 4.0 * nnzLU                  # factorisation
 
             v = un.copy()
@@ -158,9 +154,3 @@ class Burgers2D:
                                             nnzLU=nnzLU, newton_fail=int(newton_fail),
                                             gmres_fail=int(gmres_fail),
                                             converged=newton_fail == 0 and gmres_fail == 0)
-
-    def runner(self, observable):
-        def f(theta):
-            obs, cost, _, _ = self.run(theta)
-            return obs[observable], cost
-        return f
