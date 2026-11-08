@@ -71,3 +71,13 @@ def test_tune_floor_probe_declines():
     res = tune(solver, [Parameter("n", [4, 8, 16, 32])], target=1e-4,
                floor_probe=[{"n": 64}, {"n": 64}, {"n": 128}], screen=False)
     assert not res.certified
+
+
+def test_floor_probe_reads_the_observable_not_the_converged_flag():
+    calls = {"n": 0}
+    def solver(n):
+        calls["n"] += 1
+        return {"converged": True, "q": 1.0 + 1.0 / n**2 + 1e-3 * (calls["n"] % 2)}
+    res = tune(solver, [Parameter("n", [4, 8, 16, 32])], target=1e-4,
+               floor_probe=[{"n": 64}, {"n": 64}, {"n": 128}])
+    assert not res.certified and res.runs_used == 0      # declined below the floor

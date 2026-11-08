@@ -269,7 +269,8 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
         something with no discretisation effect such as the thread count.  The
         spread of the observable over them is the round-off floor; targets
         below ``floor_factor`` (default 10) times it are declined without
-        searching.  Recommended for single-precision or otherwise noisy codes.
+        searching.  Probe runs are read like every other run, so an unconverged
+        one is left out.  Recommended for single-precision or otherwise noisy codes.
     """
     names = [k.name for k in params]
     ladders = [k.values for k in params]
@@ -279,6 +280,14 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
 
     def setting(idx):
         return {names[i]: ladders[i][j] for i, j in enumerate(idx)}
+
+    def unflag(out):
+        """A run's output without its "converged" flag, and whether the run is used:
+        an unconverged run counts as failed unless accept_unconverged."""
+        if isinstance(out, dict) and "converged" in out:
+            out = dict(out)
+            return out, bool(out.pop("converged")) or accept_unconverged
+        return out, True
 
     def value(out):
         """The observable in a run's output: a scalar, or a dict of observables."""
@@ -325,13 +334,11 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
         cost = None
         if isinstance(out, tuple) and len(out) == 2:
             out, cost = out
-        if isinstance(out, dict) and "converged" in out:
-            out = dict(out)
-            ok = bool(out.pop("converged"))
-            if not ok and not accept_unconverged:
-                if verbose:
-                    print(f"  run {probe['n']:3d}  {kw}  -> not converged (treated as failed)")
-                return float("nan"), float(cost if cost is not None else max(wall, 1e-9))
+        out, used = unflag(out)
+        if not used:
+            if verbose:
+                print(f"  run {probe['n']:3d}  {kw}  -> not converged (treated as failed)")
+            return float("nan"), float(cost if cost is not None else max(wall, 1e-9))
         val = value(out)
         if verbose:
             print(f"  run {probe['n']:3d}  {kw}  -> {val:.8g}")
@@ -350,9 +357,8 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
             out = solver(**th)
             if isinstance(out, tuple) and len(out) == 2:
                 out = out[0]
-            if isinstance(out, dict):
-                out = out[observable] if observable is not None else next(iter(out.values()))
-            vals.append(float(out))
+            out, used = unflag(out)
+            vals.append(value(out) if used else float("nan"))
         floor = measure_floor(vals)
         if verbose:
             print(f"  round-off floor: {floor:.3g} (from {len(vals)} runs)")
