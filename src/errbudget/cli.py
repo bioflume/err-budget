@@ -103,7 +103,3 @@ def _dispatch(a) -> int:
         print(run_table(os.path.join(job.workdir, "runs.jsonl"), limit=a.last))
         return 0
     return 2
-
-
-if __name__ == "__main__":                                   # python -m errbudget.cli
-    sys.exit(main())
