@@ -98,7 +98,7 @@ class JobSpec:
             if key not in d:
                 errors.append(f"missing field {key!r}")
                 return None
-            if not isinstance(d[key], typ):
+            if isinstance(d[key], bool) or not isinstance(d[key], typ):
                 errors.append(f"{key!r} must be {typ.__name__ if not isinstance(typ, tuple) else '/'.join(t.__name__ for t in typ)}")
                 return None
             return d[key]

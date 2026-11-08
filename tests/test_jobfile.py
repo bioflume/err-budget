@@ -347,6 +347,12 @@ def test_failure_that_is_not_a_mapping_is_refused(tmp_path, capsys):
     assert "'failure' must be a mapping" in capsys.readouterr().err
 
 
+def test_target_true_is_refused():
+    d = {"command": "x {{n}}", "parameters": [{"name": "n", "values": [1, 2]}], "observable": "v", "target": True}
+    with pytest.raises(JobError, match="'target' must be int/float"):
+        JobSpec.from_dict(d)
+
+
 def test_null_json_and_fortran_columns():
     with pytest.raises(JobError, match="could not read"):
         extract_number({"key": "flux"}, '{"flux": null}')
