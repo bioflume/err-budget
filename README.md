@@ -1,5 +1,10 @@
 # errbudget
 
+> This is the article's repository. `src/errbudget` is the package as it produced the results
+> (its engine `_core.py` is byte-identical to the library's), `paper/` reproduces every result
+> (see `paper/README.md`) and `hamilton/` holds the cluster jobs. The maintained library is
+> <https://github.com/bioflume/errbudget>.
+
 Choose a solver's numerical parameters to hit a target accuracy **in the quantity you care about**, at close to the cheapest cost that achieves it.
 
 You give it something that runs your solver (a Python function or a shell command), the

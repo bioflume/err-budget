@@ -214,6 +214,10 @@ versions are in Section S15 of the supplement and in `../CHANGELOG.md`.
 
 The studies of Sections S8–S14 of the supplement were not repeated with version 1.2.1;
 their scripts are listed under revision 2 below.
+From version 11 of the article on, Sections S11 (adaptive BDF integrator) and S12 (learned
+component) are no longer in the supplement. Their results stay in this repository, with
+version 1.1: `figures/sec9x_adaptive.txt` (`exp51_adaptive.py`) and
+`figures/sec84_learned.txt` (`exp23_mlhybrid.py`).
 
 ## Where each result of revision 3 came from (version 1.2.1)
 
@@ -230,6 +234,7 @@ their scripts are listed under revision 2 below.
 | Fig. 3: one search | `exp63_figures.py` | `figures/fig_search.pdf` |
 | Fig. 4: L5 stall | `exp63_figures.py` | `figures/fig_l5_stall.pdf` |
 | Fig. 5, Section 7.1: 2D-1 rebuilt with exact centroids; n_arc 96 and 128 | `exp46_dfg_build.py`, `exp69_dfg_fine.py`, `exp63_figures.py` | `data/dfg_tensor_v12.pkl`, `data/dfg_fine.json`, `figures/fig_dfg_mesh.pdf` |
+| Referee point 7 of revision 3: is the 2D-1 drag plateau in the solver or in the post-processing? | `exp59_dfg_plateau.py` | `data/dfg_plateau.json` |
 | Section 7.2: 2D-2, every target and configuration | `exp71_dfg2_detail.py` | `figures/rev3_dfg2_detail.txt` |
 | Section 7.3, Supplement S4: GROMACS floor sensitivity, probe cost | `exp58_floor_sensitivity.py v1.2` | `figures/rev3_floor_sensitivity.txt`, `figures/tab_floor.tex` |
 | Section 7.4: ABINIT SCF convergence check | `exp68_abinit_scf.py` | `figures/rev3_abinit_scf.txt` |
