@@ -102,6 +102,8 @@ interface for everyone else.
 ## Test problems
 
 `errbudget.problems` holds the article's test problems, solvers with exact solutions:
-`Burgers1D`, `Burgers2D`, `AdvectionDiffusion`, `ReactionDiffusion2D`, `DrivenCavity`,
-`MLHybridBurgers1D`, `make_synthetic`. Each has `run(theta) -> (observables, cost, wall, info)`
+`Burgers1D`, `Burgers2D`, `ReactionDiffusion2D`, `DrivenCavity` and `MLHybridBurgers1D`.
+Each has `run(theta) -> (observables, cost, wall, info)`
 and `exact_observables()`.
+
+`Burgers2D`, `ReactionDiffusion2D` and `DrivenCavity` need SymPy, which only the `dev` extra installs.

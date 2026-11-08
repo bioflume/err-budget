@@ -1,4 +1,4 @@
-"""L2: 1D viscous Burgers -- one rung harder than linear Crank-Nicolson.
+"""L2: 1D viscous Burgers, Crank-Nicolson in time with Newton and GMRES.
 
     u_t + u u_x = nu u_xx        on [0, 2pi), periodic,  u(x,0) = sin x
 
