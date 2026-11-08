@@ -23,15 +23,18 @@ refined for nothing.
 """
 from __future__ import annotations
 
+import json
 import time
 from dataclasses import dataclass, field
 from typing import Any, Callable, Sequence
 
 import numpy as np
 
-from ._core import run_protocol, V12, V121
+from . import report
+from ._core import measure_floor, run_protocol, V11, V12, V121
 
 KINDS = ("discretisation", "nested-solver", "cost-only")
+CONFIGURATIONS = {"v1.2.1": V121, "v1.2": V12, "v1.1": V11}
 
 
 class RunFailed(Exception):
@@ -76,23 +79,17 @@ class Parameter:
                  h: Callable[[Any], float] | None = None, model: str = "power"):
         if model not in ("power", "exponential"):
             raise ValueError(f"model must be 'power' or 'exponential', got {model!r}")
-        self.model = model
-        if model == "exponential":
-            x = [float(v) for v in values]
-            if not all(x[i + 1] > x[i] for i in range(len(x) - 1)):
-                raise ValueError(f"parameter {name!r}: an exponential-model parameter must "
-                                 f"increase from coarse to fine, got {values!r}")
-            if len(values) < 2:
-                raise ValueError(f"parameter {name!r}: need at least two candidate values")
-            if kind not in KINDS:
-                raise ValueError(f"kind must be one of {KINDS}, got {kind!r}")
-            self.name, self.values, self.kind, self.h = name, list(values), kind, x
-            return
         if kind not in KINDS:
             raise ValueError(f"kind must be one of {KINDS}, got {kind!r}")
         if len(values) < 2:
             raise ValueError(f"parameter {name!r}: need at least two candidate values")
-        self.name, self.values, self.kind = name, list(values), kind
+        self.name, self.values, self.kind, self.model = name, list(values), kind, model
+        if model == "exponential":
+            self.h = [float(v) for v in self.values]
+            if not all(self.h[i + 1] > self.h[i] for i in range(len(self.h) - 1)):
+                raise ValueError(f"parameter {name!r}: an exponential-model parameter must "
+                                 f"increase from coarse to fine, got {values!r}")
+            return
         if h is not None:
             self.h = [float(h(v)) for v in self.values]
         else:
@@ -222,20 +219,17 @@ class TuneResult:
 
     def to_json(self, path: str, indent: int = 1) -> None:
         """Write the result as JSON; read it back with `TuneResult.load`."""
-        import json
         with open(path, "w") as f:
             json.dump(self.to_dict(), f, indent=indent)
 
     @classmethod
     def load(cls, path: str) -> "TuneResult":
-        import json
         with open(path) as f:
             return cls.from_dict(json.load(f))
 
     def markdown(self) -> str:
         """The same report as `str(result)`, as Markdown with a settings table."""
-        from .report import markdown
-        return markdown(self)
+        return report.markdown(self)
 
 
 def tune(solver: Callable, params: Sequence[Parameter], target: float,
@@ -281,7 +275,23 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
     ladders = [k.values for k in params]
     hs = [k.h for k in params]
     kinds = [k.kind for k in params]
-    models = [getattr(k, "model", "power") for k in params]
+    models = [k.model for k in params]
+
+    def setting(idx):
+        return {names[i]: ladders[i][j] for i, j in enumerate(idx)}
+
+    def value(out):
+        """The observable in a run's output: a scalar, or a dict of observables."""
+        if not isinstance(out, dict):
+            return float(out)
+        if observable is None:
+            if len(out) != 1:
+                raise ValueError("solver returned several observables; say "
+                                 "which one with observable=...")
+            return float(next(iter(out.values())))
+        if observable not in out:
+            raise KeyError(f"observable {observable!r} not in solver output {sorted(out)}")
+        return float(out[observable])
 
     if start is None:
         start_idx = tuple(len(k) // 2 for k in params)
@@ -301,7 +311,7 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
     probe = {"n": 0}
 
     def lookup(idx):
-        kw = {names[i]: ladders[i][j] for i, j in enumerate(idx)}
+        kw = setting(idx)
         t0 = time.perf_counter()
         try:
             out = solver(**kw)
@@ -322,19 +332,7 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
                 if verbose:
                     print(f"  run {probe['n']:3d}  {kw}  -> not converged (treated as failed)")
                 return float("nan"), float(cost if cost is not None else max(wall, 1e-9))
-        if isinstance(out, dict):
-            if observable is None:
-                if len(out) != 1:
-                    raise ValueError("solver returned several observables; say "
-                                     "which one with observable=...")
-                val = float(next(iter(out.values())))
-            else:
-                if observable not in out:
-                    raise KeyError(f"observable {observable!r} not in solver output "
-                                   f"{sorted(out)}")
-                val = float(out[observable])
-        else:
-            val = float(out)
+        val = value(out)
         if verbose:
             print(f"  run {probe['n']:3d}  {kw}  -> {val:.8g}")
         return val, float(cost if cost is not None else max(wall, 1e-9))
@@ -347,7 +345,6 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
 
     floor = None
     if floor_probe:
-        from ._core import measure_floor
         vals = []
         for th in floor_probe:
             out = solver(**th)
@@ -365,20 +362,19 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
     r = run_protocol(lookup, ladders, start_idx, eps, hs=hs, kinds=kinds,
                      use_screen=screen, models=models, noise_floor=floor, **cfg)
     if r["budget"] is None:          # declined below the round-off floor
-        return TuneResult(settings={names[i]: ladders[i][j] for i, j in enumerate(start_idx)},
+        return TuneResult(settings=setting(start_idx),
                           certified=False, error_estimate=float("nan"), target=eps,
                           observable=observable or "", limiting=None,
                           budget_shares={}, wasted=[], frozen=[], violations=[],
                           runs_used=probe["n"], calibration_cost=0.0,
-                          recommended_cost=1.0,
-                          start={names[i]: ladders[i][j] for i, j in enumerate(start_idx)})
+                          recommended_cost=1.0, start=setting(start_idx))
 
     idx = r["proposal"]
     lb = r["budget"]
-    settings = {names[i]: ladders[i][j] for i, j in enumerate(idx)}
+    settings = setting(idx)
 
     # which parameter holds the error, and which are being refined for nothing
-    rk = getattr(lb, "rk", [np.nan] * len(params))
+    rk = lb.rk
     finite = [abs(v) for v in rk if np.isfinite(v)]
     tot = sum(finite) or 1.0
     shares = {names[i]: (abs(rk[i]) / tot if np.isfinite(rk[i]) else 0.0)
@@ -418,7 +414,6 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
         violations=[names[k] for k in r["violations"]],
         runs_used=r["runs"], calibration_cost=r["protocol_cost"],
         recommended_cost=float(np.exp(lb.model_logcost(idx))),
-        start={names[i]: ladders[i][j] for i, j in enumerate(start_idx)},
-        trace=[{names[i]: ladders[i][j] for i, j in enumerate(t)}
-               for t in r.get("trace", [])],
+        start=setting(start_idx),
+        trace=[setting(t) for t in r["trace"]],
     )

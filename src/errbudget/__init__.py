@@ -18,13 +18,12 @@ The engine is version 1.2.1 of the article (Computer Physics Communications,
 2026); ENGINE_VERSION records it.  The package version counts the tooling
 around it.
 """
-from .api import Parameter, TuneResult, tune, KINDS, RunFailed
+from .api import Parameter, TuneResult, tune, KINDS, RunFailed, CONFIGURATIONS
 from ._core import LocalBudget, measure_floor, run_protocol, screen, V11, V12, V121
 from .jobfile import JobSpec, load_job, run_job
 
 __version__ = "2.0.0"
 ENGINE_VERSION = "1.2.1"
-CONFIGURATIONS = {"v1.2.1": V121, "v1.2": V12, "v1.1": V11}
 
 __all__ = ["Parameter", "tune", "TuneResult", "KINDS", "RunFailed",
            "JobSpec", "load_job", "run_job", "CONFIGURATIONS",
