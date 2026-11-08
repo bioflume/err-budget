@@ -1,4 +1,4 @@
-"""Run a solver that is a shell command (or an importable Python function) from a job file.
+"""Run a solver that is a shell command from a job file.
 
 The engine only needs a function `solver(**params) -> (observables, cost)`.  This
 module builds one around a command line: for every setting it creates a run
@@ -15,15 +15,12 @@ writes a number".
 from __future__ import annotations
 
 import hashlib
-import importlib
-import importlib.util
 import json
 import os
 import re
 import shutil
 import signal
 import subprocess
-import sys
 import tempfile
 import time
 from typing import Any, Callable
@@ -201,40 +198,13 @@ def _read_log(path: str, warn: Callable[[str], None] | None = None) -> list[dict
 
 
 # ----------------------------------------------------------------- the solver
-def load_python_solver(ref: str, base_dir: str) -> Callable:
-    """'package.module:function' or 'path/to/file.py:function'."""
-    if ":" not in ref:
-        raise JobError(f"solver must be 'module:function' or 'file.py:function', got {ref!r}")
-    mod, func = ref.rsplit(":", 1)
-    try:
-        if mod.endswith(".py"):
-            path = mod if os.path.isabs(mod) else os.path.join(base_dir, mod)
-            if not os.path.isfile(path):
-                raise JobError(f"solver file {mod!r} does not exist")
-            spec = importlib.util.spec_from_file_location("errbudget_user_solver", path)
-            module = importlib.util.module_from_spec(spec)
-            sys.modules["errbudget_user_solver"] = module
-            spec.loader.exec_module(module)
-        else:
-            if base_dir not in sys.path:
-                sys.path.insert(0, base_dir)
-            module = importlib.import_module(mod)
-    except JobError:
-        raise
-    except Exception as exc:                                   # noqa: BLE001
-        raise JobError(f"could not import the solver {ref!r}: {exc}") from None
-    try:
-        return getattr(module, func)
-    except AttributeError:
-        raise JobError(f"{mod} has no function {func!r}") from None
-
-
 def job_fingerprint(job) -> str:
-    """What a cached run depends on besides its parameters: the command or solver, how
+    """What a cached run depends on besides its parameters: the command, how
     the observable and the cost are read, the failure rules, the environment and the
     content of the template files.  A record whose fingerprint differs is not reused."""
     h = hashlib.sha256()
-    parts = {"command": job.command, "solver": job.solver, "observable": job.observable,
+    # "solver" is always None now; it stays so that run logs written by 2.0.0 keep matching
+    parts = {"command": job.command, "solver": None, "observable": job.observable,
              "cost": job.cost, "failure": job.failure, "env": job.env,
              "render_files": job.render_files}
     h.update(json.dumps(parts, sort_keys=True, default=str).encode())
@@ -251,14 +221,6 @@ def job_fingerprint(job) -> str:
                 h.update(os.path.relpath(p, job.base_dir).encode() + f.read())
         except OSError:
             h.update(p.encode())
-    if job.solver and job.solver.split(":")[0].endswith(".py"):
-        p = job.solver.split(":")[0]
-        p = p if os.path.isabs(p) else os.path.join(job.base_dir, p)
-        try:
-            with open(p, "rb") as f:
-                h.update(f.read())
-        except OSError:
-            pass
     return h.hexdigest()[:16]
 
 
@@ -294,7 +256,6 @@ class CommandSolver:
                          f"job file and are not reused)")
         self.n_calls = 0
         self.n_cached = 0
-        self._py = load_python_solver(job.solver, job.base_dir) if job.solver else None
 
     # -- helpers
     @staticmethod
@@ -320,10 +281,7 @@ class CommandSolver:
         self.next_id += 1
         rec = {"run_id": run_id, "key": key, "params": params, "status": "running",
                "fingerprint": self.fingerprint, "started": time.strftime("%Y-%m-%d %H:%M:%S")}
-        if self._py is not None:
-            rec.update(self._run_python(params))
-        else:
-            rec.update(self._run_command(run_id, params))
+        rec.update(self._run_command(run_id, params))
         self._record(rec)
         self.log(f"  run {run_id:>4}           {self._pstr(params)}  -> {self._vstr(rec)}")
         return self._outcome(rec)
@@ -346,40 +304,6 @@ class CommandSolver:
         if rec["status"] == "unconverged":
             return {name: rec.get("value", float("nan")), "converged": False}, float(rec["cost"])
         raise RunFailed(rec.get("error", "failed"))
-
-    # -- python function
-    def _run_python(self, params: dict) -> dict:
-        t0 = time.perf_counter()
-        try:
-            out = self._py(**params)
-        except RunFailed as exc:
-            return {"status": "failed", "error": str(exc) or "RunFailed",
-                    "cost": time.perf_counter() - t0}
-        wall = time.perf_counter() - t0
-        cost = wall
-        try:
-            if isinstance(out, tuple) and len(out) == 2:
-                out, cost = out
-            converged = True
-            if isinstance(out, dict):
-                out = dict(out)
-                converged = bool(out.pop("converged", True))
-                name = self.job.observable["name"]
-                if name in out:
-                    value = _to_float(out[name])
-                elif len(out) == 1:
-                    value = _to_float(next(iter(out.values())))
-                else:
-                    return {"status": "failed", "cost": float(cost),
-                            "error": f"solver returned {sorted(out)}, none named {name!r}"}
-            else:
-                value = _to_float(out)
-            cost = float(cost)
-        except (TypeError, ValueError) as exc:
-            return {"status": "failed", "cost": wall,
-                    "error": f"solver returned something that is not a number: {exc}"}
-        return {"status": "ok" if converged else "unconverged", "value": value,
-                "cost": cost, "wall": wall}
 
     # -- shell command
     def _run_command(self, run_id: str, params: dict) -> dict:

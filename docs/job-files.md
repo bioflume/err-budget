@@ -15,7 +15,7 @@ errbudget report errbudget_result.json
 
 ## The fields
 
-### `command` or `solver` (one of the two is required)
+### `command` (required)
 
 `command` is a shell command that runs **one** simulation. `{{name}}` is replaced by the
 value of the parameter `name`; three more placeholders are always available:
@@ -30,10 +30,6 @@ The command runs **inside the run directory**, so a script or input next to the 
 is `{{job_dir}}/solver.py`. A format spec can follow the name: `{{dt:.3e}}`. Integers are
 written as integers, floats in their shortest form (`1e-06`, `0.05`). Braces that are not
 `{{name}}` are left alone, so OpenFOAM dictionaries are safe.
-
-`solver: module:function` or `solver: path/to/file.py:function` calls a Python function
-instead; it gets the parameters as keyword arguments and returns a number, a dict of
-observables, or `(observables, cost)`, like the Python API.
 
 ### `parameters` (required)
 

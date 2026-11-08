@@ -4,7 +4,7 @@
     errbudget check job.yaml   # validates it and runs your starting setting once
     errbudget run job.yaml     # tunes, prints the report, writes the result files
 
-A job file says what to run (`command`, or `solver` for a Python function), which
+A job file says what to run (`command`), which
 parameters to tune (`parameters`, each with its kind and candidate values), what to
 read from the output (`observable`) and how accurate it has to be (`target`).  The
 reference is in docs/job-files.md; `errbudget init` writes one with every field explained.
@@ -56,7 +56,6 @@ class JobSpec:
     target: float
     observable: dict                      # {"name", "source", "path", "parse", "regex"/"key"/"column", ...}
     command: str | None = None
-    solver: str | None = None             # "module:function" or "file.py:function"
     name: str = "errbudget job"
     relative: bool = False
     start: dict = field(default_factory=dict)
@@ -104,14 +103,11 @@ class JobSpec:
                 return None
             return d[key]
 
-        command, solver = d.get("command"), d.get("solver")
+        command = d.get("command")
         if isinstance(command, list):
             command = " ".join(str(c) for c in command)
-        if not command and not solver:
-            errors.append("give either 'command' (a shell command with {{placeholders}}) or "
-                          "'solver' (module:function)")
-        if command and solver:
-            errors.append("give 'command' or 'solver', not both")
+        if not command:
+            errors.append("give 'command' (a shell command with {{placeholders}})")
 
         params_in = need("parameters", list) or []
         params, names = [], []
@@ -253,14 +249,7 @@ class JobSpec:
                     re.compile(str(pat))
                 except re.error as exc:
                     errors.append(f"failure.{key} {pat!r} does not compile: {exc}")
-        if solver and ":" in str(solver):
-            mod = str(solver).rsplit(":", 1)[0]
-            if mod.endswith(".py") and not os.path.isfile(mod if os.path.isabs(mod)
-                                                          else os.path.join(base_dir, mod)):
-                errors.append(f"solver file {mod!r} does not exist")
-        elif solver:
-            errors.append("solver must be 'module:function' or 'file.py:function'")
-        unknown = set(d) - {"name", "command", "solver", "parameters", "target", "observable",
+        unknown = set(d) - {"name", "command", "parameters", "target", "observable",
                             "relative", "start", "options", "workdir", "template_dir", "files",
                             "render_files", "env", "timeout", "keep_runs", "cost", "failure",
                             "output"}
@@ -274,7 +263,7 @@ class JobSpec:
         output = d.get("output", "errbudget_result")
         output = output if os.path.isabs(output) else os.path.join(base_dir, output)
         job = cls(parameters=params, target=float(target), observable=obs, command=command,
-                  solver=solver, name=str(d.get("name", "errbudget job")),
+                  name=str(d.get("name", "errbudget job")),
                   relative=bool(d.get("relative", False)), start=start, options=options,
                   workdir=workdir, template_dir=tdir, files=files,
                   render_files=d.get("render_files"), env=dict(d.get("env") or {}),
@@ -318,7 +307,7 @@ class JobSpec:
     def describe(self) -> str:
         """A short text description: what runs, the parameters, the target."""
         L = [f"job: {self.name}"]
-        L.append(f"runs: {self.command!r}" if self.command else f"solver: {self.solver}")
+        L.append(f"runs: {self.command!r}")
         L.append(f"observable: {self.observable['name']} "
                  f"({self.observable.get('parse') or parse_method(self.observable).replace('_', ' ')}"
                  f" from {self.observable.get('source', 'file' if 'path' in self.observable else 'stdout')})")

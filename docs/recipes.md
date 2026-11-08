@@ -215,21 +215,6 @@ the tool checks this and reports a contradiction if domain decomposition moves t
 observable beyond the resolution. Report core-seconds as the cost so that rank counts are
 comparable.
 
-## A Python solver, without writing Python
-
-```yaml
-solver: my_solver.py:run          # def run(N, dt, rtol): ... return {"drag": cd, "converged": ok}, cost
-parameters:
-  - {name: N,    values: [32, 64, 128, 256], start: 64}
-  - {name: dt,   values: [1e-2, 5e-3, 2.5e-3, 1.25e-3], start: 5e-3}
-  - {name: rtol, kind: nested-solver, values: [1e-4, 1e-6, 1e-8, 1e-10], start: 1e-10}
-observable: drag
-target: 1e-3
-```
-
-The function sees the same keyword arguments and returns what `tune` accepts; the runner
-adds the run log and the result files.
-
 ## Checking a recipe
 
 1. `errbudget check job.yaml` runs the starting setting once and prints the number it read and

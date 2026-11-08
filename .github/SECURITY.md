@@ -28,9 +28,8 @@ you when the problem is made public.
 ## Job files run commands by design
 
 A job file tells errbudget what to run. The `command` field is run through the shell once
-for every setting that is tried, and the `solver` field (`module:function` or
-`file.py:function`) imports and runs Python code. This is how errbudget drives a solver,
-not a vulnerability, and it means that a job file can do anything a script can. Treat a
+for every setting that is tried. This is how errbudget drives a solver, not a
+vulnerability, and it means that a job file can do anything a script can. Treat a
 job file from someone else as you would a script from them, and read it before you run
 it: `errbudget check` and `errbudget run` execute it, while `errbudget check --no-run`
 only validates it.

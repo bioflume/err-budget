@@ -98,11 +98,11 @@ def test_validation_lists_every_problem(tmp_path):
         assert frag in msg, frag
 
 
-def test_solver_and_command_are_exclusive():
+def test_command_is_required_and_solver_is_not_a_field():
     base = {"parameters": [{"name": "n", "values": [1, 2]}], "observable": "v", "target": 1}
-    with pytest.raises(JobError, match="either 'command'"):
+    with pytest.raises(JobError, match="give 'command'"):
         JobSpec.from_dict(dict(base))
-    with pytest.raises(JobError, match="not both"):
+    with pytest.raises(JobError, match=r"unknown field\(s\): solver"):
         JobSpec.from_dict(dict(base, command="x", solver="m:f"))
 
 
@@ -188,18 +188,6 @@ def test_template_dir_and_file_observable(tmp_path):
     assert out["value"] == 2.0
     assert open(os.path.join(job.workdir, "run_0001", "system", "controlDict")).read() \
         == "deltaT 0.001;\nwriteInterval 10;\n"
-
-
-def test_python_solver_in_a_job_file(tmp_path):
-    (tmp_path / "mysolver.py").write_text(
-        "def run(n, tol):\n    return {'v': 1 + 1/n + tol, 'converged': tol > 1e-9}, n/tol\n")
-    d = {"solver": "mysolver.py:run",
-         "parameters": [{"name": "n", "values": [2, 4, 8, 16, 32], "start": 8},
-                        {"name": "tol", "kind": "nested-solver", "values": [1e-1, 1e-3, 1e-6, 1e-10]}],
-         "observable": "v", "target": 0.3, "workdir": "runs"}
-    job = JobSpec.from_dict(d, base_dir=str(tmp_path))
-    r = run_job(job, log=None, write=False)
-    assert r.certified and r.settings["n"] >= 4
 
 
 # ------------------------------------------------------------------ end to end
@@ -332,7 +320,6 @@ def test_validation_catches_engine_refusals_and_bad_fields(tmp_path):
         (dict(base, parameters=[{"name": "r", "values": [1, 2]}], observable={"name": "v", "regex": "x"}), "capture group"),
         (dict(base, parameters=[{"name": "r", "values": [1, 2]}], options={"resid_margn": 1}), "not an option"),
         (dict(base, parameters=[{"name": "r", "values": [1, 2]}], failure={"fail_regex": "x"}), "not a failure rule"),
-        ({"solver": "nope.py:run", "parameters": [{"name": "r", "values": [1, 2]}], "observable": "v", "target": 1}, "does not exist"),
     ]:
         with pytest.raises(JobError, match=frag):
             JobSpec.from_dict(bad, base_dir=str(tmp_path))
@@ -340,16 +327,11 @@ def test_validation_catches_engine_refusals_and_bad_fields(tmp_path):
     assert job.tune_kwargs()["resid_margin"] == 1e-3
 
 
-def test_null_json_and_fortran_columns(tmp_path):
+def test_null_json_and_fortran_columns():
     with pytest.raises(JobError, match="could not read"):
         extract_number({"key": "flux"}, '{"flux": null}')
     assert extract_number({"column": 2}, "1 -1.5D-03\n") == -1.5e-3
     assert extract_number({"column": 2}, "0.5 (0.12 0.3 0.0)\n") == 0.12
-    (tmp_path / "m.py").write_text("def run(n):\n    return None\n")
-    job = JobSpec.from_dict({"solver": "m.py:run", "parameters": [{"name": "n", "values": [1, 2]}],
-                             "observable": "v", "target": 1, "workdir": "runs"}, base_dir=str(tmp_path))
-    with pytest.raises(RunFailed, match="not a number"):
-        CommandSolver(job, log=None)(n=1)
 
 
 def test_output_directory_is_created_and_log_table_survives_a_truncated_line(tmp_path):

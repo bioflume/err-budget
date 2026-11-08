@@ -32,8 +32,8 @@ errbudget run job.yaml     # tunes, prints the report, writes errbudget_result.j
 ```
 
 The [job-file reference](job-files.md) describes every field, and the [recipes](recipes.md)
-give job files for OpenFOAM, LAMMPS, GROMACS, Quantum ESPRESSO, ABINIT, MPI codes and Python
-solvers. For a solver you can call as a Python function, see the [Python API](api.md). Four
+give job files for OpenFOAM, LAMMPS, GROMACS, Quantum ESPRESSO, ABINIT and MPI codes. For a
+solver you can call as a Python function, see the [Python API](api.md). Four
 runnable examples, including a command-line one, are in
 [`examples/`](https://github.com/bioflume/errbudget/tree/main/examples).
 

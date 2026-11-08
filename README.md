@@ -183,7 +183,7 @@ The documentation is at <https://bioflume.github.io/errbudget/>. The same pages 
 |---|---|
 | `docs/guide.md` | how it works, how to choose values and a target, how to read the report, when it declines |
 | `docs/job-files.md` | the job-file reference (every field) |
-| `docs/recipes.md` | job files for OpenFOAM, LAMMPS, GROMACS, Quantum ESPRESSO / ABINIT, MPI codes, Python solvers |
+| `docs/recipes.md` | job files for OpenFOAM, LAMMPS, GROMACS, Quantum ESPRESSO / ABINIT, MPI codes |
 | `docs/api.md` | the Python API (`Parameter`, `tune`, `TuneResult`, `RunFailed`, the engine) |
 | `examples/` | four runnable examples, including the command-line one |
 | `CHANGELOG.md` | what changed between versions |
