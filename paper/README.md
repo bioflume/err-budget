@@ -254,7 +254,6 @@ now in the supplement or in `../CHANGELOG.md`.
 | Section 5.1: round-off floor of the observables | `exp25_referee.py` | `sec5_floor.txt` |
 | Table 3 and Section 5.2: transfer of thresholds | `exp32_conditions.py` | `tab03_transfer.txt` |
 | Section 5.2: conditioning mechanism | `exp31_mechanism.py` | `sec52_mechanism.txt` |
-| Table 4: design ablations | `exp41_ablations.py` | `tab04_ablations.txt` |
 | Table 5 and Section 7.1: all 11,048 replays | `exp26_outcomes.py` | `tab05_outcomes.txt` |
 | Table 6: separability and estimate quality | `exp28_separability.py` | `tab06_rho.txt` |
 | Table 7: ladder spacing | `exp34_spacing.py`, `exp35_whyfine.py`, `exp36_gated.py` | `tab07_*.txt` |

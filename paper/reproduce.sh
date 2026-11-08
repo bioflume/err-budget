@@ -47,7 +47,6 @@ step sec5_masking    python exp40_section5.py
 step sec5_floor      python exp25_referee.py
 step tab03_transfer  python exp32_conditions.py
 step sec52_mechanism python exp31_mechanism.py
-step tab04_ablations python exp41_ablations.py
 step tab05_outcomes  python exp26_outcomes.py
 step tab06_rho       python exp28_separability.py
 step tab07_whyfine   python exp35_whyfine.py
