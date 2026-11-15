@@ -1,203 +1,60 @@
-# errbudget
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/errbudget-logo-dark.svg">
+    <img alt="errbudget" src="docs/assets/errbudget-logo.svg" width="360">
+  </picture>
+</p>
 
-> This is the article's repository. `src/errbudget` is the package as it produced the results
-> (its engine `_core.py` is byte-identical to the library's), `paper/` reproduces every result
-> (see `paper/README.md`) and `hamilton/` holds the cluster jobs. The maintained library is
-> <https://github.com/bioflume/errbudget>.
+# Reproducing the errbudget article
 
-Choose a solver's numerical parameters to hit a target accuracy **in the quantity you care about**, at close to the cheapest cost that achieves it.
+This branch reproduces the article "errbudget: choosing the discretization and the solver
+tolerances of a black-box code for a target accuracy in one observable" (Computer Physics
+Communications) and its supplement. The program for users is on the branch `main`.
 
-You give it something that runs your solver (a Python function or a shell command), the
-numerical parameters with their candidate values, the observable you want, and how
-accurate you need it. It gives you a setting, an error estimate, and a statement of which
-parameter is limiting the accuracy and which ones you are refining for nothing.
+The article presents only the released program, errbudget 1.2.1, with its default
+configuration `errbudget.V121`, and every result was replayed with it. The configurations
+`V12` and `V11` and the tag `v1.2.0-frozen` exist only to replay the pre-registered searches
+of H1–H3, which ran the program as frozen at registration. The program was earlier named
+`knobs`; the frozen source keeps that name.
 
-It does not need an adjoint, access to the solver's source, and analysis of your particular
-problem. It costs runs proportional to the *number* of parameters. It was tested on OpenFOAM, Quantum ESPRESSO, ABINIT, GROMACS and LAMMPS, driven
-only through their input files, and on test problems with exact solutions; the article
-reports every miss and its cause.
+## What is here
+
+```
+src/errbudget/   the package as it produced the results: the engine (_core.py), the Python
+                 interface (api.py: tune, Parameter) and the test problems
+paper/           the replay and rebuild scripts, the stored runs (data/), the tables and the
+                 printed output (figures/), the frozen program (frozen_src/) and the build of
+                 the coarser 2D-2 study (dfg2d2_job/)
+hamilton/        the Hamilton jobs J1-J5 and their summarised results (results/)
+studies/         pre_comparison/ (Section S-4.6), reuse2d1/ (S-6), airfoil/ (S-7)
+tests/           the tests, among them the 14 of test_spec_v121.py (Section S-1.11)
+examples/        short examples of the Python interface
+```
+
+`PREREGISTRATION.md` fixed the pre-registered problems H1–H3. `DATA.md` lists the raw data
+kept outside git, with their SHA-256. `CHANGELOG.md` records how the repository changed.
+
+## Reproduce
 
 ```bash
-pip install "errbudget[yaml] @ git+https://github.com/bioflume/errbudget"
+git checkout paper
+python3.11 -m venv .venv && source .venv/bin/activate
+pip install -e . -r paper/requirements-article.txt
+bash paper/replay_all.sh
 ```
 
-## Two ways to use it
+`paper/README.md` maps every number, table and figure of the article and the supplement to
+the script that produces it, and says which results need a solver (`paper/reproduce.sh`) or
+a cluster (`hamilton/`, `studies/`). `paper/REPRODUCTION_CHECK.md` records what was
+reproduced.
 
-**From the command line, for any code that runs as a command** (OpenFOAM, LAMMPS, your
-own binary, `python my_solver.py`):
+## The command-line tool
 
-```bash
-errbudget init job.yaml    # writes an annotated job file: edit the command, the parameters, the target
-errbudget check job.yaml   # validates it and runs your starting setting once
-errbudget run job.yaml     # tunes, prints the report, writes errbudget_result.json and .md
-```
+The commands `errbudget init`, `check` and `run` of Section 9 belong to the package on the
+branch `main` (`src/errbudget/cli.py`, installed as the console script `errbudget`). The
+package here is the record of the code that produced the results; it has the engine and
+the Python interface but not the command-line tool.
 
-A job file is a page of YAML (or JSON, or TOML). Here is the one from
-`examples/04_command_line/`:
+## Licence and citation
 
-```yaml
-command: python3 {{job_dir}}/solver.py --steps {{steps}} --tol {{tol}} --refresh {{refresh}}
-
-parameters:                      # values run COARSE (cheap) to FINE (accurate)
-  - {name: steps,   kind: discretisation, values: [25, 50, 100, 200, 400, 800], start: 100}
-  - {name: tol,     kind: nested-solver,  values: [1e-2, 1e-4, 1e-6, 1e-8, 1e-10], start: 1e-10}
-  - {name: refresh, kind: cost-only,      values: [16, 8, 4, 2, 1],               start: 1}
-
-observable: {name: u_final, regex: "u_final\\s*=\\s*([-+0-9.eE]+)"}   # read from stdout
-target: 1e-4
-cost: {regex: "work\\s*=\\s*([0-9]+)"}   # optional; wall-clock time by default
-```
-
-Every run gets its own directory (template files are copied in with `{{placeholders}}`
-filled), and every run is logged, so a tuning that is interrupted resumes where it was.
-`docs/job-files.md` is the reference and `docs/recipes.md` has job files for OpenFOAM,
-LAMMPS, GROMACS and plane-wave DFT codes.
-
-**From Python**, for a solver you can call as a function:
-
-```python
-from errbudget import Parameter, tune
-
-def solver(steps, inner_tol, inner_max, jac_every):
-    ...                                  # your code, untouched
-    return {"u_final": u}, work          # observables, and optionally a cost
-
-result = tune(
-    solver,
-    [Parameter("steps",     [25, 50, 100, 200, 400, 800], kind="discretisation"),
-     Parameter("inner_tol", [1e-2, 1e-4, 1e-6, 1e-8, 1e-10], kind="nested-solver"),
-     Parameter("inner_max", [2, 4, 8, 16],               kind="nested-solver"),
-     Parameter("jac_every", [16, 8, 4, 2, 1],            kind="cost-only")],
-    target=1e-4, observable="u_final",
-    start=dict(steps=100, inner_tol=1e-10, inner_max=16, jac_every=1))
-
-print(result)
-```
-
-```
-  Target 0.0001 MET. Estimated error 2.08e-06.
-
-  setting:
-    steps                25     (was 100)
-    inner_tol            0.01   (was 1e-10)
-    inner_max            2      (was 16)
-    jac_every            16     (was 1)
-```
-
-That starting configuration is a reasonable, cautious guess. It costs 1000 units of work
-for an error of 1.4e-7 when 1e-4 was asked for. The recommendation costs 64, **15× less**,
-and still meets the target with room to spare. Run it yourself:
-`python examples/02_bring_your_own_solver.py`.
-
-## Declaring your parameters
-
-Each parameter is declared as one of three kinds. This matters, and it is the one thing
-the tool asks of you.
-
-| kind | meaning | examples |
-|---|---|---|
-| `discretisation` | refining improves the answer and costs more | mesh spacing, time step, basis size, cutoff radius, k-point mesh |
-| `nested-solver` | tolerance or iteration limit of a solver nested inside the outer problem | Newton tolerance, linear-solver relative tolerance, iteration caps, Krylov restart, SCF or constraint tolerance |
-| `cost-only` | changes cost but not the answer, often with an interior cost optimum | preconditioner fill or drop tolerance, how often a Jacobian or preconditioner is refreshed, neighbour-list rebuild frequency |
-
-**Errbudget does not infer your parameters.** We tested inference and it scores
-3–4 out of 8. The obstacle is structural: a nested-solver parameter that is *masked*,
-currently buried under another parameter's error, is indistinguishable from one that does not do anything at all. In one of our tests even the mesh measured zero influence, because a loose
-Newton tolerance dominated so completely that refining the mesh changed nothing.
-
-**Errbudget falsifies what cannot be inferred.** The only declaration that is unsafe to get
-wrong is calling an influential parameter `cost-only`, and that is detected by a sweep: with `screen: true` the preliminary sweep tests every declaration and the report
-lists the ones its measurements contradict. Without the sweep, a parameter declared
-`cost-only` is only moved to a cheaper value when the observable stays the same to within
-5 % of the target, so a wrong declaration costs efficiency, not correctness.
-
-Values are listed from coarse to fine. For a parameter whose error decays exponentially
-(a plane-wave or spectral cutoff) add `model: exponential` (`Parameter(..., model="exponential")`);
-its values must increase.
-
-## What it will tell you
-
-- the recommended setting, and what it changed from yours;
-- whether the target was met, and, if it cannot be met with the values you offered, it
-  says so instead of returning a confident wrong answer;
-- which parameter is limiting the accuracy;
-- which parameters are refined finer than they need to be, and by how much;
-- any declaration its own measurements contradict (with the preliminary sweep).
-
-## Three things worth knowing before you use it
-
-**Calibration is not free.** In the article's tests it cost about a hundred to a few
-hundred runs at the returned setting (more where convergence is irregular). You cannot
-certify an answer without computing a better one, so part of that is irreducible. It pays
-back if you are running parameter studies or ensembles; it does not pay back for a single
-run.
-
-**It does not guess (and declines) when it cannot find it.** Where an observable converges irregularly, or a target
-can only be met through a lucky cancellation, it declines and says which parameter it could
-not bound. Extend that parameter's list of values and run it again.
-
-**The certificate is measured only.** You get a computed estimate with a calibrated
-margin and a stopping rule that is re-verified at every step. On four test problems with
-exact solutions and on five production codes the article reports every miss and its cause.
-That is stronger than a heuristic and weaker than a proof.
-
-## Failed and unconverged runs
-
-A run whose nested solver stopped at its iteration limit is not an answer. From Python,
-return `{"drag": cd, "converged": False}` or raise `errbudget.RunFailed`; from a job file, give
-a pattern that marks it (`failure: {unconverged_if_regex: "did not converge"}`). A non-zero
-exit code is always a failure. Such runs are recorded with their cost but never proposed
-and never fitted. `accept_unconverged: true` restores the behaviour of version 1.1.
-
-## What it checks before it accepts a setting
-
-- the observed order along every discretisation parameter (three runs through the current
-  value): a list that starts before the asymptotic range, or an error that stalls between
-  two grids, is refined or declined instead of extrapolated;
-- the interaction of the parameters, by refining them all together by one step (one extra
-  run): errors of different parameters that cancel at one setting but not at the next are
-  not credited;
-- a safety factor that grows with the misfit of the error models.
-
-The default configuration is the article's version 1.2.1 (`errbudget.V121`); `v1.2` and `v1.1`
-reproduce the earlier versions. For single-precision or otherwise noisy codes,
-`floor_probe` measures the round-off floor from two settings refined beyond every
-candidate value and declines targets below ten times it; `screen: true` runs a
-preliminary sweep (fewer runs, more expensive recommendations).
-
-## Documentation
-
-| | |
-|---|---|
-| `docs/guide.md` | how it works, how to choose values and a target, how to read the report, when it declines |
-| `docs/job-files.md` | the job-file reference (every field) |
-| `docs/recipes.md` | job files for OpenFOAM, LAMMPS, GROMACS, Quantum ESPRESSO / ABINIT, MPI codes, Python solvers |
-| `docs/api.md` | the Python API (`Parameter`, `tune`, `TuneResult`, `RunFailed`, the engine) |
-| `examples/` | four runnable examples, including the command-line one |
-| `CHANGELOG.md` | what changed between versions |
-
-## Install
-
-```bash
-pip install "errbudget[yaml] @ git+https://github.com/bioflume/errbudget"   # with YAML job files
-pip install "errbudget @ git+https://github.com/bioflume/errbudget"         # Python API, JSON/TOML job files
-```
-
-Python 3.9 or later, NumPy and SciPy. From a clone: `pip install -e ".[dev]"` and `pytest`
-(about 80 s; the tests encode the article's claims, not just code health).
-
-## Citing
-
-The method and its evaluation are described in
-
-> G. Kabacaoğlu, *errbudget: choosing the numerical parameters of a black-box solver for a
-> target accuracy in one observable*, Computer Physics Communications, 2026.
-
-The engine in this package is version 1.2.1, the version the article describes
-(`errbudget.ENGINE_VERSION`); the article's own repository, with every script, stored solver
-output and the cluster jobs, is <https://github.com/bioflume/errbudget-paper>. See
-`CITATION.cff`.
-
-## Licence
-
-MIT.
+MIT (`LICENSE`). To cite the article or the software, see `CITATION.cff`.
