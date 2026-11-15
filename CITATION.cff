@@ -1,6 +1,6 @@
 cff-version: 1.2.1
 message: "If you use errbudget, please cite the article and the software release below."
-title: "errbudget: choosing the numerical parameters of a black-box solver for a target accuracy in one observable"
+title: "errbudget: choosing the discretization and the solver tolerances of a black-box code for a target accuracy in one observable"
 type: software
 version: 1.2.1
 date-released: "2026-10-31"            # TODO: set at release
@@ -21,7 +21,7 @@ keywords:
   - discretisation error
 preferred-citation:
   type: article
-  title: "errbudget: choosing the numerical parameters of a black-box solver for a target accuracy in one observable"
+  title: "errbudget: choosing the discretization and the solver tolerances of a black-box code for a target accuracy in one observable"
   authors:
     - family-names: "Kabacaoğlu"
       given-names: "Gökberk"

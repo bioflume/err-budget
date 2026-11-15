@@ -5,6 +5,40 @@ article. The article describes version 1.2.1; the comparisons with earlier versi
 used to be in the article are recorded here, with the script that reproduces each. The
 entries below the rename keep the old name, as it was at the time.
 
+## Reproduction of v12 of the article (November 2026; program unchanged: 1.2.1)
+
+No change to the engine: `src/errbudget/_core.py` and `api.py` are as before, and the tests
+pass, `tests/test_spec_v121.py` included.
+
+- **New studies** (`studies/`), imported as run from the project repository (paper-v12,
+  deb494d): the comparison with probabilistic Richardson extrapolation (`pre_comparison/`,
+  protocol e1d1bce), the pre-registered Reynolds-number reuse study on 2D-1 (`reuse2d1/`,
+  protocol 8cb358c) and the pre-registered airfoil study (`airfoil/`, protocol da6e9e0,
+  amendments A1-A6). Only their absolute paths changed. The summaries of their raw packs are
+  in `studies/*/summary/`; `DATA.md` lists the raw packs with their SHA-256.
+- **Reruns with the released program**: `exp30_transfer.py` and `exp37_calhardest.py` (reuse
+  on L2), `exp34_spacing.py`, `exp35_whyfine.py` and the new `exp34_spacing_margin.py`
+  (closely spaced values), `exp54_eight.py` (eight parameters), with the new `l2flags.py`.
+  They replace the scripts of the same name, which ran earlier versions.
+- **New analyses** of the refined 2D-2 study: `exp83_dfg2_traces.py` (the misses at two
+  ungraded targets, the traced search, the reference remark) and `exp84_dfg2_strict.py` (the
+  stricter rule after a failed finer run, applied in the script).
+- **Figures** of v12: `extract_2d1_l5.py`, `make_2d1_l5_figures.py`,
+  `make_baselines_figure.py`, `make_pre_figure.py`, `figstyle.py`; `make_lammps_figure.py`
+  without the marker of version 1.1.
+- **Tables**: `exp70_tables.py` writes the eight table files of v12 byte for byte, among them
+  Tables 4, 5 and S-3.2, whose generators had been lost; `exp65_misdeclare_v12.py` writes
+  Table S-3.5 with the labels of v12.
+- **One replay entry point**, `paper/replay_all.sh`, replaces `run_v6_analyses.sh`;
+  `reproduce.sh` rebuilds the stored runs and then calls it.
+- **Removed**: 23 scripts that produce no number of v12 (the screening, outcome, margin,
+  calibration, wall-clock, adaptive-integrator and learned-component studies, the analyses
+  of earlier versions superseded by the reruns, and the helpers of the revision-4 workflow),
+  with their printed output; the table files that v12 does not use.
+- **Clean-up** of the replay scripts: imports without `sys.path` edits, unused imports and
+  names removed, docstrings that say what each script computes and where v12 uses it. The
+  solver drivers, the builders of the stored runs and the cluster code are unchanged.
+
 ## Results of the cluster reruns (November 2026; program unchanged: 1.2.1)
 
 - **Refined 2D-2 study (J2).** `hamilton/J2_dfg2d2/analyse_j2.py` grades against the run at
