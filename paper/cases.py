@@ -1,15 +1,11 @@
-"""Every study of the article as one registry, for the pooled results table.
+"""Registry of the development studies that the replays search: for each case the stored
+runs (setting -> observables, cost, convergence information), the candidate values,
+refinement scalars, declared classes and error models, the reference value and its
+relative uncertainty for each observable, and the targets.
 
-Each case carries what the replay needs: the exhaustive tensor (configuration
--> observables, cost, per-run information), the candidate values, refinement
-scalars, declared classes and error models, the exact or reference value of
-each observable with its uncertainty, the graded targets, and a flag saying
-whether each run met its own convergence criterion.
-
-The declarations are those a user following the article would make; they are
-the same for every configuration of the program that is compared.  Targets are
-graded only if they are at least ten times the relative uncertainty of the
-reference (`admitted`).
+A target is graded (admitted) only if it is at least ten times the uncertainty of its
+reference (Section 5.3).  converged(i) tells whether run i met its own convergence
+criterion; the released configuration treats a run that did not as failed.
 """
 from __future__ import annotations
 
@@ -91,8 +87,8 @@ def _manufactured():
 def _dfg1(cost="deterministic"):
     from exp46_dfg_build import LAD
     from openfoam_cylinder import REF
-    # version-1.2 post-processing (exact cell centroids at the wall, second-order
-    # wall pressure); the tensor of revision 2 is dfg_tensor.pkl
+    # forces from the exact wall-cell centroids and the second-order wall pressure;
+    # dfg_tensor.pkl holds the earlier post-processing (vertex-mean cell centres)
     raw = pickle.load(open(os.path.join(D, os.environ.get("ERRBUDGET_DFG_TENSOR", "dfg_tensor_v12.pkl")), "rb"))
     t = {}
     for i, v in raw.items():
@@ -160,14 +156,12 @@ def _gromacs():
 
 
 def abinit_uncertainty(REF):
-    """Relative uncertainty of the ABINIT reference used for grading.
+    """Relative uncertainty of the 48-Ha ABINIT reference (S-5.5).
 
-    Until revision 4 this was the value measured on the 30-Ha reference of revision 2
-    (figures/sec83_reference.txt: 1.22e-4 in the energy, 4.45e-3 in the force), although
-    the tensor is graded against the 48-Ha reference (abinit_silicon.py, reference()).
-    paper/exp75_abinit_reference.py measures the uncertainty of the 48-Ha reference with
-    the recipe used for Quantum ESPRESSO and writes data/abinit_reference_v6.json; that
-    value is used if the reference it measured is the one in the tensor."""
+    exp75_abinit_reference.py measures it with the recipe used for Quantum ESPRESSO and
+    writes data/abinit_reference_v6.json; that value is used if the reference it measured
+    is the one in the tensor.  Otherwise, and with ERRBUDGET_ABINIT_UNC=rev2, the value of
+    the earlier 30-Ha reference (figures/sec83_reference.txt) is used."""
     unc = {"energy": 1.22e-4, "force": 4.45e-3}
     f = os.path.join(D, "abinit_reference_v6.json")
     if os.path.exists(f) and os.environ.get("ERRBUDGET_ABINIT_UNC", "measured") == "measured":
@@ -195,11 +189,11 @@ def _abinit():
 
 
 def _dfg2_refined():
-    """Revision 4: DFG 2D-2 refined on Hamilton (job J2).  Parameters n_arc 24-96, time
-    step, PIMPLE residualControl, GAMG tolerance, relaxation time and averaging window;
-    forces from OpenFOAM's forceCoeffs function object; reference n_arc 192, dt 1.25e-4,
-    whose uncertainty is measured against two other reference runs and the window
-    variants (hamilton/J2_dfg2d2/analyse_j2.py, which writes the case specification)."""
+    """The refined OpenFOAM 2D-2 study (Hamilton job J2, case 2D-2h): n_arc 24-96, time
+    step, PIMPLE residualControl, GAMG tolerance, discarded transient R and averaging
+    window W; forces from the forceCoeffs function object.  The reference is the run at
+    n_arc = 128, dt = 1.25e-4 (the run at 192 diverged); hamilton/J2_dfg2d2/analyse_j2.py
+    measures its uncertainty and writes the case specification."""
     p = os.path.normpath(os.path.join(os.path.dirname(D), "..", "hamilton", "results", "j2_tensor.pkl"))
     if not os.path.exists(p):
         raise FileNotFoundError(p)
@@ -227,9 +221,9 @@ def _qe():
 
 
 def all_cases(dfg1_cost="deterministic", refined_2d2=True):
-    """Every development case.  With refined_2d2 (revision 4) the refined 2D-2 study of
-    the Hamilton job J2 is appended as case "2D-2h" when its results are present; the
-    revision-3 2D-2 case stays in the list, and the tables choose which one to show."""
+    """Every development case.  With refined_2d2 the refined 2D-2 study (case 2D-2h) is
+    appended when hamilton/results/j2_tensor.pkl is present; the coarser 2D-2 study (case
+    2D-2) stays in the list, and the tables show the refined one."""
     out = (_manufactured() + [_dfg1(dfg1_cost), _dfg2()] + _lammps() + _gromacs()
            + [_abinit(), _qe()])
     if refined_2d2:

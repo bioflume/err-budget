@@ -1,12 +1,8 @@
-"""DFG 2D-2: every target, including those below ten times the reference
-uncertainty (not admitted to the pooled table), for the configurations that
-differ in how interacting errors are treated (referee points 4 and 8).
-    python exp71_dfg2_detail.py
+"""The coarser OpenFOAM 2D-2 study at every target, graded or not, for the configurations
+that treat interacting errors differently (S-3.3): with cancellation allowed
+(v1.2.1-credit), the drag at 3e-3 misses at one setting, whose budget is printed.
 
-Version 7 of the article: the released program with cancellation credited
-(v1.2.1-credit) is added, and for the drag at 3e-3 the script prints the budget
-at the setting that this configuration returns outside the target (Section 7.2
-and the Remark of Section 4.8).
+    python exp71_dfg2_detail.py
 """
 import numpy as np
 import cases as C

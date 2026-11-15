@@ -1,26 +1,11 @@
-"""Reliability against ladder spacing: the test the method is supposed to fail.
+"""Closely spaced candidate values on L2 (S-3.5, Table S-3.4): four lists of five values
+with the same geometric midpoint (N = 128, 100 time steps, both tolerances 1e-6), refined
+by 2/100, 1.6/10, 1.4/5 and 1.2/3 (mesh and time step / tolerances).  The released program
+searches from every setting at the 25th and 50th percentile of each observable's errors.
+The tensors are built on first use (data/burgers_sp_<mesh>_<tol>.pkl); their convergence
+flags come from l2flags.py.
 
-Section 6.4 attributes the measured reliability not to the accuracy of the error
-estimate, which is optimistic at a fifth of anchors, but to the coarseness of the
-ladder.  A configuration that passes the stopping test typically lands well inside
-the target because the next rung down is far away; an estimate that is 20%
-optimistic changes the decision only near a rung boundary.
-
-If that is right, reliability must degrade as the rungs close up, and the
-diagnostic that degrades with it is the SLACK -- the true error of the
-recommendation as a fraction of the target.  Slack near zero means the ladder is
-doing the work; slack near one means the stopping test is, and the stopping test
-is the part that is only 80% accurate.
-
-Same problem, same method, same margin; only the spacing changes.  Each ladder is
-centred on the same geometric midpoint so that the comparison is of spacing and
-not of range.
-
-Rerun for the revision without version history: the search uses the released
-program (errbudget.V121, unconverged runs treated as failed); the targets and the
-grading are unchanged.  Added: the median cost ratio pooled over the four test cases
-of a spacing (as exp36_gated.py reported it).  Results go to
-data/spacing_released.json.
+    python exp34_spacing.py         # about nine minutes; writes data/spacing_released.json
 """
 import itertools
 import os

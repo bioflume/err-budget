@@ -1,12 +1,8 @@
-"""DFG benchmark 2D-2 (Re = 100) in OpenFOAM: analysis of the grid built by
-exp56_dfg2d2_build.py (run `exp56_dfg2d2_build.py collect` first).
+"""The coarser OpenFOAM 2D-2 study (S-2.3): the stored runs of exp56_dfg2d2_build.py, the
+reference (n_arc = 64, dt = 2.5e-4) and its uncertainty, the graded test cases, the
+interaction measure rho of S-3.4 for mesh and time step, and the program's replay.
 
-Observables: maximum drag and lift coefficients over a shedding period and the
-Strouhal number, all of them extrema or a frequency rather than integrals.
-The reference is the finest OpenFOAM run (n_arc = 64, dt = 2.5e-4); its
-uncertainty is the larger change to the runs with twice the time step and with
-the next coarser mesh, and a target is admitted only if it is at least ten
-times that uncertainty.
+    python exp56_dfg2d2.py
 """
 import os
 import pickle

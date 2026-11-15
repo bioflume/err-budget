@@ -1,12 +1,9 @@
-"""Misdeclared classes with version 1.2.1 (supplement, Table S2; referee point 2).
+"""Wrongly declared classes (S-3.6, Table S-3.5).  Each parameter of L3 and of OpenFOAM 2D-1
+is declared as each of the two classes it does not belong to, and the released program
+searches from every setting (L3: both observables at both targets; 2D-1: the drag at 3e-3
+and the lift at 3e-2), without and with the screening sweep.
 
-Each L3 parameter is declared as each of the two classes it does not belong to,
-and the program is replayed from all 432 starts for both observables at 1e-2 and
-3e-3, in the full mode (the default of version 1.2) and with the preliminary sweep.
-The same is done for the four OpenFOAM 2D-1 parameters (c_D at 3e-3, c_L at 3e-2).
-    python exp65_misdeclare_v12.py      # prints the counts and writes figures/tab_misdeclare.tex
-
-The script name predates version 1.2.1; it replays the configuration v1.2.1 of pooled.py.
+    python exp65_misdeclare_v12.py      # prints the counts, writes figures/tab_misdeclare.tex
 """
 import os
 

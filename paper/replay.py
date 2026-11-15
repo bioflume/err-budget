@@ -1,8 +1,5 @@
-"""Exhaustive replay on a tensor: the method and the baselines from every start.
-
-Shared by the studies added in revision 2 (L5, the DFG benchmark, the
-misdeclaration and margin studies), so that every new table is computed by
-the same code as Table 5 and Table 8.
+"""Replay of the program and of the procedures of baselines.py from every starting setting
+of a stored study; used by the builders exp48_cavity.py, exp53_qe.py and exp56_dfg2d2.py.
 """
 import itertools
 

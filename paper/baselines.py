@@ -1,30 +1,15 @@
-"""What the method is actually competing with.
+"""The three procedures of current practice (Section 6.3, S-4.2), on the stored runs.
 
-Three baselines, each a written-down version of what practitioners do, graded on
-the same tensors and from the same starting configurations as the method.
+seq        sequential convergence study (S): the parameters in the order of the case's list;
+           each is refined one value at a time until the observable changes by at most eta,
+           then frozen.
+coord      sequential study with a joint refinement (SJ): as seq, then one run with every
+           parameter refined by one step; if the observable moves by more than eta, the
+           study restarts from there.
+ref_check  selection against a reference run (Ref.): the cheapest setting within the target
+           of the finest candidate setting.
 
-  SEQ   Sequential one-at-a-time convergence. Take the parameters in the order
-        given. For each, refine one rung at a time until the observable stops
-        moving by more than a threshold delta, then freeze it and move on. This
-        is what every convergence workchain in the workflow frameworks does, and
-        what a careful user does by hand.
-
-  COORD Coordinate search with a diagonal check, after Grossmann et al.: run SEQ,
-        then verify by advancing every parameter one rung together; if the
-        observable moves by more than delta, restart from that point. Costs more
-        and catches the case where the parameters are not separable.
-
-  REF   Converged-reference check, after Khouzami et al.: compute a reference at
-        the finest setting of every parameter, then accept the cheapest
-        configuration on the grid whose observable is within the target of that
-        reference. This is the strongest baseline -- it uses the whole grid ---
-        and it is also the one whose assumption a discretised PDE violates,
-        because the reference is not the truth.
-
-All three need a threshold. A user has no principled way to pick one, so each is
-run at delta = eps, eps/3 and eps/10 relative to the target and the best and
-worst outcomes are both reported. That is the fairest treatment: the method gets
-no threshold to tune, and the baselines get three.
+None of the three can decline.  A run that failed or did not converge counts as failed.
 """
 import os
 
@@ -34,7 +19,6 @@ import numpy as np
 D = os.path.join(os.path.dirname(__file__), "data")
 
 
-# ------------------------------------------------------------------ baselines
 def seq(look, LAD, start, delta, order=None):
     """Sequential one-at-a-time convergence. Returns (proposal, runs)."""
     n = len(LAD)
@@ -91,6 +75,5 @@ def ref_check(look, LAD, ALL, eps):
     if not ok:
         return fine, len(ALL)
     return min(ok, key=lambda i: look(i)[1]), len(ALL)
-
 
 

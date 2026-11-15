@@ -1,14 +1,13 @@
-"""Pooled results table: every case, observable and admitted target, one configuration.
+"""Replay of the program over the stored runs of every development test case: Tables 4 and
+S-3.1 (configuration v1.2.1) and the ablation of Table S-3.2 (v1.2.1-<variant>).
 
-    python pooled.py [config ...]        # configs defined in CONFIGS below
+    python pooled.py CONFIG [CONFIG ...] [--only CASE,CASE] [--skip CASE,CASE]
 
-For each (case, observable, target) it replays the program from every usable
-start and reports: starts; accepted; missed (accepted but outside the target);
-declined although some usable, converged setting on the grid meets the target;
-declined where none does; the median and worst cost penalty of the accepted
-settings relative to the cheapest converged setting that meets the target; the
-median number of runs; and how many accepted settings are runs whose nested
-solver did not meet its tolerance.
+For each graded test case the program searches from every setting whose run completed.
+Written to data/pooled_<config>.json, one row per test case: searches, unconverged starts,
+accepted, missed, declined (attainable or not), distinct settings, cost ratios relative to
+the optimal setting, runs per search and the decline reasons.  With --only or --skip the
+rows of the selected cases replace those already in the file.
 """
 from __future__ import annotations
 
@@ -26,18 +25,14 @@ except ImportError:                      # the frozen program of the held-out te
     V121 = dict(V12, joint_res=1.0)
 import cases as C
 
-# Program configurations compared in the article.  "v1.1" is the version of
-# revision 2 (constant safety factor, unconverged runs accepted); "v1.2" is the
-# default of this version.
+# v1.2.1: the released program; v1.2.1-<variant>: the ablation of Table S-3.2; v1.2: the
+# program frozen for the pre-registered searches; v1.1: an earlier version (constant
+# safety factor, unconverged runs accepted).
 CONFIGS = {
-    # version 1.1 (revision 2): constant safety factor, unconverged runs accepted
     "v1.1": dict(fail_unconverged=False, kw=dict(V11)),
     "v1.1+gated": dict(fail_unconverged=False, kw=dict(V11, resid_margin=5.0)),
-    # version 1.2, frozen for the held-out tests
     "v1.2": dict(fail_unconverged=True, kw=dict(V12)),
-    # version 1.2.1, the default of the released program (amendment after H2)
     "v1.2.1": dict(fail_unconverged=True, kw=dict(V121)),
-    # version 1.2 with one component removed (ablations of Table 3)
     "v1.2-accept-unconverged": dict(fail_unconverged=False, kw=dict(V12)),
     "v1.2-nolocal": dict(fail_unconverged=True, kw=dict(V12, local_order_check=False)),
     "v1.2-nojoint": dict(fail_unconverged=True, kw=dict(V12, joint_check=False)),
@@ -45,11 +40,8 @@ CONFIGS = {
     "v1.2-constant": dict(fail_unconverged=True, kw=dict(V12, resid_margin=0.0)),
     "v1.2-nores": dict(fail_unconverged=True, kw=dict(V12, res_frac=0.0)),
     "v1.2-screened": dict(fail_unconverged=True, kw=dict(V12, use_screen=True)),
-    # the nested-solver class removed: every nested-solver parameter declared as a
-    # discretisation parameter (referee point 10)
+    # every iterative-solver parameter declared a discretization parameter
     "v1.2-nested-as-disc": dict(fail_unconverged=True, kw=dict(V12), kinds_map={"nested-solver": "discretisation"}),
-    # Revision 4: the same ablations taken relative to the released default, version
-    # 1.2.1, so that Table 4 compares every row with the configuration of Table 3.
     "v1.2.1-accept-unconverged": dict(fail_unconverged=False, kw=dict(V121)),
     "v1.2.1-nolocal": dict(fail_unconverged=True, kw=dict(V121, local_order_check=False)),
     "v1.2.1-nojoint": dict(fail_unconverged=True, kw=dict(V121, joint_check=False)),
@@ -59,7 +51,7 @@ CONFIGS = {
     "v1.2.1-screened": dict(fail_unconverged=True, kw=dict(V121, use_screen=True)),
     "v1.2.1-nested-as-disc": dict(fail_unconverged=True, kw=dict(V121),
                                   kinds_map={"nested-solver": "discretisation"}),
-    # Revision 4, referee point on GROMACS: version 1.2.1 without the round-off probe
+    # without the round-off measurement
     "v1.2.1-noprobe": dict(fail_unconverged=True, kw=dict(V121), no_floor=True),
     "v1.1-noprobe": dict(fail_unconverged=False, kw=dict(V11), no_floor=True),
 }
@@ -108,8 +100,7 @@ def replay(case, ob, tg, cfg, starts=None):
         if r["certified"]:
             q = tuple(r["proposal"])
             out["accepted"] += 1
-            # Revision 4: distinct accepted settings (counts over starts are not
-            # independent samples; Section 5.3 promises the number of distinct settings)
+            # searches from neighbouring starts are not independent: count distinct settings
             out["proposals"][q] = out["proposals"].get(q, 0) + 1
             e = err[q] / eps
             out["worst"] = max(out["worst"], e)
@@ -168,7 +159,6 @@ def summarise(o):
                               if any(np.isfinite(x) and x < 1 for pr in ords for x in pr)),
                 low_order_missed=sum(1 for ords, e in o["orders"] if e > 1 and
                                      any(np.isfinite(x) and x < 1 for pr in ords for x in pr)),
-                # revision 4 bookkeeping (no effect on any count above)
                 distinct=len(o.get("proposals", {})),
                 distinct_missed=len(o.get("proposals_missed", {})),
                 accepted_settings=[[list(q), c] for q, c in sorted(o.get("proposals", {}).items())],
@@ -202,9 +192,6 @@ def run_config(name, cases=None, verbose=True):
 
 
 if __name__ == "__main__":
-    # python pooled.py CONFIG [CONFIG ...] [--only KEY,KEY] [--skip KEY,KEY]
-    # With --only or --skip the rows of the selected cases replace those already in
-    # data/pooled_<config>.json, so a case whose tensor is rebuilt can be redone alone.
     args = sys.argv[1:]
     only = skip = None
     if "--only" in args:
@@ -213,9 +200,7 @@ if __name__ == "__main__":
         i = args.index("--skip"); skip = set(args[i + 1].split(",")); del args[i:i + 2]
     names = args or ["v1.2"]
     out_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
-    # Revision 4: "2D-2h" is the refined DFG 2D-2 study of the Hamilton job J2; it is
-    # loaded only when hamilton/results/j2_tensor.pkl exists, so the default pooled
-    # table is unchanged until it does (select it with --only 2D-2h).
+    # 2D-2h, the refined 2D-2 study, needs hamilton/results/j2_tensor.pkl
     loaders = [("L", C._manufactured), ("2D-1", lambda: [C._dfg1()]), ("2D-2", lambda: [C._dfg2()]),
                ("2D-2h", lambda: [C._dfg2_refined()]),
                ("LMP", C._lammps), ("GMX", C._gromacs), ("ABINIT", lambda: [C._abinit()]),

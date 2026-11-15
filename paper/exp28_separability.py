@@ -1,29 +1,14 @@
-"""Two quantities the paper asserted and must instead measure.
+"""How far the additive error model holds, and whether the estimate covers its failure
+(S-3.4).  For every 2x2 design of adjacent values of two parameters k != l, at a fixed
+setting z of the others,
 
-(1) THE SEPARABILITY RESIDUAL.  The additive model E(theta) = sum_k e_k(theta_k)
-is the search model.  Its violation was quoted as "0.27 rms" with no definition.
-Define it per interacting pair, from second differences of the tensor:
+    I = [E(b,d;z) - E(a,d;z)] - [E(b,c;z) - E(a,c;z)],
+    M = max(|E(b,c;z) - E(a,c;z)|, |E(a,d;z) - E(a,c;z)|),   rho = |I| / M,
 
-    for parameters k != l, levels a<b on ladder k and c<d on ladder l, and any
-    fixed setting z of the remaining parameters,
+over the designs with M above a tenth of the tightest graded target, on L2-L4.  Also the
+ratio of the estimate to the true error at every setting, against the local rho.
 
-        I  = [E(b,d;z) - E(a,d;z)] - [E(b,c;z) - E(a,c;z)]        (cross term)
-        M  = max( |E(b,c;z) - E(a,c;z)| , |E(a,d;z) - E(a,c;z)| ) (main effects)
-        rho = |I| / M
-
-rho = 0 is exact additivity; rho = 1 means the cross term is as large as the
-larger main effect.  We report the whole distribution, not an rms.
-
-(2) WHETHER THE MARGIN COVERS IT.  Safety needs the estimate to be conservative,
-Ehat >= |E_true|.  We measure that ratio at every anchor and cross it against the
-local rho, which is the evidence the additive model's violation is absorbed --
-or the evidence that it is not.
-
-(3) THE NON-TRANSFERABILITY MECHANISM.  The paper explains transfer failure by
-saying that coarsening the time step makes each inner solve harder, so a
-tolerance's own error grows just as the discretisation error that would bury it
-also grows.  That is a testable statement: e_tol/tol should increase with dt.
-A tally becomes a predictive relation.
+    python exp28_separability.py
 """
 import itertools
 import os

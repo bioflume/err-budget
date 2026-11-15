@@ -1,4 +1,8 @@
-"""Figure: the problems actually being solved, and what under-resolution does."""
+"""Fig. S-2.1 (fig0_problems.pdf): the solutions of the development problems L2-L5 and what
+under-resolution does to them.
+
+    python make_solution_figure.py      # writes to ERRBUDGET_FIG_DIR (default figures/)
+"""
 import os
 import numpy as np
 import matplotlib
@@ -21,7 +25,7 @@ plt.rcParams.update({
 
 fig, ax = plt.subplots(1, 4, figsize=(9.4, 2.35))
 
-# --- L2: 1D Burgers, exact vs a coarse run -----------------------------------
+# L2: 1D Burgers, exact vs a coarse run
 b1 = Burgers1D(nu=0.05, T=1.0)
 xf, uf, _ = b1.exact(b1.T)
 ax[0].plot(xf, uf, "-", color=INK, lw=1.4, label="exact")
@@ -49,7 +53,7 @@ ax[0].set_title("(a) L2: Burgers, 1D", loc="left")
 ax[0].set_xticks([0, np.pi, 2 * np.pi]); ax[0].set_xticklabels(["0", r"$\pi$", r"$2\pi$"])
 ax[0].legend(frameon=False, fontsize=7.5, loc="lower left")
 
-# --- L3: 2D Burgers field ----------------------------------------------------
+# L3: 2D Burgers field
 b2 = Burgers2D(nu=0.05, T=1.0)
 N = 128
 x = 2 * np.pi * np.arange(N) / N
@@ -61,7 +65,7 @@ ax[1].set(xlabel="$x$", ylabel="$y$", aspect="equal")
 ax[1].set_title("(b) L3: Burgers, 2D", loc="left")
 plt.colorbar(im, ax=ax[1], fraction=0.046, pad=0.03).ax.tick_params(labelsize=7)
 
-# --- L4: reaction-diffusion inhibitor field ----------------------------------
+# L4: reaction-diffusion inhibitor field
 rd = ReactionDiffusion2D()
 V = rd.v_ex(X, Y, rd.T)
 im2 = ax[2].pcolormesh(X, Y, V, cmap="viridis", shading="auto", rasterized=True)
@@ -72,7 +76,7 @@ plt.colorbar(im2, ax=ax[2], fraction=0.046, pad=0.03).ax.tick_params(labelsize=7
 for a in (ax[1], ax[2]):
     a.set_xticks([0, np.pi, 2 * np.pi]); a.set_xticklabels(["0", r"$\pi$", r"$2\pi$"])
     a.set_yticks([0, np.pi, 2 * np.pi]); a.set_yticklabels(["0", r"$\pi$", r"$2\pi$"])
-# --- L5: driven cavity, streamfunction with the boundary layer --------------
+# L5: driven cavity, streamfunction with the boundary layer
 cv = DrivenCavity()
 xs = np.linspace(0, 1, 201)
 XC, YC = np.meshgrid(xs, xs, indexing="ij")

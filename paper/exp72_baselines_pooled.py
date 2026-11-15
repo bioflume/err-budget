@@ -1,34 +1,18 @@
-"""The program and three procedures in common use, graded as the pooled table
-(referee points 15, 16 and 20 of revision 3; revision 4: coordinate search at every
-threshold, GROMACS, ABINIT and LAMMPS in the same table, the round-off floor applied
-to the program exactly as in Table 3, and the sweep order printed).
+"""The program and the three procedures of current practice (baselines.py) from every
+converged starting setting of every graded test case (Section 6.3, Fig. 4, Tables S-4.2
+and S-4.3).
 
-For every admitted cell of the selected cases and every start whose own run
-converged, each procedure returns a setting.  A returned setting *reaches* the
-target if its run converged and its true error is within the target; otherwise it
-*misses* (the program may also decline, which is neither).  Runs whose nested
-solver did not converge are failed runs for every procedure.  Reported per case and
-pooled:
-  reached, missed, declined;
-  penalty: cost of the returned setting / cheapest converged setting that reaches
-           the target (median over the cells of the per-cell median);
-  runs:    distinct solver evaluations used to decide (median of cell medians);
-  K:       calibration cost in production runs, i.e. the summed cost of the runs used
-           to decide divided by the cost of one run at the returned setting
-           (median of cell medians) -- the same unit for every procedure.
+    ERRBUDGET_CFG=v1.2.1 python exp72_baselines_pooled.py                  # every case
+    ERRBUDGET_CFG=v1.2.1 ERRBUDGET_BASE_OUT=baselines_lmp_gmx.json \
+        python exp72_baselines_pooled.py LMP-20 LMP-40 LMP-64 GMX-d       # Table S-4.3
 
-The sequential and coordinate procedures take the parameters in the order of the
-case's parameter list (cases.py): discretisation parameters first, then the
-nested-solver tolerances, then the cost-only parameter (GROMACS: rcoulomb,
-fourierspacing, pme-order, ewald-rtol).  A cost-only parameter is treated like any
-other: it is refined one position at a time until the observable stops moving by
-more than delta, which for a parameter that does not move the observable is after
-one trial.
-
-    python exp72_baselines_pooled.py                 # every case (2D-2h if present)
-    python exp72_baselines_pooled.py L2 L3 2D-1      # selected cases
-    ERRBUDGET_CFG=v1.2.1 (default) | v1.2 | v1.1         # the program's configuration
-Writes data/baselines_v6.json (all cells) and prints the pooled groups.
+A returned setting meets the target if its run converged and its true error is within the
+target; otherwise it misses (the program may also decline).  Per test case and procedure:
+met, missed, declined; the cost ratio against the optimal setting; the runs used to decide;
+and the search cost K, the summed cost of those runs over the cost of one run at the
+returned setting.  S and SJ take the parameters in the order of the case's list
+(cases.py), discretization parameters first; GROMACS: rcoulomb, fourierspacing, pme-order,
+ewald-rtol.  Writes data/baselines_v6.json (or ERRBUDGET_BASE_OUT).
 """
 import json
 import os

@@ -1,14 +1,11 @@
-"""Accuracy of the error estimate at every setting (Appendix A, Table A.1).
+"""Accuracy of the error estimate at every setting (S-3.4, Table S-3.3).  At every
+completed, converged setting of L2-L5 and OpenFOAM 2D-1, the estimate of the released
+program, with the interaction check applied at every setting, against the true error:
+the 10th percentile and median of Ehat/|E| and the share of settings where the estimate is
+below the true error, for the signed sum and for the final estimate, over the settings
+whose error exceeds a tenth of the tightest graded target.
 
-For every usable, converged setting of L2-L5 and OpenFOAM 2D-1, the estimate of
-version 1.1 and of version 1.2 (including the joint-refinement check, applied here
-at every setting rather than only where the estimate is within the target) is
-compared with the true error.  Reported per observable: the 10th percentile and
-median of Ehat/|E_true|, and the fraction of settings where the estimate is
-optimistic (below the true error), for the raw signed sum sum_k r_k and for the
-final estimate of each version.  The resolution is one tenth of the tightest graded
-target.
-    python exp66_estimate_v12.py
+    python exp66_estimate_v12.py        # writes data/estimate_v12.json
 """
 import os
 

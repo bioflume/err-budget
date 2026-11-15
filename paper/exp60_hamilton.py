@@ -1,18 +1,12 @@
-"""Bring the cluster results into the article.
+"""Brings the results of the Hamilton jobs J1-J5 into the article.
 
     python exp60_hamilton.py hamilton_results.tar.gz
 
-1. unpacks the archive written by hamilton/collect.sh into hamilton/results;
-2. replays the held-out problem H3 (J5) with the frozen program and with the released
-   version, as registered (exp62_heldout.py, both modes; H1 and H2 are replayed again
-   alongside, unchanged);
-3. prints the summaries of J1-J4 that the placeholders of the article refer to:
-   J1  Section 7.1, forces function object of OpenFOAM v2406 against the article's
-       post-processing, and the 2D-1 grid with a current release;
-   J2  Section 7.2, the refined 2D-2 study;
-   J3  Sections 7.4 and 9, Quantum ESPRESSO with a current release;
-   J4  Supplement S11, parallel widths 1-64;
-   J5  Section 6.2 and Table 6, H3.
+Unpacks the archive written by hamilton/collect.sh into hamilton/results, replays H1-H3
+with the frozen and the released program (exp62_heldout.py), prints the summaries of J1-J4
+and regenerates the tables (exp70_tables.py).  J1: 2D-1 with OpenFOAM v2406 and its function
+object (S-5.1, S-5.6); J2: the refined 2D-2 study (Section 7.2, S-5.2); J3: Quantum
+ESPRESSO 7.6 (S-5.6); J4: MPI ranks (S-5.6); J5: H3 (Section 6.2, Table 5).
 """
 import os
 import subprocess

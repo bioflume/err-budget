@@ -1,22 +1,9 @@
-"""Transfer of thresholds with a resolution floor (referee point 10 of revision 3).
+"""Convergence thresholds chosen once (S-4.1, Table S-4.1): the failure rate of
+exp47_transfer.py, without and with the two adjustments.  With them, deviations and
+remaining errors below a tenth of the tightest graded target count as zero, and runs whose
+iterative solver did not converge count as failed.
 
-Same definition as exp47_transfer.py: for parameter k and every combination c of
-the other parameters, the threshold of k at c is its coarsest value whose
-deviation from the value at k's finest is within phi times the error remaining
-at c.  A threshold calibrated with every other parameter at its finest fails at
-c when c needs a finer value of k.
-
-Two changes:
-  * deviations and remaining errors below a resolution floor count as zero.  The
-    floor is one tenth of the tightest graded target of the observable (the
-    resolution the program itself uses, res_frac = 0.1), so a failure is only
-    counted where it could change a graded answer;
-  * runs whose nested solver did not converge are treated as failed (as in the
-    program), so an unconverged run cannot make a cost-only parameter look
-    influential.
-Reported with and without the floor so that the effect of each is visible.
-
-    python exp64_transfer_floor.py
+    python exp64_transfer_floor.py      # writes data/transfer_floor.json
 """
 import itertools
 import os

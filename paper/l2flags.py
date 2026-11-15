@@ -1,10 +1,6 @@
-"""Convergence flags for the stored L2 tensors that predate them (added for the reruns
-with the released program, which treats a run whose nested solver missed its own
-tolerance as failed; cf. exp57_flags.py, which did the same for the main L2-L5 grids).
-
-flags(tensor, ladders, nu, tag) reruns every setting of the stored tensor, checks that
-the observables and the work-unit cost are bit-for-bit those of the stored tensor, and
-caches the flags in data/flags_<tag>.pkl.
+"""Convergence flags for the stored L2 tensors that predate them.  flags(tensor, ladders,
+nu, tag) reruns every setting, checks that the observables and the cost are those of the
+stored tensor, and caches the flags in data/flags_<tag>.pkl.
 """
 import itertools
 import os

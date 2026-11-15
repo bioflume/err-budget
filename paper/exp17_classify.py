@@ -1,15 +1,8 @@
-"""Can a knob's structural class be inferred from its own cheap sweep?
+"""Can a parameter's class be read from its own one-at-a-time sweep (S-3.6)?  Features of
+each sweep of L3 with eight parameters, classified by simple rules and compared with the
+known classes.  The runs are cached in data/classify.pkl.
 
-If yes, the 'generic' tool needs only a parameter list and ladders.  If no, the
-user must declare the class and the guarantee becomes conditional on that
-declaration.  Ground-truth classes are known here, so this is checkable.
-
-Signature features, all from one OAT sweep at one anchor:
-  err_range     max |dQ| over the ladder, relative to the anchor value
-  plateau       fraction of the FINE half where refining changes nothing
-  monotone      fraction of adjacent steps moving the observable one way
-  cost_slope    d log(cost) / d (ladder index)
-  cost_interior 1 if cost has an interior minimum (neither end is cheapest)
+    python exp17_classify.py
 """
 import pickle, os, time, numpy as np
 from errbudget.problems import Burgers2D

@@ -1,27 +1,10 @@
-"""Does a recommendation calibrated at one PHYSICAL parameter survive an
-ensemble in that parameter?
+"""Reuse of a setting across a parameter study on L2 (S-4.5, Table S-4.4): the program
+searches at nu = 0.05 from N = 128, 100 time steps and both tolerances 1e-8 (released
+program, unconverged runs failed), and the returned setting is run unchanged at 22
+viscosities in [0.02, 0.5] and graded against the exact solution of each (Cole-Hopf,
+evaluated in log space).
 
-The referee is right that this is the load-bearing missing experiment.  The
-paper's payback argument is that calibration amortises over a parameter study;
-the paper's own central finding is that calibration does not transfer across
-numerical settings.  If it also fails to transfer across physical settings, the
-payback argument collapses and the method is worth using only to correct
-configurations that were wrong, never to make correct ones cheaper.
-
-Calibrate once on 1D Burgers at nu = 0.05 and apply the resulting setting
-unchanged across an ensemble in nu.  Ground truth at every nu comes from the
-Cole-Hopf solution evaluated in log space, which is stable at every viscosity
-tested; the spectral route this replaced silently returns garbage below
-nu ~ 0.04, which is why the sweep had to be re-done.
-
-Rerun for the revision without version history: the search uses the released
-program (errbudget.V121, unconverged runs treated as failed, as in pooled.py); the
-grading is unchanged.  Results go to data/reuse_released.json.
-
-Report, against the ensemble:
-  * whether the transported setting still attains the target,
-  * the margin it retains or loses,
-  * and the cost of the alternative -- recalibrating at every ensemble member.
+    python exp30_transfer.py        # about a minute; writes data/reuse_released.json
 """
 import os
 import pickle

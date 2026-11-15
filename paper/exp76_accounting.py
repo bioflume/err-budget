@@ -1,12 +1,9 @@
-"""Revision 4: how the grid sizes of Table 2 become the start counts of Table 3.
+"""Accounting of the settings and searches (S-2.6, Table 3): for every case, the settings of
+the grid (the product of the numbers of candidate values), the runs without a value, the
+runs with a value that did not converge (starts whose own run failed), the converged runs
+and the graded and ungraded targets.
 
-For every case: the number of settings in the exhaustive grid (the product of the
-numbers of candidate values, which is printed); how many runs produced no value
-(crashed, diverged, out of memory: never a start, never proposed); how many produced
-a value but did not converge (counted as starts whose own run failed, "start
-failed"); and how many converged.  Also the candidate values of every parameter, so
-that Table 2 can list m_1 x ... x m_p.
-    python exp76_accounting.py            # writes data/accounting_v6.json
+    python exp76_accounting.py          # writes data/accounting_v6.json
 """
 import json
 import os

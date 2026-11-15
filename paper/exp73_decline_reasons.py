@@ -1,8 +1,7 @@
-"""Why the program declines (Section 6.1): the reason reported by run_protocol for every
-declined start of every admitted cell, with version 1.2.1.
+"""Declines by reason and by group (S-3.2): the decline code that run_protocol reports for
+every declined search of every graded development test case, released program.
+
     python exp73_decline_reasons.py
-Revision 4: one 2D-2 study only, as in Table 3 (ERRBUDGET_TABLE3_2D2=refined, the default,
-uses the refined study 2D-2h when its results are present; =rev3 the study of revision 3).
 """
 import collections
 import os

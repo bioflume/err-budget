@@ -1,26 +1,10 @@
-"""Revision 4 (referee point on the unconverged counts): what "accepting unconverged runs"
-changes, start by start.
+"""Accepting unconverged runs (S-3.3), search by search.  For every graded test case with
+unconverged runs, the released program and the same with unconverged runs accepted, from
+every completed setting: the additional acceptances, split into searches whose starting run
+did not converge and converged searches that passed through an unconverged run, and the
+accepted settings that are themselves unconverged runs.
 
-Table 4 reports that accepting unconverged runs adds about 1,500 acceptances, while the
-text says that 39 of the accepted settings would then be unconverged runs.  Both are
-true; they count different things.  For every admitted cell of every case that has
-unconverged runs (the only cases where the two configurations can differ), this replays
-version 1.2.1 and version 1.2.1 with unconverged runs accepted from every usable start
-and tabulates, per case and in total:
-  starts            usable starts (runs that produced a value)
-  own run unconv.   starts whose own run did not converge (version 1.2.1 reports them
-                    as "start failed" instead of searching from them)
-  acc. 1.2.1        accepted by version 1.2.1
-  acc. accept-unc.  accepted with unconverged runs accepted, split into acceptances from
-                    starts whose own run did not converge and from converged starts
-  unconv. accepted  accepted settings that are themselves unconverged runs (over starts,
-                    distinct, and from converged starts)
-  missed            misses with unconverged runs accepted
-  changed           converged starts whose outcome differs between the two configurations
-
-    python exp79_unconverged.py [CASE ...]
-    ERRBUDGET_TABLE3_2D2=refined (default) | rev3, as for Table 3
-Writes data/unconverged_v6.json.
+    python exp79_unconverged.py         # writes data/unconverged_v6.json
 """
 import json
 import os

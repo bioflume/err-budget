@@ -1,12 +1,11 @@
-"""fig_baselines.pdf: the program against the three procedures of current practice.
-
-Data source: paper/tab_baselines_full.tex (Table S-4.2), parsed as written; no other input.
-Columns of each row: group, procedure, Met, Missed, Declined, Cost ratio, Runs, K.
-  (a) fraction of searches from converged starting settings whose returned setting misses
-      = Missed / (Met + Missed + Declined); Declined is "---" (zero) for the procedures.
+"""Fig. 4 (fig_baselines.pdf): the program against the three procedures of current practice,
+from Table S-4.2 (figures/tab_baselines_full.tex) as written.
+  (a) share of the searches from converged starting settings whose returned setting misses,
+      Missed / (Met + Missed + Declined);
   (b) median cost ratio of the program and of SJ at its largest threshold with no miss,
-      with K beside each point; the legend title says so.
-  python3 figures/make_baselines_figure.py
+      with the search cost K beside each point.
+
+    python make_baselines_figure.py     # writes figures/fig_baselines.pdf and .png
 """
 import os
 import re

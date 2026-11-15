@@ -1,19 +1,8 @@
-"""If it is not the slack, what fails on a closely spaced ladder?
+"""Spacing study, continued (S-3.5, Table S-3.4): at every converged setting of the four
+lists of exp34_spacing.py, the median misfit of the fits and the ratio of the estimate to
+the true error, over the settings whose error exceeds a tenth of the tighter target.
 
-Section 7.5 found reliability falling from 100% to 80% as the rungs close from
-2x to 1.2x, but the slack -- how far inside the target the recommendation lands
--- is about 0.6 on both, so the first explanation offered was wrong.  The
-alternative is that the ESTIMATE degrades: the offset power-law fit of (4) sees
-h varying by 16x across a coarse ladder and by only 2x across a fine one, so it
-is far less determined there.  This measures both.
-
-Rerun for the revision without version history: the estimate is that of the released
-program (errbudget.V121, built as in exp66_estimate_v12.py, including the interaction
-check), with the resolution set from the tighter of the two targets of exp34_spacing.py;
-unconverged runs are failed (flags from l2flags.py).  Reported per spacing and observable:
-the median misfit of the fits, and the 10th percentile, median and 90th percentile of
-Ehat/Etrue with the share of optimistic estimates, over every setting whose true error
-exceeds the resolution (as exp66 grades it).  Results go to data/spacing_estimate_released.json.
+    python exp35_whyfine.py         # under a minute; writes data/spacing_estimate_released.json
 """
 import itertools, os, pickle
 import numpy as np

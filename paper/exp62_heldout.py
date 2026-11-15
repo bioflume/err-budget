@@ -1,18 +1,15 @@
-"""Held-out tests H1 and H2 (and H3 if its Hamilton results are present), replayed
-with the frozen program exactly as fixed in PREREGISTRATION.md.
+"""The pre-registered problems H1-H3 (Section 6.2, Table 5, S-3.7), replayed exactly as
+PREREGISTRATION.md fixed them.
 
-    python exp62_heldout.py            # the frozen program (git tag v1.2.0-frozen), as
-                                       # registered, and version 1.1 for comparison
-    python exp62_heldout.py --current  # the released program (version 1.2.1, the
-                                       # amendment registered after H2 and before H3)
+    python exp62_heldout.py             # the frozen program (tag v1.2.0-frozen), and version 1.1
+    python exp62_heldout.py --current   # the released program (the registered amendment)
 
-The frozen source is extracted from the git tag and its hash checked against
-PREREGISTRATION.md before anything is replayed.
-
-The program was called knobs when the held-out tests were registered, and the frozen
-source keeps that name (src/knobs at the tag, paper/frozen_src/knobs).  The replay scripts
-import the current name, errbudget, so in the frozen mode the frozen package is registered
-under that name before any of them is imported.
+The frozen source is taken from the git tag, or from paper/frozen_src if the tag is
+absent, and its hash is checked against PREREGISTRATION.md before anything is replayed.
+The program was called knobs at registration; the frozen package is registered under the
+current name, errbudget, before the replay modules import it.  H3 is replayed when
+hamilton/results/j5_tensor.pkl is present.  Writes data/heldout_replay.json or
+data/heldout_replay_current.json.
 """
 import glob
 import hashlib

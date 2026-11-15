@@ -1,10 +1,8 @@
-"""Choice of the base safety factor of version 1.2 (Appendix B).
+"""Choice of the base safety factor (S-1.10): the base factor F0 (fs_cap; the misfit-dependent
+factor is F0 (1 + 5 q)) is scanned over every graded test case of L2-L5 and 2D-1, with the
+rest of the released program unchanged.  For each F0: accepted, missed and the median cost
+ratio per problem, and the smallest safe F0 with each problem in turn as the calibration set.
 
-The base factor F (fs_cap; the gated factor is F (1 + 5 q)) is scanned over every
-admitted cell of the development problems with exact solutions, L2-L5 and 2D-1,
-with the rest of version 1.2 unchanged.  For each F: accepted, missed and the median
-of the per-cell median penalties, per problem; and the smallest F that is safe when
-each problem in turn is the calibration set.
     python exp67_margin_v12.py
 """
 

@@ -1,15 +1,10 @@
-"""Table 3 on every problem: does a threshold calibrated at the finest
-setting of the other parameters transfer to the rest of the grid?
+"""Failure rate of a convergence threshold chosen with every other parameter at its finest
+value (helpers for exp64_transfer_floor.py).  The threshold of parameter k at a
+combination c of the others is its coarsest value whose deviation from the value at k's
+finest is within a fraction phi of the error remaining at c; a threshold chosen at the
+finest combination fails at c when c needs a finer value of k.
 
-For parameter k and every combination c of the other parameters, the masking
-threshold is the coarsest value of k whose deviation from k's finest value
-stays within a fraction phi of the remaining error at c.  A threshold measured
-with everything else at its finest "fails" at c when c needs a finer value of
-k (the unsafe direction).  Reported: the failure rate per parameter, pooled over
-the problem's observables, for phi = 0.01 ... 0.5.
-
-Version 1.0 computed this on L2 only.  This script repeats it on L3, L4, L5 and
-the DFG benchmark (when its tensor exists).
+    python exp47_transfer.py        # the rates without the adjustments of S-4.1
 """
 import itertools
 import os

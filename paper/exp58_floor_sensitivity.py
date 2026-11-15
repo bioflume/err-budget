@@ -1,22 +1,11 @@
-"""Sensitivity of the GROMACS round-off floor to the number of probe settings and
-to the factor (referee points 22 and 23 of revision 3).
+"""Sensitivity of the round-off measurement of GROMACS (S-5.4).  The six settings of
+exp44_gromacs_floor.py give six potential energies per build; for every subset of two to
+six of them and every factor F in {3, 5, 10, 20}, the program declines targets below F
+times their spread, and the mixed-precision runs are searched again.  The cost of the
+three measurement runs is timed against runs at the GROMACS default setting; without the
+GROMACS binaries the ratio measured before (figures/rev3_floor_sensitivity.txt) is used.
 
-The six converged settings of exp44_gromacs_floor.py give six values of the
-potential energy per build (figures/sec82_floor.txt).  For every subset of k of
-them (k = 2..6) the floor is their spread; for each factor F the program
-declines targets below F times the floor.  For each (k, F) we report, over all
-subsets, the range of the declining threshold and, replaying the mixed-precision
-tensor with that floor, the accepted starts and the misses against the
-double-precision reference.  The probe's cost is reported relative to the
-calibration cost of one search.
-
-    python exp58_floor_sensitivity.py v1.2.1    # prints the table and writes figures/tab_floor.tex
-
-The cost of the probe is a ratio of run times (three probe runs against runs at the
-GROMACS default setting, timed together).  It does not depend on the version of the
-program, so without the GROMACS binaries the script takes the ratio measured for
-revision 3 (figures/rev3_floor_sensitivity.txt) and recomputes only the calibration,
-which needs the stored tensors alone.
+    python exp58_floor_sensitivity.py v1.2.1   # prints the table, writes figures/tab_floor.tex
 """
 import itertools
 import os
@@ -82,7 +71,7 @@ os.makedirs(os.path.join(os.path.dirname(os.path.abspath(__file__)), "figures"),
 with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "figures", "tab_floor.tex"), "w") as fh:
     fh.write("\n".join(TEX) + "\n")
 
-# cost of the probe (referee point 22).  The three probe settings and the GROMACS
+# Cost of the measurement.  The three measurement settings and the GROMACS
 # default setting are timed together now, so that machine load cancels in their
 # ratio; the ratio is applied to the tensor's cost of the default setting and set
 # against the calibration cost of the searches (sum of the costs of the runs each

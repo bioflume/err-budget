@@ -1,10 +1,8 @@
-"""fig_teaser.pdf, fig_sup_dfg.pdf, fig_sup_search.pdf and fig_l5_stall.pdf.
+"""Figs. 1 (fig_teaser.pdf) and 3 (fig_l5_stall.pdf) and Figs. S-5.1 (fig_sup_dfg.pdf) and
+S-5.2 (fig_sup_search.pdf), from figures/data_2d1_l5.json (extract_2d1_l5.py); prints the
+plotted values.
 
-Data source: figures/data_2d1_l5.json, written by figures/extract_2d1_l5.py from the stored
-runs of the article's repository (2D-1 tensor dfg_tensor_v12.pkl and dfg_fine.json, L5 tensor
-cavity_tensor.pkl) and the search of v11 Fig. 4 rerun with version 1.2.1. Adapted from
-PAPER_REPO/paper/exp63_figures.py. Writes the PDFs into paper/ and prints the plotted values.
-  python3 figures/make_2d1_l5_figures.py
+    python make_2d1_l5_figures.py       # writes figures/*.pdf and a .png of each
 """
 import json
 import os
@@ -41,7 +39,6 @@ def save(fig, name):
     print("wrote", name)
 
 
-# --------------------------------------------------------------------------------------------
 def teaser():
     f, s = D["dfg"], D["search"]
     na = f["n_arc"]
@@ -114,7 +111,6 @@ def teaser():
         print("  ", i, st["setting"], st["estimate"], st["true"])
 
 
-# --------------------------------------------------------------------------------------------
 def sup_dfg():
     f = D["dfg"]
     na, nf = f["n_arc"], f["n_arc_fine"]
@@ -149,7 +145,6 @@ def sup_dfg():
     print("sup_dfg cd_vm", f["tight_cd_vm"])
 
 
-# --------------------------------------------------------------------------------------------
 def sup_search():
     s = D["search"]
     steps = s["steps"]
@@ -200,7 +195,6 @@ def sup_search():
     save(fig, "fig_sup_search.pdf")
 
 
-# --------------------------------------------------------------------------------------------
 def l5():
     d = D["l5"]
     N, e = d["N"], d["err"]

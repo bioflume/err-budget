@@ -1,23 +1,15 @@
-"""Section 4.8: Lemma 1, Proposition 1 and Corollary 1 checked against the program.
+"""Conditions of Proposition 1 tested on synthetic problems (S-1.9).  Synthetic errors on
+candidate lists of constant ratio; the released program (errbudget.V121) searches from every
+setting.
 
-    python exp81_bound_check.py
+    python exp81_bound_check.py         # about three minutes
 
-Synthetic problems with exact errors and candidate lists of constant ratio; the released
-configuration (errbudget.V121) is replayed through run_protocol from every start of the grid.
-
-1. Lemma 1: the local-order bound of the code equals the geometric extrapolation
-   |D_j0| rho^(a - j0) / (1 - rho), rho = D_j1 / D_j0, at each of its alignments.
-2. Corollary 1: an exact separable model with one sign and orders on the grid of the fit.
-   The program accepts if and only if the finest setting meets 0.8 eps, declines otherwise
-   as not_reached, and its estimate is exactly 1.25 |E| at the accepted settings.
-3. Proposition 1, condition (A1): higher-order terms of the opposite sign to the leading
-   term (the convergence speeds up: the bound holds) and of the same sign (the convergence
-   slows down beyond the sampled values: the bound fails, and the program can miss).
-4. Proposition 1, condition (A3) and the joint check: a bilinear interaction b u0 u1.  With
-   both parameters of order about two on lists halved at each step, (1 - rho0)(1 - rho1)
-   >= 1/2, and the term 2|I| of the joint check covers the interaction whenever both
-   parameters take part in the check.  Where one of them cannot (at its finest value), a
-   strong interaction is not seen.
+1. Lemma 1: the bound of the observed-order check against the geometric extrapolation
+   |D_j0| rho^(a - j0) / (1 - rho), rho = D_j1 / D_j0, at each choice of positions.
+2. Corollary 1 at targets 1% above and below 1.25 |E(theta_f)|.
+3. (A1): higher-order terms of the sign of the leading term, and of the opposite sign.
+4. (A3): a bilinear interaction b u_k u_l, with and without the interaction check.
+5. An interaction that reverses the sign of the error at a parameter's finest value.
 """
 import itertools
 import os
@@ -29,7 +21,7 @@ from errbudget import LocalBudget, V121, run_protocol  # noqa: E402
 
 PG = np.linspace(0.25, 6.0, 121)                     # order grid of the fit (Section 4.2)
 
-# ---------------------------------------------------------------- 1. Lemma 1
+# 1. Lemma 1
 rng = np.random.default_rng(1)
 LAD1 = [[8, 16, 32, 64, 128, 256], [1e-2, 1e-4, 1e-6]]
 HS1 = [[1.0 / v for v in LAD1[0]], list(LAD1[1])]
@@ -58,7 +50,7 @@ for trial in range(300):
 print("1. Lemma 1: local-order bound against the geometric extrapolation")
 print(f"   {n_checked} checks at the alignments {sorted(aligned)}: largest relative difference {maxdev:.1e}")
 
-# ------------------------------------------------- the synthetic problems of 2-4
+# the synthetic problems of 2-4
 LAD = [[8, 16, 32, 64, 128], [10, 20, 40, 80, 160], [1e-2, 1e-4, 1e-6, 1e-8], [1, 2, 3, 4]]
 HS = [[1.0 / v for v in LAD[0]], [1.0 / v for v in LAD[1]], list(LAD[2]), [1.0, 0.5, 0.25, 0.125]]
 KINDS = ["discretisation", "discretisation", "nested-solver", "cost-only"]
@@ -104,7 +96,7 @@ def summary(T, out, eps):
 
 u = lambda i, k, p: HS[k][i[k]] ** p[k]
 
-# ------------------------------------------------------------- 2. Corollary 1
+# 2. Corollary 1
 p = [PG[37], PG[16], PG[16], 1.0]
 c = [1.0, 0.5, 2.0, 0.0]
 QA = lambda i: 1.0 + sum(c[k] * u(i, k, p) for k in range(4))
@@ -120,7 +112,7 @@ for eps in (1e-2, 5e-3, Efin / 0.8 * 1.01, Efin / 0.8 * 0.99, 3e-3):
           f"declined {dec}, missed {len(miss)}, worst |E|/eps {worst:.3f}; corollary violated at {viol} "
           f"starts; largest relative deviation of |Ehat| from 1.25 |E| {exact:.1e}")
 
-# --------------------------------------------- 3. Proposition 1, condition (A1)
+# 3. Proposition 1, condition (A1)
 pB = [2.0, 1.0, PG[16], 1.0]                          # leading orders, off the grid of the fit
 QB = lambda i: 1.0 + 1.0 * (u(i, 0, pB) - 0.4 * u(i, 0, pB) ** 1.5) \
     + 0.5 * (u(i, 1, pB) - 0.4 * u(i, 1, pB) ** 2) + 2.0 * u(i, 2, pB)
@@ -140,7 +132,7 @@ for name, Q in (("opposite-sign higher-order terms (convergence speeds up)", QB)
               f"worst |E|/eps {worst:.3f}; |E| > |Ehat| at {len(over)} accepted settings; "
               f"max |E| Fs/|Ehat| {ratio:.3f}")
 
-# ----------------------------------- 4. Proposition 1, condition (A3), joint check
+# 4. Proposition 1, condition (A3), joint check
 print("\n4. Proposition 1, (A3): bilinear interaction b u0 u1 (u_k = h_k^p_k)")
 
 

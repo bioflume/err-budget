@@ -1,17 +1,10 @@
-"""Figure of REPORT.md: PRE's 95% band is too narrow on 2D-1, and its selector misses or declines.
+"""Fig. S-4.1 (fig_sup_pre.pdf): PRE against the program on OpenFOAM 2D-1, from the results of
+studies/pre_comparison (a copy of its make_figure.py with the comparisons named as in S-4.6).
+  (a) share of PRE's fits whose band m +- 2s contains the exact value: 608 fits of the
+      same-runs comparison and 50 designs of the matched-budget comparison per test case;
+  (b) outcome of the 608 searches of the same-runs comparison per test case at z = 2.
 
-Copy of studies/pre_comparison/make_figure.py for the article's supplement (Fig. S-4.1), with the
-comparisons renamed: "Arm 1" is the same-runs comparison (PRE fitted to the runs the program
-used) and "Arm 2" the matched-budget comparison (PRE chooses its own runs at the program's
-search cost).  It reads studies/pre_comparison/results/ and writes figures/fig_sup_pre.pdf; nothing in
-studies/pre_comparison/ is changed.
-
-(a) Share of PRE fits whose band m +- 2s contains the exact value, per test case: same-runs
-    comparison (608 fits on errbudget's runs) and matched-budget comparison (50 designs at
-    budget B).  Nominal: 95%.
-(b) Outcome of the 608 searches of the same-runs comparison per test case at z = 2.
-
-    PYTHONDONTWRITEBYTECODE=1 python make_pre_figure.py
+    python make_pre_figure.py           # writes figures/fig_sup_pre.pdf
 """
 import os
 import sys

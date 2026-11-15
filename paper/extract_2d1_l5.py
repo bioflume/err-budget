@@ -1,17 +1,10 @@
-"""Extract the plotted values of fig_teaser, fig_sup_dfg, fig_sup_search and fig_l5_stall.
+"""Extracts the plotted values of Figs. 1 and 3 and S-5.1 and S-5.2 from the stored runs:
+OpenFOAM 2D-1 (data/dfg_tensor_v12.pkl through cases._dfg1; data/dfg_fine.json for
+n_arc = 96 and 128) and L5 (data/cavity_tensor.pkl through grids).  The search of Fig. S-5.2,
+the lift at 3e-2 from the tutorial settings at n_arc = 32, is rerun with the released
+program, and the budget is recomputed at every step.
 
-Data sources (all in the article's repository, PAPER_REPO, commit 4d32148, read only):
-  paper/data/dfg_tensor_v12.pkl  OpenFOAM 2D-1 tensor, version-1.2 post-processing, loaded
-                                 through paper/cases.py:_dfg1. "cd", "cl", "dp": forces from
-                                 the exact wall-cell centroids and the second-order wall
-                                 pressure; "cd_vm": drag with the vertex-mean cell centres.
-  paper/data/dfg_fine.json       2D-1 at n_arc = 96, 128 (tightest settings, beyond the study).
-  paper/data/cavity_tensor.pkl   L5, through paper/grids.py.
-  src/errbudget                  the engine; the search is rerun with V121 exactly as
-                                 paper/exp63_figures.py:fig_search does (v11 Fig. 4).
-Writes figures/data_2d1_l5.json. Run with PYTHONDONTWRITEBYTECODE=1 so that nothing is
-written into PAPER_REPO:
-  PYTHONDONTWRITEBYTECODE=1 python3 figures/extract_2d1_l5.py
+    python extract_2d1_l5.py            # writes figures/data_2d1_l5.json
 """
 import json
 import os

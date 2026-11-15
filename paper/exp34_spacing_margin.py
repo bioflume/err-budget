@@ -1,8 +1,7 @@
-"""Check for the spacing study (exp34_spacing.py): at spacing 1.2 / 3, does the
-misfit-dependent safety factor cause the declines?  Replays the released program
-(errbudget.V121) with and without it (resid_margin=0, a constant factor 1.25) on the
-same four test cases, graded as in exp34_spacing.py.  Results go to
-data/spacing_margin_check.json.
+"""Spacing 1.2 / 3 of exp34_spacing.py with a constant safety factor of 1.25 instead of the
+misfit-dependent one (S-3.5): accepted searches and misses.
+
+    python exp34_spacing_margin.py  # about two minutes; writes data/spacing_margin_check.json
 """
 import itertools
 import json

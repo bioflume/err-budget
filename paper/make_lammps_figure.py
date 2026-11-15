@@ -1,9 +1,8 @@
-"""Figure: the method on LAMMPS, against LAMMPS's own documented practice.
+"""Fig. S-5.3 (fig_lammps.pdf): LAMMPS at 8,000 ions, every setting against LAMMPS's documented
+practice, and the cost against the order of the charge assignment.
 
-Regenerated for the revision without version history: the marker of the setting that an
-earlier version returned ("this method") is removed.  The released program (errbudget.V121)
-is run from the documented setting only to report its outcome, which the caption states.
-The figure is written to ERRBUDGET_FIG_DIR (default: figures/)."""
+    python make_lammps_figure.py        # writes to ERRBUDGET_FIG_DIR (default figures/)
+"""
 import itertools
 import os
 import pickle

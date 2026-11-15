@@ -1,10 +1,7 @@
-"""If transfer fails only towards harder physics, calibrating at the hardest
-member of the ensemble should make the whole ensemble safe.  That turns a
-negative result into a usable rule, so it is worth testing rather than asserting.
+"""Reuse on L2 with the search at the hardest member, nu = 0.02 (S-4.5, Table S-4.4, last
+column): the returned settings run unchanged at the 22 viscosities of exp30_transfer.py.
 
-Rerun for the revision without version history: the search uses the released
-program (errbudget.V121, unconverged runs treated as failed); the grading is
-unchanged.  Results go to data/reuse_hardest_released.json.
+    python exp37_calhardest.py      # about a minute; writes data/reuse_hardest_released.json
 """
 import os, pickle
 import numpy as np

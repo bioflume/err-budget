@@ -1,4 +1,9 @@
-"""Section 5: masking on L2 and L3, and dependence on the observable (L2)."""
+"""Two measurements on L2 (S-4.1): the change of the energy and the dissipation when the
+Newton tolerance is tightened from 1e-8 to 1e-10 at the finest mesh and time step, and the
+dissipation error of the optimal setting for the energy at 1e-3.
+
+    python exp40_section5.py
+"""
 import numpy as np
 from errbudget import LocalBudget
 from grids import L2, L3, hs, load, exact, grid

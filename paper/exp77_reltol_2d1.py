@@ -1,24 +1,11 @@
-"""Revision 4 (referee point on relTol): when does the GAMG tolerance of DFG 2D-1 act?
+"""When the GAMG tolerance t of OpenFOAM 2D-1 acts (Section 7.1, S-5.1).  Each linear solve
+stops at max(tolerance, 0.1 x its initial residual) and does no iteration if its initial
+residual is already below the tolerance; the outer iteration stops when the pressure
+residual falls below residualControl r_c and the momentum residual below r_c/10.  The runs
+are sorted into the regimes 100 t/r_c < 0.1, 100 t/r_c >= 0.1 with t < r_c, and t >= r_c,
+and each observable is compared with the run at t = 1e-8.
 
-Both linear solvers keep relTol 0.1, as in the OpenFOAM tutorials, so a solve stops at
-max(tolerance, 0.1 x its initial residual), and does no iteration at all if its initial
-residual is already below the tolerance.  The outer SIMPLE iteration stops when the
-initial residual of p falls below residualControl and that of U below a tenth of it.
-The study's "GAMG tolerance" t sets the pressure tolerance t and the momentum tolerance
-10 t, so relative to its outer threshold the momentum tolerance is 100 t / residualControl
-and the pressure tolerance t / residualControl.  The table shows which of the two ratios
-decides whether the tolerance acts: the observables change with t until 100 t /
-residualControl falls below about 0.1 (the momentum solve then always stops by relTol),
-and the outer iteration fails to converge once t / residualControl reaches 1 (the
-pressure solve then does no iteration before the outer residual reaches its threshold).
-This script reads the 2D-1 tensor (no runs) and reports, for every pair of
-residualControl and GAMG tolerance: the fraction of settings that did not converge,
-and, for converged settings, the change of each observable from the tightest GAMG
-tolerance at the same mesh, residualControl and coarsest level, relative to the
-exact value (median and largest over meshes and coarsest levels).
-    python exp77_reltol_2d1.py         # writes data/reltol_2d1.json
-The Hamilton job J1 (tasks rt_*) measures the stopping criterion of every pressure
-solve directly from the solver log, with relTol 0.1 and 0.
+    python exp77_reltol_2d1.py          # writes data/reltol_2d1.json
 """
 import json
 import os

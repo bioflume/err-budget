@@ -1,20 +1,12 @@
-"""Item 7: reliability with eight parameters, half of them nearly inert.
+"""Eight parameters on L3 (S-3.5): the five of L3 and gmres_restart, precond_freq and
+newton_max, 11,664 settings that are not built.  The released program searches from 200
+random starting settings at the energy target 1e-2, and every returned setting is graded
+against the manufactured solution.  The stored runs (data/eight_cache.pkl) have no
+convergence flags, so every setting a search requests is run once to obtain its flag and
+checked against the stored run; the flags are cached in data/eight_flags_released.pkl.
 
-L3 with the three further solver parameters of the class-inference study
-(Section 3.1): gmres_restart, precond_freq (how many time steps a preconditioner
-is reused) and newton_max.  The 8-parameter grid has 11,664 settings and is
-not built; the method is run live from 200 random starts at one target
-(energy, 1e-2 relative) and every recommendation is graded against the exact
-solution.  Runs are cached and shared between starts, and the calibration cost
-of each start counts only the runs that start requested.
-
-Rerun for the revision without version history: the search uses the released
-program (errbudget.V121, without screening, its default), which treats a run whose
-nested solver missed its tolerance as failed.  The stored cache holds no convergence
-flags, so every setting a search requests is rerun once to obtain its flag (and checked
-bit-for-bit against the stored cache); a first pass that assumes convergence finds the
-settings to flag, which are then run in parallel.  The grading is unchanged.  The flags
-are cached in data/eight_flags_released.pkl; results go to data/eight_released.json.
+    ERRBUDGET_NPROC=4 python exp54_eight.py   # 6.5 CPU-hours without the flag cache;
+                                              # writes data/eight_released.json
 """
 import os
 import pickle

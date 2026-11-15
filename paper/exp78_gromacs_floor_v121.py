@@ -1,13 +1,9 @@
-"""Revision 4: the mixed-precision GROMACS build with version 1.2.1.
+"""The mixed-precision GROMACS build (Section 7.3, S-5.4): the released program without and
+with the round-off measurement at 1e-4 ... 1e-6, graded against the double-precision
+reference, and the number of mixed-precision settings whose energy falls within each
+target by chance.
 
-1. Version 1.2.1 without the round-off probe and with it, at the targets of both
-   revisions (1e-4, 3e-5, 1e-5, 3e-6, 1e-6), graded against the double-precision
-   reference.  (The sentence of Section 7.3 that quoted "6 of 9 and 6 of 6 accepted
-   starts at 1e-5 and 3e-6" came from exp44_gromacs_floor.py, which runs version 1.1.)
-2. Why Table 3 counts the declines at 3e-5 and 1e-5 as "reachable": the number of
-   mixed-precision settings whose energy happens to lie within the target of the
-   double-precision reference, against the round-off spread of the build.
-    python exp78_gromacs_floor_v121.py      # writes data/gromacs_floor_v121.json
+    python exp78_gromacs_floor_v121.py  # writes data/gromacs_floor_v121.json
 """
 import json
 import os

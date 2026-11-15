@@ -1,26 +1,23 @@
-"""Numbers quoted in the text of revision 4 that no table holds.
+"""Numbers of the text that no table holds.
 
     python exp80_v6_numbers.py
 
-1. Section 7.4: the error budgets of ABINIT (12 Ha, 3^3 k-points) and Quantum ESPRESSO
-   (16 Ry, 3^3 k-points, pw.x defaults), with version 1.2.1, with its fits alone (no
-   local-order check; Section 7.4 of version 7 of the article) and with version 1.1
-   (Section S15 of the supplement); the cheapest
-   ABINIT setting that reaches 1e-2 in the energy and its force error; the energy and force
-   errors along the ABINIT cutoffs at 6^3 k-points.
-2. Section 4.6 and Fig. 3: the Phase 1 gains at the two steps where the cost-only
-   coarsest level of OpenFOAM 2D-1 moves (steps 3 and 7 of the search of Fig. 3).
-3. Section 6.1: the L5 setting at which version 1.2 with cancellation credited missed, and
-   what the joint check of versions 1.2 and 1.2.1 measures there.
-4. Section 6.1: the L5 streamfunction minimum, its errors along N at the tightest
-   tolerances and the settings that meet 1e-2 and 3e-3.
-5. Section 4.8, Remark: the y-coordinate of the L5 minimum at 3e-4, at the settings that
-   miss with a constant safety factor (read from data/pooled_v1.2.1-constant.json): the
-   budget with the constant and with the gated factor, and the changes along N.
+1. Section 7.4, S-5.5: the error budgets of ABINIT (12 Ha, 3^3 k-points) and Quantum
+   ESPRESSO (16 Ry, 3^3 k-points, default threshold and mixing), with the released program,
+   with its fits alone and with version 1.1; the cheapest ABINIT setting that meets 1e-2 in
+   the energy and its force error; the energy and force errors along the ABINIT cutoffs at
+   6^3 k-points.
+2. The Phase 1 gains where the cost-only coarsest level of 2D-1 moves in the search of
+   Fig. S-5.2.
+3. L5: the setting at which version 1.2 with cancellation allowed missed, and what the
+   interaction check measures there.
+4. S-3.2: the L5 streamfunction minimum, its errors along N at the tightest tolerances and
+   the settings that meet 1e-2 and 3e-3.
+5. S-3.3: the y-coordinate of the L5 minimum at 3e-4 at the settings that miss with a
+   constant safety factor (from data/pooled_v1.2.1-constant.json).
 
-L3-L5 take their exact values from SymPy.  Without SymPy the script uses the reference
-values stored in data/accounting_v6.json (written by exp76_accounting.py), which are the
-same numbers.
+L3-L5 take their exact values from SymPy; without it, from data/accounting_v6.json
+(exp76_accounting.py).  The printed headings keep the section numbers of revision 4.
 """
 import json
 import os
