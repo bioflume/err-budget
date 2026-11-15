@@ -1,0 +1,103 @@
+errbudget 1.2.1 from /Users/grbj73@durham.ac.uk/OpenResearch/knobs-paper/knobs-paper/src/errbudget
+
+== 1. Accounting
+| sweep | runs | stored | converged | at the cap | failed | missing | simpleFoam core-h |
+|---|---|---|---|---|---|---|---|
+| check | 3 | 3 | 3 | 0 | 0 | 0 | 0 |
+| grid | 10920 | 10920 | 7851 | 2289 | 780 | 0 | 53.92 |
+| ref | 39 | 39 | 36 | 3 | 0 | 0 | 33.98 |
+
+== 2. References (PROTOCOL.md 5)
+| Re | c_D n96 | n128 | n192 | iterations n192 | p | p' | u | reference |
+|---|---|---|---|---|---|---|---|---|
+| 10 | 8.427 | nan | nan | 20000 | nan | 1 | nan | NO |
+| 12.5 | 7.3 | 7.301 | nan | 20000 | nan | 1 | nan | NO |
+| 15 | 6.543 | 6.543 | 6.544 | 6939 | 1.844 | 1.844 | 2.763e-05 | yes |
+| 17.5 | 5.995 | 5.996 | 5.996 | 6697 | 1.537 | 1.537 | 4.44e-05 | yes |
+| 20 | 5.579 | 5.579 | 5.58 | 6454 | 1.381 | 1.381 | 5.727e-05 | yes |
+| 22.5 | 5.25 | 5.25 | 5.25 | 6223 | 1.292 | 1.292 | 6.585e-05 | yes |
+| 25 | 4.982 | 4.983 | 4.983 | 6024 | 1.24 | 1.24 | 7.047e-05 | yes |
+| 27.5 | 4.76 | 4.76 | 4.761 | 5850 | 1.211 | 1.211 | 7.169e-05 | yes |
+| 30 | 4.572 | 4.572 | 4.572 | 5695 | 1.198 | 1.198 | 7.014e-05 | yes |
+| 32.5 | 4.41 | 4.41 | 4.41 | 5555 | 1.197 | 1.197 | 6.637e-05 | yes |
+| 35 | 4.269 | 4.269 | 4.269 | 5431 | 1.208 | 1.208 | 6.092e-05 | yes |
+| 37.5 | 4.145 | 4.145 | 4.145 | 5318 | 1.229 | 1.229 | 5.418e-05 | yes |
+| 40 | 4.035 | 4.035 | 4.035 | 5214 | 1.264 | 1.264 | 4.656e-05 | yes |
+Re 20: n192 5.579571871 against the benchmark 5.57953523384: 6.57e-06 relative
+members with a reference: 11 of 13; largest u 7.17e-05; target 1.0%: GRADED; target 0.3%: GRADED
+
+== 3. The hardest member (PROTOCOL.md 7)
+| Re | c_D n24 (default start) | c_D n32 | relative change | both converged |
+|---|---|---|---|---|
+| 10 | 8.401 | 8.414 | 0.001574 | True |
+| 12.5 | 7.276 | 7.288 | 0.001578 | True |
+| 15 | 6.521 | 6.532 | 0.001563 | True |
+| 17.5 | 5.976 | 5.985 | 0.001533 | True |
+| 20 | 5.561 | 5.569 | 0.001489 | True |
+| 22.5 | 5.233 | 5.241 | 0.001431 | True |
+| 25 | 4.967 | 4.974 | 0.001361 | True |
+| 27.5 | 4.746 | 4.752 | 0.001278 | True |
+| 30 | 4.559 | 4.565 | 0.001184 | True |
+| 32.5 | 4.399 | 4.403 | 0.00108 | True |
+| 35 | 4.259 | 4.263 | 0.0009672 | True |
+| 37.5 | 4.136 | 4.14 | 0.0008464 | True |
+| 40 | 4.028 | 4.03 | 0.0007188 | True |
+hardest member: Re = 12.5
+
+== 4-5. Target 1.0% (graded)
+(a) at Re 12.5: {'n_arc': 48, 'res_ctrl': 0.001, 'lin_tol': 1e-05, 'n_coarsest': 10} after 94 runs (search 1172 CPU s); limiting n_arc
+| setting | values | members met | worst error / eps | missed at Re |
+|---|---|---|---|---|
+| (a) | {'n_arc': 48, 'res_ctrl': 0.001, 'lin_tol': 1e-05, 'n_coarsest': 10} | 11/11 | 0.1058 | - |
+| (b) tutorial | {'n_arc': 32, 'res_ctrl': 0.01, 'lin_tol': 1e-06, 'n_coarsest': 10} | 11/11 | 0.2261 | - |
+| (c) cautious | {'n_arc': 64, 'res_ctrl': 1e-07, 'lin_tol': 1e-08, 'n_coarsest': 10} | 11/11 | 0.03662 | - |
+payback (cpu): S 1172, K 139, mu 12.8 at Re 12.5 (median over members 9.4), n* = K/(mu-1) 11.8; study: N* 12.2 members (pays within the 13; in Re order after 13)
+payback (cells_iters): S 9.971e+08, K 172, mu 17.3 at Re 12.5 (median over members 14.1), n* = K/(mu-1) 10.5; study: N* 13 members (does NOT pay within the 13; in Re order after None)
+-- (a, every start) at Re 12.5
+592 converged starts: 588 accepted, 4 declined, 20 distinct settings; (start, member) pairs met 6468/6468; accepted searches whose setting meets the target at every member 588; K median 87.5; N* median 3.18 (93% within 13 members)
+-- (a') the default-start search at each member, reused at every member (information)
+| searched at Re | setting | members met | missed at Re |
+|---|---|---|---|
+| 10 | {'n_arc': 24, 'res_ctrl': 1e-05, 'lin_tol': 1e-06, 'n_coarsest': 250} | 11/11 | - |
+| 12.5 | {'n_arc': 48, 'res_ctrl': 0.001, 'lin_tol': 1e-05, 'n_coarsest': 10} | 11/11 | - |
+| 15 | {'n_arc': 48, 'res_ctrl': 0.01, 'lin_tol': 1e-05, 'n_coarsest': 50} | 11/11 | - |
+| 17.5 | {'n_arc': 32, 'res_ctrl': 1e-05, 'lin_tol': 1e-06, 'n_coarsest': 250} | 11/11 | - |
+| 20 | {'n_arc': 48, 'res_ctrl': 0.0001, 'lin_tol': 1e-07, 'n_coarsest': 50} | 11/11 | - |
+| 22.5 | {'n_arc': 48, 'res_ctrl': 1e-05, 'lin_tol': 1e-07, 'n_coarsest': 10} | 11/11 | - |
+| 25 | {'n_arc': 32, 'res_ctrl': 0.01, 'lin_tol': 1e-05, 'n_coarsest': 10} | 11/11 | - |
+| 27.5 | {'n_arc': 32, 'res_ctrl': 0.01, 'lin_tol': 1e-08, 'n_coarsest': 50} | 11/11 | - |
+| 30 | {'n_arc': 24, 'res_ctrl': 0.01, 'lin_tol': 1e-05, 'n_coarsest': 10} | 11/11 | - |
+| 32.5 | {'n_arc': 24, 'res_ctrl': 0.01, 'lin_tol': 1e-08, 'n_coarsest': 50} | 11/11 | - |
+| 35 | {'n_arc': 8, 'res_ctrl': 0.01, 'lin_tol': 1e-06, 'n_coarsest': 250} | 6/11 | 15, 17.5, 20, 22.5, 25 |
+| 37.5 | {'n_arc': 12, 'res_ctrl': 0.01, 'lin_tol': 1e-06, 'n_coarsest': 10} | 7/11 | 15, 17.5, 20, 22.5 |
+| 40 | {'n_arc': 12, 'res_ctrl': 0.01, 'lin_tol': 1e-06, 'n_coarsest': 50} | 7/11 | 15, 17.5, 20, 22.5 |
+
+== 4-5. Target 0.3% (graded)
+(a) at Re 12.5: {'n_arc': 64, 'res_ctrl': 0.001, 'lin_tol': 1e-06, 'n_coarsest': 10} after 93 runs (search 2329 CPU s); limiting n_arc
+| setting | values | members met | worst error / eps | missed at Re |
+|---|---|---|---|---|
+| (a) | {'n_arc': 64, 'res_ctrl': 0.001, 'lin_tol': 1e-06, 'n_coarsest': 10} | 11/11 | 0.1635 | - |
+| (b) tutorial | {'n_arc': 32, 'res_ctrl': 0.01, 'lin_tol': 1e-06, 'n_coarsest': 10} | 11/11 | 0.7536 | - |
+| (c) cautious | {'n_arc': 64, 'res_ctrl': 1e-07, 'lin_tol': 1e-08, 'n_coarsest': 10} | 11/11 | 0.1221 | - |
+payback (cpu): S 2329, K 90, mu 4.18 at Re 12.5 (median over members 3.76), n* = K/(mu-1) 28.3; study: N* 29.6 members (does NOT pay within the 13; in Re order after None)
+payback (cells_iters): S 1.998e+09, K 133, mu 6.67 at Re 12.5 (median over members 5.94), n* = K/(mu-1) 23.4; study: N* 29.2 members (does NOT pay within the 13; in Re order after None)
+-- (a, every start) at Re 12.5
+592 converged starts: 584 accepted, 8 declined, 15 distinct settings; (start, member) pairs met 6424/6424; accepted searches whose setting meets the target at every member 584; K median 47.6; N* median 11.2 (56% within 13 members)
+-- (a') the default-start search at each member, reused at every member (information)
+| searched at Re | setting | members met | missed at Re |
+|---|---|---|---|
+| 10 | {'n_arc': 48, 'res_ctrl': 1e-05, 'lin_tol': 1e-06, 'n_coarsest': 50} | 11/11 | - |
+| 12.5 | {'n_arc': 64, 'res_ctrl': 0.001, 'lin_tol': 1e-06, 'n_coarsest': 10} | 11/11 | - |
+| 15 | {'n_arc': 64, 'res_ctrl': 1e-06, 'lin_tol': 1e-08, 'n_coarsest': 250} | 11/11 | - |
+| 17.5 | {'n_arc': 64, 'res_ctrl': 1e-06, 'lin_tol': 1e-08, 'n_coarsest': 50} | 11/11 | - |
+| 20 | {'n_arc': 32, 'res_ctrl': 1e-07, 'lin_tol': 1e-08, 'n_coarsest': 10} | 11/11 | - |
+| 22.5 | {'n_arc': 48, 'res_ctrl': 0.0001, 'lin_tol': 1e-07, 'n_coarsest': 50} | 11/11 | - |
+| 25 | {'n_arc': 64, 'res_ctrl': 0.001, 'lin_tol': 1e-06, 'n_coarsest': 250} | 11/11 | - |
+| 27.5 | {'n_arc': 48, 'res_ctrl': 0.0001, 'lin_tol': 1e-07, 'n_coarsest': 50} | 11/11 | - |
+| 30 | {'n_arc': 32, 'res_ctrl': 1e-06, 'lin_tol': 1e-08, 'n_coarsest': 50} | 11/11 | - |
+| 32.5 | {'n_arc': 48, 'res_ctrl': 1e-06, 'lin_tol': 1e-08, 'n_coarsest': 10} | 11/11 | - |
+| 35 | {'n_arc': 48, 'res_ctrl': 0.0001, 'lin_tol': 1e-08, 'n_coarsest': 50} | 11/11 | - |
+| 37.5 | {'n_arc': 24, 'res_ctrl': 1e-05, 'lin_tol': 1e-08, 'n_coarsest': 50} | 6/11 | 15, 17.5, 20, 22.5, 25 |
+| 40 | {'n_arc': 24, 'res_ctrl': 0.0001, 'lin_tol': 1e-07, 'n_coarsest': 250} | 6/11 | 15, 17.5, 20, 22.5, 25 |
+
+summary written to results/reuse2d1-20261115-1111/res/reuse_summary.json

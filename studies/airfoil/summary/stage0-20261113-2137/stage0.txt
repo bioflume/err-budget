@@ -1,0 +1,61 @@
+== 1. Accounting
+stage0: 26 runs expected, 26 results (24 converged, 2 stalled, 0 at the cap, 0 other unconverged, 0 failed), 0 with errors, 0 given up, 0 without a record
+   COMPLETE
+
+== 2. Cost model
+core-seconds per cell and iteration: median 3.75e-06 (range 2.28e-06-6.07e-06, 90th percentile 5.86e-06; 23 serial runs); assumed 4.6e-06
+iterations at n_surf 128: res_ctrl 1e-03: 116, res_ctrl 1e-04: 271, res_ctrl 1e-05: 464, res_ctrl 1e-06: 2321, res_ctrl 1e-07: 4178  (x1.12 per level; assumed x1.29)
+| run | np | cells | iterations | stop | L/D | core-min | y+ mean | y+ max | first cell / dy1 |
+|---|---|---|---|---|---|---|---|---|---|
+| m2.0_t10_n64_y2e-05_R500_rc1e-05_gt1e-07 | 1 | 18000 | 589 | converged | 72.2833 | 0.485 | 1.25 | 2.67 | 1 |
+| m2.0_t10_n128_y2e-05_R500_rc1e-05_gt1e-07 | 1 | 66690 | 386 | converged | 73.3665 | 1.72 | 1.24 | 2.7 | 1 |
+| m2.0_t10_n256_y2e-05_R500_rc1e-05_gt1e-07 | 1 | 251430 | 973 | converged | 72.1582 | 15.3 | 1.25 | 2.71 | 1 |
+| m2.0_t10_n256_y2e-05_R500_rc1e-06_gt1e-08 | 1 | 251430 | 2277 | converged | 71.897 | 29.8 | 1.25 | 2.71 | 1 |
+| m2.0_t10_n181_y2e-05_R500_rc1e-05_gt1e-07 | 1 | 129130 | 521 | converged | 72.5421 | 6.04 | 1.25 | 2.71 | 1 |
+| m2.0_t10_n181_y2e-05_R500_rc1e-05_gt1e-07_np4 | 4 | 129130 | 535 | converged | 72.6188 | 9.43 | 1.25 | 2.71 | 1 |
+| m0.0_t8_n128_y2e-05_R500_rc1e-05_gt1e-07 | 1 | 66690 | 280 | converged | 52.8177 | 1.83 | 1.27 | 3.37 | 1 |
+| m0.0_t8_n181_y2e-05_R500_rc1e-05_gt1e-07 | 1 | 129130 | 380 | converged | 52.2207 | 4.9 | 1.27 | 3.39 | 1 |
+| m0.0_t12_n128_y2e-05_R500_rc1e-05_gt1e-07 | 1 | 66690 | 351 | converged | 48.5478 | 2.26 | 1.24 | 2.49 | 1 |
+| m0.0_t12_n181_y2e-05_R500_rc1e-05_gt1e-07 | 1 | 129130 | 475 | converged | 48.3135 | 5.45 | 1.24 | 2.5 | 1 |
+| m4.0_t8_n128_y2e-05_R500_rc1e-05_gt1e-07 | 1 | 66690 | 335 | converged | 94.0282 | 2.07 | 1.25 | 3 | 0.999 |
+| m4.0_t8_n181_y2e-05_R500_rc1e-05_gt1e-07 | 1 | 129130 | 487 | converged | 93.2197 | 6.36 | 1.25 | 3.03 | 0.999 |
+| m4.0_t12_n128_y2e-05_R500_rc1e-05_gt1e-07 | 1 | 66690 | 702 | converged | 85.8328 | 3.37 | 1.21 | 2.28 | 1 |
+| m4.0_t12_n181_y2e-05_R500_rc1e-05_gt1e-07 | 1 | 129130 | 755 | converged | 85.6998 | 8.78 | 1.21 | 2.27 | 1 |
+| m0.0_t8_n91_y2e-05_R50_rc1e-06_gt1e-08_st | 1 | 26544 | 3052 | settled | 50.8777 | 3.79 | 1.27 | 3.32 | 1 |
+| m0.0_t8_n91_y2e-05_R500_rc1e-06_gt1e-08_st | 1 | 34848 | 2978 | settled | 52.5106 | 4.8 | 1.27 | 3.33 | 1 |
+| m0.0_t8_n91_y2e-05_R5000_rc1e-06_gt1e-08_st | 1 | 43844 | 3202 | settled | 52.6597 | 6.29 | 1.27 | 3.33 | 1 |
+| m0.0_t12_n91_y2e-05_R50_rc1e-06_gt1e-08_st | 1 | 26544 | 3410 | settled | 46.8486 | 4.12 | 1.24 | 2.49 | 0.999 |
+| m0.0_t12_n91_y2e-05_R500_rc1e-06_gt1e-08_st | 1 | 34848 | 3158 | settled | 48.2545 | 5.6 | 1.24 | 2.49 | 0.999 |
+| m0.0_t12_n91_y2e-05_R5000_rc1e-06_gt1e-08_st | 1 | 43844 | 3275 | settled | 48.4144 | 6.76 | 1.24 | 2.49 | 0.999 |
+| m4.0_t8_n91_y2e-05_R50_rc1e-06_gt1e-08_st | 1 | 26544 | 3114 | settled | 85.0024 | 3.14 | 1.25 | 2.99 | 0.999 |
+| m4.0_t8_n91_y2e-05_R500_rc1e-06_gt1e-08_st | 1 | 34848 | 2947 | settled | 93.2292 | 4.63 | 1.25 | 3 | 0.999 |
+| m4.0_t8_n91_y2e-05_R5000_rc1e-06_gt1e-08_st | 1 | 43844 | 10627 | stalled | 94.074 | 13.7 | 1.25 | 3.01 | 0.999 |
+| m4.0_t12_n91_y2e-05_R50_rc1e-06_gt1e-08_st | 1 | 26544 | 3725 | settled | 77.8023 | 4.43 | 1.21 | 2.27 | 1 |
+| m4.0_t12_n91_y2e-05_R500_rc1e-06_gt1e-08_st | 1 | 34848 | 3798 | settled | 84.5675 | 9.04 | 1.21 | 2.28 | 1 |
+| m4.0_t12_n91_y2e-05_R5000_rc1e-06_gt1e-08_st | 1 | 43844 | 11576 | stalled | 85.4708 | 22.8 | 1.21 | 2.28 | 1 |
+parallel (n_surf 181): 1 core 371 s, 4 cores 150 s: speed-up 2.47, efficiency 62%; L/D differs by 1.1e-03
+forces written for every run: True; decayControl echoed by every run: True
+
+== 3. Decisions (mechanical)
+| corner (m, t) | L/D at 128 | L/D at 181 | relative change | converged |
+|---|---|---|---|---|
+| (0.0, 0.08) | 52.8177 | 52.2207 | 0.0114 | True |
+| (0.0, 0.12) | 48.5478 | 48.3135 | 0.00485 | True |
+| (0.04, 0.08) | 94.0282 | 93.2197 | 0.00867 | True |
+| (0.04, 0.12) | 85.8328 | 85.6998 | 0.00155 | True |
+hardest design (PROTOCOL.md 4.2): m = 0.0, t = 0.08
+| corner | L/D at R = 50, 500, 5000 (settled) | Delta_R / (L/D) at 5000 | A / (L/D) in L/D = Q + A/R | above eps/10 |
+|---|---|---|---|---|
+| (0.0, 0.08) | 50.8777, 52.5106, 52.6597 | 0.000315 | -1.57 | False |
+| (0.0, 0.12) | 46.8486, 48.2545, 48.4144 | 0.000367 | -1.83 | False |
+| (0.04, 0.08) | 85.0024, 93.2292, nan | nan | nan | False |
+| (0.04, 0.12) | 77.8023, 84.5675, nan | nan | nan | False |
+far field (A5; the check of PROTOCOL.md 3.2 is withdrawn): radius list 50, 500, 5000 and reference radius 5000 unchanged; the reference value carries Delta_R
+numerics check (PROTOCOL.md 3.3): passed (0 diverged; 2 of 13 runs at 1e-6 unconverged)
+
+== 4. Predicted core-hours with the measured model
+median t: Stage 1 52 + reference 23; Stage 2 (b) 1, (c) 26, (d) 109, (a) 1-26; Stages 1-2 at most 235
+   p90 t: Stage 1 81 + reference 36; Stage 2 (b) 1, (c) 40, (d) 170, (a) 1-40; Stages 1-2 at most 367
+
+summary written to /nobackup/grbj73/airfoil/results/stage0_summary.json
+config written to /nobackup/grbj73/airfoil/code/config
