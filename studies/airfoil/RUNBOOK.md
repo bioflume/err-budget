@@ -28,11 +28,10 @@ Background: PROTOCOL.md (what and why), COST.md (the estimate).
 
 ## 1. Upload (Mac)
 
-`AF` is the `airfoil/` directory of a checkout of branch `study/airfoil`; the line below
-names the worktree where it was prepared.
+`AF` is this directory, `studies/airfoil/` of the article's repository.
 
 ```bash
-AF="/Users/grbj73@durham.ac.uk/.local/share/openresearch/worktrees/2ed68104-cb7b-456e-999e-56a5d09d1af9/chat_7c2bdc9c-696d-ead8-f4ba-6e51075f2c4f/airfoil"
+AF="$(git rev-parse --show-toplevel)/studies/airfoil"
 shasum -a 256 "$AF/dist/airfoil-batch.tar.gz"; cat "$AF/dist/SHA256SUMS"     # the two must agree
 scp "$AF/dist/airfoil-batch.tar.gz" grbj73@hamilton8.dur.ac.uk:/nobackup/grbj73/
 ```

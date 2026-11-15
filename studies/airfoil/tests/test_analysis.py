@@ -144,7 +144,7 @@ def test_radius_list_never_changes_after_a5(lab):
 def test_replay_copy_matches_the_article_baselines():
     """seq/coord/ref_check are verbatim copies of the article's paper/baselines.py."""
     import inspect
-    src = os.path.join(os.path.expanduser("~/OpenResearch/knobs-paper/knobs-paper/paper"), "baselines.py")
+    src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..", "paper", "baselines.py")
     if not os.path.exists(src):
         pytest.skip("article repository not on this machine")
     text = open(src).read()

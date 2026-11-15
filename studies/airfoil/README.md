@@ -24,7 +24,7 @@ compared with the tutorial's setting, a cautious one, and the procedures of prac
 | `dist/` | `airfoil-batch.tar.gz` for Hamilton (`bash make_dist.sh`) and its SHA-256 |
 
 Local checks (about a minute; NumPy, SciPy, Matplotlib, PyYAML and pytest; the analysis tests
-use the article's engine at `~/OpenResearch/knobs-paper/knobs-paper/src`, or `$ERRBUDGET_SRC`):
+use the engine in the repository's `src/`, or `$ERRBUDGET_SRC`):
 
 ```bash
 cd airfoil/tests && PYTHONDONTWRITEBYTECODE=1 /opt/anaconda3/bin/python3 -m pytest -q -p no:cacheprovider

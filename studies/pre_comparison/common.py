@@ -2,7 +2,7 @@
 PRE selector.  The study, the program and the grading are read from the article's
 repository (read-only); nothing there is modified.
 
-    ERRBUDGET_REPO   path of the article's repository (default below), at commit 4d32148
+    ERRBUDGET_REPO   path of the article's repository (default: the repository holding this folder)
 """
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ import sys
 import numpy as np
 
 REPO = os.environ.get("ERRBUDGET_REPO",
-                      "/Users/grbj73@durham.ac.uk/OpenResearch/knobs-paper/knobs-paper")
+                      os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
 sys.dont_write_bytecode = True          # write no __pycache__ into the read-only repository
 sys.path.insert(0, os.path.join(REPO, "src"))
 sys.path.insert(0, os.path.join(REPO, "paper"))

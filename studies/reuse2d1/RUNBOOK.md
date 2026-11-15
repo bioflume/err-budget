@@ -19,7 +19,7 @@ task is given up after three errors.
 ## 1. Upload (Mac)
 
 ```bash
-RE="/Users/grbj73@durham.ac.uk/.local/share/openresearch/worktrees/2ed68104-cb7b-456e-999e-56a5d09d1af9/chat_7c2bdc9c-696d-ead8-f4ba-6e51075f2c4f/reuse2d1"
+RE="$(git rev-parse --show-toplevel)/studies/reuse2d1"
 shasum -a 256 "$RE/dist/reuse2d1-batch.tar.gz"; cat "$RE/dist/SHA256SUMS"     # the two must agree
 scp "$RE/dist/reuse2d1-batch.tar.gz" grbj73@hamilton8.dur.ac.uk:/nobackup/grbj73/
 ```

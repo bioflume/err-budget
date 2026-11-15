@@ -12,7 +12,7 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, "analysis"))
 from cyl import study  # noqa: E402
 
-ARTICLE = os.path.expanduser("~/OpenResearch/knobs-paper/knobs-paper")
+ARTICLE = os.path.join(HERE, "..", "..")
 TENSOR = os.path.join(ARTICLE, "paper", "data", "dfg_tensor_v12.pkl")
 pytestmark = pytest.mark.skipif(not os.path.exists(TENSOR), reason="article repository not present")
 BENCH = 5.57953523384

@@ -21,7 +21,7 @@ sys.dont_write_bytecode = True
 from af import study  # noqa: E402
 from af.cgrid import MESH_VERSION  # noqa: E402
 
-ARTICLE_SRC = os.path.expanduser("~/OpenResearch/knobs-paper/knobs-paper/src")
+ARTICLE_SRC = os.path.join(ROOT, "..", "..", "src")
 
 
 def use_config(path):

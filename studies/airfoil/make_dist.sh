@@ -6,7 +6,7 @@
 # the live run, plus VERSION (commit, engine origin and hashes).  Writes dist/SHA256SUMS.
 set -euo pipefail
 here=$(cd "$(dirname "$0")" && pwd)
-engine_src=${ERRBUDGET_SRC:-$HOME/OpenResearch/knobs-paper/knobs-paper/src}
+engine_src=${ERRBUDGET_SRC:-$here/../../src}
 [ -f "$engine_src/errbudget/_core.py" ] || { echo "no errbudget engine at $engine_src" >&2; exit 1; }
 stage=$(mktemp -d)
 trap 'rm -rf "$stage"' EXIT

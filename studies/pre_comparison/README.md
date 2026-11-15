@@ -16,5 +16,5 @@ and was committed before any PRE result was graded. `REPORT.md` gives the result
 | Tables and criteria | `.venv/bin/python summarize.py` | `results/summary.json`, `results/tables.md` |
 | Figure | `.venv/bin/python make_figure.py` | `fig_pre_2d1.pdf` |
 
-The study and the program are read from the article's repository (`ERRBUDGET_REPO`, default
-`~/OpenResearch/knobs-paper/knobs-paper`, commit 4d32148). Nothing there is modified.
+The study and the program are read from the repository holding this folder (`paper/` and `src/`, or
+`ERRBUDGET_REPO`). Nothing there is modified.

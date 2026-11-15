@@ -13,8 +13,8 @@
   6. (a, every start): from every converged start at the hardest member (--starts-every K:
      every K-th start only, for tests);
   7. (a'): the default-start search at every other member, reused at every member.
-Writes reuse_summary.json.  Needs the errbudget engine: the article's src/ (default
-~/OpenResearch/knobs-paper/knobs-paper/src, or $ERRBUDGET_SRC, or --engine).
+Writes reuse_summary.json.  Needs the errbudget engine: the repository's src/ (default),
+$ERRBUDGET_SRC, or --engine.
 """
 from __future__ import annotations
 
@@ -36,7 +36,7 @@ COSTS = ("cpu", "cells_iters")
 
 
 def engine(path=None):
-    src = path or os.environ.get("ERRBUDGET_SRC") or os.path.expanduser("~/OpenResearch/knobs-paper/knobs-paper/src")
+    src = path or os.environ.get("ERRBUDGET_SRC") or os.path.join(HERE, "..", "..", "src")
     sys.path.insert(0, src)
     import errbudget
     return errbudget
