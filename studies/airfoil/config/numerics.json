@@ -1,0 +1,4 @@
+{
+  "note": "PROTOCOL.md 3.3: 'primary' unless the Stage-0 analysis triggers 'fallback'.",
+  "numerics": "primary"
+}

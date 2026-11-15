@@ -1,0 +1,28 @@
+# errbudget job file of the airfoil use case (PROTOCOL.md 7(a)).
+#
+# OpenFOAM's simpleFoam is driven as a black box through driver.py, which writes the
+# case, meshes it, runs it and prints L/D and its cost.  The design is the hardest one
+# of Stage 0 (config/stage1.json); the target is 1 % of L/D, relative to the default
+# start, as a user who does not know the answer would set it.
+#
+#   python3 live_tune.py errbudget_job.yaml      (this repository's runner, errbudget's
+#                                                 Python API underneath)
+#   errbudget run errbudget_job.yaml             (a release with the command-line interface)
+#
+# After Stage 1 every run it asks for is in the run store, so the tuning takes minutes
+# and must return the setting the stored-run replay returns.
+
+command: python3 {{job_dir}}/driver.py --run-setting n_surf={{n_surf}} dy1={{dy1}} radius={{radius}} res_ctrl={{res_ctrl}} gamg_tol={{gamg_tol}} --design-from-config --print
+
+parameters:                      # values run COARSE (cheap) to FINE (accurate)
+  - {name: n_surf,   kind: discretisation, values: [64, 91, 128, 181, 256],             start: 128}
+  - {name: dy1,      kind: discretisation, values: [4.0e-5, 2.0e-5, 1.0e-5],           start: 2.0e-5}
+  - {name: radius,   kind: discretisation, values: [50.0, 500.0, 5000.0],              start: 500.0}
+  - {name: res_ctrl, kind: nested-solver,  values: [1.0e-3, 1.0e-4, 1.0e-5, 1.0e-6],   start: 1.0e-5}
+  - {name: gamg_tol, kind: nested-solver,  values: [1.0e-6, 1.0e-7, 1.0e-8],           start: 1.0e-7}
+
+observable: {name: L/D, regex: "L/D\\s*=\\s*([-+0-9.eE]+)"}     # read from stdout
+target: 0.01
+relative: true                   # 1 % of L/D at the start
+cost: {regex: "cost\\s*=\\s*([0-9.eE+-]+)"}                     # cells x iterations
+failure: {unconverged_if_regex: "NOT CONVERGED"}                # stalled or at the cap: a failed run
