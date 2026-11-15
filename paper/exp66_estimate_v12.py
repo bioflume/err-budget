@@ -11,11 +11,9 @@ target.
     python exp66_estimate_v12.py
 """
 import os
-import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cases as C
 from errbudget import LocalBudget, V11, V121 as V12
 

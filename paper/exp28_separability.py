@@ -28,11 +28,9 @@ A tally becomes a predictive relation.
 import itertools
 import os
 import pickle
-import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(__file__))
 from errbudget import LocalBudget
 from errbudget.problems import Burgers1D, Burgers2D, ReactionDiffusion2D
 
@@ -40,7 +38,7 @@ D = os.path.join(os.path.dirname(__file__), "data")
 FLOOR = 1e-14          # nothing below the double-precision resolution counts
 
 
-def rho_distribution(tensor, LAD, ob, QS, sample=20000, seed=0):
+def rho_distribution(tensor, LAD, ob, QS, seed=0):
     """All 2x2 second differences of the error tensor, normalised."""
     n = len(LAD)
     E = {i: tensor[i][0][ob] - QS for i in tensor}

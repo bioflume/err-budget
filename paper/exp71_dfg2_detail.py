@@ -8,10 +8,7 @@ Version 7 of the article: the released program with cancellation credited
 at the setting that this configuration returns outside the target (Section 7.2
 and the Remark of Section 4.8).
 """
-import os, sys
 import numpy as np
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "src"))
 import cases as C
 import pooled as P
 from errbudget import LocalBudget

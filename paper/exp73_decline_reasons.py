@@ -6,11 +6,9 @@ uses the refined study 2D-2h when its results are present; =rev3 the study of re
 """
 import collections
 import os
-import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cases as C
 import pooled as P
 from errbudget import run_protocol

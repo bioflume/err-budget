@@ -1,7 +1,5 @@
 """Section 5: masking on L2 and L3, and dependence on the observable (L2)."""
-import sys, os
 import numpy as np
-sys.path.insert(0, os.path.dirname(__file__))
 from errbudget import LocalBudget
 from grids import L2, L3, hs, load, exact, grid
 

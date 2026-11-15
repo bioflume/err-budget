@@ -7,14 +7,12 @@ The figure is written to ERRBUDGET_FIG_DIR (default: figures/)."""
 import itertools
 import os
 import pickle
-import sys
 
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-sys.path.insert(0, os.path.dirname(__file__))
 from errbudget import run_protocol, V121
 from lammps_madelung import LammpsMadelung
 

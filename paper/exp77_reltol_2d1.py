@@ -22,11 +22,9 @@ solve directly from the solver log, with relTol 0.1 and 0.
 """
 import json
 import os
-import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cases as C
 
 

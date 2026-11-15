@@ -20,12 +20,10 @@ which needs the stored tensors alone.
 """
 import itertools
 import os
-import pickle
 import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cases as C
 import pooled as P
 
@@ -62,7 +60,6 @@ for k in range(2, 7):
         cells = []
         allres = []
         for tg in TARGETS:
-            acc_lo = miss_hi = None
             res = []
             for f in (min(floors), max(floors)):
                 case.floor = f

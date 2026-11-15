@@ -17,7 +17,7 @@ BLUE = "#0072B2"              # errbudget (estimate, returned setting)
 VERM = "#D55E00"              # tutorial settings and procedures of current practice
 BLACK = "#000000"             # true or reference error
 GREY = "#777777"              # target line, annotations
-SKY, GREEN, ORANGE, PURPLE, YELLOW = "#56B4E9", "#009E73", "#E69F00", "#CC79A7", "#F0E442"
+GREEN, ORANGE, PURPLE = "#009E73", "#E69F00", "#CC79A7"
 SHADE = "#EEEEEE"
 
 

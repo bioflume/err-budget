@@ -15,9 +15,8 @@ the median misfit of the fits, and the 10th percentile, median and 90th percenti
 Ehat/Etrue with the share of optimistic estimates, over every setting whose true error
 exceeds the resolution (as exp66 grades it).  Results go to data/spacing_estimate_released.json.
 """
-import itertools, os, pickle, sys
+import itertools, os, pickle
 import numpy as np
-sys.path.insert(0, os.path.dirname(__file__))
 import json
 from errbudget import LocalBudget, V121
 from l2flags import flags

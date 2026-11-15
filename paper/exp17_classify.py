@@ -11,7 +11,7 @@ Signature features, all from one OAT sweep at one anchor:
   cost_slope    d log(cost) / d (ladder index)
   cost_interior 1 if cost has an interior minimum (neither end is cheapest)
 """
-import sys, os, pickle, os, time, numpy as np
+import pickle, os, time, numpy as np
 from errbudget.problems import Burgers2D
 
 NAMES = ["N","steps","newton_tol","gmres_tol","ilu_drop","gmres_restart",
@@ -32,7 +32,7 @@ def get(idx):
     return store[idx]
 
 def signature(anchor, ob):
-    base, C0 = get(anchor)
+    base, _ = get(anchor)
     rows=[]
     for k in range(8):
         Q=[];Cc=[]

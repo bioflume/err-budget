@@ -6,9 +6,8 @@ Rerun for the revision without version history: the search uses the released
 program (errbudget.V121, unconverged runs treated as failed); the grading is
 unchanged.  Results go to data/reuse_hardest_released.json.
 """
-import os, pickle, sys
+import os, pickle
 import numpy as np
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import json
 from errbudget import run_protocol, V121
 from l2flags import flags

@@ -5,12 +5,9 @@ misdeclaration and margin studies), so that every new table is computed by
 the same code as Table 5 and Table 8.
 """
 import itertools
-import os
-import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(__file__))
 from errbudget import run_protocol
 from baselines import seq, coord, ref_check
 

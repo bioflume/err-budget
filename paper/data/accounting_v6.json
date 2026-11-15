@@ -54,7 +54,7 @@
   "models": null,
   "reference": {
    "energy": 1.3738482866506077,
-   "dissipation": 0.3104023614478108
+   "dissipation": 0.31040236144781075
   },
   "uncertainty": {},
   "admitted": {
@@ -64,9 +64,9 @@
     0.0007278824086449631
    ],
    "dissipation": [
-    0.03221624975195732,
-    0.009664874925587196,
-    0.0032216249751957316
+    0.032216249751957325,
+    0.009664874925587198,
+    0.003221624975195732
    ]
   },
   "not_admitted": {
@@ -131,8 +131,8 @@
   ],
   "models": null,
   "reference": {
-   "energy": 5.581492102073773,
-   "gradient": 46.884533657419695
+   "energy": 5.581492102073775,
+   "gradient": 46.88453365741967
   },
   "uncertainty": {},
   "admitted": {
@@ -209,7 +209,7 @@
   "models": null,
   "reference": {
    "inhibitor_mass": 9.869604401089358,
-   "pattern_sharpness": 0.7261649103311923
+   "pattern_sharpness": 0.726164910331192
   },
   "uncertainty": {},
   "admitted": {

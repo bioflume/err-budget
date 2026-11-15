@@ -43,7 +43,6 @@ else:
     else:
         sys.path.insert(0, os.path.join(HERE, "frozen_src"))
         SRC = os.path.join(HERE, "frozen_src", "knobs")
-sys.path.insert(0, HERE)
 if CURRENT:
     import errbudget as program
 else:

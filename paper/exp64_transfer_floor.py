@@ -20,11 +20,9 @@ Reported with and without the floor so that the effect of each is visible.
 """
 import itertools
 import os
-import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cases as C
 
 PHIS = [0.01, 0.05, 0.1, 0.25, 0.5]

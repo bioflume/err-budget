@@ -18,12 +18,10 @@ are cached in data/eight_flags_released.pkl; results go to data/eight_released.j
 """
 import os
 import pickle
-import sys
 import time
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(__file__))
 import json
 from multiprocessing import Pool
 from errbudget import run_protocol, V121

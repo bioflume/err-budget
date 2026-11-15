@@ -7,12 +7,9 @@ of the per-cell median penalties, per problem; and the smallest F that is safe w
 each problem in turn is the calibration set.
     python exp67_margin_v12.py
 """
-import os
-import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cases as C
 import pooled as P
 

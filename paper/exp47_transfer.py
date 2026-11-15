@@ -14,11 +14,9 @@ the DFG benchmark (when its tensor exists).
 import itertools
 import os
 import pickle
-import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(__file__))
 import grids
 
 PHIS = [0.01, 0.05, 0.1, 0.25, 0.5]

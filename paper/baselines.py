@@ -26,17 +26,10 @@ run at delta = eps, eps/3 and eps/10 relative to the target and the best and
 worst outcomes are both reported. That is the fairest treatment: the method gets
 no threshold to tune, and the baselines get three.
 """
-import itertools
-import json
 import os
-import pickle
-import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(__file__))
-from errbudget import run_protocol
-from errbudget.problems import Burgers1D, Burgers2D, ReactionDiffusion2D
 
 D = os.path.join(os.path.dirname(__file__), "data")
 

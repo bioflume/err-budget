@@ -9,11 +9,9 @@ The same is done for the four OpenFOAM 2D-1 parameters (c_D at 3e-3, c_L at 3e-2
 The script name predates version 1.2.1; it replays the configuration v1.2.1 of pooled.py.
 """
 import os
-import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cases as C
 import pooled as P
 

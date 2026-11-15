@@ -23,17 +23,13 @@ Report, against the ensemble:
   * the margin it retains or loses,
   * and the cost of the alternative -- recalibrating at every ensemble member.
 """
-import itertools
 import os
 import pickle
-import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(__file__))
 import json
 from errbudget import run_protocol, V121
-from l2flags import flags
 from errbudget.problems import Burgers1D
 
 from paths import DATA as D, OUT
@@ -57,7 +53,7 @@ print("=" * 100)
 print("transfer of a recommendation across a physical parameter (viscosity)")
 print("=" * 100)
 print(f"calibrated once at nu = {NU_CAL}; the SAME setting is then used at every")
-print(f"other viscosity, with no further solver runs.")
+print("other viscosity, with no further solver runs.")
 
 RES = []
 for ob, targets in [("energy", [1e-2, 3e-3]), ("dissipation", [1e-2, 3e-3])]:

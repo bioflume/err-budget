@@ -45,7 +45,6 @@ def parse():
 COLS = [("S", r"$\varepsilon$"), ("S", r"$\varepsilon/3$"), ("S", r"$\varepsilon/10$"),
         ("SJ", r"$\varepsilon$"), ("SJ", r"$\varepsilon/3$"), ("SJ", r"$\varepsilon/10$"),
         ("Ref.", None), ("This program", None)]
-ETAS = {r"$\varepsilon$": 1, r"$\varepsilon/3$": 3, r"$\varepsilon/10$": 10}
 
 
 def key(proc, eta):

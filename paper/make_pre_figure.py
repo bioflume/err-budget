@@ -32,7 +32,6 @@ TG = {1e-2: r"$10^{-2}$", 3e-3: r"$3{\times}10^{-3}$", 1e-3: r"$10^{-3}$", 3e-2:
 
 
 def coverage(g):
-    eps = np.array([K.eps_abs(o, t) for o, t in zip(g.ob, g.target)])
     Q = np.array([K.CASE.exact[o] for o in g.ob])
     return 100 * np.mean(np.abs(g.pre_m - Q) <= 2 * g.pre_s)
 
@@ -67,7 +66,6 @@ def main():
     h = 0.34
     for k, (o, t) in enumerate(tests):
         g = a1[(a1.ob == o) & (a1.target == t)]
-        n = len(g)
         met_eb = 100 * np.mean(g.eb_err <= 1)
         ax2.barh(k + h / 2 + 0.02, met_eb, height=h, color=PALETTE["blue"], lw=0)
         miss = 100 * np.mean(g.pre_err_z2 > 1)

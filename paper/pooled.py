@@ -19,7 +19,6 @@ import time
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from errbudget import run_protocol, V11, V12
 try:
     from errbudget import V121

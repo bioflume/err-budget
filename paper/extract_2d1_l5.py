@@ -15,13 +15,9 @@ written into PAPER_REPO:
 """
 import json
 import os
-import sys
 
 import numpy as np
 
-PR = os.environ.get("PAPER_REPO", os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-sys.path.insert(0, os.path.join(PR, "src"))
-sys.path.insert(0, os.path.join(PR, "paper"))
 import cases as C                                   # noqa: E402
 import grids                                        # noqa: E402
 from errbudget import LocalBudget, run_protocol, V121   # noqa: E402

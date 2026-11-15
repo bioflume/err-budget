@@ -10,12 +10,10 @@ that Table 2 can list m_1 x ... x m_p.
 """
 import json
 import os
-import sys
 from collections import Counter
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import cases as C
 
 

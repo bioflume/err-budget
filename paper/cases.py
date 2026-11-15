@@ -75,7 +75,7 @@ def _with_flags(name, t):
 
 def _manufactured():
     out = []
-    for P, tg_abs in [(grids.L2, None), (grids.L3, None), (grids.L4, None), (grids.L5, None)]:
+    for P in (grids.L2, grids.L3, grids.L4, grids.L5):
         t = _with_flags(P["name"], _norm(grids.load(P)))
         ex = grids.exact(P)
         tg = P["targets"] if isinstance(P["targets"], dict) else {o: P["targets"] for o in P["obs"]}

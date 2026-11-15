@@ -8,11 +8,9 @@ import itertools
 import json
 import os
 import pickle
-import sys
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from errbudget import run_protocol, V121
 from errbudget.problems import Burgers1D
 from l2flags import flags

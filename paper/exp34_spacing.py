@@ -25,12 +25,10 @@ data/spacing_released.json.
 import itertools
 import os
 import pickle
-import sys
 import time
 
 import numpy as np
 
-sys.path.insert(0, os.path.dirname(__file__))
 import json
 from errbudget import run_protocol, V121
 from l2flags import flags

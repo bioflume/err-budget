@@ -21,12 +21,10 @@ configuration (errbudget.V121) is replayed through run_protocol from every start
 """
 import itertools
 import os
-import sys
 
 import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(HERE, "..", "src"))
 from errbudget import LocalBudget, V121, run_protocol  # noqa: E402
 
 PG = np.linspace(0.25, 6.0, 121)                     # order grid of the fit (Section 4.2)
