@@ -41,7 +41,7 @@ def dfg_mesh():
 
 
 def search():
-    """As exp63_figures.py:fig_search (v11 Fig. 4), unchanged."""
+    """The search of Fig. S-5.2: the lift at 3e-2 from the tutorial settings at n_arc = 32."""
     c = C._dfg1(cost="deterministic")
     T, LAD, ob = c.tensor, c.LAD, "cl"
     eps = 3e-2 * abs(c.exact[ob])

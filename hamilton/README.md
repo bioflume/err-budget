@@ -280,24 +280,19 @@ tensors (`paper/data/`), keeping the original on Hamilton. Then, from `paper/`:
 
 ```bash
 cd paper
-bash run_v6_analyses.sh check                               # Python stack, solvers, git tag
-bash run_v6_analyses.sh after /path/to/hamilton_results.tar.gz   # 2-3 hours
-bash run_v6_analyses.sh collect                             # RESULTS_SUMMARY.md + archive
+python exp60_hamilton.py /path/to/hamilton_results.tar.gz
+bash replay_all.sh
 ```
 
-`after` runs `exp60_hamilton.py` (unpacks into `hamilton/results`, prints J1–J5, replays
-H1–H3 with the frozen program and with v1.2.1, regenerates the tables; the line
-`frozen program verified` must appear), then merges the refined 2D-2 study (`2D-2h`) into
-every pooled file, the baselines, the accounting, the unconverged counts, the decline
-reasons and the final tables (`exp70_tables.py`; Table 3 uses the refined study by default,
-`ERRBUDGET_TABLE3_2D2=refined`). If `hamilton/results/j2_tensor.pkl` lacks the case
-specification, the 2D-2h steps are skipped and reported: re-run the patched
-`J2_dfg2d2/analyse_j2.py` on Hamilton. `collect` writes `RESULTS_SUMMARY.md` in the
-repository root and `errbudget_v6_results.tar.gz` beside it. The small files of
-`hamilton/results` (everything but `raw.tar.gz`, 1 MB) are in the repository, so that
-`paper/pooled.py` replays the refined 2D-2 study (`2D-2h`) from a clone; the raw outputs
-(`raw.tar.gz`, 47 MB) go to the Zenodo archive. The steps that do not need the
-cluster (`run_v6_analyses.sh before`) are described in `../paper/README.md`; run them first.
+`exp60_hamilton.py` unpacks the archive into `hamilton/results`, prints J1–J5, replays
+H1–H3 with the frozen program and with the released one (the line `frozen program
+verified` must appear) and regenerates the tables. `replay_all.sh` then replays every
+result, the refined 2D-2 study (case `2D-2h`) included. If `hamilton/results/j2_tensor.pkl`
+lacks the case specification, `pooled.py` skips case 2D-2h and says so: re-run the patched
+`J2_dfg2d2/analyse_j2.py` on Hamilton. The small files of `hamilton/results` (everything but
+`raw.tar.gz`, 1 MB) are in the repository, so that the replay includes the refined 2D-2
+study from a clone; the raw outputs (`raw.tar.gz`, 47 MB) go to the Zenodo archive
+(`../DATA.md`).
 
 ## 7. What to send back
 

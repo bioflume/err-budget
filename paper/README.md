@@ -1,306 +1,147 @@
 # Reproducing the article
 
-This folder holds every script, every stored solver output and every table and figure of
-the article. There are three ways to reproduce it, from cheap to expensive:
+This folder regenerates every number, table and figure of the article (v12) and its
+supplement. Each result below names the script that produces it, the step of
+`replay_all.sh` that runs the script, and the stored data that the script reads.
 
-| Tier | What it does | Needs | Time |
+There are three levels, from cheap to expensive:
+
+| Level | What it does | Needs | Time |
 |---|---|---|---|
-| **A. Replay** | re-runs the program over the stored solver output in `data/` and regenerates every number, table and figure | Python with NumPy, SciPy, Matplotlib, SymPy, pytest | 2–4 hours on 2 cores |
-| **B. From scratch** | runs every solver again and rebuilds `data/`, then replays | tier A plus LAMMPS, GROMACS, ABINIT, OpenFOAM and Quantum ESPRESSO (versions below) | about 16 CPU-hours, plus the 2D-2 build (`dfg2d2_job/`, about 40 CPU-hours) |
-| **C. Cluster studies** | the five SLURM jobs J1–J5 of revision 4, including the pre-registered held-out test H3 | Durham's Hamilton (or any SLURM cluster, see `../hamilton/config.sh`) | 1–3 days of queue time, about 400–700 core-hours |
-
-Tier A is what a reader checking the article needs. Tier B is for someone who wants to
-regenerate the solver output itself. Tier C lives entirely in `../hamilton/`, whose README
-is the runbook.
+| **Replay** (`replay_all.sh`) | searches the stored runs in `data/` and `../hamilton/results/` with the released program and regenerates every result that needs no solver | Python 3.11, `requirements-article.txt` | about 2–4 hours on two cores, plus about 6.5 CPU-hours for the eight-parameter study (`--no-eight` leaves it out) |
+| **Rebuild** (`reproduce.sh`) | runs the solvers again, rebuilds `data/`, runs the analyses that need a solver, then replays | the replay, plus LAMMPS, GROMACS, ABINIT, OpenFOAM v1912 and Quantum ESPRESSO | about 16 CPU-hours, plus about 40 for the coarser 2D-2 study (`dfg2d2_job/`) |
+| **Cluster studies** | the Hamilton jobs J1–J5 (`../hamilton/`) and the studies of Sections S-6 and S-7 (`../studies/`) | a SLURM cluster with OpenFOAM | days of queue time; see each runbook |
 
 ## Setup
 
 ```bash
-git clone <this repository> errbudget-paper && cd errbudget-paper
-python -m venv .venv && source .venv/bin/activate
-pip install -e ".[paper]"            # numpy, scipy, matplotlib, sympy, pytest and the errbudget package
-cd paper && bash run_v6_analyses.sh check
+git clone <this repository> && cd <it> && git checkout paper
+python3.11 -m venv .venv && source .venv/bin/activate
+pip install -e . -r paper/requirements-article.txt
+bash paper/replay_all.sh                  # or: ERRBUDGET_JOBS=4 bash paper/replay_all.sh
+git status paper/data paper/figures       # what the replay changed
 ```
 
-`check` lists what it finds: the Python stack, the `errbudget` package (it must report
-`V121`), the solvers, and the git tag `v1.2.0-frozen` (or `frozen_src/`), which the
-held-out replays need. Missing solvers only matter for tier B and for the three steps of
-tier A that call them (A03, A04 and the second half of A12).
+The replay writes its results where the stored ones are, so `git diff` compares the two. The
+printed output of each step goes to `logs/replay/<step>.txt`. Results that the replay prints
+but does not store are compared with the stored printed output in `figures/<name>.txt`.
+`REPRODUCTION_CHECK.md` records what was reproduced on which machine.
 
-The article's own environment is in the table at the end of this file. Replays with
-NumPy 2.x and SciPy 1.18 give identical counts (checked on 2026-10-19).
+The searches are deterministic: on Linux x86-64 and aarch64 every count of the stored
+replays is reproduced exactly. Scripts that rerun a solver (the L2 viscosity study, the
+exact solutions of L3–L5) can differ from the stored values in the last digits on another
+platform; no rounded number of the article changes.
 
-## Tier A: replay the stored output
+## Article
 
-### Revision 4 (current): `run_v6_analyses.sh`
-
-```bash
-bash run_v6_analyses.sh before                          # 2-4 hours on 2 cores
-bash run_v6_analyses.sh after hamilton_results.tar.gz   # once the cluster results are back
-bash run_v6_analyses.sh collect                         # RESULTS_SUMMARY.md and errbudget_v6_results.tar.gz
-```
-
-Every step logs to `../logs/v6/<step>.txt` and records its exit status in
-`../logs/v6/STATUS.txt`. A failed step is reported and the script goes on, except the
-environment check and the tests. `ERRBUDGET_JOBS` (default 2) sets how many pooled
-configurations run at once.
-
-**`before`** needs nothing from the cluster:
-
-| Step | Script | Produces | What it answers; what to check |
+| Result | Script (step of `replay_all.sh`) | Reads | Writes |
 |---|---|---|---|
-| A01 | `pytest ../tests -q` | — | all tests pass (52) |
-| A02 | `../tests/test_spec_v121.py` | — | 14 lines `ok`: the program's behaviour as Section 4 describes it |
-| A03 | `exp75_abinit_reference.py` | `data/abinit_reference_v6.json` | the uncertainty of the 48-Ha ABINIT reference with the Quantum ESPRESSO recipe; the log must say `REFERENCE REPRODUCED` (otherwise the revision-2 value is kept). It decides which ABINIT targets are graded, hence it runs before A05. **Needs ABINIT.** |
-| A04 | `exp74_pppm_mechanism.py` | `data/pppm_mechanism_v6.json` | why PPPM order 7 is cheapest (coarser FFT grid): 24 rows, 3 sizes × 2 settings × orders 4–7, and the "cheapest order" lines. **Needs the LAMMPS Python module.** |
-| A05 | `pooled.py <config>` × 20 | `data/pooled_<config>.json` | Table 3 and Table 4: v1.2.1, v1.2, v1.1, v1.1+gated, the eight ablations from v1.2.1 and the same eight from v1.2; every log ends with `TOTAL`. The 2D-1 rows of v1.2.1 show 780 starts and 608 accepted at all 7 targets, `missed` 0 everywhere. |
-| A06 | `summ.py v1.2.1 v1.2 v1.1` | — | pooled totals, low-order acceptances, step-cap hits |
-| A07 | `exp72_baselines_pooled.py` | `data/baselines_v6.json` | Table 6: sequential and coordinate searches against the program, with a "sweep order" line per case; LAMMPS, GROMACS double and mixed, ABINIT and QE included |
-| A08 | the same, `LMP-20 LMP-40 LMP-64 GMX-d` | `data/baselines_lmp_gmx.json` | Supplement S5 |
-| A09 | `exp76_accounting.py` | `data/accounting_v6.json` | Table 2 against Table 3: candidate lists m1×…×mp, settings without a value, not converged, converged, starts. 2D-1: 840 / 60 / 172 / 608 / 780. |
-| A10 | `exp77_reltol_2d1.py` | `data/reltol_2d1.json` | is the GAMG tolerance inactive when 10× below residualControl? Regime line `100 t/rc < 0.1 ... 78 settings, 0 not converged; largest change ... cd 0.0e+00` |
-| A11 | `exp78_gromacs_floor_v121.py` | `data/gromacs_floor_v121.json` | GROMACS mixed precision: 3e-5 and 1e-5 reachable only by chance (table below) |
-| A12 | `exp58_floor_sensitivity.py v1.2.1` | — | floor sensitivity; its second half times probe runs and **needs GROMACS** |
-| A13 | `exp79_unconverged.py` | `data/unconverged_v6.json` | accepting unconverged runs: 2D-1 row 5460 starts, 1204 whose own run did not converge, 4256 accepted by v1.2.1, 5460 with unconverged runs accepted; 1,514 extra acceptances in total |
-| A14 | `exp73_decline_reasons.py` | — | Section 6.1; a `TOTAL` line |
-| A15 | `exp62_heldout.py` | `data/heldout_replay.json` | Table 5: H1 and H2 with the frozen program; `frozen program verified (sha256 34dd3f44...)`; every row carries `distinct` |
-| A16 | `exp62_heldout.py --current` | `data/heldout_replay_current.json` | the same with v1.2.1 |
-| A17 | `exp71_dfg2_detail.py` | — | Section 7.2, every 2D-2 target and configuration, including v1.2.1 with cancellation credited (drag at 3e-3: `accepted 172 missed 116`) and the budget at the one setting it returns outside the target (r_k/eps 1.456 and -1.199 for the mesh and the time step, true error +1.031) |
-| A18–A21 | `exp65_misdeclare_v12.py`, `exp66_estimate_v12.py`, `exp67_margin_v12.py`, `exp64_transfer_floor.py` | — | Supplement S3, Appendix A, Appendix B, Supplement S2 (rerun because the admitted ABINIT cells may change after A03) |
-| A21b | `exp80_v6_numbers.py` | — | numbers that no table holds: the error budgets of ABINIT and Quantum ESPRESSO (v1.2.1, its fits alone, and v1.1), the Phase 1 gains of Fig. 3, the L5 joint check with cancellation credited, the L5 streamfunction minimum, and (part 5) the two L5 settings that miss with a constant safety factor: estimate/eps -0.997 with it and -1.112 with the gated factor, true error -1.080 |
-| A21c | `exp81_bound_check.py` | — | Section 4.8 (about 3 minutes): Lemma 1 against the code, `largest relative difference 2.3e-14` at three alignments; Corollary 1 `violated at 0 starts` at all five targets; same-sign higher-order terms `missed 400` at 3e-3, worst 1.083; opposite-sign terms `\|E\| > \|Ehat\| at 0`; the bilinear interaction `at 0 with the joint check and at 16 without it` for b = -60 and -40; at a parameter's finest value `missed 240`, worst 1.281 |
-| A22 | `exp63_figures.py` | `figures/fig_search.pdf`, `figures/fig_search_steps.txt` | Fig. 3: 14 steps, Phase 1 ends at step 8, final setting (32, 1e-4, 1e-7, 10), error 0.225 ε, 146 runs; Fig. 4, Fig. 5 |
-| A23 | `exp70_tables.py` | `figures/tab_*.tex`, including `tab_ablation_v12.tex` and, for Section S15 of the supplement, `tab_versions_summary.tex`, `tab_versions.tex` and `tab_estimate_v11.tex` | every table of the article and of the supplement; the tables of the article carry no columns of earlier versions |
+| Fig. 1, Section 1 and 7.1 (lift error 1.3×10⁻² to 0.79, the program's setting at 0.23 ε) | `extract_2d1_l5.py` (fig_2d1_l5_data), `make_2d1_l5_figures.py` (fig_2d1_l5) | `data/dfg_tensor_v12.pkl`, `data/dfg_fine.json` | `figures/data_2d1_l5.json`, `figures/fig_teaser.pdf`; printed values as in `figures/values_2d1_l5.txt` |
+| Table 1, Table 2, Fig. 2 | none (literature, notation, schematic) | | |
+| Fig. 3; 21 searches miss without the observed-order check | `make_2d1_l5_figures.py`; `pooled.py v1.2.1-nolocal` | `data/cavity_tensor.pkl` | `figures/fig_l5_stall.pdf`; `data/pooled_v1.2.1-nolocal.json` (L5, y of the minimum, 3×10⁻⁴) |
+| Section 4.3, the base safety factor | `exp67_margin_v12.py` (margin) | stored runs of L2–L5, 2D-1 | printed |
+| Table 3: settings and converged runs | `exp76_accounting.py` (accounting) | every case of `cases.py` | `data/accounting_v6.json` |
+| Table 3: reference uncertainties | `exp75_abinit_reference.py` (ABINIT, rebuild only), `../hamilton/J2_dfg2d2/analyse_j2.py` (2D-2), `exp44_gromacs_floor.py` (GROMACS, rebuild only), `data/qe_tensor.pkl` (Quantum ESPRESSO) | | `data/abinit_reference_v6.json`, `../hamilton/results/j2.txt`, `figures/sec82_floor.txt` |
+| Table 4 (`tab_pooled_compact.tex`) and Section 6.1 | `pooled.py v1.2.1` (pooled), `exp72_baselines_pooled.py` (baselines), `exp70_tables.py` (tables) | `data/`, `../hamilton/results/j2_tensor.pkl` | `data/pooled_v1.2.1.json`, `data/baselines_v6.json`, `figures/tab_pooled_compact.tex` |
+| Section 6.1: 436 and 105 misses of the ablation; up to 36% underestimates on the 2D-1 lift | `pooled.py v1.2.1-constant`, `v1.2.1-nolocal`; `exp66_estimate_v12.py` (estimate) | | Table S-3.2, Table S-3.3 |
+| Table 5 (`tab_preregistered.tex`) and Section 6.2 | `exp62_heldout.py` (heldout_frozen), `exp62_heldout.py --current` (heldout_released), `exp70_tables.py` | `data/heldout_H1.pkl`, `data/heldout_H2.pkl`, `../hamilton/results/j5_tensor.pkl`, the frozen program (tag `v1.2.0-frozen` or `frozen_src/`) | `data/heldout_replay.json`, `data/heldout_replay_current.json`, `figures/tab_preregistered.tex` |
+| Section 6.2, the airfoil study | `../studies/airfoil/` (Section S-7) | | |
+| Fig. 4 and Section 6.3 (S and SJ misses, the safe thresholds, 2.7 to 40 times cheaper, search cost 14 to 32 and six to seven times SJ's) | `exp72_baselines_pooled.py`, `exp70_tables.py`, `make_baselines_figure.py` (fig_baselines) | `data/` | `figures/tab_baselines_full.tex`, `figures/fig_baselines.pdf`; printed values as in `figures/values_baselines.txt` |
+| Section 6.3, PRE (7–30% coverage, 8.6% of searches, 1.84 ε) | `../studies/pre_comparison/` (Section S-4.6) | | `results/summary.json`, `results/tables.md`, `REPORT.md` |
+| Section 6.4: search cost K (40–460, 1,550 on L5, median 112; S 4–8) | Table S-4.2 | | |
+| Section 6.4: reuse across Reynolds numbers | `../studies/reuse2d1/` (Section S-6) | | |
+| Section 7.1: the GAMG tolerance acts through 100 t/r_c | `exp77_reltol_2d1.py` (reltol_2d1) | `data/dfg_tensor_v12.pkl` | `data/reltol_2d1.json` |
+| Section 7.2: 180 runs, 40 diverged | `../hamilton/J2_dfg2d2/analyse_j2.py` | J2 raw runs | `../hamilton/results/j2.txt` |
+| Section 7.2: 136 misses at two ungraded targets, up to 2.39 times | `exp83_dfg2_traces.py` (dfg2_traces) | `../hamilton/results/j2_tensor.pkl` | `data/dfg2_traces.json`, `figures/dfg2_traces.txt` |
+| Section 7.3: LAMMPS within 1.0–2.6 times the optimal cost; 400 of 660 declined | Table S-4.3; Table S-3.1 | | |
+| Section 7.3: GROMACS round-off 3.0×10⁻⁵ and 2.3×10⁻⁹; 450 declined | `exp44_gromacs_floor.py` (rebuild only); Table S-3.1 | | `figures/sec82_floor.txt` |
+| Section 7.4: 82% and 91% of the errors; force error 27% | `exp80_v6_numbers.py` (numbers), part 1 | `data/qe_tensor.pkl`, `data/abinit_tensor_v11.pkl` | printed |
+| Section 8: 19% declines; the stricter rule | Table S-3.1; `exp84_dfg2_strict.py` (dfg2_strict) | | `data/dfg2_strict.json`, `figures/dfg2_strict.txt` |
+| Section 9: the interface | the package on the `main` branch (`errbudget init/check/run` is its command-line tool); `tests/test_spec_v121.py` (14 tests) | | |
 
-The deterministic replay of the GROMACS tensor (A11) must give exactly:
+## Supplement
 
-| Target | Settings within the target by chance (of 225) | v1.2.1 | v1.1-noprobe |
+| Result | Script (step) | Reads | Writes |
 |---|---|---|---|
-| 1e-4 | 206 | 69 accepted (7 distinct), 0 missed | — |
-| 3e-5 | 160 | 0 accepted | 152 accepted, 0 missed |
-| 1e-5 | 51 | 0 accepted | 9 accepted, 6 missed (worst 1.58 ε) |
-| 3e-6 | 13 | 0 accepted | 6 accepted, 6 missed (worst 3.20 ε) |
-| 1e-6 | 4 | 0 accepted | — |
+| S-1, Tables S-1.1–S-1.3: the specification | `../src/errbudget/_core.py`, `api.py` (the engine as it produced the results) | | |
+| S-1.9: tests of the conditions of Proposition 1 | `exp81_bound_check.py` (bound_check) | synthetic problems | printed |
+| S-1.10: scan of the base safety factor | `exp67_margin_v12.py` (margin) | | printed |
+| S-1.11: the 14 tests | `../tests/test_spec_v121.py` (tests) | | |
+| S-2.1, S-2.2, Tables S-2.1, S-2.2: candidate values and work units | `grids.py:10–38`, `../src/errbudget/problems/`, `qe_silicon.py:38–54`, `abinit_silicon.py:33–53`, `cases.py`, `exp46_dfg_build.py` | | |
+| Fig. S-2.1 | `make_solution_figure.py` (fig_problems) | | `figures/fig0_problems.pdf` |
+| S-2.3: the coarser 2D-2 study (240 settings, its reference); 116 misses with cancellation | `exp56_dfg2d2.py` (dfg2d2_coarse); `exp71_dfg2_detail.py` (dfg2_detail) | `data/dfg2d2_tensor.pkl` | printed, as in `figures/sec8x_dfg2d2.txt`, `figures/rev3_dfg2_detail.txt` |
+| S-2.4: the pre-registered problems | `../PREREGISTRATION.md`; `heldout_fem.py`, `heldout_cavity.py`, `../hamilton/J5_abc3d/`; H3 errors at the finest setting: `../hamilton/results/j5.txt` | | |
+| S-2.5: references; the remark on limits beyond the 2D-2 reference | `../hamilton/results/j2.txt`; `exp83_dfg2_traces.py`, part 1 | | `data/dfg2_traces.json` |
+| S-2.6: accounting | `exp76_accounting.py` (accounting) | | `data/accounting_v6.json` |
+| Table S-3.1 (`tab_pooled.tex`) | `pooled.py v1.2.1`, `exp70_tables.py` | | `figures/tab_pooled.tex` |
+| S-3.2: declines by reason; L5 orders | `exp73_decline_reasons.py` (decline_reasons); `exp80_v6_numbers.py`, part 4 | | printed |
+| Table S-3.2 (`tab_sup_ablation.tex`) and S-3.3 | `pooled.py v1.2.1-<variant>` (8 variants), `exp70_tables.py`; 0.997, 1.08 and 1.11 ε: `exp80_v6_numbers.py`, part 5; 116 of 172: `exp71_dfg2_detail.py`; accepting unconverged runs: `exp79_unconverged.py` (unconverged); 2D-1 with the function object: `../hamilton/results/j1.txt` | | `figures/tab_sup_ablation.tex`, `data/unconverged_v6.json` |
+| S-3.4: the additive model (57,000 designs); the coarser 2D-2 study | `exp28_separability.py` (separability); `exp56_dfg2d2.py` | | printed, as in `figures/tab06_rho.txt` |
+| Table S-3.3 (`tab_estimate.tex`) | `exp66_estimate_v12.py` (estimate), `exp70_tables.py` | | `data/estimate_v12.json` |
+| S-3.5, Table S-3.4: closely spaced values | `exp34_spacing.py` (spacing_released), `exp35_whyfine.py` (spacing_estimate_released), `exp34_spacing_margin.py` (spacing_margin), with `l2flags.py` | `data/burgers_sp_*.pkl` | `data/spacing_released.json`, `data/spacing_estimate_released.json`, `data/spacing_margin_check.json` |
+| S-3.5: eight parameters | `exp54_eight.py` (eight_released) | `data/eight_cache.pkl` | `data/eight_released.json` |
+| S-3.6, Table S-3.5: wrongly declared classes | `exp17_classify.py` (classify); `exp65_misdeclare_v12.py` (misdeclare) | `data/classify.pkl` | `figures/tab_misdeclare.tex` |
+| S-3.7: traces of the pre-registered searches | `exp62_heldout.py`; `../hamilton/J5_abc3d/analyse_j5.py` | | printed; `../hamilton/results/j5.txt` |
+| Table S-4.1 (`tab_transfer.tex`); two measurements on L2 | `exp64_transfer_floor.py` (transfer), `exp70_tables.py`; `exp40_section5.py` (section5) | | `data/transfer_floor.json` |
+| S-4.2: the three procedures | `baselines.py` | | |
+| Table S-4.2 (`tab_baselines_full.tex`) | `exp72_baselines_pooled.py` (baselines), `exp70_tables.py` | | `data/baselines_v6.json` |
+| Table S-4.3 (`tab_lmpbase.tex`) | `exp72_baselines_pooled.py LMP-20 LMP-40 LMP-64 GMX-d` (baselines_md), `exp70_tables.py` | | `data/baselines_lmp_gmx.json` |
+| S-4.5, Table S-4.4: reuse on L2 | `exp30_transfer.py` (reuse_released), `exp37_calhardest.py` (reuse_hardest_released) | `data/burgers_tensor.pkl`, `data/burgers_nu002_tensor.pkl` | `data/reuse_released.json`, `data/reuse_hardest_released.json` |
+| S-4.6, Tables S-4.5, S-4.6: PRE | `../studies/pre_comparison/` (`replay_all.sh --pre`) | the 2D-1 runs in `data/` | `results/` |
+| Fig. S-4.1 | `make_pre_figure.py` (fig_pre) | `../studies/pre_comparison/results/` | `figures/fig_sup_pre.pdf` |
+| Figs. S-5.1, S-5.2 | `extract_2d1_l5.py`, `make_2d1_l5_figures.py` | | `figures/fig_sup_dfg.pdf`, `figures/fig_sup_search.pdf` |
+| S-5.1: the regimes of the GAMG tolerance | `exp77_reltol_2d1.py`; solver logs of the v2406 repeat: `../hamilton/results/j1_reltol.json` | | `data/reltol_2d1.json` |
+| S-5.1: vertex-mean bias, runs beyond the study | `exp59_dfg_plateau.py`, `exp69_dfg_fine.py` (rebuild only) | | `data/dfg_plateau.json`, `data/dfg_fine.json` |
+| S-5.1: the function object of OpenFOAM v2406 | `../hamilton/J1_dfg2d1/analyse_j1.py` | | `../hamilton/results/j1.txt`, `j1_fo.json`, `j1_replay.json` |
+| S-5.2: divergence, convergence along each parameter, the conservative estimate | `../hamilton/J2_dfg2d2/analyse_j2.py` | | `../hamilton/results/j2.txt` |
+| S-5.2: misses at the ungraded targets, the traced search, the mesh errors | `exp83_dfg2_traces.py` (dfg2_traces) | `../hamilton/results/j2_tensor.pkl` | `data/dfg2_traces.json` |
+| S-5.2: the stricter rule | `exp84_dfg2_strict.py` (dfg2_strict) | `../hamilton/results/j2_tensor.pkl`, `data/pooled_v1.2.1.json` | `data/dfg2_strict.json` |
+| S-5.3: PPPM order | `exp74_pppm_mechanism.py` (rebuild only; needs LAMMPS) | | `data/pppm_mechanism_v6.json` |
+| Fig. S-5.3 | `make_lammps_figure.py` (fig_lammps) | `data/lammps_tensor_n20.pkl` | `figures/fig_lammps.pdf` |
+| S-5.4: round-off measurement | `exp44_gromacs_floor.py` (rebuild only); `exp78_gromacs_floor_v121.py` (gromacs_floor); `exp58_floor_sensitivity.py v1.2.1` (floor_sensitivity; its timings need GROMACS) | | `figures/sec82_floor.txt`, `data/gromacs_floor_v121.json`, `figures/tab_floor.tex` |
+| S-5.5: plane-wave DFT | `exp75_abinit_reference.py`, `exp45_abinit_reference.py` (earlier 30-Ha reference), `exp68_abinit_scf.py` (rebuild only); `exp80_v6_numbers.py`, part 1 | | `data/abinit_reference_v6.json`, `figures/sec83_reference.txt`, `figures/rev3_abinit_scf.txt` |
+| S-5.6: OpenFOAM v2406, Quantum ESPRESSO 7.6, MPI ranks | `../hamilton/J1_dfg2d1/`, `J3_qe/`, `J4_parallel/` analyses | | `../hamilton/results/j1.txt`, `j3.txt`, `j4.txt` |
+| S-6, Tables S-6.1, S-6.2: reuse across Reynolds numbers | `../studies/reuse2d1/analysis/reuse.py` (reuse2d1, when the raw pack is unpacked) | the raw pack (`../DATA.md`) | `../studies/reuse2d1/summary/reuse2d1-20261115-1111/` |
+| S-7: the airfoil study | `../studies/airfoil/analysis/stage0.py`, `stage1.py` (airfoil_stage1, when the raw pack is unpacked) | the raw packs (`../DATA.md`) | `../studies/airfoil/summary/` |
 
-**`after <archive>`** needs `hamilton_results.tar.gz` from `../hamilton/`:
+"Rebuild only": the script runs a solver and is part of `reproduce.sh`, not of the replay;
+its stored output is listed.
 
-| Step | Script | What it does |
-|---|---|---|
-| B01 | `exp60_hamilton.py` | unpacks into `../hamilton/results`; prints J1–J5; replays H1–H3 with the frozen program and with v1.2.1 (`heldout_replay*.json` then contain case `H3`); regenerates the tables |
-| B02 | `pooled.py --only 2D-2h` × 20 | merges the refined 2D-2 study into every `pooled_<config>.json` (skipped, and reported, if `j2_tensor.pkl` lacks the case specification) |
-| B03 | `exp72_baselines_pooled.py 2D-2h` | 2D-2h baselines merged into `baselines_v6.json` |
-| B04–B06 | `exp76`, `exp79`, `exp73` | accounting, unconverged counts and decline reasons including 2D-2h |
-| B07 | `exp70_tables.py` | final tables; Table 3 uses the refined 2D-2 study (`ERRBUDGET_TABLE3_2D2=refined`, the default) |
+## Cluster studies
 
-**`collect`** runs `exp82_collect_v6.py`: `RESULTS_SUMMARY.md` in the repository root
-(headline numbers for every configuration with both 2D-2 studies, the held-out tables,
-accounting, baselines, every revision-4 analysis, the tails of `j1.txt`–`j5.txt`) and
-`errbudget_v6_results.tar.gz` (the summary, every result file, tables, figures, logs and
-`hamilton/results` without the raw archive).
+- **Hamilton jobs J1–J5** (`../hamilton/`, runbook `../hamilton/README.md`): 2D-1 with
+  OpenFOAM v2406, the refined 2D-2 study, Quantum ESPRESSO 7.6, MPI ranks and the
+  pre-registered problem H3. Their summarised results are in `../hamilton/results/`; after
+  a new run, `python exp60_hamilton.py hamilton_results.tar.gz` unpacks them, replays H1–H3
+  and regenerates the tables.
+- **The Reynolds-number reuse study** (`../studies/reuse2d1/`, runbook `RUNBOOK.md`) and
+  **the airfoil study** (`../studies/airfoil/`, runbook `RUNBOOK.md`, cost model `COST.md`):
+  both pre-registered. Their protocols were committed before any run, and each amendment of
+  the airfoil protocol alone, in the project repository: airfoil da6e9e0 (10 November
+  2026), amendments A1 5774f09, A2 9b6f670, A3 31f17e0, A4 5b8cdc5, A5 4a1d510, A6 88c1910;
+  reuse2d1 8cb358c (14 November 2026, no amendment). The code that ran on Hamilton is that
+  of the batch tarballs listed in `../DATA.md` (reuse2d1: 9b7482e). The raw packs are not in
+  git; their analyses are committed under `summary/`.
+- **The PRE comparison** (`../studies/pre_comparison/`): protocol committed before any PRE
+  result was graded (e1d1bce, 9 November 2026). `fetch_pre.sh` clones the PRE authors' code
+  from https://github.com/NewcastleRSE/sparse-probabilistic-richardson-extrapolation at
+  commit 3918107 (MIT licence, © 2025–2026 Oates, Howey and Karvonen) and installs its
+  environment; nothing of it is kept here. `spre_white.py` restates their model in closed
+  form, and `validate_spre.py` checks it against their code. Its `README.md` gives the
+  validation steps.
 
-### Earlier revisions: `reproduce.sh --cached`
+## Stored data that v12 does not use
 
-```bash
-./reproduce.sh --cached   # re-analyse the stored solver output of revisions 2 and 3 (about 2 hours)
-```
+The scripts removed with v12 read these files, which are kept as the record of earlier
+results: `adaptive_tensor.pkl`, `burgers_fine_tensor.pkl`, `cputime_L2.pkl`,
+`cputime_L3.pkl`, `screen8.pkl`, `margin_scan.json`, `outcomes.json`,
+`baselines_pooled_main.json`, `pooled_v1.2.1_run1.json`, the pooled files of versions 1.2
+and 1.1 (`pooled_v1.2*.json` without `.1`, `pooled_v1.1*.json`), and the local parallel
+runs `gromacs_gmx_d_threads*.pkl`, `lammps_mpi_n64_r*.pkl`.
 
-Each step writes its output to `figures/<step>.txt`; the tables further down map every
-result of revisions 3 and 2 to its script. Those results are now in the supplement or in
-`../CHANGELOG.md`.
+## The article's environment
 
-## Tier B: rebuild the solver output from scratch
-
-```bash
-./reproduce.sh            # deletes data/*.pkl and data/*.json, runs every solver again (about 10 hours on 2 cores)
-```
-
-Then the DFG 2D-2 grid, which is a batch job of 243 OpenFOAM runs (about 40 CPU-hours;
-SLURM or one machine): see `dfg2d2_job/README.md`. Finally `run_v6_analyses.sh before`
-as in tier A.
-
-Nothing is read from saved output unless `--cached` is given. The stored solver output is
-in `data/` (pickled tensors, one per case, plus JSON result files), and `cases.py` is the
-registry of every case: its tensor, declarations, reference, admission rule and targets.
-
-- **Machine-dependent numbers:** the costs of every production code (wall-clock time for
-  LAMMPS and GROMACS, CPU time for OpenFOAM, ABINIT and Quantum ESPRESSO), the penalties
-  derived from them, the CPU-time replay of `exp52`, the 8-parameter study `exp54`
-  (which uses work units but whose recommendations are graded by them), and running times.
-- **Machine-independent numbers:** everything else, which reproduces exactly.
-- **One exception, the L2 cost model.** Its work-unit cost counts GMRES iterations. At loose
-  tolerances this count can differ by one between SciPy builds, which changes L2 costs by up
-  to 0.25%. In our checks this changed no number in the article.
-
-## Tier C: the cluster studies
-
-Everything that runs on the cluster is in `../hamilton/`: the five jobs, their drivers,
-the submit, status and collect scripts, and the runbook (`../hamilton/README.md`) that
-takes the results back to `run_v6_analyses.sh after`.
-
-## What is in this folder
-
-```
-run_v6_analyses.sh   revision 4: check | before | after <archive> | collect
-reproduce.sh         revisions 2 and 3, from scratch or --cached
-cases.py             the case registry (every tensor, declaration, reference, admission rule)
-pooled.py, summ.py   the pooled replay over every case and configuration, and its totals
-replay.py, grids.py, baselines.py   shared replay, grid and baseline code
-exp*.py              one script per analysis; the tables below say which result each one produces
-*_silicon.py, gromacs_water.py, lammps_*.py, openfoam_*.py, heldout_*.py
-                     drivers of the solvers (ABINIT, QE, GROMACS, LAMMPS, OpenFOAM, held-out problems)
-snfix.c              the snprintf shim for Quantum ESPRESSO 6.7 (see ../THIRD_PARTY_RESULTS.md)
-data/                stored solver output and result files
-figures/             tables (tab_*.tex), figures (fig_*.pdf) and the text output of every step
-frozen_src/          copy of version 1.2.0, the frozen program of the held-out tests
-dfg2d2_job/          batch build of the revision-2 2D-2 grid (SLURM or one machine)
-```
-
-## Environment used for the article
-
-| Component | Version |
-|---|---|
-| OS | Ubuntu 24.04, 2 vCPU, 7 GB RAM |
-| Python | 3.11 |
-| numpy | 1.26.4 |
-| scipy | 1.13.1 (1.12 or later is required) |
-| Other Python packages | matplotlib, sympy, pytest |
-| LAMMPS | 20240207, with its Python module (`apt install lammps python3-lammps`) |
-| GROMACS | 2023.3, `gmx` (mixed precision) and `gmx_d` (double precision) (`apt install gromacs`) |
-| ABINIT | 9.10.4, pseudopotentials in `/usr/share/abinit/psp` (`apt install abinit`) |
-| OpenFOAM | v1912 (`apt install openfoam`); `simpleFoam`, `pimpleFoam`, `blockMesh`, `checkMesh` |
-| Quantum ESPRESSO | 6.7 (`apt install quantum-espresso`), run with the preloaded shim `snfix.c` (needs `gcc`) |
-
-
-## Where each result of the current article comes from (revision 5, version 1.2.1)
-
-Section, table and figure numbers are those of revision 5 of the article and its
-supplement. Every step is in `run_v6_analyses.sh before` (the step is given in brackets).
-The tables of the article report the released program only; the comparisons with earlier
-versions are in Section S15 of the supplement and in `../CHANGELOG.md`.
-
-| Result | Script [step] | Output |
-|---|---|---|
-| Table 4 (pooled), totals in Section 6.1 and in the abstract | `pooled.py v1.2.1` [A05], then `exp70_tables.py` [A23] | `data/pooled_v1.2.1.json`, `figures/tab_pooled.tex` |
-| Table 5 (ablation, including the frozen program's joint-check threshold); Sections 6.1 and 8 | `pooled.py v1.2.1-* v1.2` [A05], then `exp70_tables.py` | `figures/tab_ablation.tex` |
-| Section 4.8: Lemma 1, Proposition 1, Corollary 1 and the synthetic tests of the Remark | `exp81_bound_check.py` [A21c] | stdout |
-| Section 4.8, Remark: the L5 settings that miss with a constant safety factor | `exp80_v6_numbers.py`, part 5 [A21b] | stdout |
-| Section 4: the central rules of the specification | `../tests/test_spec_v121.py` [A02] | — |
-| Section 4.6 and Fig. 3: Phase 1 gains of the cost-only moves | `exp80_v6_numbers.py`, part 2 [A21b] | stdout |
-| Section 6.1: low-order acceptances, step cap | `summ.py v1.2.1 v1.2 v1.1` [A06] | stdout |
-| Section 6.1: decline reasons | `exp73_decline_reasons.py` [A14] | stdout |
-| Section 6.1: accepting unconverged runs | `exp79_unconverged.py` [A13] | `data/unconverged_v6.json` |
-| Section 6.1: the L5 joint check with cancellation credited; the L5 streamfunction minimum | `exp80_v6_numbers.py`, parts 3 and 4 [A21b] | stdout |
-| Table 3 and Section 5.2: accounting of every grid | `exp76_accounting.py` [A09] | `data/accounting_v6.json` |
-| Table 6 and Section 6.2: held-out H1, H2 (H3 after the cluster run) | `exp62_heldout.py` [A15, frozen], `exp62_heldout.py --current` [A16] | `data/heldout_replay*.json`, `figures/tab_heldout.tex` |
-| Table 7, Table S6, Sections 6.3 and 6.4: baselines and calibration cost | `exp72_baselines_pooled.py` [A07], then `exp70_tables.py` | `data/baselines_v6.json`, `figures/tab_baselines_compact.tex`, `figures/tab_baselines_full.tex` |
-| Table S4: LAMMPS and GROMACS double precision against the baselines | `exp72_baselines_pooled.py LMP-20 LMP-40 LMP-64 GMX-d` [A08] | `figures/tab_lmpbase.tex` |
-| Fig. 3, Fig. 4, Fig. 5 | `exp63_figures.py` [A22] | `figures/fig_search.pdf`, `figures/fig_l5_stall.pdf`, `figures/fig_dfg_mesh.pdf` |
-| Section 7.1: when the GAMG tolerance acts | `exp77_reltol_2d1.py` [A10] | `data/reltol_2d1.json` |
-| Section 7.2 and the Remark of Section 4.8: 2D-2 below the admission threshold, with and without credit for cancellation | `exp71_dfg2_detail.py` [A17] | stdout |
-| Section 7.3: PPPM grid and cost split (needs the LAMMPS Python module) | `exp74_pppm_mechanism.py` [A04] | `data/pppm_mechanism_v6.json` |
-| Section 7.3: GROMACS round-off floor | `exp78_gromacs_floor_v121.py` [A11] | `data/gromacs_floor_v121.json` |
-| Section 7.3, Section S4, Table S3: floor sensitivity and probe cost | `exp58_floor_sensitivity.py v1.2.1` [A12] | `figures/tab_floor.tex` |
-| Section 7.4: ABINIT reference uncertainty (needs ABINIT) | `exp75_abinit_reference.py` [A03] | `data/abinit_reference_v6.json` |
-| Section 7.4: error budgets of ABINIT and Quantum ESPRESSO (program and fits alone); ABINIT errors along the cutoff | `exp80_v6_numbers.py`, part 1 [A21b] | stdout |
-| Section 7.4: ABINIT misses without the local-order check | `pooled.py v1.2.1-nolocal` [A05] | `data/pooled_v1.2.1-nolocal.json` (`miss_list`) |
-| Appendix A, Table A.1 | `exp66_estimate_v12.py` [A19], then `exp70_tables.py` | `figures/tab_estimate.tex` |
-| Appendix B | `exp67_margin_v12.py` [A20] | stdout |
-| Section 3.2, Section S2, Table S1 | `exp64_transfer_floor.py` [A21] | `figures/tab_transfer.tex` |
-| Section S3, Table S2: misdeclared classes | `exp65_misdeclare_v12.py` [A18] | `figures/tab_misdeclare.tex` |
-| Section S15, Tables S9 and S10: earlier versions over every cell | `pooled.py v1.2 v1.1+gated v1.1` [A05], then `exp70_tables.py` | `figures/tab_versions_summary.tex`, `figures/tab_versions.tex` |
-| Section S15, Table S11: accuracy of the estimate of version 1.1 | `exp66_estimate_v12.py` [A19], then `exp70_tables.py` | `figures/tab_estimate_v11.tex` |
-| Section S15: held-out problems, 2D-2, GROMACS and ABINIT with earlier versions | `exp62_heldout.py` [A15], `exp71_dfg2_detail.py` [A17], `exp78_gromacs_floor_v121.py` [A11], `exp80_v6_numbers.py` [A21b] | stdout |
-| Cluster studies J1–J5 | `../hamilton/` (see its README), then `run_v6_analyses.sh after` | `../hamilton/results/` |
-
-The studies of Sections S8–S14 of the supplement were not repeated with version 1.2.1;
-their scripts are listed under revision 2 below.
-From version 11 of the article on, Sections S11 (adaptive BDF integrator) and S12 (learned
-component) are no longer in the supplement. Their results stay in this repository, with
-version 1.1: `figures/sec9x_adaptive.txt` (`exp51_adaptive.py`) and
-`figures/sec84_learned.txt` (`exp23_mlhybrid.py`).
-
-## Where each result of revision 3 came from (version 1.2.1)
-
-| Result | Script | Output |
-|---|---|---|
-| Table 3 (pooled), Table 4 (ablation), totals in the text | `pooled.py v1.2.1 v1.2 v1.1 v1.2-nojoint …` then `exp70_tables.py` | `data/pooled_*.json`, `figures/tab_pooled.tex`, `figures/tab_ablation.tex` |
-| Pooled totals, low-order acceptances, step-cap hits | `summ.py v1.2.1 v1.2 v1.1` | stdout |
-| Case registry (every tensor, declaration, reference, admission rule) | `cases.py` | — |
-| Section 4.1: L2–L5 convergence flags | `exp57_flags.py` | `data/flags_L*.pkl` |
-| Table 5 and Section 6.2: held-out H1, H2 (H3 after the cluster run) | `exp61_heldout_build.py H1/H2`, `exp62_heldout.py` (frozen, from the tag or `frozen_src/`), `exp62_heldout.py --current` | `figures/rev3_heldout*.txt`, `figures/tab_heldout.tex` |
-| Section 6.2: post-hoc check of the amendment | `posthoc_v121.py` | — |
-| Table 6 and Section 6.3: baselines | `exp72_baselines_pooled.py` | `figures/rev3_baselines_pooled.txt`, `figures/tab_baselines.tex` |
-| Section 6.1: decline reasons | `exp73_decline_reasons.py` | `figures/rev3_decline_reasons.txt` |
-| Fig. 3: one search | `exp63_figures.py` | `figures/fig_search.pdf` |
-| Fig. 4: L5 stall | `exp63_figures.py` | `figures/fig_l5_stall.pdf` |
-| Fig. 5, Section 7.1: 2D-1 rebuilt with exact centroids; n_arc 96 and 128 | `exp46_dfg_build.py`, `exp69_dfg_fine.py`, `exp63_figures.py` | `data/dfg_tensor_v12.pkl`, `data/dfg_fine.json`, `figures/fig_dfg_mesh.pdf` |
-| Referee point 7 of revision 3: is the 2D-1 drag plateau in the solver or in the post-processing? | `exp59_dfg_plateau.py` | `data/dfg_plateau.json` |
-| Section 7.2: 2D-2, every target and configuration | `exp71_dfg2_detail.py` | `figures/rev3_dfg2_detail.txt` |
-| Section 7.3, Supplement S4: GROMACS floor sensitivity, probe cost | `exp58_floor_sensitivity.py v1.2` | `figures/rev3_floor_sensitivity.txt`, `figures/tab_floor.tex` |
-| Section 7.4: ABINIT SCF convergence check | `exp68_abinit_scf.py` | `figures/rev3_abinit_scf.txt` |
-| Appendix A: accuracy of the estimate | `exp66_estimate_v12.py` | `figures/rev3_estimate.txt`, `figures/tab_estimate.tex` |
-| Appendix B: base safety factor | `exp67_margin_v12.py` | `figures/rev3_margin.txt` |
-| Section 3.2, Supplement S2: transfer with a resolution floor | `exp64_transfer_floor.py` | `figures/rev3_transfer_floor.txt`, `figures/tab_transfer.tex` |
-| Supplement S3: misdeclared classes | `exp65_misdeclare_v12.py` | `figures/rev3_misdeclare.txt`, `figures/tab_misdeclare.tex` |
-| Supplement S5: LAMMPS and GROMACS baselines | `exp72_baselines_pooled.py` (cells `LMP-*`, `GMX-d`) | `data/baselines_lmp_gmx.json`, `figures/tab_lmpbase.tex` |
-| Cluster studies J1–J5 | `../hamilton/` (see its README), then `exp60_hamilton.py hamilton_results.tar.gz` | `../hamilton/results/` |
-| Behavioural claims (38 tests) | `pytest ../tests` | — |
-
-The sections below map the results of earlier versions of the article. Those studies are
-now in the supplement or in `../CHANGELOG.md`.
-
-## Where each result of revision 2 came from
-
-| Article | Script | Output (`figures/`) |
-|---|---|---|
-| Section 3.1: class inference (3 or 4 of 8) | `exp17_classify.py` | `sec31_classes.txt` |
-| Table 2: L4 error budget | `exp20_reactdiff.py` | `build_L4.txt` |
-| Section 5.1: masking on L2 and L3; Section 5.3: two observables | `exp40_section5.py` | `sec5_masking.txt` |
-| Section 5.1: round-off floor of the observables | `exp25_referee.py` | `sec5_floor.txt` |
-| Table 3 and Section 5.2: transfer of thresholds | `exp32_conditions.py` | `tab03_transfer.txt` |
-| Section 5.2: conditioning mechanism | `exp31_mechanism.py` | `sec52_mechanism.txt` |
-| Table 5 and Section 7.1: all 11,048 replays | `exp26_outcomes.py` | `tab05_outcomes.txt` |
-| Table 6: separability and estimate quality | `exp28_separability.py` | `tab06_rho.txt` |
-| Table 7: ladder spacing | `exp34_spacing.py`, `exp35_whyfine.py`, `exp36_gated.py` | `tab07_*.txt` |
-| Table 8: baselines | `exp38_baselines.py` | `tab08_baselines.txt` |
-| Section 7.6: margin scan | `exp29_margin.py` | `sec76_margin.txt` |
-| Table 9: transfer across ν | `exp30_transfer.py` | `tab09_transfer.txt` |
-| Section 7.7: calibrating at the hardest member | `exp37_calhardest.py` | `sec77_hardest.txt` |
-| Table 10: calibration cost and break-even; calibration runs vs distance | `exp42_calibration.py` | `tab10_calibration.txt` |
-| LAMMPS table, Fig. 3: LAMMPS at 8,000 / 64,000 / 262,144 ions | `exp22_lammps.py` (`ERRBUDGET_LMP_N=20,40,64`), `make_lammps_figure.py` | `sec81_lammps_n*.txt` |
-| Table 12: LAMMPS against baselines | `exp39_lmp_baselines.py` | `sec81_baselines.txt` |
-| Section 8.1: the certified misses and their cause | `exp43_lammps_misses.py` | `sec81_misses.txt` |
-| Table 13: GROMACS | `exp24_gromacs.py` | `sec82_gromacs_d.txt` |
-| Section 8.2: precision floor of `gmx` and `gmx_d` | `exp44_gromacs_floor.py` | `sec82_floor.txt` |
-| Table 14, Section 8.3: ABINIT budget and outcomes | `exp27_abinit.py` | `sec83_abinit.txt` |
-| Section 8.3: uncertainty of the ABINIT reference | `exp45_abinit_reference.py` | `sec83_reference.txt` |
-| Section 8.4: learned component | `exp23_mlhybrid.py` | `sec84_learned.txt` |
-| Fig. 2: test problems | `make_solution_figure.py` | `fig0_problems.pdf` |
-| Section 6, L5 and Table 7.x: driven cavity, non-integral observables | `exp48_cavity.py` | `sec5x_cavity.txt` |
-| Table 3 on L2–L5 and OpenFOAM | `exp47_transfer.py` | `tab03_all.txt` |
-| Section 3.1: misdeclared classes (L3, OpenFOAM) | `exp49_misdeclare.py` | `tab_misdeclare.txt` |
-| Appendix B: margin calibrated on each problem in turn | `exp50_margin_heldout.py` | `app_margin_held.txt` |
-| Section 9: adaptive BDF integrator | `exp51_adaptive.py` | `sec9x_adaptive.txt` |
-| Section 10: Table 5 with CPU time as cost | `exp52_wallclock.py` | `tab05_cputime.txt` |
-| Section 7: eight parameters, 200 starts | `exp54_eight.py` | `sec7x_eight.txt` |
-| Section 8.1, Table: OpenFOAM DFG 2D-1 | `exp46_dfg_build.py`, `exp46_dfg.py` | `build_dfg.txt`, `sec8x_dfg.txt` |
-| Section 8.1: OpenFOAM DFG 2D-2 (Re = 100) | `exp56_dfg2d2_build.py` (run through `dfg2d2_job/`, see its README), `exp56_dfg2d2.py` | `sec8x_dfg2d2.txt` |
-| Section 8.4: ABINIT and Quantum ESPRESSO | `exp27_abinit.py`, `exp45_abinit_reference.py`, `exp53_qe.py` | `sec83_*.txt`, `sec8x_qe.txt` |
-| Section 8.6: parallel execution | `exp55_parallel.py` (`ERRBUDGET_RANKS`, `ERRBUDGET_THREADS`) | `sec8x_parallel.txt` |
-| Behavioural claims (31 tests) | `pytest ../tests` | — |
-
-Exhaustive grids are built before the analyses that use them:
-`exp00_build_L2.py`, `exp07_2d.py` (L3), `exp20_reactdiff.py` (L4),
-`exp33_fineladder.py`, `exp34_spacing.py` and `exp37_calhardest.py`. These grids are used
-only to grade the method. The method itself never sees more than the configurations it
-chooses to evaluate.
-
-
-## Version 1.1 (revision 2)
-
-The method changed in three places (see `src/errbudget/_core.py`):
-`unfit="order1"` (a parameter that cannot be fitted is charged its one-step change
-extrapolated at first order), the `noise_floor` check, and `models=[..."exponential"...]`.
-Every table was regenerated with version 1.1. The stored solver output in `data/` and
-the text output of every script in `figures/` are included so that results can be
-inspected without rerunning; `./reproduce.sh` regenerates them from scratch.
+Ubuntu 24.04 on a 2-vCPU, 7 GB virtual machine; Python 3.11, NumPy 1.26.4, SciPy 1.13.1
+(`requirements-article.txt`); OpenFOAM v1912, LAMMPS 20240207, GROMACS 2023.3, ABINIT 9.10.4,
+Quantum ESPRESSO 6.7 (Ubuntu packages); on Hamilton, OpenFOAM v2406 and v2606, Quantum
+ESPRESSO 7.6. Replays with Python 3.13, NumPy 2.5 and SciPy 1.18 give identical counts.
