@@ -1,0 +1,17 @@
+{
+ "released (default, no screening)": {
+  "starts": 200,
+  "accepted": 192,
+  "missed": 0,
+  "worst": 0.30441243098332926,
+  "distinct": 6,
+  "runs_med": 111.0,
+  "runs_max": 217,
+  "calib_med": 250.8330521317787,
+  "pen5_med": 0.7525155640347357,
+  "pen5_max": 8.847063371832826,
+  "pen8_med": 1.0000000000000002,
+  "runs_seen": 6641,
+  "unconverged_flagged": 160
+ }
+}

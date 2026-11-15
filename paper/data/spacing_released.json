@@ -1,0 +1,190 @@
+[
+ {
+  "rd": 2.0,
+  "rt": 100.0,
+  "h_range": 16.0,
+  "cases": [
+   {
+    "ob": "energy",
+    "target_rel": 0.0003637006603008664,
+    "starts": 625,
+    "accepted": 625,
+    "met": 625,
+    "med_slack": 0.36504705152770905,
+    "med_cost_ratio": 1.6160164271047228
+   },
+   {
+    "ob": "energy",
+    "target_rel": 0.0029182064220069025,
+    "starts": 625,
+    "accepted": 625,
+    "met": 625,
+    "med_slack": 0.5256776273497044,
+    "med_cost_ratio": 1.128
+   },
+   {
+    "ob": "dissipation",
+    "target_rel": 0.001609947727317008,
+    "starts": 625,
+    "accepted": 625,
+    "met": 625,
+    "med_slack": 0.30705699410129733,
+    "med_cost_ratio": 5.503496503496503
+   },
+   {
+    "ob": "dissipation",
+    "target_rel": 0.006989853929920996,
+    "starts": 625,
+    "accepted": 625,
+    "met": 625,
+    "med_slack": 0.30559278346162666,
+    "med_cost_ratio": 2.784
+   }
+  ],
+  "accepted": 2500,
+  "met": 2500,
+  "searches": 2500,
+  "med_cost_ratio": 2.784
+ },
+ {
+  "rd": 1.6,
+  "rt": 10.0,
+  "h_range": 6.56,
+  "cases": [
+   {
+    "ob": "energy",
+    "target_rel": 0.000553580844924094,
+    "starts": 625,
+    "accepted": 625,
+    "met": 625,
+    "med_slack": 0.48746334060827046,
+    "med_cost_ratio": 1.0
+   },
+   {
+    "ob": "energy",
+    "target_rel": 0.0014206722761360671,
+    "starts": 625,
+    "accepted": 625,
+    "met": 625,
+    "med_slack": 0.425297154667086,
+    "med_cost_ratio": 1.0
+   },
+   {
+    "ob": "dissipation",
+    "target_rel": 0.0024435099568558224,
+    "starts": 625,
+    "accepted": 625,
+    "met": 625,
+    "med_slack": 0.47964973796756216,
+    "med_cost_ratio": 1.0
+   },
+   {
+    "ob": "dissipation",
+    "target_rel": 0.006237619554319489,
+    "starts": 625,
+    "accepted": 625,
+    "met": 625,
+    "med_slack": 0.42551074480965123,
+    "med_cost_ratio": 1.0
+   }
+  ],
+  "accepted": 2500,
+  "met": 2500,
+  "searches": 2500,
+  "med_cost_ratio": 1.0
+ },
+ {
+  "rd": 1.4,
+  "rt": 5.0,
+  "h_range": 3.861538461538461,
+  "cases": [
+   {
+    "ob": "energy",
+    "target_rel": 0.0007261869353463932,
+    "starts": 625,
+    "accepted": 625,
+    "met": 625,
+    "med_slack": 0.5198771626330975,
+    "med_cost_ratio": 1.588328075709779
+   },
+   {
+    "ob": "energy",
+    "target_rel": 0.00141913372231777,
+    "starts": 625,
+    "accepted": 625,
+    "met": 625,
+    "med_slack": 0.5162691110233746,
+    "med_cost_ratio": 1.5869191049913942
+   },
+   {
+    "ob": "dissipation",
+    "target_rel": 0.0032017617782128336,
+    "starts": 625,
+    "accepted": 625,
+    "met": 625,
+    "med_slack": 0.5291353530489972,
+    "med_cost_ratio": 1.3249211356466877
+   },
+   {
+    "ob": "dissipation",
+    "target_rel": 0.006237618991927133,
+    "starts": 625,
+    "accepted": 625,
+    "met": 625,
+    "med_slack": 0.5327801741048463,
+    "med_cost_ratio": 1.0
+   }
+  ],
+  "accepted": 2500,
+  "met": 2500,
+  "searches": 2500,
+  "med_cost_ratio": 1.5301493283589265
+ },
+ {
+  "rd": 1.2,
+  "rt": 3.0,
+  "h_range": 2.067415730337079,
+  "cases": [
+   {
+    "ob": "energy",
+    "target_rel": 0.000979962720837868,
+    "starts": 625,
+    "accepted": 305,
+    "met": 305,
+    "med_slack": 0.7083620214861082,
+    "med_cost_ratio": 1.1857142857142857
+   },
+   {
+    "ob": "energy",
+    "target_rel": 0.0014189791684544699,
+    "starts": 625,
+    "accepted": 480,
+    "met": 480,
+    "med_slack": 0.6954041143299552,
+    "med_cost_ratio": 1.2028985507246377
+   },
+   {
+    "ob": "dissipation",
+    "target_rel": 0.004319712646552275,
+    "starts": 625,
+    "accepted": 470,
+    "met": 470,
+    "med_slack": 0.7098464631156839,
+    "med_cost_ratio": 1.1857142857142857
+   },
+   {
+    "ob": "dissipation",
+    "target_rel": 0.006237618991927133,
+    "starts": 625,
+    "accepted": 475,
+    "met": 475,
+    "med_slack": 0.6969696674159442,
+    "med_cost_ratio": 1.2028985507246377
+   }
+  ],
+  "accepted": 1730,
+  "met": 1730,
+  "searches": 2500,
+  "med_cost_ratio": 1.1857142857142857
+ }
+]

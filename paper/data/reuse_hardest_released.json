@@ -1,0 +1,56 @@
+[
+ {
+  "ob": "energy",
+  "target": 0.01,
+  "accepted": true,
+  "setting": {
+   "N": 128,
+   "steps": 25,
+   "newton_tol": 0.0001,
+   "gmres_tol": 0.0001
+  },
+  "runs": 83,
+  "cost": 36608.0,
+  "members": 22,
+  "met": 22,
+  "worst_ratio": 0.22796130888743724
+ },
+ {
+  "ob": "energy",
+  "target": 0.003,
+  "accepted": true,
+  "setting": {
+   "N": 128,
+   "steps": 50,
+   "newton_tol": 1e-06,
+   "gmres_tol": 0.01
+  },
+  "runs": 63,
+  "cost": 96000.0,
+  "members": 22,
+  "met": 22,
+  "worst_ratio": 0.7169227499317302
+ },
+ {
+  "ob": "dissipation",
+  "target": 0.01,
+  "accepted": true,
+  "setting": {
+   "N": 512,
+   "steps": 50,
+   "newton_tol": 0.0001,
+   "gmres_tol": 0.0001
+  },
+  "runs": 95,
+  "cost": 350208.0,
+  "members": 22,
+  "met": 22,
+  "worst_ratio": 0.18158370432940243
+ },
+ {
+  "ob": "dissipation",
+  "target": 0.003,
+  "accepted": false,
+  "declined": "not_reached"
+ }
+]

@@ -1,0 +1,12 @@
+{
+ "released": {
+  "accepted": 1730,
+  "met": 1730,
+  "searches": 2500
+ },
+ "released, constant factor": {
+  "accepted": 2500,
+  "met": 2500,
+  "searches": 2500
+ }
+}

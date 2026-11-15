@@ -1,14 +1,20 @@
 """If transfer fails only towards harder physics, calibrating at the hardest
 member of the ensemble should make the whole ensemble safe.  That turns a
 negative result into a usable rule, so it is worth testing rather than asserting.
+
+Rerun for the revision without version history: the search uses the released
+program (errbudget.V121, unconverged runs treated as failed); the grading is
+unchanged.  Results go to data/reuse_hardest_released.json.
 """
 import os, pickle, sys
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from errbudget import run_protocol
+import json
+from errbudget import run_protocol, V121
+from l2flags import flags
 from errbudget.problems import Burgers1D
 
-D = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+from paths import DATA as D, OUT
 NAMES = ["N", "steps", "newton_tol", "gmres_tol"]
 LAD = [[32, 64, 128, 256, 512], [25, 50, 100, 200, 400],
        [1e-2, 1e-4, 1e-6, 1e-8, 1e-10], [1e-2, 1e-4, 1e-6, 1e-8, 1e-10]]
@@ -35,16 +41,23 @@ else:
     pickle.dump(t, open(CACHE, "wb"))
     print(f"tensor at nu=0.02: {time.time()-t0:.0f}s", flush=True)
 
+FL = flags(t, LAD, 0.02, "L2_nu002")
 EX002 = p002.exact_observables()
+RES = []
 print("="*92)
 print("calibrate at the HARDEST ensemble member (nu = 0.02) and transport upward")
 print("="*92)
 for ob in ["energy", "dissipation"]:
     for tr in [1e-2, 3e-3]:
         QS = EX002[ob]
-        look = lambda i, ob=ob: (t[tuple(i)][0][ob], t[tuple(i)][1])
+        look = lambda i, ob=ob: ((t[tuple(i)][0][ob] if FL[tuple(i)]["converged"] else np.nan),
+                                 t[tuple(i)][1])
         eps = tr*abs(QS)
-        r = run_protocol(look, LAD, (2,2,3,3), eps, hs=HS, kinds=KIN, use_screen=False)
+        r = run_protocol(look, LAD, (2,2,3,3), eps, hs=HS, kinds=KIN, **V121)
+        if not r["certified"]:
+            print(f"  {ob:<12} target {tr:.0e}  ->  declined ({r.get('declined')})")
+            RES.append(dict(ob=ob, target=tr, accepted=False, declined=r.get("declined")))
+            continue
         rec = {NAMES[k]: LAD[k][j] for k, j in enumerate(r["proposal"])}
         nok, worst = 0, 0.0
         for nu in NUS:
@@ -58,3 +71,6 @@ for ob in ["energy", "dissipation"]:
               + ", ".join(f"{k}={v:g}" for k,v in rec.items()))
         print(f"  {'':<12} transports to {nok}/{len(NUS)} members, worst margin "
               f"{worst:.2f}x, cost {cost_here:.3g} work units")
+        RES.append(dict(ob=ob, target=tr, accepted=True, setting=rec, runs=r["runs"],
+                        cost=cost_here, members=len(NUS), met=int(nok), worst_ratio=worst))
+json.dump(RES, open(os.path.join(OUT, "reuse_hardest_released.json"), "w"), indent=1)

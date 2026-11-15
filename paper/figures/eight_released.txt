@@ -1,0 +1,144 @@
+    50 flagged runs, 69s
+first pass: 6113 settings requested, 6032 to flag
+    100 flagged runs, 137s
+    150 flagged runs, 167s
+    200 flagged runs, 188s
+    250 flagged runs, 213s
+    300 flagged runs, 239s
+    350 flagged runs, 263s
+    400 flagged runs, 285s
+    450 flagged runs, 312s
+    500 flagged runs, 333s
+    550 flagged runs, 361s
+    600 flagged runs, 383s
+    650 flagged runs, 406s
+    700 flagged runs, 427s
+    750 flagged runs, 447s
+    800 flagged runs, 464s
+    850 flagged runs, 484s
+    900 flagged runs, 503s
+    950 flagged runs, 521s
+    1000 flagged runs, 538s
+    1050 flagged runs, 558s
+    1100 flagged runs, 575s
+    1150 flagged runs, 594s
+    1200 flagged runs, 613s
+    1250 flagged runs, 634s
+    1300 flagged runs, 654s
+    1350 flagged runs, 672s
+    1400 flagged runs, 689s
+    1450 flagged runs, 707s
+    1500 flagged runs, 740s
+    1550 flagged runs, 763s
+    1600 flagged runs, 781s
+    1650 flagged runs, 800s
+    1700 flagged runs, 820s
+    1750 flagged runs, 841s
+    1800 flagged runs, 866s
+    1850 flagged runs, 889s
+    1900 flagged runs, 909s
+    1950 flagged runs, 925s
+    2000 flagged runs, 941s
+    2050 flagged runs, 962s
+    2100 flagged runs, 977s
+    2150 flagged runs, 994s
+    2200 flagged runs, 1010s
+    2250 flagged runs, 1028s
+    2300 flagged runs, 1045s
+    2350 flagged runs, 1061s
+    2400 flagged runs, 1077s
+    2450 flagged runs, 1099s
+    2500 flagged runs, 1119s
+    2550 flagged runs, 1137s
+    2600 flagged runs, 1154s
+    2650 flagged runs, 1174s
+    2700 flagged runs, 1191s
+    2750 flagged runs, 1211s
+    2800 flagged runs, 1227s
+    2850 flagged runs, 1250s
+    2900 flagged runs, 1271s
+    2950 flagged runs, 1288s
+    3000 flagged runs, 1307s
+    3050 flagged runs, 1335s
+    3100 flagged runs, 1359s
+    3150 flagged runs, 1392s
+    3200 flagged runs, 1413s
+    3250 flagged runs, 1439s
+    3300 flagged runs, 1465s
+    3350 flagged runs, 1499s
+    3400 flagged runs, 1523s
+    3450 flagged runs, 1540s
+    3500 flagged runs, 1556s
+    3550 flagged runs, 1584s
+    3600 flagged runs, 1602s
+    3650 flagged runs, 1635s
+    3700 flagged runs, 1660s
+    3750 flagged runs, 1698s
+    3800 flagged runs, 1725s
+    3850 flagged runs, 1757s
+    3900 flagged runs, 1789s
+    3950 flagged runs, 1832s
+    4000 flagged runs, 1852s
+    4050 flagged runs, 1870s
+    4100 flagged runs, 1900s
+    4150 flagged runs, 1925s
+    4200 flagged runs, 1961s
+    4250 flagged runs, 1993s
+    4300 flagged runs, 2046s
+    4350 flagged runs, 2096s
+    4400 flagged runs, 2137s
+    4450 flagged runs, 2196s
+    4500 flagged runs, 2274s
+    4550 flagged runs, 2301s
+    4600 flagged runs, 2322s
+    4650 flagged runs, 2345s
+    4700 flagged runs, 2379s
+    4750 flagged runs, 2464s
+    4800 flagged runs, 2522s
+    4850 flagged runs, 2610s
+    4900 flagged runs, 2642s
+    4950 flagged runs, 2734s
+    5000 flagged runs, 2782s
+    5050 flagged runs, 2845s
+    5100 flagged runs, 2875s
+    5150 flagged runs, 2915s
+    5200 flagged runs, 2948s
+    5250 flagged runs, 2999s
+    5300 flagged runs, 3045s
+    5350 flagged runs, 3097s
+    5400 flagged runs, 3133s
+    5450 flagged runs, 3185s
+    5500 flagged runs, 3240s
+    5550 flagged runs, 3319s
+    5600 flagged runs, 3406s
+    5650 flagged runs, 3505s
+    5700 flagged runs, 3561s
+    5750 flagged runs, 3663s
+    5800 flagged runs, 3786s
+    5850 flagged runs, 3938s
+    5900 flagged runs, 4042s
+    5950 flagged runs, 4129s
+    6000 flagged runs, 4277s
+    6050 flagged runs, 4499s
+    6100 flagged runs, 4710s
+flagged 6113 runs in 4773s: 155 did not converge, 2299 differ from the stored cache
+  released (default, no screening): 20/200 starts done
+  released (default, no screening): 40/200 starts done
+    6150 flagged runs, 4849s
+  released (default, no screening): 60/200 starts done
+    6200 flagged runs, 4915s
+  released (default, no screening): 80/200 starts done
+  released (default, no screening): 100/200 starts done
+  released (default, no screening): 120/200 starts done
+/Users/grbj73@durham.ac.uk/.local/share/openresearch/worktrees/2ed68104-cb7b-456e-999e-56a5d09d1af9/chat_bc6ac95f-19c7-cb9d-0d5a-c3e7d616dbd6/paper/analysis/errbudget/_core.py:143: RuntimeWarning: invalid value encountered in scalar subtract
+  dg = g_k[hi] - g_k[hi - 1]
+  released (default, no screening): 140/200 starts done
+  released (default, no screening): 160/200 starts done
+  released (default, no screening): 180/200 starts done
+  released (default, no screening): 200/200 starts done
+
+8-parameter L3, released (default, no screening) mode, energy 1e-2, 200 starts:
+  certified 192, missed 0, worst error 0.30 eps, distinct recommendations 6
+  median runs 111 (max 217), median calibration cost 251 production runs at the start setting
+  penalty against the 5-parameter grid optimum: median 0.75, worst 8.85; against the cheapest attaining setting among the 6641 8-parameter runs made: median 1.00
+/opt/anaconda3/bin/python3 exp54_eight.py  17890.47s user 5658.98s system 471% cpu 1:23:16.07 total

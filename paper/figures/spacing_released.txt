@@ -1,0 +1,39 @@
+========================================================================================================
+reliability against ladder spacing
+========================================================================================================
+  spacing                observable      target  certified  attained   safety  med slack  med pen
+flags L2_sp_2.0_100.0: 625 runs, 477 differ from the stored tensor, 0 did not converge
+  2.0x mesh / 100.0x tol energy         3.6e-04        625       625   100.0%      0.365    1.62x
+  2.0x mesh / 100.0x tol energy         2.9e-03        625       625   100.0%      0.526    1.13x
+  2.0x mesh / 100.0x tol dissipation    1.6e-03        625       625   100.0%      0.307    5.50x
+  2.0x mesh / 100.0x tol dissipation    7.0e-03        625       625   100.0%      0.306    2.78x
+
+flags L2_sp_1.6_10.0: 625 runs, 529 differ from the stored tensor, 0 did not converge
+  1.6x mesh / 10.0x tol  energy         5.5e-04        625       625   100.0%      0.487    1.00x
+  1.6x mesh / 10.0x tol  energy         1.4e-03        625       625   100.0%      0.425    1.00x
+  1.6x mesh / 10.0x tol  dissipation    2.4e-03        625       625   100.0%      0.480    1.00x
+  1.6x mesh / 10.0x tol  dissipation    6.2e-03        625       625   100.0%      0.426    1.00x
+
+flags L2_sp_1.4_5.0: 625 runs, 499 differ from the stored tensor, 0 did not converge
+  1.4x mesh / 5.0x tol   energy         7.3e-04        625       625   100.0%      0.520    1.59x
+  1.4x mesh / 5.0x tol   energy         1.4e-03        625       625   100.0%      0.516    1.59x
+  1.4x mesh / 5.0x tol   dissipation    3.2e-03        625       625   100.0%      0.529    1.32x
+  1.4x mesh / 5.0x tol   dissipation    6.2e-03        625       625   100.0%      0.533    1.00x
+
+flags L2_sp_1.2_3.0: 625 runs, 490 differ from the stored tensor, 0 did not converge
+  1.2x mesh / 3.0x tol   energy         9.8e-04        305       305   100.0%      0.708    1.19x
+  1.2x mesh / 3.0x tol   energy         1.4e-03        480       480   100.0%      0.695    1.20x
+  1.2x mesh / 3.0x tol   dissipation    4.3e-03        470       470   100.0%      0.710    1.19x
+  1.2x mesh / 3.0x tol   dissipation    6.2e-03        475       475   100.0%      0.697    1.20x
+
+========================================================================================================
+  spacing                   certified  attained    safety  mean slack
+  2.0x mesh / 100.0x tolerance       2500      2500    100.0%       0.376
+  1.6x mesh / 10.0x tolerance       2500      2500    100.0%       0.454
+  1.4x mesh / 5.0x tolerance       2500      2500    100.0%       0.525
+  1.2x mesh / 3.0x tolerance       1730      1730    100.0%       0.703
+
+  Safety and slack move together, as 6.4 predicts.  The method's
+  reliability on a coarse ladder is bought by the ladder, and a user who
+  supplies closely spaced candidate values should expect less of it.
+/opt/anaconda3/bin/python3 exp34_spacing.py  528.33s user 7.83s system 101% cpu 8:48.57 total

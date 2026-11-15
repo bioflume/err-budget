@@ -15,6 +15,12 @@ is the part that is only 80% accurate.
 Same problem, same method, same margin; only the spacing changes.  Each ladder is
 centred on the same geometric midpoint so that the comparison is of spacing and
 not of range.
+
+Rerun for the revision without version history: the search uses the released
+program (errbudget.V121, unconverged runs treated as failed); the targets and the
+grading are unchanged.  Added: the median cost ratio pooled over the four test cases
+of a spacing (as exp36_gated.py reported it).  Results go to
+data/spacing_released.json.
 """
 import itertools
 import os
@@ -25,10 +31,12 @@ import time
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(__file__))
-from errbudget import run_protocol
+import json
+from errbudget import run_protocol, V121
+from l2flags import flags
 from errbudget.problems import Burgers1D
 
-D = os.path.join(os.path.dirname(__file__), "data")
+from paths import DATA as D, OUT
 NAMES = ["N", "steps", "newton_tol", "gmres_tol"]
 KIN = ["discretisation", "discretisation", "nested-solver", "nested-solver"]
 ALL = list(itertools.product(*[range(5) for _ in range(4)]))
@@ -69,16 +77,18 @@ print(f"  {'spacing':<22} {'observable':<13} {'target':>8} {'certified':>10} "
       f"{'attained':>9} {'safety':>8} {'med slack':>10} {'med pen':>8}")
 
 SPACINGS = [(2.0, 100.0), (1.6, 10.0), (1.4, 5.0), (1.2, 3.0)]
-summary = []
+summary, OUTROWS = [], []
 for rd, rt in SPACINGS:
     tensor, LAD = tensor_for(rd, rt)
     HS = [[2 * np.pi / n for n in LAD[0]], [1.0 / s for s in LAD[1]],
           list(LAD[2]), list(LAD[3])]
-    rows = []
+    FL = flags(tensor, LAD, 0.05, f"L2_sp_{rd}_{rt}")
+    rows, allpens, cases = [], [], []
     for ob in ["energy", "dissipation"]:
         QS = EX[ob]
         err = {i: abs(tensor[i][0][ob] - QS) for i in ALL}
-        lk = lambda i, ob=ob: (tensor[tuple(i)][0][ob], tensor[tuple(i)][1])
+        lk = lambda i, ob=ob: ((tensor[tuple(i)][0][ob] if FL[tuple(i)]["converged"] else np.nan),
+                               tensor[tuple(i)][1])
         # pick the target that discriminates best: closest to the median error
         cand = sorted(err.values())
         for tgt in [cand[int(0.25 * len(cand))], cand[int(0.5 * len(cand))]]:
@@ -90,8 +100,7 @@ for rd, rt in SPACINGS:
             cert = safe = 0
             slack, pens = [], []
             for a in ALL:
-                r = run_protocol(lk, LAD, a, eps, hs=HS, kinds=KIN,
-                                 use_screen=False)
+                r = run_protocol(lk, LAD, a, eps, hs=HS, kinds=KIN, **V121)
                 if not r["certified"]:
                     continue
                 cert += 1
@@ -99,6 +108,10 @@ for rd, rt in SPACINGS:
                 safe += err[q] <= eps
                 slack.append(err[q] / eps)
                 pens.append(tensor[q][1] / c_opt)
+            allpens += pens
+            cases.append(dict(ob=ob, target_rel=eps / abs(QS), starts=len(ALL), accepted=cert,
+                              met=safe, med_slack=float(np.median(slack)) if slack else None,
+                              med_cost_ratio=float(np.median(pens)) if pens else None))
             if cert == 0:
                 print(f"  {f'{rd}x mesh / {rt}x tol':<22} {ob:<13} "
                       f"{eps/abs(QS):>8.1e} {'all 625 refused':>28}")
@@ -111,8 +124,13 @@ for rd, rt in SPACINGS:
     if rows:
         c = sum(r[0] for r in rows); s = sum(r[1] for r in rows)
         summary.append((rd, rt, c, s, float(np.mean([r[2] for r in rows]))))
+    OUTROWS.append(dict(rd=rd, rt=rt, h_range=HS[0][0] / HS[0][-1], cases=cases,
+                        accepted=sum(c["accepted"] for c in cases), met=sum(c["met"] for c in cases),
+                        searches=len(ALL) * len(cases),
+                        med_cost_ratio=float(np.median(allpens)) if allpens else None))
     print()
 
+json.dump(OUTROWS, open(os.path.join(OUT, "spacing_released.json"), "w"), indent=1)
 print("=" * 104)
 print(f"  {'spacing':<24} {'certified':>10} {'attained':>9} {'safety':>9} "
       f"{'mean slack':>11}")
