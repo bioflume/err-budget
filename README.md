@@ -17,21 +17,18 @@
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue"></a>
 </p>
 
-You give it something that runs your solver (a Python function or a shell command), the
+Given a driver of your solver (a Python function or a shell command), the
 numerical parameters with their candidate values, the observable you want, and how
-accurate you need it. It gives you a setting, an error estimate, and a statement of which
-parameter is limiting the accuracy and which ones you are refining for nothing.
+accurate you need it, errbudget gives you a setting, an error estimate, and a statement of which
+parameter is limiting the accuracy and refining which ones do not make any changes.
 
-It does not need an adjoint, access to the solver's source, and analysis of your particular
-problem. It costs runs proportional to the *number* of parameters. It was tested on OpenFOAM, Quantum ESPRESSO, ABINIT, GROMACS and LAMMPS, driven
-only through their input files, and on test problems with exact solutions; the article
-reports every miss and its cause.
+It costs runs proportional to the *number* of parameters. It was tested on OpenFOAM, Quantum ESPRESSO, ABINIT, GROMACS and LAMMPS, driven through their input files, and on test problems with exact solutions; the article reports every miss and its cause.
 
 ```bash
 pip install "errbudget[yaml] @ git+https://github.com/bioflume/errbudget"
 ```
 
-## Two ways to use it
+## How to use it?
 
 **From the command line, for any code that runs as a command** (OpenFOAM, LAMMPS, your
 own binary, `python my_solver.py`):
@@ -58,8 +55,8 @@ target: 1e-4
 cost: {regex: "work\\s*=\\s*([0-9]+)"}   # optional; wall-clock time by default
 ```
 
-Every run gets its own directory (template files are copied in with `{{placeholders}}`
-filled), and every run is logged, so a tuning that is interrupted resumes where it was.
+Every run has its directory (template files are copied in with `{{placeholders}}`
+filled), and is logged, so a tuning that is interrupted resumes where it was.
 `docs/job-files.md` is the reference and `docs/recipes.md` has job files for OpenFOAM,
 LAMMPS, GROMACS and plane-wave DFT codes.
 
@@ -101,8 +98,7 @@ and still meets the target with room to spare. Run it yourself:
 
 ## Declaring your parameters
 
-Each parameter is declared as one of three kinds. This matters, and it is the one thing
-the tool asks of you.
+Each parameter is declared as one of three kinds. 
 
 | kind | meaning | examples |
 |---|---|---|
@@ -111,7 +107,7 @@ the tool asks of you.
 | `cost-only` | changes cost but not the answer, often with an interior cost optimum | preconditioner fill or drop tolerance, how often a Jacobian or preconditioner is refreshed, neighbour-list rebuild frequency |
 
 **Errbudget does not infer your parameters.** We tested inference and it scores
-3–4 out of 8. The obstacle is structural: a nested-solver parameter that is *masked*,
+3–4 out of 8. The issue is structural: a nested-solver parameter that is *masked*,
 currently buried under another parameter's error, is indistinguishable from one that does not do anything at all. In one of our tests even the mesh measured zero influence, because a loose
 Newton tolerance dominated so completely that refining the mesh changed nothing.
 
@@ -125,7 +121,7 @@ Values are listed from coarse to fine. For a parameter whose error decays expone
 (a plane-wave or spectral cutoff) add `model: exponential` (`Parameter(..., model="exponential")`);
 its values must increase.
 
-## What it will tell you
+## Outputs
 
 - the recommended setting, and what it changed from yours;
 - whether the target was met, and, if it cannot be met with the values you offered, it
@@ -147,17 +143,15 @@ can only be met through a lucky cancellation, it declines and says which paramet
 not bound. Extend that parameter's list of values and run it again.
 
 **The certificate is measured only.** You get a computed estimate with a calibrated
-margin and a stopping rule that is re-verified at every step. On four test problems with
-exact solutions and on five production codes the article reports every miss and its cause.
-That is stronger than a heuristic and weaker than a proof.
+margin and a stopping rule that is re-verified at every step. That is stronger than a heuristic and weaker than a proof.
 
 ## Failed and unconverged runs
 
-A run whose nested solver stopped at its iteration limit is not an answer. From Python,
+A run whose nested solver stopped at its iteration limit does not give an answer. From Python,
 return `{"drag": cd, "converged": False}` or raise `errbudget.RunFailed`; from a job file, give
 a pattern that marks it (`failure: {unconverged_if_regex: "did not converge"}`). A non-zero
 exit code is always a failure. Such runs are recorded with their cost but never proposed
-and never fitted. `accept_unconverged: true` restores the behaviour of version 1.1.
+and never fitted. 
 
 ## What it checks before it accepts a setting
 
@@ -169,15 +163,14 @@ and never fitted. `accept_unconverged: true` restores the behaviour of version 1
   not credited;
 - a safety factor that grows with the misfit of the error models.
 
-The default configuration is the article's version 1.2.1 (`errbudget.V121`); `v1.2` and `v1.1`
-reproduce the earlier versions. For single-precision or otherwise noisy codes,
+For single-precision or otherwise noisy codes,
 `floor_probe` measures the round-off floor from two settings refined beyond every
 candidate value and declines targets below ten times it; `screen: true` runs a
 preliminary sweep (fewer runs, more expensive recommendations).
 
 ## Documentation
 
-The documentation is at <https://bioflume.github.io/errbudget/>. The same pages are in `docs/`:
+The documentation is in `docs/`:
 
 | | |
 |---|---|
@@ -206,9 +199,8 @@ The method and its evaluation are described in
 > G. Kabacaoğlu, *errbudget: choosing the numerical parameters of a black-box solver for a
 > target accuracy in one observable*, Computer Physics Communications, 2026.
 
-The engine in this package is version 1.2.1, the version the article describes
-(`errbudget.ENGINE_VERSION`); the article's own repository, with every script, stored solver
-output and the cluster jobs, is <https://github.com/bioflume/errbudget-paper>. See
+The article's own repository, with every script, stored solver
+output and the cluster jobs, is in the paper branch. See
 `CITATION.cff`.
 
 ## Licence
