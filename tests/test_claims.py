@@ -11,7 +11,6 @@ import math
 import numpy as np
 import pytest
 
-from errbudget import Parameter, tune
 from errbudget._core import LocalBudget, run_protocol
 
 

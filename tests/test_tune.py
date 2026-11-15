@@ -1,5 +1,5 @@
 """Behavioural guarantees. These are the claims the paper makes."""
-import numpy as np, pytest
+import pytest
 from errbudget import Parameter, tune
 from errbudget.problems import Burgers1D
 

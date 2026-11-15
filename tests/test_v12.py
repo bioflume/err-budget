@@ -2,7 +2,6 @@
 import itertools
 
 import numpy as np
-import pytest
 
 from errbudget import Parameter, RunFailed, V11, V12, run_protocol, tune
 

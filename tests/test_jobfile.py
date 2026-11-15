@@ -7,7 +7,7 @@ import textwrap
 import pytest
 
 from errbudget import load_job, run_job, JobSpec
-from errbudget.jobfile import check_job, init_job
+from errbudget.jobfile import check_job
 from errbudget.runner import (CommandSolver, JobError, RunFailed, extract_number, render,
                           format_value)
 from errbudget.cli import main
