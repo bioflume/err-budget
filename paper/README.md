@@ -90,7 +90,7 @@ platform; no rounded number of the article changes.
 | S-4.6, Tables S-4.5, S-4.6: PRE | `../studies/pre_comparison/` (`replay_all.sh --pre`) | the 2D-1 runs in `data/` | `results/` |
 | Fig. S-4.1 | `make_pre_figure.py` (fig_pre) | `../studies/pre_comparison/results/` | `figures/fig_sup_pre.pdf` |
 | Figs. S-5.1, S-5.2 | `extract_2d1_l5.py`, `make_2d1_l5_figures.py` | | `figures/fig_sup_dfg.pdf`, `figures/fig_sup_search.pdf` |
-| S-5.1: the regimes of the GAMG tolerance | `exp77_reltol_2d1.py`; solver logs of the v2406 repeat: `../hamilton/results/j1_reltol.json` | | `data/reltol_2d1.json` |
+| S-5.1: the regimes of the GAMG tolerance; `relTol` 0; why the linear solves stopped | `exp77_reltol_2d1.py`; the v2406 repeat: `../hamilton/J1_dfg2d1/analyse_j1.py` | | `data/reltol_2d1.json`, `../hamilton/results/j1.txt`, `j1_reltol.json`, `j1_stop.json` |
 | S-5.1: vertex-mean bias, runs beyond the study | `exp59_dfg_plateau.py`, `exp69_dfg_fine.py` (rebuild only) | | `data/dfg_plateau.json`, `data/dfg_fine.json` |
 | S-5.1: the function object of OpenFOAM v2406 | `../hamilton/J1_dfg2d1/analyse_j1.py` | | `../hamilton/results/j1.txt`, `j1_fo.json`, `j1_replay.json` |
 | S-5.2: divergence, convergence along each parameter, the conservative estimate | `../hamilton/J2_dfg2d2/analyse_j2.py` | | `../hamilton/results/j2.txt` |

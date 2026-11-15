@@ -59,9 +59,11 @@ cost ratio and run count equals the stored one, and the worst error ratio agrees
 No script in the repository prints these numbers of the supplement; they appear to come
 from analyses of the writing sessions:
 
-- S-5.1: the change of the observables with `relTol` 0 (3.9×10⁻³, 9.6×10⁻² for the lift);
-  the shares of momentum solves stopped by their tolerance (26%, 94%) and the 48 runs with
-  residual histories.
+- S-5.1: the shares of momentum solves stopped by their tolerance alone over the 608
+  converged runs (26% at 100 t/r_c = 0.1, 94% at 1). `../hamilton/results/j1.txt` prints them
+  over all 840 runs (26% and 93%); the 48 runs with residual histories are in
+  `../hamilton/results/j1_reltol.json`, but no script tallies them. (The change with `relTol`
+  0, at most 3.9×10⁻³ and 9.6×10⁻² for the lift, is in `j1.txt`.)
 - S-5.2: "22 of 54 runs diverged" and Co_max = 27.8 n_arc Δt. The Courant numbers are in
   `hamilton/results/j2_tensor.pkl` ("courant"), but no script tallies them.
 - S-3.2: the LAMMPS errors along the five cutoffs, (3.1, 3.6, 0.77, 2.4, 0.95)×10⁻²; the ABINIT
