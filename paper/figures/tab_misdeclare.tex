@@ -1,29 +1,29 @@
 \begin{tabular}{llrrrrrr}
 \toprule
-& & \multicolumn{3}{c}{Full mode (default)} & \multicolumn{3}{c}{Preliminary sweep} \\
+& & \multicolumn{3}{c}{Default (without screening)} & \multicolumn{3}{c}{Screening sweep} \\
 \cmidrule(lr){3-5}\cmidrule(lr){6-8}
-Problem & Declaration & Penalty & Worst & Runs & Penalty & Worst & Runs \\
+Problem & Declared class & Cost ratio & Worst & Runs & Cost ratio & Worst & Runs \\
 \midrule
 L3 & correct & 1.00 & 3.12 & 50 & 2.51 & 4.51 & 26 \\
- & N as nested solver & 1.00 & 3.12 & 50 & 1.00 & 1.00 & 40 \\
+ & N as iterative-solver & 1.00 & 3.12 & 50 & 1.00 & 1.00 & 40 \\
  & N as cost-only & 1.00 & 3.12 & 50 & 2.51 & 5.68 & 25 \\
- & time steps as nested solver & 1.00 & 5.68 & 48 & 1.00 & 1.00 & 39 \\
+ & time steps as iterative-solver & 1.00 & 5.68 & 48 & 1.00 & 1.00 & 39 \\
  & time steps as cost-only & 1.00 & 5.68 & 50 & 1.00 & 1.00 & 27 \\
  & Newton tol. as discretization & 1.00 & 3.12 & 50 & 1.55 & 25.65 & 27 \\
  & Newton tol. as cost-only & 1.00 & 3.12 & 50 & 1.90 & 25.65 & 20 \\
  & GMRES tol. as discretization & 1.00 & 1.00 & 52 & 3.07 & 10.42 & 18 \\
  & GMRES tol. as cost-only & 1.00 & 3.12 & 51 & 2.51 & 4.51 & 19 \\
  & ILU drop tol. as discretization & 1.00 & 5.68 & 51 & 2.85 & 6.25 & 25 \\
- & ILU drop tol. as nested solver & 1.00 & 3.12 & 50 & 3.12 & 5.68 & 34 \\
+ & ILU drop tol. as iterative-solver & 1.00 & 3.12 & 50 & 3.12 & 5.68 & 34 \\
 \addlinespace[2pt]
 2D-1 & correct & 14.17 & 96.30 & 77 & 8.79 & 48.69 & 67 \\
- & n\_arc as nested solver & 14.17 & 96.30 & 73 & 14.17 & 96.30 & 65 \\
- & n\_arc as cost-only & 14.17 & 96.30 & 70 & 7.59 & 204.28 & 51 \\
+ & $n_\mathrm{arc}$ as iterative-solver & 14.17 & 96.30 & 73 & 14.17 & 96.30 & 65 \\
+ & $n_\mathrm{arc}$ as cost-only & 14.17 & 96.30 & 70 & 7.59 & 204.28 & 51 \\
  & residualControl as discretization & 14.17 & 204.28 & 77 & 8.79 & 176.31 & 65 \\
  & residualControl as cost-only & 14.17 & 48.69 & 75 & 6.46 & 62.54 & 59 \\
  & GAMG tol. as discretization & 14.17 & 96.30 & 77 & 14.17 & 96.30 & 81 \\
  & GAMG tol. as cost-only & 14.17 & 65.66 & 77 & 14.17 & 48.69 & 45 \\
  & coarsest level as discretization & 14.17 & 96.30 & 77 & 7.59 & 48.69 & 59 \\
- & coarsest level as nested solver & 14.17 & 97.97 & 77 & 14.17 & 97.97 & 79 \\
+ & coarsest level as iterative-solver & 14.17 & 97.97 & 77 & 14.17 & 97.97 & 79 \\
 \bottomrule
 \end{tabular}

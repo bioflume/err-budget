@@ -1,25 +1,17 @@
-"""LaTeX tables of the article generated from the pooled replays (data/pooled_*.json).
+"""The LaTeX tables of v12, from the stored replays in data/.
 
-    python exp70_tables.py            # writes figures/tab_pooled.tex, tab_ablation.tex,
-                                      # tab_ablation_v12.tex, tab_baselines_compact.tex,
-                                      # tab_baselines_full.tex, tab_transfer.tex,
-                                      # tab_heldout.tex, tab_estimate.tex, tab_lmpbase.tex,
-                                      # and for Section S15 of the supplement
-                                      # tab_versions_summary.tex, tab_versions.tex,
-                                      # tab_estimate_v11.tex; prints the totals quoted in the text
+    python exp70_tables.py     # writes figures/tab_*.tex and prints the totals quoted in the text
 
-Version 6 of the article: counts of 1,000 or more carry a thin separator ({,}), the
-ablation tables report the distinct accepted settings and the distinct missed ones,
-the thresholds of the baselines are written eta, and Table 7 of the article is the
-compact table tab_baselines_compact.tex (the full one goes to the supplement).
+Article: Table 4 (tab_pooled_compact.tex), Table 5 (tab_preregistered.tex).
+Supplement: Tables S-3.1 (tab_pooled.tex), S-3.2 (tab_sup_ablation.tex), S-3.3
+(tab_estimate.tex), S-4.1 (tab_transfer.tex), S-4.2 (tab_baselines_full.tex) and S-4.3
+(tab_lmpbase.tex).  Table S-3.5 (tab_misdeclare.tex) is written by exp65_misdeclare_v12.py.
 
-Version 7 of the article: the tables of the article carry no columns or rows of earlier
-versions of the program.  Those comparisons are in Section S15 of the supplement
-(tab_versions_summary.tex, tab_versions.tex, tab_estimate_v11.tex).
+Group values are medians over the test cases of the per-case medians; counts are sums.
+2D-2 is the refined study (case 2D-2h); the coarser study (case 2D-2) is left out.
 """
 import json
 import os
-import sys
 
 import numpy as np
 
@@ -28,7 +20,7 @@ D = os.path.join(HERE, "data")
 OUT = os.path.join(HERE, "figures")
 
 LABEL = {"L2": "L2", "L3": "L3", "L4": "L4", "L5": "L5", "2D-1": "OpenFOAM 2D-1",
-         "2D-2": "OpenFOAM 2D-2", "2D-2h": "OpenFOAM 2D-2", "LMP-20": "LAMMPS 8{,}000", "LMP-40": "LAMMPS 64{,}000",
+         "2D-2h": "OpenFOAM 2D-2", "LMP-20": "LAMMPS 8{,}000", "LMP-40": "LAMMPS 64{,}000",
          "LMP-64": "LAMMPS 262{,}144", "GMX-d": "GROMACS double", "GMX-s": "GROMACS mixed",
          "ABINIT": "ABINIT", "QE": "Quantum ESPRESSO"}
 OBS = {"energy": "energy", "dissipation": "dissipation", "gradient": "grad.\\ energy",
@@ -37,28 +29,34 @@ OBS = {"energy": "energy", "dissipation": "dissipation", "gradient": "grad.\\ en
        "cd": "$c_D$", "dp": "$\\Delta p$", "cl": "$c_L$", "cd_max": "$c_{D,\\max}$",
        "cl_max": "$c_{L,\\max}$", "st": "St", "energy_per_ion": "energy",
        "potential": "energy", "force": "force"}
-ORDER = list(LABEL)
-PLAIN = {k: v.replace("{,}", ",") for k, v in LABEL.items()}
-# Revision 4: which 2D-2 study enters Table 3.  "refined" (default when the rows of the
-# Hamilton job J2 are present) shows case 2D-2h and drops the revision-3 case 2D-2;
-# "old" shows the revision-3 case.  Both are always in data/pooled_<config>.json.
-TABLE3_2D2 = os.environ.get("ERRBUDGET_TABLE3_2D2", "refined")
+GROUPS = [("L2--L4", ["L2", "L3", "L4"]), ("L5", ["L5"]), ("OpenFOAM 2D-1", ["2D-1"]),
+          ("OpenFOAM 2D-2", ["2D-2h"]), ("LAMMPS", ["LMP-20", "LMP-40", "LMP-64"]),
+          ("GROMACS double", ["GMX-d"]), ("GROMACS mixed", ["GMX-s"]), ("ABINIT", ["ABINIT"]),
+          ("Quantum ESPRESSO", ["QE"])]
+PROCEDURES = [("program", "This program"), ("seq-1", "S, $\\eta=\\varepsilon$"),
+              ("seq-3", "S, $\\eta=\\varepsilon/3$"), ("seq-10", "S, $\\eta=\\varepsilon/10$"),
+              ("coord-1", "SJ, $\\eta=\\varepsilon$"), ("coord-3", "SJ, $\\eta=\\varepsilon/3$"),
+              ("coord-10", "SJ, $\\eta=\\varepsilon/10$"), ("ref", "Ref.")]
+ABLATION = [("v1.2.1", "Default configuration"),
+            ("v1.2.1-nojoint", "\\quad without the interaction check"),
+            ("v1.2.1-nolocal", "\\quad without the observed-order check"),
+            ("v1.2.1-credit", "\\quad signed sum (cancellation allowed)"),
+            ("v1.2.1-constant", "\\quad fixed safety factor 1.25"),
+            ("v1.2.1-nores", "\\quad detection threshold $\\rho=\\sigma$"),
+            ("v1.2.1-accept-unconverged", "\\quad accepting unconverged runs"),
+            ("v1.2.1-nested-as-disc", "\\quad iterative-solver parameters declared discretization"),
+            ("v1.2.1-screened", "\\quad with the screening sweep")]
 
 
-def _select_2d2(R):
-    has_h = any(r["case"] == "2D-2h" for r in R)
-    drop = "2D-2" if (has_h and TABLE3_2D2 == "refined") else "2D-2h"
-    return [r for r in R if r["case"] != drop]
+def load_json(name):
+    return json.load(open(os.path.join(D, name)))
 
 
-def load(cfg, select=True):
-    p = os.path.join(D, f"pooled_{cfg}.json")
-    if not os.path.exists(p):
-        return None
-    R = json.load(open(p))
-    if select:
-        R = _select_2d2(R)
-    return sorted(R, key=lambda r: (ORDER.index(r["case"]), list(OBS).index(r["ob"]), -r["target"]))
+def load(cfg):
+    """Rows of data/pooled_<cfg>.json in the order of the tables, without the coarser 2D-2."""
+    R = [r for r in load_json(f"pooled_{cfg}.json") if r["case"] in LABEL]
+    return sorted(R, key=lambda r: (list(LABEL).index(r["case"]), list(OBS).index(r["ob"]),
+                                    -r["target"]))
 
 
 def tex_num(x):
@@ -68,14 +66,8 @@ def tex_num(x):
 
 
 def tex_int(n):
-    """An integer with a thin separator for thousands, as in the article (17{,}610)."""
+    """An integer with a thin separator for thousands (17{,}610)."""
     return f"{int(n):,}".replace(",", "{,}")
-
-
-def tex_big(x):
-    """tex_num with a thousands separator for values of 1,000 or more."""
-    s = tex_num(x)
-    return tex_int(round(x)) if s != "---" and x >= 1000 else s
 
 
 def tex_tg(t):
@@ -86,311 +78,191 @@ def tex_tg(t):
     return f"$10^{{{e}}}$" if m == 1 else f"${m}{{\\times}}10^{{{e}}}$"
 
 
+def median(xs):
+    xs = [x for x in xs if np.isfinite(x)]
+    return float(np.median(xs)) if xs else np.nan
+
+
 def totals(R):
     t = lambda k: sum(r.get(k, 0) for r in R)
     pm = [r["pen_med"] for r in R if r["accepted"] and np.isfinite(r["pen_med"])]
-    return dict(cells=len(R), n=t("n"), sf=t("start_failed"), acc=t("accepted"), miss=t("missed"),
+    return dict(cases=len(R), n=t("n"), sf=t("start_failed"), acc=t("accepted"), miss=t("missed"),
                 dr=t("declined_reach"), du=t("declined_unreach"), unconv=t("unconv"),
                 distinct=t("distinct"), distinct_missed=t("distinct_missed"),
-                cells_miss=sum(1 for r in R if r["missed"]),
+                cases_miss=sum(1 for r in R if r["missed"]),
                 pen=float(np.median(pm)) if pm else np.nan,
                 geo=float(np.exp(np.mean(np.log(pm)))) if pm else np.nan,
-                runs=float(np.median([r["runs_med"] for r in R if np.isfinite(r["runs_med"])])))
+                runs=median([r["runs_med"] for r in R]))
 
 
 def pooled_table(R):
-    lines = []
-    last = None
-    for r in R:
-        lab = LABEL[r["case"]] if r["case"] != last else ""
-        if r["case"] != last and last is not None:
-            lines.append("\\addlinespace[1pt]")
-        last = r["case"]
-        lines.append(f"{lab} & {OBS[r['ob']]} & {tex_tg(r['target'])} & {tex_int(r['n'])} & {tex_int(r['start_failed'])} & "
-                     f"{tex_int(r['accepted'])} & {r.get('distinct', '---')} & {tex_int(r['missed'])} & "
-                     f"{tex_int(r['declined_reach'])} & {tex_int(r['declined_unreach'])} & "
-                     f"{tex_num(r['pen_med'])} & {tex_num(r['pen_max'])} & {r['runs_med']:.0f} \\\\")
-    T = totals(R)
-    lines.append("\\midrule")
-    lines.append(f"\\multicolumn{{3}}{{l}}{{All {T['cells']} cells}} & {tex_int(T['n'])} & {tex_int(T['sf'])} & "
-                 f"{tex_int(T['acc'])} & {tex_int(T['distinct'])} & {tex_int(T['miss'])} & {tex_int(T['dr'])} & "
-                 f"{tex_int(T['du'])} & {tex_num(T['pen'])} & & {T['runs']:.0f} \\\\")
-    return "\n".join(lines)
-
-
-def versions_table(cfgs):
-    """Section S15: accepted/missed in every cell of Table 3 for each version of the program."""
-    data = [(c, {(r["case"], r["ob"], r["target"]): r for r in (load(c) or [])}) for c, _ in cfgs]
-    base = load(cfgs[0][0]) or []
+    """Table S-3.1: every development test case."""
     lines, last = [], None
-    for r in base:
-        lab = LABEL[r["case"]] if r["case"] != last else ""
+    for r in R:
         if r["case"] != last and last is not None:
             lines.append("\\addlinespace[1pt]")
+        lab = LABEL[r["case"]] if r["case"] != last else ""
         last = r["case"]
-        k = (r["case"], r["ob"], r["target"])
-        cells = []
-        for _, D_ in data:
-            o = D_.get(k)
-            cells.append(f"{tex_int(o['accepted'])}/{tex_int(o['missed'])}" if o else "---")
         lines.append(f"{lab} & {OBS[r['ob']]} & {tex_tg(r['target'])} & {tex_int(r['n'])} & "
-                     + " & ".join(cells) + " \\\\")
-    tots = []
-    for c, D_ in data:
-        T = totals(list(D_.values()))
-        tots.append(f"{tex_int(T['acc'])}/{tex_int(T['miss'])}")
-    lines.append("\\midrule")
-    lines.append(f"\\multicolumn{{3}}{{l}}{{All {len(base)} cells}} & {tex_int(totals(base)['n'])} & "
-                 + " & ".join(tots) + " \\\\")
+                     f"{tex_int(r['start_failed'])} & {tex_int(r['accepted'])} & {r['distinct']} & "
+                     f"{tex_int(r['missed'])} & {tex_int(r['declined_reach'])} & "
+                     f"{tex_int(r['declined_unreach'])} & {tex_num(r['pen_med'])} & "
+                     f"{tex_num(r['pen_max'])} & {r['runs_med']:.0f} \\\\")
+    T = totals(R)
+    lines += ["\\midrule",
+              f"\\multicolumn{{3}}{{l}}{{All {T['cases']} test cases}} & {tex_int(T['n'])} & "
+              f"{tex_int(T['sf'])} & {tex_int(T['acc'])} & {tex_int(T['distinct'])} & "
+              f"{tex_int(T['miss'])} & {tex_int(T['dr'])} & {tex_int(T['du'])} & "
+              f"{tex_num(T['pen'])} & & {T['runs']:.0f} \\\\"]
     return "\n".join(lines)
 
 
-def ablation_table(cfgs, base_cfg="v1.2.1"):
-    rows = []
-    base = load(base_cfg)
-    keys = {(r["case"], r["ob"], r["target"]) for r in base} if base else set()
-    for name, lab in cfgs:
-        R = load(name)
-        if R is None:
-            continue
-        R = [r for r in R if (r["case"], r["ob"], r["target"]) in keys]
+def compact_table(R, base):
+    """Table 4: the development test cases by group.  Cost ratio and runs per search are
+    those of the program from converged starting settings (data/baselines_v6.json)."""
+    lines = []
+    for g, keys in GROUPS:
+        rows = [r for r in R if r["case"] in keys]
+        prog = [v["program"] for k, v in base.items() if k.split("|")[0] in keys]
+        T = totals(rows)
+        lines.append(f"{g} & {T['cases']} & {tex_int(T['n'])} & {tex_int(T['acc'])} & "
+                     f"{T['distinct']} & {T['miss']} & {tex_int(T['dr'] + T['du'])} & "
+                     f"{tex_num(median([p['pen'] for p in prog]))} & "
+                     f"{np.median([p['runs'] for p in prog]):.0f} \\\\")
+    T = totals(R)
+    prog = [v["program"] for k, v in base.items() if k.split("|")[0] in LABEL]
+    lines += ["\\midrule",
+              f"All groups & {T['cases']} & {tex_int(T['n'])} & {tex_int(T['acc'])} & "
+              f"{T['distinct']} & {T['miss']} & {tex_int(T['dr'] + T['du'])} & "
+              f"{tex_num(T['pen'])} & {np.median([p['runs'] for p in prog]):.0f} \\\\"]
+    return "\n".join(lines) + "\n"
+
+
+def preregistered_table():
+    """Table 5: the searches of the frozen program on H1-H3 and the released program's
+    accepted and missed searches."""
+    frozen = {(r["case"], r["ob"], r["target"]): r
+              for r in load_json("heldout_replay.json") if r["config"] == "v1.2"}
+    released = {(r["case"], r["ob"], r["target"]): r
+                for r in load_json("heldout_replay_current.json") if r["config"] == "v1.2.1"}
+    obs = {"mean": "mean", "flux": "flux", "u_min": "$u_{\\min}$", "v_max": "$v_{\\max}$",
+           "v_min": "$v_{\\min}$", "ek": "kinetic energy", "eps": "dissipation rate",
+           "umax": "$u_{\\max}$"}
+    lines, last = [], None
+    for k, r in frozen.items():
+        if last is not None and k[0] != last:
+            lines.append("\\addlinespace[1pt]")
+        c = released[k]
+        lines.append(f"{k[0] if k[0] != last else ''} & {obs[k[1]]} & {tex_tg(k[2])} & {r['n']} & "
+                     f"{r['accepted']} & {r['distinct']} & {r['missed']} & "
+                     f"{r['declined_reach'] + r['declined_unreach']} & {tex_num(r['pen_med'])} & "
+                     f"{r['runs_med']:.0f} & {c['accepted']}/{c['missed']} \\\\")
+        last = k[0]
+    return "\n".join(lines) + "\n"
+
+
+def ablation_table():
+    """Table S-3.2: the released program with one check removed or changed."""
+    keys = {(r["case"], r["ob"], r["target"]) for r in load("v1.2.1")}
+    lines = []
+    for cfg, lab in ABLATION:
+        R = [r for r in load(cfg) if (r["case"], r["ob"], r["target"]) in keys]
         T = totals(R)
-        cells = sorted({r["case"] for r in R if r["missed"]}, key=ORDER.index)
-        cells = list(dict.fromkeys(LABEL[c] for c in cells))
+        where = list(dict.fromkeys(LABEL[r["case"]] for r in R if r["missed"]))
         miss = tex_int(T["miss"]) + (f" ({T['distinct_missed']})" if T["miss"] else "")
-        rows.append(f"{lab} & {tex_int(T['acc'])} & {tex_int(T['distinct'])} & {miss} & {T['cells_miss']} & "
-                    f"{tex_int(T['dr'])} & {tex_num(T['pen'])} & {tex_num(T['geo'])} & {T['runs']:.0f} & "
-                    f"{', '.join(cells) if cells else '---'} \\\\")
-    return "\n".join(rows)
+        lines.append(f"{lab} & {tex_int(T['acc'])} & {tex_int(T['distinct'])} & {miss} & "
+                     f"{T['cases_miss']} & {tex_int(T['dr'])} & {tex_num(T['pen'])} & "
+                     f"{tex_num(T['geo'])} & {T['runs']:.0f} & {', '.join(where) or '---'} \\\\")
+    return "\n".join(lines) + "\n"
 
 
-if __name__ == "__main__":
-    os.makedirs(OUT, exist_ok=True)
-    R = load("v1.2.1")
-    open(os.path.join(OUT, "tab_pooled.tex"), "w").write(pooled_table(R))
-    for name in ["v1.2.1", "v1.2", "v1.1"]:
-        X = load(name)
-        if X:
-            print(name, totals(X))
-    # Revision 4: every component is removed from version 1.2.1, the configuration of
-    # Table 3 (revision 3 removed them from the frozen version 1.2; that table is kept
-    # as tab_ablation_v12.tex for the response letter).
-    # Version 7: Table 5 of the article removes components from the released program and
-    # shows the frozen program as its joint-check threshold; the earlier versions are in
-    # Section S15 of the supplement (tab_versions_summary.tex).
-    abl = [("v1.2.1", "Default configuration"),
-           ("v1.2", "joint check only above $3\\rho$ (frozen program)"),
-           ("v1.2.1-nojoint", "without the joint check"),
-           ("v1.2.1-nolocal", "without the local-order check"),
-           ("v1.2.1-credit", "crediting cancellation"),
-           ("v1.2.1-constant", "constant safety factor"),
-           ("v1.2.1-nores", "resolution without the $0.1\\,\\varepsilon$ term"),
-           ("v1.2.1-accept-unconverged", "accepting unconverged runs"),
-           ("v1.2.1-nested-as-disc", "nested solver declared discretization"),
-           ("v1.2.1-screened", "with the preliminary sweep")]
-    open(os.path.join(OUT, "tab_ablation.tex"), "w").write(ablation_table(abl))
-    vers = [("v1.2.1", "1.2.1 (released)"),
-            ("v1.2", "1.2 (frozen)"),
-            ("v1.1+gated", "1.1, gated factor"),
-            ("v1.1", "1.1")]
-    open(os.path.join(OUT, "tab_versions_summary.tex"), "w").write(ablation_table(vers))
-    open(os.path.join(OUT, "tab_versions.tex"), "w").write(versions_table(vers))
-    abl12 = [(n.replace("v1.2.1-", "v1.2-"), l) for n, l in abl if n.startswith("v1.2.1-")]
-    open(os.path.join(OUT, "tab_ablation_v12.tex"), "w").write(
-        ablation_table([("v1.2", "Version 1.2 (frozen)")] + abl12, base_cfg="v1.2"))
-    print(open(os.path.join(OUT, "tab_ablation.tex")).read())
-
-
-def baseline_cells():
-    p = os.path.join(D, "baselines_v6.json")
-    if os.path.exists(p):
-        res = json.load(open(p))["cells"]
-    else:
-        p = os.path.join(D, "baselines_pooled.json")
-        if not os.path.exists(p):
-            return None, []
-        res = json.load(open(p))
-    has_h = any(k.split("|")[0] == "2D-2h" for k in res)
-    two = (["2D-2h"] if (has_h and TABLE3_2D2 == "refined") else ["2D-2"])
-    groups = [("L2--L4", ["L2", "L3", "L4"]), ("L5", ["L5"]), ("OpenFOAM 2D-1", ["2D-1"]),
-              ("OpenFOAM 2D-2", two), ("LAMMPS", ["LMP-20", "LMP-40", "LMP-64"]),
-              ("GROMACS double", ["GMX-d"]), ("GROMACS mixed", ["GMX-s"]), ("ABINIT", ["ABINIT"]),
-              ("Quantum ESPRESSO", ["QE"])]
-    return res, groups
-
-
-def baselines_compact_table():
-    """Table 7 of the article: one row per group.  Program: cells, starts, declines, penalty,
-    runs and K; misses of sequential convergence (S) and coordinate search (C) at the three
-    thresholds and of reference acceptance; penalty and K of C at eta = eps/3 and eps/10.
-    Group values are medians over the cells of the per-cell medians, counts are sums."""
-    res, groups = baseline_cells()
-    if res is None:
-        return ""
-    med = lambda R, f: float(np.median([r[f] for r in R if np.isfinite(r[f])])) if any(
-        np.isfinite(r[f]) for r in R) else np.nan
+def baselines_table(base):
+    """Table S-4.2: the program and the three procedures of current practice by group."""
     out = []
-    for g, ks in groups:
-        rows = [v for k, v in res.items() if k.split("|")[0] in ks]
-        if not rows:
-            continue
-        P = [v["program"] for v in rows]
-        starts = sum(r["reached"] + r["missed"] + r["declined"] for r in P)
-        cells = [g, str(len(rows)), tex_int(starts), tex_int(sum(r["declined"] for r in P)),
-                 tex_num(med(P, "pen")), f"{np.median([r['runs'] for r in P]):.0f}", tex_big(med(P, "K"))]
-        for key in ("seq-1", "seq-3", "seq-10", "coord-1", "coord-3", "coord-10", "ref"):
-            cells.append(tex_int(sum(v[key]["missed"] for v in rows)))
-        for key in ("coord-3", "coord-10"):
+    for g, keys in GROUPS:
+        rows = [v for k, v in base.items() if k.split("|")[0] in keys]
+        for i, (key, lab) in enumerate(PROCEDURES):
             R = [v[key] for v in rows]
-            cells += [tex_num(med(R, "pen")), f"{med(R, 'K'):.1f}"]
-        out.append(" & ".join(cells) + " \\\\")
-    return "\n".join(out)
-
-
-def baselines_table():
-    res, groups = baseline_cells()
-    if res is None:
-        return ""
-    names = [("program", "This program"), ("seq-1", "Sequential, $\\eta=\\varepsilon$"),
-             ("seq-3", "Sequential, $\\eta=\\varepsilon/3$"), ("seq-10", "Sequential, $\\eta=\\varepsilon/10$"),
-             ("coord-1", "Coordinate, $\\eta=\\varepsilon$"), ("coord-3", "Coordinate, $\\eta=\\varepsilon/3$"),
-             ("coord-10", "Coordinate, $\\eta=\\varepsilon/10$"), ("ref", "Reference acceptance")]
-    out = []
-    for g, ks in groups:
-        rows = {k: v for k, v in res.items() if k.split("|")[0] in ks}
-        if not rows:
-            continue
-        first = True
-        for key, lab in names:
-            R = [v[key] for v in rows.values() if key in v]
-            if not R:
-                continue
-            pen = [r["pen"] for r in R if np.isfinite(r["pen"])]
-            Ks = [r["K"] for r in R if np.isfinite(r["K"])]
-            dec = sum(r["declined"] for r in R)
-            out.append(f"{g + f' ({len(rows)} cells)' if first else ''} & {lab} & {sum(r['reached'] for r in R)} & "
-                       f"{sum(r['missed'] for r in R)} & {dec if key == 'program' else '---'} & "
-                       f"{tex_num(np.median(pen)) if pen else '---'} & {np.median([r['runs'] for r in R]):.0f} & "
-                       f"{tex_num(np.median(Ks)) if Ks else '---'} \\\\")
-            first = False
+            out.append(f"{f'{g} ({len(rows)} cases)' if i == 0 else ''} & {lab} & "
+                       f"{sum(r['reached'] for r in R)} & {sum(r['missed'] for r in R)} & "
+                       f"{sum(r['declined'] for r in R) if key == 'program' else '---'} & "
+                       f"{tex_num(median([r['pen'] for r in R]))} & "
+                       f"{np.median([r['runs'] for r in R]):.0f} & "
+                       f"{tex_num(median([r['K'] for r in R]))} \\\\")
         out.append("\\addlinespace[2pt]")
     return "\n".join(out[:-1])
 
 
-open(os.path.join(OUT, "tab_baselines_full.tex"), "w").write(baselines_table())
-open(os.path.join(OUT, "tab_baselines_compact.tex"), "w").write(baselines_compact_table())
+def md_table():
+    """Table S-4.3: LAMMPS and GROMACS double precision by size and target."""
+    R = load_json("baselines_lmp_gmx.json")["cells"]
+    lab = {"LMP-20": "LAMMPS 8,000", "LMP-40": "LAMMPS 64,000", "LMP-64": "LAMMPS 262,144",
+           "GMX-d": "GROMACS double"}
+    procs = [PROCEDURES[i] for i in (0, 1, 3, 6, 7)]
+    out = ["\\begin{tabular}{ll" + "r" * len(procs) + "}", "\\toprule",
+           "Code and size & Target & " + " & ".join(p[1] for p in procs) + " \\\\", "\\midrule"]
+    for k, v in R.items():
+        c, _, tg = k.split("|")
+        cells = []
+        for p, _ in procs:
+            x = v[p]
+            pen = "---" if not np.isfinite(x["pen"]) else f"{x['pen']:.2f}"
+            cells.append(f"{x['reached']}/{x['reached'] + x['missed'] + x['declined']} ({pen})")
+        out.append(f"{lab[c]} & {tex_tg(float(tg))} & " + " & ".join(cells) + " \\\\")
+    return "\n".join(out + ["\\bottomrule", "\\end{tabular}"])
 
 
 def transfer_table():
-    p = os.path.join(D, "transfer_floor.json")
-    if not os.path.exists(p):
-        return ""
-    rows = json.load(open(p))
-    cls = {"discretisation": "d", "nested-solver": "n", "cost-only": "c"}
-    lab = {"L2": "L2", "L3": "L3", "L4": "L4", "L5": "L5", "2D-1": "2D-1", "2D-2": "2D-2",
-           "QE": "QE", "ABINIT": "ABINIT"}
+    """Table S-4.1: failure rate of a convergence threshold chosen once."""
+    cls = {"discretisation": "d", "nested-solver": "i", "cost-only": "c"}
+    par = {"n_arc": "$n_\\mathrm{arc}$", "dt": "$\\Delta t$"}
     out = ["\\begin{tabular}{lllrrrrrrrrrr}", "\\toprule",
-           "& & & \\multicolumn{5}{c}{Without the refinements} & \\multicolumn{5}{c}{With the refinements} \\\\",
+           "& & & \\multicolumn{5}{c}{Without the adjustments} & "
+           "\\multicolumn{5}{c}{With the adjustments} \\\\",
            "\\cmidrule(lr){4-8}\\cmidrule(lr){9-13}",
-           "Problem & Parameter & & $f{=}0.01$ & $0.05$ & $0.1$ & $0.25$ & $0.5$ & $0.01$ & $0.05$ & $0.1$ & $0.25$ & $0.5$ \\\\",
+           "Problem & Parameter & & $f{=}0.01$ & $0.05$ & $0.1$ & $0.25$ & $0.5$ & $0.01$ & "
+           "$0.05$ & $0.1$ & $0.25$ & $0.5$ \\\\",
            "\\midrule"]
-    last = None
     keyed = {}
-    for r in rows:
+    for r in load_json("transfer_floor.json"):
         keyed.setdefault((r["case"], r["param"], r["kind"]), {})[r["floor"]] = r["rates"]
-    for (case, par, kind), v in keyed.items():
+    last = None
+    for (case, p, kind), v in keyed.items():
         if last is not None and case != last:
             out.append("\\addlinespace[1pt]")
-        a = v.get(False, [np.nan] * 5); b = v.get(True, [np.nan] * 5)
-        pname = par.replace("_", "\\_")
-        out.append(f"{lab[case] if case != last else ''} & {pname} & {cls[kind]} & "
-                   + " & ".join(f"{x:.0f}\\%" for x in a) + " & " + " & ".join(f"{x:.0f}\\%" for x in b) + " \\\\")
+        out.append(f"{case if case != last else ''} & {par.get(p, p.replace('_', chr(92) + '_'))} & "
+                   f"{cls[kind]} & " + " & ".join(f"{x:.0f}\\%" for x in v[False] + v[True]) + " \\\\")
         last = case
-    out += ["\\bottomrule", "\\end{tabular}"]
-    return "\n".join(out)
+    return "\n".join(out + ["\\bottomrule", "\\end{tabular}"])
 
 
-open(os.path.join(OUT, "tab_transfer.tex"), "w").write(transfer_table())
-
-
-def heldout_table():
-    p1 = os.path.join(D, "heldout_replay.json"); p2 = os.path.join(D, "heldout_replay_current.json")
-    if not os.path.exists(p1):
-        return ""
-    R = json.load(open(p1)); Rc = json.load(open(p2)) if os.path.exists(p2) else []
-    get = lambda rows, cfg: {(r["case"], r["ob"], r["target"]): r for r in rows if r["config"] == cfg}
-    v12, v121 = get(R, "v1.2"), get(Rc, "v1.2.1")
-    obs = {"mean": "mean", "flux": "flux", "u_min": "$u_{\\min}$", "v_max": "$v_{\\max}$",
-           "v_min": "$v_{\\min}$", "ek": "$E_k$", "eps": "$\\epsilon$", "umax": "$u_{\\max}$"}
-    out, last = [], None
-    for k, r in v12.items():
-        case = k[0]
-        if last is not None and case != last:
-            out.append("\\addlinespace[1pt]")
-        c = v121.get(k)
-        out.append(f"{case if case != last else ''} & {obs.get(k[1], k[1])} & {tex_tg(k[2])} & {r['n']} & "
-                   f"{r['start_failed']} & {r['accepted']} & {r.get('distinct', '---')} & {r['missed']} & {r['declined_reach'] + r['declined_unreach']} & "
-                   f"{tex_num(r['pen_med'])} & {r['runs_med']:.0f} & "
-                   f"{(str(c['accepted']) + '/' + str(c['missed'])) if c else '---'} \\\\")
-        last = case
-    return "\n".join(out)
-
-
-open(os.path.join(OUT, "tab_heldout.tex"), "w").write(heldout_table())
-
-
-def estimate_table(version="v12"):
-    """Table A.1 of the article (version="v12": the released program, whose results the
-    file stores under the key v12) or the version-1.1 columns of Section S15 ("v11")."""
-    p = os.path.join(D, "estimate_v12.json")
-    if not os.path.exists(p):
-        return ""
-    R = json.load(open(p))
-    head = "Final estimate" if version == "v12" else "Version 1.1"
+def estimate_table():
+    """Table S-3.3: ratio of the estimated to the true error."""
     out = ["\\begin{tabular}{llrrrrr}", "\\toprule",
-           f"& & & Raw & \\multicolumn{{3}}{{c}}{{{head}}} \\\\",
-           "\\cmidrule(lr){5-7}",
-           "Problem & Observable & Settings & opt. & 10th pct. & Median & Opt. \\\\",
+           "& & & Signed sum & \\multicolumn{3}{c}{Final estimate} \\\\", "\\cmidrule(lr){5-7}",
+           "Problem & Observable & Settings & under. & 10th pct. & Median & Under. \\\\",
            "\\midrule"]
     last = None
-    for r in R:
-        lab = LABEL.get(r["case"], r["case"]) if r["case"] != last else ""
+    for r in load_json("estimate_v12.json"):
+        a = r["v12"]
+        out.append(f"{LABEL.get(r['case'], r['case']) if r['case'] != last else ''} & "
+                   f"{OBS.get(r['ob'], r['ob'])} & {r['n']} & {r['raw']:.0f}\\% & {a[0]:.2f} & "
+                   f"{a[1]:.2f} & {a[2]:.1f}\\% \\\\")
         last = r["case"]
-        a = r[version]
-        out.append(f"{lab} & {OBS.get(r['ob'], r['ob'])} & {r['n']} & {r['raw']:.0f}\\% & {a[0]:.2f} & {a[1]:.2f} & "
-                   f"{a[2]:.1f}\\% \\\\")
-    out += ["\\bottomrule", "\\end{tabular}"]
-    return "\n".join(out)
+    return "\n".join(out + ["\\bottomrule", "\\end{tabular}"])
 
 
-open(os.path.join(OUT, "tab_estimate.tex"), "w").write(estimate_table("v12"))
-open(os.path.join(OUT, "tab_estimate_v11.tex"), "w").write(estimate_table("v11"))
-
-
-def lmp_table():
-    p = os.path.join(D, "baselines_lmp_gmx.json")
-    if not os.path.exists(p):
-        return ""
-    R = json.load(open(p))
-    if isinstance(R, dict) and "cells" in R:          # revision 4 format of exp72: {config, cells}
-        R = R["cells"]
-    lab = {"LMP-20": "LAMMPS 8,000", "LMP-40": "LAMMPS 64,000", "LMP-64": "LAMMPS 262,144",
-           "GMX-d": "GROMACS double"}
-    procs = [("program", "This program"), ("seq-1", "Sequential, $\\eta=\\varepsilon$"),
-             ("seq-10", "Sequential, $\\eta=\\varepsilon/10$"),
-             ("coord-10", "Coordinate, $\\eta=\\varepsilon/10$"), ("ref", "Reference acceptance")]
-    out = ["\\begin{tabular}{ll" + "r" * len(procs) + "}", "\\toprule",
-           "Case & Target & " + " & ".join(p[1] for p in procs) + " \\\\", "\\midrule"]
-    for k, v in R.items():
-        c, ob, tg = k.split("|")
-        cells = []
-        for p, _ in procs:
-            x = v[p]; n = x["reached"] + x["missed"] + x["declined"]
-            pen = "---" if not np.isfinite(x["pen"]) else f"{x['pen']:.2f}"
-            cells.append(f"{x['reached']}/{n} ({pen})")
-        out.append(f"{lab[c]} & {tex_tg(float(tg))} & " + " & ".join(cells) + " \\\\")
-    out += ["\\bottomrule", "\\end{tabular}"]
-    return "\n".join(out)
-
-
-open(os.path.join(OUT, "tab_lmpbase.tex"), "w").write(lmp_table())
+if __name__ == "__main__":
+    R = load("v1.2.1")
+    base = load_json("baselines_v6.json")["cells"]
+    base = {k: v for k, v in base.items() if k.split("|")[0] in LABEL}
+    tables = {"tab_pooled.tex": pooled_table(R), "tab_pooled_compact.tex": compact_table(R, base),
+              "tab_preregistered.tex": preregistered_table(), "tab_sup_ablation.tex": ablation_table(),
+              "tab_estimate.tex": estimate_table(), "tab_transfer.tex": transfer_table(),
+              "tab_baselines_full.tex": baselines_table(base), "tab_lmpbase.tex": md_table()}
+    for name, text in tables.items():
+        open(os.path.join(OUT, name), "w").write(text)
+    T = totals(R)
+    print(f"v1.2.1: {T['cases']} test cases, {T['n']} searches ({T['sf']} from unconverged starts), "
+          f"{T['acc']} accepted ({T['distinct']} distinct), {T['miss']} missed, "
+          f"{T['dr'] + T['du']} declined; median cost ratio {T['pen']:.2f}, runs {T['runs']:.0f}")

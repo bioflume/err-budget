@@ -24,7 +24,8 @@ CELLS = {"L3": [(o, t) for o in ("energy", "grad_energy") for t in (1e-2, 3e-3)]
          "2D-1": [("cd", 3e-3), ("cl", 3e-2)]}
 
 L3 = [c for c in C._manufactured() if c.key == "L3"][0]
-TEXCLASS = {"discretisation": "discretization", "nested-solver": "nested solver", "cost-only": "cost-only"}
+TEXCLASS = {"discretisation": "discretization", "nested-solver": "iterative-solver", "cost-only": "cost-only"}
+TEXNAME = {"n_arc": "$n_\\mathrm{arc}$"}
 ROWS = {}            # (problem, declaration) -> {mode: (median penalty, worst penalty, median runs)}
 for case in (L3, C._dfg1()):
     cells = [(o, t) for o, t in CELLS[case.key] if o in case.targets]
@@ -39,7 +40,7 @@ for case in (L3, C._dfg1()):
     texlab = {"correct": "correct"}
     for k, nm in enumerate(NAMES[case.key]):
         for c in CLASSES:
-            texlab[f"{nm} as {c}"] = f"{nm.replace('_', chr(92) + '_')} as {TEXCLASS[c]}"
+            texlab[f"{nm} as {c}"] = f"{TEXNAME.get(nm, nm)} as {TEXCLASS[c]}"
     for mode, scr in (("full (default)", False), ("preliminary sweep", True)):
         print("=" * 100)
         print(f"{case.label}, {mode}: cells {cells}")
@@ -60,9 +61,9 @@ for case in (L3, C._dfg1()):
                 np.median(pen) if pen else np.nan, np.max(pen) if pen else np.nan, np.median(runs))
 
 out = ["\\begin{tabular}{llrrrrrr}", "\\toprule",
-       "& & \\multicolumn{3}{c}{Full mode (default)} & \\multicolumn{3}{c}{Preliminary sweep} \\\\",
+       "& & \\multicolumn{3}{c}{Default (without screening)} & \\multicolumn{3}{c}{Screening sweep} \\\\",
        "\\cmidrule(lr){3-5}\\cmidrule(lr){6-8}",
-       "Problem & Declaration & Penalty & Worst & Runs & Penalty & Worst & Runs \\\\", "\\midrule"]
+       "Problem & Declared class & Cost ratio & Worst & Runs & Cost ratio & Worst & Runs \\\\", "\\midrule"]
 last = None
 for (prob, lab), v in ROWS.items():
     if last is not None and prob != last:
