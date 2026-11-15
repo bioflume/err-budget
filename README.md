@@ -192,17 +192,6 @@ Python 3.9 or later, NumPy and SciPy. From a clone: `pip install -e ".[dev]"` an
 (under a minute; the tests encode the article's claims, not just code health). To contribute, see
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## Citing
-
-The method and its evaluation are described in
-
-> G. Kabacaoğlu, *errbudget: choosing the numerical parameters of a black-box solver for a
-> target accuracy in one observable*, Computer Physics Communications, 2026.
-
-The article's own repository, with every script, stored solver
-output and the cluster jobs, is in the paper branch. See
-`CITATION.cff`.
-
 ## Licence
 
 MIT.
