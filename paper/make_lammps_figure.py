@@ -1,4 +1,9 @@
-"""Figure: the method on LAMMPS, against LAMMPS's own documented practice."""
+"""Figure: the method on LAMMPS, against LAMMPS's own documented practice.
+
+Regenerated for the revision without version history: the marker of the setting that an
+earlier version returned ("this method") is removed.  The released program (errbudget.V121)
+is run from the documented setting only to report its outcome, which the caption states.
+The figure is written to ERRBUDGET_FIG_DIR (default: figures/)."""
 import itertools
 import os
 import pickle
@@ -10,10 +15,10 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 sys.path.insert(0, os.path.dirname(__file__))
-from errbudget import run_protocol
+from errbudget import run_protocol, V121
 from lammps_madelung import LammpsMadelung
 
-OUT = os.environ.get("ERRBUDGET_FIG_DIR", "figures/")
+OUT = os.environ.get("ERRBUDGET_FIG_DIR", os.path.join(os.path.dirname(os.path.abspath(__file__)), "figures") + "/")
 C = ["#0072B2", "#D55E00", "#009E73", "#E69F00", "#CC79A7"]
 INK, MUTED = "#1a1a1a", "#6b6b6b"
 plt.rcParams.update({
@@ -33,7 +38,8 @@ ALL = list(itertools.product(*[range(len(l)) for l in LAD]))
 
 p = LammpsMadelung(n_cells=20, n_eval=3)
 QS = p.exact_observables()["energy_per_ion"]
-tensor = pickle.load(open(os.path.join(os.path.dirname(__file__), "data",
+from paths import DATA
+tensor = pickle.load(open(os.path.join(DATA,
                                        "lammps_tensor_n20.pkl"), "rb"))
 rel = lambda i: abs(tensor[i][0]["energy_per_ion"] - QS) / abs(QS)
 cost = lambda i: tensor[i][1]
@@ -48,8 +54,9 @@ feas = [i for i in ALL if rel(i) <= target]
 best = min(feas, key=cost)
 doc = (LAD[0].index(10.0), LAD[1].index(1e-5), LAD[2].index(5))
 cautious = (LAD[0].index(14.0), LAD[1].index(1e-6), LAD[2].index(7))
-r = run_protocol(look, LAD, doc, eps, hs=HS, kinds=KINDS, use_screen=False)
-rec = r["proposal"]
+r = run_protocol(look, LAD, doc, eps, hs=HS, kinds=KINDS, **V121)
+print(f"released program from the documented setting: accepted={r['certified']}, "
+      f"declined={r.get('declined')}, proposal={r['proposal']}, error={rel(r['proposal']):.2e}")
 
 ax[0].scatter([cost(i) for i in ALL], [rel(i) for i in ALL], s=7,
               color="#c9c9c9", edgecolor="none", zorder=1,
@@ -60,7 +67,6 @@ ax[0].annotate("accuracy requested", xy=(0.02, target), xycoords=("axes fraction
 for idx, col, mark, size, lab in [
         (doc,      C[1], "s", 62, "LAMMPS documented practice"),
         (cautious, C[4], "D", 46, "cautious user"),
-        (rec,      C[2], "*", 135, "this method"),
         (best,     C[0], "o", 62, "cheapest that attains it")]:
     ax[0].scatter([cost(idx)], [rel(idx)], s=size, marker=mark, color=col,
                   edgecolor="white", linewidth=0.8, zorder=5, label=lab)
@@ -68,7 +74,7 @@ ax[0].set_xscale("log"); ax[0].set_yscale("log")
 ax[0].set(xlabel="cost per evaluation (s)", ylabel="relative error in the energy")
 ax[0].set_title("(a) All 100 settings", loc="left")
 ax[0].grid(alpha=.5, lw=.4)
-fig.legend(*ax[0].get_legend_handles_labels(), frameon=False, fontsize=7.5, loc="lower center", ncol=5, bbox_to_anchor=(0.5, -0.16), handletextpad=0.3, columnspacing=1.2)
+fig.legend(*ax[0].get_legend_handles_labels(), frameon=False, fontsize=7.5, loc="lower center", ncol=4, bbox_to_anchor=(0.5, -0.16), handletextpad=0.3, columnspacing=1.2)
 
 # ---- right: the accuracy-neutral parameter LAMMPS does not give advice on ----
 orders = LAD[2]
@@ -94,4 +100,4 @@ ax[1].legend(frameon=False, fontsize=7.5, loc="upper right")
 fig.subplots_adjust(wspace=0.34)
 fig.savefig(OUT + "fig_lammps.pdf")
 print(f"lammps figure done: documented={cost(doc):.4f}s err={rel(doc):.2e}, "
-      f"method={cost(rec):.4f}s err={rel(rec):.2e}, best={cost(best):.4f}s")
+      f"cautious={cost(cautious):.4f}s err={rel(cautious):.2e}, best={cost(best):.4f}s err={rel(best):.2e}")
