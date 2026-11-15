@@ -1,0 +1,12 @@
+2D-2h, released rule against the stricter rule (accepted / missed / declined)
+  cd_max  0.1    graded    released  1179 /   0 /    54   stricter  1107 /   0 /   126   lost 72
+  cd_max  0.03   graded    released  1178 /   0 /    55   stricter  1106 /   0 /   127   lost 72
+  cd_max  0.01   graded    released  1136 /   0 /    97   stricter  1064 /   0 /   169   lost 72
+  cd_max  0.003  ungraded  released    72 /  72 /  1161   stricter     0 /   0 /  1233   lost 72
+  cl_max  0.1    graded    released  1151 /   0 /    82   stricter  1079 /   0 /   154   lost 72
+  cl_max  0.03   graded    released    96 /   0 /  1137   stricter     0 /   0 /  1233   lost 96
+  cl_max  0.01   ungraded  released    64 /  64 /  1169   stricter     0 /   0 /  1233   lost 64
+  st      0.1    graded    released  1179 /   0 /    54   stricter  1107 /   0 /   126   lost 72
+  st      0.03   graded    released  1179 /   0 /    54   stricter  1107 /   0 /   126   lost 72
+  st      0.01   graded    released  1161 /   0 /    72   stricter  1089 /   0 /   144   lost 72
+misses removed: 136

@@ -1,0 +1,152 @@
+[
+ {
+  "ob": "cd_max",
+  "target": 0.1,
+  "graded": true,
+  "released": {
+   "accepted": 1179,
+   "missed": 0,
+   "declined": 54
+  },
+  "stricter": {
+   "accepted": 1107,
+   "missed": 0,
+   "declined": 126
+  }
+ },
+ {
+  "ob": "cd_max",
+  "target": 0.03,
+  "graded": true,
+  "released": {
+   "accepted": 1178,
+   "missed": 0,
+   "declined": 55
+  },
+  "stricter": {
+   "accepted": 1106,
+   "missed": 0,
+   "declined": 127
+  }
+ },
+ {
+  "ob": "cd_max",
+  "target": 0.01,
+  "graded": true,
+  "released": {
+   "accepted": 1136,
+   "missed": 0,
+   "declined": 97
+  },
+  "stricter": {
+   "accepted": 1064,
+   "missed": 0,
+   "declined": 169
+  }
+ },
+ {
+  "ob": "cd_max",
+  "target": 0.003,
+  "graded": false,
+  "released": {
+   "accepted": 72,
+   "missed": 72,
+   "declined": 1161
+  },
+  "stricter": {
+   "accepted": 0,
+   "missed": 0,
+   "declined": 1233
+  }
+ },
+ {
+  "ob": "cl_max",
+  "target": 0.1,
+  "graded": true,
+  "released": {
+   "accepted": 1151,
+   "missed": 0,
+   "declined": 82
+  },
+  "stricter": {
+   "accepted": 1079,
+   "missed": 0,
+   "declined": 154
+  }
+ },
+ {
+  "ob": "cl_max",
+  "target": 0.03,
+  "graded": true,
+  "released": {
+   "accepted": 96,
+   "missed": 0,
+   "declined": 1137
+  },
+  "stricter": {
+   "accepted": 0,
+   "missed": 0,
+   "declined": 1233
+  }
+ },
+ {
+  "ob": "cl_max",
+  "target": 0.01,
+  "graded": false,
+  "released": {
+   "accepted": 64,
+   "missed": 64,
+   "declined": 1169
+  },
+  "stricter": {
+   "accepted": 0,
+   "missed": 0,
+   "declined": 1233
+  }
+ },
+ {
+  "ob": "st",
+  "target": 0.1,
+  "graded": true,
+  "released": {
+   "accepted": 1179,
+   "missed": 0,
+   "declined": 54
+  },
+  "stricter": {
+   "accepted": 1107,
+   "missed": 0,
+   "declined": 126
+  }
+ },
+ {
+  "ob": "st",
+  "target": 0.03,
+  "graded": true,
+  "released": {
+   "accepted": 1179,
+   "missed": 0,
+   "declined": 54
+  },
+  "stricter": {
+   "accepted": 1107,
+   "missed": 0,
+   "declined": 126
+  }
+ },
+ {
+  "ob": "st",
+  "target": 0.01,
+  "graded": true,
+  "released": {
+   "accepted": 1161,
+   "missed": 0,
+   "declined": 72
+  },
+  "stricter": {
+   "accepted": 1089,
+   "missed": 0,
+   "declined": 144
+  }
+ }
+]

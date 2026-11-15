@@ -1,0 +1,38 @@
+1. Limits beyond the reference (n_arc 64, 96, 128 at dt 2.5e-4; relative to the reference)
+  cd_max  order 1.38   beyond the reference: 8.2e-04 (observed order), 5.2e-04 (second order)
+  cl_max  order 1.35   beyond the reference: 5.9e-03 (observed order), 3.6e-03 (second order)
+  st      order 2.05   beyond the reference: 6.8e-04 (observed order), 7.0e-04 (second order)
+  lift at 3e-2 against the limit at the observed order: 96 of 96 accepted searches miss, worst 1.12
+  lift at 3e-2 against the limit at the second order: 78 of 96 accepted searches miss, worst 1.04
+  lift at 3e-2: 10.7 times the measured uncertainty
+
+2. The released program at the two ungraded targets
+  cd_max 0.003: 7.5 times the uncertainty (uncertainty 0.13 of the target); accepted 72, missed 72, error 1.444-1.446 times the target
+     18 return n_arc 32, dt 0.002, residualControl 0.01, GAMG 1e-06, R 1, W 1
+     54 return n_arc 32, dt 0.001, residualControl 0.01, GAMG 1e-08, R 1, W 1
+  cl_max 0.01: 3.6 times the uncertainty (uncertainty 0.28 of the target); accepted 64, missed 64, error 2.136-2.391 times the target
+      2 return n_arc 32, dt 0.002, residualControl 0.01, GAMG 1e-06, R 1, W 4
+      8 return n_arc 32, dt 0.002, residualControl 0.01, GAMG 1e-06, R 2, W 1
+      6 return n_arc 32, dt 0.001, residualControl 0.01, GAMG 1e-08, R 1, W 4
+     48 return n_arc 32, dt 0.001, residualControl 0.01, GAMG 1e-08, R 2, W 1
+
+3. The traced search for the drag at 3e-3
+  from (0, 0, 0, 1, 0, 0): path [(0, 0, 0, 1, 0, 0), (1, 0, 0, 1, 0, 0)], accepted True
+    budget / eps: mesh +0.187, time step +0.003, residualControl +0.028, GAMG -0.108, R +0.156, W +0.178
+    signed sum 0.444, safety factor 1.252, estimate 0.555, true error 1.446; finer run failed: ['mesh', 'GAMG']; interaction check skipped: True (axes [4])
+  from (1, 1, 0, 2, 0, 0): path [(1, 1, 0, 2, 0, 0)], accepted True
+    budget / eps: mesh +0.290, time step +0.007, residualControl +0.026, GAMG +0.000, R +0.132, W +0.134
+    signed sum 0.589, safety factor 1.253, estimate 0.738, true error 1.444; finer run failed: ['mesh']; interaction check skipped: True (axes [4])
+  at the two time steps where every finer mesh runs, with the tolerances and windows of each missed setting: changes along n_arc 24-32-48-64-96 and the error at n_arc 32, in units of the target
+    cd_max 0.003, rc/GAMG/R/W (0, 1, 0, 0), dt 0.0005: -0.323 -0.603 -0.324 -0.321; error at 32 +1.443; change 32 to 96 -1.247
+    cd_max 0.003, rc/GAMG/R/W (0, 1, 0, 0), dt 0.00025: -0.352 -0.612 -0.329 -0.393; error at 32 +1.449; change 32 to 96 -1.334
+    cd_max 0.003, rc/GAMG/R/W (0, 2, 0, 0), dt 0.0005: -0.326 -0.603 -0.318 +nan; error at 32 +1.440; change 32 to 96 +nan
+    cd_max 0.003, rc/GAMG/R/W (0, 2, 0, 0), dt 0.00025: -0.353 -0.614 -0.327 -0.336; error at 32 +1.449; change 32 to 96 -1.276
+    cl_max 0.01, rc/GAMG/R/W (0, 1, 0, 2), dt 0.0005: +0.105 -0.853 -0.588 -0.739; error at 32 +2.453; change 32 to 96 -2.180
+    cl_max 0.01, rc/GAMG/R/W (0, 1, 0, 2), dt 0.00025: -0.048 -0.907 -0.635 -1.046; error at 32 +2.518; change 32 to 96 -2.588
+    cl_max 0.01, rc/GAMG/R/W (0, 1, 1, 0), dt 0.0005: +0.050 -0.827 -0.588 -0.719; error at 32 +2.396; change 32 to 96 -2.134
+    cl_max 0.01, rc/GAMG/R/W (0, 1, 1, 0), dt 0.00025: -0.094 -0.880 -0.635 -1.030; error at 32 +2.461; change 32 to 96 -2.545
+    cl_max 0.01, rc/GAMG/R/W (0, 2, 0, 2), dt 0.0005: +0.088 -0.841 -0.633 +nan; error at 32 +2.439; change 32 to 96 +nan
+    cl_max 0.01, rc/GAMG/R/W (0, 2, 0, 2), dt 0.00025: -0.045 -0.912 -0.621 -0.680; error at 32 +2.520; change 32 to 96 -2.213
+    cl_max 0.01, rc/GAMG/R/W (0, 2, 1, 0), dt 0.0005: +0.051 -0.825 -0.635 +nan; error at 32 +2.394; change 32 to 96 +nan
+    cl_max 0.01, rc/GAMG/R/W (0, 2, 1, 0), dt 0.00025: -0.088 -0.882 -0.621 -0.663; error at 32 +2.461; change 32 to 96 -2.166
