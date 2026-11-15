@@ -1,0 +1,16 @@
+V1 abs_err_baseline   rerun vs published, 64 rows above the floor: max rel. diff 0.0e+00; at the floor max abs. diff 0.0e+00
+V1 abs_err_MRE        rerun vs published, 51 rows above the floor: max rel. diff 3.5e-04; at the floor max abs. diff 1.1e-15
+V1 abs_err_SPRE       rerun vs published, 53 rows above the floor: max rel. diff 3.2e-04; at the floor max abs. diff 3.3e-15
+V1 rel_err_SPRE       rerun vs published, 53 rows above the floor: max rel. diff 3.1e-03; at the floor max abs. diff 2.3e+00
+V1 abs_err_GRE        rerun vs published, 58 rows above the floor: max rel. diff 2.1e+00; at the floor max abs. diff 5.9e-13
+V1 rel_err_GRE        rerun vs published, 58 rows above the floor: max rel. diff 1.1e+00; at the floor max abs. diff 1.3e-01
+V1 rate SPRE d=1 s=0: measured 2.00 over 17 rows; paper: O(h^2)
+V1 rate SPRE d=1 s=1: measured 4.00 over 9 rows; paper: O(h^4)
+V1 rate SPRE d=2 s=0: measured 2.00 over 8 rows; paper: O(h^2)
+V1 rate SPRE d=2 s=1: measured 3.99 over 6 rows; paper: O(h^4)
+V1 rate SPRE d=3 s=0: measured 2.00 over 5 rows; paper: O(h^2)
+V1 rate SPRE d=3 s=1: measured 3.99 over 5 rows; paper: O(h^4)
+V1 SPRE |error| / sd <= 3 in 92% of rows (paper: 'usually')
+V1 Fig. 1 MRE: published 0.2095515075, rerun 0.2095515075 (truth 0.1959631589)
+V1 Fig. 1 GRE: published 0.1515990382, rerun 0.1515990382 (truth 0.1959631589)
+V1 Fig. 1 SPRE: published 0.1898365485, rerun 0.1898365485 (truth 0.1959631589)

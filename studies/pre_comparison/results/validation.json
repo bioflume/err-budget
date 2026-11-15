@@ -1,0 +1,519 @@
+{
+ "V1_published": {
+  "columns": {
+   "abs_err_baseline": {
+    "rows": 66,
+    "rows_above_floor": 64,
+    "max_rel_diff_above_floor": 0.0,
+    "max_abs_diff_at_floor": 0.0
+   },
+   "abs_err_MRE": {
+    "rows": 66,
+    "rows_above_floor": 51,
+    "max_rel_diff_above_floor": 0.00035310734463276836,
+    "max_abs_diff_at_floor": 1.1102230246251565e-15
+   },
+   "abs_err_SPRE": {
+    "rows": 66,
+    "rows_above_floor": 53,
+    "max_rel_diff_above_floor": 0.0003156897821740503,
+    "max_abs_diff_at_floor": 3.3306690738754633e-15
+   },
+   "rel_err_SPRE": {
+    "rows": 66,
+    "rows_above_floor": 53,
+    "max_rel_diff_above_floor": 0.003063505450084143,
+    "max_abs_diff_at_floor": 2.262732587742384
+   },
+   "abs_err_GRE": {
+    "rows": 66,
+    "rows_above_floor": 58,
+    "max_rel_diff_above_floor": 2.067463170958972,
+    "max_abs_diff_at_floor": 5.864198016070077e-13
+   },
+   "rel_err_GRE": {
+    "rows": 66,
+    "rows_above_floor": 58,
+    "max_rel_diff_above_floor": 1.0980205468375668,
+    "max_abs_diff_at_floor": 0.1285709372397647
+   }
+  },
+  "rates": {
+   "d=1,s=0": {
+    "slope": 1.9999979855351038,
+    "stated": 2,
+    "rows": 17
+   },
+   "d=1,s=1": {
+    "slope": 3.999664194127289,
+    "stated": 4,
+    "rows": 9
+   },
+   "d=2,s=0": {
+    "slope": 1.9978019235313278,
+    "stated": 2,
+    "rows": 8
+   },
+   "d=2,s=1": {
+    "slope": 3.9939633577124605,
+    "stated": 4,
+    "rows": 6
+   },
+   "d=3,s=0": {
+    "slope": 1.996362049790653,
+    "stated": 2,
+    "rows": 5
+   },
+   "d=3,s=1": {
+    "slope": 3.9935695829014364,
+    "stated": 4,
+    "rows": 5
+   }
+  },
+  "within3": 0.9242424242424242,
+  "illustration": {
+   "MRE": {
+    "published": 0.20955150751404555,
+    "rerun": 0.2095515075140455,
+    "rel_diff": 2.6490456637510515e-16
+   },
+   "GRE": {
+    "published": 0.15159903820601464,
+    "rerun": 0.15159903820601464,
+    "rel_diff": 0.0
+   },
+   "SPRE": {
+    "published": 0.18983654852800078,
+    "rerun": 0.18983654852800216,
+    "rel_diff": 7.310387760114324e-15
+   }
+  }
+ },
+ "V2_agreement_run2": [
+  {
+   "label": "2D-1 cd 0.001 start 509",
+   "n": 40,
+   "mu_authors": 5.59207950614977,
+   "mu_fast": 5.592079506149796,
+   "sd_authors": 0.0022999875642560064,
+   "sd_fast": 0.0022999875764726277,
+   "A_authors": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     1,
+     0,
+     0
+    ],
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "A_fast": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     1,
+     0,
+     0
+    ],
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     2,
+     1,
+     0
+    ]
+   ],
+   "same_A": true,
+   "rel_diff_mu_over_sd": 1.1198831929178491e-11,
+   "rel_diff_sd": 5.3116032310637405e-09,
+   "seconds_authors": 119.7980420589447
+  },
+  {
+   "label": "2D-1 dp 0.03 start 159",
+   "n": 19,
+   "mu_authors": 0.11789229124225084,
+   "mu_fast": 0.11789229124225052,
+   "sd_authors": 3.118151160747142e-05,
+   "sd_fast": 3.118151162465821e-05,
+   "A_authors": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     1,
+     0,
+     0
+    ],
+    [
+     1,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     0
+    ]
+   ],
+   "A_fast": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     1,
+     0,
+     0
+    ],
+    [
+     1,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     0
+    ]
+   ],
+   "same_A": true,
+   "rel_diff_mu_over_sd": 1.0236486402514606e-11,
+   "rel_diff_sd": 5.511853749551004e-10,
+   "seconds_authors": 44.72592329978943
+  },
+  {
+   "label": "2D-1 dp 0.01 start 66",
+   "n": 44,
+   "mu_authors": 0.11779189461763562,
+   "mu_fast": 0.11779189461763535,
+   "sd_authors": 3.549682519561264e-05,
+   "sd_fast": 3.549682519591917e-05,
+   "A_authors": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     1,
+     0,
+     0
+    ],
+    [
+     1,
+     1,
+     0
+    ]
+   ],
+   "A_fast": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     1,
+     0,
+     0
+    ],
+    [
+     1,
+     1,
+     0
+    ]
+   ],
+   "same_A": true,
+   "rel_diff_mu_over_sd": 7.428212717487334e-12,
+   "rel_diff_sd": 8.63545000226812e-12,
+   "seconds_authors": 88.87162017822266
+  },
+  {
+   "label": "2D-1 cl 0.1 start 181",
+   "n": 29,
+   "mu_authors": 0.010756251775591141,
+   "mu_fast": 0.010756251775591143,
+   "sd_authors": 0.00014341588033476443,
+   "sd_fast": 0.00014341588034074066,
+   "A_authors": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ]
+   ],
+   "A_fast": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ]
+   ],
+   "same_A": true,
+   "rel_diff_mu_over_sd": 1.2095755866976365e-14,
+   "rel_diff_sd": 4.1670634946475264e-11,
+   "seconds_authors": 41.49076461791992
+  },
+  {
+   "label": "2D-1 cl 0.03 start 251",
+   "n": 72,
+   "mu_authors": 0.01061357015428997,
+   "mu_fast": 0.010613570154303536,
+   "sd_authors": 0.00206628305273426,
+   "sd_fast": 0.0020662830828486432,
+   "A_authors": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     1,
+     0,
+     0
+    ],
+    [
+     1,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     1,
+     1
+    ],
+    [
+     2,
+     2,
+     0
+    ],
+    [
+     3,
+     0,
+     1
+    ],
+    [
+     4,
+     0,
+     1
+    ]
+   ],
+   "A_fast": [
+    [
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     0,
+     1,
+     1
+    ],
+    [
+     1,
+     0,
+     0
+    ],
+    [
+     1,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     1,
+     1,
+     1
+    ],
+    [
+     2,
+     0,
+     1
+    ],
+    [
+     2,
+     1,
+     0
+    ],
+    [
+     2,
+     1,
+     1
+    ],
+    [
+     2,
+     2,
+     0
+    ],
+    [
+     3,
+     0,
+     1
+    ],
+    [
+     4,
+     0,
+     1
+    ]
+   ],
+   "same_A": true,
+   "rel_diff_mu_over_sd": 6.565188425752076e-12,
+   "rel_diff_sd": 1.457418100074602e-08,
+   "seconds_authors": 453.0109190940857
+  }
+ ],
+ "V2_agreement_run1_from_log": [
+  {
+   "label": "Fig. 1 SPRE data",
+   "n": 4,
+   "same_A": true,
+   "rel_diff_mu_over_sd": 5e-14,
+   "rel_diff_sd": 3.5e-09,
+   "seconds_authors": 6.0,
+   "source": "validation/agree_run1.log"
+  },
+  {
+   "label": "2D-1 cd 0.01 start 386",
+   "n": 32,
+   "same_A": true,
+   "rel_diff_mu_over_sd": 3.9e-12,
+   "rel_diff_sd": 9.3e-10,
+   "seconds_authors": 45.0,
+   "source": "validation/agree_run1.log"
+  },
+  {
+   "label": "2D-1 cd 0.01 start 310",
+   "n": 44,
+   "same_A": true,
+   "rel_diff_mu_over_sd": 1.4e-12,
+   "rel_diff_sd": 1.1e-08,
+   "seconds_authors": 64.0,
+   "source": "validation/agree_run1.log"
+  },
+  {
+   "label": "2D-1 cd 0.01 start 515",
+   "n": 53,
+   "same_A": true,
+   "rel_diff_mu_over_sd": 8.9e-12,
+   "rel_diff_sd": 1.8e-10,
+   "seconds_authors": 163.0,
+   "source": "validation/agree_run1.log"
+  },
+  {
+   "label": "2D-1 cd 0.003 start 10",
+   "n": 55,
+   "same_A": false,
+   "rel_diff_mu_over_sd": 0.18,
+   "rel_diff_sd": 0.072,
+   "seconds_authors": 565.0,
+   "source": "validation/agree_run1.log"
+  }
+ ],
+ "V2_summary": {
+  "data_sets": 10,
+  "same_A": 9,
+  "max_dmu_over_sd_when_same_A": 1.1198831929178491e-11,
+  "max_dsd_over_sd_when_same_A": 1.457418100074602e-08,
+  "differing": [
+   {
+    "label": "2D-1 cd 0.003 start 10",
+    "n": 55,
+    "same_A": false,
+    "rel_diff_mu_over_sd": 0.18,
+    "rel_diff_sd": 0.072,
+    "seconds_authors": 565.0,
+    "source": "validation/agree_run1.log"
+   }
+  ],
+  "note": "The differing data set (c_D 3e-3, start 10): both implementations give the same LOOCV criterion to 6 digits for every candidate through order 4 (validation/debug_case.log); the fast version then adds terms of orders 5-8 (powers up to (1/n_arc)^7), where the basis is ill-conditioned and the authors' code inverts matrices directly while spre_white.py uses QR."
+ }
+}

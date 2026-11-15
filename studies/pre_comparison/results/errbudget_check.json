@@ -1,0 +1,421 @@
+{
+ "cd 0.01": {
+  "replay": {
+   "searches": 780,
+   "unconv": 172,
+   "accepted": 608,
+   "distinct": 14,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 7.745738636363637,
+   "pen_max": 284.328125,
+   "runs": 66.0
+  },
+  "table_s31": {
+   "searches": 780,
+   "unconv": 172,
+   "accepted": 608,
+   "distinct": 14,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 7.75,
+   "pen_max": 284.0,
+   "runs": 66.0
+  },
+  "table7_replay": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 7.745738636363637,
+   "runs": 76.5,
+   "K": 113.02157652385202,
+   "spent_median": 294873824.0
+  },
+  "table7_stored": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 7.745738636363637,
+   "runs": 76.5,
+   "K": 113.02157652385202
+  },
+  "checks": {
+   "table_counts": true,
+   "table_cost_ratio": true,
+   "table_runs": true,
+   "stored_json": 1.0,
+   "exp72": true
+  }
+ },
+ "cd 0.003": {
+  "replay": {
+   "searches": 780,
+   "unconv": 172,
+   "accepted": 608,
+   "distinct": 8,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 8.791185280273856,
+   "pen_max": 28.197689345314505,
+   "runs": 88.0
+  },
+  "table_s31": {
+   "searches": 780,
+   "unconv": 172,
+   "accepted": 608,
+   "distinct": 8,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 8.79,
+   "pen_max": 28.2,
+   "runs": 88.0
+  },
+  "table7_replay": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 8.791185280273856,
+   "runs": 100.0,
+   "K": 91.80166518716102,
+   "spent_median": 809991380.0
+  },
+  "table7_stored": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 8.791185280273856,
+   "runs": 100.0,
+   "K": 91.80166518716102
+  },
+  "checks": {
+   "table_counts": true,
+   "table_cost_ratio": true,
+   "table_runs": true,
+   "stored_json": 1.0,
+   "exp72": true
+  }
+ },
+ "cd 0.001": {
+  "replay": {
+   "searches": 780,
+   "unconv": 172,
+   "accepted": 608,
+   "distinct": 2,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 6.563486655309483,
+   "pen_max": 6.563486655309483,
+   "runs": 113.0
+  },
+  "table_s31": {
+   "searches": 780,
+   "unconv": 172,
+   "accepted": 608,
+   "distinct": 2,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 6.56,
+   "pen_max": 6.56,
+   "runs": 113.0
+  },
+  "table7_replay": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 6.563486655309483,
+   "runs": 125.0,
+   "K": 76.5086551252849,
+   "spent_median": 2537112110.0
+  },
+  "table7_stored": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 6.563486655309483,
+   "runs": 125.0,
+   "K": 76.5086551252849
+  },
+  "checks": {
+   "table_counts": true,
+   "table_cost_ratio": true,
+   "table_runs": true,
+   "stored_json": 1.0,
+   "exp72": true
+  }
+ },
+ "dp 0.03": {
+  "replay": {
+   "searches": 780,
+   "unconv": 172,
+   "accepted": 608,
+   "distinct": 6,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 3.0,
+   "pen_max": 11.181818181818182,
+   "runs": 59.0
+  },
+  "table_s31": {
+   "searches": 780,
+   "unconv": 172,
+   "accepted": 608,
+   "distinct": 6,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 3.0,
+   "pen_max": 11.2,
+   "runs": 59.0
+  },
+  "table7_replay": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 3.0,
+   "runs": 70.0,
+   "K": 444.00822679924244,
+   "spent_median": 51932196.0
+  },
+  "table7_stored": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 3.0,
+   "runs": 70.0,
+   "K": 444.00822679924244
+  },
+  "checks": {
+   "table_counts": true,
+   "table_cost_ratio": true,
+   "table_runs": true,
+   "stored_json": 1.0,
+   "exp72": true
+  }
+ },
+ "dp 0.01": {
+  "replay": {
+   "searches": 780,
+   "unconv": 172,
+   "accepted": 608,
+   "distinct": 9,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 7.8686868686868685,
+   "pen_max": 58.76925505050505,
+   "runs": 69.0
+  },
+  "table_s31": {
+   "searches": 780,
+   "unconv": 172,
+   "accepted": 608,
+   "distinct": 9,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 7.87,
+   "pen_max": 58.8,
+   "runs": 69.0
+  },
+  "table7_replay": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 7.8686868686868685,
+   "runs": 78.0,
+   "K": 223.91153692851196,
+   "spent_median": 178420804.0
+  },
+  "table7_stored": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 7.8686868686868685,
+   "runs": 78.0,
+   "K": 223.91153692851196
+  },
+  "checks": {
+   "table_counts": true,
+   "table_cost_ratio": true,
+   "table_runs": true,
+   "stored_json": 1.0,
+   "exp72": true
+  }
+ },
+ "cl 0.1": {
+  "replay": {
+   "searches": 780,
+   "unconv": 172,
+   "accepted": 608,
+   "distinct": 12,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 1.6363636363636365,
+   "pen_max": 182.2092803030303,
+   "runs": 68.0
+  },
+  "table_s31": {
+   "searches": 780,
+   "unconv": 172,
+   "accepted": 608,
+   "distinct": 12,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 1.64,
+   "pen_max": 182.0,
+   "runs": 68.0
+  },
+  "table7_replay": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.6363636363636365,
+   "runs": 83.0,
+   "K": 2227.319071713572,
+   "spent_median": 195772228.0
+  },
+  "table7_stored": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 1.6363636363636365,
+   "runs": 83.0,
+   "K": 2227.319071713572
+  },
+  "checks": {
+   "table_counts": true,
+   "table_cost_ratio": true,
+   "table_runs": true,
+   "stored_json": 1.0,
+   "exp72": true
+  }
+ },
+ "cl 0.03": {
+  "replay": {
+   "searches": 780,
+   "unconv": 172,
+   "accepted": 608,
+   "distinct": 13,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 14.174715909090908,
+   "pen_max": 96.3046875,
+   "runs": 66.0
+  },
+  "table_s31": {
+   "searches": 780,
+   "unconv": 172,
+   "accepted": 608,
+   "distinct": 13,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 14.2,
+   "pen_max": 96.3,
+   "runs": 66.0
+  },
+  "table7_replay": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 14.174715909090908,
+   "runs": 80.0,
+   "K": 385.0423798761182,
+   "spent_median": 383712856.0
+  },
+  "table7_stored": {
+   "reached": 608,
+   "missed": 0,
+   "declined": 0,
+   "pen": 14.174715909090908,
+   "runs": 80.0,
+   "K": 385.0423798761182
+  },
+  "checks": {
+   "table_counts": true,
+   "table_cost_ratio": true,
+   "table_runs": true,
+   "stored_json": 1.0,
+   "exp72": true
+  }
+ },
+ "_summary": {
+  "median_K": 223.91153692851196,
+  "all_checks_pass": true
+ },
+ "errbudget_3p": {
+  "cd 0.01": {
+   "starts": 164,
+   "accepted": 164,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 28.349431818181817,
+   "pen_max": 53.605429292929294,
+   "pen10_med": 28.349431818181817,
+   "K_med": 89.18805950830077,
+   "c_opt_ratio_nc10": 1.0
+  },
+  "cd 0.003": {
+   "starts": 164,
+   "accepted": 0,
+   "missed": 0,
+   "declined": 164,
+   "pen_med": NaN,
+   "pen_max": NaN,
+   "pen10_med": NaN,
+   "K_med": NaN,
+   "c_opt_ratio_nc10": 1.0158730158730158
+  },
+  "cd 0.001": {
+   "starts": 164,
+   "accepted": 0,
+   "missed": 0,
+   "declined": 164,
+   "pen_med": NaN,
+   "pen_max": NaN,
+   "pen10_med": NaN,
+   "K_med": NaN,
+   "c_opt_ratio_nc10": 1.0
+  },
+  "dp 0.03": {
+   "starts": 164,
+   "accepted": 164,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 3.0,
+   "pen_max": 4.7272727272727275,
+   "pen10_med": 3.0,
+   "K_med": 357.61959438131316,
+   "c_opt_ratio_nc10": 1.0
+  },
+  "dp 0.01": {
+   "starts": 164,
+   "accepted": 164,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 7.8686868686868685,
+   "pen_max": 12.048926767676768,
+   "pen10_med": 7.8686868686868685,
+   "K_med": 195.33944259467268,
+   "c_opt_ratio_nc10": 1.0
+  },
+  "cl 0.1": {
+   "starts": 164,
+   "accepted": 164,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 1.5681818181818181,
+   "pen_max": 182.578125,
+   "pen10_med": 1.5681818181818181,
+   "K_med": 3239.2307895531403,
+   "c_opt_ratio_nc10": 1.0
+  },
+  "cl 0.03": {
+   "starts": 164,
+   "accepted": 164,
+   "missed": 0,
+   "declined": 0,
+   "pen_med": 48.6875,
+   "pen_max": 48.6875,
+   "pen10_med": 48.6875,
+   "K_med": 358.13161784727896,
+   "c_opt_ratio_nc10": 1.0
+  }
+ }
+}

@@ -1,0 +1,26 @@
+order 1 base A=[[0, 0, 0]]: fast L=19.016767 authors L=19.016767 amp fast 1.148e-01 authors 1.148e-01
+    + [np.int64(0), np.int64(0), np.int64(1)]: fast L=20.063511 authors L=20.063511  amp fast 1.169e-01 authors 1.169e-01  /
+    + [np.int64(0), np.int64(1), np.int64(0)]: fast L=15.722343 authors L=15.722343  amp fast 9.994e-02 authors 9.994e-02  keep/keep
+    + [np.int64(1), np.int64(0), np.int64(0)]: fast L=-100.722941 authors L=-100.722941  amp fast 1.448e-03 authors 1.448e-03  keep/keep
+order 2 base A=[[0, 0, 0], [np.int64(0), np.int64(1), np.int64(0)], [np.int64(1), np.int64(0), np.int64(0)]]: fast L=-102.176816 authors L=-102.176816 amp fast 1.347e-03 authors 1.347e-03
+    + [np.int64(0), np.int64(1), np.int64(1)]: fast L=-103.338601 authors L=-103.338601  amp fast 1.265e-03 authors 1.265e-03  keep/keep
+    + [np.int64(0), np.int64(2), np.int64(0)]: fast L=-101.389732 authors L=-101.389732  amp fast 1.357e-03 authors 1.357e-03  /
+    + [np.int64(1), np.int64(0), np.int64(1)]: fast L=-100.106734 authors L=-100.106734  amp fast 1.419e-03 authors 1.419e-03  /
+    + [np.int64(1), np.int64(1), np.int64(0)]: fast L=-101.976490 authors L=-101.976490  amp fast 1.328e-03 authors 1.328e-03  /
+    + [np.int64(2), np.int64(0), np.int64(0)]: fast L=-102.472637 authors L=-102.472637  amp fast 1.306e-03 authors 1.306e-03  keep/keep
+order 3 base A=[[0, 0, 0], [np.int64(0), np.int64(1), np.int64(0)], [np.int64(1), np.int64(0), np.int64(0)], [np.int64(0), np.int64(1), np.int64(1)], [np.int64(2), np.int64(0), np.int64(0)]]: fast L=-103.521451 authors L=-103.521451 amp fast 1.231e-03 authors 1.231e-03
+    + [np.int64(0), np.int64(1), np.int64(2)]: fast L=-102.611045 authors L=-102.611045  amp fast 1.246e-03 authors 1.246e-03  /
+    + [np.int64(0), np.int64(2), np.int64(1)]: fast L=-102.648589 authors L=-102.648589  amp fast 1.243e-03 authors 1.243e-03  /
+    + [np.int64(1), np.int64(1), np.int64(1)]: fast L=-104.101793 authors L=-104.101793  amp fast 1.165e-03 authors 1.165e-03  keep/keep
+    + [np.int64(2), np.int64(0), np.int64(1)]: fast L=-104.664630 authors L=-104.664630  amp fast 1.133e-03 authors 1.133e-03  keep/keep
+    + [np.int64(2), np.int64(1), np.int64(0)]: fast L=-103.558658 authors L=-103.558658  amp fast 1.200e-03 authors 1.200e-03  keep/keep
+    + [np.int64(3), np.int64(0), np.int64(0)]: fast L=-140.004287 authors L=-140.004287  amp fast 3.201e-04 authors 3.201e-04  keep/keep
+order 4 base A=[[0, 0, 0], [np.int64(0), np.int64(1), np.int64(0)], [np.int64(1), np.int64(0), np.int64(0)], [np.int64(0), np.int64(1), np.int64(1)], [np.int64(2), np.int64(0), np.int64(0)], [np.int64(1), np.int64(1), np.int64(1)], [np.int64(2), np.int64(0), np.int64(1)], [np.int64(2), np.int64(1), np.int64(0)], [np.int64(3), np.int64(0), np.int64(0)]]: fast L=-170.460815 authors L=-170.460815 amp fast 9.525e-05 authors 9.525e-05
+    + [np.int64(1), np.int64(1), np.int64(2)]: fast L=-169.782084 authors L=-169.782084  amp fast 9.498e-05 authors 9.498e-05  /
+    + [np.int64(1), np.int64(2), np.int64(1)]: fast L=-180.568476 authors L=-180.568476  amp fast 6.301e-05 authors 6.301e-05  keep/keep
+    + [np.int64(2), np.int64(0), np.int64(2)]: fast L=-169.040592 authors L=-169.040592  amp fast 9.669e-05 authors 9.669e-05  /
+    + [np.int64(2), np.int64(1), np.int64(1)]: fast L=-177.054655 authors L=-177.054655  amp fast 7.104e-05 authors 7.104e-05  keep/keep
+    + [np.int64(2), np.int64(2), np.int64(0)]: fast L=-169.031977 authors L=-169.031978  amp fast 9.710e-05 authors 9.710e-05  /
+    + [np.int64(3), np.int64(0), np.int64(1)]: fast L=-177.980761 authors L=-177.980761  amp fast 6.836e-05 authors 6.836e-05  keep/keep
+    + [np.int64(3), np.int64(1), np.int64(0)]: fast L=-186.739158 authors L=-186.739158  amp fast 5.145e-05 authors 5.145e-05  keep/keep
+    + [np.int64(4), np.int64(0), np.int64(0)]: fast L=-169.667710 authors L=-169.667711  amp fast 9.581e-05 authors 9.581e-05  /

@@ -1,0 +1,7 @@
+V2 2D-1 cd 0.001 start 509  n=40   same A True  |dmu|/sd 1.1e-11  |dsd|/sd 5.3e-09  (120 s)
+
+WARNING: A non-unisolvent set encountered! Rank=4, m=5
+V2 2D-1 dp 0.03 start 159   n=19   same A True  |dmu|/sd 1.0e-11  |dsd|/sd 5.5e-10  (45 s)
+V2 2D-1 dp 0.01 start 66    n=44   same A True  |dmu|/sd 7.4e-12  |dsd|/sd 8.6e-12  (89 s)
+V2 2D-1 cl 0.1 start 181    n=29   same A True  |dmu|/sd 1.2e-14  |dsd|/sd 4.2e-11  (41 s)
+V2 2D-1 cl 0.03 start 251   n=72   same A True  |dmu|/sd 6.6e-12  |dsd|/sd 1.5e-08  (453 s)

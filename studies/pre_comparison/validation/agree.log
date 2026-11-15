@@ -1,0 +1,7 @@
+V2 Fig. 1 SPRE data         n=4    same A True  |dmu|/sd 5.0e-14  |dsd|/sd 3.5e-09  (6 s)
+V2 2D-1 cd 0.01 start 386   n=32   same A True  |dmu|/sd 3.9e-12  |dsd|/sd 9.3e-10  (45 s)
+V2 2D-1 cd 0.01 start 310   n=44   same A True  |dmu|/sd 1.4e-12  |dsd|/sd 1.1e-08  (64 s)
+V2 2D-1 cd 0.01 start 515   n=53   same A True  |dmu|/sd 8.9e-12  |dsd|/sd 1.8e-10  (163 s)
+V2 2D-1 cd 0.003 start 10   n=55   same A False  |dmu|/sd 1.8e-01  |dsd|/sd 7.2e-02  (565 s)
+/opt/anaconda3/lib/python3.12/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
