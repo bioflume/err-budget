@@ -1,9 +1,0 @@
-obs        target    mode       safe    penalty(med/p90)  calib/user-run  runs  frozen
-energy     1e-02   baseline  100.0%   1.00/ 1.00           117.9x     45   0.0
-energy     1e-02   screened  100.0%   2.66/ 4.37            74.0x     25   2.0
-energy     3e-03   baseline  100.0%   1.00/ 1.00           361.4x     53   0.0
-energy     3e-03   screened  100.0%   2.43/ 4.51           178.4x     26   2.0
-gradient   1e-02   baseline  100.0%   1.00/ 1.00           117.9x     44   0.0
-gradient   1e-02   screened  100.0%   2.66/ 4.37            74.0x     25   2.0
-gradient   3e-03   baseline  100.0%   1.00/ 1.00           370.8x     51   0.0
-gradient   3e-03   screened  100.0%   2.43/ 4.51           185.0x     26   2.0
