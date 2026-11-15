@@ -1,106 +1,47 @@
 #!/usr/bin/env bash
-# Regenerate every number, table and figure in the article FROM SCRATCH.
+# Rebuilds the stored runs with the solvers, runs the analyses that need a solver, and then
+# replays everything (replay_all.sh).
 #
-#   ./reproduce.sh            delete all cached solver output and rebuild it
-#   ./reproduce.sh --cached   reuse whatever is already in data/
+#   bash reproduce.sh            # delete the stored runs in data/ and rebuild them
+#   bash reproduce.sh --cached   # keep what is already in data/
 #
-# Requirements: Python 3.11, numpy 1.26.4, scipy 1.13.1 (>= 1.12 is required),
-# matplotlib, sympy, pytest; LAMMPS with its Python module, GROMACS (gmx and
-# gmx_d), ABINIT with its pseudopotential directory /usr/share/abinit/psp.
-# Revision 2 adds OpenFOAM (simpleFoam) and Quantum ESPRESSO (pw.x) and gcc.
-# On Ubuntu 24.04: apt install lammps python3-lammps gromacs abinit openfoam
-# quantum-espresso gcc.
-#
-# Wall-clock costs (LAMMPS, GROMACS and ABINIT timings) depend on the machine;
-# OpenFOAM, Quantum ESPRESSO and the 8-parameter L3 study (CPU time) also
-# depend on it; every other number is machine-independent.  About 16 CPU-hours
-# on 2 cores, plus about 40 CPU-hours for the DFG 2D-2 grid, which is built
-# separately (dfg2d2_job/).  The analyses of the current article then run with
-# run_v6_analyses.sh before.
+# Needs Python 3.11 with requirements-article.txt, LAMMPS with its Python module, GROMACS
+# (gmx and gmx_d), ABINIT with its pseudopotentials in /usr/share/abinit/psp, OpenFOAM v1912
+# (simpleFoam), Quantum ESPRESSO (pw.x) and gcc; on Ubuntu 24.04: apt install lammps
+# python3-lammps gromacs abinit openfoam quantum-espresso gcc.  About 16 CPU-hours on two
+# cores.  The coarser 2D-2 study (dfg2d2_job/, about 40 CPU-hours) and the cluster jobs
+# (../hamilton/) are built separately.  Wall-clock costs depend on the machine; every
+# other number does not.
 set -e
-cd "$(dirname "$0")"
-mkdir -p data figures logs
-if [ "$1" != "--cached" ]; then
-  echo "== removing cached solver output"
-  rm -f data/*.pkl data/*.json
+cd "$(dirname "$0")" || exit 1
+mkdir -p data figures
+if [ "${1:-}" != "--cached" ]; then
+    rm -f data/*.pkl data/*.json
 fi
-step(){ name=$1; shift; echo "== $name"; "$@" 2>&1 | tee "figures/$name.txt"; }
+step() { name=$1; shift; echo "== $name"; "$@" 2>&1 | tee "figures/$name.txt"; }
 
-echo "######## 1. Build the exhaustive grids used to grade the method"
+# The stored runs
 step build_L2        python exp00_build_L2.py
 step build_L3        python exp07_2d.py
 step build_L4        python exp20_reactdiff.py
-step build_fine      python exp33_fineladder.py
-step tab07_spacing   python exp34_spacing.py
-step sec77_hardest   python exp37_calhardest.py
+step sec5x_cavity    python exp48_cavity.py
 for N in 20 40 64; do step sec81_lammps_n$N env ERRBUDGET_LMP_N=$N python exp22_lammps.py; done
 step sec82_gromacs_d python exp24_gromacs.py
 step sec82_gromacs_mixed env ERRBUDGET_GMX=gmx python exp24_gromacs.py
 step sec83_abinit    python exp27_abinit.py
 step build_dfg       python exp46_dfg_build.py
-step sec5x_cavity    python exp48_cavity.py
 step sec8x_qe        python exp53_qe.py
+step rev3_flags      python exp57_flags.py
+[ -f data/heldout_H1.pkl ] || step rev3_build_H1 python exp61_heldout_build.py H1
+[ -f data/heldout_H2.pkl ] || step rev3_build_H2 python exp61_heldout_build.py H2
 
-echo "######## 2. Results"
-step sec31_classes   python exp17_classify.py
-step sec5_masking    python exp40_section5.py
-step sec5_floor      python exp25_referee.py
-step tab03_transfer  python exp32_conditions.py
-step sec52_mechanism python exp31_mechanism.py
-step tab05_outcomes  python exp26_outcomes.py
-step tab06_rho       python exp28_separability.py
-step tab07_whyfine   python exp35_whyfine.py
-step tab07_gated     python exp36_gated.py
-step tab08_baselines python exp38_baselines.py
-step sec76_margin    python exp29_margin.py
-step tab09_transfer  python exp30_transfer.py
-step tab10_calibration python exp42_calibration.py
-step tab10_screened  python exp19_screened2d.py
-step sec34_screening python exp16_screen8.py
-step sec81_baselines python exp39_lmp_baselines.py
-step sec81_misses    python exp43_lammps_misses.py
+# Analyses that run a solver
 step sec82_floor     python exp44_gromacs_floor.py
 step sec83_reference python exp45_abinit_reference.py
-step sec84_learned   python exp23_mlhybrid.py
-step sec8x_dfg       python exp46_dfg.py
-step tab03_all       python exp47_transfer.py
-step tab_misdeclare  python exp49_misdeclare.py
-step app_margin_held python exp50_margin_heldout.py
-step sec9x_adaptive  python exp51_adaptive.py
-step tab05_cputime   python exp52_wallclock.py
-step sec7x_eight     python exp54_eight.py
-step sec8x_parallel  python exp55_parallel.py
-# DFG 2D-2: the grid takes about 24 CPU-hours; build it with dfg2d2_job/ (see its README)
-if [ -f data/dfg2d2_tensor.pkl ]; then step sec8x_dfg2d2 python exp56_dfg2d2.py; fi
+step rev3_abinit_scf python exp68_abinit_scf.py
+step rev3_fine       python exp69_dfg_fine.py
+step dfg_plateau     python exp59_dfg_plateau.py
+step pppm_mechanism  python exp74_pppm_mechanism.py
+step abinit_reference python exp75_abinit_reference.py
 
-echo "######## 2b. Revision 3 (version 1.2.1): pooled table, held-out tests, analyses"
-step rev3_flags        python exp57_flags.py
-if [ ! -f data/heldout_H1.pkl ]; then step rev3_build_H1 python exp61_heldout_build.py H1; fi
-if [ ! -f data/heldout_H2.pkl ]; then step rev3_build_H2 python exp61_heldout_build.py H2; fi
-step rev3_fine          python exp69_dfg_fine.py
-step rev3_pooled        python pooled.py v1.2.1 v1.2 v1.1 v1.2-nojoint v1.2-nolocal v1.2-credit \
-                             v1.2-constant v1.2-nores v1.2-accept-unconverged v1.2-nested-as-disc \
-                             v1.2-screened v1.1+gated
-step rev3_summary       python summ.py v1.2.1 v1.2 v1.1
-step rev3_heldout       python exp62_heldout.py
-step rev3_heldout_current python exp62_heldout.py --current
-step rev3_baselines_pooled python exp72_baselines_pooled.py
-ERRBUDGET_BASE_OUT=baselines_lmp_gmx.json step rev3_baselines_lmp python exp72_baselines_pooled.py LMP-20 LMP-40 LMP-64 GMX-d
-step rev3_dfg2_detail   python exp71_dfg2_detail.py
-step rev3_decline_reasons python exp73_decline_reasons.py
-step rev3_floor_sensitivity python exp58_floor_sensitivity.py v1.2
-step rev3_abinit_scf    python exp68_abinit_scf.py
-step rev3_estimate      python exp66_estimate_v12.py
-step rev3_margin        python exp67_margin_v12.py
-step rev3_transfer_floor python exp64_transfer_floor.py
-step rev3_misdeclare    python exp65_misdeclare_v12.py
-step rev3_figures       python exp63_figures.py
-step rev3_tables        python exp70_tables.py
-
-echo "######## 3. Figures"
-ERRBUDGET_FIG_DIR=figures/ python make_solution_figure.py
-ERRBUDGET_FIG_DIR=figures/ python make_lammps_figure.py
-
-echo "######## 4. Behavioural claims"
-python -m pytest ../tests -q
-ls -la figures/
+bash replay_all.sh

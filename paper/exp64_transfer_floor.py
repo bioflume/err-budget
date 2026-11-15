@@ -1,4 +1,4 @@
-"""Convergence thresholds chosen once (S-4.1, Table S-4.1): the failure rate of
+"""Convergence thresholds chosen once (S-4.1, Table S-4.1): the failure rate defined in
 exp47_transfer.py, without and with the two adjustments.  With them, deviations and
 remaining errors below a tenth of the tightest graded target count as zero, and runs whose
 iterative solver did not converge count as failed.

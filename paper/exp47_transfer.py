@@ -1,18 +1,13 @@
 """Failure rate of a convergence threshold chosen with every other parameter at its finest
-value (helpers for exp64_transfer_floor.py).  The threshold of parameter k at a
+value, as defined in S-4.1; used by exp56_dfg2d2.py.  The threshold of parameter k at a
 combination c of the others is its coarsest value whose deviation from the value at k's
 finest is within a fraction phi of the error remaining at c; a threshold chosen at the
 finest combination fails at c when c needs a finer value of k.
-
-    python exp47_transfer.py        # the rates without the adjustments of S-4.1
 """
 import itertools
-import os
-import pickle
 
 import numpy as np
 
-import grids
 
 PHIS = [0.01, 0.05, 0.1, 0.25, 0.5]
 
@@ -63,40 +58,3 @@ def failure_rate(get, LAD, k, obs, phi, fallback=False):
             fail += t > ref
     return fail, n
 
-
-def table(name, get, LAD, NAMES, KINDS, obs):
-    print(f"\n{name}: failure rate of a threshold calibrated at the finest setting "
-          f"of the other parameters")
-    print(f"  {'parameter':<14} {'class':<15} " + " ".join(f"phi={p:<6g}" for p in PHIS))
-    for k in range(len(LAD)):
-        row = []
-        for phi in PHIS:
-            f, n = failure_rate(get, LAD, k, obs, phi)
-            row.append(f"{100*f/max(n,1):>9.0f}%")
-        print(f"  {NAMES[k]:<14} {KINDS[k]:<15} " + " ".join(row))
-
-
-def from_tensor(t, exact):
-    def get(idx, ob):
-        v = t[idx]
-        return v[0][ob] if np.isfinite(v[1]) else np.nan
-    get.exact = exact
-    return get
-
-
-if __name__ == "__main__":
-    D = os.path.join(os.path.dirname(__file__), "data")
-    probs = [grids.L2, grids.L3, grids.L4]
-    if os.path.exists(os.path.join(D, grids.L5["file"])):
-        probs.append(grids.L5)
-    for P in probs:
-        t = grids.load(P)
-        table(P["name"], from_tensor(t, grids.exact(P)), P["lad"], P["names"], P["kinds"], P["obs"])
-
-    if os.path.exists(os.path.join(D, "dfg_tensor.pkl")):
-        from exp46_dfg_build import LAD as DLAD, NAMES as DN
-        from openfoam_cylinder import REF
-        t = pickle.load(open(os.path.join(D, "dfg_tensor.pkl"), "rb"))
-        table("DFG 2D-1 (OpenFOAM)", from_tensor(t, REF), DLAD, DN,
-              ["discretisation", "nested-solver", "nested-solver", "cost-only"],
-              ["cd", "dp"])

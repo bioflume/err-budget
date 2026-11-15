@@ -14,5 +14,7 @@ hamilton/*/logs/
 hamilton/collect_*.out
 hamilton/hamilton_results.tar.gz
 *.sif
-RESULTS_SUMMARY.md
-errbudget_v6_results.tar.gz
+paper/figures/*.pdf
+paper/figures/*.png
+paper/data/flags_L2_*.pkl
+paper/data/eight_flags_released.pkl
