@@ -4,22 +4,23 @@ jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        python-version: ["3.9", "3.11", "3.12"]
+        python-version: ["3.9", "3.11", "3.12", "3.13"]
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      # a full clone does not always fetch tags; the frozen-program check needs one
+      - run: git fetch --force --tags origin
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
       - run: pip install -e ".[dev,paper]"
+      # the human-owned files (PROTECTED) must match the manifest the author keeps
+      - run: python tools/check_protected.py
+      # the program frozen for the held-out tests must still be the registered one: the
+      # tag v1.2.0-frozen at commit 41d3db3 and the copy in paper/frozen_src
+      - run: python tools/check_frozen.py
       - run: pytest -q
-      # the program frozen for the held-out tests must still be the registered one
-      - name: frozen-source check
-        run: |
-          if git rev-parse -q --verify refs/tags/v1.2.0-frozen >/dev/null; then
-            d=$(mktemp -d); git archive v1.2.0-frozen src/knobs | tar -x -C "$d"
-            h=$(cd "$d/src/knobs" && for f in $(ls *.py | sort); do printf '%s  %s\n' "$(sha256sum "$f" | cut -d' ' -f1)" "$f"; done | sha256sum | cut -d' ' -f1)
-            grep -q "$h" PREREGISTRATION.md || (echo "the tagged frozen source does not match PREREGISTRATION.md"; exit 1)
-          fi
+      - run: python tests/test_spec_v121.py

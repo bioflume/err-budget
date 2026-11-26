@@ -1,0 +1,28 @@
+# Human-owned files: the requirements, the acceptance tests, the program that produced the
+# results and the record of the results. Agents must not change them (AGENTS.md).
+# tools/check_protected.py checks them in CI against PROTECTED.sha256, which only the
+# author updates. A replay that rewrites a stored result makes the check fail: that is
+# the point.
+src/errbudget/**/*.py
+tests/test_spec_v121.py
+tests/test_claims.py
+PREREGISTRATION.md
+DATA.md
+CHANGELOG.md
+paper/frozen_src/**
+paper/data/**
+paper/figures/**
+hamilton/results/**
+hamilton/J5_abc3d/abc_hpc.py
+studies/*/PROTOCOL.md
+studies/*/summary/**
+studies/pre_comparison/results/**
+studies/airfoil/notes/**
+AGENTS.md
+AI_USE.md
+TRUST.md
+PROTECTED
+tools/check_protected.py
+tools/check_frozen.py
+.github/CODEOWNERS
+.github/workflows/ci.yml
