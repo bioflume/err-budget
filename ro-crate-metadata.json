@@ -1,0 +1,3024 @@
+{
+ "@context": "https://w3id.org/ro/crate/1.1/context",
+ "@graph": [
+  {
+   "@id": "ro-crate-metadata.json",
+   "@type": "CreativeWork",
+   "conformsTo": {
+    "@id": "https://w3id.org/ro/crate/1.1"
+   },
+   "about": {
+    "@id": "./"
+   }
+  },
+  {
+   "@id": "./",
+   "@type": "Dataset",
+   "name": "errbudget: the stored runs and results of the article",
+   "description": "Stored solver runs, replay outputs and cluster summaries that reproduce the article and its supplement; see paper/README.md and DATA.md.",
+   "license": {
+    "@id": "https://spdx.org/licenses/MIT"
+   },
+   "author": {
+    "@id": "#author"
+   },
+   "version": "git f1c64f8",
+   "hasPart": [
+    {
+     "@id": "hamilton/results/J3_RUN_RECORD.txt"
+    },
+    {
+     "@id": "hamilton/results/dfg_tensor_current.pkl"
+    },
+    {
+     "@id": "hamilton/results/dfg_tensor_current_fo.pkl"
+    },
+    {
+     "@id": "hamilton/results/failed_on_hamilton/j3.txt"
+    },
+    {
+     "@id": "hamilton/results/failed_on_hamilton/qe_tensor_current.pkl"
+    },
+    {
+     "@id": "hamilton/results/j1.txt"
+    },
+    {
+     "@id": "hamilton/results/j1_fo.json"
+    },
+    {
+     "@id": "hamilton/results/j1_reltol.json"
+    },
+    {
+     "@id": "hamilton/results/j1_replay.json"
+    },
+    {
+     "@id": "hamilton/results/j1_stop.json"
+    },
+    {
+     "@id": "hamilton/results/j2.txt"
+    },
+    {
+     "@id": "hamilton/results/j2_hamilton.txt"
+    },
+    {
+     "@id": "hamilton/results/j2_replay.json"
+    },
+    {
+     "@id": "hamilton/results/j2_tensor.pkl"
+    },
+    {
+     "@id": "hamilton/results/j3.txt"
+    },
+    {
+     "@id": "hamilton/results/j3_replay.json"
+    },
+    {
+     "@id": "hamilton/results/j4.txt"
+    },
+    {
+     "@id": "hamilton/results/j5.txt"
+    },
+    {
+     "@id": "hamilton/results/j5_replay.json"
+    },
+    {
+     "@id": "hamilton/results/j5_tensor.pkl"
+    },
+    {
+     "@id": "hamilton/results/qe_tensor_current.pkl"
+    },
+    {
+     "@id": "paper/data/README.md"
+    },
+    {
+     "@id": "paper/data/abinit_reference_v6.json"
+    },
+    {
+     "@id": "paper/data/abinit_tensor_v11.pkl"
+    },
+    {
+     "@id": "paper/data/accounting_v6.json"
+    },
+    {
+     "@id": "paper/data/adaptive_tensor.pkl"
+    },
+    {
+     "@id": "paper/data/baselines.json"
+    },
+    {
+     "@id": "paper/data/baselines_lmp_gmx.json"
+    },
+    {
+     "@id": "paper/data/baselines_pooled.json"
+    },
+    {
+     "@id": "paper/data/baselines_pooled_main.json"
+    },
+    {
+     "@id": "paper/data/baselines_v6.json"
+    },
+    {
+     "@id": "paper/data/burgers2d_tensor.pkl"
+    },
+    {
+     "@id": "paper/data/burgers_fine_tensor.pkl"
+    },
+    {
+     "@id": "paper/data/burgers_nu002_tensor.pkl"
+    },
+    {
+     "@id": "paper/data/burgers_sp_1.2_3.0.pkl"
+    },
+    {
+     "@id": "paper/data/burgers_sp_1.4_5.0.pkl"
+    },
+    {
+     "@id": "paper/data/burgers_sp_1.6_10.0.pkl"
+    },
+    {
+     "@id": "paper/data/burgers_sp_2.0_100.0.pkl"
+    },
+    {
+     "@id": "paper/data/burgers_tensor.pkl"
+    },
+    {
+     "@id": "paper/data/cavity_tensor.pkl"
+    },
+    {
+     "@id": "paper/data/classify.pkl"
+    },
+    {
+     "@id": "paper/data/cputime_L2.pkl"
+    },
+    {
+     "@id": "paper/data/cputime_L3.pkl"
+    },
+    {
+     "@id": "paper/data/dfg2_strict.json"
+    },
+    {
+     "@id": "paper/data/dfg2_traces.json"
+    },
+    {
+     "@id": "paper/data/dfg2d2_tensor.pkl"
+    },
+    {
+     "@id": "paper/data/dfg_fine.json"
+    },
+    {
+     "@id": "paper/data/dfg_plateau.json"
+    },
+    {
+     "@id": "paper/data/dfg_tensor.pkl"
+    },
+    {
+     "@id": "paper/data/dfg_tensor_v12.pkl"
+    },
+    {
+     "@id": "paper/data/eight_cache.pkl"
+    },
+    {
+     "@id": "paper/data/eight_released.json"
+    },
+    {
+     "@id": "paper/data/estimate_v12.json"
+    },
+    {
+     "@id": "paper/data/flags_L2.pkl"
+    },
+    {
+     "@id": "paper/data/flags_L3.pkl"
+    },
+    {
+     "@id": "paper/data/flags_L4.pkl"
+    },
+    {
+     "@id": "paper/data/flags_L5.pkl"
+    },
+    {
+     "@id": "paper/data/gromacs_floor_v121.json"
+    },
+    {
+     "@id": "paper/data/gromacs_gmx_d_threads1.pkl"
+    },
+    {
+     "@id": "paper/data/gromacs_gmx_d_threads2.pkl"
+    },
+    {
+     "@id": "paper/data/gromacs_tensor_gmx.pkl"
+    },
+    {
+     "@id": "paper/data/gromacs_tensor_gmx_d.pkl"
+    },
+    {
+     "@id": "paper/data/heldout_H1.pkl"
+    },
+    {
+     "@id": "paper/data/heldout_H2.pkl"
+    },
+    {
+     "@id": "paper/data/heldout_replay.json"
+    },
+    {
+     "@id": "paper/data/heldout_replay_current.json"
+    },
+    {
+     "@id": "paper/data/lammps_mpi_n64_r1.pkl"
+    },
+    {
+     "@id": "paper/data/lammps_mpi_n64_r2.pkl"
+    },
+    {
+     "@id": "paper/data/lammps_tensor_n20.pkl"
+    },
+    {
+     "@id": "paper/data/lammps_tensor_n40.pkl"
+    },
+    {
+     "@id": "paper/data/lammps_tensor_n64.pkl"
+    },
+    {
+     "@id": "paper/data/margin_scan.json"
+    },
+    {
+     "@id": "paper/data/outcomes.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.1+gated.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.1.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2-accept-unconverged.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2-constant.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2-credit.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2-nested-as-disc.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2-nojoint.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2-nolocal.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2-nores.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2-screened.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2.1-accept-unconverged.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2.1-constant.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2.1-credit.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2.1-nested-as-disc.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2.1-nojoint.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2.1-nolocal.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2.1-nores.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2.1-screened.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2.1.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2.1_run1.json"
+    },
+    {
+     "@id": "paper/data/pooled_v1.2.json"
+    },
+    {
+     "@id": "paper/data/pppm_mechanism_v6.json"
+    },
+    {
+     "@id": "paper/data/qe_tensor.pkl"
+    },
+    {
+     "@id": "paper/data/reactdiff_tensor.pkl"
+    },
+    {
+     "@id": "paper/data/reltol_2d1.json"
+    },
+    {
+     "@id": "paper/data/reuse_hardest_released.json"
+    },
+    {
+     "@id": "paper/data/reuse_released.json"
+    },
+    {
+     "@id": "paper/data/screen8.pkl"
+    },
+    {
+     "@id": "paper/data/spacing_estimate_released.json"
+    },
+    {
+     "@id": "paper/data/spacing_margin_check.json"
+    },
+    {
+     "@id": "paper/data/spacing_released.json"
+    },
+    {
+     "@id": "paper/data/transfer_floor.json"
+    },
+    {
+     "@id": "paper/data/unconverged_v6.json"
+    },
+    {
+     "@id": "paper/figures/build_L2.txt"
+    },
+    {
+     "@id": "paper/figures/build_L3.txt"
+    },
+    {
+     "@id": "paper/figures/build_L4.txt"
+    },
+    {
+     "@id": "paper/figures/data_2d1_l5.json"
+    },
+    {
+     "@id": "paper/figures/dfg2_strict.txt"
+    },
+    {
+     "@id": "paper/figures/dfg2_traces.txt"
+    },
+    {
+     "@id": "paper/figures/eight_released.txt"
+    },
+    {
+     "@id": "paper/figures/reuse_hardest_released.txt"
+    },
+    {
+     "@id": "paper/figures/reuse_released.txt"
+    },
+    {
+     "@id": "paper/figures/rev3_abinit_scf.txt"
+    },
+    {
+     "@id": "paper/figures/rev3_baselines_pooled.txt"
+    },
+    {
+     "@id": "paper/figures/rev3_decline_reasons.txt"
+    },
+    {
+     "@id": "paper/figures/rev3_dfg2_detail.txt"
+    },
+    {
+     "@id": "paper/figures/rev3_estimate.txt"
+    },
+    {
+     "@id": "paper/figures/rev3_floor_sensitivity.txt"
+    },
+    {
+     "@id": "paper/figures/rev3_heldout.txt"
+    },
+    {
+     "@id": "paper/figures/rev3_heldout_current.txt"
+    },
+    {
+     "@id": "paper/figures/rev3_margin.txt"
+    },
+    {
+     "@id": "paper/figures/rev3_misdeclare.txt"
+    },
+    {
+     "@id": "paper/figures/rev3_transfer_floor.txt"
+    },
+    {
+     "@id": "paper/figures/sec31_classes.txt"
+    },
+    {
+     "@id": "paper/figures/sec5_masking.txt"
+    },
+    {
+     "@id": "paper/figures/sec5x_cavity.txt"
+    },
+    {
+     "@id": "paper/figures/sec81_lammps_n20.txt"
+    },
+    {
+     "@id": "paper/figures/sec81_lammps_n40.txt"
+    },
+    {
+     "@id": "paper/figures/sec81_lammps_n64.txt"
+    },
+    {
+     "@id": "paper/figures/sec82_floor.txt"
+    },
+    {
+     "@id": "paper/figures/sec82_gromacs_d.txt"
+    },
+    {
+     "@id": "paper/figures/sec82_gromacs_mixed.txt"
+    },
+    {
+     "@id": "paper/figures/sec83_abinit.txt"
+    },
+    {
+     "@id": "paper/figures/sec83_reference.txt"
+    },
+    {
+     "@id": "paper/figures/sec8x_dfg2d2.txt"
+    },
+    {
+     "@id": "paper/figures/sec8x_qe.txt"
+    },
+    {
+     "@id": "paper/figures/spacing_estimate_released.txt"
+    },
+    {
+     "@id": "paper/figures/spacing_released.txt"
+    },
+    {
+     "@id": "paper/figures/tab06_rho.txt"
+    },
+    {
+     "@id": "paper/figures/tab_baselines_full.tex"
+    },
+    {
+     "@id": "paper/figures/tab_estimate.tex"
+    },
+    {
+     "@id": "paper/figures/tab_floor.tex"
+    },
+    {
+     "@id": "paper/figures/tab_lmpbase.tex"
+    },
+    {
+     "@id": "paper/figures/tab_misdeclare.tex"
+    },
+    {
+     "@id": "paper/figures/tab_pooled.tex"
+    },
+    {
+     "@id": "paper/figures/tab_pooled_compact.tex"
+    },
+    {
+     "@id": "paper/figures/tab_preregistered.tex"
+    },
+    {
+     "@id": "paper/figures/tab_sup_ablation.tex"
+    },
+    {
+     "@id": "paper/figures/tab_transfer.tex"
+    },
+    {
+     "@id": "paper/figures/unscripted.txt"
+    },
+    {
+     "@id": "paper/figures/values_2d1_l5.txt"
+    },
+    {
+     "@id": "paper/figures/values_baselines.txt"
+    },
+    {
+     "@id": "studies/airfoil/summary/confirm-20261112-0927/confirm_summary.md"
+    },
+    {
+     "@id": "studies/airfoil/summary/convmap-20261111-0910/convmap_summary.md"
+    },
+    {
+     "@id": "studies/airfoil/summary/stage0-20261113-2123/stage0_summary.json"
+    },
+    {
+     "@id": "studies/airfoil/summary/stage0-20261113-2137/stage0.txt"
+    },
+    {
+     "@id": "studies/airfoil/summary/stage0-20261113-2137/stage0_summary.json"
+    },
+    {
+     "@id": "studies/airfoil/summary/stage1-20261114-1548/stage1_summary.json"
+    },
+    {
+     "@id": "studies/pre_comparison/results/arm1_rows.csv"
+    },
+    {
+     "@id": "studies/pre_comparison/results/arm2_rows.csv"
+    },
+    {
+     "@id": "studies/pre_comparison/results/errbudget_check.json"
+    },
+    {
+     "@id": "studies/pre_comparison/results/summary.json"
+    },
+    {
+     "@id": "studies/pre_comparison/results/tables.md"
+    },
+    {
+     "@id": "studies/pre_comparison/results/validation.json"
+    },
+    {
+     "@id": "studies/reuse2d1/summary/reuse2d1-20261115-1111/res.txt"
+    },
+    {
+     "@id": "studies/reuse2d1/summary/reuse2d1-20261115-1111/reuse_summary.json"
+    }
+   ]
+  },
+  {
+   "@id": "#author",
+   "@type": "Person",
+   "name": "Gökberk Kabacaoğlu",
+   "affiliation": "Department of Computer Science, Durham University"
+  },
+  {
+   "@id": "hamilton/results/J3_RUN_RECORD.txt",
+   "@type": "File",
+   "contentSize": 852,
+   "sha256": "7438e1963e246000a085509ddd66536410d9838a6670e45f3ff7afd4b6351010"
+  },
+  {
+   "@id": "hamilton/results/dfg_tensor_current.pkl",
+   "@type": "File",
+   "contentSize": 286032,
+   "sha256": "44bb1c7aba40c30caf41c79d8eafa8bd26de35652ee7d50adb859255c7b4a325"
+  },
+  {
+   "@id": "hamilton/results/dfg_tensor_current_fo.pkl",
+   "@type": "File",
+   "contentSize": 286032,
+   "sha256": "f0ab457524002f0b92826d0d2e9548651749684548df7ac667d30655de732047"
+  },
+  {
+   "@id": "hamilton/results/failed_on_hamilton/j3.txt",
+   "@type": "File",
+   "contentSize": 382,
+   "sha256": "922a278152d058021618cb4d0048e476370121ee9c673a4e0ef808844deb09ff"
+  },
+  {
+   "@id": "hamilton/results/failed_on_hamilton/qe_tensor_current.pkl",
+   "@type": "File",
+   "contentSize": 38490,
+   "sha256": "d6e3a84fb688d7458c7c9c44dc4aa6e96012b0d0c03d61d7a50e3afe565089d5"
+  },
+  {
+   "@id": "hamilton/results/j1.txt",
+   "@type": "File",
+   "contentSize": 19270,
+   "sha256": "8b31aa406a30e0966820a82c56b19c4e836dfbd8b15a02c350b46019a8b23d4b"
+  },
+  {
+   "@id": "#write-hamilton/results/j1.txt-paper/exp77_reltol_2d1.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp77_reltol_2d1.py"
+   },
+   "result": {
+    "@id": "hamilton/results/j1.txt"
+   },
+   "description": "listed with paper/exp77_reltol_2d1.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-hamilton/results/j1.txt-hamilton/J1_dfg2d1/analyse_j1.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "hamilton/J1_dfg2d1/analyse_j1.py"
+   },
+   "result": {
+    "@id": "hamilton/results/j1.txt"
+   },
+   "description": "listed with hamilton/J1_dfg2d1/analyse_j1.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "hamilton/results/j1_fo.json",
+   "@type": "File",
+   "contentSize": 9775,
+   "sha256": "8292d286ced677e511b2b9f3814a6632ed81793f703bd22180eac005d1f8869d"
+  },
+  {
+   "@id": "hamilton/results/j1_reltol.json",
+   "@type": "File",
+   "contentSize": 37305,
+   "sha256": "c5859a160e6c154dede8ec39d5f0dcb2b6c903ff42e69ec1d5ff50222f552547"
+  },
+  {
+   "@id": "hamilton/results/j1_replay.json",
+   "@type": "File",
+   "contentSize": 43884,
+   "sha256": "edf0ba876c7ccac6b54cdcb18adff75f8b38cefdff068a88457f609e5bfcfe5a"
+  },
+  {
+   "@id": "hamilton/results/j1_stop.json",
+   "@type": "File",
+   "contentSize": 4017,
+   "sha256": "7c5c0e6cba46c07632eaa085a56dc364f5f8800e850aeda38816d1005be9fc7c"
+  },
+  {
+   "@id": "hamilton/results/j2.txt",
+   "@type": "File",
+   "contentSize": 18325,
+   "sha256": "482c8cde45ed928235ba36683c53efe8e280185a7acc6efa524c53203ef5bf4a"
+  },
+  {
+   "@id": "#write-hamilton/results/j2.txt-paper/exp75_abinit_reference.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp75_abinit_reference.py"
+   },
+   "result": {
+    "@id": "hamilton/results/j2.txt"
+   },
+   "description": "listed with paper/exp75_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-hamilton/results/j2.txt-hamilton/J2_dfg2d2/analyse_j2.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "hamilton/J2_dfg2d2/analyse_j2.py"
+   },
+   "result": {
+    "@id": "hamilton/results/j2.txt"
+   },
+   "description": "listed with hamilton/J2_dfg2d2/analyse_j2.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-hamilton/results/j2.txt-paper/exp44_gromacs_floor.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp44_gromacs_floor.py"
+   },
+   "result": {
+    "@id": "hamilton/results/j2.txt"
+   },
+   "description": "listed with paper/exp44_gromacs_floor.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "hamilton/results/j2_hamilton.txt",
+   "@type": "File",
+   "contentSize": 3507,
+   "sha256": "2a381349f414cffcdef61e2a639e75464c8c124292d4e8e92471255492f56f1c"
+  },
+  {
+   "@id": "hamilton/results/j2_replay.json",
+   "@type": "File",
+   "contentSize": 101796,
+   "sha256": "fddb7c7e4b04b218d497d393075fcad977ae5c1fbe2eace79bca093ec182f139"
+  },
+  {
+   "@id": "hamilton/results/j2_tensor.pkl",
+   "@type": "File",
+   "contentSize": 116416,
+   "sha256": "d8fc4745670b39eb62dd744832514947cc1680e330e2babff368bb49e1ee61e4"
+  },
+  {
+   "@id": "hamilton/results/j3.txt",
+   "@type": "File",
+   "contentSize": 2316,
+   "sha256": "1d79b0f4848d478d0a3ea9e517225ed1723da17bb9d1378015dbf09d2faf2cb8"
+  },
+  {
+   "@id": "hamilton/results/j3_replay.json",
+   "@type": "File",
+   "contentSize": 18508,
+   "sha256": "60c7ce0f4faa70a21b3c30d6cd154c66908ebfc9a04d92f665356cb34fd4fe91"
+  },
+  {
+   "@id": "hamilton/results/j4.txt",
+   "@type": "File",
+   "contentSize": 3938,
+   "sha256": "355aa098aa9a4833ca2c7a782fef93e62bde17e844b01ccebed0558a96f707cf"
+  },
+  {
+   "@id": "hamilton/results/j5.txt",
+   "@type": "File",
+   "contentSize": 1328,
+   "sha256": "df21860632aed5f62d4ed2c235d48a7efecf7c41b1bb10abb836740ca75529b2"
+  },
+  {
+   "@id": "#write-hamilton/results/j5.txt-paper/exp62_heldout.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp62_heldout.py"
+   },
+   "result": {
+    "@id": "hamilton/results/j5.txt"
+   },
+   "description": "listed with paper/exp62_heldout.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-hamilton/results/j5.txt-hamilton/J5_abc3d/analyse_j5.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "hamilton/J5_abc3d/analyse_j5.py"
+   },
+   "result": {
+    "@id": "hamilton/results/j5.txt"
+   },
+   "description": "listed with hamilton/J5_abc3d/analyse_j5.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "hamilton/results/j5_replay.json",
+   "@type": "File",
+   "contentSize": 6828,
+   "sha256": "d1741afe5c77beff34f728e941b09a5509e9567289f408a9ebfc20f5ae042ba7"
+  },
+  {
+   "@id": "hamilton/results/j5_tensor.pkl",
+   "@type": "File",
+   "contentSize": 16658,
+   "sha256": "fda27edd1b9fb4793cbfed2af81cf4d5920089a7dce784651a579017d51f70c1"
+  },
+  {
+   "@id": "hamilton/results/qe_tensor_current.pkl",
+   "@type": "File",
+   "contentSize": 37529,
+   "sha256": "d6ae4ce31293e0796ad13fa90d7791c14f347b3e0a9564be147162a1b8d7b505"
+  },
+  {
+   "@id": "paper/data/README.md",
+   "@type": "File",
+   "contentSize": 2428,
+   "sha256": "57cf6f163dedb4c009d8e96cc7cc624c5713b7eb1fbd42979a2f1f2c6cd040b0"
+  },
+  {
+   "@id": "paper/data/abinit_reference_v6.json",
+   "@type": "File",
+   "contentSize": 2464,
+   "sha256": "1646608e7758dea1c75ac0709ed3c1e8e7c05a621a9424f0e327e66061b90339"
+  },
+  {
+   "@id": "#write-paper/data/abinit_reference_v6.json-paper/exp75_abinit_reference.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp75_abinit_reference.py"
+   },
+   "result": {
+    "@id": "paper/data/abinit_reference_v6.json"
+   },
+   "description": "listed with paper/exp75_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/abinit_reference_v6.json-hamilton/J2_dfg2d2/analyse_j2.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "hamilton/J2_dfg2d2/analyse_j2.py"
+   },
+   "result": {
+    "@id": "paper/data/abinit_reference_v6.json"
+   },
+   "description": "listed with hamilton/J2_dfg2d2/analyse_j2.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/abinit_reference_v6.json-paper/exp44_gromacs_floor.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp44_gromacs_floor.py"
+   },
+   "result": {
+    "@id": "paper/data/abinit_reference_v6.json"
+   },
+   "description": "listed with paper/exp44_gromacs_floor.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/abinit_reference_v6.json-paper/exp45_abinit_reference.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp45_abinit_reference.py"
+   },
+   "result": {
+    "@id": "paper/data/abinit_reference_v6.json"
+   },
+   "description": "listed with paper/exp45_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/abinit_reference_v6.json-paper/exp68_abinit_scf.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp68_abinit_scf.py"
+   },
+   "result": {
+    "@id": "paper/data/abinit_reference_v6.json"
+   },
+   "description": "listed with paper/exp68_abinit_scf.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/abinit_reference_v6.json-paper/exp80_v6_numbers.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp80_v6_numbers.py"
+   },
+   "result": {
+    "@id": "paper/data/abinit_reference_v6.json"
+   },
+   "description": "listed with paper/exp80_v6_numbers.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/abinit_tensor_v11.pkl",
+   "@type": "File",
+   "contentSize": 16185,
+   "sha256": "68c9d60f12c2f9cb59348c470af719baf585b1e2c33e0b343117102fc5c33c2b"
+  },
+  {
+   "@id": "paper/data/accounting_v6.json",
+   "@type": "File",
+   "contentSize": 13861,
+   "sha256": "b19daed969f8852abe29bbbfae72a6dbc2c2a43390e9f2a2145514400260069d"
+  },
+  {
+   "@id": "#write-paper/data/accounting_v6.json-paper/exp76_accounting.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp76_accounting.py"
+   },
+   "result": {
+    "@id": "paper/data/accounting_v6.json"
+   },
+   "description": "listed with paper/exp76_accounting.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/adaptive_tensor.pkl",
+   "@type": "File",
+   "contentSize": 21495,
+   "sha256": "8d0b75e56e3cb250236af75f3c0a31bc129c6f1b55c25d3a6d41c705587e5837"
+  },
+  {
+   "@id": "paper/data/baselines.json",
+   "@type": "File",
+   "contentSize": 12871,
+   "sha256": "ec8fd79152759b8b26226a4ccbaad906ef38bf85b2a1ea8a1ff79a91cdf247da"
+  },
+  {
+   "@id": "paper/data/baselines_lmp_gmx.json",
+   "@type": "File",
+   "contentSize": 13553,
+   "sha256": "f36dbcd7532d1133d943f84e3202df8c8438c9a5ddf752d7ea42f6a8b686901c"
+  },
+  {
+   "@id": "#write-paper/data/baselines_lmp_gmx.json-paper/exp70_tables.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp70_tables.py"
+   },
+   "result": {
+    "@id": "paper/data/baselines_lmp_gmx.json"
+   },
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/baselines_pooled.json",
+   "@type": "File",
+   "contentSize": 31043,
+   "sha256": "ac09150cafc700d6e75fc677ad6428e6c2dfdc6f80179ea0014640001a0c9790"
+  },
+  {
+   "@id": "paper/data/baselines_pooled_main.json",
+   "@type": "File",
+   "contentSize": 31043,
+   "sha256": "ac09150cafc700d6e75fc677ad6428e6c2dfdc6f80179ea0014640001a0c9790"
+  },
+  {
+   "@id": "paper/data/baselines_v6.json",
+   "@type": "File",
+   "contentSize": 75663,
+   "sha256": "0b068b2034d7c194e927bafebf180708d993ee625f1e1d10a09374b0952acfee"
+  },
+  {
+   "@id": "#write-paper/data/baselines_v6.json-paper/exp72_baselines_pooled.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp72_baselines_pooled.py"
+   },
+   "result": {
+    "@id": "paper/data/baselines_v6.json"
+   },
+   "description": "listed with paper/exp72_baselines_pooled.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/baselines_v6.json-paper/exp70_tables.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp70_tables.py"
+   },
+   "result": {
+    "@id": "paper/data/baselines_v6.json"
+   },
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/burgers2d_tensor.pkl",
+   "@type": "File",
+   "contentSize": 25520,
+   "sha256": "7c266f6adbaacccee44fb34dbdca22c6f98baa9b8066f36722e90c54999d3fdb"
+  },
+  {
+   "@id": "paper/data/burgers_fine_tensor.pkl",
+   "@type": "File",
+   "contentSize": 30035,
+   "sha256": "8a3440853d02f9c446877314f5a9e8efff410539ffabd0e4944e0bb2c02d59dd"
+  },
+  {
+   "@id": "paper/data/burgers_nu002_tensor.pkl",
+   "@type": "File",
+   "contentSize": 30035,
+   "sha256": "f1f92e4b224a924626942b6098f9a7b292eedec7e7995df6dee7e312afc37c1e"
+  },
+  {
+   "@id": "paper/data/burgers_sp_1.2_3.0.pkl",
+   "@type": "File",
+   "contentSize": 30035,
+   "sha256": "6bbc30dc9b8e48acbc56560397bb4c7333d8604685f5891e14c052b78f8e67c7"
+  },
+  {
+   "@id": "paper/data/burgers_sp_1.4_5.0.pkl",
+   "@type": "File",
+   "contentSize": 30035,
+   "sha256": "79f9f11f0ebf78c77114570b5313132f33ddde0402dfa692aa5fc9e4829cc063"
+  },
+  {
+   "@id": "paper/data/burgers_sp_1.6_10.0.pkl",
+   "@type": "File",
+   "contentSize": 30035,
+   "sha256": "5c05a7f43e463695d9abe1c609e1d2538d917ca4ef1c2e714aae835a8ab16cf6"
+  },
+  {
+   "@id": "paper/data/burgers_sp_2.0_100.0.pkl",
+   "@type": "File",
+   "contentSize": 30035,
+   "sha256": "2abb33c85192d73811c93dbd9939c376f9822126657fa03311f3a7eaf32f5035"
+  },
+  {
+   "@id": "paper/data/burgers_tensor.pkl",
+   "@type": "File",
+   "contentSize": 35660,
+   "sha256": "0f6f64baf9aef42f830f94a8d400446924109ffc6224b7a42ad8ab2e72fca173"
+  },
+  {
+   "@id": "paper/data/cavity_tensor.pkl",
+   "@type": "File",
+   "contentSize": 51910,
+   "sha256": "9c56766f350eee25231ce8ebc3159985df87f6e3f5208a8e21c566f71baa11dc"
+  },
+  {
+   "@id": "paper/data/classify.pkl",
+   "@type": "File",
+   "contentSize": 2160,
+   "sha256": "545223627beb9e5d6c7235506a5ba300dfaa9a60bc5d00b529f65b9c45f13613"
+  },
+  {
+   "@id": "paper/data/cputime_L2.pkl",
+   "@type": "File",
+   "contentSize": 12516,
+   "sha256": "9ba198acd348a01415f786caf9589c467a0edcdade3c757529190e0b6b2c9d2a"
+  },
+  {
+   "@id": "paper/data/cputime_L3.pkl",
+   "@type": "File",
+   "contentSize": 9520,
+   "sha256": "95f3476c9e97ca316188d2d4a6a9f481664353f8724b139e37d0f91803849dfb"
+  },
+  {
+   "@id": "paper/data/dfg2_strict.json",
+   "@type": "File",
+   "contentSize": 2116,
+   "sha256": "e3fbc56b3927f1168ea71a8f2ece849ca9a93daf84e625ffbb02e33509748bc7"
+  },
+  {
+   "@id": "#write-paper/data/dfg2_strict.json-paper/exp84_dfg2_strict.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp84_dfg2_strict.py"
+   },
+   "result": {
+    "@id": "paper/data/dfg2_strict.json"
+   },
+   "description": "listed with paper/exp84_dfg2_strict.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/dfg2_traces.json",
+   "@type": "File",
+   "contentSize": 5474,
+   "sha256": "cf2174f7fa7d3217a9eefe67de21d0d65c3e7f4abec8d3eb539b084d757bf8d1"
+  },
+  {
+   "@id": "#write-paper/data/dfg2_traces.json-paper/exp83_dfg2_traces.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp83_dfg2_traces.py"
+   },
+   "result": {
+    "@id": "paper/data/dfg2_traces.json"
+   },
+   "description": "listed with paper/exp83_dfg2_traces.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/dfg2d2_tensor.pkl",
+   "@type": "File",
+   "contentSize": 46909,
+   "sha256": "43212ed9decc1d0462ade5561b0406adac53cf32d2b7cbc58333fc0fab99a936"
+  },
+  {
+   "@id": "paper/data/dfg_fine.json",
+   "@type": "File",
+   "contentSize": 966,
+   "sha256": "fc0b61db2e7f5e44b560d17b7a847c0d2ceaad54b1e0a57861f786e5c25dbb2b"
+  },
+  {
+   "@id": "#write-paper/data/dfg_fine.json-paper/exp59_dfg_plateau.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp59_dfg_plateau.py"
+   },
+   "result": {
+    "@id": "paper/data/dfg_fine.json"
+   },
+   "description": "listed with paper/exp59_dfg_plateau.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/dfg_fine.json-paper/exp69_dfg_fine.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp69_dfg_fine.py"
+   },
+   "result": {
+    "@id": "paper/data/dfg_fine.json"
+   },
+   "description": "listed with paper/exp69_dfg_fine.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/dfg_plateau.json",
+   "@type": "File",
+   "contentSize": 768,
+   "sha256": "5e40803a8ed2687ca699e65a17ea7be36ca120848fdf7bfdd1e6a48fdeaf8511"
+  },
+  {
+   "@id": "#write-paper/data/dfg_plateau.json-paper/exp59_dfg_plateau.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp59_dfg_plateau.py"
+   },
+   "result": {
+    "@id": "paper/data/dfg_plateau.json"
+   },
+   "description": "listed with paper/exp59_dfg_plateau.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/dfg_plateau.json-paper/exp69_dfg_fine.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp69_dfg_fine.py"
+   },
+   "result": {
+    "@id": "paper/data/dfg_plateau.json"
+   },
+   "description": "listed with paper/exp69_dfg_fine.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/dfg_tensor.pkl",
+   "@type": "File",
+   "contentSize": 82933,
+   "sha256": "0dbc51e532b1b6263717519fcad68afaf9c02699a22fad264f9beb7064d3620b"
+  },
+  {
+   "@id": "paper/data/dfg_tensor_v12.pkl",
+   "@type": "File",
+   "contentSize": 108878,
+   "sha256": "0880d50fe466051fe3395c1fc92bd4b2d750eba341058bef4ae7e528c31392a2"
+  },
+  {
+   "@id": "paper/data/eight_cache.pkl",
+   "@type": "File",
+   "contentSize": 392559,
+   "sha256": "59eb81fe60ebbbb8e828cd2a9b3be14087a9514ae8c5a63f18ca6ca405444eb3"
+  },
+  {
+   "@id": "paper/data/eight_released.json",
+   "@type": "File",
+   "contentSize": 370,
+   "sha256": "0bd2867160b0fad4fe97befe1c0af5c45111082a0208171b753e03a2017b8b86"
+  },
+  {
+   "@id": "#write-paper/data/eight_released.json-paper/exp54_eight.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp54_eight.py"
+   },
+   "result": {
+    "@id": "paper/data/eight_released.json"
+   },
+   "description": "listed with paper/exp54_eight.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/estimate_v12.json",
+   "@type": "File",
+   "contentSize": 3350,
+   "sha256": "d0bfb65d1c8d01d099a2f9d5a35d158e90498f5fef9ab9e144942018e154708c"
+  },
+  {
+   "@id": "#write-paper/data/estimate_v12.json-paper/exp66_estimate_v12.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp66_estimate_v12.py"
+   },
+   "result": {
+    "@id": "paper/data/estimate_v12.json"
+   },
+   "description": "listed with paper/exp66_estimate_v12.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/estimate_v12.json-paper/exp70_tables.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp70_tables.py"
+   },
+   "result": {
+    "@id": "paper/data/estimate_v12.json"
+   },
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/flags_L2.pkl",
+   "@type": "File",
+   "contentSize": 23905,
+   "sha256": "67011149372b3412bf8180705d8e3b6c3dbc0ed251744b7c12eca70561e25b47"
+  },
+  {
+   "@id": "paper/data/flags_L3.pkl",
+   "@type": "File",
+   "contentSize": 19372,
+   "sha256": "972001c032114773758aca8370309f0fd75bf2cd34b051c29d67c48676a495da"
+  },
+  {
+   "@id": "paper/data/flags_L4.pkl",
+   "@type": "File",
+   "contentSize": 17908,
+   "sha256": "c19d316792c6e77c9fc81ba3cafa3c5ec9803bb6f8b8dcbdf0fc61a625cc9588"
+  },
+  {
+   "@id": "paper/data/flags_L5.pkl",
+   "@type": "File",
+   "contentSize": 25319,
+   "sha256": "62bdebb976a1b5373bfc07a3d9f8cd0a80543ff7577ada5f7f63b7295978b8a2"
+  },
+  {
+   "@id": "paper/data/gromacs_floor_v121.json",
+   "@type": "File",
+   "contentSize": 5298,
+   "sha256": "1c0e7a9ded49fdd098afbc6bc8a27d429f9680c3e11a2373dbad41c62bd232a2"
+  },
+  {
+   "@id": "#write-paper/data/gromacs_floor_v121.json-paper/exp44_gromacs_floor.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp44_gromacs_floor.py"
+   },
+   "result": {
+    "@id": "paper/data/gromacs_floor_v121.json"
+   },
+   "description": "listed with paper/exp44_gromacs_floor.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/gromacs_floor_v121.json-paper/exp78_gromacs_floor_v121.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp78_gromacs_floor_v121.py"
+   },
+   "result": {
+    "@id": "paper/data/gromacs_floor_v121.json"
+   },
+   "description": "listed with paper/exp78_gromacs_floor_v121.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/gromacs_gmx_d_threads1.pkl",
+   "@type": "File",
+   "contentSize": 8137,
+   "sha256": "a076f4d704fc881b17ff7a92dd45ee988b06143c22797011cc5288e845e3a708"
+  },
+  {
+   "@id": "paper/data/gromacs_gmx_d_threads2.pkl",
+   "@type": "File",
+   "contentSize": 8137,
+   "sha256": "8fa2ca8ecc6fbe66b26d790b41db035c126869f3f2f9249bed6d6651b6bdb615"
+  },
+  {
+   "@id": "paper/data/gromacs_tensor_gmx.pkl",
+   "@type": "File",
+   "contentSize": 8137,
+   "sha256": "96f29ac092637f0b8bacd135ab1da5cf5501b7e26270cb86fc3b203ab63a52b5"
+  },
+  {
+   "@id": "paper/data/gromacs_tensor_gmx_d.pkl",
+   "@type": "File",
+   "contentSize": 8137,
+   "sha256": "39b04b6c4af43c47ebca0dc87812c0dc0a70f6efe0fc5ea23a4149a7700b9ab1"
+  },
+  {
+   "@id": "paper/data/heldout_H1.pkl",
+   "@type": "File",
+   "contentSize": 6725,
+   "sha256": "57374b5e4158e023f29f2e27f51f76c108ad184a0c7af6d7f4817705ccf56e99"
+  },
+  {
+   "@id": "paper/data/heldout_H2.pkl",
+   "@type": "File",
+   "contentSize": 7708,
+   "sha256": "61d81f7b1868b7c68283f957520246b03a7f0654a8ff655fbf5a08508f5d3083"
+  },
+  {
+   "@id": "paper/data/heldout_replay.json",
+   "@type": "File",
+   "contentSize": 33055,
+   "sha256": "a0fb246cea5656bf713c9be5e16c6c8e5593108d213f89aeb3ec0679b5295074"
+  },
+  {
+   "@id": "#write-paper/data/heldout_replay.json-paper/exp62_heldout.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp62_heldout.py"
+   },
+   "result": {
+    "@id": "paper/data/heldout_replay.json"
+   },
+   "description": "listed with paper/exp62_heldout.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/heldout_replay.json-paper/exp70_tables.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp70_tables.py"
+   },
+   "result": {
+    "@id": "paper/data/heldout_replay.json"
+   },
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/heldout_replay_current.json",
+   "@type": "File",
+   "contentSize": 16536,
+   "sha256": "dc78b01a12da9a08b3274a8fb9e6345d4fe8baf1eaf225456c2e4629f8ef3c9c"
+  },
+  {
+   "@id": "#write-paper/data/heldout_replay_current.json-paper/exp62_heldout.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp62_heldout.py"
+   },
+   "result": {
+    "@id": "paper/data/heldout_replay_current.json"
+   },
+   "description": "listed with paper/exp62_heldout.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/heldout_replay_current.json-paper/exp70_tables.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp70_tables.py"
+   },
+   "result": {
+    "@id": "paper/data/heldout_replay_current.json"
+   },
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/lammps_mpi_n64_r1.pkl",
+   "@type": "File",
+   "contentSize": 2143,
+   "sha256": "353a2b87ae936f564725e7d606b169e8e38146981d32146900b7739c948ad63a"
+  },
+  {
+   "@id": "paper/data/lammps_mpi_n64_r2.pkl",
+   "@type": "File",
+   "contentSize": 2143,
+   "sha256": "e506d047f6a3387dc4de80edfd2d80b601ce41bddb381fe3df2c4f6aa80c8f81"
+  },
+  {
+   "@id": "paper/data/lammps_tensor_n20.pkl",
+   "@type": "File",
+   "contentSize": 7516,
+   "sha256": "fed4b87313ea0d8d9d28d86507d8bfcb363216ea4b9ee336e7cee786ab93d4f9"
+  },
+  {
+   "@id": "paper/data/lammps_tensor_n40.pkl",
+   "@type": "File",
+   "contentSize": 4816,
+   "sha256": "a01ae6ce9d68a779c1cf70031aa8b3e3392be12ecd719a405b6d695a17bdea9e"
+  },
+  {
+   "@id": "paper/data/lammps_tensor_n64.pkl",
+   "@type": "File",
+   "contentSize": 4816,
+   "sha256": "af46bad864c3e16e290eed1637f0a9dea5e72dac83ea5c721079522047ec2ce9"
+  },
+  {
+   "@id": "paper/data/margin_scan.json",
+   "@type": "File",
+   "contentSize": 18338,
+   "sha256": "21b71ce8cb0aaba2bff404bdb2328b40b1817fb3b2205f61eedd0e36020b60ae"
+  },
+  {
+   "@id": "paper/data/outcomes.json",
+   "@type": "File",
+   "contentSize": 11136,
+   "sha256": "2161fce1d379ee49af45a4f75f7830f359adf9b2b317085f2fb291b9428b773f"
+  },
+  {
+   "@id": "paper/data/pooled_v1.1+gated.json",
+   "@type": "File",
+   "contentSize": 70075,
+   "sha256": "5b7af908863c21ac6b640d6e6ccf2372b126a271e356f22acc2ddb771fc6f248"
+  },
+  {
+   "@id": "paper/data/pooled_v1.1.json",
+   "@type": "File",
+   "contentSize": 61770,
+   "sha256": "0ba97a7847b9c630b32ccff572f3af64a54b1a00fe337e1b11c0e58220a3495d"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2-accept-unconverged.json",
+   "@type": "File",
+   "contentSize": 60734,
+   "sha256": "39a6033039e953396c52776cdc7911634c508148bb1629f221b84cef8d422823"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2-constant.json",
+   "@type": "File",
+   "contentSize": 57523,
+   "sha256": "3460501050ef0d3dd22f54f433601bab2b6eb7e0e1d4a836f6c14d3c9221c30c"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2-credit.json",
+   "@type": "File",
+   "contentSize": 62308,
+   "sha256": "753ebb06d8fa88082b8c1086ee9f3f44d5ce733ce661db6a5a4a67ea37b9115b"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2-nested-as-disc.json",
+   "@type": "File",
+   "contentSize": 60068,
+   "sha256": "89585f1997743a25f585866887c6c96f334cf9a9fdfc7985ce3a59ef28ba3a01"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2-nojoint.json",
+   "@type": "File",
+   "contentSize": 61276,
+   "sha256": "6dcb1de9cbb4f8e0bb1ab254052ef988b363669eaf053ff202b1294844f37e34"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2-nolocal.json",
+   "@type": "File",
+   "contentSize": 71527,
+   "sha256": "49db48cdce6a0481341fa129cf80fb08609181edbc2bbcd47cb70dd00384a097"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2-nores.json",
+   "@type": "File",
+   "contentSize": 67485,
+   "sha256": "44dfde4bc18b427ffcc82a7642ed62c2f3c69897ef9af7c98a4ba151ff4792e1"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2-screened.json",
+   "@type": "File",
+   "contentSize": 75424,
+   "sha256": "887c7e2266a132e788e0cc629e5eeb06320b84e86f4db13ef0fe420c5fae7a87"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2.1-accept-unconverged.json",
+   "@type": "File",
+   "contentSize": 60422,
+   "sha256": "2763ba8296906f8b376c212c5d6081300dc82f56efd36c0145190eca843cda9a"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2.1-constant.json",
+   "@type": "File",
+   "contentSize": 54581,
+   "sha256": "e4d067e1718640bea260e2cfb7d8706186ba5ad529cccbb0080b26e751111317"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2.1-credit.json",
+   "@type": "File",
+   "contentSize": 61240,
+   "sha256": "ad13b69487dad61b1ce746a3eb5af624b5cb56bc015826d5a9f55c4e6ec9b8ba"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2.1-nested-as-disc.json",
+   "@type": "File",
+   "contentSize": 59977,
+   "sha256": "22af7e2b6606dc5af220b9b037a85bb0f672e7a3aff9ef921363ccd3e06a0dab"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2.1-nojoint.json",
+   "@type": "File",
+   "contentSize": 61276,
+   "sha256": "6dcb1de9cbb4f8e0bb1ab254052ef988b363669eaf053ff202b1294844f37e34"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2.1-nolocal.json",
+   "@type": "File",
+   "contentSize": 71296,
+   "sha256": "b3f9f50476460058ff35642fe9b5cb73370d9582e969bd40fdc7b57aa8ae4719"
+  },
+  {
+   "@id": "#write-paper/data/pooled_v1.2.1-nolocal.json-paper/make_2d1_l5_figures.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/make_2d1_l5_figures.py"
+   },
+   "result": {
+    "@id": "paper/data/pooled_v1.2.1-nolocal.json"
+   },
+   "description": "listed with paper/make_2d1_l5_figures.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2.1-nores.json",
+   "@type": "File",
+   "contentSize": 67485,
+   "sha256": "44dfde4bc18b427ffcc82a7642ed62c2f3c69897ef9af7c98a4ba151ff4792e1"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2.1-screened.json",
+   "@type": "File",
+   "contentSize": 75228,
+   "sha256": "6e54a9933e419102eb2c028cb1b4a29e445ab9c6d352726a68c9581a83fb4157"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2.1.json",
+   "@type": "File",
+   "contentSize": 60769,
+   "sha256": "f15b138af0e7c8bd9967eb976af7746ffdbaf216c481d8db7747ef06a14ea604"
+  },
+  {
+   "@id": "#write-paper/data/pooled_v1.2.1.json-paper/exp72_baselines_pooled.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp72_baselines_pooled.py"
+   },
+   "result": {
+    "@id": "paper/data/pooled_v1.2.1.json"
+   },
+   "description": "listed with paper/exp72_baselines_pooled.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/pooled_v1.2.1.json-paper/exp70_tables.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp70_tables.py"
+   },
+   "result": {
+    "@id": "paper/data/pooled_v1.2.1.json"
+   },
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2.1_run1.json",
+   "@type": "File",
+   "contentSize": 20302,
+   "sha256": "c3193563bf3d9e8c6521c7c6cffe18d61337dd84248839189b260f02d4442d3a"
+  },
+  {
+   "@id": "paper/data/pooled_v1.2.json",
+   "@type": "File",
+   "contentSize": 61084,
+   "sha256": "5bce411c1e697461e7e8cbc71c0ef433fe2711e0984af17d08bd00f50b33f889"
+  },
+  {
+   "@id": "paper/data/pppm_mechanism_v6.json",
+   "@type": "File",
+   "contentSize": 18119,
+   "sha256": "c22906cc11c7d32c1df06cee3a7535c68afeabb66273fe14e98a4c12aebc9429"
+  },
+  {
+   "@id": "#write-paper/data/pppm_mechanism_v6.json-paper/exp74_pppm_mechanism.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp74_pppm_mechanism.py"
+   },
+   "result": {
+    "@id": "paper/data/pppm_mechanism_v6.json"
+   },
+   "description": "listed with paper/exp74_pppm_mechanism.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/qe_tensor.pkl",
+   "@type": "File",
+   "contentSize": 26493,
+   "sha256": "15a28ae5afc6e6a6c5e0259c7b6b570a3b49561781097f938bed4f8130ff7238"
+  },
+  {
+   "@id": "paper/data/reactdiff_tensor.pkl",
+   "@type": "File",
+   "contentSize": 28849,
+   "sha256": "b6d34d9b7a03e645310afa4911f49f0346daae6d3d49b911eaad27b17b02fd42"
+  },
+  {
+   "@id": "paper/data/reltol_2d1.json",
+   "@type": "File",
+   "contentSize": 8851,
+   "sha256": "17ece1fb63e8d8b3f01e3e9366e052159d1e20bb165da22ba7a8968c6a690161"
+  },
+  {
+   "@id": "#write-paper/data/reltol_2d1.json-paper/exp77_reltol_2d1.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp77_reltol_2d1.py"
+   },
+   "result": {
+    "@id": "paper/data/reltol_2d1.json"
+   },
+   "description": "listed with paper/exp77_reltol_2d1.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/reltol_2d1.json-hamilton/J1_dfg2d1/analyse_j1.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "hamilton/J1_dfg2d1/analyse_j1.py"
+   },
+   "result": {
+    "@id": "paper/data/reltol_2d1.json"
+   },
+   "description": "listed with hamilton/J1_dfg2d1/analyse_j1.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/reuse_hardest_released.json",
+   "@type": "File",
+   "contentSize": 883,
+   "sha256": "7b882be9ece4f2cc0cab570246bbe21e789d74fe8ed06bffc0033254dc99ec9e"
+  },
+  {
+   "@id": "#write-paper/data/reuse_hardest_released.json-paper/exp30_transfer.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp30_transfer.py"
+   },
+   "result": {
+    "@id": "paper/data/reuse_hardest_released.json"
+   },
+   "description": "listed with paper/exp30_transfer.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/reuse_hardest_released.json-paper/exp37_calhardest.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp37_calhardest.py"
+   },
+   "result": {
+    "@id": "paper/data/reuse_hardest_released.json"
+   },
+   "description": "listed with paper/exp37_calhardest.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/reuse_released.json",
+   "@type": "File",
+   "contentSize": 9298,
+   "sha256": "277dda50551209eec7cd6157437ddd6b9b054fba57f4c5c7693c8e3144c91970"
+  },
+  {
+   "@id": "#write-paper/data/reuse_released.json-paper/exp30_transfer.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp30_transfer.py"
+   },
+   "result": {
+    "@id": "paper/data/reuse_released.json"
+   },
+   "description": "listed with paper/exp30_transfer.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/reuse_released.json-paper/exp37_calhardest.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp37_calhardest.py"
+   },
+   "result": {
+    "@id": "paper/data/reuse_released.json"
+   },
+   "description": "listed with paper/exp37_calhardest.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/screen8.pkl",
+   "@type": "File",
+   "contentSize": 18400,
+   "sha256": "bcccaf049af0f8572f97da1c448b987572f8b60ce8433f19bf9123277e81eb56"
+  },
+  {
+   "@id": "paper/data/spacing_estimate_released.json",
+   "@type": "File",
+   "contentSize": 2163,
+   "sha256": "9dcc4e1bf510dc04f371a4b7e12b2bf6d1e174eb7899b3e83b268b4009c0bffb"
+  },
+  {
+   "@id": "#write-paper/data/spacing_estimate_released.json-paper/exp34_spacing.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp34_spacing.py"
+   },
+   "result": {
+    "@id": "paper/data/spacing_estimate_released.json"
+   },
+   "description": "listed with paper/exp34_spacing.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/spacing_estimate_released.json-paper/exp35_whyfine.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp35_whyfine.py"
+   },
+   "result": {
+    "@id": "paper/data/spacing_estimate_released.json"
+   },
+   "description": "listed with paper/exp35_whyfine.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/spacing_estimate_released.json-paper/exp34_spacing_margin.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp34_spacing_margin.py"
+   },
+   "result": {
+    "@id": "paper/data/spacing_estimate_released.json"
+   },
+   "description": "listed with paper/exp34_spacing_margin.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/spacing_estimate_released.json-paper/l2flags.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/l2flags.py"
+   },
+   "result": {
+    "@id": "paper/data/spacing_estimate_released.json"
+   },
+   "description": "listed with paper/l2flags.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/spacing_margin_check.json",
+   "@type": "File",
+   "contentSize": 165,
+   "sha256": "5ea4e7a599ca4eef17c1e10457e47a6bdcc11ab743b47c3aef76de4a620abb73"
+  },
+  {
+   "@id": "#write-paper/data/spacing_margin_check.json-paper/exp34_spacing.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp34_spacing.py"
+   },
+   "result": {
+    "@id": "paper/data/spacing_margin_check.json"
+   },
+   "description": "listed with paper/exp34_spacing.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/spacing_margin_check.json-paper/exp35_whyfine.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp35_whyfine.py"
+   },
+   "result": {
+    "@id": "paper/data/spacing_margin_check.json"
+   },
+   "description": "listed with paper/exp35_whyfine.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/spacing_margin_check.json-paper/exp34_spacing_margin.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp34_spacing_margin.py"
+   },
+   "result": {
+    "@id": "paper/data/spacing_margin_check.json"
+   },
+   "description": "listed with paper/exp34_spacing_margin.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/spacing_margin_check.json-paper/l2flags.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/l2flags.py"
+   },
+   "result": {
+    "@id": "paper/data/spacing_margin_check.json"
+   },
+   "description": "listed with paper/l2flags.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/spacing_released.json",
+   "@type": "File",
+   "contentSize": 3883,
+   "sha256": "4c9fda7d425a064de85ad4607d19d6855a887d2a76a31fb1e771ab12daf2b211"
+  },
+  {
+   "@id": "#write-paper/data/spacing_released.json-paper/exp34_spacing.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp34_spacing.py"
+   },
+   "result": {
+    "@id": "paper/data/spacing_released.json"
+   },
+   "description": "listed with paper/exp34_spacing.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/spacing_released.json-paper/exp35_whyfine.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp35_whyfine.py"
+   },
+   "result": {
+    "@id": "paper/data/spacing_released.json"
+   },
+   "description": "listed with paper/exp35_whyfine.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/spacing_released.json-paper/exp34_spacing_margin.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp34_spacing_margin.py"
+   },
+   "result": {
+    "@id": "paper/data/spacing_released.json"
+   },
+   "description": "listed with paper/exp34_spacing_margin.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/spacing_released.json-paper/l2flags.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/l2flags.py"
+   },
+   "result": {
+    "@id": "paper/data/spacing_released.json"
+   },
+   "description": "listed with paper/l2flags.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/transfer_floor.json",
+   "@type": "File",
+   "contentSize": 11822,
+   "sha256": "e8f8578ae7e4aa23169f3fdf30b890809331432c7da1e2f9a150ba0f8595e0fb"
+  },
+  {
+   "@id": "#write-paper/data/transfer_floor.json-paper/exp64_transfer_floor.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp64_transfer_floor.py"
+   },
+   "result": {
+    "@id": "paper/data/transfer_floor.json"
+   },
+   "description": "listed with paper/exp64_transfer_floor.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/transfer_floor.json-paper/exp70_tables.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp70_tables.py"
+   },
+   "result": {
+    "@id": "paper/data/transfer_floor.json"
+   },
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/transfer_floor.json-paper/exp40_section5.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp40_section5.py"
+   },
+   "result": {
+    "@id": "paper/data/transfer_floor.json"
+   },
+   "description": "listed with paper/exp40_section5.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/data/unconverged_v6.json",
+   "@type": "File",
+   "contentSize": 1205,
+   "sha256": "274a68aef2a3659ee79844c04e0ad998581ee250c55709a160639ab57c41606d"
+  },
+  {
+   "@id": "#write-paper/data/unconverged_v6.json-paper/exp70_tables.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp70_tables.py"
+   },
+   "result": {
+    "@id": "paper/data/unconverged_v6.json"
+   },
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/unconverged_v6.json-paper/exp80_v6_numbers.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp80_v6_numbers.py"
+   },
+   "result": {
+    "@id": "paper/data/unconverged_v6.json"
+   },
+   "description": "listed with paper/exp80_v6_numbers.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/unconverged_v6.json-paper/exp71_dfg2_detail.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp71_dfg2_detail.py"
+   },
+   "result": {
+    "@id": "paper/data/unconverged_v6.json"
+   },
+   "description": "listed with paper/exp71_dfg2_detail.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/data/unconverged_v6.json-paper/exp79_unconverged.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp79_unconverged.py"
+   },
+   "result": {
+    "@id": "paper/data/unconverged_v6.json"
+   },
+   "description": "listed with paper/exp79_unconverged.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/build_L2.txt",
+   "@type": "File",
+   "contentSize": 32,
+   "sha256": "29d2f067ace658667559ad2f641d32ad6d8aea94869671d61a69c4008cbc92f0"
+  },
+  {
+   "@id": "paper/figures/build_L3.txt",
+   "@type": "File",
+   "contentSize": 3481,
+   "sha256": "a3a104a3c770f98577e9bb77567600a98d636cf1c96b3fe1f6268bb760fe004e"
+  },
+  {
+   "@id": "paper/figures/build_L4.txt",
+   "@type": "File",
+   "contentSize": 1660,
+   "sha256": "2dde345a591aa146a82abe09c4b82b69344169d345d2a887214a5a54fe0611ac"
+  },
+  {
+   "@id": "paper/figures/data_2d1_l5.json",
+   "@type": "File",
+   "contentSize": 6093,
+   "sha256": "a33d1a12d603023e376eb810c4224f9f72c09032f254fe726e756d082ba13a91"
+  },
+  {
+   "@id": "#write-paper/figures/data_2d1_l5.json-paper/extract_2d1_l5.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/extract_2d1_l5.py"
+   },
+   "result": {
+    "@id": "paper/figures/data_2d1_l5.json"
+   },
+   "description": "listed with paper/extract_2d1_l5.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/data_2d1_l5.json-paper/make_2d1_l5_figures.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/make_2d1_l5_figures.py"
+   },
+   "result": {
+    "@id": "paper/figures/data_2d1_l5.json"
+   },
+   "description": "listed with paper/make_2d1_l5_figures.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/dfg2_strict.txt",
+   "@type": "File",
+   "contentSize": 1068,
+   "sha256": "f6fac62360bf2ad404fd99403ddea3ed72c124ecbf828cc5bd468a18ac2d64fa"
+  },
+  {
+   "@id": "#write-paper/figures/dfg2_strict.txt-paper/exp84_dfg2_strict.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp84_dfg2_strict.py"
+   },
+   "result": {
+    "@id": "paper/figures/dfg2_strict.txt"
+   },
+   "description": "listed with paper/exp84_dfg2_strict.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/dfg2_traces.txt",
+   "@type": "File",
+   "contentSize": 3830,
+   "sha256": "ed79a4d5ee270398b6d2bf064e3d09c4a4349c5d5ea726ac8d7c91b7e87babe9"
+  },
+  {
+   "@id": "#write-paper/figures/dfg2_traces.txt-paper/exp83_dfg2_traces.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp83_dfg2_traces.py"
+   },
+   "result": {
+    "@id": "paper/figures/dfg2_traces.txt"
+   },
+   "description": "listed with paper/exp83_dfg2_traces.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/eight_released.txt",
+   "@type": "File",
+   "contentSize": 5006,
+   "sha256": "2000f55fb5bc62c75b81fde90c2d2c2dfe8d4cf0ac46fcced4d2ba5951489af1"
+  },
+  {
+   "@id": "paper/figures/reuse_hardest_released.txt",
+   "@type": "File",
+   "contentSize": 916,
+   "sha256": "114f5856a7ab50bca0ffa779c52d34522e4ee2d2d28011cf0ab423d23dec5f97"
+  },
+  {
+   "@id": "paper/figures/reuse_released.txt",
+   "@type": "File",
+   "contentSize": 7656,
+   "sha256": "05c6ec43bac3986be97cc66609a9867306cacd65d2e3eba0b07140971b29962b"
+  },
+  {
+   "@id": "paper/figures/rev3_abinit_scf.txt",
+   "@type": "File",
+   "contentSize": 3087,
+   "sha256": "b9c2a467bce412a9f1fbc9735f7314ce0065a4a46ca40c97211b44cc2fbe0656"
+  },
+  {
+   "@id": "#write-paper/figures/rev3_abinit_scf.txt-paper/exp75_abinit_reference.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp75_abinit_reference.py"
+   },
+   "result": {
+    "@id": "paper/figures/rev3_abinit_scf.txt"
+   },
+   "description": "listed with paper/exp75_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/rev3_abinit_scf.txt-paper/exp45_abinit_reference.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp45_abinit_reference.py"
+   },
+   "result": {
+    "@id": "paper/figures/rev3_abinit_scf.txt"
+   },
+   "description": "listed with paper/exp45_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/rev3_abinit_scf.txt-paper/exp68_abinit_scf.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp68_abinit_scf.py"
+   },
+   "result": {
+    "@id": "paper/figures/rev3_abinit_scf.txt"
+   },
+   "description": "listed with paper/exp68_abinit_scf.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/rev3_abinit_scf.txt-paper/exp80_v6_numbers.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp80_v6_numbers.py"
+   },
+   "result": {
+    "@id": "paper/figures/rev3_abinit_scf.txt"
+   },
+   "description": "listed with paper/exp80_v6_numbers.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/rev3_baselines_pooled.txt",
+   "@type": "File",
+   "contentSize": 10641,
+   "sha256": "e8d8c56feae24b1aac41396ee1e9d85b312022051f4782b3a12b0f416e29e5ab"
+  },
+  {
+   "@id": "paper/figures/rev3_decline_reasons.txt",
+   "@type": "File",
+   "contentSize": 2038,
+   "sha256": "35b84e7bdb2b7069d5c9705e62c2f0fca539b95e151641f185db858bf833ee99"
+  },
+  {
+   "@id": "paper/figures/rev3_dfg2_detail.txt",
+   "@type": "File",
+   "contentSize": 7982,
+   "sha256": "4411cdd3830e888d601454393e4fa2fd5f68e59da2497b80e15ee55810e16a50"
+  },
+  {
+   "@id": "#write-paper/figures/rev3_dfg2_detail.txt-paper/exp56_dfg2d2.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp56_dfg2d2.py"
+   },
+   "result": {
+    "@id": "paper/figures/rev3_dfg2_detail.txt"
+   },
+   "description": "listed with paper/exp56_dfg2d2.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/rev3_dfg2_detail.txt-paper/exp71_dfg2_detail.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp71_dfg2_detail.py"
+   },
+   "result": {
+    "@id": "paper/figures/rev3_dfg2_detail.txt"
+   },
+   "description": "listed with paper/exp71_dfg2_detail.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/rev3_estimate.txt",
+   "@type": "File",
+   "contentSize": 1984,
+   "sha256": "85f5569a1819bb7e5087a20eb31f3a2f62b47b2e5c793192dc288eed526272d6"
+  },
+  {
+   "@id": "paper/figures/rev3_floor_sensitivity.txt",
+   "@type": "File",
+   "contentSize": 3515,
+   "sha256": "fdcfc47e240c13bfa03b449e5a393a739804f737248ac2745379ed2b3507fdda"
+  },
+  {
+   "@id": "paper/figures/rev3_heldout.txt",
+   "@type": "File",
+   "contentSize": 5582,
+   "sha256": "bdeed5eae67908ef6ca6c9e9df46b3c2e9d9be89b27f690df9ce30c60eae1845"
+  },
+  {
+   "@id": "paper/figures/rev3_heldout_current.txt",
+   "@type": "File",
+   "contentSize": 3221,
+   "sha256": "c7cc345f09373cb050f1288e0c710a750e86a55b384f84009d904d2a43fa8898"
+  },
+  {
+   "@id": "paper/figures/rev3_margin.txt",
+   "@type": "File",
+   "contentSize": 2693,
+   "sha256": "91a4726aca9b2ac1502c91087298fa5da6c3a70e756425e45ffccb04720d7af7"
+  },
+  {
+   "@id": "paper/figures/rev3_misdeclare.txt",
+   "@type": "File",
+   "contentSize": 4810,
+   "sha256": "5ae91557d1066d88eaaee8966e97338ce5d64a8b853d5edc9eff4ed085a41361"
+  },
+  {
+   "@id": "paper/figures/rev3_transfer_floor.txt",
+   "@type": "File",
+   "contentSize": 7078,
+   "sha256": "a430110e416feb25612f785beabfc3d1676284b93bb09e5dd531571c84336c78"
+  },
+  {
+   "@id": "paper/figures/sec31_classes.txt",
+   "@type": "File",
+   "contentSize": 4052,
+   "sha256": "544e6b70a95890d9fd22f740f8803fe7cf102f791883700dda6088a9f3e8359c"
+  },
+  {
+   "@id": "paper/figures/sec5_masking.txt",
+   "@type": "File",
+   "contentSize": 3276,
+   "sha256": "31097e530139cbaccad7571e690fc2353ac506dacbb91103b24501b7a450add9"
+  },
+  {
+   "@id": "paper/figures/sec5x_cavity.txt",
+   "@type": "File",
+   "contentSize": 6807,
+   "sha256": "6c8a3ff1bf2a9f2c1a746d74c0814bbee6d9a87f4e061ddcc013751e664644a9"
+  },
+  {
+   "@id": "paper/figures/sec81_lammps_n20.txt",
+   "@type": "File",
+   "contentSize": 2265,
+   "sha256": "2e70c1eb1d71b978a4cbf2603cd961b2900211bf3b0305eaea9ae7a244254b7b"
+  },
+  {
+   "@id": "paper/figures/sec81_lammps_n40.txt",
+   "@type": "File",
+   "contentSize": 2265,
+   "sha256": "2cbb581ee3a6659a1d6f1bf3454e7b2f9766de48a4c3e3740185ce1695e2a166"
+  },
+  {
+   "@id": "paper/figures/sec81_lammps_n64.txt",
+   "@type": "File",
+   "contentSize": 2266,
+   "sha256": "8c3ad28c40521e9a8f1a1881c4d193b2a21f7d3974c82eddb6cd12575c1a2691"
+  },
+  {
+   "@id": "paper/figures/sec82_floor.txt",
+   "@type": "File",
+   "contentSize": 2735,
+   "sha256": "af7c0bcb3dcd93ee0f84fa35b1131c882f09c1384722ecd6f32409dc762249f4"
+  },
+  {
+   "@id": "#write-paper/figures/sec82_floor.txt-paper/exp75_abinit_reference.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp75_abinit_reference.py"
+   },
+   "result": {
+    "@id": "paper/figures/sec82_floor.txt"
+   },
+   "description": "listed with paper/exp75_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/sec82_floor.txt-hamilton/J2_dfg2d2/analyse_j2.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "hamilton/J2_dfg2d2/analyse_j2.py"
+   },
+   "result": {
+    "@id": "paper/figures/sec82_floor.txt"
+   },
+   "description": "listed with hamilton/J2_dfg2d2/analyse_j2.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/sec82_floor.txt-paper/exp44_gromacs_floor.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp44_gromacs_floor.py"
+   },
+   "result": {
+    "@id": "paper/figures/sec82_floor.txt"
+   },
+   "description": "listed with paper/exp44_gromacs_floor.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/sec82_floor.txt-paper/exp78_gromacs_floor_v121.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp78_gromacs_floor_v121.py"
+   },
+   "result": {
+    "@id": "paper/figures/sec82_floor.txt"
+   },
+   "description": "listed with paper/exp78_gromacs_floor_v121.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/sec82_gromacs_d.txt",
+   "@type": "File",
+   "contentSize": 2230,
+   "sha256": "54f000ddb4cb16f0a7d043433893065a1f58c8e24e125b49ca402763559246ba"
+  },
+  {
+   "@id": "paper/figures/sec82_gromacs_mixed.txt",
+   "@type": "File",
+   "contentSize": 2264,
+   "sha256": "ec5e76f891f0715a8da65833ac6d10143ded80d976f354b09e57df37103ec2a0"
+  },
+  {
+   "@id": "paper/figures/sec83_abinit.txt",
+   "@type": "File",
+   "contentSize": 9460,
+   "sha256": "259521d4f87ee0d4516106cabba8db734a86beed348de5f92ac7677aacd39a14"
+  },
+  {
+   "@id": "paper/figures/sec83_reference.txt",
+   "@type": "File",
+   "contentSize": 638,
+   "sha256": "54e07c123c924741c1ec0775f94e25c2bdbb00de14ded67d2e155bd2598b3be4"
+  },
+  {
+   "@id": "#write-paper/figures/sec83_reference.txt-paper/exp75_abinit_reference.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp75_abinit_reference.py"
+   },
+   "result": {
+    "@id": "paper/figures/sec83_reference.txt"
+   },
+   "description": "listed with paper/exp75_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/sec83_reference.txt-paper/exp45_abinit_reference.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp45_abinit_reference.py"
+   },
+   "result": {
+    "@id": "paper/figures/sec83_reference.txt"
+   },
+   "description": "listed with paper/exp45_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/sec83_reference.txt-paper/exp68_abinit_scf.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp68_abinit_scf.py"
+   },
+   "result": {
+    "@id": "paper/figures/sec83_reference.txt"
+   },
+   "description": "listed with paper/exp68_abinit_scf.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/sec83_reference.txt-paper/exp80_v6_numbers.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp80_v6_numbers.py"
+   },
+   "result": {
+    "@id": "paper/figures/sec83_reference.txt"
+   },
+   "description": "listed with paper/exp80_v6_numbers.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/sec8x_dfg2d2.txt",
+   "@type": "File",
+   "contentSize": 10098,
+   "sha256": "7e9e9a20a895072c376bfd00052747211e2170d5ec2e443bbfafa0b67bdfdddd"
+  },
+  {
+   "@id": "#write-paper/figures/sec8x_dfg2d2.txt-paper/exp56_dfg2d2.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp56_dfg2d2.py"
+   },
+   "result": {
+    "@id": "paper/figures/sec8x_dfg2d2.txt"
+   },
+   "description": "listed with paper/exp56_dfg2d2.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/sec8x_dfg2d2.txt-paper/exp71_dfg2_detail.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp71_dfg2_detail.py"
+   },
+   "result": {
+    "@id": "paper/figures/sec8x_dfg2d2.txt"
+   },
+   "description": "listed with paper/exp71_dfg2_detail.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/sec8x_qe.txt",
+   "@type": "File",
+   "contentSize": 5313,
+   "sha256": "2925a118d8908a6ca503c7c97c4a5fb948c3738cd168fc6d2f0f1581a9b6397a"
+  },
+  {
+   "@id": "paper/figures/spacing_estimate_released.txt",
+   "@type": "File",
+   "contentSize": 1432,
+   "sha256": "d06831a49d24b4a9001df3940f0b721b9ff37eceab1eab03210913d6e956f75c"
+  },
+  {
+   "@id": "paper/figures/spacing_released.txt",
+   "@type": "File",
+   "contentSize": 3026,
+   "sha256": "b112f2e9e1f75d53ea8bbccba023c2e9cf56340dc89c84644c84ebc216e82a12"
+  },
+  {
+   "@id": "paper/figures/tab06_rho.txt",
+   "@type": "File",
+   "contentSize": 3770,
+   "sha256": "3898eff79c861aa458cf00c753e00433111ad20eb3be407cc8eceb8b00706c5d"
+  },
+  {
+   "@id": "#write-paper/figures/tab06_rho.txt-paper/exp28_separability.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp28_separability.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab06_rho.txt"
+   },
+   "description": "listed with paper/exp28_separability.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/tab06_rho.txt-paper/exp56_dfg2d2.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp56_dfg2d2.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab06_rho.txt"
+   },
+   "description": "listed with paper/exp56_dfg2d2.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/tab_baselines_full.tex",
+   "@type": "File",
+   "contentSize": 4813,
+   "sha256": "6cb4158ff3fce0d78d9aa35f5966787c7c534d460737a6a25e65e44ff649642a"
+  },
+  {
+   "@id": "#write-paper/figures/tab_baselines_full.tex-paper/exp72_baselines_pooled.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp72_baselines_pooled.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_baselines_full.tex"
+   },
+   "description": "listed with paper/exp72_baselines_pooled.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/tab_baselines_full.tex-paper/exp70_tables.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp70_tables.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_baselines_full.tex"
+   },
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/tab_baselines_full.tex-paper/make_baselines_figure.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/make_baselines_figure.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_baselines_full.tex"
+   },
+   "description": "listed with paper/make_baselines_figure.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/tab_estimate.tex",
+   "@type": "File",
+   "contentSize": 850,
+   "sha256": "118ba1311d200dd27c9fc881fa3588dee971cfb668f3b11a803391fab9deb975"
+  },
+  {
+   "@id": "paper/figures/tab_floor.tex",
+   "@type": "File",
+   "contentSize": 1594,
+   "sha256": "50212c44ae085b83a0aed5305852b58c141292c99b6eac08d51e77a6152f38d2"
+  },
+  {
+   "@id": "#write-paper/figures/tab_floor.tex-paper/exp44_gromacs_floor.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp44_gromacs_floor.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_floor.tex"
+   },
+   "description": "listed with paper/exp44_gromacs_floor.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/tab_floor.tex-paper/exp78_gromacs_floor_v121.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp78_gromacs_floor_v121.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_floor.tex"
+   },
+   "description": "listed with paper/exp78_gromacs_floor_v121.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/tab_lmpbase.tex",
+   "@type": "File",
+   "contentSize": 1381,
+   "sha256": "016e0d2e097852ef2c1cbb99f57a076b77a73315cf72ba1ab9a0da8189f50ccb"
+  },
+  {
+   "@id": "paper/figures/tab_misdeclare.tex",
+   "@type": "File",
+   "contentSize": 1757,
+   "sha256": "8349630d1485b61704560a26289a7f6745b87e1faf275db40e88fcbe9a5b8bb4"
+  },
+  {
+   "@id": "#write-paper/figures/tab_misdeclare.tex-paper/exp17_classify.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp17_classify.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_misdeclare.tex"
+   },
+   "description": "listed with paper/exp17_classify.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/tab_misdeclare.tex-paper/exp65_misdeclare_v12.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp65_misdeclare_v12.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_misdeclare.tex"
+   },
+   "description": "listed with paper/exp65_misdeclare_v12.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/tab_pooled.tex",
+   "@type": "File",
+   "contentSize": 5089,
+   "sha256": "1a19f10d7dbdcc8cc6c3e7b1814a9cc87d3ea2046484c5c532f6736e67001af7"
+  },
+  {
+   "@id": "#write-paper/figures/tab_pooled.tex-paper/exp70_tables.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp70_tables.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_pooled.tex"
+   },
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/tab_pooled_compact.tex",
+   "@type": "File",
+   "contentSize": 638,
+   "sha256": "4c76dc159d990f2319c95d1925c5bff839dbbe7969f67df989bbc756cb0c75d5"
+  },
+  {
+   "@id": "#write-paper/figures/tab_pooled_compact.tex-paper/exp72_baselines_pooled.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp72_baselines_pooled.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_pooled_compact.tex"
+   },
+   "description": "listed with paper/exp72_baselines_pooled.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/tab_pooled_compact.tex-paper/exp70_tables.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp70_tables.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_pooled_compact.tex"
+   },
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/tab_preregistered.tex",
+   "@type": "File",
+   "contentSize": 1659,
+   "sha256": "3098efcc0f64d4ed0e29362da7950fe3d36aeae9cde0b7cdb5ed4fb2ea8a8cf4"
+  },
+  {
+   "@id": "#write-paper/figures/tab_preregistered.tex-paper/exp62_heldout.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp62_heldout.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_preregistered.tex"
+   },
+   "description": "listed with paper/exp62_heldout.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/tab_preregistered.tex-paper/exp70_tables.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp70_tables.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_preregistered.tex"
+   },
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/tab_sup_ablation.tex",
+   "@type": "File",
+   "contentSize": 915,
+   "sha256": "24bca662f91adeebf81cce42850d56184fdb88dae398c9f393ece0804591675d"
+  },
+  {
+   "@id": "#write-paper/figures/tab_sup_ablation.tex-paper/exp70_tables.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp70_tables.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_sup_ablation.tex"
+   },
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/tab_sup_ablation.tex-paper/exp80_v6_numbers.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp80_v6_numbers.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_sup_ablation.tex"
+   },
+   "description": "listed with paper/exp80_v6_numbers.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/tab_sup_ablation.tex-paper/exp71_dfg2_detail.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp71_dfg2_detail.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_sup_ablation.tex"
+   },
+   "description": "listed with paper/exp71_dfg2_detail.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/tab_sup_ablation.tex-paper/exp79_unconverged.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp79_unconverged.py"
+   },
+   "result": {
+    "@id": "paper/figures/tab_sup_ablation.tex"
+   },
+   "description": "listed with paper/exp79_unconverged.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/tab_transfer.tex",
+   "@type": "File",
+   "contentSize": 3281,
+   "sha256": "49299a150d0fb31750707978a0e12ba25f793ca471a4998a4ab4d13254779652"
+  },
+  {
+   "@id": "paper/figures/unscripted.txt",
+   "@type": "File",
+   "contentSize": 1470,
+   "sha256": "710cb37bde8b70560cbf00d9a01f0552ea87ed68b4e48275080c6f2fed94e01d"
+  },
+  {
+   "@id": "#write-paper/figures/unscripted.txt-paper/exp85_unscripted.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp85_unscripted.py"
+   },
+   "result": {
+    "@id": "paper/figures/unscripted.txt"
+   },
+   "description": "listed with paper/exp85_unscripted.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/values_2d1_l5.txt",
+   "@type": "File",
+   "contentSize": 3153,
+   "sha256": "769766755b62a62687c2138d1c1ecc4b17697fb9ba43a9f248eb04bfa7845c54"
+  },
+  {
+   "@id": "#write-paper/figures/values_2d1_l5.txt-paper/extract_2d1_l5.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/extract_2d1_l5.py"
+   },
+   "result": {
+    "@id": "paper/figures/values_2d1_l5.txt"
+   },
+   "description": "listed with paper/extract_2d1_l5.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/values_2d1_l5.txt-paper/make_2d1_l5_figures.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/make_2d1_l5_figures.py"
+   },
+   "result": {
+    "@id": "paper/figures/values_2d1_l5.txt"
+   },
+   "description": "listed with paper/make_2d1_l5_figures.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "paper/figures/values_baselines.txt",
+   "@type": "File",
+   "contentSize": 1693,
+   "sha256": "e51d70f8ea039e11dc25d18cad89827951fabb45a5902ebcbf24295129cc69e1"
+  },
+  {
+   "@id": "#write-paper/figures/values_baselines.txt-paper/exp72_baselines_pooled.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp72_baselines_pooled.py"
+   },
+   "result": {
+    "@id": "paper/figures/values_baselines.txt"
+   },
+   "description": "listed with paper/exp72_baselines_pooled.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/values_baselines.txt-paper/exp70_tables.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/exp70_tables.py"
+   },
+   "result": {
+    "@id": "paper/figures/values_baselines.txt"
+   },
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "#write-paper/figures/values_baselines.txt-paper/make_baselines_figure.py",
+   "@type": "CreateAction",
+   "instrument": {
+    "@id": "paper/make_baselines_figure.py"
+   },
+   "result": {
+    "@id": "paper/figures/values_baselines.txt"
+   },
+   "description": "listed with paper/make_baselines_figure.py in one row of paper/README.md (commit f1c64f8)"
+  },
+  {
+   "@id": "studies/airfoil/summary/confirm-20261112-0927/confirm_summary.md",
+   "@type": "File",
+   "contentSize": 6973,
+   "sha256": "80b212f3dd57df881fe8e5fcbf5f0ec9ce2fa7a27da034a70badef507468220f"
+  },
+  {
+   "@id": "studies/airfoil/summary/convmap-20261111-0910/convmap_summary.md",
+   "@type": "File",
+   "contentSize": 13839,
+   "sha256": "0482b920d00df537e6c0f2a3699376344a087d451621380f198a204c6ba8cde9"
+  },
+  {
+   "@id": "studies/airfoil/summary/stage0-20261113-2123/stage0_summary.json",
+   "@type": "File",
+   "contentSize": 3855,
+   "sha256": "90311bb8f696cbc38c898cc4ff357288b3e1529a39881b5d746fbb693ee2f57d"
+  },
+  {
+   "@id": "studies/airfoil/summary/stage0-20261113-2137/stage0.txt",
+   "@type": "File",
+   "contentSize": 5172,
+   "sha256": "b726be5dd0a6fd8bf0b95965733479f7699c668d775592ab262e3500e4662163"
+  },
+  {
+   "@id": "studies/airfoil/summary/stage0-20261113-2137/stage0_summary.json",
+   "@type": "File",
+   "contentSize": 4000,
+   "sha256": "075d287a1514808eaff064a3099af73a1afc74525fc35092c261656e7547bcc8"
+  },
+  {
+   "@id": "studies/airfoil/summary/stage1-20261114-1548/stage1_summary.json",
+   "@type": "File",
+   "contentSize": 16255,
+   "sha256": "cbc2702b2649329690d0e39272fc6e66caa795b979b2563aa214c46a386036c3"
+  },
+  {
+   "@id": "studies/pre_comparison/results/arm1_rows.csv",
+   "@type": "File",
+   "contentSize": 1386398,
+   "sha256": "ea259690b5c45bb0f6d805f8c0926d68939a4f93e8ef36c1f206003fc6980d1c"
+  },
+  {
+   "@id": "studies/pre_comparison/results/arm2_rows.csv",
+   "@type": "File",
+   "contentSize": 163612,
+   "sha256": "868f988613d966479a7da9409ec80b87cde357c48609279e5e306e4da8e0d2d5"
+  },
+  {
+   "@id": "studies/pre_comparison/results/errbudget_check.json",
+   "@type": "File",
+   "contentSize": 7887,
+   "sha256": "867113672ff01ce4f738e6d2ffa624423af9c2511e0d4bfbe321c94e666643e1"
+  },
+  {
+   "@id": "studies/pre_comparison/results/summary.json",
+   "@type": "File",
+   "contentSize": 35966,
+   "sha256": "228374bc7adb2bd1731d4df4e3be76f6f10ada0496266c020a23f4a5e14b5a06"
+  },
+  {
+   "@id": "studies/pre_comparison/results/tables.md",
+   "@type": "File",
+   "contentSize": 4504,
+   "sha256": "054f3fc0a4097633278158f15a0fcc5327df654a87a0edfab36c92c1e610f47d"
+  },
+  {
+   "@id": "studies/pre_comparison/results/validation.json",
+   "@type": "File",
+   "contentSize": 7908,
+   "sha256": "9f1fc2b8f7447e209b9d20c06d4a9632c0bef074a72030946c4c342dce4b55ec"
+  },
+  {
+   "@id": "studies/reuse2d1/summary/reuse2d1-20261115-1111/res.txt",
+   "@type": "File",
+   "contentSize": 7551,
+   "sha256": "ffb948d6d5db81eb7bc8ae755006bd987901e9d5b9b24a37cbbd2b7ba604ec20"
+  },
+  {
+   "@id": "studies/reuse2d1/summary/reuse2d1-20261115-1111/reuse_summary.json",
+   "@type": "File",
+   "contentSize": 39308,
+   "sha256": "64ca1378134173bfb87170397c27cdcb004ae3873f3b8c7cf7c41737c387305e"
+  },
+  {
+   "@id": "hamilton/J1_dfg2d1/analyse_j1.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "hamilton/J2_dfg2d2/analyse_j2.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "hamilton/J5_abc3d/analyse_j5.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp17_classify.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp28_separability.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp30_transfer.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp34_spacing.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp34_spacing_margin.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp35_whyfine.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp37_calhardest.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp40_section5.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp44_gromacs_floor.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp45_abinit_reference.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp54_eight.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp56_dfg2d2.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp59_dfg_plateau.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp62_heldout.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp64_transfer_floor.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp65_misdeclare_v12.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp66_estimate_v12.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp68_abinit_scf.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp69_dfg_fine.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp70_tables.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp71_dfg2_detail.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp72_baselines_pooled.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp74_pppm_mechanism.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp75_abinit_reference.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp76_accounting.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp77_reltol_2d1.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp78_gromacs_floor_v121.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp79_unconverged.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp80_v6_numbers.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp83_dfg2_traces.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp84_dfg2_strict.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/exp85_unscripted.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/extract_2d1_l5.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/l2flags.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/make_2d1_l5_figures.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  },
+  {
+   "@id": "paper/make_baselines_figure.py",
+   "@type": [
+    "File",
+    "SoftwareSourceCode"
+   ],
+   "programmingLanguage": "Python"
+  }
+ ]
+}
