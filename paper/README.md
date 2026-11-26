@@ -73,6 +73,7 @@ platform; no rounded number of the article changes.
 | S-2.4: the pre-registered problems | `../PREREGISTRATION.md`; `heldout_fem.py`, `heldout_cavity.py`, `../hamilton/J5_abc3d/`; H3 errors at the finest setting: `../hamilton/results/j5.txt` | | |
 | S-2.5: references; the remark on limits beyond the 2D-2 reference | `../hamilton/results/j2.txt`; `exp83_dfg2_traces.py`, part 1 | | `data/dfg2_traces.json` |
 | S-2.6: accounting | `exp76_accounting.py` (accounting) | | `data/accounting_v6.json` |
+| S-3.2, S-5.1, S-5.2: the numbers that no script printed before (LAMMPS errors along the cutoffs, the ABINIT estimate at the finest setting, momentum solves stopped by their tolerance, the Courant number and the diverged 2D-2 runs) | `exp85_unscripted.py` (unscripted) | `../hamilton/results/dfg_tensor_current.pkl`, `j2_tensor.pkl`, `data/lammps_tensor_n20.pkl`, the ABINIT tensor | printed, as in `figures/unscripted.txt` |
 | Table S-3.1 (`tab_pooled.tex`) | `pooled.py v1.2.1`, `exp70_tables.py` | | `figures/tab_pooled.tex` |
 | S-3.2: declines by reason; L5 orders | `exp73_decline_reasons.py` (decline_reasons); `exp80_v6_numbers.py`, part 4 | | printed |
 | Table S-3.2 (`tab_sup_ablation.tex`) and S-3.3 | `pooled.py v1.2.1-<variant>` (8 variants), `exp70_tables.py`; 0.997, 1.08 and 1.11 ε: `exp80_v6_numbers.py`, part 5; 116 of 172: `exp71_dfg2_detail.py`; accepting unconverged runs: `exp79_unconverged.py` (unconverged); 2D-1 with the function object: `../hamilton/results/j1.txt` | | `figures/tab_sup_ablation.tex`, `data/unconverged_v6.json` |
@@ -119,11 +120,13 @@ its stored output is listed.
   both pre-registered. Their protocols were committed before any run, and each amendment of
   the airfoil protocol alone, in the project repository: airfoil da6e9e0 (10 November
   2026), amendments A1 5774f09, A2 9b6f670, A3 31f17e0, A4 5b8cdc5, A5 4a1d510, A6 88c1910;
-  reuse2d1 8cb358c (14 November 2026, no amendment). The code that ran on Hamilton is that
+  reuse2d1 8cb358c (14 November 2026, no amendment). That project repository is not
+  available, and none of these commits is in this repository, so their dates cannot be
+  checked here; `../TRUST.md` says what evidence of the order of events remains. The code that ran on Hamilton is that
   of the batch tarballs listed in `../DATA.md` (reuse2d1: 9b7482e). The raw packs are not in
   git; their analyses are committed under `summary/`.
 - **The PRE comparison** (`../studies/pre_comparison/`): protocol committed before any PRE
-  result was graded (e1d1bce, 9 November 2026). `fetch_pre.sh` clones the PRE authors' code
+  result was graded (e1d1bce, 9 November 2026); the commit is not available either). `fetch_pre.sh` clones the PRE authors' code
   from https://github.com/NewcastleRSE/sparse-probabilistic-richardson-extrapolation at
   commit 3918107 (MIT licence, © 2025–2026 Oates, Howey and Karvonen) and installs its
   environment; nothing of it is kept here. `spre_white.py` restates their model in closed

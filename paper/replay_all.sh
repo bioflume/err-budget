@@ -57,6 +57,7 @@ step transfer $PY exp64_transfer_floor.py
 step section5 $PY exp40_section5.py
 step bound_check $PY exp81_bound_check.py
 step numbers $PY exp80_v6_numbers.py
+step unscripted $PY exp85_unscripted.py
 
 # Pre-registered problems (Table 5, S-3.7)
 step heldout_frozen $PY -W ignore exp62_heldout.py

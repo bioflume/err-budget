@@ -54,20 +54,24 @@ cost ratio and run count equals the stored one, and the worst error ratio agrees
 | S-7 | digits | `studies/airfoil/analysis/stage1.py` rerun from the raw pack: `stage1_summary.json` identical except two sums in the last digit |
 | The other analyses rerun here | exact | `exp77_reltol_2d1.py`, `exp78_gromacs_floor_v121.py`: stored JSON rewritten byte for byte; `exp56_dfg2d2.py`: printed output equals `figures/sec8x_dfg2d2.txt`; tests: 52 passed |
 
-## Not reproduced: numbers without a script
+## Numbers that had no script
 
-No script in the repository prints these numbers of the supplement; they appear to come
-from analyses of the writing sessions:
+When this check was made, no script printed the numbers below. `exp85_unscripted.py` (step
+`unscripted`, added 26 November 2026) now recomputes them from the stored runs; its output
+is `figures/unscripted.txt`.
 
 - S-5.1: the shares of momentum solves stopped by their tolerance alone over the 608
-  converged runs (26% at 100 t/r_c = 0.1, 94% at 1). `../hamilton/results/j1.txt` prints them
-  over all 840 runs (26% and 93%); the 48 runs with residual histories are in
-  `../hamilton/results/j1_reltol.json`, but no script tallies them. (The change with `relTol`
-  0, at most 3.9×10⁻³ and 9.6×10⁻² for the lift, is in `j1.txt`.)
-- S-5.2: "22 of 54 runs diverged" and Co_max = 27.8 n_arc Δt. The Courant numbers are in
-  `hamilton/results/j2_tensor.pkl` ("courant"), but no script tallies them.
-- S-3.2: the LAMMPS errors along the five cutoffs, (3.1, 3.6, 0.77, 2.4, 0.95)×10⁻²; the ABINIT
-  estimate at the finest setting (1.15 and 3.5 times the target) and the "about 50 times".
+  converged runs, 26% and 94%: **reproduced** (26.0% and 93.7%; "tolerance alone" read as
+  the classes abs and zero of `analyse_j1.py`).
+- S-5.2: Co_max = 27.8 n_arc Δt: **reproduced** (median 27.82 over the 140 runs that did not
+  diverge). "22 of 54 runs diverged": **reproduced** if the 54 runs are those of the six
+  (n_arc, Δt) pairs in which some but not all runs diverged; over all 180 runs, 40 diverged.
+  The text of S-5.2 should say which runs it counts.
+- S-3.2: the LAMMPS errors along the five cutoffs, (3.1, 3.6, 0.77, 2.4, 0.95)×10⁻²:
+  **reproduced** (8,000 ions, PPPM accuracy 10⁻², order 7). The ABINIT estimate at the
+  finest setting, 1.15 and 3.5 times the target: **reproduced** (1.15 and 3.46 at the
+  energy targets 3×10⁻³ and 10⁻³). "About 50 times": **not reproduced**; the estimate
+  exceeds the true error 65.6 times at both targets.
 
 ## Not run here
 
