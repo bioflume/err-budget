@@ -18,3 +18,6 @@ paper/figures/*.pdf
 paper/figures/*.png
 paper/data/flags_L2_*.pkl
 paper/data/eight_flags_released.pkl
+
+# macOS folder metadata
+.DS_Store
