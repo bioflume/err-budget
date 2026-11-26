@@ -40,7 +40,10 @@ agent, submitted the Hamilton jobs, as the runbook `hamilton/README.md` is writt
 
 `TRUST.md` lists the checks a reader can run and their results.
 
-## Not recorded
+## Session logs
 
-The agent's session logs (prompts, tool calls, its own reports) were not kept, so the
-record of how the code was written is the git history alone.
+The agent's session logs (prompts, tool calls, its own reports) are not in this repository.
+The 39 commits made in agent sessions name their session in a `Claude-Session:` line, four
+sessions in all; the logs are on claude.ai under the author's account, if they are still
+kept. [Author to confirm: whether the logs are kept, and whether they can be archived with
+the release.]

@@ -22,7 +22,7 @@
    "author": {
     "@id": "#author"
    },
-   "version": "git f1c64f8",
+   "version": "git 64af81c",
    "hasPart": [
     {
      "@id": "hamilton/results/J3_RUN_RECORD.txt"
@@ -584,7 +584,7 @@
    "result": {
     "@id": "hamilton/results/j1.txt"
    },
-   "description": "listed with paper/exp77_reltol_2d1.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp77_reltol_2d1.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-hamilton/results/j1.txt-hamilton/J1_dfg2d1/analyse_j1.py",
@@ -595,7 +595,7 @@
    "result": {
     "@id": "hamilton/results/j1.txt"
    },
-   "description": "listed with hamilton/J1_dfg2d1/analyse_j1.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with hamilton/J1_dfg2d1/analyse_j1.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "hamilton/results/j1_fo.json",
@@ -636,7 +636,7 @@
    "result": {
     "@id": "hamilton/results/j2.txt"
    },
-   "description": "listed with paper/exp75_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp75_abinit_reference.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-hamilton/results/j2.txt-hamilton/J2_dfg2d2/analyse_j2.py",
@@ -647,7 +647,7 @@
    "result": {
     "@id": "hamilton/results/j2.txt"
    },
-   "description": "listed with hamilton/J2_dfg2d2/analyse_j2.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with hamilton/J2_dfg2d2/analyse_j2.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-hamilton/results/j2.txt-paper/exp44_gromacs_floor.py",
@@ -658,7 +658,7 @@
    "result": {
     "@id": "hamilton/results/j2.txt"
    },
-   "description": "listed with paper/exp44_gromacs_floor.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp44_gromacs_floor.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "hamilton/results/j2_hamilton.txt",
@@ -711,7 +711,7 @@
    "result": {
     "@id": "hamilton/results/j5.txt"
    },
-   "description": "listed with paper/exp62_heldout.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp62_heldout.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-hamilton/results/j5.txt-hamilton/J5_abc3d/analyse_j5.py",
@@ -722,7 +722,7 @@
    "result": {
     "@id": "hamilton/results/j5.txt"
    },
-   "description": "listed with hamilton/J5_abc3d/analyse_j5.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with hamilton/J5_abc3d/analyse_j5.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "hamilton/results/j5_replay.json",
@@ -763,7 +763,7 @@
    "result": {
     "@id": "paper/data/abinit_reference_v6.json"
    },
-   "description": "listed with paper/exp75_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp75_abinit_reference.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/abinit_reference_v6.json-hamilton/J2_dfg2d2/analyse_j2.py",
@@ -774,7 +774,7 @@
    "result": {
     "@id": "paper/data/abinit_reference_v6.json"
    },
-   "description": "listed with hamilton/J2_dfg2d2/analyse_j2.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with hamilton/J2_dfg2d2/analyse_j2.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/abinit_reference_v6.json-paper/exp44_gromacs_floor.py",
@@ -785,7 +785,7 @@
    "result": {
     "@id": "paper/data/abinit_reference_v6.json"
    },
-   "description": "listed with paper/exp44_gromacs_floor.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp44_gromacs_floor.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/abinit_reference_v6.json-paper/exp45_abinit_reference.py",
@@ -796,7 +796,7 @@
    "result": {
     "@id": "paper/data/abinit_reference_v6.json"
    },
-   "description": "listed with paper/exp45_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp45_abinit_reference.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/abinit_reference_v6.json-paper/exp68_abinit_scf.py",
@@ -807,7 +807,7 @@
    "result": {
     "@id": "paper/data/abinit_reference_v6.json"
    },
-   "description": "listed with paper/exp68_abinit_scf.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp68_abinit_scf.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/abinit_reference_v6.json-paper/exp80_v6_numbers.py",
@@ -818,7 +818,7 @@
    "result": {
     "@id": "paper/data/abinit_reference_v6.json"
    },
-   "description": "listed with paper/exp80_v6_numbers.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp80_v6_numbers.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/abinit_tensor_v11.pkl",
@@ -841,7 +841,7 @@
    "result": {
     "@id": "paper/data/accounting_v6.json"
    },
-   "description": "listed with paper/exp76_accounting.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp76_accounting.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/adaptive_tensor.pkl",
@@ -870,7 +870,7 @@
    "result": {
     "@id": "paper/data/baselines_lmp_gmx.json"
    },
-   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/baselines_pooled.json",
@@ -899,7 +899,7 @@
    "result": {
     "@id": "paper/data/baselines_v6.json"
    },
-   "description": "listed with paper/exp72_baselines_pooled.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp72_baselines_pooled.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/baselines_v6.json-paper/exp70_tables.py",
@@ -910,7 +910,7 @@
    "result": {
     "@id": "paper/data/baselines_v6.json"
    },
-   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/burgers2d_tensor.pkl",
@@ -999,7 +999,7 @@
    "result": {
     "@id": "paper/data/dfg2_strict.json"
    },
-   "description": "listed with paper/exp84_dfg2_strict.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp84_dfg2_strict.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/dfg2_traces.json",
@@ -1016,7 +1016,7 @@
    "result": {
     "@id": "paper/data/dfg2_traces.json"
    },
-   "description": "listed with paper/exp83_dfg2_traces.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp83_dfg2_traces.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/dfg2d2_tensor.pkl",
@@ -1039,7 +1039,7 @@
    "result": {
     "@id": "paper/data/dfg_fine.json"
    },
-   "description": "listed with paper/exp59_dfg_plateau.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp59_dfg_plateau.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/dfg_fine.json-paper/exp69_dfg_fine.py",
@@ -1050,7 +1050,7 @@
    "result": {
     "@id": "paper/data/dfg_fine.json"
    },
-   "description": "listed with paper/exp69_dfg_fine.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp69_dfg_fine.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/dfg_plateau.json",
@@ -1067,7 +1067,7 @@
    "result": {
     "@id": "paper/data/dfg_plateau.json"
    },
-   "description": "listed with paper/exp59_dfg_plateau.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp59_dfg_plateau.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/dfg_plateau.json-paper/exp69_dfg_fine.py",
@@ -1078,7 +1078,7 @@
    "result": {
     "@id": "paper/data/dfg_plateau.json"
    },
-   "description": "listed with paper/exp69_dfg_fine.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp69_dfg_fine.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/dfg_tensor.pkl",
@@ -1113,7 +1113,7 @@
    "result": {
     "@id": "paper/data/eight_released.json"
    },
-   "description": "listed with paper/exp54_eight.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp54_eight.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/estimate_v12.json",
@@ -1130,7 +1130,7 @@
    "result": {
     "@id": "paper/data/estimate_v12.json"
    },
-   "description": "listed with paper/exp66_estimate_v12.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp66_estimate_v12.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/estimate_v12.json-paper/exp70_tables.py",
@@ -1141,7 +1141,7 @@
    "result": {
     "@id": "paper/data/estimate_v12.json"
    },
-   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/flags_L2.pkl",
@@ -1182,7 +1182,7 @@
    "result": {
     "@id": "paper/data/gromacs_floor_v121.json"
    },
-   "description": "listed with paper/exp44_gromacs_floor.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp44_gromacs_floor.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/gromacs_floor_v121.json-paper/exp78_gromacs_floor_v121.py",
@@ -1193,7 +1193,7 @@
    "result": {
     "@id": "paper/data/gromacs_floor_v121.json"
    },
-   "description": "listed with paper/exp78_gromacs_floor_v121.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp78_gromacs_floor_v121.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/gromacs_gmx_d_threads1.pkl",
@@ -1246,7 +1246,7 @@
    "result": {
     "@id": "paper/data/heldout_replay.json"
    },
-   "description": "listed with paper/exp62_heldout.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp62_heldout.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/heldout_replay.json-paper/exp70_tables.py",
@@ -1257,7 +1257,7 @@
    "result": {
     "@id": "paper/data/heldout_replay.json"
    },
-   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/heldout_replay_current.json",
@@ -1274,7 +1274,7 @@
    "result": {
     "@id": "paper/data/heldout_replay_current.json"
    },
-   "description": "listed with paper/exp62_heldout.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp62_heldout.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/heldout_replay_current.json-paper/exp70_tables.py",
@@ -1285,7 +1285,7 @@
    "result": {
     "@id": "paper/data/heldout_replay_current.json"
    },
-   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/lammps_mpi_n64_r1.pkl",
@@ -1434,7 +1434,7 @@
    "result": {
     "@id": "paper/data/pooled_v1.2.1-nolocal.json"
    },
-   "description": "listed with paper/make_2d1_l5_figures.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/make_2d1_l5_figures.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/pooled_v1.2.1-nores.json",
@@ -1463,7 +1463,7 @@
    "result": {
     "@id": "paper/data/pooled_v1.2.1.json"
    },
-   "description": "listed with paper/exp72_baselines_pooled.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp72_baselines_pooled.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/pooled_v1.2.1.json-paper/exp70_tables.py",
@@ -1474,7 +1474,7 @@
    "result": {
     "@id": "paper/data/pooled_v1.2.1.json"
    },
-   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/pooled_v1.2.1_run1.json",
@@ -1503,7 +1503,7 @@
    "result": {
     "@id": "paper/data/pppm_mechanism_v6.json"
    },
-   "description": "listed with paper/exp74_pppm_mechanism.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp74_pppm_mechanism.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/qe_tensor.pkl",
@@ -1532,7 +1532,7 @@
    "result": {
     "@id": "paper/data/reltol_2d1.json"
    },
-   "description": "listed with paper/exp77_reltol_2d1.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp77_reltol_2d1.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/reltol_2d1.json-hamilton/J1_dfg2d1/analyse_j1.py",
@@ -1543,7 +1543,7 @@
    "result": {
     "@id": "paper/data/reltol_2d1.json"
    },
-   "description": "listed with hamilton/J1_dfg2d1/analyse_j1.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with hamilton/J1_dfg2d1/analyse_j1.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/reuse_hardest_released.json",
@@ -1560,7 +1560,7 @@
    "result": {
     "@id": "paper/data/reuse_hardest_released.json"
    },
-   "description": "listed with paper/exp30_transfer.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp30_transfer.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/reuse_hardest_released.json-paper/exp37_calhardest.py",
@@ -1571,7 +1571,7 @@
    "result": {
     "@id": "paper/data/reuse_hardest_released.json"
    },
-   "description": "listed with paper/exp37_calhardest.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp37_calhardest.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/reuse_released.json",
@@ -1588,7 +1588,7 @@
    "result": {
     "@id": "paper/data/reuse_released.json"
    },
-   "description": "listed with paper/exp30_transfer.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp30_transfer.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/reuse_released.json-paper/exp37_calhardest.py",
@@ -1599,7 +1599,7 @@
    "result": {
     "@id": "paper/data/reuse_released.json"
    },
-   "description": "listed with paper/exp37_calhardest.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp37_calhardest.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/screen8.pkl",
@@ -1622,7 +1622,7 @@
    "result": {
     "@id": "paper/data/spacing_estimate_released.json"
    },
-   "description": "listed with paper/exp34_spacing.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp34_spacing.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/spacing_estimate_released.json-paper/exp35_whyfine.py",
@@ -1633,7 +1633,7 @@
    "result": {
     "@id": "paper/data/spacing_estimate_released.json"
    },
-   "description": "listed with paper/exp35_whyfine.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp35_whyfine.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/spacing_estimate_released.json-paper/exp34_spacing_margin.py",
@@ -1644,7 +1644,7 @@
    "result": {
     "@id": "paper/data/spacing_estimate_released.json"
    },
-   "description": "listed with paper/exp34_spacing_margin.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp34_spacing_margin.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/spacing_estimate_released.json-paper/l2flags.py",
@@ -1655,7 +1655,7 @@
    "result": {
     "@id": "paper/data/spacing_estimate_released.json"
    },
-   "description": "listed with paper/l2flags.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/l2flags.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/spacing_margin_check.json",
@@ -1672,7 +1672,7 @@
    "result": {
     "@id": "paper/data/spacing_margin_check.json"
    },
-   "description": "listed with paper/exp34_spacing.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp34_spacing.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/spacing_margin_check.json-paper/exp35_whyfine.py",
@@ -1683,7 +1683,7 @@
    "result": {
     "@id": "paper/data/spacing_margin_check.json"
    },
-   "description": "listed with paper/exp35_whyfine.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp35_whyfine.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/spacing_margin_check.json-paper/exp34_spacing_margin.py",
@@ -1694,7 +1694,7 @@
    "result": {
     "@id": "paper/data/spacing_margin_check.json"
    },
-   "description": "listed with paper/exp34_spacing_margin.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp34_spacing_margin.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/spacing_margin_check.json-paper/l2flags.py",
@@ -1705,7 +1705,7 @@
    "result": {
     "@id": "paper/data/spacing_margin_check.json"
    },
-   "description": "listed with paper/l2flags.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/l2flags.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/spacing_released.json",
@@ -1722,7 +1722,7 @@
    "result": {
     "@id": "paper/data/spacing_released.json"
    },
-   "description": "listed with paper/exp34_spacing.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp34_spacing.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/spacing_released.json-paper/exp35_whyfine.py",
@@ -1733,7 +1733,7 @@
    "result": {
     "@id": "paper/data/spacing_released.json"
    },
-   "description": "listed with paper/exp35_whyfine.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp35_whyfine.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/spacing_released.json-paper/exp34_spacing_margin.py",
@@ -1744,7 +1744,7 @@
    "result": {
     "@id": "paper/data/spacing_released.json"
    },
-   "description": "listed with paper/exp34_spacing_margin.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp34_spacing_margin.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/spacing_released.json-paper/l2flags.py",
@@ -1755,7 +1755,7 @@
    "result": {
     "@id": "paper/data/spacing_released.json"
    },
-   "description": "listed with paper/l2flags.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/l2flags.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/transfer_floor.json",
@@ -1772,7 +1772,7 @@
    "result": {
     "@id": "paper/data/transfer_floor.json"
    },
-   "description": "listed with paper/exp64_transfer_floor.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp64_transfer_floor.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/transfer_floor.json-paper/exp70_tables.py",
@@ -1783,7 +1783,7 @@
    "result": {
     "@id": "paper/data/transfer_floor.json"
    },
-   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/transfer_floor.json-paper/exp40_section5.py",
@@ -1794,7 +1794,7 @@
    "result": {
     "@id": "paper/data/transfer_floor.json"
    },
-   "description": "listed with paper/exp40_section5.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp40_section5.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/data/unconverged_v6.json",
@@ -1811,7 +1811,7 @@
    "result": {
     "@id": "paper/data/unconverged_v6.json"
    },
-   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/unconverged_v6.json-paper/exp80_v6_numbers.py",
@@ -1822,7 +1822,7 @@
    "result": {
     "@id": "paper/data/unconverged_v6.json"
    },
-   "description": "listed with paper/exp80_v6_numbers.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp80_v6_numbers.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/unconverged_v6.json-paper/exp71_dfg2_detail.py",
@@ -1833,7 +1833,7 @@
    "result": {
     "@id": "paper/data/unconverged_v6.json"
    },
-   "description": "listed with paper/exp71_dfg2_detail.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp71_dfg2_detail.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/data/unconverged_v6.json-paper/exp79_unconverged.py",
@@ -1844,7 +1844,7 @@
    "result": {
     "@id": "paper/data/unconverged_v6.json"
    },
-   "description": "listed with paper/exp79_unconverged.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp79_unconverged.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/build_L2.txt",
@@ -1879,7 +1879,7 @@
    "result": {
     "@id": "paper/figures/data_2d1_l5.json"
    },
-   "description": "listed with paper/extract_2d1_l5.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/extract_2d1_l5.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/data_2d1_l5.json-paper/make_2d1_l5_figures.py",
@@ -1890,7 +1890,7 @@
    "result": {
     "@id": "paper/figures/data_2d1_l5.json"
    },
-   "description": "listed with paper/make_2d1_l5_figures.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/make_2d1_l5_figures.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/dfg2_strict.txt",
@@ -1907,7 +1907,7 @@
    "result": {
     "@id": "paper/figures/dfg2_strict.txt"
    },
-   "description": "listed with paper/exp84_dfg2_strict.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp84_dfg2_strict.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/dfg2_traces.txt",
@@ -1924,7 +1924,7 @@
    "result": {
     "@id": "paper/figures/dfg2_traces.txt"
    },
-   "description": "listed with paper/exp83_dfg2_traces.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp83_dfg2_traces.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/eight_released.txt",
@@ -1959,7 +1959,7 @@
    "result": {
     "@id": "paper/figures/rev3_abinit_scf.txt"
    },
-   "description": "listed with paper/exp75_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp75_abinit_reference.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/rev3_abinit_scf.txt-paper/exp45_abinit_reference.py",
@@ -1970,7 +1970,7 @@
    "result": {
     "@id": "paper/figures/rev3_abinit_scf.txt"
    },
-   "description": "listed with paper/exp45_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp45_abinit_reference.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/rev3_abinit_scf.txt-paper/exp68_abinit_scf.py",
@@ -1981,7 +1981,7 @@
    "result": {
     "@id": "paper/figures/rev3_abinit_scf.txt"
    },
-   "description": "listed with paper/exp68_abinit_scf.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp68_abinit_scf.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/rev3_abinit_scf.txt-paper/exp80_v6_numbers.py",
@@ -1992,7 +1992,7 @@
    "result": {
     "@id": "paper/figures/rev3_abinit_scf.txt"
    },
-   "description": "listed with paper/exp80_v6_numbers.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp80_v6_numbers.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/rev3_baselines_pooled.txt",
@@ -2021,7 +2021,7 @@
    "result": {
     "@id": "paper/figures/rev3_dfg2_detail.txt"
    },
-   "description": "listed with paper/exp56_dfg2d2.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp56_dfg2d2.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/rev3_dfg2_detail.txt-paper/exp71_dfg2_detail.py",
@@ -2032,7 +2032,7 @@
    "result": {
     "@id": "paper/figures/rev3_dfg2_detail.txt"
    },
-   "description": "listed with paper/exp71_dfg2_detail.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp71_dfg2_detail.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/rev3_estimate.txt",
@@ -2127,7 +2127,7 @@
    "result": {
     "@id": "paper/figures/sec82_floor.txt"
    },
-   "description": "listed with paper/exp75_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp75_abinit_reference.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/sec82_floor.txt-hamilton/J2_dfg2d2/analyse_j2.py",
@@ -2138,7 +2138,7 @@
    "result": {
     "@id": "paper/figures/sec82_floor.txt"
    },
-   "description": "listed with hamilton/J2_dfg2d2/analyse_j2.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with hamilton/J2_dfg2d2/analyse_j2.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/sec82_floor.txt-paper/exp44_gromacs_floor.py",
@@ -2149,7 +2149,7 @@
    "result": {
     "@id": "paper/figures/sec82_floor.txt"
    },
-   "description": "listed with paper/exp44_gromacs_floor.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp44_gromacs_floor.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/sec82_floor.txt-paper/exp78_gromacs_floor_v121.py",
@@ -2160,7 +2160,7 @@
    "result": {
     "@id": "paper/figures/sec82_floor.txt"
    },
-   "description": "listed with paper/exp78_gromacs_floor_v121.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp78_gromacs_floor_v121.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/sec82_gromacs_d.txt",
@@ -2195,7 +2195,7 @@
    "result": {
     "@id": "paper/figures/sec83_reference.txt"
    },
-   "description": "listed with paper/exp75_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp75_abinit_reference.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/sec83_reference.txt-paper/exp45_abinit_reference.py",
@@ -2206,7 +2206,7 @@
    "result": {
     "@id": "paper/figures/sec83_reference.txt"
    },
-   "description": "listed with paper/exp45_abinit_reference.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp45_abinit_reference.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/sec83_reference.txt-paper/exp68_abinit_scf.py",
@@ -2217,7 +2217,7 @@
    "result": {
     "@id": "paper/figures/sec83_reference.txt"
    },
-   "description": "listed with paper/exp68_abinit_scf.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp68_abinit_scf.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/sec83_reference.txt-paper/exp80_v6_numbers.py",
@@ -2228,7 +2228,7 @@
    "result": {
     "@id": "paper/figures/sec83_reference.txt"
    },
-   "description": "listed with paper/exp80_v6_numbers.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp80_v6_numbers.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/sec8x_dfg2d2.txt",
@@ -2245,7 +2245,7 @@
    "result": {
     "@id": "paper/figures/sec8x_dfg2d2.txt"
    },
-   "description": "listed with paper/exp56_dfg2d2.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp56_dfg2d2.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/sec8x_dfg2d2.txt-paper/exp71_dfg2_detail.py",
@@ -2256,7 +2256,7 @@
    "result": {
     "@id": "paper/figures/sec8x_dfg2d2.txt"
    },
-   "description": "listed with paper/exp71_dfg2_detail.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp71_dfg2_detail.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/sec8x_qe.txt",
@@ -2291,7 +2291,7 @@
    "result": {
     "@id": "paper/figures/tab06_rho.txt"
    },
-   "description": "listed with paper/exp28_separability.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp28_separability.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/tab06_rho.txt-paper/exp56_dfg2d2.py",
@@ -2302,7 +2302,7 @@
    "result": {
     "@id": "paper/figures/tab06_rho.txt"
    },
-   "description": "listed with paper/exp56_dfg2d2.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp56_dfg2d2.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/tab_baselines_full.tex",
@@ -2319,7 +2319,7 @@
    "result": {
     "@id": "paper/figures/tab_baselines_full.tex"
    },
-   "description": "listed with paper/exp72_baselines_pooled.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp72_baselines_pooled.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/tab_baselines_full.tex-paper/exp70_tables.py",
@@ -2330,7 +2330,7 @@
    "result": {
     "@id": "paper/figures/tab_baselines_full.tex"
    },
-   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/tab_baselines_full.tex-paper/make_baselines_figure.py",
@@ -2341,7 +2341,7 @@
    "result": {
     "@id": "paper/figures/tab_baselines_full.tex"
    },
-   "description": "listed with paper/make_baselines_figure.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/make_baselines_figure.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/tab_estimate.tex",
@@ -2364,7 +2364,7 @@
    "result": {
     "@id": "paper/figures/tab_floor.tex"
    },
-   "description": "listed with paper/exp44_gromacs_floor.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp44_gromacs_floor.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/tab_floor.tex-paper/exp78_gromacs_floor_v121.py",
@@ -2375,7 +2375,7 @@
    "result": {
     "@id": "paper/figures/tab_floor.tex"
    },
-   "description": "listed with paper/exp78_gromacs_floor_v121.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp78_gromacs_floor_v121.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/tab_lmpbase.tex",
@@ -2398,7 +2398,7 @@
    "result": {
     "@id": "paper/figures/tab_misdeclare.tex"
    },
-   "description": "listed with paper/exp17_classify.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp17_classify.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/tab_misdeclare.tex-paper/exp65_misdeclare_v12.py",
@@ -2409,7 +2409,7 @@
    "result": {
     "@id": "paper/figures/tab_misdeclare.tex"
    },
-   "description": "listed with paper/exp65_misdeclare_v12.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp65_misdeclare_v12.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/tab_pooled.tex",
@@ -2426,7 +2426,7 @@
    "result": {
     "@id": "paper/figures/tab_pooled.tex"
    },
-   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/tab_pooled_compact.tex",
@@ -2443,7 +2443,7 @@
    "result": {
     "@id": "paper/figures/tab_pooled_compact.tex"
    },
-   "description": "listed with paper/exp72_baselines_pooled.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp72_baselines_pooled.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/tab_pooled_compact.tex-paper/exp70_tables.py",
@@ -2454,7 +2454,7 @@
    "result": {
     "@id": "paper/figures/tab_pooled_compact.tex"
    },
-   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/tab_preregistered.tex",
@@ -2471,7 +2471,7 @@
    "result": {
     "@id": "paper/figures/tab_preregistered.tex"
    },
-   "description": "listed with paper/exp62_heldout.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp62_heldout.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/tab_preregistered.tex-paper/exp70_tables.py",
@@ -2482,7 +2482,7 @@
    "result": {
     "@id": "paper/figures/tab_preregistered.tex"
    },
-   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/tab_sup_ablation.tex",
@@ -2499,7 +2499,7 @@
    "result": {
     "@id": "paper/figures/tab_sup_ablation.tex"
    },
-   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/tab_sup_ablation.tex-paper/exp80_v6_numbers.py",
@@ -2510,7 +2510,7 @@
    "result": {
     "@id": "paper/figures/tab_sup_ablation.tex"
    },
-   "description": "listed with paper/exp80_v6_numbers.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp80_v6_numbers.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/tab_sup_ablation.tex-paper/exp71_dfg2_detail.py",
@@ -2521,7 +2521,7 @@
    "result": {
     "@id": "paper/figures/tab_sup_ablation.tex"
    },
-   "description": "listed with paper/exp71_dfg2_detail.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp71_dfg2_detail.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/tab_sup_ablation.tex-paper/exp79_unconverged.py",
@@ -2532,7 +2532,7 @@
    "result": {
     "@id": "paper/figures/tab_sup_ablation.tex"
    },
-   "description": "listed with paper/exp79_unconverged.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp79_unconverged.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/tab_transfer.tex",
@@ -2555,7 +2555,7 @@
    "result": {
     "@id": "paper/figures/unscripted.txt"
    },
-   "description": "listed with paper/exp85_unscripted.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp85_unscripted.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/values_2d1_l5.txt",
@@ -2572,7 +2572,7 @@
    "result": {
     "@id": "paper/figures/values_2d1_l5.txt"
    },
-   "description": "listed with paper/extract_2d1_l5.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/extract_2d1_l5.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/values_2d1_l5.txt-paper/make_2d1_l5_figures.py",
@@ -2583,7 +2583,7 @@
    "result": {
     "@id": "paper/figures/values_2d1_l5.txt"
    },
-   "description": "listed with paper/make_2d1_l5_figures.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/make_2d1_l5_figures.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "paper/figures/values_baselines.txt",
@@ -2600,7 +2600,7 @@
    "result": {
     "@id": "paper/figures/values_baselines.txt"
    },
-   "description": "listed with paper/exp72_baselines_pooled.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp72_baselines_pooled.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/values_baselines.txt-paper/exp70_tables.py",
@@ -2611,7 +2611,7 @@
    "result": {
     "@id": "paper/figures/values_baselines.txt"
    },
-   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/exp70_tables.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "#write-paper/figures/values_baselines.txt-paper/make_baselines_figure.py",
@@ -2622,7 +2622,7 @@
    "result": {
     "@id": "paper/figures/values_baselines.txt"
    },
-   "description": "listed with paper/make_baselines_figure.py in one row of paper/README.md (commit f1c64f8)"
+   "description": "listed with paper/make_baselines_figure.py in one row of paper/README.md (commit 64af81c)"
   },
   {
    "@id": "studies/airfoil/summary/confirm-20261112-0927/confirm_summary.md",
