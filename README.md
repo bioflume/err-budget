@@ -15,6 +15,7 @@
   <a href="https://bioflume.github.io/err-budget/"><img alt="Documentation" src="https://img.shields.io/badge/docs-bioflume.github.io%2Ferr--budget-blue"></a>
   <img alt="Python 3.9+" src="https://img.shields.io/badge/python-3.9%2B-blue">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue"></a>
+  <a href="https://doi.org/10.5281/zenodo.24608267"><img alt="DOI 10.5281/zenodo.24608267" src="https://zenodo.org/badge/DOI/10.5281/zenodo.24608267.svg"></a>
 </p>
 
 Given a driver of your solver (a Python function or a shell command), the
@@ -238,8 +239,9 @@ The method and its evaluation are described in
 > target accuracy in one observable*, Computer Physics Communications, 2026.
 
 The article's own repository, with every script, stored solver
-output and the cluster jobs, is in the paper branch. See
-`CITATION.cff`.
+output and the cluster jobs, is in the paper branch. The software is archived on Zenodo
+with the DOI [10.5281/zenodo.24608267](https://doi.org/10.5281/zenodo.24608267), which
+covers every release of this repository. See `CITATION.cff`.
 
 ## Licence
 

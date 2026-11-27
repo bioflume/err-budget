@@ -1,4 +1,4 @@
-cff-version: 1.2.1
+cff-version: 1.2.0
 message: "If you use errbudget, please cite the article and the software release below."
 title: "errbudget: choosing the discretization and the solver tolerances of a black-box code for a target accuracy in one observable"
 type: software
@@ -6,7 +6,7 @@ version: 1.2.1
 date-released: "2026-10-31"            # TODO: set at release
 license: MIT
 repository-code: "https://github.com/bioflume/err-budget/tree/paper"
-doi: "10.5281/zenodo.XXXXXXX"            # TODO: Zenodo concept DOI, minted at the first release
+doi: "10.5281/zenodo.24608267"           # Zenodo concept DOI: every release of this repository
 authors:
   - family-names: "Kabacaoğlu"
     given-names: "Gökberk"
