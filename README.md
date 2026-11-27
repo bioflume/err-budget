@@ -11,8 +11,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/bioflume/errbudget/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/bioflume/errbudget/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="https://bioflume.github.io/errbudget/"><img alt="Documentation" src="https://img.shields.io/badge/docs-bioflume.github.io%2Ferrbudget-blue"></a>
+  <a href="https://github.com/bioflume/err-budget/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/bioflume/err-budget/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://bioflume.github.io/err-budget/"><img alt="Documentation" src="https://img.shields.io/badge/docs-bioflume.github.io%2Ferr--budget-blue"></a>
   <img alt="Python 3.9+" src="https://img.shields.io/badge/python-3.9%2B-blue">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue"></a>
 </p>
@@ -25,7 +25,7 @@ parameter is limiting the accuracy and refining which ones do not make any chang
 It costs runs proportional to the *number* of parameters. It was tested on OpenFOAM, Quantum ESPRESSO, ABINIT, GROMACS and LAMMPS, driven through their input files, and on test problems with exact solutions; the article reports every miss and its cause.
 
 ```bash
-pip install "errbudget[yaml] @ git+https://github.com/bioflume/errbudget"
+pip install "errbudget[yaml] @ git+https://github.com/bioflume/err-budget"
 ```
 
 ## How to use it?
@@ -168,6 +168,41 @@ For single-precision or otherwise noisy codes,
 candidate value and declines targets below ten times it; `screen: true` runs a
 preliminary sweep (fewer runs, more expensive recommendations).
 
+## How it was written, and how you can check it
+
+An AI coding agent (Claude Opus 5.5, in Claude Code) wrote most of this code under the
+direction of its author, Gökberk Kabacaoğlu, who is responsible for every change and every
+result ([AI_USE.md](AI_USE.md)). Because a reader cannot rely on who wrote it, the evidence
+for trusting it does not depend on the author or the agent:
+
+1. **The author owns the requirements and the acceptance tests.** The rules of the method,
+   the tests that pin them (`tests/test_spec_v121.py`, `tests/test_claims.py`,
+   `tests/test_v122.py`) and the engine are listed in [PROTECTED](PROTECTED). CI compares them with the hashes in
+   `PROTECTED.sha256` (`tools/check_protected.py`), so a change to any of them shows up and
+   needs the author's approval.
+2. **Agents work under written rules** ([AGENTS.md](AGENTS.md)). They may not change the
+   protected files, and when a check fails they stop and report instead of weakening the
+   test. A test an agent writes goes into a new file and counts as evidence only after the
+   author has reviewed it.
+3. **Some checks are kept out of the agent's reach.** Problems with known answers, made by a
+   generator held outside this repository, test the engine on inputs the agent never saw.
+4. **The tests themselves are tested.** Faults planted in the engine by a separate agent,
+   which never saw the tests, measure how many wrong changes the tests catch, and harmless
+   changes measure how many false alarms they raise.
+5. **A different model reviews the code** without seeing its history, the agent's own
+   account of its work or the test results. Its confirmed findings are fixed in engine
+   1.2.2 ([CHANGELOG.md](CHANGELOG.md)).
+6. **The article's program is kept.** The configuration `v1.2.1` reproduces the engine the
+   article describes, search for search; the branch
+   [`paper`](https://github.com/bioflume/err-budget/tree/paper) replays every number of the
+   article, and its pre-registered held-out tests run a frozen program whose hash CI checks.
+7. **Every commit records the model** that made it, and `CITATION.cff` and `codemeta.json`
+   describe the software.
+
+[TRUST.md](TRUST.md) lists the checks you can run and what they found, failures included.
+These steps follow the UKRI project "Trustworthy Agentic Workflows in Scientific
+Computing".
+
 ## Documentation
 
 The documentation is in `docs/`:
@@ -184,8 +219,8 @@ The documentation is in `docs/`:
 ## Install
 
 ```bash
-pip install "errbudget[yaml] @ git+https://github.com/bioflume/errbudget"   # with YAML job files
-pip install "errbudget @ git+https://github.com/bioflume/errbudget"         # Python API, JSON/TOML job files
+pip install "errbudget[yaml] @ git+https://github.com/bioflume/err-budget"   # with YAML job files
+pip install "errbudget @ git+https://github.com/bioflume/err-budget"         # Python API, JSON/TOML job files
 ```
 
 Python 3.9 or later, NumPy and SciPy. From a clone: `pip install -e ".[dev]"` and `pytest`

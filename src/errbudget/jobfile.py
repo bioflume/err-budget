@@ -13,13 +13,15 @@ from __future__ import annotations
 
 import inspect
 import json
+import math
 import os
 import re
 import time
 from dataclasses import dataclass, field
 from typing import Any, Callable
 
-from .api import Parameter, TuneResult, tune, CONFIGURATIONS
+from .api import (Parameter, TuneResult, tune, CONFIGURATIONS, DEFAULT_CONFIGURATION,
+                  full_configuration)
 from ._core import run_protocol
 from .runner import (BUILTIN_PLACEHOLDERS, CommandSolver, JobError, placeholders, format_value, dry_render,
                      parse_method)
@@ -34,6 +36,8 @@ KIND_ALIASES = {
 TUNE_OPTIONS = ("screen", "accept_unconverged", "floor_probe", "configuration")
 FAILURE_RULES = ("failed_if_regex", "unconverged_if_regex", "converged_if_regex",
                  "allow_nonzero_exit", "path")
+PARAMETER_KEYS = ("name", "kind", "values", "start", "h", "model")
+READ_KEYS = ("source", "path", "parse", "regex", "key", "column", "comment", "which")
 
 
 _NUM = re.compile(r"^[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?$")
@@ -115,6 +119,12 @@ class JobSpec:
             if not isinstance(p, dict) or "name" not in p:
                 errors.append(f"parameters[{i}] needs at least 'name' and 'values'")
                 continue
+            for key in sorted(set(p) - set(PARAMETER_KEYS)):
+                errors.append(f"parameter {p['name']!r}: {key!r} is not a field "
+                              f"({', '.join(PARAMETER_KEYS)})")
+            if str(p["name"]) in BUILTIN_PLACEHOLDERS:
+                errors.append(f"parameter {p['name']!r}: the name is reserved for the run "
+                              f"directory placeholders ({', '.join(BUILTIN_PLACEHOLDERS)})")
             kind = KIND_ALIASES.get(str(p.get("kind", "discretisation")).lower())
             if kind is None:
                 errors.append(f"parameter {p['name']!r}: kind must be one of {', '.join(KIND_ALIASES)} "
@@ -147,8 +157,11 @@ class JobSpec:
             errors.append("'parameters' is empty")
 
         target = need("target", (int, float))
-        if target is not None and target <= 0:
-            errors.append("'target' must be positive")
+        if target is not None and not (math.isfinite(target) and target > 0):
+            errors.append("'target' must be positive and finite")
+        for key in ("relative", "keep_runs"):
+            if key in d and not isinstance(d[key], bool):
+                errors.append(f"{key!r} must be true or false (got {d[key]!r})")
 
         obs = d.get("observable")
         if isinstance(obs, str):
@@ -159,6 +172,8 @@ class JobSpec:
             obs = obs if isinstance(obs, dict) else {}
         if obs.get("source") == "file" and "path" not in obs:
             errors.append("observable: 'source: file' needs 'path'")
+        for key in sorted(set(obs) - {"name", *READ_KEYS}):
+            errors.append(f"observable: {key!r} is not a field (name, {', '.join(READ_KEYS)})")
 
         start = dict(d.get("start") or {})
         for p in params:
@@ -171,10 +186,15 @@ class JobSpec:
             elif v not in p["values"]:
                 errors.append(f"start value {v!r} for {k!r} is not among its values {p['values']!r}")
 
-        options = dict(d.get("options") or {})
-        cfg = str(options.get("configuration", "v1.2.1"))
+        options = d.get("options") or {}
+        if not isinstance(options, dict):
+            errors.append("'options' must be a mapping")
+            options = {}
+        options = dict(options)
+        cfg = str(options.get("configuration", DEFAULT_CONFIGURATION))
         if cfg not in CONFIGURATIONS:
-            errors.append("options.configuration must be v1.2.1 (default), v1.2 or v1.1")
+            errors.append(f"options.configuration must be {DEFAULT_CONFIGURATION} (default), "
+                          f"{', '.join(c for c in CONFIGURATIONS if c != DEFAULT_CONFIGURATION)}")
         for key in ("screen", "accept_unconverged"):
             if key in options and not isinstance(options[key], bool):
                 errors.append(f"options.{key} must be true or false")
@@ -182,6 +202,11 @@ class JobSpec:
         if fp is not None and (not isinstance(fp, list) or len(fp) < 2
                                or not all(isinstance(x, dict) for x in fp)):
             errors.append("options.floor_probe must list two or more settings (dicts)")
+        elif fp is not None and names:
+            for x in fp:
+                if set(x) != set(names):
+                    errors.append(f"options.floor_probe setting {x}: give every parameter "
+                                  f"({', '.join(names)}) and no others")
         engine_options = set(inspect.signature(run_protocol).parameters) - {
             "lookup", "ladders", "anchor", "eps", "hs", "kinds", "models", "noise_floor", "use_screen"}
         for key in list(options):
@@ -226,6 +251,8 @@ class JobSpec:
             cost = None
         if cost is not None and cost.get("source") == "file" and "path" not in cost:
             errors.append("cost: 'source: file' needs 'path'")
+        for key in sorted(set(cost or {}) - set(READ_KEYS)):
+            errors.append(f"cost: {key!r} is not a field ({', '.join(READ_KEYS)})")
         failure = d.get("failure") or {}
         if not isinstance(failure, dict):
             errors.append(f"'failure' must be a mapping ({', '.join(FAILURE_RULES)})")
@@ -240,8 +267,18 @@ class JobSpec:
                         errors.append(f"{what}.regex needs one capture group around the number")
                 except re.error as exc:
                     errors.append(f"{what}.regex does not compile: {exc}")
-            if parse_method(spec) not in ("regex", "json", "column", "last_number"):
+            method = parse_method(spec)
+            if method not in ("regex", "json", "column", "last_number"):
                 errors.append(f"{what}.parse must be regex, json, column or last_number")
+            needed = {"regex": "regex", "json": "key", "column": "column"}.get(method)
+            if needed and needed not in spec:
+                errors.append(f"{what}: parse {method} needs {needed!r}")
+            if "column" in spec and (isinstance(spec["column"], bool) or
+                                     not isinstance(_num(spec["column"]), int) or
+                                     _num(spec["column"]) < 1):
+                errors.append(f"{what}.column must be a column number, counted from 1")
+        if "converged_if_regex" in failure and not isinstance(failure["converged_if_regex"], str):
+            errors.append("failure.converged_if_regex must be one pattern (a string)")
         for key in ("failed_if_regex", "unconverged_if_regex", "converged_if_regex"):
             pats = failure.get(key)
             for pat in ([pats] if isinstance(pats, str) else pats or []):
@@ -249,6 +286,11 @@ class JobSpec:
                     re.compile(str(pat))
                 except re.error as exc:
                     errors.append(f"failure.{key} {pat!r} does not compile: {exc}")
+        rf = d.get("render_files")
+        if rf is not None and not (isinstance(rf, list) and all(isinstance(x, str) for x in rf)):
+            errors.append("'render_files' must list file names (paths in the run directory)")
+        if not isinstance(d.get("env") or {}, dict):
+            errors.append("'env' must map variable names to values")
         unknown = set(d) - {"name", "command", "parameters", "target", "observable",
                             "relative", "start", "options", "workdir", "template_dir", "files",
                             "render_files", "env", "timeout", "keep_runs", "cost", "failure",
@@ -298,7 +340,9 @@ class JobSpec:
                                   screen=bool(o.get("screen", False)),
                                   accept_unconverged=bool(o.get("accept_unconverged", False)),
                                   floor_probe=o.get("floor_probe"))
-        kw.update(CONFIGURATIONS[str(o.get("configuration", "v1.2.1"))])
+        # the complete options of the named configuration (full_configuration), so that
+        # v1.2 and v1.1 run as they were, whatever the default configuration of tune
+        kw.update(full_configuration(str(o.get("configuration", DEFAULT_CONFIGURATION))))
         for key, val in o.items():
             if key not in TUNE_OPTIONS:
                 kw[key] = val           # expert overrides, passed to the engine as given
@@ -317,7 +361,7 @@ class JobSpec:
             vals = ", ".join(format_value(v) for v in p["values"])
             st = self.start.get(p["name"], p["values"][len(p["values"]) // 2])
             L.append(f"  {p['name']:<18} {p['kind']:<15} [{vals}]   start {format_value(st)}")
-        L.append(f"configuration: {self.options.get('configuration', 'v1.2.1')}"
+        L.append(f"configuration: {self.options.get('configuration', DEFAULT_CONFIGURATION)}"
                  f"{'; preliminary screen' if self.options.get('screen') else ''}"
                  f"{'; unconverged runs accepted' if self.options.get('accept_unconverged') else ''}")
         L.append(f"run directories: {self.workdir}")
@@ -338,20 +382,56 @@ def load_job(path: str) -> JobSpec:
         except ImportError:
             raise JobError("reading YAML needs PyYAML: pip install pyyaml  (or write the job "
                            "file as JSON or TOML)") from None
-        d = yaml.safe_load(raw)
+        try:
+            d = yaml.load(raw, Loader=_unique_key_loader(yaml))
+        except yaml.YAMLError as exc:
+            raise JobError(f"{os.path.basename(path)} is not valid YAML: {exc}") from None
     elif ext == ".json":
-        d = json.loads(raw)
+        try:
+            d = json.loads(raw, object_pairs_hook=_unique_pairs)
+        except json.JSONDecodeError as exc:
+            raise JobError(f"{os.path.basename(path)} is not valid JSON: {exc}") from None
     elif ext == ".toml":
         try:
             import tomllib
         except ImportError:                                   # Python < 3.11
             raise JobError("reading TOML needs Python 3.11+ (or write the job file as JSON)") from None
-        d = tomllib.loads(raw.decode())
+        try:
+            d = tomllib.loads(raw.decode())
+        except tomllib.TOMLDecodeError as exc:
+            raise JobError(f"{os.path.basename(path)} is not valid TOML: {exc}") from None
     else:
         raise JobError(f"unknown job file type {ext!r}: use .yaml, .json or .toml")
     if not isinstance(d, dict):
         raise JobError("the job file must be a mapping of fields")
     return JobSpec.from_dict(d, base_dir=os.path.dirname(path), source_path=path)
+
+
+def _unique_pairs(pairs):
+    """json object hook: a key given twice is an error, not the last value silently."""
+    out = {}
+    for k, v in pairs:
+        if k in out:
+            raise JobError(f"the field {k!r} is given twice")
+        out[k] = v
+    return out
+
+
+def _unique_key_loader(yaml):
+    """A SafeLoader that refuses a mapping with the same key twice."""
+    class Loader(yaml.SafeLoader):
+        pass
+
+    def construct(loader, node, deep=False):
+        keys = [loader.construct_object(k, deep=deep) for k, _ in node.value]
+        dup = sorted({str(k) for k in keys if keys.count(k) > 1})
+        if dup:
+            raise yaml.constructor.ConstructorError(
+                None, None, f"the field(s) {', '.join(dup)} are given twice", node.start_mark)
+        return yaml.SafeLoader.construct_mapping(loader, node, deep=deep)
+
+    Loader.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, construct)
+    return Loader
 
 
 # ------------------------------------------------------------------- running
@@ -467,10 +547,10 @@ failure:
   # converged_if_regex: "SIMPLE solution converged"
   # path: log.simpleFoam
 
-# 5. Options.  configuration v1.2.1 is the article's default; screen runs a cheap
-#    preliminary sweep (fewer runs, more expensive recommendations).
+# 5. Options.  configuration v1.2.2 is the default; v1.2.1 is the article's program.
+#    screen runs a cheap preliminary sweep (fewer runs, more expensive recommendations).
 options:
-  configuration: v1.2.1
+  configuration: v1.2.2
   screen: false
   accept_unconverged: false
   # floor_probe:               # two settings refined beyond every value: measures the

@@ -18,7 +18,7 @@ single run.
 ## Install
 
 ```bash
-pip install "errbudget[yaml] @ git+https://github.com/bioflume/errbudget"
+pip install "errbudget[yaml] @ git+https://github.com/bioflume/err-budget"
 ```
 
 It needs Python 3.9 or later. The `yaml` extra installs PyYAML, which YAML job files need.
@@ -35,7 +35,7 @@ The [job-file reference](job-files.md) describes every field, and the [recipes](
 give job files for OpenFOAM, LAMMPS, GROMACS, Quantum ESPRESSO, ABINIT and MPI codes. For a
 solver you can call as a Python function, see the [Python API](api.md). Four
 runnable examples, including a command-line one, are in
-[`examples/`](https://github.com/bioflume/errbudget/tree/main/examples).
+[`examples/`](https://github.com/bioflume/err-budget/tree/main/examples).
 
 ## Contents
 
@@ -51,7 +51,7 @@ changelog
 
 ## The article
 
-The method and its evaluation are described in an article. Its repository,
-<https://github.com/bioflume/errbudget-paper>, has every script, the stored solver output
+The method and its evaluation are described in an article. The branch `paper` of this
+repository, <https://github.com/bioflume/err-budget/tree/paper>, has every script, the stored solver output
 and the cluster jobs. To cite errbudget, see
-[`CITATION.cff`](https://github.com/bioflume/errbudget/blob/main/CITATION.cff).
+[`CITATION.cff`](https://github.com/bioflume/err-budget/blob/main/CITATION.cff).

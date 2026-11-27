@@ -49,7 +49,7 @@ that directory; git ignores them.
 
 ## Reporting a bug or asking for a feature
 
-Open an issue at <https://github.com/bioflume/errbudget/issues/new/choose> and choose
+Open an issue at <https://github.com/bioflume/err-budget/issues/new/choose> and choose
 **Bug report** or **Feature request**. The bug form asks for what you ran (the job file or
 the code), what happened, what you expected, the output of `errbudget version`, and your
 Python version and operating system. A small case that shows the problem is the most
@@ -59,17 +59,17 @@ errbudget calls it.
 A result that declines to certify a setting is not necessarily a bug. errbudget declines
 when it cannot bound a parameter's error, and the report says which parameter; extending
 that parameter's list of values is often the answer. The
-[documentation](https://bioflume.github.io/errbudget/) explains when and why it declines.
+[documentation](https://bioflume.github.io/err-budget/) explains when and why it declines.
 
 Do not report a security problem in a public issue; see the
 [security policy](.github/SECURITY.md).
 
 ## The engine rule
 
-The engine is version 1.2.1 (`errbudget.ENGINE_VERSION`), the version the article
-describes, and `_core.py` is kept byte for byte as that version. A change to it changes
-results that the article reports, and this holds for bug fixes too. Such a change
-therefore needs
+The engine is version 1.2.2 (`errbudget.ENGINE_VERSION`). The article describes version
+1.2.1, which the configuration `"v1.2.1"` (`errbudget.V121`) must keep reproducing exactly:
+every correction since 1.2.1 is an option that `V121` leaves off. A change to `_core.py`
+changes results, and this holds for bug fixes too. Such a change therefore needs
 
 1. **an issue first**, describing the change and why it is needed, and agreement in that
    issue before a pull request is opened;
@@ -77,7 +77,8 @@ therefore needs
 3. **an entry in `CHANGELOG.md`** that says how the results change, not only how the code
    changes;
 4. **`tests/test_spec_v121.py` updated or extended**, so that its tests state the new
-   behaviour.
+   behaviour (the corrections of 1.2.2 are pinned in `tests/test_v122.py`);
+5. **`V121` unchanged:** its searches give the same results as before, run for run.
 
 Where possible, put new behaviour behind an option, so that a configuration still
 reproduces the article, as `errbudget.V12` and `errbudget.V11` reproduce the earlier

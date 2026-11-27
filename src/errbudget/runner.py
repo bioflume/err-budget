@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 import re
 import shutil
@@ -154,7 +155,10 @@ def extract_number(spec: dict, text: str, what: str = "observable") -> float:
             if not lines:
                 raise JobError(f"{what}: no data lines")
             row = [c for c in re.split(r"[,\s()\[\]]+", lines[-1].strip()) if c]
-            return _to_float(row[int(spec["column"]) - 1])
+            col = int(spec["column"])
+            if col < 1:
+                raise JobError(f"{what}: column {col}: columns are counted from 1")
+            return _to_float(row[col - 1])
         if parse == "last_number":
             ms = NUMBER.findall(text)
             if not ms:
@@ -207,6 +211,10 @@ def job_fingerprint(job) -> str:
     parts = {"command": job.command, "solver": None, "observable": job.observable,
              "cost": job.cost, "failure": job.failure, "env": job.env,
              "render_files": job.render_files}
+    if job.files:
+        # where each file is copied to, not only its content (logs of jobs without
+        # `files` keep the fingerprint of 2.0.0)
+        parts["files"] = {str(k): str(v) for k, v in job.files.items()}
     h.update(json.dumps(parts, sort_keys=True, default=str).encode())
     files = []
     for src in sorted(job.files or {}):
@@ -272,6 +280,8 @@ class CommandSolver:
         self.n_calls += 1
         key = self.key_of(params)
         rec = self.cache.get(key)
+        if rec is not None and rec["status"] == "failed" and self._timed_out_sooner(rec):
+            rec = None          # it ran out of a shorter time limit than the job gives now
         if rec is not None and not (self.retry_failed and rec["status"] == "failed"):
             self.n_cached += 1
             self.log(f"  run {rec['run_id']:>4} (cached)  {self._pstr(params)}  -> "
@@ -285,6 +295,13 @@ class CommandSolver:
         self._record(rec)
         self.log(f"  run {run_id:>4}           {self._pstr(params)}  -> {self._vstr(rec)}")
         return self._outcome(rec)
+
+    def _timed_out_sooner(self, rec: dict) -> bool:
+        m = re.match(r"timed out after ([0-9.eE+-]+) s", str(rec.get("error", "")))
+        if not m:
+            return False
+        limit = self.job.timeout
+        return limit is None or float(m.group(1)) < float(limit)
 
     def _pstr(self, params: dict) -> str:
         return ", ".join(f"{k}={format_value(v)}" for k, v in params.items())
@@ -303,7 +320,7 @@ class CommandSolver:
             return {name: rec["value"], "converged": True}, float(rec["cost"])
         if rec["status"] == "unconverged":
             return {name: rec.get("value", float("nan")), "converged": False}, float(rec["cost"])
-        raise RunFailed(rec.get("error", "failed"))
+        raise RunFailed(rec.get("error", "failed"), cost=float(rec.get("cost", 0.0) or 0.0))
 
     # -- shell command
     def _run_command(self, run_id: str, params: dict) -> dict:
@@ -374,6 +391,9 @@ class CommandSolver:
             with open(os.path.join(run_dir, "error.txt"), "w") as f:
                 f.write(str(exc) + "\n")
             return dict(rec, status="failed", error=str(exc))
+        if not math.isfinite(value):
+            return dict(rec, status="failed",
+                        error=f"observable {job.observable['name']!r} is {value!r}, not a finite number")
         if job.cost:
             try:
                 rec["cost"] = extract_number(job.cost, _source_text(job.cost, run_dir, stdout), "cost")
@@ -409,7 +429,11 @@ def prepare_run_dir(job, run_dir: str, params: dict, run_id: str = "0000") -> st
         shutil.copy(src_path, dst_path)
         targets.append(dst_path)
     if job.render_files is not None:
-        targets += [os.path.join(run_dir, p) for p in job.render_files]
+        for p in job.render_files:
+            if not os.path.isfile(os.path.join(run_dir, p)):
+                raise JobError(f"render_files: {p!r} is not in the run directory (it must come "
+                               f"from template_dir or files)")
+            targets.append(os.path.join(run_dir, p))
     elif job.template_dir:
         for root, _, files in os.walk(run_dir):
             for fn in files:

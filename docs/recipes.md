@@ -1,8 +1,8 @@
 # Recipes: job files for common codes
 
 These are starting points, not finished cases: the parameter lists, the output patterns
-and the file layouts are the ones the article used for the same codes (its repository,
-<https://github.com/bioflume/errbudget-paper>, has the complete drivers). Adapt the command,
+and the file layouts are the ones the article used for the same codes (the branch `paper`,
+<https://github.com/bioflume/err-budget/tree/paper>, has the complete drivers). Adapt the command,
 the template files and the observable to your case, then `errbudget check job.yaml`.
 
 The pattern is always the same: a `template_dir` holding the case with `{{placeholders}}`

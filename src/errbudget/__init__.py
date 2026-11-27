@@ -14,18 +14,21 @@ Command line (shell-command solvers, no Python needed):
     errbudget check job.yaml
     errbudget run job.yaml
 
-The engine is version 1.2.1 of the article (Computer Physics Communications,
-2026); ENGINE_VERSION records it.  The package version counts the tooling
-around it.
+The engine is version 1.2.2; ENGINE_VERSION records it.  The article (Computer
+Physics Communications, 2026) describes version 1.2.1, which the configuration
+"v1.2.1" (errbudget.V121) reproduces exactly.  The package version counts the
+tooling around the engine.
 """
-from .api import Parameter, TuneResult, tune, KINDS, RunFailed, CONFIGURATIONS
-from ._core import LocalBudget, measure_floor, run_protocol, screen, V11, V12, V121
+from .api import (Parameter, TuneResult, tune, KINDS, RunFailed, CONFIGURATIONS,
+                  full_configuration)
+from ._core import LocalBudget, measure_floor, run_protocol, screen, V11, V12, V121, V122
 from .jobfile import JobSpec, load_job, run_job
 
-__version__ = "2.0.0"
-ENGINE_VERSION = "1.2.1"
+__version__ = "2.1.0"
+ENGINE_VERSION = "1.2.2"
 
 __all__ = ["Parameter", "tune", "TuneResult", "KINDS", "RunFailed",
-           "JobSpec", "load_job", "run_job", "CONFIGURATIONS",
+           "JobSpec", "load_job", "run_job", "CONFIGURATIONS", "full_configuration",
            "LocalBudget", "measure_floor", "run_protocol", "screen", "V11", "V12", "V121",
+           "V122",
            "__version__", "ENGINE_VERSION"]

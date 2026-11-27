@@ -1,0 +1,14 @@
+# Human-owned files: the requirements, the acceptance tests and the engine of the article.
+# Agents must not change them (AGENTS.md). tools/check_protected.py checks them in CI
+# against PROTECTED.sha256, which only the author updates.
+src/errbudget/_core.py
+tests/test_spec_v121.py
+tests/test_claims.py
+tests/test_v122.py
+AGENTS.md
+AI_USE.md
+TRUST.md
+PROTECTED
+tools/check_protected.py
+.github/CODEOWNERS
+.github/workflows/ci.yml

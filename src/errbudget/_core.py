@@ -31,7 +31,8 @@ class LocalBudget:
     def __init__(self, lookup, ladders, anchor, hs=None, fs_cap=None,
                  resid_margin=0.0, models=None, unfit="order1", kinds=None,
                  local_order=False, resolution=0.0, resid_mode="relative",
-                 cancel_rule="credit", joint_res=3.0):
+                 cancel_rule="credit", joint_res=3.0, strict_unfit=False,
+                 local_at_finest=False, cancel_strict=False):
         """lookup(idx) -> (Q, cost);  ladders: settings;  hs: refinement scalars.
 
         models[k] is "power" (default: e_k(h) = c (h^p - h_a^p)) or
@@ -65,6 +66,18 @@ class LocalBudget:
         # a parameter takes part in the joint check if its one-step change exceeds
         # joint_res times the resolution (3 in the frozen version 1.2, 1 from 1.2.1)
         self.joint_res = float(joint_res)
+        # Version 1.2.2 (each off in 1.2.1, so that the article's results replay):
+        # strict_unfit: an axis too short to fit is charged the change to its nearest
+        # finite coarser run (more if the values are closely spaced), and is declined
+        # (unmeasured) if it has none -- 1.2.1 counted such an axis as error-free;
+        # local_at_finest: the local-order check also runs at the finest value of a
+        # ladder, from the three values ending there -- 1.2.1 skipped it;
+        # cancel_strict: with cancel_rule="none", any cancellation between
+        # parameters is summed in magnitude -- 1.2.1 did so only when the signed sum
+        # fell below 0.8 times the largest term.
+        self.strict_unfit = bool(strict_unfit)
+        self.local_at_finest = bool(local_at_finest)
+        self.cancel_strict = bool(cancel_strict)
         self.cancelled = False
         self.local = {}
         self.joint = None
@@ -179,9 +192,11 @@ class LocalBudget:
             j0, j1, j2 = a - 1, a, a + 1
         elif a == 0 and ok(1) and ok(2):
             j0, j1, j2 = 0, 1, 2
-        elif self.fine_failed[k] and ok(a - 2) and ok(a - 1) and np.isfinite(self.e[k][a]):
-            # the finer run failed, so nothing is known on the refining side: the
-            # order is taken from the three values ending at the anchor
+        elif ((self.fine_failed[k] or (self.local_at_finest and a == self.m[k] - 1))
+              and ok(a - 2) and ok(a - 1) and np.isfinite(self.e[k][a])):
+            # the finer run failed, or the anchor is the finest value, so nothing is
+            # known on the refining side: the order is taken from the three values
+            # ending at the anchor
             j0, j1, j2 = a - 2, a - 1, a
         else:
             return None
@@ -256,8 +271,30 @@ class LocalBudget:
                                 pass
                             elif ha > hb > 0:
                                 r = r * (1.0 + hb / (ha - hb))
-                    elif a - 1 in js:
+                    elif a - 1 in js and not self.strict_unfit:
                         r = self.e[k][a - 1]        # bounded by the last coarser step
+                    elif self.strict_unfit and any(j < a for j in js):
+                        # nearest finite coarser run: charge its whole change, as 1.2.1
+                        # does for the next coarser value, or more where the values are
+                        # closely spaced -- if the axis converges at least to first
+                        # order, the error left at the anchor is at most that change
+                        # times h_a / (h_j - h_a), which exceeds 1 when h_j < 2 h_a.
+                        # Never less: a tolerance can converge more slowly than first
+                        # order, and scaling a ten-fold step down by 9 missed targets
+                        # on the held-out problem H2.
+                        j = max(j for j in js if j < a)
+                        r = self.e[k][j]
+                        if self.hs is not None and not (self.models is not None and
+                                                        self.models[k] == "exponential"):
+                            hj, ha = self.hs[k][j], self.hs[k][a]
+                            if hj > ha > 0:
+                                r = r * max(1.0, ha / (hj - ha))
+                    if self.strict_unfit and not np.isfinite(r) and \
+                            (self.kinds is None or self.kinds[k] != "cost-only"):
+                        # an axis that was swept but has no finite change carries an
+                        # unknown error: it is not error-free (a cost-only axis is
+                        # declared not to move the answer)
+                        r = np.inf
                 self.rk.append(r); self.pk.append(np.nan); self.fit_q.append(np.inf)
                 continue
             model = self.models[k] if self.models is not None else "power"
@@ -295,7 +332,8 @@ class LocalBudget:
         # missed on LAMMPS at 262,144 ions.  Such an axis is charged at least
         # its last measured one-step change; if it has none, the setting is
         # declined (E_knob = inf).
-        self.unmeasured = []
+        self.unmeasured = [k for k in range(len(self.m))
+                           if self.strict_unfit and self.rk[k] == np.inf]
         for k in range(len(self.m)):
             if not self.fine_failed[k]:
                 continue
@@ -303,7 +341,8 @@ class LocalBudget:
             step = abs(self.e[k][a - 1]) if a >= 1 and np.isfinite(self.e[k][a - 1]) \
                 else np.nan
             if not np.isfinite(step):
-                self.unmeasured.append(k)
+                if k not in self.unmeasured:
+                    self.unmeasured.append(k)
                 self.rk[k] = np.inf
                 continue
             r = self.rk[k]
@@ -379,7 +418,12 @@ class LocalBudget:
         E_path = np.nan
         # cancellation: the signed sum is smaller than the largest single term
         big = max((abs(r) for r in rk), default=0.0)
-        cancels = big > 0 and abs(E_fit) < 0.8 * big
+        if self.cancel_strict:
+            # any two terms of opposite sign: the signed sum is below the sum of
+            # magnitudes
+            cancels = big > 0 and abs(E_fit) < E_abs * (1.0 - 1e-12)
+        else:
+            cancels = big > 0 and abs(E_fit) < 0.8 * big
         if cancels and cancel_rule == "none":
             core = E_abs + 2.0 * (abs(I) if np.isfinite(I) else 0.0)
         elif cancels and cancel_rule == "path" and np.isfinite(dJ):
@@ -428,7 +472,9 @@ class LocalBudget:
                 # terms are summed in magnitude (the sign of the largest is kept).
                 rk = [r for r in self.rk if np.isfinite(r)]
                 big = max(rk, key=abs) if rk else 0.0
-                if rk and abs(E) < 0.8 * abs(big):
+                bound = (float(np.sum(np.abs(rk))) * (1.0 - 1e-12) if self.cancel_strict
+                         else 0.8 * abs(big))
+                if rk and abs(E) < bound:
                     E = float(np.sign(big) * np.sum(np.abs(rk)))
                     self.cancelled = True
         else:
@@ -668,6 +714,10 @@ V11 = dict(resid_margin=0.0, joint_check=False, local_order_check=False, res_fra
 # the resolution, not three times it.  Found by the held-out problem H2, where the check
 # was skipped at a setting that missed (PREREGISTRATION.md, amendment).
 V121 = dict(V12, joint_res=1.0)
+# Version 1.2.2: three corrections found by an independent review (CHANGELOG.md): an
+# axis too short to fit is not counted as error-free, the local-order check runs at
+# the finest value of a ladder, and no cancellation between parameters is credited.
+V122 = dict(V121, strict_unfit=True, local_at_finest=True, cancel_strict=True)
 
 
 def run_protocol(lookup, ladders, anchor, eps, mode="optimistic", max_iter=40,
@@ -677,7 +727,8 @@ def run_protocol(lookup, ladders, anchor, eps, mode="optimistic", max_iter=40,
                  screen_at="tight", audit_factor=2.0, models=None,
                  noise_floor=None, floor_factor=10.0, unfit="order1",
                  joint_check=False, local_order_check=False, cancel_rule="credit",
-                 resid_mode="relative", res_frac=0.0, joint_res=3.0):
+                 resid_mode="relative", res_frac=0.0, joint_res=3.0,
+                 strict_unfit=False, local_at_finest=False, cancel_strict=False):
     """Screen, walk, audit.
 
     Every configuration is evaluated at most once for the whole protocol.
@@ -725,7 +776,9 @@ def run_protocol(lookup, ladders, anchor, eps, mode="optimistic", max_iter=40,
                          resid_margin=resid_margin, models=models, unfit=unfit,
                          kinds=kinds, local_order=local_order_check,
                          resolution=max(noise_floor or 0.0, res_frac * eps),
-                         resid_mode=resid_mode, cancel_rule=cancel_rule, joint_res=joint_res)
+                         resid_mode=resid_mode, cancel_rule=cancel_rule, joint_res=joint_res,
+                         strict_unfit=strict_unfit, local_at_finest=local_at_finest,
+                         cancel_strict=cancel_strict)
         lb.on_charge = _note_tag
         lb.sweep(fine_reach=fine_reach, active=active)
         lb.per_knob_error()

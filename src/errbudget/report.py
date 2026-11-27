@@ -1,10 +1,14 @@
 """Reports: the result as Markdown, and the run log as a table."""
 from __future__ import annotations
 
+import math
+
 
 def _fmt(v) -> str:
+    # parameter values in full (repr is the shortest form that reads back exactly):
+    # two candidate values that differ beyond the sixth digit must not look equal
     if isinstance(v, float):
-        return f"{v:.6g}"
+        return repr(v)
     return repr(v) if isinstance(v, str) else str(v)
 
 
@@ -15,8 +19,11 @@ def markdown(result) -> str:
         L.append(f"**Target {result.target:.3g} met.** Estimated error "
                  f"{abs(result.error_estimate):.3g}.")
     else:
-        L.append(f"**Target {result.target:.3g} not reachable with the values given.** "
-                 f"Best estimate at the returned setting: {abs(result.error_estimate):.3g}.")
+        L.append(f"**Target {result.target:.3g} not reachable with the values given.**")
+        if getattr(result, "declined", None):
+            L.append(f"Why: {result.declined}.")
+        if math.isfinite(result.error_estimate):
+            L.append(f"Best estimate at the returned setting: {abs(result.error_estimate):.3g}.")
     L += ["", "| parameter | recommended | was |", "|---|---|---|"]
     for k, v in result.settings.items():
         was = result.start.get(k)

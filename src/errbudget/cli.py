@@ -70,7 +70,8 @@ def main(argv: list[str] | None = None) -> int:
 
 def _dispatch(a) -> int:
     if a.cmd == "version":
-        print(f"errbudget {__version__} (engine {ENGINE_VERSION}, the article's version)")
+        print(f"errbudget {__version__} (engine {ENGINE_VERSION}; the article describes "
+              f"engine 1.2.1, configuration v1.2.1)")
         return 0
     if a.cmd == "init":
         path = init_job(a.file, overwrite=a.force)

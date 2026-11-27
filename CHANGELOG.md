@@ -1,9 +1,68 @@
 # Changelog
 
-## Unreleased
+## 2.1.0 — engine 1.2.2 (27 November 2026)
 
-Every result is unchanged: the engine `_core.py` is byte for byte that of 2.0.0, version 1.2.1
-of the article. What goes is code that nothing used.
+Engine 1.2.2 corrects three rules of 1.2.1 that an independent review found (`TRUST.md`),
+and is the new default. The configuration `"v1.2.1"` (`errbudget.V121`) still runs the
+engine exactly as the article describes it: on 86,001 searches over synthetic problems, every
+proposal, decision, run count, cost and error estimate is bit for bit that of 2.0.0. The
+article's results are on the branch `paper` and do not change.
+
+- **Engine 1.2.2: an axis whose error cannot be measured is not error-free.** An axis with
+  fewer than three successful runs and no finer run (for example a three-value ladder whose
+  middle run failed, searched from its finest value) was left out of the error estimate, and
+  a setting with 98 times the target error was certified. It is now charged the change to
+  its nearest finite coarser run (more where the values are closely spaced: that change
+  extrapolated to first order), and the search declines (`unmeasured_axis`) if the axis has
+  no finite change at all (`strict_unfit`).
+- **Engine 1.2.2: the local-order check runs at the finest value of a ladder** (from the three
+  values ending there), where 1.2.1 skipped it (`local_at_finest`). On the pre-registered
+  held-out problem H3 this turns the 216 searches that 1.2.1 accepted and that missed the
+  kinetic-energy target 10⁻⁴ (no setting on the grid meets it) into declines.
+- **Engine 1.2.2: no credit for any cancellation between parameters.** With
+  `cancel_rule="none"`, 1.2.1 summed the errors in magnitude only when their signed sum fell
+  below 0.8 times the largest term; errors of +1, +1 and -1 were credited two thirds of
+  their size. 1.2.2 sums them in magnitude whenever their signs differ (`cancel_strict`).
+- **`errbudget.V122`** is V121 with these three switches on; `tune` and job files use it
+  unless told otherwise (`configuration="v1.2.1"`, `options.configuration: v1.2.1`).
+- **What it changes on the article's stored runs** (every graded test case and the held-out
+  problems H1-H3, every start): V121 accepts 28,257 of 36,315 searches and misses 216 (all
+  on H3); V122 accepts 23,971 and misses none. The price is caution: on the development
+  problems V122 accepts 22,625 searches against 25,869, and on H1-H3 1,346 against 2,388.
+  Most of the difference comes from the local-order check at the finest value, the
+  correction that removes the H3 misses (`TRUST.md`).
+- **`tune(configuration=...)`** names the configuration: "v1.2.2" (default), "v1.2.1", "v1.2",
+  "v1.1". Keyword overrides are added to it. Before, `configuration: v1.2` in a job file and
+  `tune(..., **V12)` ran with the joint-check resolution of 1.2.1 (1, not 3), because `V12` has
+  no `joint_res` key; `full_configuration(name)` now lists every option of a configuration.
+- **Fixed: `tune(relative=True)`** scaled the target by the value at the start setting, so a
+  coarse start certified a miss of the relative target. The search is now repeated with the
+  target scaled by the returned value less its estimated error, until it holds. The start
+  setting was also run twice; every setting now runs once. A failed or zero start value is an
+  error with a message instead of a target of `nan`.
+- **Fixed: the floor probe.** A failed probe run is left out instead of stopping the tuning
+  with a traceback; fewer than two usable probe runs, or a probe setting that does not give
+  every parameter, is an error with a message.
+- **Fixed: a declined result says why** (`TuneResult.declined`, in the report and in Markdown):
+  a failed start, a floor, an unmeasured or unbounded parameter, or no setting within the
+  values given.
+- **Fixed: job files are checked more strictly.** Refused, with a message: unknown keys in a
+  parameter, `observable` or `cost` (a misspelt `knd:` was read as a discretisation
+  parameter, `regx:` as the last number of the output); `relative` and `keep_runs` that are not
+  true or false (`"false"` was read as true); a non-finite target; `column` below 1 (0 read the
+  last column); `parse` without the key it needs; a list for `converged_if_regex` (it crashed
+  every run); `render_files` that is not a list; `options` or `env` that is not a mapping;
+  floor-probe settings that do not give every parameter; parameters named `run_dir`, `run_id`
+  or `job_dir`; a field given twice; invalid YAML, JSON or TOML (a traceback before).
+- **Fixed: runs of a command.** An observable that reads as `nan` or `inf` is a failed run
+  (it was logged as ok); a `render_files` entry missing from the run directory fails the run
+  (the file was left unrendered); a run that timed out is run again when the job's `timeout`
+  is longer; a failed run is charged its recorded cost (`RunFailed(cost=...)`); where `files`
+  copies each file is part of the fingerprint of the run log.
+- **Fixed: reports** print parameter values in full in Markdown (they were rounded to six
+  digits) and list frozen parameters in the terminal report too.
+- **Not changed:** the search ranks its moves as before; the order of `os.walk` in the
+  fingerprint and numbers such as `"1e3"` read as floats are as in 2.0.0.
 
 - **Removed from job files.** The field `solver` (`module:function`, `file.py:function`); from
   Python, call `tune`. A job file that still has it is refused as an unknown field. Run logs
@@ -23,7 +82,7 @@ of the article. What goes is code that nothing used.
 - **Fixed: `target: true`** in a job file is refused; it was read as an absolute target of 1.0.
 - **Tests.** Redundant, always-passing and never-running tests are gone; the suite takes under
   a minute.
-- **Planned for engine 1.2.2, after the article is accepted.** Remove the engine's dead code
+- **Planned, after the article is accepted.** Remove the engine's dead code
   (about 75 lines: `refine_path(n_levels >= 2)`, `cancel_rule="path"`,
   `resid_mode="additive"`, `unmeasured_rule`, `shares()`, `model_abs_error()`,
   `propose(mode=...)`, `run_protocol(mode=...)`) and the ablation-only options `walk_mode`,

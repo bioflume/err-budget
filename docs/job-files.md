@@ -68,8 +68,14 @@ Fortran exponents (`1.5D-03`) are understood.
 
 ### `target` (required) and `relative`
 
-The allowed error in the observable, absolute by default; `relative: true` makes it a
-fraction of the observable's value at the starting setting.
+The allowed error in the observable, a positive number, absolute by default;
+`relative: true` (true or false, not a string) makes it a fraction of the observable's value,
+first at the starting setting and then, if the search ends where the value less its
+estimated error is smaller, at that value (`tune`, `relative`).
+
+A job file is refused, with a message for each problem, when a field or a key inside
+`parameters`, `observable` or `cost` is unknown (a misspelt key is never ignored), a field is
+given twice, or the file is not valid YAML, JSON or TOML.
 
 ### `cost` (optional)
 
@@ -112,7 +118,7 @@ from that log, or when `path: log.simpleFoam` is given.
 
 | key | |
 |---|---|
-| `configuration` | `v1.2.1` (default, the article's), `v1.2` or `v1.1` |
+| `configuration` | `v1.2.2` (default), `v1.2.1` (the article's program), `v1.2` or `v1.1` |
 | `screen` | `true` runs the preliminary sweep: fewer runs, recommendations that keep frozen parameters at your value |
 | `accept_unconverged` | `true` uses unconverged runs as answers (version 1.1 behaviour) |
 | `floor_probe` | two or more settings (mappings of parameter values) refined beyond every candidate value; the spread of the observable over them is the round-off floor, and targets below ten times it are declined without searching. Recommended for single-precision codes |

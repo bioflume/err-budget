@@ -23,6 +23,7 @@ refined for nothing.
 """
 from __future__ import annotations
 
+import inspect
 import json
 import time
 from dataclasses import dataclass, field
@@ -31,16 +32,52 @@ from typing import Any, Callable, Sequence
 import numpy as np
 
 from . import report
-from ._core import measure_floor, run_protocol, V11, V12, V121
+from . import _core
+from ._core import measure_floor, run_protocol, V11, V12, V121, V122
 
 KINDS = ("discretisation", "nested-solver", "cost-only")
-CONFIGURATIONS = {"v1.2.1": V121, "v1.2": V12, "v1.1": V11}
+CONFIGURATIONS = {"v1.2.2": V122, "v1.2.1": V121, "v1.2": V12, "v1.1": V11}
+DEFAULT_CONFIGURATION = "v1.2.2"
+
+
+def full_configuration(name: str) -> dict:
+    """The complete engine options of a named configuration.
+
+    Each entry of CONFIGURATIONS lists only what differs from the engine's own
+    defaults; the keys it leaves out take run_protocol's defaults, so that "v1.2"
+    runs with v1.2's joint-check resolution (3) rather than inheriting another
+    configuration's."""
+    if name not in CONFIGURATIONS:
+        raise ValueError(f"configuration must be one of {', '.join(CONFIGURATIONS)}, got {name!r}")
+    sig = inspect.signature(_core.run_protocol).parameters
+    keys = set().union(*CONFIGURATIONS.values())
+    full = {k: sig[k].default for k in keys}
+    full.update(CONFIGURATIONS[name])
+    return full
+
+
+DECLINE_REASONS = {
+    "below_floor": "the target is below floor_factor (10) times the round-off floor that "
+                   "the floor probe measured",
+    "start_failed": "the run at the start setting failed or did not converge",
+    "unmeasured_axis": "the error along {axes} cannot be measured: the runs that would "
+                       "measure it failed",
+    "unbounded_axis": "the changes along {axes} do not decrease, so the error left there "
+                      "is unbounded; extend their values or start finer",
+    "not_reached": "no setting within the values given meets the target with the "
+                   "estimated error; extend the finest values{of}",
+}
 
 
 class RunFailed(Exception):
     """Raise this from the solver function to report a run that failed (crashed,
     diverged, or whose nested solver did not converge).  The program records it
-    as unusable and never proposes or fits to it."""
+    as unusable and never proposes or fits to it.  `cost`, if given, is what the
+    failed run cost; otherwise the wall-clock time of the call is charged."""
+
+    def __init__(self, *args, cost: float | None = None):
+        super().__init__(*args)
+        self.cost = cost
 
 
 class Parameter:
@@ -138,6 +175,7 @@ class TuneResult:
     recommended_cost: float
     start: dict
     trace: list = field(default_factory=list)
+    declined: str | None = None           # why the target was not met (DECLINE_REASONS)
 
     def __str__(self):
         w = 74
@@ -149,8 +187,11 @@ class TuneResult:
                      f"{abs(self.error_estimate):.3g}.")
         else:
             L.append(f"  Target {self.target:.3g} NOT REACHABLE with the values given.")
-            L.append(f"  Best estimate at the returned setting: "
-                     f"{abs(self.error_estimate):.3g}.")
+            if self.declined:
+                L.append(f"  Why: {self.declined}.")
+            if np.isfinite(self.error_estimate):
+                L.append(f"  Best estimate at the returned setting: "
+                         f"{abs(self.error_estimate):.3g}.")
         L.append("")
         L.append("  setting:")
         for k, v in self.settings.items():
@@ -165,6 +206,10 @@ class TuneResult:
             L.append("  refined past the point of having any effect:")
             for s in self.wasted:
                 L.append(f"    {s}")
+        if self.frozen:
+            L.append("")
+            L.append("  frozen by the preliminary sweep (kept at your value): "
+                     + ", ".join(self.frozen))
         if self.violations:
             L.append("")
             L.append("  declarations contradicted by measurement:")
@@ -237,6 +282,7 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
          relative: bool = False, screen: bool = False, verbose: bool = False,
          floor_probe: Sequence[dict] | None = None,
          accept_unconverged: bool = False,
+         configuration: str = DEFAULT_CONFIGURATION,
          **protocol_kwargs) -> TuneResult:
     """Choose parameter settings that meet `target` at close to minimal cost.
 
@@ -253,6 +299,11 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
         of each ladder.  The method calibrates locally, so this matters: it is
         where measurement begins, not merely a seed.
     relative : interpret ``target`` as a fraction of the observable's magnitude.
+        The target is first scaled by the value at the start setting; if the
+        search ends at a setting whose value, less its estimated error, is smaller
+        in magnitude, the search is repeated with the smaller absolute target
+        (repeated runs come from the cache), so the target holds relative to the
+        converged value as far as the estimate can tell.
     screen : optional preliminary sweep that freezes parameters which
         demonstrably do not matter, using cheap runs.  Lowers calibration cost
         (2-3x in our tests) at the price of a more expensive recommendation,
@@ -261,9 +312,11 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
         reports that it did not converge, by returning a dict with
         ``"converged": False`` or by raising ``RunFailed``.  Set True to use such
         runs as answers (the behaviour of version 1.1).
-    The remaining keyword arguments override the default configuration of
-    version 1.2.1 (``errbudget.V121``: residual-gated safety factor, joint-refinement
-    check, local-order check, no credit for cancellation between parameters).
+    configuration : the engine's rules, by name: "v1.2.2" (default; ``errbudget.V122``),
+        "v1.2.1" (the article's program, ``V121``), "v1.2" or "v1.1".
+    The remaining keyword arguments override single options of that configuration
+    (they are added to it, not used instead of it: to run version 1.2, pass
+    ``configuration="v1.2"``, not ``**V12``).
     floor_probe : two or more settings (dicts of keyword arguments for
         ``solver``) refined beyond every candidate value, or differing only in
         something with no discretisation effect such as the thread count.  The
@@ -318,17 +371,27 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
         start_idx = tuple(start_idx)
 
     probe = {"n": 0}
+    memo: dict = {}
 
     def lookup(idx):
+        # every setting is run once, whichever part of tune asks for it first
+        idx = tuple(idx)
+        if idx not in memo:
+            memo[idx] = run(idx)
+        return memo[idx]
+
+    def run(idx):
         kw = setting(idx)
         t0 = time.perf_counter()
         try:
             out = solver(**kw)
-        except RunFailed:
+        except RunFailed as exc:
             probe["n"] += 1
             if verbose:
                 print(f"  run {probe['n']:3d}  {kw}  -> failed")
-            return float("nan"), max(time.perf_counter() - t0, 1e-9)
+            cost = getattr(exc, "cost", None)
+            return float("nan"), float(cost if cost is not None
+                                       else max(time.perf_counter() - t0, 1e-9))
         wall = time.perf_counter() - t0
         probe["n"] += 1
         cost = None
@@ -346,34 +409,77 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
 
     if relative:
         q0, _ = lookup(start_idx)
+        if not np.isfinite(q0) or q0 == 0:
+            raise ValueError(
+                f"relative target: the run at the start setting {setting(start_idx)} "
+                f"{'failed or did not converge' if not np.isfinite(q0) else 'gave 0'}, "
+                f"so the target cannot be scaled by the observable; give an absolute "
+                f"target or another start")
         eps = abs(target * q0)
     else:
         eps = float(target)
+    if not (np.isfinite(eps) and eps > 0):
+        raise ValueError(f"target must be a positive finite number, got {target!r}")
 
     floor = None
     if floor_probe:
         vals = []
         for th in floor_probe:
-            out = solver(**th)
+            unknown, missing = set(th) - set(names), set(names) - set(th)
+            if unknown or missing:
+                raise ValueError(f"floor_probe setting {th}: give every parameter "
+                                 f"({', '.join(names)}) and no others")
+            try:
+                out = solver(**th)
+            except RunFailed:
+                vals.append(float("nan"))
+                continue
             if isinstance(out, tuple) and len(out) == 2:
                 out = out[0]
             out, used = unflag(out)
             vals.append(value(out) if used else float("nan"))
+        if sum(np.isfinite(vals)) < 2:
+            raise ValueError(f"floor_probe: {sum(np.isfinite(vals))} of {len(vals)} probe "
+                             f"runs gave a value (the others failed or did not converge); "
+                             f"the round-off floor needs two")
         floor = measure_floor(vals)
         if verbose:
             print(f"  round-off floor: {floor:.3g} (from {len(vals)} runs)")
 
-    cfg = dict(V121)
+    cfg = full_configuration(configuration)
     cfg.update(protocol_kwargs)
-    r = run_protocol(lookup, ladders, start_idx, eps, hs=hs, kinds=kinds,
-                     use_screen=screen, models=models, noise_floor=floor, **cfg)
+
+    def search(eps):
+        return run_protocol(lookup, ladders, start_idx, eps, hs=hs, kinds=kinds,
+                            use_screen=screen, models=models, noise_floor=floor, **cfg)
+
+    r = search(eps)
+    if relative:
+        # the target is relative to the observable, which the start value only
+        # approximates: tighten it until it holds at the returned setting's value
+        # less its estimated error (a few repeats; every run comes from the cache)
+        for _ in range(5):
+            if not r["certified"] or r["budget"] is None:
+                break
+            q_fin = memo[tuple(r["proposal"])][0]
+            lower = abs(q_fin) - abs(r["budget"].E0)
+            eps_needed = abs(target) * lower
+            if eps_needed >= eps * (1 - 1e-12):
+                break
+            if not eps_needed > 0:
+                r = dict(r, certified=False, declined="not_reached")
+                break
+            eps = eps_needed
+            r = search(eps)
+
     if r["budget"] is None:          # declined below the round-off floor
         return TuneResult(settings=setting(start_idx),
                           certified=False, error_estimate=float("nan"), target=eps,
                           observable=observable or "", limiting=None,
                           budget_shares={}, wasted=[], frozen=[], violations=[],
                           runs_used=probe["n"], calibration_cost=0.0,
-                          recommended_cost=1.0, start=setting(start_idx))
+                          recommended_cost=1.0, start=setting(start_idx),
+                          declined=DECLINE_REASONS["below_floor"])
 
     idx = r["proposal"]
     lb = r["budget"]
@@ -411,6 +517,16 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
                           f"needed (={ladders[k][coarsest]!r} would still meet the "
                           f"target)")
 
+    declined = None
+    if not r["certified"]:
+        why = r.get("declined") or "not_reached"
+        axes = [names[k] for k in range(len(params))
+                if why == "unbounded_axis" and not np.isfinite(lb.rk[k])] if lb is not None else []
+        if why == "unmeasured_axis":
+            axes = [names[k] for k in getattr(lb, "unmeasured", [])]
+        of = f" of {limiting}" if limiting else ""
+        declined = DECLINE_REASONS.get(why, why).format(axes=", ".join(axes) or "an axis", of=of)
+
     return TuneResult(
         settings=settings, certified=bool(r["certified"]),
         error_estimate=float(lb.E0), target=eps,
@@ -422,4 +538,5 @@ def tune(solver: Callable, params: Sequence[Parameter], target: float,
         recommended_cost=float(np.exp(lb.model_logcost(idx))),
         start=setting(start_idx),
         trace=[setting(t) for t in r["trace"]],
+        declined=declined,
     )

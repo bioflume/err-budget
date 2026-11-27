@@ -2,10 +2,10 @@ cff-version: 1.2.0
 message: "If you use errbudget, please cite the article and the software release below."
 title: "errbudget: choosing the numerical parameters of a black-box solver for a target accuracy in one observable"
 type: software
-version: 2.0.0
-date-released: "2026-10-20"
+version: 2.1.0
+date-released: "2026-11-27"
 license: MIT
-repository-code: "https://github.com/bioflume/errbudget"
+repository-code: "https://github.com/bioflume/err-budget"
 authors:
   - family-names: "Kabacaoğlu"
     given-names: "Gökberk"
