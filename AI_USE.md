@@ -14,8 +14,8 @@ responsibility.
   nine are README edits by the author (7e908ec, 94a719a, cf64223), the initial commit, and
   imports or restructurings of material prepared elsewhere: db92080 (revision 4 results),
   f2ee6e5 (restructure for revision 4), 774d447 (merge of the knobs-paper repository) and
-  150570a (the refactored branch). The trailer does not show who wrote the imported
-  material. [Author to confirm: whether the agent wrote it.]
+  150570a (the refactored branch). The author wrote these commits (the author's statement,
+  27 November 2026).
 - **Studies imported as run.** `studies/` was imported on 15 November 2026 from a project
   repository that is not available. The commits that `paper/README.md` cites as the
   registrations of the three studies (airfoil da6e9e0 and amendments A1-A6, reuse2d1
@@ -33,8 +33,8 @@ The author, not the agent, owns:
 - every decision to accept a change or a result.
 
 These files are listed in `PROTECTED`. CI checks them against `PROTECTED.sha256`, and
-`AGENTS.md` forbids agents to change them. [Author to confirm: that the author, not an
-agent, submitted the Hamilton jobs, as the runbook `hamilton/README.md` is written for.]
+`AGENTS.md` forbids agents to change them. The author, not an agent, submitted every job
+on the Hamilton cluster.
 
 ## Evidence that does not rest on trusting the author
 
@@ -44,6 +44,5 @@ agent, submitted the Hamilton jobs, as the runbook `hamilton/README.md` is writt
 
 The agent's session logs (prompts, tool calls, its own reports) are not in this repository.
 The 39 commits made in agent sessions name their session in a `Claude-Session:` line, four
-sessions in all; the logs are on claude.ai under the author's account, if they are still
-kept. [Author to confirm: whether the logs are kept, and whether they can be archived with
-the release.]
+sessions in all. Those logs were not kept, so the record of how the code was written is the
+git history alone.

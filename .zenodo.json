@@ -12,7 +12,7 @@
                "numerical parameter selection", "discretisation error", "OpenFOAM",
                "LAMMPS", "GROMACS", "Quantum ESPRESSO", "ABINIT"],
   "related_identifiers": [
-    {"relation": "isSupplementTo", "identifier": "https://github.com/bioflume/errbudget-paper", "scheme": "url"}
+    {"relation": "isSupplementTo", "identifier": "https://github.com/bioflume/err-budget/tree/paper", "scheme": "url"}
   ],
   "access_right": "open"
 }

@@ -5,7 +5,7 @@ type: software
 version: 1.2.1
 date-released: "2026-10-31"            # TODO: set at release
 license: MIT
-repository-code: "https://github.com/bioflume/errbudget-paper"
+repository-code: "https://github.com/bioflume/err-budget/tree/paper"
 doi: "10.5281/zenodo.XXXXXXX"            # TODO: Zenodo concept DOI, minted at the first release
 authors:
   - family-names: "Kabacaoğlu"

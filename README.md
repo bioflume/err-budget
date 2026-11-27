@@ -11,8 +11,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/bioflume/errbudget/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/bioflume/errbudget/actions/workflows/ci.yml/badge.svg"></a>
-  <a href="https://bioflume.github.io/errbudget/"><img alt="Documentation" src="https://img.shields.io/badge/docs-bioflume.github.io%2Ferrbudget-blue"></a>
+  <a href="https://github.com/bioflume/err-budget/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/bioflume/err-budget/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://bioflume.github.io/err-budget/"><img alt="Documentation" src="https://img.shields.io/badge/docs-bioflume.github.io%2Ferr--budget-blue"></a>
   <img alt="Python 3.9+" src="https://img.shields.io/badge/python-3.9%2B-blue">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue"></a>
 </p>
@@ -25,7 +25,7 @@ parameter is limiting the accuracy and refining which ones do not make any chang
 It costs runs proportional to the *number* of parameters. It was tested on OpenFOAM, Quantum ESPRESSO, ABINIT, GROMACS and LAMMPS, driven through their input files, and on test problems with exact solutions; the article reports every miss and its cause.
 
 ```bash
-pip install "errbudget[yaml] @ git+https://github.com/bioflume/errbudget"
+pip install "errbudget[yaml] @ git+https://github.com/bioflume/err-budget"
 ```
 
 ## How to use it?
@@ -184,8 +184,8 @@ The documentation is in `docs/`:
 ## Install
 
 ```bash
-pip install "errbudget[yaml] @ git+https://github.com/bioflume/errbudget"   # with YAML job files
-pip install "errbudget @ git+https://github.com/bioflume/errbudget"         # Python API, JSON/TOML job files
+pip install "errbudget[yaml] @ git+https://github.com/bioflume/err-budget"   # with YAML job files
+pip install "errbudget @ git+https://github.com/bioflume/err-budget"         # Python API, JSON/TOML job files
 ```
 
 Python 3.9 or later, NumPy and SciPy. From a clone: `pip install -e ".[dev]"` and `pytest`
