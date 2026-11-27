@@ -15,7 +15,8 @@ responsibility.
   imports or restructurings of material prepared elsewhere: db92080 (revision 4 results),
   f2ee6e5 (restructure for revision 4), 774d447 (merge of the knobs-paper repository) and
   150570a (the refactored branch). The author wrote these commits (the author's statement,
-  27 November 2026).
+  27 November 2026). The commits after cf64223 (the audit of 26 and 27 November) were made by
+  the agent and carry the line.
 - **Studies imported as run.** `studies/` was imported on 15 November 2026 from a project
   repository that is not available. The commits that `paper/README.md` cites as the
   registrations of the three studies (airfoil da6e9e0 and amendments A1-A6, reuse2d1
