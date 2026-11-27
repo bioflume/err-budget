@@ -1,0 +1,13 @@
+# The author reviews every change to the human-owned files (AGENTS.md, PROTECTED).
+# GitHub enforces this only when branch protection requires review from code owners.
+/src/errbudget/_core.py      @bioflume
+/tests/test_spec_v121.py     @bioflume
+/tests/test_claims.py        @bioflume
+/tests/test_v122.py          @bioflume
+/AGENTS.md                   @bioflume
+/AI_USE.md                   @bioflume
+/TRUST.md                    @bioflume
+/PROTECTED                   @bioflume
+/PROTECTED.sha256            @bioflume
+/tools/                      @bioflume
+/.github/                    @bioflume

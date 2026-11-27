@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        A change to the engine (`src/errbudget/_core.py`) changes results that the article reports, so it follows the [engine rule](https://github.com/bioflume/errbudget/blob/main/CONTRIBUTING.md#the-engine-rule). A feature in the tooling around it (the command, job files, the runner, the report) does not need this.
+        A change to the engine (`src/errbudget/_core.py`) changes results that the article reports, so it follows the [engine rule](https://github.com/bioflume/err-budget/blob/main/CONTRIBUTING.md#the-engine-rule). A feature in the tooling around it (the command, job files, the runner, the report) does not need this.
   - type: textarea
     id: problem
     attributes:

@@ -18,6 +18,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: pip install -e ".[dev]"
+      # the human-owned files (PROTECTED) must match the manifest the author keeps
+      - run: python tools/check_protected.py
       - run: pytest -q
       - name: command-line example
         run: |

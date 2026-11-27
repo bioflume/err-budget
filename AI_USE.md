@@ -12,8 +12,10 @@ direction; the agent is not an author and carries no responsibility.
   ten are README edits and merges by the author, the initial commit, and three bulk imports
   of repositories prepared elsewhere: 27f6221 (knobs 1.3.0), 015bf6b (job-file fixes from
   review) and 2fc31e5 (the refactored package). The author wrote these commits (the
-  author's statement, 27 November 2026). The commits after 636453e (the audit of 26 November
-  and engine 1.2.2) were made by the agent and carry the line.
+  author's statement, 27 November 2026). The agent did the audit of 26 November and engine
+  1.2.2 in ten commits that carry the line; the author copied their result into this
+  repository as one commit, 3b57805 ("Release version updated", 27 November 2026), which
+  does not carry it. Every later commit made by the agent does.
 - **The engine.** `src/errbudget/_core.py` is engine 1.2.2. Its configuration `v1.2.1` runs
   the engine that produced the article's results on the branch `paper`, search for search
   (`TRUST.md`). The corrections of 1.2.2 were made at the author's request of

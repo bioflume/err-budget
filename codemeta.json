@@ -39,5 +39,6 @@
       "description": "AI coding agent that wrote most of the code under the author's direction; see AI_USE.md"
     }
   ],
-  "dateModified": "2026-11-27"
+  "dateModified": "2026-11-27",
+  "identifier": "https://doi.org/10.5281/zenodo.24608267"
 }

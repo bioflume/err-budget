@@ -10,3 +10,6 @@ errbudget_runs/
 errbudget_result.json
 errbudget_result.md
 examples/**/errbudget_runs/
+
+# macOS folder metadata
+.DS_Store

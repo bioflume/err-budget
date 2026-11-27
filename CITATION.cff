@@ -4,6 +4,7 @@ title: "errbudget: choosing the numerical parameters of a black-box solver for a
 type: software
 version: 2.1.0
 date-released: "2026-11-27"
+doi: "10.5281/zenodo.24608267"         # Zenodo concept DOI: every release of this repository
 license: MIT
 repository-code: "https://github.com/bioflume/err-budget"
 authors:

@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: Documentation
-    url: https://bioflume.github.io/errbudget/
+    url: https://bioflume.github.io/err-budget/
     about: How errbudget works, the job-file reference, recipes for common codes and the Python API.

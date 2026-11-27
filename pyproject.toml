@@ -35,6 +35,7 @@ errbudget = "errbudget.cli:main"
 
 [project.urls]
 Repository = "https://github.com/bioflume/err-budget"
+DOI = "https://doi.org/10.5281/zenodo.24608267"
 Article = "https://github.com/bioflume/err-budget/tree/paper"
 
 [tool.setuptools.packages.find]

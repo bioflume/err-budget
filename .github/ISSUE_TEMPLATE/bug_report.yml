@@ -7,7 +7,7 @@ body:
       value: |
         Thank you for reporting a problem. A small case that shows it is the most useful thing you can send.
 
-        A result that declines to certify a setting is not necessarily a bug: errbudget declines when it cannot bound a parameter's error, and the report says which parameter (see the [documentation](https://bioflume.github.io/errbudget/)). Please report a security problem privately instead, as the [security policy](https://github.com/bioflume/errbudget/security/policy) describes.
+        A result that declines to certify a setting is not necessarily a bug: errbudget declines when it cannot bound a parameter's error, and the report says which parameter (see the [documentation](https://bioflume.github.io/err-budget/)). Please report a security problem privately instead, as the [security policy](https://github.com/bioflume/err-budget/security/policy) describes.
   - type: textarea
     id: what-you-ran
     attributes:
@@ -51,7 +51,7 @@ body:
     attributes:
       label: errbudget version
       description: Run `errbudget version` (or `python -m errbudget version`) and paste what it prints.
-      placeholder: errbudget 2.0.0 (engine 1.2.1, the article's version)
+      placeholder: errbudget 2.1.0 (engine 1.2.2; the article describes engine 1.2.1, configuration v1.2.1)
     validations:
       required: true
   - type: input

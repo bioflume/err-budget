@@ -15,6 +15,7 @@
   <a href="https://bioflume.github.io/err-budget/"><img alt="Documentation" src="https://img.shields.io/badge/docs-bioflume.github.io%2Ferr--budget-blue"></a>
   <img alt="Python 3.9+" src="https://img.shields.io/badge/python-3.9%2B-blue">
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-blue"></a>
+  <a href="https://doi.org/10.5281/zenodo.24608267"><img alt="DOI 10.5281/zenodo.24608267" src="https://zenodo.org/badge/DOI/10.5281/zenodo.24608267.svg"></a>
 </p>
 
 Given a driver of your solver (a Python function or a shell command), the
@@ -226,6 +227,12 @@ pip install "errbudget @ git+https://github.com/bioflume/err-budget"         # P
 Python 3.9 or later, NumPy and SciPy. From a clone: `pip install -e ".[dev]"` and `pytest`
 (under a minute; the tests encode the article's claims, not just code health). To contribute, see
 [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Citing
+
+The software is archived on Zenodo with the DOI
+[10.5281/zenodo.24608267](https://doi.org/10.5281/zenodo.24608267), which covers every
+release; Zenodo lists each version under it. [CITATION.cff](CITATION.cff) has the details.
 
 ## Licence
 

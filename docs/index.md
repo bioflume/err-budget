@@ -53,5 +53,6 @@ changelog
 
 The method and its evaluation are described in an article. The branch `paper` of this
 repository, <https://github.com/bioflume/err-budget/tree/paper>, has every script, the stored solver output
-and the cluster jobs. To cite errbudget, see
+and the cluster jobs. To cite errbudget, use its DOI,
+[10.5281/zenodo.24608267](https://doi.org/10.5281/zenodo.24608267), or see
 [`CITATION.cff`](https://github.com/bioflume/err-budget/blob/main/CITATION.cff).
