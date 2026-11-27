@@ -168,6 +168,44 @@ For single-precision or otherwise noisy codes,
 candidate value and declines targets below ten times it; `screen: true` runs a
 preliminary sweep (fewer runs, more expensive recommendations).
 
+## How it was written, and how you can check it
+
+An AI coding agent (Claude Opus 5.5, in Claude Code) wrote most of this code under the
+direction of its author, Gökberk Kabacaoğlu, who is responsible for every change and every
+result ([AI_USE.md](AI_USE.md)). This branch, `paper`, is the record of the article: the
+program as it produced the results (engine 1.2.1), the stored runs, and the scripts that
+replay every number. Because a reader cannot rely on who wrote it, the evidence for
+trusting it does not depend on the author or the agent:
+
+1. **The author owns the requirements, the acceptance tests and the record.** The program,
+   the tests that pin the article's rules, the pre-registration, the frozen program, the
+   stored runs and the printed results are listed in [PROTECTED](PROTECTED). CI compares
+   them with the hashes in `PROTECTED.sha256` (`tools/check_protected.py`), so a changed
+   result or test shows up and needs the author's approval.
+2. **The held-out tests were pre-registered** ([PREREGISTRATION.md](PREREGISTRATION.md)):
+   the program, the problems, the targets and the grading were fixed before any replay, and
+   the results are reported whatever they were. CI checks that the frozen program still
+   matches its registered hash (`tools/check_frozen.py`).
+3. **Agents work under written rules** ([AGENTS.md](AGENTS.md)). They may not change the
+   protected files, and when a check fails they stop and report instead of weakening the
+   test.
+4. **Some checks are kept out of the agent's reach.** Problems with known answers, made by a
+   generator held outside this repository, test the engine on inputs the agent never saw.
+5. **The tests themselves are tested.** Faults planted in the engine by a separate agent,
+   which never saw the tests, measure how many wrong changes the tests catch.
+6. **A different model reviews the code** without seeing its history, the agent's own
+   account of its work or the test results. The engine here stays as the article describes
+   it; the confirmed findings are fixed in engine 1.2.2 on the branch
+   [`main`](https://github.com/bioflume/err-budget), whose configuration `v1.2.1` still
+   reproduces this engine search for search.
+7. **Every number has a script.** `paper/README.md` maps each number, table and figure to
+   the script that produces it, `paper/REPRODUCTION_CHECK.md` records what was reproduced,
+   and `ro-crate-metadata.json` lists every stored result with its SHA-256.
+
+[TRUST.md](TRUST.md) lists the checks you can run and what they found, failures included.
+These steps follow the UKRI project "Trustworthy Agentic Workflows in Scientific
+Computing".
+
 ## Documentation
 
 The documentation is in `docs/`:

@@ -96,8 +96,10 @@ miss the same ones, except F48, which does not apply there. They fall into three
   - Under cancellation, the estimate takes the largest single term instead of the sum (F37).
 - **Changes to the search or its cost accounting.** F08, F15, F23, F32, F41, F49.
 
-The list, the harness and the results are kept with the hidden checks. New tests that would
-catch these faults go in a new file for the author to review (`AGENTS.md`).
+The list, the harness and the results are kept with the hidden checks. On the branch `main`,
+`tests/test_v122.py` (for the author to review, `AGENTS.md`) now catches six of these faults
+(F05, F08, F09, F23, F37, F49); its tests were written knowing the faults, so this is not an
+independent measurement.
 
 ## Independent review
 
@@ -129,8 +131,10 @@ On the program that produced the results (`_core.py`, `api.py`) and the grading 
 - **`tune(..., relative=True)` scales the target by the value at the start setting,** which
   can be coarse, and runs the start setting twice. The article's replays do not use `tune`.
 
-None of these changes a stored result; the engine is frozen, so they are findings for the
-article and for engine 1.2.2. The full reports are kept with the hidden checks.
+None of these changes a stored result. The engine on this branch stays as the article
+describes it; the findings are fixed in engine 1.2.2 on the branch `main` (its default
+configuration `V122`), whose configuration `V121` still runs this engine search for search.
+The full reports are kept with the hidden checks.
 
 ## Code quality
 
